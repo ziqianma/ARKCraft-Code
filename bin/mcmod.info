@@ -1,0 +1,16 @@
+[
+{
+  "modid": "arkcraft",
+  "name": "ARKCraft",
+  "description": "A Minecraft mod based off ARK Survival",
+  "version": "${0.1}",
+  "mcversion": "${1.8}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Vastatio"],
+  "credits": "The Forge and FML guys, for making this mod possible",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
