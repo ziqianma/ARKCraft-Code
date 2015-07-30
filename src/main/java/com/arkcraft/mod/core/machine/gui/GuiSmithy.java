@@ -22,20 +22,21 @@ import com.arkcraft.mod.core.Main;
 @SideOnly(Side.CLIENT)
 public class GuiSmithy extends GuiContainer {
 
-	private static final ResourceLocation tex = new ResourceLocation(Main.MODID, ":textures/gui/smithy.png");
+	private static final ResourceLocation tex = 
+			new ResourceLocation(Main.MODID, "textures/gui/smithy.png");
 	
 	public GuiSmithy(InventoryPlayer invPlayer, World world, BlockPos pos) {
 		super(new ContainerSmithy(invPlayer, world, pos));
 		
 		this.xSize = 176;
-		this.ySize = 166;
+		this.ySize = 204;
 		
 	}
 	
 	public void onGuiClosed() { super.onGuiClosed(); }
 	
 	protected void drawGuiContainerForegroundLayer(int i, int j) {
-		this.fontRendererObj.drawString(StatCollector.translateToLocal("Smithy"), 100, 5, 0x000000);
+		this.fontRendererObj.drawString(StatCollector.translateToLocal("Smithy"), 50, 5, 0x000000);
 	}
 	
 	@Override

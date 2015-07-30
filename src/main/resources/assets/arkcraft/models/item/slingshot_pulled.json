@@ -1,7 +1,7 @@
 {
     "parent": "builtin/generated",
     "textures": {
-        "layer0": "old_textures/slingshot_pulled"
+        "layer0": "textures/slingshot_pulled"
     },
     "display": {
         "thirdperson": {

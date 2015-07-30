@@ -3,6 +3,21 @@ package com.arkcraft.mod.core;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.arkcraft.mod.core.blocks.ARKBlock;
+import com.arkcraft.mod.core.blocks.ARKBush;
+import com.arkcraft.mod.core.blocks.ARKSmithy;
+import com.arkcraft.mod.core.creativetabs.ARKTabs;
+import com.arkcraft.mod.core.entity.EntityRaptor;
+import com.arkcraft.mod.core.handler.EntityHandler;
+import com.arkcraft.mod.core.handler.GuiHandler;
+import com.arkcraft.mod.core.handler.RecipeHandler;
+import com.arkcraft.mod.core.items.ARKArmorItem;
+import com.arkcraft.mod.core.items.ARKFood;
+import com.arkcraft.mod.core.items.ARKItem;
+import com.arkcraft.mod.core.items.ARKSaddle;
+import com.arkcraft.mod.core.items.ARKSlingshot;
+import com.arkcraft.mod.core.items.ARKWeapon;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -13,20 +28,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.common.util.EnumHelper;
-
-import com.arkcraft.mod.core.blocks.ARKBlock;
-import com.arkcraft.mod.core.blocks.ARKBush;
-import com.arkcraft.mod.core.blocks.ARKSmithy;
-import com.arkcraft.mod.core.creativetabs.ARKTabs;
-import com.arkcraft.mod.core.entity.EntityRaptor;
-import com.arkcraft.mod.core.handler.EntityHandler;
-import com.arkcraft.mod.core.handler.RecipeHandler;
-import com.arkcraft.mod.core.items.ARKArmorItem;
-import com.arkcraft.mod.core.items.ARKFood;
-import com.arkcraft.mod.core.items.ARKItem;
-import com.arkcraft.mod.core.items.ARKSaddle;
-import com.arkcraft.mod.core.items.ARKSlingshot;
-import com.arkcraft.mod.core.items.ARKWeapon;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 /**
  * @author Vastatio
@@ -81,6 +83,7 @@ public class GlobalAdditions {
 		ironPike = addWeapon("ironPike", ToolMaterial.IRON);
 		pestle_and_mortar = addBlock(Material.rock, "mortar_and_pestle", 3.0F);
 		RecipeHandler.registerVanillaCraftingRecipes();
+		NetworkRegistry.INSTANCE.registerGuiHandler(Main.instance, new GuiHandler());
 		EntityHandler.registerMonster(EntityRaptor.class, "raptor");
 	}
 	
