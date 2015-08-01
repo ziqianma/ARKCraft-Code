@@ -1,22 +1,38 @@
-[17:16:04] [main/INFO]: Logging in with username & password
-[17:16:10] [Client thread/INFO]: Setting user: Vastatio
-[17:16:15] [Client thread/INFO]: LWJGL Version: 2.9.2
-[17:16:22] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:ARKCraft
-[17:16:23] [Sound Library Loader/INFO]: Starting up SoundSystem...
-[17:16:23] [Thread-8/INFO]: Initializing LWJGL OpenAL
-[17:16:23] [Thread-8/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
-[17:16:23] [Thread-8/INFO]: OpenAL initialized.
-[17:16:24] [Sound Library Loader/INFO]: Sound engine started
-[17:16:28] [Client thread/INFO]: Created: 16x16 textures-atlas
-[17:16:30] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:ARKCraft
-[17:16:30] [Client thread/INFO]: SoundSystem shutting down...
-[17:16:30] [Client thread/WARN]: Author: Paul Lamb, www.paulscode.com
-[17:16:30] [Sound Library Loader/INFO]: Starting up SoundSystem...
-[17:16:30] [Thread-10/INFO]: Initializing LWJGL OpenAL
-[17:16:30] [Thread-10/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
-[17:16:30] [Thread-10/INFO]: OpenAL initialized.
-[17:16:31] [Sound Library Loader/INFO]: Sound engine started
-[17:16:34] [Client thread/INFO]: Created: 512x512 textures-atlas
-[17:16:35] [Client thread/ERROR]: ########## GL ERROR ##########
-[17:16:35] [Client thread/ERROR]: @ Post startup
-[17:16:35] [Client thread/ERROR]: 1281: Invalid value
+[10:44:45] [main/INFO]: Logging in with username & password
+[10:44:52] [Client thread/INFO]: Setting user: Vastatio
+[10:44:57] [Client thread/INFO]: LWJGL Version: 2.9.2
+[10:45:04] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:ARKCraft
+[10:45:05] [Sound Library Loader/INFO]: Starting up SoundSystem...
+[10:45:05] [Thread-8/INFO]: Initializing LWJGL OpenAL
+[10:45:05] [Thread-8/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
+[10:45:05] [Thread-8/INFO]: OpenAL initialized.
+[10:45:05] [Sound Library Loader/INFO]: Sound engine started
+[10:45:09] [Client thread/INFO]: Created: 16x16 textures-atlas
+[10:45:12] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:ARKCraft
+[10:45:12] [Client thread/INFO]: SoundSystem shutting down...
+[10:45:12] [Client thread/WARN]: Author: Paul Lamb, www.paulscode.com
+[10:45:12] [Sound Library Loader/INFO]: Starting up SoundSystem...
+[10:45:13] [Thread-10/INFO]: Initializing LWJGL OpenAL
+[10:45:13] [Thread-10/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
+[10:45:13] [Thread-10/INFO]: OpenAL initialized.
+[10:45:13] [Sound Library Loader/INFO]: Sound engine started
+[10:45:20] [Client thread/INFO]: Created: 512x512 textures-atlas
+[10:45:21] [Client thread/ERROR]: ########## GL ERROR ##########
+[10:45:21] [Client thread/ERROR]: @ Post startup
+[10:45:21] [Client thread/ERROR]: 1281: Invalid value
+[10:45:56] [Server thread/INFO]: Starting integrated minecraft server version 1.8
+[10:45:56] [Server thread/INFO]: Generating keypair
+[10:45:57] [Server thread/INFO]: Preparing start region for level 0
+[10:45:58] [Server thread/INFO]: Preparing spawn area: 31%
+[10:45:59] [Server thread/INFO]: Preparing spawn area: 98%
+[10:45:59] [Server thread/INFO]: Changing view distance to 12, from 10
+[10:46:00] [Server thread/INFO]: Vastatio[local:E:5553e57c] logged in with entity id 247 at (-138.84327665944144, 64.0, -58.43172273745132)
+[10:46:00] [Server thread/INFO]: Vastatio joined the game
+[10:46:04] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 3817ms behind, skipping 76 tick(s)
+[10:46:19] [Client thread/INFO]: Stopping!
+[10:46:19] [Client thread/INFO]: SoundSystem shutting down...
+[10:46:20] [Client thread/WARN]: Author: Paul Lamb, www.paulscode.com
+[10:46:20] [Client Shutdown Thread/INFO]: Stopping server
+[10:46:20] [Client Shutdown Thread/INFO]: Saving players
+[10:46:20] [Client Shutdown Thread/INFO]: Saving worlds
+[10:46:20] [Client Shutdown Thread/INFO]: Saving chunks for level 'New World'/Overworld

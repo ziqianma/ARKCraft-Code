@@ -27,16 +27,15 @@ public class GuiSmithy extends GuiContainer {
 	
 	public GuiSmithy(InventoryPlayer invPlayer, World world, BlockPos pos) {
 		super(new ContainerSmithy(invPlayer, world, pos));
-		
-		this.xSize = 176;
-		this.ySize = 204;
+		this.xSize = 182;
+		this.ySize = 226;
 		
 	}
 	
 	public void onGuiClosed() { super.onGuiClosed(); }
 	
 	protected void drawGuiContainerForegroundLayer(int i, int j) {
-		this.fontRendererObj.drawString(StatCollector.translateToLocal("Smithy"), 50, 5, 0x000000);
+		this.fontRendererObj.drawString(StatCollector.translateToLocal("Smithy"), 96, 5, 0x000000);
 	}
 	
 	@Override
