@@ -1,16 +1,16 @@
 [
 {
   "modid": "arkcraft",
-  "name": "ARKCraft",
-  "description": "A Minecraft mod based off ARK Survival",
-  "version": "${0.1}",
+  "name": "ARKCraft: Survival Evolved",
+  "description": "A Minecraft mod based off ARK: Survival Evolved",
+  "version": "${0.1 ALPHA}",
   "mcversion": "${1.8}",
-  "url": "",
+  "url": "http://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/wip-mods/2482915-wip-arkcraft-survival-evolved-survival-of-the#c14",
   "updateUrl": "",
-  "authorList": ["Vastatio"],
-  "credits": "The Forge and FML guys, for making this mod possible",
+  "authorList": ["Vastatio", "wildbill22"],
+  "credits": "The Forge and FML guys, for making this mod possible, Our team: Nickilpickle, Danbrixton, CreativeOne, Gibbs, Vastatio, wildbill22, Spongebob Squarepants, ",
   "logoFile": "",
-  "screenshots": [],
+  "screenshots": [http://i58.tinypic.com/1e82dc.png],
   "dependencies": []
 }
 ]

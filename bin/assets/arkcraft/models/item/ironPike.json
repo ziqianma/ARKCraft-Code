@@ -1,7 +1,7 @@
 {
     "parent": "builtin/generated",
     "textures": {
-        "layer0": "old_textures/ironPike"
+        "layer0": "arkcraft:items/ironPike"
     },
     "display": {
         "thirdperson": {

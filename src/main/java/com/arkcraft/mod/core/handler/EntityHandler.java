@@ -2,18 +2,19 @@ package com.arkcraft.mod.core.handler;
 
 import java.util.Random;
 
+import com.arkcraft.mod.core.Main;
+
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 
-import com.arkcraft.mod.core.Main;
 
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class EntityHandler {
 	
 	public EntityHandler() {}
-	
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static void registerMonster(Class eClass, String name) {
 		int entityID = EntityRegistry.findGlobalUniqueEntityId();
 		Random rand = new Random(name.hashCode());
@@ -26,8 +27,8 @@ public class EntityHandler {
 		EntityList.entityEggs.put(Integer.valueOf(entityID), new EntityList.EntityEggInfo(entityID, mainColor, secondColor));
 	}
 	
-	public static void registerOtherEntity(String name) {
-		
+	public static void registerModEntity(Class<? extends Entity> eClass, String name, int entityID, Object mainClass, int trackRange, int updateFreq, boolean sVU) {
+		EntityRegistry.registerModEntity(eClass, name, entityID, mainClass, trackRange, updateFreq, sVU);
 	}
 	
 }

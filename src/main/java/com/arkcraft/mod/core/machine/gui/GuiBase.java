@@ -30,7 +30,6 @@ public class GuiBase extends GuiContainer {
 	/* Regular close */
 	public void onGuiClosed() { super.onGuiClosed(); }
 
-
 	/* Basic draw, draws picture of GUI in center of minecraft screen */
 	/* For more complex GUI's, override, super, then add more to it if you'd like */
 	

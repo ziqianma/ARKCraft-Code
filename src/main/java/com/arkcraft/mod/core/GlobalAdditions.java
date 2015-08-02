@@ -7,6 +7,8 @@ import com.arkcraft.mod.core.blocks.ARKBlock;
 import com.arkcraft.mod.core.blocks.ARKBush;
 import com.arkcraft.mod.core.blocks.ARKSmithy;
 import com.arkcraft.mod.core.creativetabs.ARKTabs;
+import com.arkcraft.mod.core.entity.EntityCobble;
+import com.arkcraft.mod.core.entity.EntityExplosive;
 import com.arkcraft.mod.core.entity.EntityRaptor;
 import com.arkcraft.mod.core.handler.EntityHandler;
 import com.arkcraft.mod.core.handler.GuiHandler;
@@ -45,13 +47,14 @@ public class GlobalAdditions {
 	public static ARKSaddle saddle_small, saddle_medium, saddle_large;
 	public static ARKArmorItem chitinHelm, chitinChest, chitinLegs, chitinBoots;
 	public static ARKArmorItem clothHelm, clothChest, clothLegs, clothBoots;
+	public static ARKArmorItem boneHelm, boneChest, boneLegs, boneBoots;
 	public static ARKWeapon stoneSpear, ironPike;
-	public static ArmorMaterial CLOTH = EnumHelper.addArmorMaterial("CLOTH_MAT", "CLOTH_MAT", 10, new int[] {3, 7,5, 1}, 30);
-	public static ArmorMaterial CHITIN = EnumHelper.addArmorMaterial("CHITIN_MAT", "CHITIN_MAT", 16, new int[] { 3,8,6,3 } , 30);
-	public static CreativeTabs tabARK = new ARKTabs(
-			CreativeTabs.getNextID(), "tabARKCraft");
+	public static ArmorMaterial CLOTH = EnumHelper.addArmorMaterial("CLOTH_MAT", "CLOTH_MAT", 4, new int[] {1,2,1,1}, 15);
+	public static ArmorMaterial CHITIN = EnumHelper.addArmorMaterial("CHITIN_MAT", "CHITIN_MAT", 16, new int[] { 3,7,6,3 } , 10);
+	public static ArmorMaterial BONE = EnumHelper.addArmorMaterial("BONE", "BONE_MAT", 40, new int[] { 3, 8, 6, 3 }, 30);
+	public static CreativeTabs tabARK = new ARKTabs(CreativeTabs.getNextID(), "tabARKCraft");
 	public static ARKSmithy smithy;
-	public static final int guiIDSmithy = 1;
+	public static int guiID = 0;
 	
 	public static void init() {
 		tintoBerry = addFood("tinto", 4, 0.3F, false, new PotionEffect(Potion.fireResistance.id, 60, 1));
@@ -79,10 +82,13 @@ public class GlobalAdditions {
 		clothChest = addArmorItem("cloth_chest", CLOTH, "clothArmor", 1);
 		clothLegs = addArmorItem("cloth_legs", CLOTH, "clothArmor", 2);
 		clothBoots = addArmorItem("cloth_boots", CLOTH, "clothArmor", 3);
+		boneHelm = addArmorItem("bone_helm", BONE, "boneArmor", 0);
 		stoneSpear = addWeapon("stoneSpear", ToolMaterial.STONE);
 		ironPike = addWeapon("ironPike", ToolMaterial.IRON);
 		pestle_and_mortar = addBlock(Material.rock, "mortar_and_pestle", 3.0F);
 		RecipeHandler.registerVanillaCraftingRecipes();
+		EntityHandler.registerModEntity(EntityExplosive.class, "Explosive Cobblestone Ball", 1, Main.instance, 64, 10, true);
+		EntityHandler.registerModEntity(EntityCobble.class, "Cobblestone Ball", 2, Main.instance, 64, 10, true);
 		NetworkRegistry.INSTANCE.registerGuiHandler(Main.instance, new GuiHandler());
 		EntityHandler.registerMonster(EntityRaptor.class, "raptor");
 	}

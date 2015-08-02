@@ -30,7 +30,7 @@ public class ARKSmithy extends Block {
 			IBlockState state, EntityPlayer playerIn, EnumFacing side,
 			float hitX, float hitY, float hitZ) {
 		if(!playerIn.isSneaking()) {
-			playerIn.openGui(Main.instance, GlobalAdditions.guiIDSmithy, worldIn, pos.getX(), pos.getY(), pos.getZ());
+			playerIn.openGui(Main.instance, GlobalAdditions.guiID++, worldIn, pos.getX(), pos.getY(), pos.getZ());
 			return true;
 		}
 		return false;

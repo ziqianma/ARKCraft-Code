@@ -16,7 +16,8 @@ public class ARKBlock extends Block {
 		this.setHardness(hardness);
 		this.setCreativeTab(GlobalAdditions.tabARK);
 		this.setUnlocalizedName(name);
-		/* Registers with the name, not the unlocalized tile. name. */
+		/* Registers with the name, not the unlocalized tile. name. (substring(5)) */
+		/* Automatically registers the block with the GameRegistry */
 		GameRegistry.registerBlock(this, this.getUnlocalizedName().substring(5));
 	}
 }

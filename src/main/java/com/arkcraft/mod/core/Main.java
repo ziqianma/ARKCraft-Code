@@ -1,7 +1,5 @@
 package com.arkcraft.mod.core;
 
-import com.arkcraft.mod.core.entity.EntityCobble;
-import com.arkcraft.mod.core.handler.GuiHandler;
 import com.arkcraft.mod.core.proxy.CommonProxy;
 
 import net.minecraftforge.fml.common.Mod;
@@ -11,7 +9,6 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.registry.EntityRegistry;
 
 @Mod(modid=Main.MODID, version=Main.VERSION, name=Main.MODID)
 public class Main {
@@ -27,14 +24,12 @@ public class Main {
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		GlobalAdditions.init();
-		EntityRegistry.registerModEntity(EntityCobble.class, "Cobblestone Ball", 1, this, 64, 10, true);
 	}
 	
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 		proxy.init();
 		proxy.registerRenderers();
-		new GuiHandler();
 	}
 	
 	@EventHandler

@@ -14,6 +14,7 @@ public class EntityCobble extends EntityThrowable {
 
 	@Override
 	protected void onImpact(MovingObjectPosition mop) {
+		/* Damage on impact */
 		float dmg = 2;
 		if(mop.entityHit != null) mop.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), dmg);
 		
