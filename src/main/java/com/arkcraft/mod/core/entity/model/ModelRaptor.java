@@ -8,7 +8,9 @@ package com.arkcraft.mod.core.entity.model;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.MathHelper;
 
 public class ModelRaptor extends ModelBase {
 	
@@ -60,64 +62,50 @@ public class ModelRaptor extends ModelBase {
 	public ModelRaptor() {
 		textureWidth = textureHeight = 64;
 		
-		RightUpperLeg = new ModelRenderer(this, 50, 0);
-		RightUpperLeg.addBox(-3F, -1F, -2F, 3, 5, 4);
-		RightUpperLeg.setRotationPoint(-2.5F, 11F, 0F);
-		RightUpperLeg.setTextureSize(64, 64);
-		RightUpperLeg.mirror = true;
-		setRotation(RightUpperLeg, -0.5759587F, 0F, 0F);
+		Head = new ModelRenderer(this, 4, 20);
+		Head.addBox(-2F, -5F, -3F, 4, 4, 6);
+		Head.setRotationPoint(0F, 4F, -11.5F);
+		Head.setTextureSize(64, 64);
+		Head.mirror = true;
+		setRotation(Head, 0.122173F, 0F, 0F);
+
+		LowerJaw = new ModelRenderer(this, 29, 12);
+		LowerJaw.addBox(-1.5F, 0F, -5F, 3, 1, 5);
+		LowerJaw.setRotationPoint(0F, 2.3F, -14.5F);
+		LowerJaw.setTextureSize(64, 64);
+		LowerJaw.mirror = true;
+		setRotation(LowerJaw, 0.0698132F, 0F, 0F);
 		
-		RightMidLeg = new ModelRenderer(this, 56, 9);
-		RightMidLeg.addBox(-2F, 0F, -4.4F, 2, 8, 2);
-		RightMidLeg.setRotationPoint(-2.5F, 11F, 0F);
-		RightMidLeg.setTextureSize(64, 64);
-		RightMidLeg.mirror = true;
-		setRotation(RightMidLeg, 0.5235988F, 0F, 0F);
+		UpperJaw = new ModelRenderer(this, 27, 18);
+		UpperJaw.addBox(-2F, 0F, -5F, 4, 2, 5);
+		UpperJaw.setRotationPoint(0F, 0.3F, -15F);
+		UpperJaw.setTextureSize(64, 64);
+		UpperJaw.mirror = true;
+		setRotation(UpperJaw, 0.122173F, 0F, 0F);
 		
-		RightLowerLeg = new ModelRenderer(this, 42, 0);
-		RightLowerLeg.addBox(-2F, 6.6F, 3.1F, 2, 4, 2);
-		RightLowerLeg.setRotationPoint(-2.5F, 11F, 0F);
-		RightLowerLeg.setTextureSize(64, 64);
-		RightLowerLeg.mirror = true;
-		setRotation(RightLowerLeg, -0.4363323F, 0F, 0F);
+		NoseBridge = new ModelRenderer(this, 18, 20);
+		NoseBridge.addBox(-1F, 0F, -5F, 2, 1, 5);
+		NoseBridge.setRotationPoint(0F, -0.6F, -15F);
+		NoseBridge.setTextureSize(64, 64);
+		NoseBridge.mirror = true;
+		setRotation(NoseBridge, 0.2792527F, 0F, 0F);
 		
-		RightFoot = new ModelRenderer(this, 42, 9);
-		RightFoot.addBox(-2F, 10.8F, -3.5F, 3, 2, 4);
-		RightFoot.setRotationPoint(-2.5F, 11F, 0F);
-		RightFoot.setTextureSize(64, 64);
-		RightFoot.mirror = true;
-		setRotation(RightFoot, 0F, 0F, 0F);
+		HeadFeathers = new ModelRenderer(this, 18, 26);
+		HeadFeathers.mirror = true;
+		HeadFeathers.addBox(-0.5F, -1F, 0F, 1, 2, 6);
+		HeadFeathers.setRotationPoint(0F, -0.3F, -14F);
+		HeadFeathers.setTextureSize(64, 64);
+		HeadFeathers.mirror = true;
+		setRotation(HeadFeathers, 0.2268928F, 0F, 0F);
+		HeadFeathers.mirror = false;
 		
-		RightClaw1 = new ModelRenderer(this, 42, 9);
-		RightClaw1.addBox(0F, 8.2F, -5.8F, 1, 2, 1);
-		RightClaw1.setRotationPoint(-2.5F, 11F, 0F);
-		RightClaw1.setTextureSize(64, 64);
-		RightClaw1.mirror = true;
-		setRotation(RightClaw1, 0.2268928F, 0F, 0F);
+		// These parts don't have a common rotation point, but won't matter unless we move them somehow!
+	    convertToChild(Head, LowerJaw);
+	    convertToChild(Head, UpperJaw);
+	    convertToChild(Head, NoseBridge);
+	    convertToChild(Head, HeadFeathers);
 		
-		RightClaw2 = new ModelRenderer(this, 44, 6);
-		RightClaw2.mirror = true;
-		RightClaw2.addBox(0F, 9F, -5F, 1, 1, 2);
-		RightClaw2.setRotationPoint(-2.5F, 11F, 0F);
-		RightClaw2.setTextureSize(64, 64);
-		RightClaw2.mirror = true;
-		setRotation(RightClaw2, 0.0174533F, 0F, 0F);
-		
-		RightClaw2.mirror = false;
-		RightOuterToe = new ModelRenderer(this, 36, 0);
-		RightOuterToe.addBox(-1.5F, 9.5F, -8.5F, 1, 1, 2);
-		RightOuterToe.setRotationPoint(-2.5F, 11F, 0F);
-		RightOuterToe.setTextureSize(64, 64);
-		RightOuterToe.mirror = true;
-		setRotation(RightOuterToe, 0.296706F, 0.122173F, 0F);
-		
-		RightInnerToe = new ModelRenderer(this, 37, 3);
-		RightInnerToe.addBox(-1F, 9.6F, -9F, 1, 1, 3);
-		RightInnerToe.setRotationPoint(-2.5F, 11F, 0F);
-		RightInnerToe.setTextureSize(64, 64);
-		RightInnerToe.mirror = true;
-		setRotation(RightInnerToe, 0.2617994F, -0.0349066F, 0F);
-		
+		// Body
 		Body = new ModelRenderer(this, 0, 47);
 		Body.addBox(-3F, 0F, 0F, 6, 5, 12);
 		Body.setRotationPoint(0F, 7F, -7.5F);
@@ -153,6 +141,29 @@ public class ModelRaptor extends ModelBase {
 		Stomach.mirror = true;
 		setRotation(Stomach, -0.0349066F, 0F, 0F);
 		
+		Neck = new ModelRenderer(this, 0, 38);
+		Neck.addBox(-2.5F, -5F, -2.5F, 5, 5, 5);
+		Neck.setRotationPoint(0F, 9.7F, -9.9F);
+		Neck.setTextureSize(64, 64);
+		Neck.mirror = true;
+		setRotation(Neck, 0.2617994F, 0F, 0F);
+		
+		UpperNeck = new ModelRenderer(this, 0, 30);
+		UpperNeck.addBox(-2F, -4F, -2.5F, 4, 3, 5);
+		UpperNeck.setRotationPoint(0F, 6.5F, -11.1F);
+		UpperNeck.setTextureSize(64, 64);
+		UpperNeck.mirror = true;
+		setRotation(UpperNeck, 0F, 0F, 0F);
+				
+		// These parts don't have a common rotation point, but won't matter unless we move them somehow!
+	    convertToChild(Body, Body2);
+	    convertToChild(Body, Back1);
+	    convertToChild(Body, Back2);
+	    convertToChild(Body, Stomach);		
+	    convertToChild(Body, Neck);		
+	    convertToChild(Body, UpperNeck);		
+
+		// Left leg and foot
 		LeftUpperLeg = new ModelRenderer(this, 50, 0);
 		LeftUpperLeg.addBox(0F, -1F, -2F, 3, 5, 4);
 		LeftUpperLeg.setRotationPoint(2.5F, 11F, 0F);
@@ -173,13 +184,27 @@ public class ModelRaptor extends ModelBase {
 		LeftLowerLeg.setTextureSize(64, 64);
 		LeftLowerLeg.mirror = true;
 		setRotation(LeftLowerLeg, -0.4363323F, 0F, 0F);
-		
+
 		LeftFoot = new ModelRenderer(this, 42, 9);
 		LeftFoot.addBox(0F, 10.8F, -3.5F, 3, 2, 4);
 		LeftFoot.setRotationPoint(2.5F, 11F, 0F);
 		LeftFoot.setTextureSize(64, 64);
 		LeftFoot.mirror = true;
 		setRotation(LeftFoot, 0F, 0F, 0F);
+
+	    LeftClaw1 = new ModelRenderer(this, 42, 9);
+		LeftClaw1.addBox(0F, 8.2F, -5.8F, 1, 2, 1);
+		LeftClaw1.setRotationPoint(2.5F, 11F, 0F);
+		LeftClaw1.setTextureSize(64, 64);
+		LeftClaw1.mirror = true;
+		setRotation(LeftClaw1, 0.2268928F, 0F, 0F);
+		
+		LeftClaw2 = new ModelRenderer(this, 44, 6);
+		LeftClaw2.addBox(0F, 9F, -5F, 1, 1, 2);
+		LeftClaw2.setRotationPoint(2.5F, 11F, 0F);
+		LeftClaw2.setTextureSize(64, 64);
+		LeftClaw2.mirror = true;
+		setRotation(LeftClaw2, 0.0174533F, 0F, 0F);
 		
 		LeftOuterToe = new ModelRenderer(this, 36, 0);
 		LeftOuterToe.addBox(1.5F, 9.5F, -8.5F, 1, 1, 2);
@@ -195,20 +220,81 @@ public class ModelRaptor extends ModelBase {
 		LeftInnerToe.mirror = true;
 		setRotation(LeftInnerToe, 0.2617994F, 0.0349066F, 0F);
 		
-		LeftClaw1 = new ModelRenderer(this, 42, 9);
-		LeftClaw1.addBox(0F, 8.2F, -5.8F, 1, 2, 1);
-		LeftClaw1.setRotationPoint(2.5F, 11F, 0F);
-		LeftClaw1.setTextureSize(64, 64);
-		LeftClaw1.mirror = true;
-		setRotation(LeftClaw1, 0.2268928F, 0F, 0F);
+		convertToChild(LeftFoot, LeftClaw1);
+	    convertToChild(LeftFoot, LeftClaw2);
+	    convertToChild(LeftFoot, LeftOuterToe);
+	    convertToChild(LeftFoot, LeftInnerToe);
+	    convertToChild(LeftLowerLeg, LeftFoot);
+	    convertToChild(LeftMidLeg, LeftLowerLeg);
+	    convertToChild(LeftUpperLeg, LeftMidLeg);
+
+		// Right leg and foot
+		RightUpperLeg = new ModelRenderer(this, 50, 0);
+		RightUpperLeg.addBox(-3.0F, -1F, -2F, 3, 5, 4);
+		RightUpperLeg.setRotationPoint(-2.5F, 11F, 0F);
+		RightUpperLeg.setTextureSize(64, 64);
+		RightUpperLeg.mirror = true;
+		setRotation(RightUpperLeg, -0.5759587F, 0F, 0F);
 		
-		LeftClaw2 = new ModelRenderer(this, 44, 6);
-		LeftClaw2.addBox(0F, 9F, -5F, 1, 1, 2);
-		LeftClaw2.setRotationPoint(2.5F, 11F, 0F);
-		LeftClaw2.setTextureSize(64, 64);
-		LeftClaw2.mirror = true;
-		setRotation(LeftClaw2, 0.0174533F, 0F, 0F);
+		RightMidLeg = new ModelRenderer(this, 56, 9);
+		RightMidLeg.addBox(-2.0F, 0F, -4.4F, 2, 8, 2);
+		RightMidLeg.setRotationPoint(-2.5F, 11F, 0F);
+		RightMidLeg.setTextureSize(64, 64);
+		RightMidLeg.mirror = true;
+		setRotation(RightMidLeg, 0.5235988F, 0F, 0F);
 		
+		RightLowerLeg = new ModelRenderer(this, 42, 0);
+		RightLowerLeg.addBox(-2.0F, 6.6F, 3.1F, 2, 4, 2);
+		RightLowerLeg.setRotationPoint(-2.5F, 11F, 0F);
+		RightLowerLeg.setTextureSize(64, 64);
+		RightLowerLeg.mirror = true;
+		setRotation(RightLowerLeg, -0.4363323F, 0F, 0F);
+		
+		RightFoot = new ModelRenderer(this, 42, 9);
+		RightFoot.addBox(-3.0F, 10.8F, -3.5F, 3, 2, 4);
+		RightFoot.setRotationPoint(-2.5F, 11F, 0F);
+		RightFoot.setTextureSize(64, 64);
+		RightFoot.mirror = true;
+		setRotation(RightFoot, 0F, 0F, 0F);
+		
+		RightClaw1 = new ModelRenderer(this, 42, 9);
+		RightClaw1.addBox(-1F, 8.2F, -5.8F, 1, 2, 1);
+		RightClaw1.setRotationPoint(-2.5F, 11F, 0F);
+		RightClaw1.setTextureSize(64, 64);
+		RightClaw1.mirror = true;
+		setRotation(RightClaw1, 0.2268928F, 0F, 0F);
+		
+		RightClaw2 = new ModelRenderer(this, 44, 6);
+		RightClaw2.mirror = true;
+		RightClaw2.addBox(-1F, 9F, -5F, 1, 1, 2);
+		RightClaw2.setRotationPoint(-2.5F, 11F, 0F);
+		RightClaw2.setTextureSize(64, 64);
+		RightClaw2.mirror = true;
+		setRotation(RightClaw2, 0.0174533F, 0F, 0F);
+		
+		RightOuterToe = new ModelRenderer(this, 36, 0);
+		RightOuterToe.addBox(-2.5F, 9.5F, -8.5F, 1, 1, 2);
+		RightOuterToe.setRotationPoint(-2.5F, 11F, 0F);
+		RightOuterToe.setTextureSize(64, 64);
+		RightOuterToe.mirror = true;
+		setRotation(RightOuterToe, 0.296706F, 0.122173F, 0F);
+		
+		RightInnerToe = new ModelRenderer(this, 37, 3);
+		RightInnerToe.addBox(-2F, 9.6F, -9F, 1, 1, 3);
+		RightInnerToe.setRotationPoint(-2.5F, 11F, 0F);
+		RightInnerToe.setTextureSize(64, 64);
+		RightInnerToe.mirror = true;
+		setRotation(RightInnerToe, 0.2617994F, -0.0349066F, 0F);
+		
+	    convertToChild(RightFoot, RightClaw1);
+	    convertToChild(RightFoot, RightClaw2);
+	    convertToChild(RightFoot, RightOuterToe);
+	    convertToChild(RightFoot, RightInnerToe);
+	    convertToChild(RightLowerLeg, RightFoot);
+	    convertToChild(RightMidLeg, RightLowerLeg);
+	    convertToChild(RightUpperLeg, RightMidLeg);
+
+	    // Left Arm and claw
 		LeftUpperArm = new ModelRenderer(this, 56, 22);
 		LeftUpperArm.addBox(0F, -1F, -1F, 2, 6, 2);
 		LeftUpperArm.setRotationPoint(3F, 8.5F, -8F);
@@ -243,7 +329,13 @@ public class ModelRaptor extends ModelBase {
 		LeftHandClaw2.setTextureSize(64, 64);
 		LeftHandClaw2.mirror = true;
 		setRotation(LeftHandClaw2, 0.8203047F, 0F, 0F);
+
+	    convertToChild(LeftHand, LeftHandClaw1);
+	    convertToChild(LeftHand, LeftHandClaw2);
+	    convertToChild(LeftLowerArm, LeftHand);
+	    convertToChild(LeftUpperArm, LeftLowerArm);
 		
+	    // Left Arm and claw
 		RightUpperArm = new ModelRenderer(this, 56, 22);
 		RightUpperArm.addBox(-2F, -1F, -1F, 2, 6, 2);
 		RightUpperArm.setRotationPoint(-3F, 8.5F, -8F);
@@ -279,6 +371,12 @@ public class ModelRaptor extends ModelBase {
 		RightHandClaw2.mirror = true;
 		setRotation(RightHandClaw2, 0.8203047F, 0F, 0F);
 		
+	    convertToChild(RightHand, RightHandClaw1);
+	    convertToChild(RightHand, RightHandClaw2);
+	    convertToChild(RightLowerArm, RightHand);
+	    convertToChild(RightUpperArm, RightLowerArm);
+				
+		// Tail
 		Tail1 = new ModelRenderer(this, 48, 31);
 		Tail1.addBox(-2.5F, -2F, 0F, 5, 4, 3);
 		Tail1.setRotationPoint(0F, 10.4F, 3F);
@@ -321,106 +419,25 @@ public class ModelRaptor extends ModelBase {
 		Tail6.mirror = true;
 		setRotation(Tail6, -0.1396263F, 0F, 0F);
 		
-		Neck = new ModelRenderer(this, 0, 38);
-		Neck.addBox(-2.5F, -5F, -2.5F, 5, 5, 5);
-		Neck.setRotationPoint(0F, 9.7F, -9.9F);
-		Neck.setTextureSize(64, 64);
-		Neck.mirror = true;
-		setRotation(Neck, 0.2617994F, 0F, 0F);
-		
-		UpperNeck = new ModelRenderer(this, 0, 30);
-		UpperNeck.addBox(-2F, -4F, -2.5F, 4, 3, 5);
-		UpperNeck.setRotationPoint(0F, 6.5F, -11.1F);
-		UpperNeck.setTextureSize(64, 64);
-		UpperNeck.mirror = true;
-		setRotation(UpperNeck, 0F, 0F, 0F);
-		
-		Head = new ModelRenderer(this, 4, 20);
-		Head.addBox(-2F, -5F, -3F, 4, 4, 6);
-		Head.setRotationPoint(0F, 4F, -11.5F);
-		Head.setTextureSize(64, 64);
-		Head.mirror = true;
-		setRotation(Head, 0.122173F, 0F, 0F);
-		
-		LowerJaw = new ModelRenderer(this, 29, 12);
-		LowerJaw.addBox(-1.5F, 0F, -5F, 3, 1, 5);
-		LowerJaw.setRotationPoint(0F, 2.3F, -14.5F);
-		LowerJaw.setTextureSize(64, 64);
-		LowerJaw.mirror = true;
-		setRotation(LowerJaw, 0.0698132F, 0F, 0F);
-		
-		UpperJaw = new ModelRenderer(this, 27, 18);
-		UpperJaw.addBox(-2F, 0F, -5F, 4, 2, 5);
-		UpperJaw.setRotationPoint(0F, 0.3F, -15F);
-		UpperJaw.setTextureSize(64, 64);
-		UpperJaw.mirror = true;
-		setRotation(UpperJaw, 0.122173F, 0F, 0F);
-		
-		NoseBridge = new ModelRenderer(this, 18, 20);
-		NoseBridge.addBox(-1F, 0F, -5F, 2, 1, 5);
-		NoseBridge.setRotationPoint(0F, -0.6F, -15F);
-		NoseBridge.setTextureSize(64, 64);
-		NoseBridge.mirror = true;
-		setRotation(NoseBridge, 0.2792527F, 0F, 0F);
-		
-		HeadFeathers = new ModelRenderer(this, 18, 26);
-		HeadFeathers.mirror = true;
-		HeadFeathers.addBox(-0.5F, -1F, 0F, 1, 2, 6);
-		HeadFeathers.setRotationPoint(0F, -0.3F, -14F);
-		HeadFeathers.setTextureSize(64, 64);
-		HeadFeathers.mirror = true;
-		setRotation(HeadFeathers, 0.2268928F, 0F, 0F);
-		HeadFeathers.mirror = false;
-		
-		Body.addChild(Back1);
-		Body.addChild(Back2);
-		Body.addChild(Stomach);
-		Body.addChild(Body2);
-		
-		Body.addChild(RightHand);
-		Body.addChild(RightUpperLeg);
-		Body.addChild(RightMidLeg);
-		Body.addChild(RightLowerLeg);
-		Body.addChild(RightFoot);
-		Body.addChild(RightInnerToe);
-		Body.addChild(RightOuterToe);
-		Body.addChild(RightClaw1);
-		Body.addChild(RightClaw2);
-		Body.addChild(RightUpperArm);
-		Body.addChild(RightLowerArm);
-		
-		Body.addChild(LeftUpperLeg);
-		Body.addChild(LeftMidLeg);
-		Body.addChild(LeftLowerLeg);
-		Body.addChild(LeftFoot);
-		Body.addChild(LeftInnerToe);
-		Body.addChild(LeftOuterToe);
-		Body.addChild(LeftHand);
-		Body.addChild(LeftClaw1);
-		Body.addChild(LeftClaw2);
-		Body.addChild(LeftUpperArm);
-		Body.addChild(LeftLowerArm);
-		
-		Body.addChild(Tail1);
-		Body.addChild(Tail2);
-		Body.addChild(Tail3);
-		Body.addChild(Tail4);
-		Body.addChild(Tail5);
-		Body.addChild(Tail6);
+		// These parts don't have a common rotation point, but won't matter unless we move them somehow!
+	    convertToChild(Tail5, Tail6);
+	    convertToChild(Tail4, Tail5);
+	    convertToChild(Tail3, Tail4);
+	    convertToChild(Tail2, Tail3);
+	    convertToChild(Tail1, Tail2);
 	}
 
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		super.render(entity, f, f1, f2, f3, f4, f5);
 		setRotationAngles(entity, f, f1, f2, f3, f4, f5);
 		
-		Body.render(f5);
-		Neck.render(f5);
-		UpperNeck.render(f5);
 		Head.render(f5);
-		LowerJaw.render(f5);
-		UpperJaw.render(f5);
-		NoseBridge.render(f5);
-		HeadFeathers.render(f5);
+		Body.render(f5);
+		LeftUpperLeg.render(f5);
+		RightUpperLeg.render(f5);
+		LeftUpperArm.render(f5);
+		RightUpperArm.render(f5);		
+		Tail1.render(f5);
 	}
 
 	private void setRotation(ModelRenderer model, float x, float y, float z) {
@@ -431,22 +448,22 @@ public class ModelRaptor extends ModelBase {
 
 	public void setRotationAngles(Entity e, float f, float f1, float f2, float f3, float f4, float f5) {
 		super.setRotationAngles(f, f1, f2, f3, f4, f5, e);
-		/*
-		this.LeftUpperLeg.setRotationPoint(-2.5F, 14F, -8F);
-		this.LeftMidLeg.setRotationPoint(-2.5F, 14F, -8F);
-		this.LeftLowerLeg.setRotationPoint(-2.5F, 14F, -8F);
-
-		this.RightUpperLeg.setRotationPoint(-2.5F, 14F, -8F);
-		this.RightMidLeg.setRotationPoint(-2.5F, 14F, -8F);
-		this.RightLowerLeg.setRotationPoint(-2.5F, 14F, -8F);
-
+		
 		this.RightUpperLeg.rotateAngleX = MathHelper.cos(f * 0.6662F) * 0.9F * f1;
-		this.RightMidLeg.rotateAngleX = MathHelper.cos(f * 0.6662F) * 0.9F * f1;
-		this.RightLowerLeg.rotateAngleX = MathHelper.cos(f * 0.6662F) * 0.9F * f1;
-
 		this.LeftUpperLeg.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 0.9F * f1;
-		this.LeftMidLeg.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 0.9F * f1;
-		this.LeftLowerLeg.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 0.9F * f1;
-		*/
+	}
+	
+	// Use this for parts that have a common rotation point, so they can be rendered together with a single call to the render function
+	protected void convertToChild(ModelRenderer parParent, ModelRenderer parChild) {
+		// move child rotation point to be relative to parent
+		parChild.rotationPointX -= parParent.rotationPointX;
+		parChild.rotationPointY -= parParent.rotationPointY;
+		parChild.rotationPointZ -= parParent.rotationPointZ;
+		// make rotations relative to parent
+		parChild.rotateAngleX -= parParent.rotateAngleX;
+		parChild.rotateAngleY -= parParent.rotateAngleY;
+		parChild.rotateAngleZ -= parParent.rotateAngleZ;
+		// create relationship
+		parParent.addChild(parChild);
 	}
 }
