@@ -7,6 +7,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.ResourceLocation;
 
+import java.util.Random;
+
 import com.arkcraft.mod.core.Main;
 import com.arkcraft.mod.core.entity.EntityRaptor;
 import com.arkcraft.mod.core.entity.model.ModelRaptor;
@@ -18,32 +20,32 @@ import com.arkcraft.mod.core.entity.model.ModelRaptor;
  */
 public class RenderRaptor extends RenderLiving {
 
-	private static final ResourceLocation texture = 
-			new ResourceLocation(Main.MODID, "textures/model/raptor.png");
-	
+	private static final ResourceLocation texture = new ResourceLocation(Main.MODID, "textures/model/raptor.png");
+	private static final ResourceLocation texture_rainbow = new ResourceLocation(Main.MODID,
+			"textures/model/raptor_rainbow.png");
+
 	protected ModelRaptor modelEntity;
-	
+
 	public RenderRaptor(ModelBase base, float par2) {
 		super(Minecraft.getMinecraft().getRenderManager(), base, par2);
-		modelEntity = ((ModelRaptor)mainModel);
+		modelEntity = ((ModelRaptor) mainModel);
 	}
-	
-	
+
 	public void render(EntityRaptor entity, double x, double y, double z, float u, float v) {
 		super.doRender(entity, x, y, z, u, v);
 	}
-	
+
 	public void doRenderLiving(EntityLiving entity, double x, double y, double z, float u, float v) {
-		render((EntityRaptor)entity, x, y, z, u, v);
+		render((EntityRaptor) entity, x, y, z, u, v);
 	}
-	
+
 	public void doRender(Entity entity, double x, double y, double z, float u, float v) {
-		render((EntityRaptor)entity, x, y, z, u, v);
+		render((EntityRaptor) entity, x, y, z, u, v);
 	}
-	
+
 	@Override
 	protected ResourceLocation getEntityTexture(Entity e) {
-		return texture;
+		return new Random().nextInt(1000) == 1000 ? texture_rainbow : texture;
 	}
-	
+
 }

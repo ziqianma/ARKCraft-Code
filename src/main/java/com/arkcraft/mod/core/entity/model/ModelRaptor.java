@@ -8,9 +8,7 @@ package com.arkcraft.mod.core.entity.model;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.MathHelper;
 
 public class ModelRaptor extends ModelBase {
 	
@@ -433,6 +431,7 @@ public class ModelRaptor extends ModelBase {
 
 	public void setRotationAngles(Entity e, float f, float f1, float f2, float f3, float f4, float f5) {
 		super.setRotationAngles(f, f1, f2, f3, f4, f5, e);
+		/*
 		this.LeftUpperLeg.setRotationPoint(-2.5F, 14F, -8F);
 		this.LeftMidLeg.setRotationPoint(-2.5F, 14F, -8F);
 		this.LeftLowerLeg.setRotationPoint(-2.5F, 14F, -8F);
@@ -448,5 +447,6 @@ public class ModelRaptor extends ModelBase {
 		this.LeftUpperLeg.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 0.9F * f1;
 		this.LeftMidLeg.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 0.9F * f1;
 		this.LeftLowerLeg.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 0.9F * f1;
+		*/
 	}
 }
