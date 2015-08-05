@@ -45,7 +45,7 @@ public class RenderRaptor extends RenderLiving {
 
 	@Override
 	protected ResourceLocation getEntityTexture(Entity e) {
-		return new Random().nextInt(1000) == 1000 ? texture_rainbow : texture;
+		return new Random().nextInt(100) > 99 ? texture_rainbow : texture;
 	}
 
 }
