@@ -21,8 +21,7 @@ import com.arkcraft.mod.core.entity.model.ModelRaptor;
 public class RenderRaptor extends RenderLiving {
 
 	private static final ResourceLocation texture = new ResourceLocation(Main.MODID, "textures/model/raptor.png");
-	private static final ResourceLocation texture_rainbow = new ResourceLocation(Main.MODID,
-			"textures/model/raptor_rainbow.png");
+	private static final ResourceLocation texture_rainbow = new ResourceLocation(Main.MODID, "textures/model/raptor_rainbow.png");
 
 	protected ModelRaptor modelEntity;
 
@@ -45,6 +44,7 @@ public class RenderRaptor extends RenderLiving {
 
 	@Override
 	protected ResourceLocation getEntityTexture(Entity e) {
+		/* It does this to all entities, of course, on run. */
 		return new Random().nextInt(100) > 99 ? texture_rainbow : texture;
 	}
 

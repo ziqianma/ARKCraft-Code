@@ -1,62 +1,56 @@
-[22:27:47] [main/INFO]: Logging in with username & password
-[22:27:54] [Client thread/INFO]: Setting user: Vastatio
-[22:27:56] [Client thread/INFO]: LWJGL Version: 2.9.1
-[22:27:59] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:arkcraft
-[22:28:00] [Sound Library Loader/INFO]: Starting up SoundSystem...
-[22:28:00] [Thread-9/INFO]: Initializing LWJGL OpenAL
-[22:28:00] [Thread-9/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
-[22:28:00] [Thread-9/INFO]: OpenAL initialized.
-[22:28:01] [Sound Library Loader/INFO]: Sound engine started
-[22:28:03] [Client thread/INFO]: Created: 16x16 textures-atlas
-[22:28:04] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:arkcraft
-[22:28:04] [Client thread/INFO]: SoundSystem shutting down...
-[22:28:04] [Client thread/WARN]: Author: Paul Lamb, www.paulscode.com
-[22:28:04] [Sound Library Loader/INFO]: Starting up SoundSystem...
-[22:28:04] [Thread-11/INFO]: Initializing LWJGL OpenAL
-[22:28:04] [Thread-11/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
-[22:28:04] [Thread-11/INFO]: OpenAL initialized.
-[22:28:04] [Sound Library Loader/INFO]: Sound engine started
-[22:28:06] [Client thread/INFO]: Created: 512x512 textures-atlas
-[22:28:14] [Server thread/INFO]: Starting integrated minecraft server version 1.8
-[22:28:14] [Server thread/INFO]: Generating keypair
-[22:28:14] [Server thread/INFO]: Preparing start region for level 0
-[22:28:15] [Server thread/INFO]: Preparing spawn area: 77%
-[22:28:16] [Server thread/INFO]: Changing view distance to 12, from 10
-[22:28:17] [Server thread/INFO]: Vastatio[local:E:63cf5aab] logged in with entity id 335 at (-124.78671468317587, 70.0, 237.84868046530408)
-[22:28:17] [Server thread/INFO]: Vastatio joined the game
-[22:28:18] [Server thread/INFO]: Saving and pausing game...
-[22:28:18] [Server thread/INFO]: Saving chunks for level 'New World'/Overworld
-[22:28:19] [Server thread/INFO]: Saving chunks for level 'New World'/Nether
-[22:28:19] [Server thread/INFO]: Saving chunks for level 'New World'/The End
-[22:29:29] [Chunk Batcher 1/WARN]: Needed to grow BufferBuilder buffer: Old size 524288 bytes, new size 2621440 bytes.
-[22:29:30] [Client thread/INFO]: [CHAT] Unknown command. Try /help for a list of commands
-[22:29:32] [Client thread/INFO]: [CHAT] --- Showing help page 1 of 7 (/help <page>) ---
-[22:29:32] [Client thread/INFO]: [CHAT] /achievement <give|take> <stat_name|*> [player]
-[22:29:32] [Client thread/INFO]: [CHAT] /blockdata <x> <y> <z> <dataTag>
-[22:29:32] [Client thread/INFO]: [CHAT] /clear [player] [item] [data] [maxCount] [dataTag]
-[22:29:32] [Client thread/INFO]: [CHAT] /clone <x1> <y1> <z1> <x2> <y2> <z2> <x> <y> <z> [mode]
-[22:29:32] [Client thread/INFO]: [CHAT] /debug <start|stop|chunk> [<x> <y> <z>]
-[22:29:32] [Client thread/INFO]: [CHAT] /defaultgamemode <mode>
-[22:29:32] [Client thread/INFO]: [CHAT] /difficulty <new difficulty>
-[22:29:32] [Client thread/INFO]: [CHAT] Tip: Use the <tab> key while typing a command to auto-complete the command or its arguments
-[22:29:38] [Chunk Batcher 1/WARN]: Needed to grow BufferBuilder buffer: Old size 524288 bytes, new size 2621440 bytes.
-[22:29:41] [Server thread/INFO]: [Vastatio: The world's default game mode is now Creative Mode]
-[22:29:41] [Client thread/INFO]: [CHAT] The world's default game mode is now Creative Mode
-[22:29:46] [Chunk Batcher 0/WARN]: Needed to grow BufferBuilder buffer: Old size 524288 bytes, new size 2621440 bytes.
-[22:29:46] [Chunk Batcher 1/WARN]: Needed to grow BufferBuilder buffer: Old size 524288 bytes, new size 2621440 bytes.
-[22:29:55] [Chunk Batcher 0/WARN]: Needed to grow BufferBuilder buffer: Old size 524288 bytes, new size 2621440 bytes.
-[22:31:19] [Client thread/INFO]: [CHAT] Saved screenshot as 2015-08-04_22.31.19.png
-[22:31:24] [Client thread/INFO]: [CHAT] Saved screenshot as 2015-08-04_22.31.23.png
-[22:31:51] [Client thread/INFO]: Stopping!
-[22:31:51] [Client thread/INFO]: SoundSystem shutting down...
-[22:31:51] [Server thread/INFO]: Stopping server
-[22:31:51] [Server thread/INFO]: Saving players
-[22:31:51] [Server thread/INFO]: Saving worlds
-[22:31:51] [Server thread/INFO]: Saving chunks for level 'New World'/Overworld
-[22:31:51] [Server thread/INFO]: Saving chunks for level 'New World'/Nether
-[22:31:51] [Server thread/INFO]: Saving chunks for level 'New World'/The End
-[22:31:51] [Client thread/WARN]: Author: Paul Lamb, www.paulscode.com
-[22:31:51] [Client Shutdown Thread/INFO]: Stopping server
-[22:31:51] [Client Shutdown Thread/INFO]: Saving players
-[22:31:51] [Client Shutdown Thread/INFO]: Saving worlds
-[22:31:51] [Client Shutdown Thread/INFO]: Saving chunks for level 'New World'/Overworld
+[19:44:20] [main/INFO]: Logging in with username & password
+[19:44:25] [Client thread/INFO]: Setting user: Vastatio
+[19:44:27] [Client thread/INFO]: LWJGL Version: 2.9.1
+[19:44:30] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:arkcraft
+[19:44:30] [Sound Library Loader/INFO]: Starting up SoundSystem...
+[19:44:31] [Thread-9/INFO]: Initializing LWJGL OpenAL
+[19:44:31] [Thread-9/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
+[19:44:31] [Thread-9/INFO]: OpenAL initialized.
+[19:44:31] [Sound Library Loader/INFO]: Sound engine started
+[19:44:33] [Client thread/INFO]: Created: 16x16 textures-atlas
+[19:44:34] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:arkcraft
+[19:44:34] [Client thread/INFO]: SoundSystem shutting down...
+[19:44:34] [Client thread/WARN]: Author: Paul Lamb, www.paulscode.com
+[19:44:34] [Sound Library Loader/INFO]: Starting up SoundSystem...
+[19:44:34] [Thread-11/INFO]: Initializing LWJGL OpenAL
+[19:44:34] [Thread-11/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
+[19:44:34] [Thread-11/INFO]: OpenAL initialized.
+[19:44:35] [Sound Library Loader/INFO]: Sound engine started
+[19:44:36] [Client thread/INFO]: Created: 512x512 textures-atlas
+[19:44:47] [Server thread/INFO]: Starting integrated minecraft server version 1.8
+[19:44:47] [Server thread/INFO]: Generating keypair
+[19:44:47] [Server thread/INFO]: Preparing start region for level 0
+[19:44:48] [Server thread/INFO]: Preparing spawn area: 87%
+[19:44:49] [Server thread/INFO]: Changing view distance to 12, from 10
+[19:44:50] [Server thread/INFO]: Vastatio[local:E:4531daa4] logged in with entity id 235 at (-336.72207181152834, 73.91236450008181, -500.85934648801594)
+[19:44:50] [Server thread/INFO]: Vastatio joined the game
+[19:45:02] [Chunk Batcher 0/WARN]: Needed to grow BufferBuilder buffer: Old size 524288 bytes, new size 2621440 bytes.
+[19:45:02] [Chunk Batcher 1/WARN]: Needed to grow BufferBuilder buffer: Old size 524288 bytes, new size 2621440 bytes.
+[19:45:06] [Chunk Batcher 0/WARN]: Needed to grow BufferBuilder buffer: Old size 524288 bytes, new size 2621440 bytes.
+[19:45:15] [Server thread/INFO]: [Vastatio: Set the time to 0]
+[19:45:15] [Client thread/INFO]: [CHAT] Set the time to 0
+[19:45:36] [Chunk Batcher 0/WARN]: Needed to grow BufferBuilder buffer: Old size 524288 bytes, new size 2621440 bytes.
+[19:47:05] [Server thread/INFO]: [Vastatio: Set own game mode to Survival Mode]
+[19:47:05] [Client thread/INFO]: [CHAT] Your game mode has been updated
+[19:48:18] [Server thread/INFO]: Vastatio fell from a high place
+[19:48:18] [Client thread/INFO]: [CHAT] Vastatio fell from a high place
+[19:48:27] [Server thread/INFO]: [Vastatio: Set own game mode to Creative Mode]
+[19:48:27] [Client thread/INFO]: [CHAT] Your game mode has been updated
+[19:50:05] [Server thread/INFO]: [Vastatio: Set own game mode to Survival Mode]
+[19:50:05] [Client thread/INFO]: [CHAT] Your game mode has been updated
+[19:51:05] [Chunk Batcher 1/WARN]: Needed to grow BufferBuilder buffer: Old size 524288 bytes, new size 2621440 bytes.
+[19:51:09] [Server thread/INFO]: Vastatio was slain by Raptor
+[19:51:09] [Client thread/INFO]: [CHAT] Vastatio was slain by Raptor
+[19:51:12] [Client thread/INFO]: Stopping!
+[19:51:12] [Client thread/INFO]: SoundSystem shutting down...
+[19:51:12] [Server thread/INFO]: Stopping server
+[19:51:12] [Server thread/INFO]: Saving players
+[19:51:12] [Server thread/INFO]: Saving worlds
+[19:51:12] [Server thread/INFO]: Saving chunks for level 'New World'/Overworld
+[19:51:12] [Server thread/INFO]: Saving chunks for level 'New World'/Nether
+[19:51:13] [Server thread/INFO]: Saving chunks for level 'New World'/The End
+[19:51:13] [Client thread/WARN]: Author: Paul Lamb, www.paulscode.com
+[19:51:13] [Client Shutdown Thread/INFO]: Stopping server
+[19:51:13] [Client Shutdown Thread/INFO]: Saving players
+[19:51:13] [Client Shutdown Thread/INFO]: Saving worlds
+[19:51:13] [Client Shutdown Thread/INFO]: Saving chunks for level 'New World'/Overworld
