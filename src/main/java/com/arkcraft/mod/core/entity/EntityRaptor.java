@@ -22,7 +22,7 @@ import net.minecraft.world.World;
 
 /***
  * 
- * @author Vastatio
+ * @author Vastatio (color done by Bill)
  *
  */
 public class EntityRaptor extends EntityMob {
@@ -131,9 +131,9 @@ public class EntityRaptor extends EntityMob {
 			type.setRaptorTypeId(nbt.getInteger(RAPTOR_TYPE_PROP));
 			LogHelper.info("EnityRaptor read: Raptor is a " + this.type.toString() + ".");
 		}
-		else
-			LogHelper.error("EnityRaptor read: No raptor type property!");
-	}		
+		LogHelper.error("EnityRaptor read: No raptor type property!");
+	}
+	
     @Override
     protected String getLivingSound() {
     	int idle = this.rand.nextInt(3);
