@@ -21,3 +21,7 @@ saves/New World/region/r.0.-1.mca
 saves/New World/region/r.0.0.mca
 saves/New World/session.lock
 saves/New World/stats/221ba2c0-f26e-4bfe-9266-57d6a75e9418.json
+.classpath
+config/splash.properties
+logs/2015-08-07-1.log.gz
+saves/New World/data/Village.dat

@@ -26,12 +26,14 @@ import net.minecraft.world.World;
  *
  */
 public class EntityRaptor extends EntityMob {
+	
 	private static final String RAPTOR_TYPE_PROP = "ark_raptor_type";
+	
 	public enum RaptorType {
 	    ALBINO(0),
 	    BREEN_WHITE(1),
 	    CYAN_LGREEN(2),
-	    GAY_GAY(3),
+	    RAINBOW(3),
 	    GREEN_GREY(4),
 	    GREEN_TAN(5),
 	    GREEN_WHITE(6),
@@ -39,6 +41,7 @@ public class EntityRaptor extends EntityMob {
 	    LBROWN_TAN(8),
 	    RED_TAN(9),
 	    TAN_WHITE(10);
+	    
 		private int type;
 		public static final int numRaptors = 11;
 	    
@@ -65,7 +68,7 @@ public class EntityRaptor extends EntityMob {
 			case 2:
 				return "Cyan Light Green";
 			case 3:
-				return "Gay Gay";
+				return "Rainbow";
 			case 4:
 				return "Green Grey";
 			case 5:
@@ -110,9 +113,9 @@ public class EntityRaptor extends EntityMob {
     	super.applyEntityAttributes();
     	this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).applyModifier(new AttributeModifier("Random spawn bonus", this.rand.nextDouble() * 0.05000000074505806D, 0));
     	this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(45.0D);
-    	this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(5.0D);
+    	this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(8.0D); //tested this at 5.0 (too low) setting to 8.
     	this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.379890125D);
-    	this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(4D);
+    	this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(4D); //2.5 hearts without armor
     }
     
 	@Override
@@ -147,7 +150,5 @@ public class EntityRaptor extends EntityMob {
     }
     
     @Override
-    protected String getDeathSound() {
-		return Main.MODID + ":" + "Death";
-    }
+    protected String getDeathSound() { return Main.MODID + ":" + "Death"; }
 }
