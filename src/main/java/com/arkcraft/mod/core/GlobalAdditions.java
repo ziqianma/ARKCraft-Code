@@ -10,6 +10,7 @@ import com.arkcraft.mod.core.creativetabs.ARKTabs;
 import com.arkcraft.mod.core.entity.EntityCobble;
 import com.arkcraft.mod.core.entity.EntityExplosive;
 import com.arkcraft.mod.core.entity.EntityRaptor;
+import com.arkcraft.mod.core.entity.passive.EntityDodo;
 import com.arkcraft.mod.core.handler.EntityHandler;
 import com.arkcraft.mod.core.handler.GuiHandler;
 import com.arkcraft.mod.core.handler.RecipeHandler;
@@ -91,6 +92,7 @@ public class GlobalAdditions {
 		EntityHandler.registerModEntity(EntityCobble.class, "Cobblestone Ball", 2, Main.instance, 64, 10, true);
 		NetworkRegistry.INSTANCE.registerGuiHandler(Main.instance, new GuiHandler());
 		EntityHandler.registerMonster(EntityRaptor.class, "raptor");
+		EntityHandler.registerPassive(EntityDodo.class, "dodo");
 	}
 	
 	protected static ARKBush addBush(String name, float hardness) {
