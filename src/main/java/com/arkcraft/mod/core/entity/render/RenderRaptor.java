@@ -9,7 +9,7 @@ import net.minecraft.util.ResourceLocation;
 
 import com.arkcraft.mod.core.Main;
 import com.arkcraft.mod.core.entity.EntityRaptor;
-import com.arkcraft.mod.core.entity.EntityRaptor.RaptorType;
+import com.arkcraft.mod.core.entity.RaptorType;
 import com.arkcraft.mod.core.entity.model.ModelRaptor;
 
 /***
