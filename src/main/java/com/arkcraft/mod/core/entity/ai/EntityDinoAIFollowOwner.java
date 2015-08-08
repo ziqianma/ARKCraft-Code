@@ -15,7 +15,7 @@ import com.arkcraft.mod.core.entity.DinoTameable;
  * @author Vastatio
  *
  */
-public class DinoAIFollowOwner extends EntityAIBase {
+public class EntityDinoAIFollowOwner extends EntityAIBase {
 
 	private DinoTameable pet;
 	private EntityLivingBase owner;
@@ -25,7 +25,7 @@ public class DinoAIFollowOwner extends EntityAIBase {
 	private PathNavigate pathFinder;
 	protected float minDist, maxDist;
 
-	public DinoAIFollowOwner(DinoTameable pet, double followSpeed,
+	public EntityDinoAIFollowOwner(DinoTameable pet, double followSpeed,
 			float minDist, float maxDist) {
 		this.pet = pet;
 		this.world = pet.worldObj;

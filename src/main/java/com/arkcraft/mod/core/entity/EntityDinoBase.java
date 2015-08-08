@@ -41,13 +41,13 @@ public class EntityDinoBase extends EntityMob/* implements ITamable */ {
 	 * 
 	public void writeEntityToNBT(NBTTagCompound nbt) {
 		super.writeEntityToNBT(nbt);
-		nbt.setInteger(TORPOR_TAG, torpor);
-		LogHelper.info("This entity has a max torpor of: " + torpor);
+		nbt.setInteger(TORPOR_TAG, this.getTorpor());
+		LogHelper.info("This entity has a max torpor of: " + this.getTorpor());
 	}
 	
 	public void readEntityFromNBT(NBTTagCompound nbt) {
 		super.readEntityFromNBT(nbt);
-		if(nbt.hasKey(TORPOR_TAG)) torpor = nbt.getInteger(TORPOR_TAG);
+		if(nbt.hasKey(TORPOR_TAG)) this.setTorpor(nbt.getInteger(TORPOR_TAG));
 	}
 	
 	*/

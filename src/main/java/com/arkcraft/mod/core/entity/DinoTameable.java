@@ -3,14 +3,14 @@ package com.arkcraft.mod.core.entity;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.world.World;
 
-import com.arkcraft.mod.core.entity.ai.DinoAIFollowOwner;
+import com.arkcraft.mod.core.entity.ai.EntityDinoAIFollowOwner;
 
 
 public abstract class DinoTameable extends EntityTameable {
 
 	protected int torpor = 0;
 	protected int progress = 0;
-	protected DinoAIFollowOwner dinoAIFollowOwner;
+	protected EntityDinoAIFollowOwner dinoAIFollowOwner;
 	
 	protected DinoTameable(World worldIn) {
 		super(worldIn);
@@ -68,7 +68,7 @@ public abstract class DinoTameable extends EntityTameable {
 	protected void setupTamedAI() {
 		/* We can setup the tamed AI here 
 		 * Ex: if tamed, the wolf follows the player */
-		if(dinoAIFollowOwner == null) dinoAIFollowOwner = new DinoAIFollowOwner(this, 10.0D, 1.0F, 1.2F);
+		if(dinoAIFollowOwner == null) dinoAIFollowOwner = new EntityDinoAIFollowOwner(this, 10.0D, 1.0F, 1.2F);
 		
 	}
 	
