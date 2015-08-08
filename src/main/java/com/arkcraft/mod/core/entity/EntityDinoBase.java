@@ -18,12 +18,12 @@ import net.minecraft.world.World;
  *
  */
 
-public class MobDinoBase extends EntityMob/* implements ITamable */ {
+public class EntityDinoBase extends EntityMob/* implements ITamable */ {
 	
 	//private static final String TORPOR_TAG = "ark_dino_torpor";
 	//int torpor; //we put this in the interface once its done or something
 	
-	public MobDinoBase(World world, String name, int torporMax) {
+	public EntityDinoBase(World world, String name, int torporMax) {
 		super(world);
 		//torpor = torporMax;
 		this.tasks.addTask(0, new EntityAISwimming(this));
