@@ -5,6 +5,7 @@ import java.util.Random;
 import com.arkcraft.mod.core.Main;
 import com.arkcraft.mod.lib.LogHelper;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIBase;
@@ -18,6 +19,8 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
 /***
@@ -26,9 +29,7 @@ import net.minecraft.world.World;
  *
  */
 public class EntityRaptor extends EntityMob {
-	
 	private static final String RAPTOR_TYPE_PROP = "ark_raptor_type";
-	
 	public enum RaptorType {
 	    ALBINO(0),
 	    BREEN_WHITE(1),
@@ -41,7 +42,6 @@ public class EntityRaptor extends EntityMob {
 	    LBROWN_TAN(8),
 	    RED_TAN(9),
 	    TAN_WHITE(10);
-	    
 		private int type;
 		public static final int numRaptors = 11;
 	    
@@ -123,7 +123,7 @@ public class EntityRaptor extends EntityMob {
 		super.writeEntityToNBT(nbt);
 		// Raptor properties
 		nbt.setInteger(RAPTOR_TYPE_PROP, this.type.getRaptorId());
-		LogHelper.info("EnityRaptor write: Raptor is a " + this.type.toString() + ".");
+		LogHelper.info("EnityRaptor write: Raptor is a " + this.type.toString() + " at: " + this.posX + ", " + this.posY + ", " + this.posZ);
 	}
 	
 	@Override
@@ -132,23 +132,57 @@ public class EntityRaptor extends EntityMob {
 		// Raptor properties
 		if (nbt.hasKey(RAPTOR_TYPE_PROP)) {
 			type.setRaptorTypeId(nbt.getInteger(RAPTOR_TYPE_PROP));
-			LogHelper.info("EnityRaptor read: Raptor is a " + this.type.toString() + ".");
+			LogHelper.info("EnityRaptor read: Raptor is a " + this.type.toString() + " at: " + this.posX + ", " + this.posY + ", " + this.posZ);
 		}
-		LogHelper.error("EnityRaptor read: No raptor type property!");
+		else
+			LogHelper.error("EnityRaptor read: No raptor type property!");
 	}
 	
     @Override
+    protected void playStepSound(BlockPos p_180429_1_, Block p_180429_2_)  {
+        this.playSound("mob.cow.step", 0.15F, 1.0F);
+    }
+
+    @Override
     protected String getLivingSound() {
-    	int idle = this.rand.nextInt(3);
+    	int idle = this.rand.nextInt(3) + 1;
 		return Main.MODID + ":" + "Idle_" + idle;
     }
     
     @Override
     protected String getHurtSound() {
-    	int hurt = this.rand.nextInt(3);
+    	int hurt = this.rand.nextInt(3) + 1;
 		return Main.MODID + ":" + "Hurt_" + hurt;
     }
     
     @Override
-    protected String getDeathSound() { return Main.MODID + ":" + "Death"; }
+    protected String getDeathSound() {
+		return Main.MODID + ":" + "Death";
+    }
+
+    /**
+     * Returns the volume for the sounds this mob makes.
+     */
+    @Override
+    protected float getSoundVolume() {
+        return 1.0F;
+    }
+    
+    /**
+     * Called when the entity is attacked. (Needed to attack other mobs)
+     */
+    @Override
+    public boolean attackEntityFrom(DamageSource damageSource, float damage) {
+    	int angry = this.rand.nextInt(3) + 1;
+        this.playSound(Main.MODID + ":" + "Angry_" + angry, 0.15F, 1.0F);    	
+		return super.attackEntityFrom(damageSource, damage);	
+    }
+    
+	/**
+     * Determines if an entity can despawn, used on idle far away entities
+     */
+	@Override
+    protected boolean canDespawn() {
+        return false;
+    }
 }
