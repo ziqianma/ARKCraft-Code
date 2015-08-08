@@ -60,49 +60,59 @@ public class DinoAIFollowOwner extends EntityAIBase {
 	public void startExecuting() {
 		/*
 		 * Not sure if in default, the animal avoids water. 1.7 was
-		 * setAvoidsWater, not sure if func_179688_b is that.
+		 * setAvoidsWater, not sure if func_179690_a is that.
 		 */
-		((PathNavigateGround) pet.getNavigator()).setSpeed(followSpeed);
+		((PathNavigateGround) pet.getNavigator()).func_179690_a(false);
 	}
 
 	public void resetTask() {
 		this.owner = null;
 		this.pathFinder.clearPathEntity();
-		((PathNavigateGround) pet.getNavigator()).func_179688_b(true);
+		((PathNavigateGround) pet.getNavigator()).func_179690_a(true);
 	}
 
 	public void updateTask() {
 		this.pet.getLookHelper().setLookPositionWithEntity(owner, 10.0F,
 				(float) this.pet.getVerticalFaceSpeed());
-		if (this.pet.getDistanceSqToEntity(this.owner) >= 144.0D) {
-			int i = MathHelper.floor_double(this.owner.posX) - 2;
-			int j = MathHelper.floor_double(this.owner.posZ) - 2;
-			int k = MathHelper
-					.floor_double(this.owner.getEntityBoundingBox().minY);
+		if (!this.pathFinder
+				.tryMoveToEntityLiving(this.owner, this.followSpeed)) {
+			if (!this.pet.getLeashed()) {
+				if (this.pet.getDistanceSqToEntity(this.owner) >= 144.0D) {
+					int i = MathHelper.floor_double(this.owner.posX) - 2;
+					int j = MathHelper.floor_double(this.owner.posZ) - 2;
+					int k = MathHelper.floor_double(this.owner
+							.getEntityBoundingBox().minY);
 
-			for (int l = 0; l <= 4; ++l) {
-				for (int i1 = 0; i1 <= 4; ++i1) {
-					if ((l < 1 || i1 < 1 || l > 3 || i1 > 3)
-							&& World.doesBlockHaveSolidTopSurface(this.world,
-									new BlockPos(i + l, k - 1, j + i1))
-							&& !this.world
-									.getBlockState(
-											new BlockPos(i + l, k, j + i1))
-									.getBlock().isFullCube()
-							&& !this.world
-									.getBlockState(
-											new BlockPos(i + l, k + 1, j + i1))
-									.getBlock().isFullCube()) {
-						this.pet.setLocationAndAngles(
-								(double) ((float) (i + l) + 0.5F), (double) k,
-								(double) ((float) (j + i1) + 0.5F),
-								this.pet.rotationYaw, this.pet.rotationPitch);
-						this.pathFinder.clearPathEntity();
-						return;
+					for (int l = 0; l <= 4; ++l) {
+						for (int i1 = 0; i1 <= 4; ++i1) {
+							if ((l < 1 || i1 < 1 || l > 3 || i1 > 3)
+									&& World.doesBlockHaveSolidTopSurface(
+											this.world, new BlockPos(i + l,
+													k - 1, j + i1))
+									&& !this.world
+											.getBlockState(
+													new BlockPos(i + l, k, j
+															+ i1)).getBlock()
+											.isFullCube()
+									&& !this.world
+											.getBlockState(
+													new BlockPos(i + l, k + 1,
+															j + i1)).getBlock()
+											.isFullCube()) {
+								this.pet.setLocationAndAngles(
+										(double) ((float) (i + l) + 0.5F),
+										(double) k,
+										(double) ((float) (j + i1) + 0.5F),
+										this.pet.rotationYaw,
+										this.pet.rotationPitch);
+								this.pathFinder.clearPathEntity();
+								return;
+							}
+						}
 					}
 				}
 			}
-		}
 
+		}
 	}
 }
