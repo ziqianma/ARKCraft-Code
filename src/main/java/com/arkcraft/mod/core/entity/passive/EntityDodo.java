@@ -1,6 +1,5 @@
 package com.arkcraft.mod.core.entity.passive;
 
-import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.EntityAIFollowParent;
 import net.minecraft.entity.ai.EntityAIMate;
 import net.minecraft.entity.ai.EntityAIPanic;
@@ -13,6 +12,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
+
+import com.arkcraft.mod.core.entity.ai.EntityDodoAILookIdle;
 
 /***
  * 

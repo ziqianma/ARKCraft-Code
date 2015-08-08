@@ -1,5 +1,6 @@
-package com.arkcraft.mod.core.entity.passive;
+package com.arkcraft.mod.core.entity.ai;
 
+import com.arkcraft.mod.core.entity.passive.EntityDodo;
 import com.arkcraft.mod.lib.LogHelper;
 
 import net.minecraft.entity.EntityLiving;
