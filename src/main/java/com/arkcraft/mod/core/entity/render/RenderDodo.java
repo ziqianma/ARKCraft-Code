@@ -1,5 +1,7 @@
 package com.arkcraft.mod.core.entity.render;
 
+import com.arkcraft.mod.core.Main;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderChicken;
@@ -8,8 +10,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
-
-import com.arkcraft.mod.core.Main;
 
 /***
  * 

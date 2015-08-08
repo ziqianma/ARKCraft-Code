@@ -1,5 +1,8 @@
+# tiles
 tile.berryBush.name=Berry Bush
 tile.smithy.name=Smithy
+
+#items
 item.narco.name=Narco Berry
 item.amar.name=Amar Berry
 item.mejo.name=Mejo Berry
@@ -25,6 +28,10 @@ item.saddle_medium.name=Medium Saddle
 item.saddle_large.name=Large Saddle
 item.cobble_ball.name=Cobblestone Ball
 item.mortar_and_pestle.name=Mortar and Pestle
+
+#miscelaneous
 itemGroup.tabARKCraft=ARKCraft: Survival Evolved
+
+#entities
 entity.raptor.name=Raptor
 entity.dodo.name=Dodo

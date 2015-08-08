@@ -7,7 +7,6 @@
 package com.arkcraft.mod.core.entity.model;
 
 import com.arkcraft.mod.core.entity.passive.EntityDodo;
-
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -342,13 +341,15 @@ public class ModelDodo extends ModelBase {
         LeftWing.rotateAngleZ = -f2;
         RightWing.rotateAngleZ = f2;
         
-        // TODO: Blink eyes
-        if (e != null && ((EntityDodo)e).eyesOpen) {        	
+        // Blink eyes
+        if (e != null && ((EntityDodo)e).isEyesOpen()) {        	
         	RightEyelid.rotateAngleZ = 0.2792527F;
         	LeftEyelid.rotateAngleZ = -0.2792527F;
         } else {
+        	// Close eyes
         	RightEyelid.rotateAngleZ = 0;
         	LeftEyelid.rotateAngleZ = 0;
+//        	LogHelper.info("ModelDodo: Closed eyes");
         }
 	}
 	
