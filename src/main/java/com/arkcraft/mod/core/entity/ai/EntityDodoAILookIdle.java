@@ -6,6 +6,11 @@ import com.arkcraft.mod.lib.LogHelper;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAIBase;
 
+/***
+ * 
+ * @author wildbill22
+ *
+ */
 public class EntityDodoAILookIdle extends EntityAIBase {
     /** The entity that is looking idle. */
     private EntityLiving idleEntity;
