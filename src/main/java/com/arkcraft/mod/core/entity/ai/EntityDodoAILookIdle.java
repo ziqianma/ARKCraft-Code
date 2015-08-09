@@ -52,10 +52,10 @@ public class EntityDodoAILookIdle extends EntityAIBase {
         --this.idleTime;
         this.idleEntity.getLookHelper().setLookPosition(this.idleEntity.posX + this.lookX, this.idleEntity.posY + (double)this.idleEntity.getEyeHeight(), this.idleEntity.posZ + this.lookZ, 10.0F, (float)this.idleEntity.getVerticalFaceSpeed());
         if (this.idleTime == 20) {
-        	((EntityDodo)this.idleEntity).eyesOpen = false;
+        	((EntityDodo)this.idleEntity).setEyesOpen(false);
         	LogHelper.info("EntityDodoAILookIdle: Closed eyes");
         } else if (this.idleTime == 10) {
-        	((EntityDodo)this.idleEntity).eyesOpen = true;        	
+        	((EntityDodo)this.idleEntity).setEyesOpen(true);
         	LogHelper.info("EntityDodoAILookIdle: Opened eyes");
         }
     }

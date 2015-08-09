@@ -1,6 +1,7 @@
 package com.arkcraft.mod.core.entity.passive;
 
 import com.arkcraft.mod.core.GlobalAdditions;
+import com.arkcraft.mod.core.entity.ai.EntityDodoAILookIdle;
 import com.arkcraft.mod.core.items.ARKFood;
 
 import net.minecraft.entity.EntityAgeable;
