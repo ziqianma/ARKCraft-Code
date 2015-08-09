@@ -1,5 +1,6 @@
 package com.arkcraft.mod.core.entity;
 
+import net.minecraft.entity.DataWatcher;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.world.World;
 
@@ -11,6 +12,8 @@ public abstract class DinoTameable extends EntityTameable {
 	protected int torpor = 0;
 	protected int progress = 0;
 	protected EntityDinoAIFollowOwner dinoAIFollowOwner;
+	/* This watches the progress and the torpor. */
+	protected DataWatcher watcher;
 	
 	protected DinoTameable(World worldIn) {
 		super(worldIn);

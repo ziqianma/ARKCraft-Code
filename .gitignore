@@ -1,50 +1,10 @@
 .settings/org.eclipse.jdt.core.prefs
 /bin/
-.gradle/2.0/taskArtifacts/cache.properties.lock
-.gradle/2.0/taskArtifacts/taskArtifacts.bin
 .project
-config/forge.cfg
-config/forgeChunkLoading.cfg
+config/
 options.txt
-saves/New World/DIM-1/data/villages_nether.dat
-saves/New World/DIM-1/forcedchunks.dat
-saves/New World/DIM1/data/villages_end.dat
-saves/New World/DIM1/forcedchunks.dat
-saves/New World/data/Mineshaft.dat
-saves/New World/data/villages.dat
-saves/New World/forcedchunks.dat
-saves/New World/level.dat
-saves/New World/level.dat_mcr
-saves/New World/level.dat_old
-saves/New World/playerdata/221ba2c0-f26e-4bfe-9266-57d6a75e9418.dat
-saves/New World/region/r.0.-1.mca
-saves/New World/region/r.0.0.mca
-saves/New World/session.lock
-saves/New World/stats/221ba2c0-f26e-4bfe-9266-57d6a75e9418.json
-.classpath
-config/splash.properties
-logs/2015-08-07-1.log.gz
-saves/New World/data/Village.dat
-logs/2015-08-07-2.log.gz
-logs/2015-08-07-3.log.gz
-logs/2015-08-07-4.log.gz
-logs/2015-08-07-5.log.gz
-logs/2015-08-07-6.log.gz
-logs/2015-08-08-1.log.gz
-saves/New World-/DIM-1/data/villages_nether.dat
-saves/New World-/DIM-1/forcedchunks.dat
-saves/New World-/DIM1/data/villages_end.dat
-saves/New World-/DIM1/forcedchunks.dat
-saves/New World-/data/Mineshaft.dat
-saves/New World-/data/Monument.dat
-saves/New World-/data/villages.dat
-saves/New World-/forcedchunks.dat
-saves/New World-/level.dat
-saves/New World-/level.dat_mcr
-saves/New World-/level.dat_old
-saves/New World-/playerdata/221ba2c0-f26e-4bfe-9266-57d6a75e9418.dat
-saves/New World-/region/r.-1.0.mca
-saves/New World-/region/r.0.0.mca
-saves/New World-/session.lock
-saves/New World-/stats/221ba2c0-f26e-4bfe-9266-57d6a75e9418.json
 saves/
+.classpath
+logs/
+.settings/
+mods/
