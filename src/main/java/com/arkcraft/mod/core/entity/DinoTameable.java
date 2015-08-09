@@ -1,39 +1,111 @@
 package com.arkcraft.mod.core.entity;
 
-import net.minecraft.entity.DataWatcher;
-import net.minecraft.entity.passive.EntityTameable;
-import net.minecraft.world.World;
+import java.util.UUID;
 
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.IEntityOwnable;
+import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.ItemFood;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.server.management.PreYggdrasilConverter;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+import com.arkcraft.mod.core.GlobalAdditions;
 import com.arkcraft.mod.core.entity.ai.EntityDinoAIFollowOwner;
 
-
-public abstract class DinoTameable extends EntityTameable {
+public class DinoTameable extends EntityMob implements IEntityOwnable {
 
 	protected int torpor = 0;
 	protected int progress = 0;
+	protected boolean isTameable = false;
+	protected boolean isRideable = false;
 	protected EntityDinoAIFollowOwner dinoAIFollowOwner;
-	/* This watches the progress and the torpor. */
-	protected DataWatcher watcher;
 	
 	protected DinoTameable(World worldIn) {
 		super(worldIn);
-		this.setupTamedAI();
-	}
-
-	@Override
-	public boolean isTamed() {
-		return (torpor < 0 && progress == 100);
+//		this.setupTamedAI();
+        this.dataWatcher.addObject(16, Byte.valueOf((byte)0));
+        this.dataWatcher.addObject(17, "");
+        this.isTameable = true;
 	}
 	
-	
-	/* Plays the hearts / smoke depending on status. If progress is 100, we always are successful.*/
-	@Override
-	protected void playTameEffect(boolean p_70908_1_)
-    {
-       if(progress == 100) super.playTameEffect(true);
-       /* We also want a way to play the smoke if torpor reaches 0 from the GUI. If we say that it will play it when torpor is always 0, the effect will play constantly right? */
+    /**
+     * (abstract) Protected helper method to write subclass entity data to NBT.
+     */
+    public void writeEntityToNBT(NBTTagCompound tagCompound) {
+        super.writeEntityToNBT(tagCompound);
+        if (this.getOwnerId() == null) {
+            tagCompound.setString("OwnerUUID", "");
+        }
+        else {
+            tagCompound.setString("OwnerUUID", this.getOwnerId());
+        }
+//        tagCompound.setBoolean("Sitting", this.isSitting());
     }
-	
+
+    /**
+     * (abstract) Protected helper method to read subclass entity data from NBT.
+     */
+    public void readEntityFromNBT(NBTTagCompound tagCompund) {
+        super.readEntityFromNBT(tagCompund);
+        String s = "";
+        if (tagCompund.hasKey("OwnerUUID", 8)) {
+            s = tagCompund.getString("OwnerUUID");
+        }
+        else {
+            String s1 = tagCompund.getString("Owner");
+            s = PreYggdrasilConverter.func_152719_a(s1);
+        }
+        if (s.length() > 0) {
+            this.setOwnerId(s);
+            this.setTamed(true);
+        }
+//        this.aiSit.setSitting(tagCompund.getBoolean("Sitting"));
+//        this.setSitting(tagCompund.getBoolean("Sitting"));
+    }
+
+	/* Plays the hearts / smoke depending on status. If progress is 100, we always are successful.*/
+	protected void playTameEffect(boolean p_70908_1_) {
+	   /* We also want a way to play the smoke if torpor reaches 0 from the GUI. If we say that it will play it when torpor is always 0, the effect will play constantly right? */
+       if(progress == 100) {
+           EnumParticleTypes enumparticletypes = EnumParticleTypes.HEART;
+
+           if (!p_70908_1_) {
+               enumparticletypes = EnumParticleTypes.SMOKE_NORMAL;
+           }
+
+           for (int i = 0; i < 7; ++i) {
+               double d0 = this.rand.nextGaussian() * 0.02D;
+               double d1 = this.rand.nextGaussian() * 0.02D;
+               double d2 = this.rand.nextGaussian() * 0.02D;
+               this.worldObj.spawnParticle(enumparticletypes, this.posX + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, this.posY + 0.5D + (double)(this.rand.nextFloat() * this.height), this.posZ + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, d0, d1, d2, new int[0]);
+           }
+       }
+    }
+
+	// TODO: Not sure if we need this!
+    @SideOnly(Side.CLIENT)
+    public void handleHealthUpdate(byte p_70103_1_) {
+        if (p_70103_1_ == 7) {
+            this.playTameEffect(true);
+        }
+        else if (p_70103_1_ == 6) {
+            this.playTameEffect(false);
+        }
+        else {
+            super.handleHealthUpdate(p_70103_1_);
+        }
+    }
+
 	public boolean isTameable() {
 		return torpor > 0;
 	}
@@ -62,17 +134,126 @@ public abstract class DinoTameable extends EntityTameable {
 		progress -= i;
 	}
 	
-	@Override
+	public boolean isTamed() {
+		if (this.isTameable)
+			return (this.dataWatcher.getWatchableObjectByte(16) & 4) != 0;
+		else
+			return false;
+//		return (torpor < 0 && progress == 100);
+	}
+	
 	public void setTamed(boolean tamed) {
-		super.setTamed(tamed);
+        byte b0 = this.dataWatcher.getWatchableObjectByte(16);
+        if (tamed) {
+            this.dataWatcher.updateObject(16, Byte.valueOf((byte)(b0 | 4)));
+        }
+        else {
+            this.dataWatcher.updateObject(16, Byte.valueOf((byte)(b0 & -5)));
+        }
+        this.setupTamedAI();
 	}	
 	
-	@Override
 	protected void setupTamedAI() {
 		/* We can setup the tamed AI here 
 		 * Ex: if tamed, the wolf follows the player */
-		if(dinoAIFollowOwner == null) dinoAIFollowOwner = new EntityDinoAIFollowOwner(this, 10.0D, 1.0F, 1.2F);
-		
+		if (dinoAIFollowOwner == null) { 
+			dinoAIFollowOwner = new EntityDinoAIFollowOwner(this, 1.5D, 1.0F, 3.0F);
+	        this.tasks.addTask(3, dinoAIFollowOwner);
+//	        this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));  // TODO: Need version of this
+//	        this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));    // TODO: Need version of this
+		}
 	}
 	
+    public String getOwnerId() {
+        return this.dataWatcher.getWatchableObjectString(17);
+    }
+
+    public void setOwnerId(String ownerUuid) {
+        this.dataWatcher.updateObject(17, ownerUuid);
+    }
+
+    public EntityLivingBase getOwnerEntity() {
+        try {
+            UUID uuid = UUID.fromString(this.getOwnerId());
+            return uuid == null ? null : this.worldObj.getPlayerEntityByUUID(uuid);
+        }
+        catch (IllegalArgumentException illegalargumentexception) {
+            return null;
+        }
+    }
+
+    public boolean isOwner(EntityLivingBase entityIn) {
+        return entityIn == this.getOwnerEntity();
+    }
+
+    /**
+     * Called when the mob's health reaches 0.
+     */
+    public void onDeath(DamageSource cause) {
+        if (!this.worldObj.isRemote && this.worldObj.getGameRules().getGameRuleBooleanValue("showDeathMessages") && this.hasCustomName() && this.getOwnerEntity() instanceof EntityPlayerMP) {
+            ((EntityPlayerMP)this.getOwnerEntity()).addChatMessage(this.getCombatTracker().getDeathMessage());
+        }
+        super.onDeath(cause);
+    }
+
+    public Entity getOwner() {
+        return this.getOwnerEntity();
+    }
+
+    /**
+     * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
+     */
+    @Override
+    public boolean interact(EntityPlayer player) {
+        ItemStack itemstack = player.inventory.getCurrentItem();
+
+        if (this.isTamed()) {
+            if (itemstack != null) {
+    			player.addChatMessage(new ChatComponentText("DinoTameable: This dino is tamed."));
+                if (itemstack.getItem() instanceof ItemFood) {
+                    ItemFood itemfood = (ItemFood)itemstack.getItem();
+                    if (!player.capabilities.isCreativeMode) {
+                         --itemstack.stackSize;
+                    }
+                    this.heal((float)itemfood.getHealAmount(itemstack));
+                    if (itemstack.stackSize <= 0) {
+                        player.inventory.setInventorySlotContents(player.inventory.currentItem, (ItemStack)null);
+                    }
+                    return true;
+                }
+            }
+        }
+        // Tame the dino with meat
+        else if (itemstack != null && itemstack.getItem() == GlobalAdditions.porkchop_raw) {
+            if (!player.capabilities.isCreativeMode) {
+                --itemstack.stackSize;
+            }
+            if (itemstack.stackSize <= 0) {
+                player.inventory.setInventorySlotContents(player.inventory.currentItem, (ItemStack)null);
+            }
+
+            if (!this.worldObj.isRemote) {
+                if (this.rand.nextInt(2) == 0) {
+                    this.setTamed(true);
+        			player.addChatMessage(new ChatComponentText("DinoTameable: You have tamed the dino!"));
+                    this.setAttackTarget((EntityLivingBase)null);
+//                    this.aiSit.setSitting(true);
+                    this.setHealth(25.0F);
+                    this.setOwnerId(player.getUniqueID().toString());
+                    this.playTameEffect(true);
+                    this.worldObj.setEntityState(this, (byte)7);
+                }
+                else {
+        			player.addChatMessage(new ChatComponentText("DinoTameable: Taming the dino failed, try again!"));
+                    this.playTameEffect(false);
+                    this.worldObj.setEntityState(this, (byte)6);
+                }
+            }
+            return true;
+        }
+        else {
+			player.addChatMessage(new ChatComponentText("DinoTameable: Use a Raw Porkchop to tame the dino."));
+        }
+        return super.interact(player);
+    }
 }

@@ -6,6 +6,7 @@ import com.arkcraft.mod.core.Main;
 import com.arkcraft.mod.lib.LogHelper;
 
 import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIBase;
@@ -16,7 +17,6 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.BlockPos;
@@ -28,7 +28,7 @@ import net.minecraft.world.World;
  * @author Vastatio (color done by Bill)
  *
  */
-public class EntityRaptor extends EntityMob {
+public class EntityRaptor extends DinoTameable {
 	private static final String RAPTOR_TYPE_PROP = "ark_raptor_type";
 	public enum RaptorType {
 	    ALBINO(0),
@@ -94,13 +94,16 @@ public class EntityRaptor extends EntityMob {
 
 	public EntityRaptor(World world) {
 		super(world);
+		
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.0D, false));
         this.tasks.addTask(5, new EntityAIMoveTowardsRestriction(this, 1.0D));
         this.tasks.addTask(7, new EntityAIWander(this, 1.0D));
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(8, new EntityAILookIdle(this));
+        
         this.applyEntityAI(new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
+        
         type = RaptorType.ALBINO;
 //        type.setRandomRaptorType(); // Set to a random type for now
 	}
@@ -113,7 +116,10 @@ public class EntityRaptor extends EntityMob {
     	super.applyEntityAttributes();
     	this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).applyModifier(new AttributeModifier("Random spawn bonus", this.rand.nextDouble() * 0.05000000074505806D, 0));
     	this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(45.0D);
-    	this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(8.0D); //tested this at 5.0 (too low) setting to 8.
+    	if (this.isTamed())
+    		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(16.0D); // Double the health for now
+    	else
+    		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(8.0D); //tested this at 5.0 (too low) setting to 8.
     	this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.379890125D);
     	this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(4D); //2.5 hearts without armor
     }
@@ -123,7 +129,7 @@ public class EntityRaptor extends EntityMob {
 		super.writeEntityToNBT(nbt);
 		// Raptor properties
 		nbt.setInteger(RAPTOR_TYPE_PROP, this.type.getRaptorId());
-		LogHelper.info("EnityRaptor write: Raptor is a " + this.type.toString() + " at: " + this.posX + ", " + this.posY + ", " + this.posZ);
+//		LogHelper.info("EnityRaptor write: Raptor is a " + this.type.toString() + " at: " + this.posX + ", " + this.posY + ", " + this.posZ);
 	}
 	
 	@Override
@@ -132,7 +138,7 @@ public class EntityRaptor extends EntityMob {
 		// Raptor properties
 		if (nbt.hasKey(RAPTOR_TYPE_PROP)) {
 			type.setRaptorTypeId(nbt.getInteger(RAPTOR_TYPE_PROP));
-			LogHelper.info("EnityRaptor read: Raptor is a " + this.type.toString() + " at: " + this.posX + ", " + this.posY + ", " + this.posZ);
+//			LogHelper.info("EnityRaptor read: Raptor is a " + this.type.toString() + " at: " + this.posX + ", " + this.posY + ", " + this.posZ);
 		}
 		else
 			LogHelper.error("EnityRaptor read: No raptor type property!");
@@ -173,11 +179,21 @@ public class EntityRaptor extends EntityMob {
      */
     @Override
     public boolean attackEntityFrom(DamageSource damageSource, float damage) {
-    	int angry = this.rand.nextInt(3) + 1;
-        this.playSound(Main.MODID + ":" + "Angry_" + angry, 0.15F, 1.0F);    	
+//    	int angry = this.rand.nextInt(3) + 1;
+//        this.playSound(Main.MODID + ":" + "Angry_" + angry, 0.15F, 1.0F);    	
 		return super.attackEntityFrom(damageSource, damage);	
     }
     
+    /**
+     * Called when attacking an entity
+     */
+    @Override
+    public boolean attackEntityAsMob(Entity entity) {
+        float f = (float)this.getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue();
+        f = this.isTamed() ? f * 2.0F : f;  // Double the damage if tamed
+        return entity.attackEntityFrom(DamageSource.causeMobDamage(this), f);    	
+    }
+
 	/**
      * Determines if an entity can despawn, used on idle far away entities
      */
