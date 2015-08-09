@@ -72,23 +72,20 @@ public class EntityDodo extends EntityChicken {
     /**
      * Drop 0-2 items of this living's type
      */
-	// TODO: Update to drop raw meat when we have that
+	// TODO: Update to drop backpack when we have that item
 	@Override
     protected void dropFewItems(boolean p_70628_1_, int p_70628_2_) {
         int j = this.rand.nextInt(3) + this.rand.nextInt(1 + p_70628_2_);
 
-        for (int k = 0; k < j; ++k)
-        {
-            this.dropItem(Items.feather, 1);
+        for (int k = 0; k < j; ++k) {
+            this.dropItem(Items.feather, 1); // TODO: Dodo feather instead
         }
 
-        if (this.isBurning())
-        {
-            this.dropItem(Items.cooked_chicken, 1);
+        if (this.isBurning()) {
+            this.dropItem(GlobalAdditions.porkchop_cooked, 1);
         }
-        else
-        {
-            this.dropItem(Items.chicken, 1);
+        else {
+            this.dropItem(GlobalAdditions.porkchop_raw, 1);
         }
     }
 	

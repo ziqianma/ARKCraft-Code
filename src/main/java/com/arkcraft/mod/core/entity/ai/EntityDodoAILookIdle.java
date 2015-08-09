@@ -1,8 +1,6 @@
 package com.arkcraft.mod.core.entity.ai;
 
 import com.arkcraft.mod.core.entity.passive.EntityDodo;
-import com.arkcraft.mod.lib.LogHelper;
-
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAIBase;
 
@@ -58,10 +56,10 @@ public class EntityDodoAILookIdle extends EntityAIBase {
         this.idleEntity.getLookHelper().setLookPosition(this.idleEntity.posX + this.lookX, this.idleEntity.posY + (double)this.idleEntity.getEyeHeight(), this.idleEntity.posZ + this.lookZ, 10.0F, (float)this.idleEntity.getVerticalFaceSpeed());
         if (this.idleTime == 20) {
         	((EntityDodo)this.idleEntity).setEyesOpen(false);
-        	LogHelper.info("EntityDodoAILookIdle: Closed eyes");
+//        	LogHelper.info("EntityDodoAILookIdle: Closed eyes");
         } else if (this.idleTime == 10) {
         	((EntityDodo)this.idleEntity).setEyesOpen(true);
-        	LogHelper.info("EntityDodoAILookIdle: Opened eyes");
+//        	LogHelper.info("EntityDodoAILookIdle: Opened eyes");
         }
     }
 }

@@ -1,6 +1,7 @@
 # tiles
 tile.berryBush.name=Berry Bush
 tile.smithy.name=Smithy
+tile.mortar_and_pestle.name=Mortar and Pestle
 
 #items
 item.narco.name=Narco Berry
@@ -27,7 +28,10 @@ item.saddle_small.name=Small Saddle
 item.saddle_medium.name=Medium Saddle
 item.saddle_large.name=Large Saddle
 item.cobble_ball.name=Cobblestone Ball
+item.explosive_ball.name=Explosive Cobblestone Ball
 item.mortar_and_pestle.name=Mortar and Pestle
+item.porkchop_cooked.name=Cooked Porkchop
+item.porkchop_raw.name=Raw Porkchop
 
 #miscelaneous
 itemGroup.tabARKCraft=ARKCraft: Survival Evolved
