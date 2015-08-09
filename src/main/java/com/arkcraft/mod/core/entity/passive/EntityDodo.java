@@ -25,22 +25,31 @@ import net.minecraft.world.World;
  *
  */
 public class EntityDodo extends EntityChicken {
-//	public boolean eyesOpen;
-	private int DODO_WATCHER = 21;
+	private int DODO_EYE_WATCHER = 21;
 	public boolean isEyesOpen() {
-        return (this.dataWatcher.getWatchableObjectByte(DODO_WATCHER) & 1) != 0;
+        return (this.dataWatcher.getWatchableObjectByte(DODO_EYE_WATCHER) & 1) != 0;
 	}
 	public void setEyesOpen(boolean eyesOpen) {
 		byte b0 = (byte) (eyesOpen ? 1 : 0);
-        this.dataWatcher.updateObject(DODO_WATCHER, Byte.valueOf(b0));
+        this.dataWatcher.updateObject(DODO_EYE_WATCHER, Byte.valueOf(b0));
+	}
+	private int DODO_CHEST_WATCHER = 22;
+	public boolean isChested() {
+        return (this.dataWatcher.getWatchableObjectByte(DODO_CHEST_WATCHER) & 1) != 0;
+	}
+	public void setChested(boolean chested) {
+		if (!this.isChild()) {
+			byte b0 = (byte) (chested ? 1 : 0);
+	        this.dataWatcher.updateObject(DODO_CHEST_WATCHER, Byte.valueOf(b0));
+		}
 	}
 	
 	public EntityDodo(World worldIn) {
 		super(worldIn);
 		
-//		eyesOpen = true;
-		this.getDataWatcher().addObject(DODO_WATCHER, Byte.valueOf((byte)1));
-//		setEyesOpen(true);
+		this.getDataWatcher().addObject(DODO_EYE_WATCHER, Byte.valueOf((byte)1));
+		// TODO: Set to 0 after the code to add the pack is added.
+		this.getDataWatcher().addObject(DODO_CHEST_WATCHER, Byte.valueOf((byte)1));
 
 		// Replace Idle task with one that blinks eyes
 		this.tasks.taskEntries.clear();

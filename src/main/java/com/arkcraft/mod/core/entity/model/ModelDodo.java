@@ -20,7 +20,7 @@ import net.minecraft.util.MathHelper;
  */
 public class ModelDodo extends ModelBase {
 
-	//fields
+	// All these are parts of the head
     ModelRenderer Head1;
     ModelRenderer Head2;
     ModelRenderer RightEyelid;
@@ -30,6 +30,7 @@ public class ModelDodo extends ModelBase {
     ModelRenderer BotBeak1;
     ModelRenderer BotBeak2;
     
+    // All these are parts of the body
     ModelRenderer UpperBoddy1;
     ModelRenderer LowerBoddy;
     ModelRenderer UpperBoddy2;
@@ -39,9 +40,11 @@ public class ModelDodo extends ModelBase {
     ModelRenderer LeftThigh;
     ModelRenderer RightThigh;    
     
+    // The wings
     ModelRenderer LeftWing;
     ModelRenderer RightWing;
     
+    // Parts of the left leg
     ModelRenderer LeftLeg;
     ModelRenderer LeftFoot1;
     ModelRenderer LeftFoot2;
@@ -50,6 +53,7 @@ public class ModelDodo extends ModelBase {
     ModelRenderer LeftClaw2;
     ModelRenderer LeftClaw3;
 
+    // Parts of the right leg
     ModelRenderer RightLeg;
     ModelRenderer RightFoot1;
     ModelRenderer RightFoot2;
@@ -57,6 +61,33 @@ public class ModelDodo extends ModelBase {
     ModelRenderer RightClaw1;
     ModelRenderer RightClaw2;
     ModelRenderer RightClaw3;
+    
+    // The pack
+    ModelRenderer Strap1;
+    ModelRenderer Box;
+    ModelRenderer Strap2;
+    ModelRenderer Lid1;
+    ModelRenderer Lid2;
+    ModelRenderer Lid3;
+    ModelRenderer Lid4;
+    ModelRenderer String1;
+    ModelRenderer NeckStrap;
+    ModelRenderer Berry1;
+    ModelRenderer Berry2;
+    ModelRenderer Berry3;
+    ModelRenderer leaf1;
+    ModelRenderer leaf2;
+    ModelRenderer leaf3;
+    ModelRenderer Stick1;
+    ModelRenderer Stick2;
+    ModelRenderer Stick3;
+    ModelRenderer StickStrap1;
+    ModelRenderer StickStrap2;
+    ModelRenderer String2;
+    ModelRenderer String3;
+    ModelRenderer String4;
+    ModelRenderer leaf4;
+    ModelRenderer leaf5;
 
 	public ModelDodo() {
 	    textureWidth = 128;
@@ -292,6 +323,183 @@ public class ModelDodo extends ModelBase {
 		  convertToChild(RightLeg, RightFoot3);
 		  convertToChild(RightLeg, RightFoot2);
 		  convertToChild(RightLeg, RightFoot1);
+		  
+		  // Pack lid
+	      Lid1 = new ModelRenderer(this, 14, 14);
+	      Lid1.addBox(-2.7F, -4.5F, 2.9F, 5, 1, 4);
+	      Lid1.setRotationPoint(0F, 17.8F, 1.5F);
+	      Lid1.setTextureSize(128, 128);
+	      Lid1.mirror = true;
+	      setRotation(Lid1, 0.1745329F, 0F, 0F);
+	      Lid2 = new ModelRenderer(this, 14, 14);
+	      Lid2.addBox(-2.3F, -4.5F, 2.9F, 5, 1, 4);
+	      Lid2.setRotationPoint(0F, 17.8F, 1.5F);
+	      Lid2.setTextureSize(128, 128);
+	      Lid2.mirror = true;
+	      setRotation(Lid2, 0.1745329F, 0F, 0F);
+	      convertToChild(Lid1, Lid2);
+	      Lid3 = new ModelRenderer(this, 14, 19);
+	      Lid3.addBox(-2.7F, -4.5F, 6.5F, 5, 2, 1);
+	      Lid3.setRotationPoint(0F, 17.8F, 1.5F);
+	      Lid3.setTextureSize(128, 128);
+	      Lid3.mirror = true;
+	      setRotation(Lid3, 0.1745329F, 0F, 0F);
+	      convertToChild(Lid1, Lid3);
+	      Lid4 = new ModelRenderer(this, 14, 19);
+	      Lid4.addBox(-2.3F, -4.5F, 6.5F, 5, 2, 1);
+	      Lid4.setRotationPoint(0F, 17.8F, 1.5F);
+	      Lid4.setTextureSize(128, 128);
+	      Lid4.mirror = true;
+	      setRotation(Lid4, 0.1745329F, 0F, 0F);
+	      convertToChild(Lid1, Lid4);
+		  
+		  // Pack (everything but lid)
+		  Box = new ModelRenderer(this, 14, 8);
+		  Box.addBox(-2.5F, -4F, 2.2F, 5, 2, 4);
+		  Box.setRotationPoint(0F, 17.8F, 1.5F);
+		  Box.setTextureSize(128, 128);
+		  Box.mirror = true;
+	      setRotation(Box, 0F, 0F, 0F);      
+	      NeckStrap = new ModelRenderer(this, 26, 24);
+	      NeckStrap.addBox(-2F, -3F, -1.5F, 4, 1, 5);
+	      NeckStrap.setRotationPoint(0F, 18.8F, 1.5F);
+	      NeckStrap.setTextureSize(128, 128);
+	      NeckStrap.mirror = true;
+	      setRotation(NeckStrap, 0.3839724F, 0F, 0F);
+	      convertToChild(Box, NeckStrap);
+	      Strap1 = new ModelRenderer(this, 26, 30);
+	      Strap1.addBox(-2.6F, -5.8F, 1.5F, 5, 9, 1);
+	      Strap1.setRotationPoint(0F, 17.8F, 1.5F);
+	      Strap1.setTextureSize(128, 128);
+	      Strap1.mirror = true;
+	      setRotation(Strap1, -0.4363323F, 0F, 0F);
+	      convertToChild(Box, Strap1);
+	      Strap2 = new ModelRenderer(this, 26, 30);
+	      Strap2.addBox(-2.4F, -5.8F, 1.5F, 5, 9, 1);
+	      Strap2.setRotationPoint(0F, 17.8F, 1.5F);
+	      Strap2.setTextureSize(128, 128);
+	      Strap2.mirror = true;
+	      setRotation(Strap2, -0.4363323F, 0F, 0F);
+	      convertToChild(Box, Strap2);
+	      String1 = new ModelRenderer(this, 26, 19);
+	      String1.addBox(-0.5F, -3.8F, 6.9F, 1, 3, 1);
+	      String1.setRotationPoint(0F, 17.8F, 1.5F);
+	      String1.setTextureSize(128, 128);
+	      String1.mirror = true;
+	      setRotation(String1, 0.2617994F, 0F, 0F);
+	      convertToChild(Box, String1);
+	      Berry1 = new ModelRenderer(this, 4, 17);
+	      Berry1.addBox(2.6F, 0F, 5.3F, 1, 1, 1);
+	      Berry1.setRotationPoint(0F, 17.8F, 1.5F);
+	      Berry1.setTextureSize(128, 128);
+	      Berry1.mirror = true;
+	      setRotation(Berry1, 0F, -0.1047198F, -0.2094395F);
+	      convertToChild(Box, Berry1);
+	      Berry2 = new ModelRenderer(this, 0, 15);
+	      Berry2.addBox(2.5F, -1F, 5F, 1, 1, 1);
+	      Berry2.setRotationPoint(0F, 17.8F, 1.5F);
+	      Berry2.setTextureSize(128, 128);
+	      Berry2.mirror = true;
+	      setRotation(Berry2, 0F, -0.0349066F, -0.2617994F);
+	      convertToChild(Box, Berry2);
+	      Berry3 = new ModelRenderer(this, 4, 15);
+	      Berry3.addBox(2.6F, -0.5F, 4.3F, 1, 1, 1);
+	      Berry3.setRotationPoint(0F, 17.8F, 1.5F);
+	      Berry3.setTextureSize(128, 128);
+	      Berry3.mirror = true;
+	      setRotation(Berry3, 0F, -0.0523599F, -0.1570796F);
+	      convertToChild(Box, Berry3);
+	      leaf1 = new ModelRenderer(this, 0, 17);
+	      leaf1.addBox(3F, -1.5F, 5F, 0, 2, 1);
+	      leaf1.setRotationPoint(0F, 17.8F, 1.5F);
+	      leaf1.setTextureSize(128, 128);
+	      leaf1.mirror = true;
+	      setRotation(leaf1, 0.122173F, 0F, -0.2617994F);
+	      convertToChild(Box, leaf1);
+	      leaf2 = new ModelRenderer(this, 0, 17);
+	      leaf2.addBox(3F, -0.5F, 5.5F, 0, 2, 1);
+	      leaf2.setRotationPoint(0F, 17.8F, 1.5F);
+	      leaf2.setTextureSize(128, 128);
+	      leaf2.mirror = true;
+	      setRotation(leaf2, 0.122173F, -0.0523599F, -0.2617994F);
+	      convertToChild(Box, leaf2);
+	      leaf3 = new ModelRenderer(this, 0, 17);
+	      leaf3.addBox(3F, -0.5F, 4.5F, 0, 3, 1);
+	      leaf3.setRotationPoint(0F, 17.8F, 1.5F);
+	      leaf3.setTextureSize(128, 128);
+	      leaf3.mirror = true;
+	      setRotation(leaf3, 0.122173F, -0.0523599F, -0.2617994F);
+	      convertToChild(Box, leaf3);
+	      Stick1 = new ModelRenderer(this, 10, 10);
+	      Stick1.addBox(-3.5F, -6F, 5F, 1, 8, 1);
+	      Stick1.setRotationPoint(0F, 17.8F, 1.5F);
+	      Stick1.setTextureSize(128, 128);
+	      Stick1.mirror = true;
+	      setRotation(Stick1, 0.2792527F, 0F, 0F);
+	      convertToChild(Box, Stick1);
+	      Stick2 = new ModelRenderer(this, 10, 19);
+	      Stick2.addBox(-3.4F, -2F, 5.6F, 1, 1, 1);
+	      Stick2.setRotationPoint(0F, 17.8F, 1.5F);
+	      Stick2.setTextureSize(128, 128);
+	      Stick2.mirror = true;
+	      setRotation(Stick2, 0.6108652F, 0F, 0F);
+	      convertToChild(Box, Stick2);
+	      Stick3 = new ModelRenderer(this, 10, 21);
+	      Stick3.addBox(-3.4F, -3F, 4.8F, 1, 1, 1);
+	      Stick3.setRotationPoint(0F, 17.8F, 1.5F);
+	      Stick3.setTextureSize(128, 128);
+	      Stick3.mirror = true;
+	      setRotation(Stick3, -0.1745329F, 0F, 0F);
+	      convertToChild(Box, Stick3);
+	      StickStrap1 = new ModelRenderer(this, 26, 40);
+	      StickStrap1.addBox(-3.6F, -2F, 5.1F, 2, 1, 1);
+	      StickStrap1.setRotationPoint(0F, 17.8F, 1.5F);
+	      StickStrap1.setTextureSize(128, 128);
+	      StickStrap1.mirror = true;
+	      setRotation(StickStrap1, 0.2792527F, 0F, 0F);
+	      convertToChild(Box, StickStrap1);
+	      StickStrap2 = new ModelRenderer(this, 26, 40);
+	      StickStrap2.addBox(-3.6F, -2F, 4.9F, 2, 1, 1);
+	      StickStrap2.setRotationPoint(0F, 17.8F, 1.5F);
+	      StickStrap2.setTextureSize(128, 128);
+	      StickStrap2.mirror = true;
+	      setRotation(StickStrap2, 0.2792527F, 0F, 0F);
+	      convertToChild(Box, StickStrap2);
+	      String2 = new ModelRenderer(this, 14, 3);
+	      String2.addBox(-0.5F, -4.6F, 2.8F, 1, 1, 4);
+	      String2.setRotationPoint(0F, 17.8F, 1.5F);
+	      String2.setTextureSize(128, 128);
+	      String2.mirror = true;
+	      setRotation(String2, 0.1745329F, 0F, 0F);
+	      convertToChild(Box, String2);
+	      String3 = new ModelRenderer(this, 14, 1);
+	      String3.addBox(-0.5F, -4.6F, 6.5F, 1, 1, 1);
+	      String3.setRotationPoint(0F, 17.8F, 1.5F);
+	      String3.setTextureSize(128, 128);
+	      String3.mirror = true;
+	      setRotation(String3, 0.1745329F, 0F, 0F);
+	      convertToChild(Box, String3);
+	      String4 = new ModelRenderer(this, 14, 1);
+	      String4.addBox(-0.5F, -3.6F, 2.8F, 1, 1, 1);
+	      String4.setRotationPoint(0F, 17.8F, 1.5F);
+	      String4.setTextureSize(128, 128);
+	      String4.mirror = true;
+	      setRotation(String4, 0.1745329F, 0F, 0F);
+	      convertToChild(Box, String4);
+	      leaf4 = new ModelRenderer(this, -2, 18);
+	      leaf4.addBox(0.5F, -4F, 5.5F, 1, 0, 2);
+	      leaf4.setRotationPoint(0F, 16.8F, 1.5F);
+	      leaf4.setTextureSize(128, 128);
+	      leaf4.mirror = true;
+	      setRotation(leaf4, 0F, -0.7853982F, 0F);
+	      convertToChild(Box, leaf4);
+	      leaf5 = new ModelRenderer(this, -2, 18);
+	      leaf5.addBox(-5.766667F, -5F, 2F, 1, 0, 2);
+	      leaf5.setRotationPoint(0F, 16.8F, 1.5F);
+	      leaf5.setTextureSize(128, 128);
+	      leaf5.mirror = true;
+	      setRotation(leaf5, 0.1745329F, 0.7853982F, 0F);
+	      convertToChild(Box, leaf5);	      
 	}
 
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
@@ -310,17 +518,19 @@ public class ModelDodo extends ModelBase {
     	    LeftLeg.render(f5);
     	    RightLeg.render(f5);
             GlStateManager.popMatrix();
-        } else {
+        } else { 
+        	// Adult
     	    Head1.render(f5);
     	    UpperBoddy1.render(f5);
     	    LeftWing.render(f5);
     	    RightWing.render(f5);
     	    LeftLeg.render(f5);
-    	    RightLeg.render(f5);        	
+    	    RightLeg.render(f5);   	
+            if (entity != null && ((EntityDodo)entity).isChested()) {
+            	Box.render(f5);
+            	Lid1.render(f5);
+            }
         }
-
-//	    RightEyelid.render(f5);
-//	    LeftEyelid.render(f5);
 	}
 
 	private void setRotation(ModelRenderer model, float x, float y, float z) {
