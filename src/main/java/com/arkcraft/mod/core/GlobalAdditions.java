@@ -55,6 +55,9 @@ public class GlobalAdditions {
 	public static ArmorMaterial BONE = EnumHelper.addArmorMaterial("BONE", "BONE_MAT", 40, new int[] { 3, 8, 6, 3 }, 30);
 	public static CreativeTabs tabARK = new ARKTabs(CreativeTabs.getNextID(), "tabARKCraft");
 	public static ARKSmithy smithy;
+	public enum GUI_ENUM {
+		SMITHY, PESTLE_AND_MORTAR, INV_DODO
+	}
 	public static int guiIDSmithy = 1, guiIDPestleAndMortar = 2, guiIDInvDodo = 3;
 	
 	public static void init() {
