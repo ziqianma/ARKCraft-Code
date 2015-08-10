@@ -15,7 +15,6 @@ public class TileEntityInventoryDodo extends TileEntity implements IInventory {
 
 	private static final int NUM_SLOTS = 9;
 	private ItemStack[] itemStacks = new ItemStack[NUM_SLOTS];
-	
 	public int getSizeInventory() { return itemStacks.length; }
 	public ItemStack getStackInSlot(int slotIndex) { return itemStacks[slotIndex]; }
 	
