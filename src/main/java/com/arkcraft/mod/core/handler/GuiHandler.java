@@ -36,7 +36,7 @@ public class GuiHandler implements IGuiHandler {
 		
 		TileEntity te = world.getTileEntity(new BlockPos(x,y,z));
 		if(te instanceof TileEntityInventoryDodo) {
-			return new GuiInventoryDodo(player.inventory, (TileEntityInventoryDodo)te, new BlockPos(x,y,z));
+			return new GuiInventoryDodo(player.inventory, (TileEntityInventoryDodo)te);
 		}
 		return null;
 	}
