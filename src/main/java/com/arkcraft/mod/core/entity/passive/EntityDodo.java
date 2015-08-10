@@ -1,7 +1,5 @@
 package com.arkcraft.mod.core.entity.passive;
 
-import java.util.Arrays;
-
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.ai.EntityAIFollowParent;
 import net.minecraft.entity.ai.EntityAIMate;
@@ -34,8 +32,8 @@ import com.arkcraft.mod.lib.LogHelper;
  *
  */
 public class EntityDodo extends EntityChicken implements IInvBasic {
-	private ItemStack[] dodoItemStacks = new ItemStack[9];
-	public IInventory invDodo;  // TODO: Initialize this somehow!
+//	private ItemStack[] dodoItemStacks = new ItemStack[9];
+	public IInventory invDodo;
 
 	private int DODO_EYE_WATCHER = 21;
 	public boolean isEyesOpen() {
@@ -65,6 +63,8 @@ public class EntityDodo extends EntityChicken implements IInvBasic {
 		// TODO: Set to 0 after the code to add the pack is added.
 		this.getDataWatcher().addObject(DODO_CHEST_WATCHER,
 				Byte.valueOf((byte) 1));
+		
+		this.invDodo = new InventoryBasic("Items", false, 27);
 
 		// Replace Idle task with one that blinks eyes
 		this.tasks.taskEntries.clear();
@@ -138,11 +138,18 @@ public class EntityDodo extends EntityChicken implements IInvBasic {
 	public void writeToNBT(NBTTagCompound nbt) {
 		super.writeEntityToNBT(nbt);
 		NBTTagList dataForAllSlots = new NBTTagList();
-		for (int i = 0; i < this.dodoItemStacks.length; ++i) {
-			if (this.dodoItemStacks[i] != null)	{
+//		for (int i = 0; i < this.dodoItemStacks.length; ++i) {
+//			if (this.dodoItemStacks[i] != null)	{
+//				NBTTagCompound dataForThisSlot = new NBTTagCompound();
+//				dataForThisSlot.setByte("Slot", (byte) i);
+//				this.dodoItemStacks[i].writeToNBT(dataForThisSlot);
+//				dataForAllSlots.appendTag(dataForThisSlot);
+//			}
+		for (int i = 0; i < this.invDodo.getSizeInventory(); ++i) {
+			if (this.invDodo.getStackInSlot(i) != null)	{
 				NBTTagCompound dataForThisSlot = new NBTTagCompound();
 				dataForThisSlot.setByte("Slot", (byte) i);
-				this.dodoItemStacks[i].writeToNBT(dataForThisSlot);
+				this.invDodo.getStackInSlot(i).writeToNBT(dataForThisSlot);
 				dataForAllSlots.appendTag(dataForThisSlot);
 			}
 		}
@@ -156,13 +163,15 @@ public class EntityDodo extends EntityChicken implements IInvBasic {
 		final byte NBT_TYPE_COMPOUND = 10;  
 		NBTTagList dataForAllSlots = nbt.getTagList("Items", NBT_TYPE_COMPOUND);
 
-		Arrays.fill(dodoItemStacks, null);   
+//		Arrays.fill(dodoItemStacks, null);   
 		for (int i = 0; i < dataForAllSlots.tagCount(); ++i) {
 			NBTTagCompound dataForOneSlot = dataForAllSlots.getCompoundTagAt(i);
 			int slotIndex = dataForOneSlot.getByte("Slot") & 255;
 
-			if (slotIndex >= 0 && slotIndex < this.dodoItemStacks.length) {
-				this.dodoItemStacks[slotIndex] = ItemStack.loadItemStackFromNBT(dataForOneSlot);
+//			if (slotIndex >= 0 && slotIndex < this.dodoItemStacks.length) {
+//				this.dodoItemStacks[slotIndex] = ItemStack.loadItemStackFromNBT(dataForOneSlot);
+			if (slotIndex >= 0 && slotIndex < this.invDodo.getSizeInventory()) {
+				this.invDodo.setInventorySlotContents(slotIndex, ItemStack.loadItemStackFromNBT(dataForOneSlot));
 			}
 		}
 	}

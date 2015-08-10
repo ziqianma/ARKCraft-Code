@@ -26,6 +26,7 @@ public class GuiHandler implements IGuiHandler {
 		if(ID == GlobalAdditions.guiIDPestleAndMortar) return new ContainerSmithy(player.inventory, world, new BlockPos(x, y, z));
 		if(ID == GlobalAdditions.guiIDInvDodo) {
 			EntityDodo entityDodo = (EntityDodo) getEntityAt(player, x, y, z);
+			/* FIXME: null pointer exception. */
 			return new ContainerInventoryDodo(player.inventory, entityDodo.invDodo, entityDodo, player);
 		}
 		return null;
