@@ -4,9 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
@@ -39,6 +37,7 @@ public class GuiHandler implements IGuiHandler {
 		if(ID == GlobalAdditions.guiIDPestleAndMortar) return ID == GlobalAdditions.guiIDPestleAndMortar && world.getBlockState(new BlockPos(x, y, z)).getBlock() == GlobalAdditions.pestle_and_mortar ? new GuiSmithy(player.inventory, world, new BlockPos(x, y, z)) : null;
 		if(ID == GlobalAdditions.guiIDInvDodo) {
 			EntityDodo entityDodo = (EntityDodo) getEntityAt(player, x, y, z);
+			/* FIXME: null pointer exception. */
 			return new GuiInventoryDodo(player.inventory, entityDodo.invDodo, entityDodo);
 		}
 		return null;
