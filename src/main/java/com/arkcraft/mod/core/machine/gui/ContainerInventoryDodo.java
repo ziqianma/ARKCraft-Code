@@ -1,20 +1,24 @@
 package com.arkcraft.mod.core.machine.gui;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-import com.arkcraft.mod.core.machine.tileentity.TileEntityInventoryDodo;
+import com.arkcraft.mod.core.entity.passive.EntityDodo;
 
 public class ContainerInventoryDodo extends Container {
 
-	private TileEntityInventoryDodo invDodo;
+	private IInventory invDodo;
+	private EntityDodo dodo;
 	
-	public ContainerInventoryDodo(InventoryPlayer invPlayer, TileEntityInventoryDodo invDodo) {
+	public ContainerInventoryDodo(IInventory invPlayer, final IInventory invDodo, final EntityDodo dodo, EntityPlayer player) {
 		this.invDodo = invDodo;
-		/* Hotbar slots */
+		this.dodo = dodo;
+		invDodo.openInventory(player);
+		
+		/* Hotbar inventory */
 		for(int col = 0; col < 9; col++) {
 			addSlotToContainer(new Slot(invPlayer, col, 7 + col * 18, 141 + col * 18));
 		}
@@ -28,47 +32,60 @@ public class ContainerInventoryDodo extends Container {
 		}
 		
 		/* Chest inventory */
-		for(int col = 0; col < 3; col++) {
-			for(int row = 0; row < 3; row++) {
-				int slotIndex = col + row * 3;
-				addSlotToContainer(new Slot(invDodo, slotIndex, 97 + col * 18, 17 + row * 18));
+		if(dodo.isChested()) {
+			for(int col = 0; col < 3; col++) {
+				for(int row = 0; row < 3; row++) {
+					int slotIndex = col + row * 3;
+					addSlotToContainer(new Slot(invPlayer, slotIndex, 97 + col * 18, 17 + row * 18));
+				}
 			}
 		}
 	}
+	
+	@Override
+    public boolean canInteractWith(EntityPlayer playerIn)
+    {
+        return this.invDodo.isUseableByPlayer(playerIn) && this.dodo.isEntityAlive() && this.dodo.getDistanceToEntity(playerIn) < 8.0F;
+    }
 
 	@Override
-	public boolean canInteractWith(EntityPlayer playerIn) {
-		return invDodo.isUseableByPlayer(playerIn);
-	}
-
-	@Override
-	public ItemStack transferStackInSlot(EntityPlayer player, int slotIndex) {
-		Slot sourceSlot = (Slot)inventorySlots.get(slotIndex);
-		if(sourceSlot == null || !sourceSlot.getHasStack()) return null;
+	public ItemStack transferStackInSlot(EntityPlayer player, int sourceSlotIndex)
+	{
+		Slot sourceSlot = (Slot)inventorySlots.get(sourceSlotIndex);
+		if (sourceSlot == null || !sourceSlot.getHasStack()) return null;
 		ItemStack sourceStack = sourceSlot.getStack();
-		ItemStack copy = sourceStack.copy();
-		if(slotIndex >= 0 && slotIndex < 36) {
-			if(!mergeItemStack(sourceStack, 36, 45, false)) return null;
-		}
-		else if(slotIndex >= 36 && slotIndex < 45) {
-			if(!mergeItemStack(sourceStack, 0, 36, false)) return null;
-		}
-		else {
-			System.err.println("Invalid Slot Index: " + slotIndex);
+		ItemStack copyOfSourceStack = sourceStack.copy();
+
+		// Check if the slot clicked is one of the vanilla container slots
+		if (sourceSlotIndex >= 0 && sourceSlotIndex < 36) {
+			// This is a vanilla container slot so merge the stack into the tile inventory
+			if (!mergeItemStack(sourceStack, 36, 45, false)){
+				return null;
+			}
+		} else if (sourceSlotIndex >= 36 && sourceSlotIndex < 45) {
+			// This is a TE slot so merge the stack into the players inventory
+			if (!mergeItemStack(sourceStack, 0, 36, false)) {
+				return null;
+			}
+		} else {
+			System.err.print("Invalid slotIndex:" + sourceSlotIndex);
 			return null;
 		}
-		
-		if(sourceStack.stackSize == 0) sourceSlot.putStack(null);
-		else sourceSlot.onSlotChanged();
+
+		// If stack size == 0 (the entire stack was moved) set slot contents to null
+		if (sourceStack.stackSize == 0) {
+			sourceSlot.putStack(null);
+		} else {
+			sourceSlot.onSlotChanged();
+		}
+
 		sourceSlot.onPickupFromSlot(player, sourceStack);
-		return copy;
+		return copyOfSourceStack;
 	}
 	
 	@Override
 	public void onContainerClosed(EntityPlayer playerIn)
 	{
 		super.onContainerClosed(playerIn);
-		this.invDodo.closeInventory(playerIn);
 	}
-	
 }
