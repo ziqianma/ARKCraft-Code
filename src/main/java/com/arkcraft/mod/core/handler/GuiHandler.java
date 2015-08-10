@@ -26,8 +26,8 @@ public class GuiHandler implements IGuiHandler {
 		if(ID == GlobalAdditions.guiIDPestleAndMortar) return new ContainerSmithy(player.inventory, world, new BlockPos(x, y, z));
 		if(ID == GlobalAdditions.guiIDInvDodo) {
 			EntityDodo entityDodo = (EntityDodo) getEntityAt(player, x, y, z);
-			/* FIXME: null pointer exception. */
-			return new ContainerInventoryDodo(player.inventory, entityDodo.invDodo, entityDodo, player);
+			/* FIXED */
+			if(entityDodo != null) return new ContainerInventoryDodo(player.inventory, entityDodo.invDodo, entityDodo, player);
 		}
 		return null;
 	}
@@ -38,8 +38,7 @@ public class GuiHandler implements IGuiHandler {
 		if(ID == GlobalAdditions.guiIDPestleAndMortar) return ID == GlobalAdditions.guiIDPestleAndMortar && world.getBlockState(new BlockPos(x, y, z)).getBlock() == GlobalAdditions.pestle_and_mortar ? new GuiSmithy(player.inventory, world, new BlockPos(x, y, z)) : null;
 		if(ID == GlobalAdditions.guiIDInvDodo) {
 			EntityDodo entityDodo = (EntityDodo) getEntityAt(player, x, y, z);
-			/* FIXME: null pointer exception. */
-			return new GuiInventoryDodo(player.inventory, entityDodo.invDodo, entityDodo);
+			if(entityDodo != null) return new GuiInventoryDodo(player.inventory, entityDodo.invDodo, entityDodo);
 		}
 		return null;
 	}

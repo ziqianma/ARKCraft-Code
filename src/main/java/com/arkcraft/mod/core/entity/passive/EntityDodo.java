@@ -128,10 +128,7 @@ public class EntityDodo extends EntityChicken implements IInvBasic {
 	 */
 	@Override
 	public boolean isBreedingItem(ItemStack stack) {
-		if (stack != null) {
-			return stack.getItem() instanceof ARKFood;
-		}
-		return false;
+		return stack != null ? stack.getItem() instanceof ARKFood : false;
 	}
 
 	@Override
