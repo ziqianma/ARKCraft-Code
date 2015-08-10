@@ -55,7 +55,7 @@ public class GlobalAdditions {
 	public static ArmorMaterial BONE = EnumHelper.addArmorMaterial("BONE", "BONE_MAT", 40, new int[] { 3, 8, 6, 3 }, 30);
 	public static CreativeTabs tabARK = new ARKTabs(CreativeTabs.getNextID(), "tabARKCraft");
 	public static ARKSmithy smithy;
-	public static int guiID = 0;
+	public static int guiIDSmithy = 1, guiIDPestleAndMortar = 2, guiIDInvDodo = 3;
 	
 	public static void init() {
 		tintoBerry = addFood("tinto", 4, 0.3F, false, new PotionEffect(Potion.fireResistance.id, 60, 1));

@@ -1,9 +1,5 @@
 package com.arkcraft.mod.core.entity.passive;
 
-import com.arkcraft.mod.core.GlobalAdditions;
-import com.arkcraft.mod.core.entity.ai.EntityDodoAILookIdle;
-import com.arkcraft.mod.core.items.ARKFood;
-
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.ai.EntityAIFollowParent;
 import net.minecraft.entity.ai.EntityAIMate;
@@ -18,6 +14,12 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+
+import com.arkcraft.mod.core.GlobalAdditions;
+import com.arkcraft.mod.core.Main;
+import com.arkcraft.mod.core.entity.ai.EntityDodoAILookIdle;
+import com.arkcraft.mod.core.items.ARKFood;
+import com.arkcraft.mod.lib.LogHelper;
 
 /***
  * 
@@ -88,6 +90,16 @@ public class EntityDodo extends EntityChicken {
             this.dropItem(GlobalAdditions.porkchop_raw, 1);
         }
     }
+	
+	@Override
+	public boolean interact(EntityPlayer p) {
+		LogHelper.info("The player right clicked a Dodo .");
+		if(isChested()) {
+			p.openGui(Main.instance, GlobalAdditions.guiIDInvDodo, worldObj, p.getPosition().getX(), p.getPosition().getY(), p.getPosition().getZ());
+			return true;
+		}
+		return false;
+	}
 	
 	@Override
     public EntityDodo createChild(EntityAgeable ageable) {

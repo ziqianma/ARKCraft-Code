@@ -185,4 +185,8 @@ public class EntityRaptor extends EntityMob {
     protected boolean canDespawn() {
         return false;
     }
+	
+	public String toString() {
+		return "Raptor[" + this.getPosition().getX() + ", " + this.getPosition().getY() + ", " + this.getPosition().getZ() + "]";
+	}
 }
