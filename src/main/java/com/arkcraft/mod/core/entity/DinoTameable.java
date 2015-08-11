@@ -5,6 +5,7 @@ import java.util.UUID;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityOwnable;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -21,7 +22,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.arkcraft.mod.core.GlobalAdditions;
 import com.arkcraft.mod.core.entity.ai.EntityDinoAIFollowOwner;
+import com.arkcraft.mod.core.entity.ai.EntityDinoAIOwnerHurtByTarget;
+import com.arkcraft.mod.core.entity.ai.EntityDinoAIOwnerHurtTarget;
 
+/***
+ * 
+ * @author wildbill22
+ *
+ */
 public class DinoTameable extends EntityMob implements IEntityOwnable {
 
 	protected int torpor = 0;
@@ -36,6 +44,11 @@ public class DinoTameable extends EntityMob implements IEntityOwnable {
         this.dataWatcher.addObject(16, Byte.valueOf((byte)0));
         this.dataWatcher.addObject(17, "");
         this.isTameable = true;
+
+        int p = 1;
+        this.targetTasks.addTask(p++, new EntityDinoAIOwnerHurtByTarget(this));
+        this.targetTasks.addTask(p++, new EntityDinoAIOwnerHurtTarget(this));
+        this.targetTasks.addTask(p++, new EntityAIHurtByTarget(this, true));
 	}
 	
     /**
@@ -159,8 +172,6 @@ public class DinoTameable extends EntityMob implements IEntityOwnable {
 		if (dinoAIFollowOwner == null) { 
 			dinoAIFollowOwner = new EntityDinoAIFollowOwner(this, 1.5D, 1.0F, 3.0F);
 	        this.tasks.addTask(3, dinoAIFollowOwner);
-//	        this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));  // TODO: Need version of this
-//	        this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));    // TODO: Need version of this
 		}
 	}
 	
@@ -198,6 +209,11 @@ public class DinoTameable extends EntityMob implements IEntityOwnable {
 
     public Entity getOwner() {
         return this.getOwnerEntity();
+    }
+
+    // This is in EntityTameable, not sure its purpose, but adding so that EntityDinoAIOwnerHurtByTarget can use it
+    public boolean func_142018_a(EntityLivingBase p_142018_1_, EntityLivingBase p_142018_2_) {
+        return true;
     }
 
     /**
