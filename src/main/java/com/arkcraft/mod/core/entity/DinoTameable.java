@@ -12,6 +12,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.scoreboard.Team;
 import net.minecraft.server.management.PreYggdrasilConverter;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
@@ -41,8 +42,8 @@ public class DinoTameable extends EntityMob implements IEntityOwnable {
 	protected DinoTameable(World worldIn) {
 		super(worldIn);
 //		this.setupTamedAI();
-        this.dataWatcher.addObject(16, Byte.valueOf((byte)0));
-        this.dataWatcher.addObject(17, "");
+//        this.dataWatcher.addObject(16, Byte.valueOf((byte)0));
+//        this.dataWatcher.addObject(17, "");
         this.isTameable = true;
 
         int p = 1;
@@ -51,6 +52,12 @@ public class DinoTameable extends EntityMob implements IEntityOwnable {
         this.targetTasks.addTask(p++, new EntityAIHurtByTarget(this, true));
 	}
 	
+    protected void entityInit() {
+        super.entityInit();
+        this.dataWatcher.addObject(16, Byte.valueOf((byte)0));
+        this.dataWatcher.addObject(17, "");
+    }
+
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
@@ -197,6 +204,34 @@ public class DinoTameable extends EntityMob implements IEntityOwnable {
         return entityIn == this.getOwnerEntity();
     }
 
+    // This is in EntityTameable, not sure its purpose, but adding so that EntityDinoAIOwnerHurtByTarget can use it
+    public boolean func_142018_a(EntityLivingBase p_142018_1_, EntityLivingBase p_142018_2_) {
+        return true;
+    }
+
+    public Team getTeam() {
+        if (this.isTamed()) {
+            EntityLivingBase entitylivingbase = this.getOwnerEntity();
+            if (entitylivingbase != null) {
+                return entitylivingbase.getTeam();
+            }
+        }
+        return super.getTeam();
+    }
+
+    public boolean isOnSameTeam(EntityLivingBase otherEntity) {
+        if (this.isTamed()) {
+            EntityLivingBase entitylivingbase1 = this.getOwnerEntity();
+            if (otherEntity == entitylivingbase1) {
+                return true;
+            }
+            if (entitylivingbase1 != null) {
+                return entitylivingbase1.isOnSameTeam(otherEntity);
+            }
+        }
+        return super.isOnSameTeam(otherEntity);
+    }
+
     /**
      * Called when the mob's health reaches 0.
      */
@@ -209,11 +244,6 @@ public class DinoTameable extends EntityMob implements IEntityOwnable {
 
     public Entity getOwner() {
         return this.getOwnerEntity();
-    }
-
-    // This is in EntityTameable, not sure its purpose, but adding so that EntityDinoAIOwnerHurtByTarget can use it
-    public boolean func_142018_a(EntityLivingBase p_142018_1_, EntityLivingBase p_142018_2_) {
-        return true;
     }
 
     /**
