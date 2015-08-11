@@ -6,7 +6,9 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityOwnable;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAITargetNonTamed;
 import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemFood;
@@ -25,6 +27,7 @@ import com.arkcraft.mod.core.GlobalAdditions;
 import com.arkcraft.mod.core.entity.ai.EntityDinoAIFollowOwner;
 import com.arkcraft.mod.core.entity.ai.EntityDinoAIOwnerHurtByTarget;
 import com.arkcraft.mod.core.entity.ai.EntityDinoAIOwnerHurtTarget;
+import com.arkcraft.mod.core.entity.ai.EntityDinoAITargetNonTamed;
 
 /***
  * 
@@ -50,6 +53,7 @@ public class DinoTameable extends EntityMob implements IEntityOwnable {
         this.targetTasks.addTask(p++, new EntityDinoAIOwnerHurtByTarget(this));
         this.targetTasks.addTask(p++, new EntityDinoAIOwnerHurtTarget(this));
         this.targetTasks.addTask(p++, new EntityAIHurtByTarget(this, true));
+        this.targetTasks.addTask(p++, new EntityDinoAITargetNonTamed(this, EntitySheep.class, false));
 	}
 	
     protected void entityInit() {
