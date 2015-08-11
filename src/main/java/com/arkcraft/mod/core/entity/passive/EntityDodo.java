@@ -134,6 +134,7 @@ public class EntityDodo extends EntityChicken implements IInvBasic {
 	@Override
 	public void writeToNBT(NBTTagCompound nbt) {
 		super.writeEntityToNBT(nbt);
+		/*
 		NBTTagList dataForAllSlots = new NBTTagList();
 //		for (int i = 0; i < this.dodoItemStacks.length; ++i) {
 //			if (this.dodoItemStacks[i] != null)	{
@@ -152,6 +153,33 @@ public class EntityDodo extends EntityChicken implements IInvBasic {
 		}
 		// the array of hashmaps is then inserted into the parent hashmap for the container
 		nbt.setTag("Items", dataForAllSlots);
+		*/
+		/***
+		 * So, some quick notes (Vastatio):
+		 * Basically, I've seen that in EntityHorse the for loop starts with 2 right?
+		 * Its because of the two checks of the getStackInSlot(1) and getStackInSlot(2) for armor/saddle.
+		 * Because apparently, minecraft needs to register those as two seperate nbt slots.
+		 * So, here, i check if the EntityDodo isChested() before.
+		 * I can get the items that are in each slot of the chest by using this.invDodo.getStackInSlot(i)
+		 * if the slots in invDodo are not empty, then write that slot to nbt using a byte.
+		 * then I write nbt to the currentItemStack?
+		 * Then, after the for loop, I create another tag called "Items" that stores all the values that have been put into the NBTTagList.
+		 * This is how I think this whole process works (this is from EntityHorse)
+		 */
+		
+		if(this.isChested()) {
+			NBTTagList nbtTags = new NBTTagList();
+			for(int i = 0; i < this.invDodo.getSizeInventory(); i++) {
+				ItemStack currentItemStack = this.invDodo.getStackInSlot(i);
+				if(currentItemStack != null) {
+					NBTTagCompound nbtCompound = new NBTTagCompound();
+					nbtCompound.setByte("Slot", (byte)i);
+					currentItemStack.writeToNBT(nbtCompound);
+					nbtTags.appendTag(nbtCompound);
+				}
+			}
+			nbt.setTag("Items", nbtTags);
+		}
 	}
 
 	@Override
