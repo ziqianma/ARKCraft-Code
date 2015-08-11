@@ -6,7 +6,6 @@ import com.arkcraft.mod.core.Main;
 import com.arkcraft.mod.lib.LogHelper;
 
 import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIBase;
@@ -20,7 +19,6 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.BlockPos;
-import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
 /***
@@ -91,6 +89,7 @@ public class EntityRaptor extends DinoTameable {
 	}
 //	public RaptorType type = RaptorType.ALBINO; // Default to this, but set it later
 	public RaptorType type;
+	protected EntityAIBase attackPlayerTarget;
 
 	public EntityRaptor(World world) {
 		super(world);
@@ -102,7 +101,9 @@ public class EntityRaptor extends DinoTameable {
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(8, new EntityAILookIdle(this));
         
-        this.applyEntityAI(new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
+//        this.applyEntityAI(new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
+        attackPlayerTarget = new EntityAINearestAttackableTarget(this, EntityPlayer.class, true);
+        this.targetTasks.addTask(1, attackPlayerTarget);
         
         type = RaptorType.ALBINO;
 //        type.setRandomRaptorType(); // Set to a random type for now
@@ -116,13 +117,24 @@ public class EntityRaptor extends DinoTameable {
     	super.applyEntityAttributes();
     	this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).applyModifier(new AttributeModifier("Random spawn bonus", this.rand.nextDouble() * 0.05000000074505806D, 0));
     	this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(45.0D);
-    	if (this.isTamed())
+    	if (this.isTamed()) {
+    		// Double when tamed
     		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(16.0D); // Double the health for now
-    	else
+        	this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(8D); //5 hearts without armor
+    	}
+    	else {
+    		// weaker when not tamed
     		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(8.0D); //tested this at 5.0 (too low) setting to 8.
+        	this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(4D); //2.5 hearts without armor
+    	}
     	this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.379890125D);
-    	this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(4D); //2.5 hearts without armor
     }
+    
+	@Override
+	public void setTamed(boolean tamed) {
+		this.targetTasks.removeTask(attackPlayerTarget);
+		super.setTamed(tamed);
+	}
     
 	@Override
 	public void writeEntityToNBT(NBTTagCompound nbt) {
@@ -174,34 +186,6 @@ public class EntityRaptor extends DinoTameable {
         return 1.0F;
     }
     
-    /**
-     * Called when the entity is attacked. (Needed to attack other mobs)
-     */
-    @Override
-    public boolean attackEntityFrom(DamageSource damageSource, float damage) {
-//    	int angry = this.rand.nextInt(3) + 1;
-//        this.playSound(Main.MODID + ":" + "Angry_" + angry, 0.15F, 1.0F);    	
-		return super.attackEntityFrom(damageSource, damage);	
-    }
-    
-    /**
-     * Called when attacking an entity
-     */
-    @Override
-    public boolean attackEntityAsMob(Entity entity) {
-        float f = (float)this.getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue();
-        f = this.isTamed() ? f * 2.0F : f;  // Double the damage if tamed
-        return entity.attackEntityFrom(DamageSource.causeMobDamage(this), f);    	
-    }
-
-	/**
-     * Determines if an entity can despawn, used on idle far away entities
-     */
-	@Override
-    protected boolean canDespawn() {
-        return false;
-    }
-	
 	public String toString() {
 		return "Raptor[" + this.getPosition().getX() + ", " + this.getPosition().getY() + ", " + this.getPosition().getZ() + "]";
 	}

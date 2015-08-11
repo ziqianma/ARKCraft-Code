@@ -5,10 +5,12 @@ import java.util.UUID;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityOwnable;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -154,6 +156,34 @@ public class DinoTameable extends EntityMob implements IEntityOwnable {
 		progress -= i;
 	}
 	
+    /**
+     * Called when the entity is attacked. (Needed to attack other mobs)
+     */
+    @Override
+    public boolean attackEntityFrom(DamageSource damageSource, float damage) {
+        if (this.isEntityInvulnerable(damageSource)) {
+            return false;
+        }
+        else {
+            Entity entity = damageSource.getEntity();
+            if (entity != null) {
+                // Reduce damage if from player
+            	if ((entity instanceof EntityPlayer) && this.isTamed()) {
+            		damage = Math.min(damage, 1.0F);
+            	}
+            }
+            return super.attackEntityFrom(damageSource, damage);
+        }
+    }
+
+    /**
+     * Called when attacking an entity
+     */
+    @Override
+    public boolean attackEntityAsMob(Entity entity) {
+        return super.attackEntityAsMob(entity);    	
+    }
+	
 	public boolean isTamed() {
 		if (this.isTameable)
 			return (this.dataWatcher.getWatchableObjectByte(16) & 4) != 0;
@@ -177,7 +207,7 @@ public class DinoTameable extends EntityMob implements IEntityOwnable {
 		/* We can setup the tamed AI here 
 		 * Ex: if tamed, the wolf follows the player */
 		if (dinoAIFollowOwner == null) { 
-			dinoAIFollowOwner = new EntityDinoAIFollowOwner(this, 1.5D, 1.0F, 3.0F);
+			dinoAIFollowOwner = new EntityDinoAIFollowOwner(this, 1.5D, 2.0F, 4.0F);
 	        this.tasks.addTask(3, dinoAIFollowOwner);
 		}
 	}
@@ -246,6 +276,14 @@ public class DinoTameable extends EntityMob implements IEntityOwnable {
         return this.getOwnerEntity();
     }
 
+	/**
+     * Determines if an entity can despawn, used on idle far away entities
+     */
+	@Override
+    protected boolean canDespawn() {
+        return false;
+    }
+	
     /**
      * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
      */

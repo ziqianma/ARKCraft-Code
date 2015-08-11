@@ -201,6 +201,14 @@ public class EntityDodo extends EntityChicken implements IInvBasic {
 		}
 	}
 
+	/**
+     * Determines if an entity can despawn, used on idle far away entities
+     */
+	@Override
+    protected boolean canDespawn() {
+        return false;
+    }
+	
 	// From IInvBasic 
 	@Override
 	public void onInventoryChanged(InventoryBasic invBasic) {
