@@ -32,6 +32,8 @@ item.explosive_ball.name=Explosive Cobblestone Ball
 item.mortar_and_pestle.name=Mortar and Pestle
 item.porkchop_cooked.name=Cooked Porkchop
 item.porkchop_raw.name=Raw Porkchop
+item.primemeat_cooked.name=Cooked Prime Meat
+item.primemeat_raw.name=Raw Prime Meat
 
 #miscelaneous
 itemGroup.tabARKCraft=ARKCraft: Survival Evolved

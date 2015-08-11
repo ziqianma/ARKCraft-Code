@@ -40,7 +40,7 @@ public class GlobalAdditions {
 
 	public static Map<String, Block> allBlocks = new HashMap<String, Block>();
 	public static Map<String, Item> allItems = new HashMap<String, Item>();
-	public static ARKFood tintoBerry, amarBerry, azulBerry, mejoBerry, narcoBerry, porkchop_raw, porkchop_cooked;
+	public static ARKFood tintoBerry, amarBerry, azulBerry, mejoBerry, narcoBerry, porkchop_raw, porkchop_cooked, primemeat_raw, primemeat_cooked;
 	public static ARKBush berryBush;
 	public static ARKBlock pestle_and_mortar;
 	public static ARKItem cobble_ball, fiber, chitin, narcotics, tranq_arrow, explosive_ball;
@@ -66,8 +66,10 @@ public class GlobalAdditions {
 		azulBerry = addFood("azul", 4, 0.3F, false, new PotionEffect(Potion.jump.id, 60, 1));
 		mejoBerry = addFood("mejo", 4, 0.3F, false, new PotionEffect(Potion.resistance.id, 100, 1));
 		narcoBerry = addFood("narco", 4, 0.3F, true, new PotionEffect(Potion.moveSpeed.id, 160, 1));
-		porkchop_raw = addFood("porkchop_raw", 4, 0.3F, false);
-		porkchop_cooked = addFood("porkchop_cooked", 8, 0.9F, false);
+		porkchop_raw = addFood("porkchop_raw", 3, 0.3F, false);
+		porkchop_cooked = addFood("porkchop_cooked", 6, 0.9F, false);
+		primemeat_raw = addFood("primemeat_raw", 3, 0.3F, false);
+		primemeat_cooked = addFood("primemeat_cooked", 8, 1.2F, false);
 		berryBush = addBush("berryBush", 0.4F);
 		fiber = addItem("fiber");
 		cobble_ball = addItemWithTooltip("cobble_ball", EnumChatFormatting.GOLD + "A Rocky Road to Victory");
