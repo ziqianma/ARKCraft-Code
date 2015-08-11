@@ -3,12 +3,16 @@ package com.arkcraft.mod.core.entity;
 import java.util.Random;
 
 import com.arkcraft.mod.core.Main;
+import com.arkcraft.mod.core.entity.ai.EntityDinoAIOwnerHurtByTarget;
+import com.arkcraft.mod.core.entity.ai.EntityDinoAIOwnerHurtTarget;
+import com.arkcraft.mod.core.entity.ai.EntityDinoAITargetNonTamed;
 import com.arkcraft.mod.lib.LogHelper;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
@@ -16,8 +20,10 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.pathfinding.PathNavigateGround;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
@@ -89,21 +95,28 @@ public class EntityRaptor extends DinoTameable {
 	}
 //	public RaptorType type = RaptorType.ALBINO; // Default to this, but set it later
 	public RaptorType type;
-	protected EntityAIBase attackPlayerTarget;
+//	protected EntityAIBase attackPlayerTarget;
 
 	public EntityRaptor(World world) {
 		super(world);
-		
+
+//        this.tasks.addTask(3, new EntityAILeapAtTarget(this, 0.4F));
+
+        ((PathNavigateGround)this.getNavigator()).func_179690_a(true);
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.0D, false));
         this.tasks.addTask(5, new EntityAIMoveTowardsRestriction(this, 1.0D));
         this.tasks.addTask(7, new EntityAIWander(this, 1.0D));
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(8, new EntityAILookIdle(this));
-        
-//        this.applyEntityAI(new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
         attackPlayerTarget = new EntityAINearestAttackableTarget(this, EntityPlayer.class, true);
         this.targetTasks.addTask(1, attackPlayerTarget);
+
+        int p = 1;
+        this.targetTasks.addTask(p++, new EntityDinoAIOwnerHurtByTarget(this));
+        this.targetTasks.addTask(p++, new EntityDinoAIOwnerHurtTarget(this));
+        this.targetTasks.addTask(p++, new EntityAIHurtByTarget(this, true));
+        this.targetTasks.addTask(p++, new EntityDinoAITargetNonTamed(this, EntitySheep.class, false));
         
         type = RaptorType.ALBINO;
 //        type.setRandomRaptorType(); // Set to a random type for now

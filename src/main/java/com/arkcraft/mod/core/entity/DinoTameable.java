@@ -5,10 +5,8 @@ import java.util.UUID;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityOwnable;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAITargetNonTamed;
+import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemFood;
@@ -25,9 +23,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.arkcraft.mod.core.GlobalAdditions;
 import com.arkcraft.mod.core.entity.ai.EntityDinoAIFollowOwner;
-import com.arkcraft.mod.core.entity.ai.EntityDinoAIOwnerHurtByTarget;
-import com.arkcraft.mod.core.entity.ai.EntityDinoAIOwnerHurtTarget;
-import com.arkcraft.mod.core.entity.ai.EntityDinoAITargetNonTamed;
 
 /***
  * 
@@ -41,25 +36,60 @@ public class DinoTameable extends EntityMob implements IEntityOwnable {
 	protected boolean isTameable = false;
 	protected boolean isRideable = false;
 	protected EntityDinoAIFollowOwner dinoAIFollowOwner;
+	protected EntityAIBase attackPlayerTarget;
 	
 	protected DinoTameable(World worldIn) {
 		super(worldIn);
-//		this.setupTamedAI();
-//        this.dataWatcher.addObject(16, Byte.valueOf((byte)0));
-//        this.dataWatcher.addObject(17, "");
         this.isTameable = true;
-
-        int p = 1;
-        this.targetTasks.addTask(p++, new EntityDinoAIOwnerHurtByTarget(this));
-        this.targetTasks.addTask(p++, new EntityDinoAIOwnerHurtTarget(this));
-        this.targetTasks.addTask(p++, new EntityAIHurtByTarget(this, true));
-        this.targetTasks.addTask(p++, new EntityDinoAITargetNonTamed(this, EntitySheep.class, false));
+	}
+	
+	protected void setupTamedAI() {
+		/* We can setup the tamed AI here 
+		 * Ex: if tamed, the wolf follows the player */
+		if (dinoAIFollowOwner == null) { 
+			dinoAIFollowOwner = new EntityDinoAIFollowOwner(this, 1.5D, 10.0F, 2.0F); // Set same as wolf for follow distance  
+			this.tasks.addTask(3, dinoAIFollowOwner);
+		}
 	}
 	
     protected void entityInit() {
         super.entityInit();
         this.dataWatcher.addObject(16, Byte.valueOf((byte)0));
         this.dataWatcher.addObject(17, "");
+    }
+
+    /**
+     * Sets the active target the Task system uses for tracking
+     */
+    public void setAttackTarget(EntityLivingBase target) {
+        super.setAttackTarget(target);
+        if (target == null) {
+            this.setAngry(false);
+        }
+        else if (!this.isTamed()) {
+            this.setAngry(true);
+        }
+    }
+
+    /**
+     * Determines whether this wolf is angry or not.
+     */
+    public boolean isAngry() {
+        return (this.dataWatcher.getWatchableObjectByte(16) & 2) != 0;
+    }
+
+    /**
+     * Sets whether this wolf is angry or not.
+     */
+    public void setAngry(boolean angry) {
+        byte b0 = this.dataWatcher.getWatchableObjectByte(16);
+
+        if (angry) {
+            this.dataWatcher.updateObject(16, Byte.valueOf((byte)(b0 | 2)));
+        }
+        else {
+            this.dataWatcher.updateObject(16, Byte.valueOf((byte)(b0 & -3)));
+        }
     }
 
     /**
@@ -204,15 +234,6 @@ public class DinoTameable extends EntityMob implements IEntityOwnable {
         }
         this.setupTamedAI();
 	}	
-	
-	protected void setupTamedAI() {
-		/* We can setup the tamed AI here 
-		 * Ex: if tamed, the wolf follows the player */
-		if (dinoAIFollowOwner == null) { 
-			dinoAIFollowOwner = new EntityDinoAIFollowOwner(this, 1.5D, 2.0F, 4.0F);
-	        this.tasks.addTask(3, dinoAIFollowOwner);
-		}
-	}
 	
     public String getOwnerId() {
         return this.dataWatcher.getWatchableObjectString(17);
