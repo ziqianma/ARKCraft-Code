@@ -3,24 +3,6 @@ package com.arkcraft.mod.core;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.arkcraft.mod.core.blocks.ARKBlock;
-import com.arkcraft.mod.core.blocks.ARKBush;
-import com.arkcraft.mod.core.blocks.ARKSmithy;
-import com.arkcraft.mod.core.creativetabs.ARKTabs;
-import com.arkcraft.mod.core.entity.EntityCobble;
-import com.arkcraft.mod.core.entity.EntityExplosive;
-import com.arkcraft.mod.core.entity.EntityRaptor;
-import com.arkcraft.mod.core.entity.passive.EntityDodo;
-import com.arkcraft.mod.core.handler.EntityHandler;
-import com.arkcraft.mod.core.handler.GuiHandler;
-import com.arkcraft.mod.core.handler.RecipeHandler;
-import com.arkcraft.mod.core.items.ARKArmorItem;
-import com.arkcraft.mod.core.items.ARKFood;
-import com.arkcraft.mod.core.items.ARKItem;
-import com.arkcraft.mod.core.items.ARKSaddle;
-import com.arkcraft.mod.core.items.ARKSlingshot;
-import com.arkcraft.mod.core.items.ARKWeapon;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -32,6 +14,26 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
+
+import com.arkcraft.mod.core.blocks.ARKBlock;
+import com.arkcraft.mod.core.blocks.ARKBush;
+import com.arkcraft.mod.core.blocks.ARKSmithy;
+import com.arkcraft.mod.core.creativetabs.ARKTabs;
+import com.arkcraft.mod.core.entity.EntityCobble;
+import com.arkcraft.mod.core.entity.EntityExplosive;
+import com.arkcraft.mod.core.entity.EntityRaptor;
+import com.arkcraft.mod.core.entity.passive.EntityDodo;
+import com.arkcraft.mod.core.gen.ore.WrappedOreGenerator;
+import com.arkcraft.mod.core.gen.ore.WrappedOreGenerator.Instruction;
+import com.arkcraft.mod.core.handler.EntityHandler;
+import com.arkcraft.mod.core.handler.GuiHandler;
+import com.arkcraft.mod.core.handler.RecipeHandler;
+import com.arkcraft.mod.core.items.ARKArmorItem;
+import com.arkcraft.mod.core.items.ARKFood;
+import com.arkcraft.mod.core.items.ARKItem;
+import com.arkcraft.mod.core.items.ARKSaddle;
+import com.arkcraft.mod.core.items.ARKSlingshot;
+import com.arkcraft.mod.core.items.ARKWeapon;
 
 /**
  * @author Vastatio
@@ -55,6 +57,8 @@ public class GlobalAdditions {
 	public static ArmorMaterial BONE = EnumHelper.addArmorMaterial("BONE", "BONE_MAT", 40, new int[] { 3, 8, 6, 3 }, 30);
 	public static CreativeTabs tabARK = new ARKTabs(CreativeTabs.getNextID(), "tabARKCraft");
 	public static ARKSmithy smithy;
+	public static WrappedOreGenerator generator;
+	
 	public enum GUI_ENUM {
 		SMITHY, PESTLE_AND_MORTAR, INV_DODO
 	}
@@ -100,6 +104,7 @@ public class GlobalAdditions {
 		NetworkRegistry.INSTANCE.registerGuiHandler(Main.instance, new GuiHandler());
 		EntityHandler.registerMonster(EntityRaptor.class, "raptor");
 		EntityHandler.registerPassive(EntityDodo.class, "dodo");
+		//generateOre(new Instruction(), new Instruction());
 	}
 	
 	protected static ARKBush addBush(String name, float hardness) {
@@ -172,4 +177,12 @@ public class GlobalAdditions {
 	public static Map<String, Block> getAllBlocks() { return allBlocks; }
 	public static Map<String, Item> getAllItems() { return allItems; }
 
+	public static void generateOre(Instruction... instructions) {
+		{
+			for(int i = 0; i < instructions.length; i++) {
+				generator = new WrappedOreGenerator(0, instructions[i]);			
+			}
+		}
+	}
+	
 }
