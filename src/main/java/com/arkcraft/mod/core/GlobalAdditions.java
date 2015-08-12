@@ -45,7 +45,7 @@ public class GlobalAdditions {
 	public static ARKFood tintoBerry, amarBerry, azulBerry, mejoBerry, narcoBerry, porkchop_raw, porkchop_cooked, primemeat_raw, primemeat_cooked;
 	public static ARKBush berryBush;
 	public static ARKBlock pestle_and_mortar;
-	public static ARKItem cobble_ball, fiber, chitin, narcotics, tranq_arrow, explosive_ball;
+	public static ARKItem cobble_ball, fiber, chitin, narcotics, tranq_arrow, explosive_ball, dodo_bag;
 	public static ARKSlingshot slingshot;
 	public static ARKSaddle saddle_small, saddle_medium, saddle_large;
 	public static ARKArmorItem chitinHelm, chitinChest, chitinLegs, chitinBoots;
@@ -65,6 +65,7 @@ public class GlobalAdditions {
 	public static int guiIDSmithy = 1, guiIDPestleAndMortar = 2, guiIDInvDodo = 3;
 	
 	public static void init() {
+		// Food
 		tintoBerry = addFood("tinto", 4, 0.3F, false, new PotionEffect(Potion.fireResistance.id, 60, 1));
 		amarBerry = addFood("amar", 4, 0.3F, false, new PotionEffect(Potion.absorption.id, 100, 1));
 		azulBerry = addFood("azul", 4, 0.3F, false, new PotionEffect(Potion.jump.id, 60, 1));
@@ -74,18 +75,29 @@ public class GlobalAdditions {
 		porkchop_cooked = addFood("porkchop_cooked", 6, 0.9F, false);
 		primemeat_raw = addFood("primemeat_raw", 3, 0.3F, false);
 		primemeat_cooked = addFood("primemeat_cooked", 8, 1.2F, false);
+		
+		// world generated
 		berryBush = addBush("berryBush", 0.4F);
-		fiber = addItem("fiber");
+				
+		// Weapons and tools
 		cobble_ball = addItemWithTooltip("cobble_ball", EnumChatFormatting.GOLD + "A Rocky Road to Victory");
 		explosive_ball = addItemWithTooltip("explosive_ball", EnumChatFormatting.RED + "A Rocky Road to Destruction");
-		chitin = addItem("chitin");
 		slingshot = addSlingshot("slingshot");
 		narcotics = addItemWithTooltip("narcotics", EnumChatFormatting.RED + "A Knockout of a Drink");
-		tranq_arrow = addItem("tranq_arrow");
 		saddle_small = addSaddle("saddle_small");
 		saddle_medium = addSaddle("saddle_medium");
 		saddle_large = addSaddle("saddle_large");
 		smithy = addSmithy("smithy", 0.4F);
+		stoneSpear = addWeapon("stoneSpear", ToolMaterial.STONE);
+		ironPike = addWeapon("ironPike", ToolMaterial.IRON);
+		
+		// Regular Items
+		fiber = addItem("fiber");
+		chitin = addItem("chitin");
+		tranq_arrow = addItem("tranq_arrow");
+		dodo_bag = addItemWithTooltip("dodo_bag", "Backpack for the Dodo");
+
+		// Armor
 		chitinHelm = addArmorItem("chitin_helm", CHITIN, "chitinArmor", 0);
 		chitinChest = addArmorItem("chitin_chest", CHITIN, "chitinArmor", 1);
 		chitinLegs = addArmorItem("chitin_legs", CHITIN, "chitinArmor", 2);
@@ -95,9 +107,11 @@ public class GlobalAdditions {
 		clothLegs = addArmorItem("cloth_legs", CLOTH, "clothArmor", 2);
 		clothBoots = addArmorItem("cloth_boots", CLOTH, "clothArmor", 3);
 		boneHelm = addArmorItem("bone_helm", BONE, "boneArmor", 0);
-		stoneSpear = addWeapon("stoneSpear", ToolMaterial.STONE);
-		ironPike = addWeapon("ironPike", ToolMaterial.IRON);
+		
+		// Blocks
 		pestle_and_mortar = addBlock(Material.rock, "mortar_and_pestle", 3.0F);
+		
+		// Other stuff
 		RecipeHandler.registerVanillaCraftingRecipes();
 		EntityHandler.registerModEntity(EntityExplosive.class, "Explosive Cobblestone Ball", 1, Main.instance, 64, 10, true);
 		EntityHandler.registerModEntity(EntityCobble.class, "Cobblestone Ball", 2, Main.instance, 64, 10, true);

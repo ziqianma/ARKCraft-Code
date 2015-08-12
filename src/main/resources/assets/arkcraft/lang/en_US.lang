@@ -3,7 +3,7 @@ tile.berryBush.name=Berry Bush
 tile.smithy.name=Smithy
 tile.mortar_and_pestle.name=Mortar and Pestle
 
-#items
+# items
 item.narco.name=Narco Berry
 item.amar.name=Amar Berry
 item.mejo.name=Mejo Berry
@@ -34,10 +34,11 @@ item.porkchop_cooked.name=Cooked Porkchop
 item.porkchop_raw.name=Raw Porkchop
 item.primemeat_cooked.name=Cooked Prime Meat
 item.primemeat_raw.name=Raw Prime Meat
+item.dodo_bag.name=Dodo Bag
 
-#miscelaneous
+# miscelaneous
 itemGroup.tabARKCraft=ARKCraft: Survival Evolved
 
-#entities
+# entities
 entity.raptor.name=Raptor
 entity.dodo.name=Dodo

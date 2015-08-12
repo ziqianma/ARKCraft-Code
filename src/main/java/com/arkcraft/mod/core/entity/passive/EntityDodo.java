@@ -62,7 +62,7 @@ public class EntityDodo extends EntityChicken implements IInvBasic {
 				Byte.valueOf((byte) 1));
 		// TODO: Set to 0 after the code to add the pack is added.
 		this.getDataWatcher().addObject(DODO_CHEST_WATCHER,
-				Byte.valueOf((byte) 1));
+				Byte.valueOf((byte) 0));
 		
 		this.invDodo = new InventoryBasic("Items", false, 27);
 
@@ -89,7 +89,6 @@ public class EntityDodo extends EntityChicken implements IInvBasic {
 	/**
 	 * Drop 0-2 items of this living's type
 	 */
-	// TODO: Update to drop backpack when we have that item
 	@Override
 	protected void dropFewItems(boolean p_70628_1_, int p_70628_2_) {
 		int j = this.rand.nextInt(3) + this.rand.nextInt(1 + p_70628_2_);
@@ -103,6 +102,10 @@ public class EntityDodo extends EntityChicken implements IInvBasic {
 		} else {
 			this.dropItem(GlobalAdditions.porkchop_raw, 1);
 		}
+		
+		if (this.isChested()) {
+			this.dropItem(GlobalAdditions.dodo_bag, 1);
+		}
 	}
 
 	@Override
@@ -113,6 +116,18 @@ public class EntityDodo extends EntityChicken implements IInvBasic {
 					.getPosition().getX(), p.getPosition().getY(), p
 					.getPosition().getZ());
 			return true;
+		}
+		else if (p.isSneaking()) {
+			ItemStack currentStack = p.getCurrentEquippedItem();
+			if (currentStack.getItem() == GlobalAdditions.dodo_bag) {
+				if (!p.capabilities.isCreativeMode) {
+					currentStack.stackSize--;
+					if (currentStack.stackSize == 0)
+	                    p.inventory.mainInventory[p.inventory.currentItem] = null;
+				}
+				setChested(true);
+				return true;
+			}
 		}
 		return false;
 	}
