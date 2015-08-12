@@ -229,4 +229,21 @@ public class EntityDodo extends EntityChicken implements IInvBasic {
 	public void onInventoryChanged(InventoryBasic invBasic) {
 
 	}
+	
+    @Override
+    protected String getLivingSound() {
+    	int idle = this.rand.nextInt(3) + 1;
+		return Main.MODID + ":" + "dodo_idle_" + idle;
+    }
+    
+    @Override
+    protected String getHurtSound() {
+    	int hurt = this.rand.nextInt(3) + 1;
+		return Main.MODID + ":" + "dodo_hurt_" + hurt;
+    }
+    
+    @Override
+    protected String getDeathSound() {
+		return Main.MODID + ":" + "dodo_death";
+    }
 }

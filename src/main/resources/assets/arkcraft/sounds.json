@@ -88,5 +88,68 @@
                 "stream": false
             }
         ]
+    },
+    "dodo_death": {
+        "category": "neutral",
+        "sounds": [
+            {
+                "name": "dodo_death",
+                "stream": false
+            }
+        ]
+    },
+    "dodo_hurt_1": {
+        "category": "neutral",
+        "sounds": [
+            {
+                "name": "dodo_hurt_1",
+                "stream": false
+            }
+        ]
+    },
+    "dodo_hurt_2": {
+        "category": "neutral",
+        "sounds": [
+            {
+                "name": "dodo_hurt_2",
+                "stream": false
+            }
+        ]
+    },
+    "dodo_hurt_3": {
+        "category": "neutral",
+        "sounds": [
+            {
+                "name": "dodo_hurt_3",
+                "stream": false
+            }
+        ]
+    },
+    "dodo_idle_1": {
+        "category": "neutral",
+        "sounds": [
+            {
+                "name": "dodo_idle_1",
+                "stream": false
+            }
+        ]
+    },
+    "dodo_idle_2": {
+        "category": "neutral",
+        "sounds": [
+            {
+                "name": "dodo_idle_2",
+                "stream": false
+            }
+        ]
+    },
+    "dodo_idle_3": {
+        "category": "neutral",
+        "sounds": [
+            {
+                "name": "dodo_idle_3",
+                "stream": false
+            }
+        ]
     }
 }
