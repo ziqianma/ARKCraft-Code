@@ -2,16 +2,9 @@ package com.arkcraft.mod.core.entity;
 
 import java.util.Random;
 
-import com.arkcraft.mod.core.Main;
-import com.arkcraft.mod.core.entity.ai.EntityDinoAIOwnerHurtByTarget;
-import com.arkcraft.mod.core.entity.ai.EntityDinoAIOwnerHurtTarget;
-import com.arkcraft.mod.core.entity.ai.EntityDinoAITargetNonTamed;
-import com.arkcraft.mod.lib.LogHelper;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
-import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
@@ -26,6 +19,12 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.pathfinding.PathNavigateGround;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
+
+import com.arkcraft.mod.core.Main;
+import com.arkcraft.mod.core.entity.ai.EntityDinoAIOwnerHurtByTarget;
+import com.arkcraft.mod.core.entity.ai.EntityDinoAIOwnerHurtTarget;
+import com.arkcraft.mod.core.entity.ai.EntityDinoAITargetNonTamed;
+import com.arkcraft.mod.lib.LogHelper;
 
 /***
  * 
@@ -121,11 +120,7 @@ public class EntityRaptor extends DinoTameable {
         type = RaptorType.ALBINO;
 //        type.setRandomRaptorType(); // Set to a random type for now
 	}
-	
-    protected void applyEntityAI(EntityAIBase... tasks) {
-    	if(tasks != null) for(EntityAIBase b : tasks) this.targetTasks.addTask(1, b);
-    }
-    
+
     protected void applyEntityAttributes() {
     	super.applyEntityAttributes();
     	this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).applyModifier(new AttributeModifier("Random spawn bonus", this.rand.nextDouble() * 0.05000000074505806D, 0));
@@ -177,18 +172,18 @@ public class EntityRaptor extends DinoTameable {
     @Override
     protected String getLivingSound() {
     	int idle = this.rand.nextInt(3) + 1;
-		return Main.MODID + ":" + "Idle_" + idle;
+		return Main.MODID + ":" + "Raptor_Idle_" + idle;
     }
     
     @Override
     protected String getHurtSound() {
     	int hurt = this.rand.nextInt(3) + 1;
-		return Main.MODID + ":" + "Hurt_" + hurt;
+		return Main.MODID + ":" + "Raptor_Hurt_" + hurt;
     }
     
     @Override
     protected String getDeathSound() {
-		return Main.MODID + ":" + "Death";
+		return Main.MODID + ":" + "Raptor_Death";
     }
 
     /**
@@ -200,6 +195,6 @@ public class EntityRaptor extends DinoTameable {
     }
     
 	public String toString() {
-		return "Raptor[" + this.getPosition().getX() + ", " + this.getPosition().getY() + ", " + this.getPosition().getZ() + "]";
+		return "EntityRaptor[" + this.getPosition().getX() + ", " + this.getPosition().getY() + ", " + this.getPosition().getZ() + "]";
 	}
 }

@@ -1,90 +1,90 @@
 {
-    "Angry_1": {
+    "Raptor_Angry_1": {
         "category": "hostile",
         "sounds": [
             {
-                "name": "Angry_1",
+                "name": "Raptor_Angry_1",
                 "stream": false
             }
         ]
     },
-    "Angry_2": {
+    "Raptor_Angry_2": {
         "category": "hostile",
         "sounds": [
             {
-                "name": "Angry_2",
+                "name": "Raptor_Angry_2",
                 "stream": false
             }
         ]
     },
-    "Angry_3": {
+    "Raptor_Angry_3": {
         "category": "hostile",
         "sounds": [
             {
-                "name": "Angry_3",
+                "name": "Raptor_Angry_3",
                 "stream": false
             }
         ]
     },
-    "Death": {
+    "Raptor_Death": {
         "category": "hostile",
         "sounds": [
             {
-                "name": "Death",
+                "name": "Raptor_Death",
                 "stream": false
             }
         ]
     },
-    "Hurt_1": {
+    "Raptor_Hurt_1": {
         "category": "hostile",
         "sounds": [
             {
-                "name": "Hurt_1",
+                "name": "Raptor_Hurt_1",
                 "stream": false
             }
         ]
     },
-    "Hurt_2": {
+    "Raptor_Hurt_2": {
         "category": "hostile",
         "sounds": [
             {
-                "name": "Hurt_2",
+                "name": "Raptor_Hurt_2",
                 "stream": false
             }
         ]
     },
-    "Hurt_3": {
+    "Raptor_Hurt_3": {
         "category": "hostile",
         "sounds": [
             {
-                "name": "Hurt_3",
+                "name": "Raptor_Hurt_3",
                 "stream": false
             }
         ]
     },
-    "Idle_1": {
+    "Raptor_Idle_1": {
         "category": "hostile",
         "sounds": [
             {
-                "name": "Idle_1",
+                "name": "Raptor_Idle_1",
                 "stream": false
             }
         ]
     },
-    "Idle_2": {
+    "Raptor_Idle_2": {
         "category": "hostile",
         "sounds": [
             {
-                "name": "Idle_2",
+                "name": "Raptor_Idle_2",
                 "stream": false
             }
         ]
     },
-    "Idle_3": {
+    "Raptor_Idle_3": {
         "category": "hostile",
         "sounds": [
             {
-                "name": "Idle_3",
+                "name": "Raptor_Idle_3",
                 "stream": false
             }
         ]
