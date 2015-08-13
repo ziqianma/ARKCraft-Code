@@ -3,10 +3,12 @@ package com.arkcraft.mod.core.handler;
 import java.util.Iterator;
 import java.util.List;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 
@@ -36,10 +38,19 @@ public class GuiHandler implements IGuiHandler {
 		if(ID == GlobalAdditions.guiIDSmithy) return ID == GlobalAdditions.guiIDSmithy ? new GuiSmithy(player.inventory, world, new BlockPos(x, y, z)) : null; 
 		if(ID == GlobalAdditions.guiIDPestleAndMortar) return ID == GlobalAdditions.guiIDPestleAndMortar && world.getBlockState(new BlockPos(x, y, z)).getBlock() == GlobalAdditions.pestle_and_mortar ? new GuiSmithy(player.inventory, world, new BlockPos(x, y, z)) : null;
 		if(ID == GlobalAdditions.guiIDInvDodo) {
-			EntityDodo entityDodo = (EntityDodo) getEntityAt(player, x, y, z);
-			if(entityDodo != null) return new GuiInventoryDodo(player.inventory, entityDodo.invDodo, entityDodo);
+			EntityDodo entityDodo = (EntityDodo) getEntityLookingAt(player);
+			if(entityDodo != null && entityDodo instanceof EntityDodo) 
+				return new GuiInventoryDodo(player.inventory, entityDodo.invDodo, entityDodo);
 		}
 		return null;
+	}
+	
+	private Entity getEntityLookingAt(EntityPlayer player) {
+		MovingObjectPosition mop = Minecraft.getMinecraft().objectMouseOver;
+		if (mop != null)
+			return mop.entityHit;
+		else
+			return null;
 	}
 
 	private Entity getEntityAt(EntityPlayer player, int x, int y, int z) {
