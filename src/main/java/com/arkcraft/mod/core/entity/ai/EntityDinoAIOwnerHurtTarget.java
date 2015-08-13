@@ -1,6 +1,6 @@
 package com.arkcraft.mod.core.entity.ai;
 
-import com.arkcraft.mod.core.entity.DinoTameable;
+import com.arkcraft.mod.core.entity.DinoTameableTest;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAITarget;
@@ -11,11 +11,11 @@ import net.minecraft.entity.ai.EntityAITarget;
  *
  */
 public class EntityDinoAIOwnerHurtTarget extends EntityAITarget {
-	DinoTameable theEntityTameable;
+	DinoTameableTest theEntityTameable;
     EntityLivingBase theTarget;
     private int lastAttackerTime;
 
-    public EntityDinoAIOwnerHurtTarget(DinoTameable entity) {
+    public EntityDinoAIOwnerHurtTarget(DinoTameableTest entity) {
         super(entity, false);
         this.theEntityTameable = entity;
         this.setMutexBits(1);

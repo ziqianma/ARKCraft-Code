@@ -38,9 +38,9 @@ public class GuiHandler implements IGuiHandler {
 		if(ID == GlobalAdditions.guiIDSmithy) return ID == GlobalAdditions.guiIDSmithy ? new GuiSmithy(player.inventory, world, new BlockPos(x, y, z)) : null; 
 		if(ID == GlobalAdditions.guiIDPestleAndMortar) return ID == GlobalAdditions.guiIDPestleAndMortar && world.getBlockState(new BlockPos(x, y, z)).getBlock() == GlobalAdditions.pestle_and_mortar ? new GuiSmithy(player.inventory, world, new BlockPos(x, y, z)) : null;
 		if(ID == GlobalAdditions.guiIDInvDodo) {
-			EntityDodo entityDodo = (EntityDodo) getEntityLookingAt(player);
-			if(entityDodo != null && entityDodo instanceof EntityDodo) 
-				return new GuiInventoryDodo(player.inventory, entityDodo.invDodo, entityDodo);
+			Entity entity = getEntityLookingAt(player);
+			if(entity != null && entity instanceof EntityDodo) 
+				return new GuiInventoryDodo(player.inventory, ((EntityDodo)entity).invDodo, (EntityDodo)entity);
 		}
 		return null;
 	}

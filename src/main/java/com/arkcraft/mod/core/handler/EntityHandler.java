@@ -22,7 +22,7 @@ public class EntityHandler {
 		int secondColor = rand.nextInt() * 16777215;
 		
 		EntityRegistry.registerGlobalEntityID(eClass, name, entityID);
-		EntityRegistry.addSpawn(eClass, 50, 2, 4, EnumCreatureType.CREATURE, BiomeGenBase.beach, BiomeGenBase.desert, BiomeGenBase.forest, BiomeGenBase.birchForest, BiomeGenBase.extremeHills);
+		EntityRegistry.addSpawn(eClass, 25, 2, 4, EnumCreatureType.CREATURE, BiomeGenBase.beach, BiomeGenBase.desert, BiomeGenBase.forest, BiomeGenBase.birchForest, BiomeGenBase.extremeHills);
 		EntityRegistry.registerModEntity(eClass, name, entityID, Main.instance(), 64, 1, true);
 		EntityList.entityEggs.put(Integer.valueOf(entityID), new EntityList.EntityEggInfo(entityID, mainColor, secondColor));
 	}

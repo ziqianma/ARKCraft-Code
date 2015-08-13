@@ -8,7 +8,7 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-import com.arkcraft.mod.core.entity.DinoTameable;
+import com.arkcraft.mod.core.entity.DinoTameableTest;
 
 /***
  * 
@@ -17,7 +17,7 @@ import com.arkcraft.mod.core.entity.DinoTameable;
  */
 public class EntityDinoAIFollowOwner extends EntityAIBase {
 
-	private DinoTameable pet;
+	private DinoTameableTest pet;
 	private EntityLivingBase owner;
 	/* Capsulated */
 	protected World world;
@@ -26,7 +26,7 @@ public class EntityDinoAIFollowOwner extends EntityAIBase {
 	private PathNavigate petPathFinder;
 	protected float minDist, maxDist;
 
-	public EntityDinoAIFollowOwner(DinoTameable pet, double followSpeed,
+	public EntityDinoAIFollowOwner(DinoTameableTest pet, double followSpeed,
 			float minDist, float maxDist) {
 		this.pet = pet;
 		this.world = pet.worldObj;

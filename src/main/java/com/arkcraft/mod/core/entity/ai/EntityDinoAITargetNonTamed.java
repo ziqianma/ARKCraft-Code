@@ -1,13 +1,14 @@
 package com.arkcraft.mod.core.entity.ai;
 
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import com.arkcraft.mod.core.entity.DinoTameable;
+
+import com.arkcraft.mod.core.entity.DinoTameableTest;
 
 public class EntityDinoAITargetNonTamed extends EntityAINearestAttackableTarget {
-    private DinoTameable theTameable;
+    private DinoTameableTest theTameable;
 
     @SuppressWarnings("rawtypes")
-	public EntityDinoAITargetNonTamed(DinoTameable thisTameable, Class target, boolean shouldCheckSite) {
+	public EntityDinoAITargetNonTamed(DinoTameableTest thisTameable, Class target, boolean shouldCheckSite) {
         super(thisTameable, target, shouldCheckSite, false);
         this.theTameable = thisTameable;
     }

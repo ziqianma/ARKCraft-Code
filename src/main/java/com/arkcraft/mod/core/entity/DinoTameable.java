@@ -1,62 +1,67 @@
 package com.arkcraft.mod.core.entity;
 
-import java.util.UUID;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.IEntityOwnable;
 import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Items;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.scoreboard.Team;
-import net.minecraft.server.management.PreYggdrasilConverter;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.arkcraft.mod.core.GlobalAdditions;
-import com.arkcraft.mod.core.entity.ai.EntityDinoAIFollowOwner;
+import com.arkcraft.mod.core.Main;
 
 /***
  * 
  * @author wildbill22
  *
  */
-public class DinoTameable extends EntityMob implements IEntityOwnable {
+public abstract class DinoTameable extends EntityTameable {
 
+	public IInventory invDino;
+	protected boolean isSaddled = false;
 	protected int torpor = 0;
 	protected int progress = 0;
 	protected boolean isTameable = false;
 	protected boolean isRideable = false;
-	protected EntityDinoAIFollowOwner dinoAIFollowOwner;
+//	protected EntityDinoAIFollowOwner dinoAIFollowOwner;
 	protected EntityAIBase attackPlayerTarget;
 	
+	private int DINO_SADDLED_WATCHER = 22;
+	public boolean isSaddled() {
+		isSaddled = (this.dataWatcher.getWatchableObjectByte(DINO_SADDLED_WATCHER) & 1) != 0;
+		return isSaddled;
+	}
+	public void setSaddled(boolean saddled) {
+		if (!this.isChild() && this.isTamed()) {
+			isSaddled = saddled;
+			byte b0 = (byte) (saddled ? 1 : 0);
+			this.dataWatcher.updateObject(DINO_SADDLED_WATCHER, Byte.valueOf(b0));
+		}
+	}
+
 	protected DinoTameable(World worldIn) {
 		super(worldIn);
+		this.getDataWatcher().addObject(DINO_SADDLED_WATCHER, Byte.valueOf((byte) 0));
         this.isTameable = true;
 	}
 	
-	protected void setupTamedAI() {
-		/* We can setup the tamed AI here 
-		 * Ex: if tamed, the wolf follows the player */
-		if (dinoAIFollowOwner == null) { 
-			dinoAIFollowOwner = new EntityDinoAIFollowOwner(this, 1.5D, 10.0F, 2.0F); // Set same as wolf for follow distance  
-			this.tasks.addTask(3, dinoAIFollowOwner);
-		}
+	/**
+	 * Clears previous AI Tasks, so the ones defined above will
+	 * actually perform.
+	 */
+	protected void clearAITasks() {
+		tasks.taskEntries.clear();
+		targetTasks.taskEntries.clear();
 	}
-	
-    protected void entityInit() {
-        super.entityInit();
-        this.dataWatcher.addObject(16, Byte.valueOf((byte)0));
-        this.dataWatcher.addObject(17, "");
-    }
 
     /**
      * Sets the active target the Task system uses for tracking
@@ -92,18 +97,42 @@ public class DinoTameable extends EntityMob implements IEntityOwnable {
         }
     }
 
+	/**
+	 * Drop 0-2 items of this living's type
+	 */
+	@Override
+	protected void dropFewItems(boolean p_70628_1_, int p_70628_2_) {
+		int j = this.rand.nextInt(3) + this.rand.nextInt(1 + p_70628_2_);
+		for (int k = 0; k < j; ++k) {
+			this.dropItem(Items.feather, 1); // TODO: Dodo feather instead
+		}
+		if (this.isBurning()) {
+			this.dropItem(GlobalAdditions.porkchop_cooked, 1);
+		} else {
+			this.dropItem(GlobalAdditions.porkchop_raw, 1);
+		}
+		if (this.isSaddled()) {
+			this.dropItem(GlobalAdditions.saddle_large, 1);
+			this.dropItemsInChest(this, this.invDino);
+		}
+	}
+	
+    private void dropItemsInChest(Entity entity, IInventory inventory) {
+        if (inventory != null && !this.worldObj.isRemote) {
+            for (int i = 0; i < inventory.getSizeInventory(); ++i) {
+                ItemStack itemstack = inventory.getStackInSlot(i);
+                if (itemstack != null) {
+                    this.entityDropItem(itemstack, 0.0F);
+                }
+            }
+        }
+    }
+
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
     public void writeEntityToNBT(NBTTagCompound tagCompound) {
         super.writeEntityToNBT(tagCompound);
-        if (this.getOwnerId() == null) {
-            tagCompound.setString("OwnerUUID", "");
-        }
-        else {
-            tagCompound.setString("OwnerUUID", this.getOwnerId());
-        }
-//        tagCompound.setBoolean("Sitting", this.isSitting());
     }
 
     /**
@@ -111,53 +140,18 @@ public class DinoTameable extends EntityMob implements IEntityOwnable {
      */
     public void readEntityFromNBT(NBTTagCompound tagCompund) {
         super.readEntityFromNBT(tagCompund);
-        String s = "";
-        if (tagCompund.hasKey("OwnerUUID", 8)) {
-            s = tagCompund.getString("OwnerUUID");
-        }
-        else {
-            String s1 = tagCompund.getString("Owner");
-            s = PreYggdrasilConverter.func_152719_a(s1);
-        }
-        if (s.length() > 0) {
-            this.setOwnerId(s);
-            this.setTamed(true);
-        }
-//        this.aiSit.setSitting(tagCompund.getBoolean("Sitting"));
-//        this.setSitting(tagCompund.getBoolean("Sitting"));
     }
 
+	@Override
+	public void setTamed(boolean tamed) {
+		if (tamed && attackPlayerTarget != null)
+			this.targetTasks.removeTask(attackPlayerTarget);
+		super.setTamed(tamed);
+	}
+    
 	/* Plays the hearts / smoke depending on status. If progress is 100, we always are successful.*/
 	protected void playTameEffect(boolean p_70908_1_) {
-	   /* We also want a way to play the smoke if torpor reaches 0 from the GUI. If we say that it will play it when torpor is always 0, the effect will play constantly right? */
-       if(progress == 100) {
-           EnumParticleTypes enumparticletypes = EnumParticleTypes.HEART;
-
-           if (!p_70908_1_) {
-               enumparticletypes = EnumParticleTypes.SMOKE_NORMAL;
-           }
-
-           for (int i = 0; i < 7; ++i) {
-               double d0 = this.rand.nextGaussian() * 0.02D;
-               double d1 = this.rand.nextGaussian() * 0.02D;
-               double d2 = this.rand.nextGaussian() * 0.02D;
-               this.worldObj.spawnParticle(enumparticletypes, this.posX + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, this.posY + 0.5D + (double)(this.rand.nextFloat() * this.height), this.posZ + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, d0, d1, d2, new int[0]);
-           }
-       }
-    }
-
-	// TODO: Not sure if we need this!
-    @SideOnly(Side.CLIENT)
-    public void handleHealthUpdate(byte p_70103_1_) {
-        if (p_70103_1_ == 7) {
-            this.playTameEffect(true);
-        }
-        else if (p_70103_1_ == 6) {
-            this.playTameEffect(false);
-        }
-        else {
-            super.handleHealthUpdate(p_70103_1_);
-        }
+		super.playTameEffect(p_70908_1_);
     }
 
 	public boolean isTameable() {
@@ -216,89 +210,6 @@ public class DinoTameable extends EntityMob implements IEntityOwnable {
         return super.attackEntityAsMob(entity);    	
     }
 	
-	public boolean isTamed() {
-		if (this.isTameable)
-			return (this.dataWatcher.getWatchableObjectByte(16) & 4) != 0;
-		else
-			return false;
-//		return (torpor < 0 && progress == 100);
-	}
-	
-	public void setTamed(boolean tamed) {
-        byte b0 = this.dataWatcher.getWatchableObjectByte(16);
-        if (tamed) {
-            this.dataWatcher.updateObject(16, Byte.valueOf((byte)(b0 | 4)));
-        }
-        else {
-            this.dataWatcher.updateObject(16, Byte.valueOf((byte)(b0 & -5)));
-        }
-        this.setupTamedAI();
-	}	
-	
-    public String getOwnerId() {
-        return this.dataWatcher.getWatchableObjectString(17);
-    }
-
-    public void setOwnerId(String ownerUuid) {
-        this.dataWatcher.updateObject(17, ownerUuid);
-    }
-
-    public EntityLivingBase getOwnerEntity() {
-        try {
-            UUID uuid = UUID.fromString(this.getOwnerId());
-            return uuid == null ? null : this.worldObj.getPlayerEntityByUUID(uuid);
-        }
-        catch (IllegalArgumentException illegalargumentexception) {
-            return null;
-        }
-    }
-
-    public boolean isOwner(EntityLivingBase entityIn) {
-        return entityIn == this.getOwnerEntity();
-    }
-
-    // This is in EntityTameable, not sure its purpose, but adding so that EntityDinoAIOwnerHurtByTarget can use it
-    public boolean func_142018_a(EntityLivingBase p_142018_1_, EntityLivingBase p_142018_2_) {
-        return true;
-    }
-
-    public Team getTeam() {
-        if (this.isTamed()) {
-            EntityLivingBase entitylivingbase = this.getOwnerEntity();
-            if (entitylivingbase != null) {
-                return entitylivingbase.getTeam();
-            }
-        }
-        return super.getTeam();
-    }
-
-    public boolean isOnSameTeam(EntityLivingBase otherEntity) {
-        if (this.isTamed()) {
-            EntityLivingBase entitylivingbase1 = this.getOwnerEntity();
-            if (otherEntity == entitylivingbase1) {
-                return true;
-            }
-            if (entitylivingbase1 != null) {
-                return entitylivingbase1.isOnSameTeam(otherEntity);
-            }
-        }
-        return super.isOnSameTeam(otherEntity);
-    }
-
-    /**
-     * Called when the mob's health reaches 0.
-     */
-    public void onDeath(DamageSource cause) {
-        if (!this.worldObj.isRemote && this.worldObj.getGameRules().getGameRuleBooleanValue("showDeathMessages") && this.hasCustomName() && this.getOwnerEntity() instanceof EntityPlayerMP) {
-            ((EntityPlayerMP)this.getOwnerEntity()).addChatMessage(this.getCombatTracker().getDeathMessage());
-        }
-        super.onDeath(cause);
-    }
-
-    public Entity getOwner() {
-        return this.getOwnerEntity();
-    }
-
 	/**
      * Determines if an entity can despawn, used on idle far away entities
      */
@@ -314,10 +225,31 @@ public class DinoTameable extends EntityMob implements IEntityOwnable {
     public boolean interact(EntityPlayer player) {
         ItemStack itemstack = player.inventory.getCurrentItem();
 
-        if (this.isTamed()) {
+		if (isSaddled()) {
+			player.openGui(Main.instance, GlobalAdditions.guiIDInvDodo, worldObj, player
+					.getPosition().getX(), player.getPosition().getY(), player.getPosition().getZ());
+			return true;
+		}
+		else if (isTamed()) {
+			player.addChatMessage(new ChatComponentText("DinoTameable: This dino is tamed."));
             if (itemstack != null) {
-    			player.addChatMessage(new ChatComponentText("DinoTameable: This dino is tamed."));
-                if (itemstack.getItem() instanceof ItemFood) {
+            	if (player.isSneaking()) {
+					// Put saddle on Dino
+					if (!isSaddled() && itemstack.getItem() == this.getSaddleType()) {
+						if (!player.capabilities.isCreativeMode) {
+							itemstack.stackSize--;
+							if (itemstack.stackSize == 0)
+			                    player.inventory.mainInventory[player.inventory.currentItem] = null;
+						}
+						setSaddled(true);
+						return true;
+					}
+					else {
+						player.addChatMessage(new ChatComponentText("This dino can only be saddled with: " + this.getSaddleType()));					
+					}
+				}
+		        // Heal the Dino with meat
+				else if (itemstack.getItem() instanceof ItemFood) {
                     ItemFood itemfood = (ItemFood)itemstack.getItem();
                     if (!player.capabilities.isCreativeMode) {
                          --itemstack.stackSize;
@@ -327,9 +259,9 @@ public class DinoTameable extends EntityMob implements IEntityOwnable {
                         player.inventory.setInventorySlotContents(player.inventory.currentItem, (ItemStack)null);
                     }
                     return true;
-                }
-            }
-        }
+	            }				
+			}
+		}
         // Tame the dino with meat
         else if (itemstack != null && itemstack.getItem() == GlobalAdditions.porkchop_raw) {
             if (!player.capabilities.isCreativeMode) {
@@ -338,7 +270,6 @@ public class DinoTameable extends EntityMob implements IEntityOwnable {
             if (itemstack.stackSize <= 0) {
                 player.inventory.setInventorySlotContents(player.inventory.currentItem, (ItemStack)null);
             }
-
             if (!this.worldObj.isRemote) {
                 if (this.rand.nextInt(2) == 0) {
                     this.setTamed(true);
@@ -363,4 +294,6 @@ public class DinoTameable extends EntityMob implements IEntityOwnable {
         }
         return super.interact(player);
     }
+    
+    public abstract Item getSaddleType();
 }
