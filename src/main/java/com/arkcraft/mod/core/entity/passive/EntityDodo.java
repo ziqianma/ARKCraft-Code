@@ -1,6 +1,7 @@
 package com.arkcraft.mod.core.entity.passive;
 
 import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIFollowOwner;
@@ -155,8 +156,20 @@ public class EntityDodo extends EntityTameable implements IInvBasic {
 		}
 		if (this.isChested()) {
 			this.dropItem(GlobalAdditions.dodo_bag, 1);
+			this.dropItemsInChest(this, this.invDodo);
 		}
 	}
+	
+    private void dropItemsInChest(Entity entity, IInventory inventory) {
+        if (inventory != null && !this.worldObj.isRemote) {
+            for (int i = 0; i < inventory.getSizeInventory(); ++i) {
+                ItemStack itemstack = inventory.getStackInSlot(i);
+                if (itemstack != null) {
+                    this.entityDropItem(itemstack, 0.0F);
+                }
+            }
+        }
+    }
 
 	@Override
     public void setTamed(boolean tamed) {
@@ -238,31 +251,11 @@ public class EntityDodo extends EntityTameable implements IInvBasic {
 		super.writeEntityToNBT(nbt);
 		nbt.setInteger("EggLayTime", this.timeUntilNextEgg);
 		nbt.setBoolean("IsChested", isChested);
-		/*
-		NBTTagList dataForAllSlots = new NBTTagList();
-//		for (int i = 0; i < this.dodoItemStacks.length; ++i) {
-//			if (this.dodoItemStacks[i] != null)	{
-//				NBTTagCompound dataForThisSlot = new NBTTagCompound();
-//				dataForThisSlot.setByte("Slot", (byte) i);
-//				this.dodoItemStacks[i].writeToNBT(dataForThisSlot);
-//				dataForAllSlots.appendTag(dataForThisSlot);
-//			}
-		for (int i = 0; i < this.invDodo.getSizeInventory(); ++i) {
-			if (this.invDodo.getStackInSlot(i) != null)	{
-				NBTTagCompound dataForThisSlot = new NBTTagCompound();
-				dataForThisSlot.setByte("Slot", (byte) i);
-				this.invDodo.getStackInSlot(i).writeToNBT(dataForThisSlot);
-				dataForAllSlots.appendTag(dataForThisSlot);
-			}
-		}
-		// the array of hashmaps is then inserted into the parent hashmap for the container
-		nbt.setTag("Items", dataForAllSlots);
-		*/
 		/***
 		 * So, some quick notes (Vastatio):
 		 * Basically, I've seen that in EntityHorse the for loop starts with 2 right?
 		 * Its because of the two checks of the getStackInSlot(1) and getStackInSlot(2) for armor/saddle.
-		 * Because apparently, minecraft needs to register those as two seperate nbt slots.
+		 * Because apparently, minecraft needs to register those as two separate nbt slots.
 		 * So, here, i check if the EntityDodo isChested() before.
 		 * I can get the items that are in each slot of the chest by using this.invDodo.getStackInSlot(i)
 		 * if the slots in invDodo are not empty, then write that slot to nbt using a byte.
@@ -271,6 +264,11 @@ public class EntityDodo extends EntityTameable implements IInvBasic {
 		 * This is how I think this whole process works (this is from EntityHorse)
 		 */
 		
+		/** (Bill): This is good, the horse needs a way to remove the saddle without killing it.
+		 *  For the Dodo, we will just kill it when we want the saddle back, so we don't need those other two slots.
+		 *  Also the Dodo will not have armor that goes in one of those slots. We do need those special slots for
+		 *  other dinos though.
+		 */
 		if(this.isChested()) {
 			NBTTagList nbtTags = new NBTTagList();
 			for(int i = 0; i < this.invDodo.getSizeInventory(); i++) {
@@ -298,13 +296,10 @@ public class EntityDodo extends EntityTameable implements IInvBasic {
 		final byte NBT_TYPE_COMPOUND = 10;  
 		NBTTagList dataForAllSlots = nbt.getTagList("Items", NBT_TYPE_COMPOUND);
 
-//		Arrays.fill(dodoItemStacks, null);   
 		for (int i = 0; i < dataForAllSlots.tagCount(); ++i) {
 			NBTTagCompound dataForOneSlot = dataForAllSlots.getCompoundTagAt(i);
 			int slotIndex = dataForOneSlot.getByte("Slot") & 255;
 
-//			if (slotIndex >= 0 && slotIndex < this.dodoItemStacks.length) {
-//				this.dodoItemStacks[slotIndex] = ItemStack.loadItemStackFromNBT(dataForOneSlot);
 			if (slotIndex >= 0 && slotIndex < this.invDodo.getSizeInventory()) {
 				this.invDodo.setInventorySlotContents(slotIndex, ItemStack.loadItemStackFromNBT(dataForOneSlot));
 			}
@@ -317,13 +312,13 @@ public class EntityDodo extends EntityTameable implements IInvBasic {
 	@Override
     protected boolean canDespawn() {
         return !this.isTamed() && this.ticksExisted > 2400;
-//        return false;
     }
 	
 	// From IInvBasic 
 	@Override
 	public void onInventoryChanged(InventoryBasic invBasic) {
-
+		// Normally used to add and remove the armor and saddle or pack, but not
+		// needed for the Dodo, as we don't have the armor and saddle slots
 	}
 	
     @Override
