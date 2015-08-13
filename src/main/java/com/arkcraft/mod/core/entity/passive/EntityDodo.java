@@ -39,13 +39,16 @@ import com.arkcraft.mod.lib.LogHelper;
 //public class EntityDodo extends EntityChicken implements IInvBasic {
 public class EntityDodo extends EntityTameable implements IInvBasic {
 	public IInventory invDodo;
-    /** The time until the next egg is spawned. */
-    public int timeUntilNextEgg;
+	private boolean isChested = false;
+
+	// Stuff from chicken:
     public float field_70886_e;
     public float destPos;
     public float field_70884_g;
     public float field_70888_h;
     public float field_70889_i = 1.0F;
+    /** The time until the next egg is spawned. */
+    public int timeUntilNextEgg;
 
 	private int DODO_EYE_WATCHER = 21;
 	public boolean isEyesOpen() {
@@ -58,10 +61,12 @@ public class EntityDodo extends EntityTameable implements IInvBasic {
 
 	private int DODO_CHEST_WATCHER = 22;
 	public boolean isChested() {
-		return (this.dataWatcher.getWatchableObjectByte(DODO_CHEST_WATCHER) & 1) != 0;
+		isChested = (this.dataWatcher.getWatchableObjectByte(DODO_CHEST_WATCHER) & 1) != 0;
+		return isChested;
 	}
 	public void setChested(boolean chested) {
 		if (!this.isChild() && this.isTamed()) {
+			isChested = chested;
 			byte b0 = (byte) (chested ? 1 : 0);
 			this.dataWatcher.updateObject(DODO_CHEST_WATCHER, Byte.valueOf(b0));
 		}
@@ -88,6 +93,8 @@ public class EntityDodo extends EntityTameable implements IInvBasic {
 		this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
 		// Replace Idle task with one that blinks eyes
 		this.tasks.addTask(7, new EntityDodoAILookIdle(this));
+		
+		this.riddenByEntity = null;
 	}
 
 	@Override
@@ -227,9 +234,10 @@ public class EntityDodo extends EntityTameable implements IInvBasic {
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound nbt) {
+	public void writeEntityToNBT(NBTTagCompound nbt) {
 		super.writeEntityToNBT(nbt);
 		nbt.setInteger("EggLayTime", this.timeUntilNextEgg);
+		nbt.setBoolean("IsChested", isChested);
 		/*
 		NBTTagList dataForAllSlots = new NBTTagList();
 //		for (int i = 0; i < this.dodoItemStacks.length; ++i) {
@@ -283,6 +291,9 @@ public class EntityDodo extends EntityTameable implements IInvBasic {
 		super.readEntityFromNBT(nbt);
         if (nbt.hasKey("EggLayTime")) {
             this.timeUntilNextEgg = nbt.getInteger("EggLayTime");
+        }
+        if (nbt.hasKey("IsChested")) {
+        	this.setChested(nbt.getBoolean("IsChested"));
         }
 		final byte NBT_TYPE_COMPOUND = 10;  
 		NBTTagList dataForAllSlots = nbt.getTagList("Items", NBT_TYPE_COMPOUND);
