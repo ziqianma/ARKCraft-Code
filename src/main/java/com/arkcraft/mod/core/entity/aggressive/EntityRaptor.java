@@ -1,6 +1,4 @@
-package com.arkcraft.mod.core.entity;
-
-import java.util.Random;
+package com.arkcraft.mod.core.entity.aggressive;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -32,7 +30,8 @@ import net.minecraft.world.World;
 
 import com.arkcraft.mod.core.GlobalAdditions;
 import com.arkcraft.mod.core.Main;
-import com.arkcraft.mod.lib.LogHelper;
+import com.arkcraft.mod.core.entity.DinoTameable;
+import com.arkcraft.mod.core.lib.LogHelper;
 import com.google.common.base.Predicate;
 
 /***
@@ -42,83 +41,19 @@ import com.google.common.base.Predicate;
  */
 public class EntityRaptor extends DinoTameable {
 	private static final String RAPTOR_TYPE_PROP = "ark_raptor_type";
-	public enum RaptorType {
-	    ALBINO(0),
-	    BREEN_WHITE(1),
-	    CYAN_LGREEN(2),
-	    RAINBOW(3),
-	    GREEN_GREY(4),
-	    GREEN_TAN(5),
-	    GREEN_WHITE(6),
-	    GREY_GREY(7),
-	    LBROWN_TAN(8),
-	    RED_TAN(9),
-	    TAN_WHITE(10);
-		private int type;
-		public static final int numRaptors = 11;
-	    
-	    RaptorType(int id) {
-	        this.type = id;
-	    }
-
-		public int getRaptorId() {
-			return type;
-		}
-		
-		public void setRandomRaptorType() {
-			type = new Random().nextInt(RaptorType.numRaptors);
-		}
-
-		public void setRaptorTypeId(int id) {
-	        this.type = id;
-		}
-		
-		public String toString() {
-			switch (type) {
-			case 1:
-				return "Breen White";
-			case 2:
-				return "Cyan Light Green";
-			case 3:
-				return "Rainbow";
-			case 4:
-				return "Green Grey";
-			case 5:
-				return "Green Tan";
-			case 6:
-				return "Green White";
-			case 7:
-				return "Grey Grey";
-			case 8:
-				return "Light Brown Tan";
-			case 9:
-				return "Red Tan";
-			case 10:
-				return "Tan White";
-			case 0:
-			default:
-				return "Albino";
-			}
-		}
-	}
-//	public RaptorType type = RaptorType.ALBINO; // Default to this, but set it later
-	public RaptorType type;
-//	protected EntityAIBase attackPlayerTarget;
+	public int raptorType;
 
 	@SuppressWarnings("rawtypes")
 	public EntityRaptor(World world) {
 		super(world);
         this.setSize(0.8F, 1.5F);
 
-        this.clearAITasks();
-//        this.tasks.addTask(3, new EntityAILeapAtTarget(this, 0.4F));
-
         ((PathNavigateGround)this.getNavigator()).func_179690_a(true);
         this.tasks.addTask(0, new EntityAISwimming(this));
 //        this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.0D, false));
         this.tasks.addTask(2, new EntityAIAttackOnCollide(this, 1.0D, false));
         this.tasks.addTask(5, new EntityAIMoveTowardsRestriction(this, 1.0D)); // For going through doors
-        this.tasks.addTask(5, new EntityAIFollowOwner(this, 1.0D, 10.0F, 2.0F)); // like wolf
+        this.tasks.addTask(5, new EntityAIFollowOwner(this, 1.5D, 10.0F, 2.0F)); // like wolf, but faster (wolf is 1.0D speed)
         this.tasks.addTask(7, new EntityAIWander(this, 1.0D));
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(8, new EntityAILookIdle(this));
@@ -139,9 +74,7 @@ public class EntityRaptor extends DinoTameable {
             }
         }));
         
-        type = RaptorType.ALBINO;
-        type.setRandomRaptorType(); // Set to a random type for now
-        
+        raptorType = RaptorType.getRandomRaptorType(); // Set to a random type for now        
         this.setTamed(false);
 	}
 
@@ -150,6 +83,8 @@ public class EntityRaptor extends DinoTameable {
     	this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).applyModifier(new AttributeModifier("Random spawn bonus", this.rand.nextDouble() * 0.05000000074505806D, 0));
     	this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(30.0D);
         this.getAttributeMap().registerAttribute(SharedMonsterAttributes.attackDamage);
+    	this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.379890125D);
+        // This code below must be duplicated in setTamed() for the change to take place immediately after taming 
     	if (this.isTamed()) {
     		// Double when tamed
     		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(16.0D); // Double the health for now
@@ -160,9 +95,23 @@ public class EntityRaptor extends DinoTameable {
     		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(8.0D); //tested this at 5.0 (too low) setting to 8.
         	this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(4.0D); //2.5 hearts without armor
     	}
-    	this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.379890125D);
     }
     
+	@Override
+	public void setTamed(boolean tamed) {
+		super.setTamed(tamed);
+        if (tamed) {
+    		// Double when tamed
+    		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(16.0D); // Double the health for now
+        	this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(8.0D); //5 hearts without armor
+        }
+        else {
+    		// weaker when not tamed
+    		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(8.0D); //tested this at 5.0 (too low) setting to 8.
+        	this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(4.0D); //2.5 hearts without armor
+        }
+	}
+        
 	/**
 	 * Drop 0-2 items of this living's type
 	 */
@@ -190,7 +139,7 @@ public class EntityRaptor extends DinoTameable {
 	public void writeEntityToNBT(NBTTagCompound nbt) {
 		super.writeEntityToNBT(nbt);
 		// Raptor properties
-		nbt.setInteger(RAPTOR_TYPE_PROP, this.type.getRaptorId());
+		nbt.setInteger(RAPTOR_TYPE_PROP, raptorType);
 //		LogHelper.info("EnityRaptor write: Raptor is a " + this.type.toString() + " at: " + this.posX + ", " + this.posY + ", " + this.posZ);
 	}
 	
@@ -199,7 +148,7 @@ public class EntityRaptor extends DinoTameable {
 		super.readEntityFromNBT(nbt);
 		// Raptor properties
 		if (nbt.hasKey(RAPTOR_TYPE_PROP)) {
-			type.setRaptorTypeId(nbt.getInteger(RAPTOR_TYPE_PROP));
+			raptorType = nbt.getInteger(RAPTOR_TYPE_PROP);
 //			LogHelper.info("EnityRaptor read: Raptor is a " + this.type.toString() + " at: " + this.posX + ", " + this.posY + ", " + this.posZ);
 		}
 		else
@@ -213,9 +162,13 @@ public class EntityRaptor extends DinoTameable {
 
     @Override
     protected String getLivingSound() {
-    	// TODO: Add angry sound if not tamed
-    	int idle = this.rand.nextInt(3) + 1;
-		return Main.MODID + ":" + "Raptor_Idle_" + idle;
+    	if (this.isAngry()) {
+	    	int idle = this.rand.nextInt(3) + 1;
+			return Main.MODID + ":" + "Raptor_Idle_" + idle;
+    	} else {
+        	int angry = this.rand.nextInt(3) + 1;
+    		return Main.MODID + ":" + "Raptor_Angry_" + angry;    		
+    	}
     }
     
     @Override

@@ -30,7 +30,7 @@ import com.arkcraft.mod.core.GlobalAdditions;
 import com.arkcraft.mod.core.Main;
 import com.arkcraft.mod.core.entity.ai.EntityDodoAILookIdle;
 import com.arkcraft.mod.core.items.ARKFood;
-import com.arkcraft.mod.lib.LogHelper;
+import com.arkcraft.mod.core.lib.LogHelper;
 
 /***
  * 

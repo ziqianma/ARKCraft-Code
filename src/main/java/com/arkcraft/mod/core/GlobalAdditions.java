@@ -21,7 +21,7 @@ import com.arkcraft.mod.core.blocks.ARKSmithy;
 import com.arkcraft.mod.core.creativetabs.ARKTabs;
 import com.arkcraft.mod.core.entity.EntityCobble;
 import com.arkcraft.mod.core.entity.EntityExplosive;
-import com.arkcraft.mod.core.entity.EntityRaptor;
+import com.arkcraft.mod.core.entity.aggressive.EntityRaptor;
 import com.arkcraft.mod.core.entity.passive.EntityDodo;
 import com.arkcraft.mod.core.gen.ore.WrappedOreGenerator;
 import com.arkcraft.mod.core.gen.ore.WrappedOreGenerator.Instruction;

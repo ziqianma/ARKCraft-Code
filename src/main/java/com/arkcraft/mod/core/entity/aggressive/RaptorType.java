@@ -1,4 +1,4 @@
-package com.arkcraft.mod.core.entity;
+package com.arkcraft.mod.core.entity.aggressive;
 
 import java.util.Random;
 
@@ -26,14 +26,15 @@ public enum RaptorType {
 		return type;
 	}
 	
-	public void setRandomRaptorType() {
-		type = new Random().nextInt(RaptorType.numRaptors);
+	public static int getRandomRaptorType() {
+		int type = new Random().nextInt(RaptorType.numRaptors);
+		return type;
 	}
 
-	public void setRaptorTypeId(int id) {
-        this.type = id;
-	}
-	
+//	public void setRaptorTypeId(int id) {
+//        this.type = id;
+//	}
+//	
 	public String toString() {
 		switch (type) {
 		case 1:

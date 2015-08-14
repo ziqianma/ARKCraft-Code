@@ -3,6 +3,7 @@ package com.arkcraft.mod.core.entity;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,6 +19,7 @@ import net.minecraft.world.World;
 
 import com.arkcraft.mod.core.GlobalAdditions;
 import com.arkcraft.mod.core.Main;
+import com.arkcraft.mod.core.lib.LogHelper;
 
 /***
  * 
@@ -207,7 +209,10 @@ public abstract class DinoTameable extends EntityTameable {
      */
     @Override
     public boolean attackEntityAsMob(Entity entity) {
-        return super.attackEntityAsMob(entity);    	
+        super.attackEntityAsMob(entity);
+        double attackDamage = this.getEntityAttribute(SharedMonsterAttributes.attackDamage).getBaseValue();
+        LogHelper.info("DinoTamable: Attacking with " + attackDamage + " attackDamage.");
+        return entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float)attackDamage);
     }
 	
 	/**
@@ -225,12 +230,7 @@ public abstract class DinoTameable extends EntityTameable {
     public boolean interact(EntityPlayer player) {
         ItemStack itemstack = player.inventory.getCurrentItem();
 
-		if (isSaddled()) {
-			player.openGui(Main.instance, GlobalAdditions.guiIDInvDodo, worldObj, player
-					.getPosition().getX(), player.getPosition().getY(), player.getPosition().getZ());
-			return true;
-		}
-		else if (isTamed()) {
+		if (isTamed()) {
 			player.addChatMessage(new ChatComponentText("DinoTameable: This dino is tamed."));
             if (itemstack != null) {
             	if (player.isSneaking()) {
@@ -258,9 +258,16 @@ public abstract class DinoTameable extends EntityTameable {
                     if (itemstack.stackSize <= 0) {
                         player.inventory.setInventorySlotContents(player.inventory.currentItem, (ItemStack)null);
                     }
+					player.addChatMessage(new ChatComponentText("This dino's health is: " + this.getHealth() + " Max is: " 
+							+ this.getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue()));					
                     return true;
 	            }				
 			}
+    		if (isSaddled()) {
+    			player.openGui(Main.instance, GlobalAdditions.guiIDInvDodo, worldObj, player
+    					.getPosition().getX(), player.getPosition().getY(), player.getPosition().getZ());
+    			return true;
+    		}
 		}
         // Tame the dino with meat
         else if (itemstack != null && itemstack.getItem() == GlobalAdditions.porkchop_raw) {

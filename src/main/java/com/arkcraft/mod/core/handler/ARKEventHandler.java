@@ -3,8 +3,8 @@ package com.arkcraft.mod.core.handler;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-import com.arkcraft.mod.core.entity.EntityRaptor;
-import com.arkcraft.mod.lib.LogHelper;
+import com.arkcraft.mod.core.entity.aggressive.EntityRaptor;
+import com.arkcraft.mod.core.lib.LogHelper;
 
 public class ARKEventHandler {
 	

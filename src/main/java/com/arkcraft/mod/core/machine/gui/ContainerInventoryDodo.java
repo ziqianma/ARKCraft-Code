@@ -37,21 +37,20 @@ public class ContainerInventoryDodo extends Container {
 			for(int col = 0; col < 3; col++) {
 				for(int row = 0; row < 3; row++) {
 					int slotIndex = col + row * 3;
-					addSlotToContainer(new Slot(invDodo, slotIndex, 98 + col * 18, 18 + row * 18));
+//					addSlotToContainer(new Slot(invDodo, slotIndex, 98 + col * 18, 18 + row * 18));
+					addSlotToContainer(new Slot(invDodo, slotIndex, 62 + col * 18, 17 + row * 18));
 				}
 			}
 		}
 	}
 	
 	@Override
-    public boolean canInteractWith(EntityPlayer playerIn)
-    {
+    public boolean canInteractWith(EntityPlayer playerIn) {
         return this.invDodo.isUseableByPlayer(playerIn) && this.dodo.isEntityAlive() && this.dodo.getDistanceToEntity(playerIn) < 8.0F;
     }
 
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer player, int sourceSlotIndex)
-	{
+	public ItemStack transferStackInSlot(EntityPlayer player, int sourceSlotIndex) {
 		Slot sourceSlot = (Slot)inventorySlots.get(sourceSlotIndex);
 		if (sourceSlot == null || !sourceSlot.getHasStack()) return null;
 		ItemStack sourceStack = sourceSlot.getStack();
@@ -59,11 +58,15 @@ public class ContainerInventoryDodo extends Container {
 
 		// Check if the slot clicked is one of the vanilla container slots
 		if(sourceSlotIndex >= 0 && sourceSlotIndex < 9) {
-			if(!mergeItemStack(sourceStack, 36, 45, false));
+//			if(!mergeItemStack(sourceStack, 36, 45, false));
+			if(!mergeItemStack(sourceStack, invDodo.getSizeInventory(), 36 + invDodo.getSizeInventory(), true)) {
+				return null;
+			}
 		}
 		else if (sourceSlotIndex >= 9 && sourceSlotIndex < 36) {
 			// This is a vanilla container slot so merge the stack into the tile inventory
-			if (!mergeItemStack(sourceStack, 36, 45, false)){
+//			if (!mergeItemStack(sourceStack, 36, 45, false)){
+			if (!mergeItemStack(sourceStack, 0, invDodo.getSizeInventory(), false)){
 				return null;
 			}
 		} else if (sourceSlotIndex >= 36 && sourceSlotIndex < 45) {
@@ -82,6 +85,10 @@ public class ContainerInventoryDodo extends Container {
 		} else {
 			sourceSlot.onSlotChanged();
 		}
+		
+        if (sourceStack.stackSize == copyOfSourceStack.stackSize) {
+            return null;
+        }
 
 		sourceSlot.onPickupFromSlot(player, sourceStack);
 		return copyOfSourceStack;

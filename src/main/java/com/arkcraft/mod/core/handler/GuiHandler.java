@@ -14,11 +14,11 @@ import net.minecraftforge.fml.common.network.IGuiHandler;
 
 import com.arkcraft.mod.core.GlobalAdditions;
 import com.arkcraft.mod.core.entity.passive.EntityDodo;
+import com.arkcraft.mod.core.lib.LogHelper;
 import com.arkcraft.mod.core.machine.gui.ContainerInventoryDodo;
 import com.arkcraft.mod.core.machine.gui.ContainerSmithy;
 import com.arkcraft.mod.core.machine.gui.GuiInventoryDodo;
 import com.arkcraft.mod.core.machine.gui.GuiSmithy;
-import com.arkcraft.mod.lib.LogHelper;
 
 public class GuiHandler implements IGuiHandler {
 

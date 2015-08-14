@@ -1,4 +1,4 @@
-package com.arkcraft.mod.lib;
+package com.arkcraft.mod.core.lib;
 
 import org.apache.logging.log4j.Level;
 

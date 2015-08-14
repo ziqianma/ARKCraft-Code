@@ -14,7 +14,7 @@ import com.arkcraft.mod.core.GlobalAdditions;
 import com.arkcraft.mod.core.Main;
 import com.arkcraft.mod.core.entity.EntityCobble;
 import com.arkcraft.mod.core.entity.EntityExplosive;
-import com.arkcraft.mod.core.entity.EntityRaptor;
+import com.arkcraft.mod.core.entity.aggressive.EntityRaptor;
 import com.arkcraft.mod.core.entity.model.ModelDodo;
 import com.arkcraft.mod.core.entity.model.ModelRaptor;
 import com.arkcraft.mod.core.entity.passive.EntityDodo;

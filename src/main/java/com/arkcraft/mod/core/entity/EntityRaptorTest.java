@@ -24,7 +24,7 @@ import com.arkcraft.mod.core.Main;
 import com.arkcraft.mod.core.entity.ai.EntityDinoAIOwnerHurtByTarget;
 import com.arkcraft.mod.core.entity.ai.EntityDinoAIOwnerHurtTarget;
 import com.arkcraft.mod.core.entity.ai.EntityDinoAITargetNonTamed;
-import com.arkcraft.mod.lib.LogHelper;
+import com.arkcraft.mod.core.lib.LogHelper;
 
 /***
  * 

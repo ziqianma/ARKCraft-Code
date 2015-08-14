@@ -8,8 +8,8 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.ResourceLocation;
 
 import com.arkcraft.mod.core.Main;
-import com.arkcraft.mod.core.entity.EntityRaptor;
-import com.arkcraft.mod.core.entity.RaptorType;
+import com.arkcraft.mod.core.entity.aggressive.EntityRaptor;
+import com.arkcraft.mod.core.entity.aggressive.RaptorType;
 import com.arkcraft.mod.core.entity.model.ModelRaptor;
 
 /***
@@ -52,6 +52,6 @@ public class RenderRaptor extends RenderLiving {
 
 	@Override
 	protected ResourceLocation getEntityTexture(Entity e) {
-		return texture[((EntityRaptor)e).type.getRaptorId()];
+		return texture[((EntityRaptor)e).raptorType];
 	}
 }
