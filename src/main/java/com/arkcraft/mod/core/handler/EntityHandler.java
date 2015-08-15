@@ -22,13 +22,35 @@ public class EntityHandler {
 		int secondColor = rand.nextInt() * 16777215;
 		
 		EntityRegistry.registerGlobalEntityID(eClass, name, entityID);
+<<<<<<< .merge_file_Y85KR6
 		EntityRegistry.addSpawn(eClass, 50, 2, 4, EnumCreatureType.CREATURE, BiomeGenBase.beach, BiomeGenBase.desert, BiomeGenBase.forest, BiomeGenBase.birchForest, BiomeGenBase.extremeHills);
+=======
+		EntityRegistry.addSpawn(eClass, 25, 2, 4, EnumCreatureType.CREATURE, BiomeGenBase.beach, BiomeGenBase.desert, BiomeGenBase.forest, BiomeGenBase.birchForest, BiomeGenBase.extremeHills);
+>>>>>>> .merge_file_N4aVuu
 		EntityRegistry.registerModEntity(eClass, name, entityID, Main.instance(), 64, 1, true);
 		EntityList.entityEggs.put(Integer.valueOf(entityID), new EntityList.EntityEggInfo(entityID, mainColor, secondColor));
 	}
 	
+<<<<<<< .merge_file_Y85KR6
 	public static void registerModEntity(Class<? extends Entity> eClass, String name, int entityID, Object mainClass, int trackRange, int updateFreq, boolean sVU) {
 		EntityRegistry.registerModEntity(eClass, name, entityID, mainClass, trackRange, updateFreq, sVU);
+=======
+	public static void registerPassive(Class eClass, String name) {
+		int entityID = EntityRegistry.findGlobalUniqueEntityId();
+		Random rand = new Random(name.hashCode());
+		int mainColor = rand.nextInt() * 16777215;
+		int secondColor = rand.nextInt() * 16777215;
+		
+		EntityRegistry.registerGlobalEntityID(eClass, name, entityID);
+		EntityRegistry.addSpawn(eClass, 15, 2, 4, EnumCreatureType.CREATURE, BiomeGenBase.plains, BiomeGenBase.savanna, 
+				BiomeGenBase.beach, BiomeGenBase.desert, BiomeGenBase.extremeHills, BiomeGenBase.coldBeach, BiomeGenBase.jungleEdge, 
+				BiomeGenBase.jungle, BiomeGenBase.plains, BiomeGenBase.swampland);
+		EntityRegistry.registerModEntity(eClass, name, entityID, Main.instance(), 64, 10, true);
+		EntityList.entityEggs.put(Integer.valueOf(entityID), new EntityList.EntityEggInfo(entityID, mainColor, secondColor));
+>>>>>>> .merge_file_N4aVuu
 	}
 	
+	public static void registerModEntity(Class<? extends Entity> eClass, String name, int entityID, Object mainClass, int trackRange, int updateFreq, boolean sVU) {
+		EntityRegistry.registerModEntity(eClass, name, entityID, mainClass, trackRange, updateFreq, sVU);
+	}	
 }

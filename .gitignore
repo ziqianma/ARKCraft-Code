@@ -1,0 +1,16 @@
+.settings/org.eclipse.jdt.core.prefs
+/bin/
+.project
+config/
+options.txt
+saves/
+.classpath
+logs/
+.settings/
+mods/
+crash-reports/
+screenshots/
+.gradle/2.0/taskArtifacts/cache.properties.lock
+.gradle/2.0/taskArtifacts/fileHashes.bin
+.gradle/2.0/taskArtifacts/fileSnapshots.bin
+.gradle/2.0/taskArtifacts/taskArtifacts.bin

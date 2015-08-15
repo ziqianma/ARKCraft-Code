@@ -14,8 +14,15 @@ import com.arkcraft.mod.core.GlobalAdditions;
 import com.arkcraft.mod.core.Main;
 import com.arkcraft.mod.core.entity.EntityCobble;
 import com.arkcraft.mod.core.entity.EntityExplosive;
+<<<<<<< .merge_file_S6MKgd
 import com.arkcraft.mod.core.entity.EntityRaptor;
+=======
+import com.arkcraft.mod.core.entity.aggressive.EntityRaptor;
+import com.arkcraft.mod.core.entity.model.ModelDodo;
+>>>>>>> .merge_file_4J2hRk
 import com.arkcraft.mod.core.entity.model.ModelRaptor;
+import com.arkcraft.mod.core.entity.passive.EntityDodo;
+import com.arkcraft.mod.core.entity.render.RenderDodo;
 import com.arkcraft.mod.core.entity.render.RenderRaptor;
 
 public class ClientProxy extends CommonProxy {
@@ -28,6 +35,7 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityExplosive.class, new RenderSnowball(Minecraft.getMinecraft().getRenderManager(), GlobalAdditions.explosive_ball, Minecraft.getMinecraft().getRenderItem()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityRaptor.class, new RenderRaptor(new ModelRaptor(), 0.5F));
 		ModelBakery.addVariantName(GlobalAdditions.slingshot, "arkcraft:slingshot", "arkcraft:slingshot_pulled");
+		RenderingRegistry.registerEntityRenderingHandler(EntityDodo.class, new RenderDodo(new ModelDodo(), 0.3F));
 		initDone = true;
 	}
 	

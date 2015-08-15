@@ -1,7 +1,11 @@
 package com.arkcraft.mod.core;
 
+<<<<<<< .merge_file_sEhsCV
 import com.arkcraft.mod.core.proxy.CommonProxy;
 
+=======
+import net.minecraftforge.common.MinecraftForge;
+>>>>>>> .merge_file_KUlw2J
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -9,6 +13,9 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+
+import com.arkcraft.mod.core.handler.ARKEventHandler;
+import com.arkcraft.mod.core.proxy.CommonProxy;
 
 @Mod(modid=Main.MODID, version=Main.VERSION, name=Main.MODID)
 public class Main {
@@ -28,6 +35,7 @@ public class Main {
 	
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
+		MinecraftForge.EVENT_BUS.register(new ARKEventHandler());
 		proxy.init();
 		proxy.registerRenderers();
 	}

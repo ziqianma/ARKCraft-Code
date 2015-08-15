@@ -1,0 +1,155 @@
+{
+    "Raptor_Angry_1": {
+        "category": "hostile",
+        "sounds": [
+            {
+                "name": "Raptor_Angry_1",
+                "stream": false
+            }
+        ]
+    },
+    "Raptor_Angry_2": {
+        "category": "hostile",
+        "sounds": [
+            {
+                "name": "Raptor_Angry_2",
+                "stream": false
+            }
+        ]
+    },
+    "Raptor_Angry_3": {
+        "category": "hostile",
+        "sounds": [
+            {
+                "name": "Raptor_Angry_3",
+                "stream": false
+            }
+        ]
+    },
+    "Raptor_Death": {
+        "category": "hostile",
+        "sounds": [
+            {
+                "name": "Raptor_Death",
+                "stream": false
+            }
+        ]
+    },
+    "Raptor_Hurt_1": {
+        "category": "hostile",
+        "sounds": [
+            {
+                "name": "Raptor_Hurt_1",
+                "stream": false
+            }
+        ]
+    },
+    "Raptor_Hurt_2": {
+        "category": "hostile",
+        "sounds": [
+            {
+                "name": "Raptor_Hurt_2",
+                "stream": false
+            }
+        ]
+    },
+    "Raptor_Hurt_3": {
+        "category": "hostile",
+        "sounds": [
+            {
+                "name": "Raptor_Hurt_3",
+                "stream": false
+            }
+        ]
+    },
+    "Raptor_Idle_1": {
+        "category": "hostile",
+        "sounds": [
+            {
+                "name": "Raptor_Idle_1",
+                "stream": false
+            }
+        ]
+    },
+    "Raptor_Idle_2": {
+        "category": "hostile",
+        "sounds": [
+            {
+                "name": "Raptor_Idle_2",
+                "stream": false
+            }
+        ]
+    },
+    "Raptor_Idle_3": {
+        "category": "hostile",
+        "sounds": [
+            {
+                "name": "Raptor_Idle_3",
+                "stream": false
+            }
+        ]
+    },
+    "dodo_death": {
+        "category": "neutral",
+        "sounds": [
+            {
+                "name": "dodo_death",
+                "stream": false
+            }
+        ]
+    },
+    "dodo_hurt_1": {
+        "category": "neutral",
+        "sounds": [
+            {
+                "name": "dodo_hurt_1",
+                "stream": false
+            }
+        ]
+    },
+    "dodo_hurt_2": {
+        "category": "neutral",
+        "sounds": [
+            {
+                "name": "dodo_hurt_2",
+                "stream": false
+            }
+        ]
+    },
+    "dodo_hurt_3": {
+        "category": "neutral",
+        "sounds": [
+            {
+                "name": "dodo_hurt_3",
+                "stream": false
+            }
+        ]
+    },
+    "dodo_idle_1": {
+        "category": "neutral",
+        "sounds": [
+            {
+                "name": "dodo_idle_1",
+                "stream": false
+            }
+        ]
+    },
+    "dodo_idle_2": {
+        "category": "neutral",
+        "sounds": [
+            {
+                "name": "dodo_idle_2",
+                "stream": false
+            }
+        ]
+    },
+    "dodo_idle_3": {
+        "category": "neutral",
+        "sounds": [
+            {
+                "name": "dodo_idle_3",
+                "stream": false
+            }
+        ]
+    }
+}

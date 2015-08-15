@@ -430,13 +430,29 @@ public class ModelRaptor extends ModelBase {
 		super.render(entity, f, f1, f2, f3, f4, f5);
 		setRotationAngles(entity, f, f1, f2, f3, f4, f5);
 		
-		Head.render(f5);
-		Body.render(f5);
-		LeftUpperLeg.render(f5);
-		RightUpperLeg.render(f5);
-		LeftUpperArm.render(f5);
-		RightUpperArm.render(f5);		
-		Tail1.render(f5);
+        if (this.isChild) {
+        	float scaling = 2.0F;
+            GlStateManager.pushMatrix();
+            GlStateManager.scale(1.0F / scaling, 1.0F / scaling, 1.0F / scaling);
+            GlStateManager.translate(0.0F, 24.0F * f5, 0.0F);
+			Head.render(f5);
+			Body.render(f5);
+			LeftUpperLeg.render(f5);
+			RightUpperLeg.render(f5);
+			LeftUpperArm.render(f5);
+			RightUpperArm.render(f5);		
+			Tail1.render(f5);
+	        GlStateManager.popMatrix();
+	    } else { 
+	    	// Adult
+			Head.render(f5);
+			Body.render(f5);
+			LeftUpperLeg.render(f5);
+			RightUpperLeg.render(f5);
+			LeftUpperArm.render(f5);
+			RightUpperArm.render(f5);		
+			Tail1.render(f5);
+	    }
 	}
 
 	private void setRotation(ModelRenderer model, float x, float y, float z) {

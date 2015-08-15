@@ -1,6 +1,7 @@
 [
 {
   "modid": "arkcraft",
+<<<<<<< .merge_file_42syQF
   "name": "ARKCraft: Survival Evolved",
   "description": "A Minecraft mod based off ARK: Survival Evolved",
   "version": "${0.1 ALPHA}",
@@ -11,6 +12,18 @@
   "credits": "The Forge and FML guys, for making this mod possible, Our team: Nickilpickle, Danbrixton, CreativeOne, Gibbs, Vastatio, wildbill22, Spongebob Squarepants, ",
   "logoFile": "",
   "screenshots": [http://i58.tinypic.com/1e82dc.png],
+=======
+  "name": "ARKCraft",
+  "description": "ARKCraft: Survival of the fitess?",
+  "version": "1.0.0",
+  "mcversion": "1.8",
+  "url": "https://github.com/SolarCactus/ARKCraft-Code",
+  "updateUrl": "",
+  "authorList": ["Vastatio and wildbill22"],
+  "credits": "Nickilpicle and the rest of the team (too many to mentio)",
+  "logoFile": "",
+  "screenshots": [],
+>>>>>>> .merge_file_pErhDg
   "dependencies": []
 }
 ]

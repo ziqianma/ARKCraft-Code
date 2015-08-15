@@ -3,23 +3,6 @@ package com.arkcraft.mod.core;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.arkcraft.mod.core.blocks.ARKBlock;
-import com.arkcraft.mod.core.blocks.ARKBush;
-import com.arkcraft.mod.core.conatiner.blocks.ContainerBlockSmithy;
-import com.arkcraft.mod.core.creativetabs.ARKTabs;
-import com.arkcraft.mod.core.entity.EntityCobble;
-import com.arkcraft.mod.core.entity.EntityExplosive;
-import com.arkcraft.mod.core.entity.EntityRaptor;
-import com.arkcraft.mod.core.handler.EntityHandler;
-import com.arkcraft.mod.core.handler.GuiHandler;
-import com.arkcraft.mod.core.handler.RecipeHandler;
-import com.arkcraft.mod.core.items.ARKArmorItem;
-import com.arkcraft.mod.core.items.ARKFood;
-import com.arkcraft.mod.core.items.ARKItem;
-import com.arkcraft.mod.core.items.ARKSaddle;
-import com.arkcraft.mod.core.items.ARKSlingshot;
-import com.arkcraft.mod.core.items.ARKWeapon;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -32,6 +15,30 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 
+import com.arkcraft.mod.core.blocks.ARKBlock;
+import com.arkcraft.mod.core.blocks.ARKBush;
+<<<<<<< .merge_file_oEYgFx
+import com.arkcraft.mod.core.conatiner.blocks.ContainerBlockSmithy;
+=======
+import com.arkcraft.mod.core.blocks.ARKContainerBlock;
+>>>>>>> .merge_file_34qSNe
+import com.arkcraft.mod.core.creativetabs.ARKTabs;
+import com.arkcraft.mod.core.entity.EntityCobble;
+import com.arkcraft.mod.core.entity.EntityExplosive;
+import com.arkcraft.mod.core.entity.aggressive.EntityRaptor;
+import com.arkcraft.mod.core.entity.passive.EntityDodo;
+import com.arkcraft.mod.core.gen.ore.WrappedOreGenerator;
+import com.arkcraft.mod.core.gen.ore.WrappedOreGenerator.Instruction;
+import com.arkcraft.mod.core.handler.EntityHandler;
+import com.arkcraft.mod.core.handler.GuiHandler;
+import com.arkcraft.mod.core.handler.RecipeHandler;
+import com.arkcraft.mod.core.items.ARKArmorItem;
+import com.arkcraft.mod.core.items.ARKFood;
+import com.arkcraft.mod.core.items.ARKItem;
+import com.arkcraft.mod.core.items.ARKSaddle;
+import com.arkcraft.mod.core.items.ARKSlingshot;
+import com.arkcraft.mod.core.items.ARKWeapon;
+
 /**
  * @author Vastatio
  */
@@ -39,41 +46,79 @@ public class GlobalAdditions {
 
 	public static Map<String, Block> allBlocks = new HashMap<String, Block>();
 	public static Map<String, Item> allItems = new HashMap<String, Item>();
-	public static ARKFood tintoBerry, amarBerry, azulBerry, mejoBerry, narcoBerry;
+	
+	public static ARKFood tintoBerry, amarBerry, azulBerry, mejoBerry, narcoBerry, porkchop_raw, porkchop_cooked, primemeat_raw, primemeat_cooked;
 	public static ARKBush berryBush;
-	public static ARKBlock pestle_and_mortar;
-	public static ARKItem cobble_ball, fiber, chitin, narcotics, tranq_arrow, explosive_ball;
+	public static ARKItem cobble_ball, fiber, chitin, narcotics, tranq_arrow, explosive_ball, dodo_bag;
 	public static ARKSlingshot slingshot;
 	public static ARKSaddle saddle_small, saddle_medium, saddle_large;
 	public static ARKArmorItem chitinHelm, chitinChest, chitinLegs, chitinBoots;
 	public static ARKArmorItem clothHelm, clothChest, clothLegs, clothBoots;
 	public static ARKArmorItem boneHelm, boneChest, boneLegs, boneBoots;
 	public static ARKWeapon stoneSpear, ironPike;
+	
 	public static ArmorMaterial CLOTH = EnumHelper.addArmorMaterial("CLOTH_MAT", "CLOTH_MAT", 4, new int[] {1,2,1,1}, 15);
 	public static ArmorMaterial CHITIN = EnumHelper.addArmorMaterial("CHITIN_MAT", "CHITIN_MAT", 16, new int[] { 3,7,6,3 } , 10);
 	public static ArmorMaterial BONE = EnumHelper.addArmorMaterial("BONE", "BONE_MAT", 40, new int[] { 3, 8, 6, 3 }, 30);
+	
 	public static CreativeTabs tabARK = new ARKTabs(CreativeTabs.getNextID(), "tabARKCraft");
+<<<<<<< .merge_file_oEYgFx
 	public static ContainerBlockSmithy smithy;
 	public static final int guiIDSmithy = 1, guiIDMP = 2;
+=======
+	
+	public static ARKContainerBlock smithy, pestle;
+	
+	public enum GUI {
+		SMITHY(0), PESTLE_AND_MORTAR(1), INV_DODO(2);
+		int id;
+		GUI(int id) {
+			this.id = id;
+		}
+		
+		public int getID() { return id; }
+	}
+	
+	public static WrappedOreGenerator generator;
+>>>>>>> .merge_file_34qSNe
 	
 	public static void init() {
+		// Food
 		tintoBerry = addFood("tinto", 4, 0.3F, false, new PotionEffect(Potion.fireResistance.id, 60, 1));
 		amarBerry = addFood("amar", 4, 0.3F, false, new PotionEffect(Potion.absorption.id, 100, 1));
 		azulBerry = addFood("azul", 4, 0.3F, false, new PotionEffect(Potion.jump.id, 60, 1));
 		mejoBerry = addFood("mejo", 4, 0.3F, false, new PotionEffect(Potion.resistance.id, 100, 1));
 		narcoBerry = addFood("narco", 4, 0.3F, true, new PotionEffect(Potion.moveSpeed.id, 160, 1));
+		porkchop_raw = addFood("porkchop_raw", 3, 0.3F, false);
+		porkchop_cooked = addFood("porkchop_cooked", 6, 0.9F, false);
+		primemeat_raw = addFood("primemeat_raw", 3, 0.3F, false);
+		primemeat_cooked = addFood("primemeat_cooked", 8, 1.2F, false);
+		
+		// world generated
 		berryBush = addBush("berryBush", 0.4F);
-		fiber = addItem("fiber");
+				
+		// Weapons and tools
 		cobble_ball = addItemWithTooltip("cobble_ball", EnumChatFormatting.GOLD + "A Rocky Road to Victory");
 		explosive_ball = addItemWithTooltip("explosive_ball", EnumChatFormatting.RED + "A Rocky Road to Destruction");
-		chitin = addItem("chitin");
 		slingshot = addSlingshot("slingshot");
 		narcotics = addItemWithTooltip("narcotics", EnumChatFormatting.RED + "A Knockout of a Drink");
-		tranq_arrow = addItem("tranq_arrow");
 		saddle_small = addSaddle("saddle_small");
 		saddle_medium = addSaddle("saddle_medium");
 		saddle_large = addSaddle("saddle_large");
-		smithy = addSmithy("smithy", 0.4F);
+		
+		smithy = addContainer("smithy", 0.4F, Material.wood, GUI.SMITHY.getID(), false, false, 3);
+		pestle = addContainer("mortar_and_pestle", 0.4F, Material.rock, GUI.PESTLE_AND_MORTAR.getID(), false, false, 3);
+		
+		stoneSpear = addWeapon("stoneSpear", ToolMaterial.STONE);
+		ironPike = addWeapon("ironPike", ToolMaterial.IRON);
+		
+		// Regular Items
+		fiber = addItem("fiber");
+		chitin = addItem("chitin");
+		tranq_arrow = addItem("tranq_arrow");
+		dodo_bag = addItemWithTooltip("dodo_bag", "Backpack for the Dodo");
+
+		// Armor
 		chitinHelm = addArmorItem("chitin_helm", CHITIN, "chitinArmor", 0);
 		chitinChest = addArmorItem("chitin_chest", CHITIN, "chitinArmor", 1);
 		chitinLegs = addArmorItem("chitin_legs", CHITIN, "chitinArmor", 2);
@@ -83,14 +128,15 @@ public class GlobalAdditions {
 		clothLegs = addArmorItem("cloth_legs", CLOTH, "clothArmor", 2);
 		clothBoots = addArmorItem("cloth_boots", CLOTH, "clothArmor", 3);
 		boneHelm = addArmorItem("bone_helm", BONE, "boneArmor", 0);
-		stoneSpear = addWeapon("stoneSpear", ToolMaterial.STONE);
-		ironPike = addWeapon("ironPike", ToolMaterial.IRON);
-		pestle_and_mortar = addBlock(Material.rock, "mortar_and_pestle", 3.0F);
+		
+		// Other stuff
 		RecipeHandler.registerVanillaCraftingRecipes();
 		EntityHandler.registerModEntity(EntityExplosive.class, "Explosive Cobblestone Ball", 1, Main.instance, 64, 10, true);
 		EntityHandler.registerModEntity(EntityCobble.class, "Cobblestone Ball", 2, Main.instance, 64, 10, true);
 		NetworkRegistry.INSTANCE.registerGuiHandler(Main.instance, new GuiHandler());
 		EntityHandler.registerMonster(EntityRaptor.class, "raptor");
+		EntityHandler.registerPassive(EntityDodo.class, "dodo");
+		//generateOre(new Instruction(), new Instruction());
 	}
 	
 	protected static ARKBush addBush(String name, float hardness) {
@@ -111,10 +157,20 @@ public class GlobalAdditions {
 		return b;
 	}
 	
+<<<<<<< .merge_file_oEYgFx
 	protected static ContainerBlockSmithy addSmithy(String name, float hardness) {
 		ContainerBlockSmithy s = new ContainerBlockSmithy(name, hardness);
 		allBlocks.put(name, s);
 		return s;
+=======
+	protected static ARKContainerBlock addContainer(String name, float hardness, Material mat, int ID, boolean renderAsNormalBlock, boolean isOpaque, int renderType) {
+		ARKContainerBlock container = new ARKContainerBlock(name, hardness, mat, ID);
+		container.setRenderAsNormalBlock(renderAsNormalBlock);
+		container.setOpaque(isOpaque);
+		container.setRenderType(renderType);
+		allBlocks.put(name, container);
+		return container;
+>>>>>>> .merge_file_34qSNe
 	}
 	
 	protected static ARKItem addItem(String name) {
@@ -163,4 +219,12 @@ public class GlobalAdditions {
 	public static Map<String, Block> getAllBlocks() { return allBlocks; }
 	public static Map<String, Item> getAllItems() { return allItems; }
 
+	public static void generateOre(Instruction... instructions) {
+		{
+			for(int i = 0; i < instructions.length; i++) {
+				generator = new WrappedOreGenerator(0, instructions[i]);			
+			}
+		}
+	}
+	
 }

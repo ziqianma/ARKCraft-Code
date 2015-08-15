@@ -1,5 +1,9 @@
+# tiles
 tile.berryBush.name=Berry Bush
 tile.smithy.name=Smithy
+tile.mortar_and_pestle.name=Mortar and Pestle
+
+# items
 item.narco.name=Narco Berry
 item.amar.name=Amar Berry
 item.mejo.name=Mejo Berry
@@ -16,7 +20,11 @@ item.cloth_helm.name=Fiber Hat
 item.cloth_chest.name=Fiber Shirt
 item.cloth_legs.name=Fiber Pants
 item.cloth_boots.name=Fiber Shoes
+<<<<<<< .merge_file_BCVi5S
 item.tranq_arrow.name=Tranquilizer Arrow
+=======
+item.tranq_arrow.name=Tranquilizer Arrow
+>>>>>>> .merge_file_D4VVfY
 item.slingshot.name=Slingshot
 item.ironPike.name=Iron Pike
 item.stoneSpear.name=Stone Spear
@@ -24,6 +32,21 @@ item.saddle_small.name=Small Saddle
 item.saddle_medium.name=Medium Saddle
 item.saddle_large.name=Large Saddle
 item.cobble_ball.name=Cobblestone Ball
+item.explosive_ball.name=Explosive Cobblestone Ball
 item.mortar_and_pestle.name=Mortar and Pestle
+item.porkchop_cooked.name=Cooked Porkchop
+item.porkchop_raw.name=Raw Porkchop
+item.primemeat_cooked.name=Cooked Prime Meat
+item.primemeat_raw.name=Raw Prime Meat
+item.dodo_bag.name=Dodo Bag
+
+# miscelaneous
 itemGroup.tabARKCraft=ARKCraft: Survival Evolved
+<<<<<<< .merge_file_BCVi5S
 entity.raptor.name=Raptor
+=======
+
+# entities
+entity.raptor.name=Raptor
+entity.dodo.name=Dodo
+>>>>>>> .merge_file_D4VVfY
