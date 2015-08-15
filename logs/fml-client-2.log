@@ -1,60 +1,60 @@
-[10:25:55] [main/DEBUG] [FML/]: Injecting tracing printstreams for STDOUT/STDERR.
-[10:25:55] [main/INFO] [FML/]: Forge Mod Loader version 8.99.184.1493 for Minecraft 1.8 loading
-[10:25:55] [main/INFO] [FML/]: Java is Java HotSpot(TM) 64-Bit Server VM, version 1.8.0_25, running on Mac OS X:x86_64:10.10.4, installed at /Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk/Contents/Home/jre
-[10:25:55] [main/DEBUG] [FML/]: Java classpath at launch is /Users/Vastatio/Desktop/ARKCraft WIP/forge/bin:/Users/Vastatio/.gradle/caches/minecraft/net/minecraftforge/forge/1.8-11.14.3.1493/snapshot/20141130/forgeSrc-1.8-11.14.3.1493.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/net.minecraft/launchwrapper/1.12/111e7bea9c968cdb3d06ef4632bf7ff0824d0f36/launchwrapper-1.12.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-debug-all/5.0.3/f9e364ae2a66ce2a543012a4668856e84e5dab74/asm-debug-all-5.0.3.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/com.typesafe.akka/akka-actor_2.11/2.3.3/ed62e9fc709ca0f2ff1a3220daa8b70a2870078e/akka-actor_2.11-2.3.3.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/com.typesafe/config/1.2.1/f771f71fdae3df231bcd54d5ca2d57f0bf93f467/config-1.2.1.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.scala-lang/scala-actors-migration_2.11/1.1.0/dfa8bc42b181d5b9f1a5dd147f8ae308b893eb6f/scala-actors-migration_2.11-1.1.0.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.scala-lang/scala-compiler/2.11.1/56ea2e6c025e0821f28d73ca271218b8dd04926a/scala-compiler-2.11.1.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.scala-lang.plugins/scala-continuations-library_2.11/1.0.2/e517c53a7e9acd6b1668c5a35eccbaa3bab9aac/scala-continuations-library_2.11-1.0.2.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.scala-lang.plugins/scala-continuations-plugin_2.11.1/1.0.2/f361a3283452c57fa30c1ee69448995de23c60f7/scala-continuations-plugin_2.11.1-1.0.2.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.scala-lang/scala-library/2.11.1/e11da23da3eabab9f4777b9220e60d44c1aab6a/scala-library-2.11.1.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.scala-lang.modules/scala-parser-combinators_2.11/1.0.1/f05d7345bf5a58924f2837c6c1f4d73a938e1ff0/scala-parser-combinators_2.11-1.0.1.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.scala-lang/scala-reflect/2.11.1/6580347e61cc7f8e802941e7fde40fa83b8badeb/scala-reflect-2.11.1.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.scala-lang.modules/scala-swing_2.11/1.0.1/b1cdd92bd47b1e1837139c1c53020e86bb9112ae/scala-swing_2.11-1.0.1.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.scala-lang.modules/scala-xml_2.11/1.0.2/820fbca7e524b530fdadc594c39d49a21ea0337e/scala-xml_2.11-1.0.2.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/lzma/lzma/0.0.1/521616dc7487b42bef0e803bd2fa3faf668101d7/lzma-0.0.1.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/java3d/vecmath/1.5.2/79846ba34cbd89e2422d74d53752f993dcc2ccaf/vecmath-1.5.2.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/net.sf.trove4j/trove4j/3.0.3/42ccaf4761f0dfdfa805c9e340d99a755907e2dd/trove4j-3.0.3.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/com.ibm.icu/icu4j-core-mojang/51.2/63d216a9311cca6be337c1e458e587f99d382b84/icu4j-core-mojang-51.2.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/net.sf.jopt-simple/jopt-simple/4.6/306816fb57cf94f108a43c95731b08934dcae15c/jopt-simple-4.6.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/com.paulscode/codecjorbis/20101023/c73b5636faf089d9f00e8732a829577de25237ee/codecjorbis-20101023.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/com.paulscode/codecwav/20101023/12f031cfe88fef5c1dd36c563c0a3a69bd7261da/codecwav-20101023.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/com.paulscode/libraryjavasound/20101123/5c5e304366f75f9eaa2e8cca546a1fb6109348b3/libraryjavasound-20101123.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/com.paulscode/librarylwjglopenal/20100824/73e80d0794c39665aec3f62eee88ca91676674ef/librarylwjglopenal-20100824.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/com.paulscode/soundsystem/20120107/419c05fe9be71f792b2d76cfc9b67f1ed0fec7f6/soundsystem-20120107.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/io.netty/netty-all/4.0.15.Final/85cad5eb4fc8ae2ecc990dc7c411771a091ded5/netty-all-4.0.15.Final.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/17.0/9c6ef172e8de35fd8d4d8783e4821e57cdef7445/guava-17.0.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-lang3/3.3.2/90a3822c38ec8c996e84c16a3477ef632cbc87a3/commons-lang3-3.3.2.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/commons-io/commons-io/2.4/b1b6ea3b7e4aa4f492509a4952029cd8e48019ad/commons-io-2.4.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/commons-codec/commons-codec/1.9/9ce04e34240f674bc72680f8b843b1457383161a/commons-codec-1.9.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/net.java.jinput/jinput/2.0.5/39c7796b469a600f72380316f6b1f11db6c2c7c4/jinput-2.0.5.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/net.java.jutils/jutils/1.0.0/e12fe1fda814bd348c1579329c86943d2cd3c6a6/jutils-1.0.0.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.2.4/a60a5e993c98c864010053cb901b7eab25306568/gson-2.2.4.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/com.mojang/authlib/1.5.17/893a8c553c0cfc9b6fbdff023747e30152ab09ec/authlib-1.5.17.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/com.mojang/realms/1.6.1/5655f6fb44aece10e5b3ad7cfee3e6936031c068/realms-1.6.1.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-compress/1.8.1/a698750c16740fd5b3871425f4cb3bbaa87f529d/commons-compress-1.8.1.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpclient/4.3.3/18f4247ff4572a074444572cee34647c43e7c9c7/httpclient-4.3.3.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/commons-logging/commons-logging/1.1.3/f6f66e966c70a83ffbdb6f17a0919eaf7c8aca7f/commons-logging-1.1.3.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpcore/4.3.2/31fbbff1ddbf98f3aa7377c94d33b0447c646b6e/httpcore-4.3.2.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.apache.logging.log4j/log4j-api/2.0-beta9/1dd66e68cccd907880229f9e2de1314bd13ff785/log4j-api-2.0-beta9.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.apache.logging.log4j/log4j-core/2.0-beta9/678861ba1b2e1fccb594bb0ca03114bb05da9695/log4j-core-2.0-beta9.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.lwjgl.lwjgl/lwjgl/2.9.2-nightly-20140822/7707204c9ffa5d91662de95f0a224e2f721b22af/lwjgl-2.9.2-nightly-20140822.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.lwjgl.lwjgl/lwjgl_util/2.9.2-nightly-20140822/f0e612c840a7639c1f77f68d72a28dae2f0c8490/lwjgl_util-2.9.2-nightly-20140822.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/tv.twitch/twitch/6.5/320a2dfd18513a5f41b4e75729df684488cbd925/twitch-6.5.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.scala-lang/scala-actors/2.11.0/8ccfb6541de179bb1c4d45cf414acee069b7f78b/scala-actors-2.11.0.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/net.java.jinput/jinput-platform/2.0.5/7ff832a6eb9ab6a767f1ade2b548092d0fa64795/jinput-platform-2.0.5-natives-linux.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/net.java.jinput/jinput-platform/2.0.5/385ee093e01f587f30ee1c8a2ee7d408fd732e16/jinput-platform-2.0.5-natives-windows.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/net.java.jinput/jinput-platform/2.0.5/53f9c919f34d2ca9de8c51fc4e1e8282029a9232/jinput-platform-2.0.5-natives-osx.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/tv.twitch/twitch-platform/6.5/206c4ccaecdbcfd2a1631150c69a97bbc9c20c11/twitch-platform-6.5-natives-windows-32.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/tv.twitch/twitch-platform/6.5/9fdd0fd5aed0817063dcf95b69349a171f447ebd/twitch-platform-6.5-natives-windows-64.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/tv.twitch/twitch-platform/6.5/5f9d1ee26257b3a33f0ca06fed335ef462af659f/twitch-platform-6.5-natives-osx.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/tv.twitch/twitch-external-platform/4.5/18215140f010c05b9f86ef6f0f8871954d2ccebf/twitch-external-platform-4.5-natives-windows-32.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/tv.twitch/twitch-external-platform/4.5/c3cde57891b935d41b6680a9c5e1502eeab76d86/twitch-external-platform-4.5-natives-windows-64.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.lwjgl.lwjgl/lwjgl-platform/2.9.2-nightly-20140822/78b2a55ce4dc29c6b3ec4df8ca165eba05f9b341/lwjgl-platform-2.9.2-nightly-20140822-natives-windows.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.lwjgl.lwjgl/lwjgl-platform/2.9.2-nightly-20140822/d898a33b5d0a6ef3fed3a4ead506566dce6720a5/lwjgl-platform-2.9.2-nightly-20140822-natives-linux.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.lwjgl.lwjgl/lwjgl-platform/2.9.2-nightly-20140822/79f5ce2fea02e77fe47a3c745219167a542121d7/lwjgl-platform-2.9.2-nightly-20140822-natives-osx.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/2.0.1/516c03b21d50a644d538de0f0369c620989cd8f0/jsr305-2.0.1.jar:/Users/Vastatio/.gradle/caches/minecraft/net/minecraftforge/forge/1.8-11.14.3.1493/start
-[10:25:55] [main/DEBUG] [FML/]: Java library path at launch is /Users/Vastatio/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.:/Users/Vastatio/.gradle/caches/minecraft/net/minecraft/minecraft_natives/1.8
-[10:25:55] [main/INFO] [FML/]: Managed to load a deobfuscated Minecraft name- we are in a deobfuscated environment. Skipping runtime deobfuscation
-[10:25:55] [main/DEBUG] [FML/]: Instantiating coremod class FMLCorePlugin
-[10:25:55] [main/DEBUG] [FML/]: Added access transformer class net.minecraftforge.fml.common.asm.transformers.AccessTransformer to enqueued access transformers
-[10:25:55] [main/DEBUG] [FML/]: Enqueued coremod FMLCorePlugin
-[10:25:55] [main/DEBUG] [FML/]: Instantiating coremod class FMLForgePlugin
-[10:25:55] [main/DEBUG] [FML/]: Added access transformer class net.minecraftforge.transformers.ForgeAccessTransformer to enqueued access transformers
-[10:25:55] [main/DEBUG] [FML/]: Enqueued coremod FMLForgePlugin
-[10:25:55] [main/DEBUG] [FML/]: All fundamental core mods are successfully located
-[10:25:55] [main/DEBUG] [FML/]: Attempting to load commandline specified mods, relative to /Users/Vastatio/Desktop/ARKCraft WIP/forge/.
-[10:25:55] [main/DEBUG] [FML/]: Discovering coremods
-[10:25:55] [main/INFO] [LaunchWrapper/]: Calling tweak class net.minecraftforge.gradle.tweakers.CoremodTweaker
-[10:25:55] [main/INFO] [GradleStart/]: Injecting location in coremod net.minecraftforge.fml.relauncher.FMLCorePlugin
-[10:25:55] [main/INFO] [GradleStart/]: Injecting location in coremod net.minecraftforge.classloading.FMLForgePlugin
-[10:25:55] [main/INFO] [LaunchWrapper/]: Loading tweak class name net.minecraftforge.fml.common.launcher.FMLInjectionAndSortingTweaker
-[10:25:55] [main/INFO] [LaunchWrapper/]: Loading tweak class name net.minecraftforge.fml.common.launcher.FMLDeobfTweaker
-[10:25:55] [main/INFO] [LaunchWrapper/]: Loading tweak class name net.minecraftforge.gradle.tweakers.AccessTransformerTweaker
-[10:25:55] [main/INFO] [LaunchWrapper/]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLInjectionAndSortingTweaker
-[10:25:55] [main/INFO] [LaunchWrapper/]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLInjectionAndSortingTweaker
-[10:25:55] [main/INFO] [LaunchWrapper/]: Calling tweak class net.minecraftforge.fml.relauncher.CoreModManager$FMLPluginWrapper
-[10:25:55] [main/DEBUG] [FML/]: Injecting coremod FMLCorePlugin {net.minecraftforge.fml.relauncher.FMLCorePlugin} class transformers
-[10:25:55] [main/TRACE] [FML/]: Registering transformer net.minecraftforge.fml.common.asm.transformers.BlamingTransformer
-[10:25:55] [main/TRACE] [FML/]: Registering transformer net.minecraftforge.fml.common.asm.transformers.MarkerTransformer
-[10:25:55] [main/TRACE] [FML/]: Registering transformer net.minecraftforge.fml.common.asm.transformers.SideTransformer
-[10:25:55] [main/TRACE] [FML/]: Registering transformer net.minecraftforge.fml.common.asm.transformers.EventSubscriptionTransformer
-[10:25:55] [main/TRACE] [FML/]: Registering transformer net.minecraftforge.fml.common.asm.transformers.EventSubscriberTransformer
-[10:25:55] [main/DEBUG] [FML/]: Injection complete
-[10:25:55] [main/DEBUG] [FML/]: Running coremod plugin for FMLCorePlugin {net.minecraftforge.fml.relauncher.FMLCorePlugin}
-[10:25:55] [main/DEBUG] [FML/]: Running coremod plugin FMLCorePlugin
-[10:25:55] [main/ERROR] [FML/]: The binary patch set is missing. Either you are in a development environment, or things are not going to work!
-[10:25:57] [main/ERROR] [FML/]: FML appears to be missing any signature data. This is not a good thing
-[10:25:57] [main/DEBUG] [FML/]: Coremod plugin class FMLCorePlugin run successfully
-[10:25:57] [main/INFO] [LaunchWrapper/]: Calling tweak class net.minecraftforge.fml.relauncher.CoreModManager$FMLPluginWrapper
-[10:25:57] [main/DEBUG] [FML/]: Injecting coremod FMLForgePlugin {net.minecraftforge.classloading.FMLForgePlugin} class transformers
-[10:25:57] [main/TRACE] [FML/]: Registering transformer net.minecraftforge.classloading.FluidIdTransformer
-[10:25:57] [main/DEBUG] [FML/]: Injection complete
-[10:25:57] [main/DEBUG] [FML/]: Running coremod plugin for FMLForgePlugin {net.minecraftforge.classloading.FMLForgePlugin}
-[10:25:57] [main/DEBUG] [FML/]: Running coremod plugin FMLForgePlugin
-[10:25:57] [main/DEBUG] [FML/]: Coremod plugin class FMLForgePlugin run successfully
-[10:25:57] [main/INFO] [LaunchWrapper/]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLDeobfTweaker
-[10:25:57] [main/DEBUG] [FML/]: Loaded 60 rules from AccessTransformer config file fml_at.cfg
-[10:25:57] [main/DEBUG] [FML/]: Loaded 120 rules from AccessTransformer config file forge_at.cfg
-[10:25:57] [main/DEBUG] [FML/]: Validating minecraft
-[10:25:57] [main/DEBUG] [FML/]: Minecraft validated, launching...
-[10:25:57] [main/INFO] [LaunchWrapper/]: Calling tweak class net.minecraftforge.gradle.tweakers.AccessTransformerTweaker
-[10:25:57] [main/INFO] [LaunchWrapper/]: Loading tweak class name net.minecraftforge.fml.common.launcher.TerminalTweaker
-[10:25:57] [main/INFO] [LaunchWrapper/]: Calling tweak class net.minecraftforge.fml.common.launcher.TerminalTweaker
-[10:25:57] [main/INFO] [LaunchWrapper/]: Launching wrapped minecraft {net.minecraft.client.main.Main}
-[10:26:04] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - LanguageManager took 0.007s
-[10:26:05] [Client thread/INFO] [STDOUT/]: [net.minecraftforge.fml.client.SplashProgress:start:235]: ---- Minecraft Crash Report ----
-// Shall we play a game?
+[10:38:20] [main/DEBUG] [FML/]: Injecting tracing printstreams for STDOUT/STDERR.
+[10:38:20] [main/INFO] [FML/]: Forge Mod Loader version 8.99.184.1493 for Minecraft 1.8 loading
+[10:38:20] [main/INFO] [FML/]: Java is Java HotSpot(TM) 64-Bit Server VM, version 1.8.0_25, running on Mac OS X:x86_64:10.10.4, installed at /Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk/Contents/Home/jre
+[10:38:20] [main/DEBUG] [FML/]: Java classpath at launch is /Users/Vastatio/Desktop/ARKCraft WIP/forge/bin:/Users/Vastatio/.gradle/caches/minecraft/net/minecraftforge/forge/1.8-11.14.3.1493/snapshot/20141130/forgeSrc-1.8-11.14.3.1493.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/net.minecraft/launchwrapper/1.12/111e7bea9c968cdb3d06ef4632bf7ff0824d0f36/launchwrapper-1.12.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-debug-all/5.0.3/f9e364ae2a66ce2a543012a4668856e84e5dab74/asm-debug-all-5.0.3.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/com.typesafe.akka/akka-actor_2.11/2.3.3/ed62e9fc709ca0f2ff1a3220daa8b70a2870078e/akka-actor_2.11-2.3.3.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/com.typesafe/config/1.2.1/f771f71fdae3df231bcd54d5ca2d57f0bf93f467/config-1.2.1.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.scala-lang/scala-actors-migration_2.11/1.1.0/dfa8bc42b181d5b9f1a5dd147f8ae308b893eb6f/scala-actors-migration_2.11-1.1.0.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.scala-lang/scala-compiler/2.11.1/56ea2e6c025e0821f28d73ca271218b8dd04926a/scala-compiler-2.11.1.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.scala-lang.plugins/scala-continuations-library_2.11/1.0.2/e517c53a7e9acd6b1668c5a35eccbaa3bab9aac/scala-continuations-library_2.11-1.0.2.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.scala-lang.plugins/scala-continuations-plugin_2.11.1/1.0.2/f361a3283452c57fa30c1ee69448995de23c60f7/scala-continuations-plugin_2.11.1-1.0.2.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.scala-lang/scala-library/2.11.1/e11da23da3eabab9f4777b9220e60d44c1aab6a/scala-library-2.11.1.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.scala-lang.modules/scala-parser-combinators_2.11/1.0.1/f05d7345bf5a58924f2837c6c1f4d73a938e1ff0/scala-parser-combinators_2.11-1.0.1.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.scala-lang/scala-reflect/2.11.1/6580347e61cc7f8e802941e7fde40fa83b8badeb/scala-reflect-2.11.1.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.scala-lang.modules/scala-swing_2.11/1.0.1/b1cdd92bd47b1e1837139c1c53020e86bb9112ae/scala-swing_2.11-1.0.1.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.scala-lang.modules/scala-xml_2.11/1.0.2/820fbca7e524b530fdadc594c39d49a21ea0337e/scala-xml_2.11-1.0.2.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/lzma/lzma/0.0.1/521616dc7487b42bef0e803bd2fa3faf668101d7/lzma-0.0.1.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/java3d/vecmath/1.5.2/79846ba34cbd89e2422d74d53752f993dcc2ccaf/vecmath-1.5.2.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/net.sf.trove4j/trove4j/3.0.3/42ccaf4761f0dfdfa805c9e340d99a755907e2dd/trove4j-3.0.3.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/com.ibm.icu/icu4j-core-mojang/51.2/63d216a9311cca6be337c1e458e587f99d382b84/icu4j-core-mojang-51.2.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/net.sf.jopt-simple/jopt-simple/4.6/306816fb57cf94f108a43c95731b08934dcae15c/jopt-simple-4.6.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/com.paulscode/codecjorbis/20101023/c73b5636faf089d9f00e8732a829577de25237ee/codecjorbis-20101023.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/com.paulscode/codecwav/20101023/12f031cfe88fef5c1dd36c563c0a3a69bd7261da/codecwav-20101023.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/com.paulscode/libraryjavasound/20101123/5c5e304366f75f9eaa2e8cca546a1fb6109348b3/libraryjavasound-20101123.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/com.paulscode/librarylwjglopenal/20100824/73e80d0794c39665aec3f62eee88ca91676674ef/librarylwjglopenal-20100824.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/com.paulscode/soundsystem/20120107/419c05fe9be71f792b2d76cfc9b67f1ed0fec7f6/soundsystem-20120107.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/io.netty/netty-all/4.0.15.Final/85cad5eb4fc8ae2ecc990dc7c411771a091ded5/netty-all-4.0.15.Final.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/17.0/9c6ef172e8de35fd8d4d8783e4821e57cdef7445/guava-17.0.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-lang3/3.3.2/90a3822c38ec8c996e84c16a3477ef632cbc87a3/commons-lang3-3.3.2.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/commons-io/commons-io/2.4/b1b6ea3b7e4aa4f492509a4952029cd8e48019ad/commons-io-2.4.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/commons-codec/commons-codec/1.9/9ce04e34240f674bc72680f8b843b1457383161a/commons-codec-1.9.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/net.java.jinput/jinput/2.0.5/39c7796b469a600f72380316f6b1f11db6c2c7c4/jinput-2.0.5.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/net.java.jutils/jutils/1.0.0/e12fe1fda814bd348c1579329c86943d2cd3c6a6/jutils-1.0.0.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.2.4/a60a5e993c98c864010053cb901b7eab25306568/gson-2.2.4.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/com.mojang/authlib/1.5.17/893a8c553c0cfc9b6fbdff023747e30152ab09ec/authlib-1.5.17.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/com.mojang/realms/1.6.1/5655f6fb44aece10e5b3ad7cfee3e6936031c068/realms-1.6.1.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-compress/1.8.1/a698750c16740fd5b3871425f4cb3bbaa87f529d/commons-compress-1.8.1.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpclient/4.3.3/18f4247ff4572a074444572cee34647c43e7c9c7/httpclient-4.3.3.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/commons-logging/commons-logging/1.1.3/f6f66e966c70a83ffbdb6f17a0919eaf7c8aca7f/commons-logging-1.1.3.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpcore/4.3.2/31fbbff1ddbf98f3aa7377c94d33b0447c646b6e/httpcore-4.3.2.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.apache.logging.log4j/log4j-api/2.0-beta9/1dd66e68cccd907880229f9e2de1314bd13ff785/log4j-api-2.0-beta9.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.apache.logging.log4j/log4j-core/2.0-beta9/678861ba1b2e1fccb594bb0ca03114bb05da9695/log4j-core-2.0-beta9.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.lwjgl.lwjgl/lwjgl/2.9.2-nightly-20140822/7707204c9ffa5d91662de95f0a224e2f721b22af/lwjgl-2.9.2-nightly-20140822.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.lwjgl.lwjgl/lwjgl_util/2.9.2-nightly-20140822/f0e612c840a7639c1f77f68d72a28dae2f0c8490/lwjgl_util-2.9.2-nightly-20140822.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/tv.twitch/twitch/6.5/320a2dfd18513a5f41b4e75729df684488cbd925/twitch-6.5.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.scala-lang/scala-actors/2.11.0/8ccfb6541de179bb1c4d45cf414acee069b7f78b/scala-actors-2.11.0.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/net.java.jinput/jinput-platform/2.0.5/7ff832a6eb9ab6a767f1ade2b548092d0fa64795/jinput-platform-2.0.5-natives-linux.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/net.java.jinput/jinput-platform/2.0.5/385ee093e01f587f30ee1c8a2ee7d408fd732e16/jinput-platform-2.0.5-natives-windows.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/net.java.jinput/jinput-platform/2.0.5/53f9c919f34d2ca9de8c51fc4e1e8282029a9232/jinput-platform-2.0.5-natives-osx.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/tv.twitch/twitch-platform/6.5/206c4ccaecdbcfd2a1631150c69a97bbc9c20c11/twitch-platform-6.5-natives-windows-32.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/tv.twitch/twitch-platform/6.5/9fdd0fd5aed0817063dcf95b69349a171f447ebd/twitch-platform-6.5-natives-windows-64.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/tv.twitch/twitch-platform/6.5/5f9d1ee26257b3a33f0ca06fed335ef462af659f/twitch-platform-6.5-natives-osx.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/tv.twitch/twitch-external-platform/4.5/18215140f010c05b9f86ef6f0f8871954d2ccebf/twitch-external-platform-4.5-natives-windows-32.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/tv.twitch/twitch-external-platform/4.5/c3cde57891b935d41b6680a9c5e1502eeab76d86/twitch-external-platform-4.5-natives-windows-64.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.lwjgl.lwjgl/lwjgl-platform/2.9.2-nightly-20140822/78b2a55ce4dc29c6b3ec4df8ca165eba05f9b341/lwjgl-platform-2.9.2-nightly-20140822-natives-windows.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.lwjgl.lwjgl/lwjgl-platform/2.9.2-nightly-20140822/d898a33b5d0a6ef3fed3a4ead506566dce6720a5/lwjgl-platform-2.9.2-nightly-20140822-natives-linux.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.lwjgl.lwjgl/lwjgl-platform/2.9.2-nightly-20140822/79f5ce2fea02e77fe47a3c745219167a542121d7/lwjgl-platform-2.9.2-nightly-20140822-natives-osx.jar:/Users/Vastatio/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/2.0.1/516c03b21d50a644d538de0f0369c620989cd8f0/jsr305-2.0.1.jar:/Users/Vastatio/.gradle/caches/minecraft/net/minecraftforge/forge/1.8-11.14.3.1493/start
+[10:38:20] [main/DEBUG] [FML/]: Java library path at launch is /Users/Vastatio/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.:/Users/Vastatio/.gradle/caches/minecraft/net/minecraft/minecraft_natives/1.8
+[10:38:20] [main/INFO] [FML/]: Managed to load a deobfuscated Minecraft name- we are in a deobfuscated environment. Skipping runtime deobfuscation
+[10:38:20] [main/DEBUG] [FML/]: Instantiating coremod class FMLCorePlugin
+[10:38:20] [main/DEBUG] [FML/]: Added access transformer class net.minecraftforge.fml.common.asm.transformers.AccessTransformer to enqueued access transformers
+[10:38:20] [main/DEBUG] [FML/]: Enqueued coremod FMLCorePlugin
+[10:38:20] [main/DEBUG] [FML/]: Instantiating coremod class FMLForgePlugin
+[10:38:20] [main/DEBUG] [FML/]: Added access transformer class net.minecraftforge.transformers.ForgeAccessTransformer to enqueued access transformers
+[10:38:20] [main/DEBUG] [FML/]: Enqueued coremod FMLForgePlugin
+[10:38:20] [main/DEBUG] [FML/]: All fundamental core mods are successfully located
+[10:38:20] [main/DEBUG] [FML/]: Attempting to load commandline specified mods, relative to /Users/Vastatio/Desktop/ARKCraft WIP/forge/.
+[10:38:20] [main/DEBUG] [FML/]: Discovering coremods
+[10:38:20] [main/INFO] [LaunchWrapper/]: Calling tweak class net.minecraftforge.gradle.tweakers.CoremodTweaker
+[10:38:20] [main/INFO] [GradleStart/]: Injecting location in coremod net.minecraftforge.fml.relauncher.FMLCorePlugin
+[10:38:20] [main/INFO] [GradleStart/]: Injecting location in coremod net.minecraftforge.classloading.FMLForgePlugin
+[10:38:20] [main/INFO] [LaunchWrapper/]: Loading tweak class name net.minecraftforge.fml.common.launcher.FMLInjectionAndSortingTweaker
+[10:38:20] [main/INFO] [LaunchWrapper/]: Loading tweak class name net.minecraftforge.fml.common.launcher.FMLDeobfTweaker
+[10:38:20] [main/INFO] [LaunchWrapper/]: Loading tweak class name net.minecraftforge.gradle.tweakers.AccessTransformerTweaker
+[10:38:20] [main/INFO] [LaunchWrapper/]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLInjectionAndSortingTweaker
+[10:38:20] [main/INFO] [LaunchWrapper/]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLInjectionAndSortingTweaker
+[10:38:20] [main/INFO] [LaunchWrapper/]: Calling tweak class net.minecraftforge.fml.relauncher.CoreModManager$FMLPluginWrapper
+[10:38:20] [main/DEBUG] [FML/]: Injecting coremod FMLCorePlugin {net.minecraftforge.fml.relauncher.FMLCorePlugin} class transformers
+[10:38:20] [main/TRACE] [FML/]: Registering transformer net.minecraftforge.fml.common.asm.transformers.BlamingTransformer
+[10:38:20] [main/TRACE] [FML/]: Registering transformer net.minecraftforge.fml.common.asm.transformers.MarkerTransformer
+[10:38:20] [main/TRACE] [FML/]: Registering transformer net.minecraftforge.fml.common.asm.transformers.SideTransformer
+[10:38:20] [main/TRACE] [FML/]: Registering transformer net.minecraftforge.fml.common.asm.transformers.EventSubscriptionTransformer
+[10:38:20] [main/TRACE] [FML/]: Registering transformer net.minecraftforge.fml.common.asm.transformers.EventSubscriberTransformer
+[10:38:20] [main/DEBUG] [FML/]: Injection complete
+[10:38:20] [main/DEBUG] [FML/]: Running coremod plugin for FMLCorePlugin {net.minecraftforge.fml.relauncher.FMLCorePlugin}
+[10:38:20] [main/DEBUG] [FML/]: Running coremod plugin FMLCorePlugin
+[10:38:20] [main/ERROR] [FML/]: The binary patch set is missing. Either you are in a development environment, or things are not going to work!
+[10:38:22] [main/ERROR] [FML/]: FML appears to be missing any signature data. This is not a good thing
+[10:38:22] [main/DEBUG] [FML/]: Coremod plugin class FMLCorePlugin run successfully
+[10:38:22] [main/INFO] [LaunchWrapper/]: Calling tweak class net.minecraftforge.fml.relauncher.CoreModManager$FMLPluginWrapper
+[10:38:22] [main/DEBUG] [FML/]: Injecting coremod FMLForgePlugin {net.minecraftforge.classloading.FMLForgePlugin} class transformers
+[10:38:22] [main/TRACE] [FML/]: Registering transformer net.minecraftforge.classloading.FluidIdTransformer
+[10:38:22] [main/DEBUG] [FML/]: Injection complete
+[10:38:22] [main/DEBUG] [FML/]: Running coremod plugin for FMLForgePlugin {net.minecraftforge.classloading.FMLForgePlugin}
+[10:38:22] [main/DEBUG] [FML/]: Running coremod plugin FMLForgePlugin
+[10:38:22] [main/DEBUG] [FML/]: Coremod plugin class FMLForgePlugin run successfully
+[10:38:22] [main/INFO] [LaunchWrapper/]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLDeobfTweaker
+[10:38:22] [main/DEBUG] [FML/]: Loaded 60 rules from AccessTransformer config file fml_at.cfg
+[10:38:22] [main/DEBUG] [FML/]: Loaded 120 rules from AccessTransformer config file forge_at.cfg
+[10:38:22] [main/DEBUG] [FML/]: Validating minecraft
+[10:38:23] [main/DEBUG] [FML/]: Minecraft validated, launching...
+[10:38:23] [main/INFO] [LaunchWrapper/]: Calling tweak class net.minecraftforge.gradle.tweakers.AccessTransformerTweaker
+[10:38:23] [main/INFO] [LaunchWrapper/]: Loading tweak class name net.minecraftforge.fml.common.launcher.TerminalTweaker
+[10:38:23] [main/INFO] [LaunchWrapper/]: Calling tweak class net.minecraftforge.fml.common.launcher.TerminalTweaker
+[10:38:23] [main/INFO] [LaunchWrapper/]: Launching wrapped minecraft {net.minecraft.client.main.Main}
+[10:38:30] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - LanguageManager took 0.008s
+[10:38:30] [Client thread/INFO] [STDOUT/]: [net.minecraftforge.fml.client.SplashProgress:start:235]: ---- Minecraft Crash Report ----
+// Sorry :(
 
-Time: 02/08/15 10:26 AM
+Time: 02/08/15 10:38 AM
 Description: Loading screen debug info
 
 This is just a prompt for computer specs to be printed. THIS IS NOT A ERROR
@@ -69,82 +69,82 @@ Details:
 	Operating System: Mac OS X (x86_64) version 10.10.4
 	Java Version: 1.8.0_25, Oracle Corporation
 	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
-	Memory: 89697560 bytes (85 MB) / 314572800 bytes (300 MB) up to 954728448 bytes (910 MB)
+	Memory: 61320360 bytes (58 MB) / 317194240 bytes (302 MB) up to 954728448 bytes (910 MB)
 	JVM Flags: 0 total; 
 	IntCache: cache: 0, tcache: 0, allocated: 0, tallocated: 0
 	FML: 
 	Loaded coremods (and transformers): 
 	GL info: ' Vendor: 'NVIDIA Corporation' Version: '2.1 NVIDIA-10.0.31 310.90.10.05b12' Renderer: 'NVIDIA GeForce 320M OpenGL Engine'
-[10:26:05] [Client thread/INFO] [MinecraftForge/]: Attempting early MinecraftForge initialization
-[10:26:05] [Client thread/INFO] [FML/]: MinecraftForge v11.14.3.1493 Initialized
-[10:26:05] [Client thread/INFO] [FML/]: Replaced 204 ore recipies
-[10:26:05] [Client thread/INFO] [MinecraftForge/]: Completed early MinecraftForge initialization
-[10:26:05] [Client thread/DEBUG] [FML/]: File /Users/Vastatio/Desktop/ARKCraft WIP/forge/config/injectedDependencies.json not found. No dependencies injected
-[10:26:05] [Client thread/DEBUG] [FML/]: Building injected Mod Containers [net.minecraftforge.fml.common.FMLContainer, net.minecraftforge.common.ForgeModContainer]
-[10:26:05] [Client thread/DEBUG] [FML/]: Attempting to load mods contained in the minecraft jar file and associated classes
-[10:26:05] [Client thread/DEBUG] [FML/]: Found a minecraft related directory at /Users/Vastatio/Desktop/ARKCraft WIP/forge/bin, examining for mod candidates
-[10:26:05] [Client thread/DEBUG] [FML/]: Found a minecraft related file at /Users/Vastatio/.gradle/caches/minecraft/net/minecraftforge/forge/1.8-11.14.3.1493/snapshot/20141130/forgeSrc-1.8-11.14.3.1493.jar, examining for mod candidates
-[10:26:05] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/net.minecraft/launchwrapper/1.12/111e7bea9c968cdb3d06ef4632bf7ff0824d0f36/launchwrapper-1.12.jar
-[10:26:05] [Client thread/DEBUG] [FML/]: Found a minecraft related file at /Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-debug-all/5.0.3/f9e364ae2a66ce2a543012a4668856e84e5dab74/asm-debug-all-5.0.3.jar, examining for mod candidates
-[10:26:05] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/com.typesafe.akka/akka-actor_2.11/2.3.3/ed62e9fc709ca0f2ff1a3220daa8b70a2870078e/akka-actor_2.11-2.3.3.jar
-[10:26:05] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/com.typesafe/config/1.2.1/f771f71fdae3df231bcd54d5ca2d57f0bf93f467/config-1.2.1.jar
-[10:26:05] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.scala-lang/scala-actors-migration_2.11/1.1.0/dfa8bc42b181d5b9f1a5dd147f8ae308b893eb6f/scala-actors-migration_2.11-1.1.0.jar
-[10:26:05] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.scala-lang/scala-compiler/2.11.1/56ea2e6c025e0821f28d73ca271218b8dd04926a/scala-compiler-2.11.1.jar
-[10:26:05] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.scala-lang.plugins/scala-continuations-library_2.11/1.0.2/e517c53a7e9acd6b1668c5a35eccbaa3bab9aac/scala-continuations-library_2.11-1.0.2.jar
-[10:26:05] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.scala-lang.plugins/scala-continuations-plugin_2.11.1/1.0.2/f361a3283452c57fa30c1ee69448995de23c60f7/scala-continuations-plugin_2.11.1-1.0.2.jar
-[10:26:05] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.scala-lang/scala-library/2.11.1/e11da23da3eabab9f4777b9220e60d44c1aab6a/scala-library-2.11.1.jar
-[10:26:05] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.scala-lang.modules/scala-parser-combinators_2.11/1.0.1/f05d7345bf5a58924f2837c6c1f4d73a938e1ff0/scala-parser-combinators_2.11-1.0.1.jar
-[10:26:05] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.scala-lang/scala-reflect/2.11.1/6580347e61cc7f8e802941e7fde40fa83b8badeb/scala-reflect-2.11.1.jar
-[10:26:05] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.scala-lang.modules/scala-swing_2.11/1.0.1/b1cdd92bd47b1e1837139c1c53020e86bb9112ae/scala-swing_2.11-1.0.1.jar
-[10:26:05] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.scala-lang.modules/scala-xml_2.11/1.0.2/820fbca7e524b530fdadc594c39d49a21ea0337e/scala-xml_2.11-1.0.2.jar
-[10:26:05] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/lzma/lzma/0.0.1/521616dc7487b42bef0e803bd2fa3faf668101d7/lzma-0.0.1.jar
-[10:26:05] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/java3d/vecmath/1.5.2/79846ba34cbd89e2422d74d53752f993dcc2ccaf/vecmath-1.5.2.jar
-[10:26:05] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/net.sf.trove4j/trove4j/3.0.3/42ccaf4761f0dfdfa805c9e340d99a755907e2dd/trove4j-3.0.3.jar
-[10:26:05] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/com.ibm.icu/icu4j-core-mojang/51.2/63d216a9311cca6be337c1e458e587f99d382b84/icu4j-core-mojang-51.2.jar
-[10:26:05] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/net.sf.jopt-simple/jopt-simple/4.6/306816fb57cf94f108a43c95731b08934dcae15c/jopt-simple-4.6.jar
-[10:26:05] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/com.paulscode/codecjorbis/20101023/c73b5636faf089d9f00e8732a829577de25237ee/codecjorbis-20101023.jar
-[10:26:05] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/com.paulscode/codecwav/20101023/12f031cfe88fef5c1dd36c563c0a3a69bd7261da/codecwav-20101023.jar
-[10:26:05] [Client thread/DEBUG] [FML/]: Found a minecraft related file at /Users/Vastatio/.gradle/caches/modules-2/files-2.1/com.paulscode/libraryjavasound/20101123/5c5e304366f75f9eaa2e8cca546a1fb6109348b3/libraryjavasound-20101123.jar, examining for mod candidates
-[10:26:05] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/com.paulscode/librarylwjglopenal/20100824/73e80d0794c39665aec3f62eee88ca91676674ef/librarylwjglopenal-20100824.jar
-[10:26:05] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/com.paulscode/soundsystem/20120107/419c05fe9be71f792b2d76cfc9b67f1ed0fec7f6/soundsystem-20120107.jar
-[10:26:05] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/io.netty/netty-all/4.0.15.Final/85cad5eb4fc8ae2ecc990dc7c411771a091ded5/netty-all-4.0.15.Final.jar
-[10:26:05] [Client thread/DEBUG] [FML/]: Found a minecraft related file at /Users/Vastatio/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/17.0/9c6ef172e8de35fd8d4d8783e4821e57cdef7445/guava-17.0.jar, examining for mod candidates
-[10:26:05] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-lang3/3.3.2/90a3822c38ec8c996e84c16a3477ef632cbc87a3/commons-lang3-3.3.2.jar
-[10:26:05] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/commons-io/commons-io/2.4/b1b6ea3b7e4aa4f492509a4952029cd8e48019ad/commons-io-2.4.jar
-[10:26:05] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/commons-codec/commons-codec/1.9/9ce04e34240f674bc72680f8b843b1457383161a/commons-codec-1.9.jar
-[10:26:05] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/net.java.jinput/jinput/2.0.5/39c7796b469a600f72380316f6b1f11db6c2c7c4/jinput-2.0.5.jar
-[10:26:05] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/net.java.jutils/jutils/1.0.0/e12fe1fda814bd348c1579329c86943d2cd3c6a6/jutils-1.0.0.jar
-[10:26:05] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.2.4/a60a5e993c98c864010053cb901b7eab25306568/gson-2.2.4.jar
-[10:26:05] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/com.mojang/authlib/1.5.17/893a8c553c0cfc9b6fbdff023747e30152ab09ec/authlib-1.5.17.jar
-[10:26:05] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/com.mojang/realms/1.6.1/5655f6fb44aece10e5b3ad7cfee3e6936031c068/realms-1.6.1.jar
-[10:26:05] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-compress/1.8.1/a698750c16740fd5b3871425f4cb3bbaa87f529d/commons-compress-1.8.1.jar
-[10:26:05] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpclient/4.3.3/18f4247ff4572a074444572cee34647c43e7c9c7/httpclient-4.3.3.jar
-[10:26:05] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/commons-logging/commons-logging/1.1.3/f6f66e966c70a83ffbdb6f17a0919eaf7c8aca7f/commons-logging-1.1.3.jar
-[10:26:05] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpcore/4.3.2/31fbbff1ddbf98f3aa7377c94d33b0447c646b6e/httpcore-4.3.2.jar
-[10:26:05] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.apache.logging.log4j/log4j-api/2.0-beta9/1dd66e68cccd907880229f9e2de1314bd13ff785/log4j-api-2.0-beta9.jar
-[10:26:05] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.apache.logging.log4j/log4j-core/2.0-beta9/678861ba1b2e1fccb594bb0ca03114bb05da9695/log4j-core-2.0-beta9.jar
-[10:26:05] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.lwjgl.lwjgl/lwjgl/2.9.2-nightly-20140822/7707204c9ffa5d91662de95f0a224e2f721b22af/lwjgl-2.9.2-nightly-20140822.jar
-[10:26:05] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.lwjgl.lwjgl/lwjgl_util/2.9.2-nightly-20140822/f0e612c840a7639c1f77f68d72a28dae2f0c8490/lwjgl_util-2.9.2-nightly-20140822.jar
-[10:26:05] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/tv.twitch/twitch/6.5/320a2dfd18513a5f41b4e75729df684488cbd925/twitch-6.5.jar
-[10:26:05] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.scala-lang/scala-actors/2.11.0/8ccfb6541de179bb1c4d45cf414acee069b7f78b/scala-actors-2.11.0.jar
-[10:26:05] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/net.java.jinput/jinput-platform/2.0.5/7ff832a6eb9ab6a767f1ade2b548092d0fa64795/jinput-platform-2.0.5-natives-linux.jar
-[10:26:05] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/net.java.jinput/jinput-platform/2.0.5/385ee093e01f587f30ee1c8a2ee7d408fd732e16/jinput-platform-2.0.5-natives-windows.jar
-[10:26:05] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/net.java.jinput/jinput-platform/2.0.5/53f9c919f34d2ca9de8c51fc4e1e8282029a9232/jinput-platform-2.0.5-natives-osx.jar
-[10:26:05] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/tv.twitch/twitch-platform/6.5/206c4ccaecdbcfd2a1631150c69a97bbc9c20c11/twitch-platform-6.5-natives-windows-32.jar
-[10:26:05] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/tv.twitch/twitch-platform/6.5/9fdd0fd5aed0817063dcf95b69349a171f447ebd/twitch-platform-6.5-natives-windows-64.jar
-[10:26:05] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/tv.twitch/twitch-platform/6.5/5f9d1ee26257b3a33f0ca06fed335ef462af659f/twitch-platform-6.5-natives-osx.jar
-[10:26:05] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/tv.twitch/twitch-external-platform/4.5/18215140f010c05b9f86ef6f0f8871954d2ccebf/twitch-external-platform-4.5-natives-windows-32.jar
-[10:26:05] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/tv.twitch/twitch-external-platform/4.5/c3cde57891b935d41b6680a9c5e1502eeab76d86/twitch-external-platform-4.5-natives-windows-64.jar
-[10:26:05] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.lwjgl.lwjgl/lwjgl-platform/2.9.2-nightly-20140822/78b2a55ce4dc29c6b3ec4df8ca165eba05f9b341/lwjgl-platform-2.9.2-nightly-20140822-natives-windows.jar
-[10:26:05] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.lwjgl.lwjgl/lwjgl-platform/2.9.2-nightly-20140822/d898a33b5d0a6ef3fed3a4ead506566dce6720a5/lwjgl-platform-2.9.2-nightly-20140822-natives-linux.jar
-[10:26:05] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.lwjgl.lwjgl/lwjgl-platform/2.9.2-nightly-20140822/79f5ce2fea02e77fe47a3c745219167a542121d7/lwjgl-platform-2.9.2-nightly-20140822-natives-osx.jar
-[10:26:05] [Client thread/DEBUG] [FML/]: Found a minecraft related file at /Users/Vastatio/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/2.0.1/516c03b21d50a644d538de0f0369c620989cd8f0/jsr305-2.0.1.jar, examining for mod candidates
-[10:26:05] [Client thread/DEBUG] [FML/]: Found a minecraft related directory at /Users/Vastatio/.gradle/caches/minecraft/net/minecraftforge/forge/1.8-11.14.3.1493/start, examining for mod candidates
-[10:26:05] [Client thread/DEBUG] [FML/]: Minecraft jar mods loaded successfully
-[10:26:05] [Client thread/INFO] [FML/]: Found 0 mods from the command line. Injecting into mod discoverer
-[10:26:05] [Client thread/INFO] [FML/]: Searching /Users/Vastatio/Desktop/ARKCraft WIP/forge/mods for mods
-[10:26:05] [Client thread/DEBUG] [FML/]: Examining directory bin for potential mods
-[10:26:05] [Client thread/ERROR] [FML/]: The mcmod.info file in bin cannot be parsed as valid JSON. It will be ignored
+[10:38:30] [Client thread/INFO] [MinecraftForge/]: Attempting early MinecraftForge initialization
+[10:38:30] [Client thread/INFO] [FML/]: MinecraftForge v11.14.3.1493 Initialized
+[10:38:30] [Client thread/INFO] [FML/]: Replaced 204 ore recipies
+[10:38:31] [Client thread/INFO] [MinecraftForge/]: Completed early MinecraftForge initialization
+[10:38:31] [Client thread/DEBUG] [FML/]: File /Users/Vastatio/Desktop/ARKCraft WIP/forge/config/injectedDependencies.json not found. No dependencies injected
+[10:38:31] [Client thread/DEBUG] [FML/]: Building injected Mod Containers [net.minecraftforge.fml.common.FMLContainer, net.minecraftforge.common.ForgeModContainer]
+[10:38:31] [Client thread/DEBUG] [FML/]: Attempting to load mods contained in the minecraft jar file and associated classes
+[10:38:31] [Client thread/DEBUG] [FML/]: Found a minecraft related directory at /Users/Vastatio/Desktop/ARKCraft WIP/forge/bin, examining for mod candidates
+[10:38:31] [Client thread/DEBUG] [FML/]: Found a minecraft related file at /Users/Vastatio/.gradle/caches/minecraft/net/minecraftforge/forge/1.8-11.14.3.1493/snapshot/20141130/forgeSrc-1.8-11.14.3.1493.jar, examining for mod candidates
+[10:38:31] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/net.minecraft/launchwrapper/1.12/111e7bea9c968cdb3d06ef4632bf7ff0824d0f36/launchwrapper-1.12.jar
+[10:38:31] [Client thread/DEBUG] [FML/]: Found a minecraft related file at /Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-debug-all/5.0.3/f9e364ae2a66ce2a543012a4668856e84e5dab74/asm-debug-all-5.0.3.jar, examining for mod candidates
+[10:38:31] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/com.typesafe.akka/akka-actor_2.11/2.3.3/ed62e9fc709ca0f2ff1a3220daa8b70a2870078e/akka-actor_2.11-2.3.3.jar
+[10:38:31] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/com.typesafe/config/1.2.1/f771f71fdae3df231bcd54d5ca2d57f0bf93f467/config-1.2.1.jar
+[10:38:31] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.scala-lang/scala-actors-migration_2.11/1.1.0/dfa8bc42b181d5b9f1a5dd147f8ae308b893eb6f/scala-actors-migration_2.11-1.1.0.jar
+[10:38:31] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.scala-lang/scala-compiler/2.11.1/56ea2e6c025e0821f28d73ca271218b8dd04926a/scala-compiler-2.11.1.jar
+[10:38:31] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.scala-lang.plugins/scala-continuations-library_2.11/1.0.2/e517c53a7e9acd6b1668c5a35eccbaa3bab9aac/scala-continuations-library_2.11-1.0.2.jar
+[10:38:31] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.scala-lang.plugins/scala-continuations-plugin_2.11.1/1.0.2/f361a3283452c57fa30c1ee69448995de23c60f7/scala-continuations-plugin_2.11.1-1.0.2.jar
+[10:38:31] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.scala-lang/scala-library/2.11.1/e11da23da3eabab9f4777b9220e60d44c1aab6a/scala-library-2.11.1.jar
+[10:38:31] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.scala-lang.modules/scala-parser-combinators_2.11/1.0.1/f05d7345bf5a58924f2837c6c1f4d73a938e1ff0/scala-parser-combinators_2.11-1.0.1.jar
+[10:38:31] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.scala-lang/scala-reflect/2.11.1/6580347e61cc7f8e802941e7fde40fa83b8badeb/scala-reflect-2.11.1.jar
+[10:38:31] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.scala-lang.modules/scala-swing_2.11/1.0.1/b1cdd92bd47b1e1837139c1c53020e86bb9112ae/scala-swing_2.11-1.0.1.jar
+[10:38:31] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.scala-lang.modules/scala-xml_2.11/1.0.2/820fbca7e524b530fdadc594c39d49a21ea0337e/scala-xml_2.11-1.0.2.jar
+[10:38:31] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/lzma/lzma/0.0.1/521616dc7487b42bef0e803bd2fa3faf668101d7/lzma-0.0.1.jar
+[10:38:31] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/java3d/vecmath/1.5.2/79846ba34cbd89e2422d74d53752f993dcc2ccaf/vecmath-1.5.2.jar
+[10:38:31] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/net.sf.trove4j/trove4j/3.0.3/42ccaf4761f0dfdfa805c9e340d99a755907e2dd/trove4j-3.0.3.jar
+[10:38:31] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/com.ibm.icu/icu4j-core-mojang/51.2/63d216a9311cca6be337c1e458e587f99d382b84/icu4j-core-mojang-51.2.jar
+[10:38:31] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/net.sf.jopt-simple/jopt-simple/4.6/306816fb57cf94f108a43c95731b08934dcae15c/jopt-simple-4.6.jar
+[10:38:31] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/com.paulscode/codecjorbis/20101023/c73b5636faf089d9f00e8732a829577de25237ee/codecjorbis-20101023.jar
+[10:38:31] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/com.paulscode/codecwav/20101023/12f031cfe88fef5c1dd36c563c0a3a69bd7261da/codecwav-20101023.jar
+[10:38:31] [Client thread/DEBUG] [FML/]: Found a minecraft related file at /Users/Vastatio/.gradle/caches/modules-2/files-2.1/com.paulscode/libraryjavasound/20101123/5c5e304366f75f9eaa2e8cca546a1fb6109348b3/libraryjavasound-20101123.jar, examining for mod candidates
+[10:38:31] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/com.paulscode/librarylwjglopenal/20100824/73e80d0794c39665aec3f62eee88ca91676674ef/librarylwjglopenal-20100824.jar
+[10:38:31] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/com.paulscode/soundsystem/20120107/419c05fe9be71f792b2d76cfc9b67f1ed0fec7f6/soundsystem-20120107.jar
+[10:38:31] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/io.netty/netty-all/4.0.15.Final/85cad5eb4fc8ae2ecc990dc7c411771a091ded5/netty-all-4.0.15.Final.jar
+[10:38:31] [Client thread/DEBUG] [FML/]: Found a minecraft related file at /Users/Vastatio/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/17.0/9c6ef172e8de35fd8d4d8783e4821e57cdef7445/guava-17.0.jar, examining for mod candidates
+[10:38:31] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-lang3/3.3.2/90a3822c38ec8c996e84c16a3477ef632cbc87a3/commons-lang3-3.3.2.jar
+[10:38:31] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/commons-io/commons-io/2.4/b1b6ea3b7e4aa4f492509a4952029cd8e48019ad/commons-io-2.4.jar
+[10:38:31] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/commons-codec/commons-codec/1.9/9ce04e34240f674bc72680f8b843b1457383161a/commons-codec-1.9.jar
+[10:38:31] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/net.java.jinput/jinput/2.0.5/39c7796b469a600f72380316f6b1f11db6c2c7c4/jinput-2.0.5.jar
+[10:38:31] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/net.java.jutils/jutils/1.0.0/e12fe1fda814bd348c1579329c86943d2cd3c6a6/jutils-1.0.0.jar
+[10:38:31] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.2.4/a60a5e993c98c864010053cb901b7eab25306568/gson-2.2.4.jar
+[10:38:31] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/com.mojang/authlib/1.5.17/893a8c553c0cfc9b6fbdff023747e30152ab09ec/authlib-1.5.17.jar
+[10:38:31] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/com.mojang/realms/1.6.1/5655f6fb44aece10e5b3ad7cfee3e6936031c068/realms-1.6.1.jar
+[10:38:31] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-compress/1.8.1/a698750c16740fd5b3871425f4cb3bbaa87f529d/commons-compress-1.8.1.jar
+[10:38:31] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpclient/4.3.3/18f4247ff4572a074444572cee34647c43e7c9c7/httpclient-4.3.3.jar
+[10:38:31] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/commons-logging/commons-logging/1.1.3/f6f66e966c70a83ffbdb6f17a0919eaf7c8aca7f/commons-logging-1.1.3.jar
+[10:38:31] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpcore/4.3.2/31fbbff1ddbf98f3aa7377c94d33b0447c646b6e/httpcore-4.3.2.jar
+[10:38:31] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.apache.logging.log4j/log4j-api/2.0-beta9/1dd66e68cccd907880229f9e2de1314bd13ff785/log4j-api-2.0-beta9.jar
+[10:38:31] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.apache.logging.log4j/log4j-core/2.0-beta9/678861ba1b2e1fccb594bb0ca03114bb05da9695/log4j-core-2.0-beta9.jar
+[10:38:31] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.lwjgl.lwjgl/lwjgl/2.9.2-nightly-20140822/7707204c9ffa5d91662de95f0a224e2f721b22af/lwjgl-2.9.2-nightly-20140822.jar
+[10:38:31] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.lwjgl.lwjgl/lwjgl_util/2.9.2-nightly-20140822/f0e612c840a7639c1f77f68d72a28dae2f0c8490/lwjgl_util-2.9.2-nightly-20140822.jar
+[10:38:31] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/tv.twitch/twitch/6.5/320a2dfd18513a5f41b4e75729df684488cbd925/twitch-6.5.jar
+[10:38:31] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.scala-lang/scala-actors/2.11.0/8ccfb6541de179bb1c4d45cf414acee069b7f78b/scala-actors-2.11.0.jar
+[10:38:31] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/net.java.jinput/jinput-platform/2.0.5/7ff832a6eb9ab6a767f1ade2b548092d0fa64795/jinput-platform-2.0.5-natives-linux.jar
+[10:38:31] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/net.java.jinput/jinput-platform/2.0.5/385ee093e01f587f30ee1c8a2ee7d408fd732e16/jinput-platform-2.0.5-natives-windows.jar
+[10:38:31] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/net.java.jinput/jinput-platform/2.0.5/53f9c919f34d2ca9de8c51fc4e1e8282029a9232/jinput-platform-2.0.5-natives-osx.jar
+[10:38:31] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/tv.twitch/twitch-platform/6.5/206c4ccaecdbcfd2a1631150c69a97bbc9c20c11/twitch-platform-6.5-natives-windows-32.jar
+[10:38:31] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/tv.twitch/twitch-platform/6.5/9fdd0fd5aed0817063dcf95b69349a171f447ebd/twitch-platform-6.5-natives-windows-64.jar
+[10:38:31] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/tv.twitch/twitch-platform/6.5/5f9d1ee26257b3a33f0ca06fed335ef462af659f/twitch-platform-6.5-natives-osx.jar
+[10:38:31] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/tv.twitch/twitch-external-platform/4.5/18215140f010c05b9f86ef6f0f8871954d2ccebf/twitch-external-platform-4.5-natives-windows-32.jar
+[10:38:31] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/tv.twitch/twitch-external-platform/4.5/c3cde57891b935d41b6680a9c5e1502eeab76d86/twitch-external-platform-4.5-natives-windows-64.jar
+[10:38:31] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.lwjgl.lwjgl/lwjgl-platform/2.9.2-nightly-20140822/78b2a55ce4dc29c6b3ec4df8ca165eba05f9b341/lwjgl-platform-2.9.2-nightly-20140822-natives-windows.jar
+[10:38:31] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.lwjgl.lwjgl/lwjgl-platform/2.9.2-nightly-20140822/d898a33b5d0a6ef3fed3a4ead506566dce6720a5/lwjgl-platform-2.9.2-nightly-20140822-natives-linux.jar
+[10:38:31] [Client thread/TRACE] [FML/]: Skipping known library file /Users/Vastatio/.gradle/caches/modules-2/files-2.1/org.lwjgl.lwjgl/lwjgl-platform/2.9.2-nightly-20140822/79f5ce2fea02e77fe47a3c745219167a542121d7/lwjgl-platform-2.9.2-nightly-20140822-natives-osx.jar
+[10:38:31] [Client thread/DEBUG] [FML/]: Found a minecraft related file at /Users/Vastatio/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/2.0.1/516c03b21d50a644d538de0f0369c620989cd8f0/jsr305-2.0.1.jar, examining for mod candidates
+[10:38:31] [Client thread/DEBUG] [FML/]: Found a minecraft related directory at /Users/Vastatio/.gradle/caches/minecraft/net/minecraftforge/forge/1.8-11.14.3.1493/start, examining for mod candidates
+[10:38:31] [Client thread/DEBUG] [FML/]: Minecraft jar mods loaded successfully
+[10:38:31] [Client thread/INFO] [FML/]: Found 0 mods from the command line. Injecting into mod discoverer
+[10:38:31] [Client thread/INFO] [FML/]: Searching /Users/Vastatio/Desktop/ARKCraft WIP/forge/mods for mods
+[10:38:31] [Client thread/DEBUG] [FML/]: Examining directory bin for potential mods
+[10:38:31] [Client thread/ERROR] [FML/]: The mcmod.info file in bin cannot be parsed as valid JSON. It will be ignored
 com.google.gson.JsonSyntaxException: com.google.gson.stream.MalformedJsonException: Unterminated array at line 13 column 24
 	at com.google.gson.internal.Streams.parse(Streams.java:56) ~[Streams.class:?]
 	at com.google.gson.JsonParser.parse(JsonParser.java:84) ~[JsonParser.class:?]
@@ -179,366 +179,370 @@ Caused by: com.google.gson.stream.MalformedJsonException: Unterminated array at 
 	at com.google.gson.internal.bind.TypeAdapters$25.read(TypeAdapters.java:642) ~[TypeAdapters$25.class:?]
 	at com.google.gson.internal.Streams.parse(Streams.java:44) ~[Streams.class:?]
 	... 22 more
-[10:26:06] [Client thread/DEBUG] [FML/]: Found an mcmod.info file in directory bin
-[10:26:06] [Client thread/TRACE] [FML/]: Recursing into package assets
-[10:26:06] [Client thread/TRACE] [FML/]: Recursing into package assets.arkcraft
-[10:26:06] [Client thread/TRACE] [FML/]: Recursing into package assets.arkcraft.blockstates
-[10:26:06] [Client thread/TRACE] [FML/]: Recursing into package assets.arkcraft.lang
-[10:26:06] [Client thread/TRACE] [FML/]: Recursing into package assets.arkcraft.models
-[10:26:06] [Client thread/TRACE] [FML/]: Recursing into package assets.arkcraft.models.block
-[10:26:06] [Client thread/TRACE] [FML/]: Recursing into package assets.arkcraft.models.item
-[10:26:06] [Client thread/TRACE] [FML/]: Recursing into package assets.arkcraft.textures
-[10:26:06] [Client thread/TRACE] [FML/]: Recursing into package assets.arkcraft.textures.armor
-[10:26:06] [Client thread/TRACE] [FML/]: Recursing into package assets.arkcraft.textures.blocks
-[10:26:06] [Client thread/TRACE] [FML/]: Recursing into package assets.arkcraft.textures.gui
-[10:26:06] [Client thread/TRACE] [FML/]: Recursing into package assets.arkcraft.textures.items
-[10:26:06] [Client thread/TRACE] [FML/]: Recursing into package assets.arkcraft.textures.model
-[10:26:06] [Client thread/TRACE] [FML/]: Recursing into package com
-[10:26:06] [Client thread/TRACE] [FML/]: Recursing into package com.arkcraft
-[10:26:06] [Client thread/TRACE] [FML/]: Recursing into package com.arkcraft.mod
-[10:26:06] [Client thread/TRACE] [FML/]: Recursing into package com.arkcraft.mod.core
-[10:26:06] [Client thread/DEBUG] [FML/]: Identified a mod of type Lnet/minecraftforge/fml/common/Mod; (com.arkcraft.mod.core.Main) - loading
-[10:26:06] [Client thread/TRACE] [arkcraft/]: Parsed dependency info : [] [] []
-[10:26:06] [Client thread/TRACE] [FML/]: Recursing into package com.arkcraft.mod.core.blocks
-[10:26:06] [Client thread/TRACE] [FML/]: Recursing into package com.arkcraft.mod.core.creativetabs
-[10:26:06] [Client thread/TRACE] [FML/]: Recursing into package com.arkcraft.mod.core.entity
-[10:26:06] [Client thread/TRACE] [FML/]: Recursing into package com.arkcraft.mod.core.entity.model
-[10:26:06] [Client thread/TRACE] [FML/]: Recursing into package com.arkcraft.mod.core.entity.render
-[10:26:06] [Client thread/TRACE] [FML/]: Recursing into package com.arkcraft.mod.core.handler
-[10:26:06] [Client thread/TRACE] [FML/]: Recursing into package com.arkcraft.mod.core.items
-[10:26:06] [Client thread/TRACE] [FML/]: Recursing into package com.arkcraft.mod.core.machine
-[10:26:06] [Client thread/TRACE] [FML/]: Recursing into package com.arkcraft.mod.core.machine.gui
-[10:26:06] [Client thread/TRACE] [FML/]: Recursing into package com.arkcraft.mod.core.proxy
-[10:26:06] [Client thread/DEBUG] [FML/]: Examining file forgeSrc-1.8-11.14.3.1493.jar for potential mods
-[10:26:06] [Client thread/DEBUG] [FML/]: The mod container forgeSrc-1.8-11.14.3.1493.jar appears to be missing an mcmod.info file
-[10:26:08] [Client thread/DEBUG] [FML/]: Examining file asm-debug-all-5.0.3.jar for potential mods
-[10:26:08] [Client thread/DEBUG] [FML/]: The mod container asm-debug-all-5.0.3.jar appears to be missing an mcmod.info file
-[10:26:08] [Client thread/DEBUG] [FML/]: Examining file libraryjavasound-20101123.jar for potential mods
-[10:26:08] [Client thread/DEBUG] [FML/]: The mod container libraryjavasound-20101123.jar appears to be missing an mcmod.info file
-[10:26:08] [Client thread/DEBUG] [FML/]: Examining file guava-17.0.jar for potential mods
-[10:26:08] [Client thread/DEBUG] [FML/]: The mod container guava-17.0.jar appears to be missing an mcmod.info file
-[10:26:09] [Client thread/DEBUG] [FML/]: Examining file jsr305-2.0.1.jar for potential mods
-[10:26:09] [Client thread/DEBUG] [FML/]: The mod container jsr305-2.0.1.jar appears to be missing an mcmod.info file
-[10:26:09] [Client thread/DEBUG] [FML/]: Examining directory start for potential mods
-[10:26:09] [Client thread/DEBUG] [FML/]: No mcmod.info file found in directory start
-[10:26:09] [Client thread/TRACE] [FML/]: Recursing into package net
-[10:26:09] [Client thread/TRACE] [FML/]: Recursing into package net.minecraftforge
-[10:26:09] [Client thread/TRACE] [FML/]: Recursing into package net.minecraftforge.gradle
-[10:26:09] [Client thread/TRACE] [FML/]: Recursing into package net.minecraftforge.gradle.tweakers
-[10:26:09] [Client thread/INFO] [FML/]: Forge Mod Loader has identified 4 mods to load
-[10:26:09] [Client thread/TRACE] [FML/]: Received a system property request ''
-[10:26:09] [Client thread/TRACE] [FML/]: System property request managing the state of 0 mods
-[10:26:09] [Client thread/DEBUG] [FML/]: After merging, found state information for 0 mods
-[10:26:09] [Client thread/DEBUG] [FML/]: Found translations in forgeSrc-1.8-11.14.3.1493.jar [en_US, af_ZA, ar_SA, br_FR, ca_ES, cs_CZ, da_DK, de_DE, el_GR, en_US, es_ES, fa_IR, fi_FI, fr_FR, he_IL, hu_HU, it_IT, ja_JP, ko_KR, lt_LT, nb_NO, nl_NL, nn_NO, no_NO, pl_PL, pt_BR, pt_PT, ro_RO, ru_RU, sl_SI, sr_SP, sv_SE, tr_TR, uk_UA, vi_VN, zh_CN, zh_TW, en_US]
-[10:26:09] [Client thread/DEBUG] [FML/]: Found translations in forgeSrc-1.8-11.14.3.1493.jar [en_US, af_ZA, ar_SA, br_FR, ca_ES, cs_CZ, da_DK, de_DE, el_GR, en_US, es_ES, fa_IR, fi_FI, fr_FR, he_IL, hu_HU, it_IT, ja_JP, ko_KR, lt_LT, nb_NO, nl_NL, nn_NO, no_NO, pl_PL, pt_BR, pt_PT, ro_RO, ru_RU, sl_SI, sr_SP, sv_SE, tr_TR, uk_UA, vi_VN, zh_CN, zh_TW, en_US]
-[10:26:09] [Client thread/DEBUG] [arkcraft/]: Enabling mod arkcraft
-[10:26:09] [Client thread/DEBUG] [FML/]: Injecting found translation assets for lang en_US at assets/arkcraft/lang/en_US.lang into language system
-[10:26:09] [Client thread/TRACE] [FML/]: Verifying mod requirements are satisfied
-[10:26:09] [Client thread/TRACE] [FML/]: All mod requirements are satisfied
-[10:26:09] [Client thread/TRACE] [FML/]: Sorting mods into an ordered list
-[10:26:09] [Client thread/TRACE] [FML/]: Mod sorting completed successfully
-[10:26:09] [Client thread/DEBUG] [FML/]: Mod sorting data
-[10:26:09] [Client thread/DEBUG] [FML/]: 	arkcraft(arkcraft:0.1 Alpha): bin ()
-[10:26:09] [Client thread/TRACE] [mcp/mcp]: Sending event FMLConstructionEvent to mod mcp
-[10:26:09] [Client thread/TRACE] [mcp/mcp]: Sent event FMLConstructionEvent to mod mcp
-[10:26:09] [Client thread/DEBUG] [FML/]: Bar Step: Construction - Minecraft Coder Pack took 0.004s
-[10:26:09] [Client thread/TRACE] [FML/FML]: Sending event FMLConstructionEvent to mod FML
-[10:26:10] [Client thread/TRACE] [FML/FML]: Mod FML is using network checker : Invoking method checkModLists
-[10:26:10] [Client thread/TRACE] [FML/FML]: Testing mod FML to verify it accepts its own version in a remote connection
-[10:26:10] [Client thread/TRACE] [FML/FML]: The mod FML accepts its own version (8.0.99.99)
-[10:26:10] [Client thread/INFO] [FML/FML]: Attempting connection with missing mods [mcp, FML, Forge, arkcraft] at CLIENT
-[10:26:10] [Client thread/INFO] [FML/FML]: Attempting connection with missing mods [mcp, FML, Forge, arkcraft] at SERVER
-[10:26:11] [Client thread/TRACE] [FML/FML]: Sent event FMLConstructionEvent to mod FML
-[10:26:11] [Client thread/DEBUG] [FML/]: Bar Step: Construction - Forge Mod Loader took 1.624s
-[10:26:11] [Client thread/TRACE] [Forge/Forge]: Sending event FMLConstructionEvent to mod Forge
-[10:26:11] [Client thread/TRACE] [FML/Forge]: Mod Forge is using network checker : No network checking performed
-[10:26:11] [Client thread/TRACE] [FML/Forge]: Testing mod Forge to verify it accepts its own version in a remote connection
-[10:26:11] [Client thread/TRACE] [FML/Forge]: The mod Forge accepts its own version (11.14.3.1493)
-[10:26:11] [Client thread/TRACE] [Forge/Forge]: Sent event FMLConstructionEvent to mod Forge
-[10:26:11] [Client thread/DEBUG] [FML/]: Bar Step: Construction - Minecraft Forge took 0.023s
-[10:26:11] [Client thread/TRACE] [arkcraft/arkcraft]: Sending event FMLConstructionEvent to mod arkcraft
-[10:26:11] [Client thread/TRACE] [FML/arkcraft]: Mod arkcraft is using network checker : Accepting version 0.1 Alpha
-[10:26:11] [Client thread/TRACE] [FML/arkcraft]: Testing mod arkcraft to verify it accepts its own version in a remote connection
-[10:26:11] [Client thread/TRACE] [FML/arkcraft]: The mod arkcraft accepts its own version (0.1 Alpha)
-[10:26:11] [Client thread/DEBUG] [FML/arkcraft]: Attempting to inject @SidedProxy classes into arkcraft
-[10:26:11] [Client thread/TRACE] [arkcraft/arkcraft]: Sent event FMLConstructionEvent to mod arkcraft
-[10:26:11] [Client thread/DEBUG] [FML/]: Bar Step: Construction - arkcraft took 0.069s
-[10:26:11] [Client thread/DEBUG] [FML/]: Bar Finished: Construction took 1.721s
-[10:26:11] [Client thread/DEBUG] [FML/]: Mod signature data
-[10:26:11] [Client thread/DEBUG] [FML/]:  	Valid Signatures:
-[10:26:11] [Client thread/DEBUG] [FML/]:  	Missing Signatures:
-[10:26:11] [Client thread/DEBUG] [FML/]: 		mcp	(Minecraft Coder Pack	9.05)	minecraft.jar
-[10:26:11] [Client thread/DEBUG] [FML/]: 		FML	(Forge Mod Loader	8.0.99.99)	forgeSrc-1.8-11.14.3.1493.jar
-[10:26:11] [Client thread/DEBUG] [FML/]: 		Forge	(Minecraft Forge	11.14.3.1493)	forgeSrc-1.8-11.14.3.1493.jar
-[10:26:11] [Client thread/DEBUG] [FML/]: 		arkcraft	(arkcraft	0.1 Alpha)	bin
-[10:26:11] [Client thread/DEBUG] [FML/]: Bar Step: Loading Resources - Default took 0.008s
-[10:26:11] [Client thread/DEBUG] [FML/]: Bar Step: Loading Resources - FMLFileResourcePack:Forge Mod Loader took 0.118s
-[10:26:11] [Client thread/DEBUG] [FML/]: Bar Step: Loading Resources - FMLFileResourcePack:Minecraft Forge took 0.112s
-[10:26:11] [Client thread/DEBUG] [FML/]: Bar Step: Loading Resources - FMLFileResourcePack:arkcraft took 0.007s
-[10:26:12] [Client thread/DEBUG] [FML/]: Bar Finished: Reloading - LanguageManager took 0.101s
-[10:26:12] [Client thread/DEBUG] [FML/]: Bar Step: Loading Resources - Reloading listeners took 0.103s
-[10:26:12] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resources took 0.348s
-[10:26:12] [Client thread/DEBUG] [Forge Mod Loader/]: Mod Forge Mod Loader is missing a pack.mcmeta file, substituting a dummy one
-[10:26:12] [Client thread/DEBUG] [Minecraft Forge/]: Mod Minecraft Forge is missing a pack.mcmeta file, substituting a dummy one
-[10:26:12] [Client thread/DEBUG] [arkcraft/]: Mod arkcraft is missing a pack.mcmeta file, substituting a dummy one
-[10:26:12] [Client thread/INFO] [FML/]: Processing ObjectHolder annotations
-[10:26:12] [Client thread/INFO] [FML/]: Found 384 ObjectHolder annotations
-[10:26:12] [Client thread/INFO] [FML/]: Identifying ItemStackHolder annotations
-[10:26:12] [Client thread/INFO] [FML/]: Found 0 ItemStackHolder annotations
-[10:26:12] [Client thread/TRACE] [mcp/mcp]: Sending event FMLPreInitializationEvent to mod mcp
-[10:26:12] [Client thread/TRACE] [mcp/mcp]: Sent event FMLPreInitializationEvent to mod mcp
-[10:26:12] [Client thread/DEBUG] [FML/]: Bar Step: PreInitialization - Minecraft Coder Pack took 0.003s
-[10:26:12] [Client thread/TRACE] [FML/FML]: Sending event FMLPreInitializationEvent to mod FML
-[10:26:12] [Client thread/TRACE] [FML/FML]: Sent event FMLPreInitializationEvent to mod FML
-[10:26:12] [Client thread/DEBUG] [FML/]: Bar Step: PreInitialization - Forge Mod Loader took 0.049s
-[10:26:12] [Client thread/TRACE] [Forge/Forge]: Sending event FMLPreInitializationEvent to mod Forge
-[10:26:12] [Client thread/INFO] [FML/Forge]: Configured a dormant chunk cache size of 0
-[10:26:12] [Client thread/TRACE] [Forge/Forge]: Sent event FMLPreInitializationEvent to mod Forge
-[10:26:12] [Client thread/DEBUG] [FML/]: Bar Step: PreInitialization - Minecraft Forge took 0.072s
-[10:26:12] [Client thread/TRACE] [arkcraft/arkcraft]: Sending event FMLPreInitializationEvent to mod arkcraft
-[10:26:12] [Client thread/TRACE] [FML/arkcraft]: Automatically registered mod arkcraft entity Explosive Cobblestone Ball as arkcraft.Explosive Cobblestone Ball
-[10:26:12] [Client thread/TRACE] [FML/arkcraft]: Automatically registered mod arkcraft entity Cobblestone Ball as arkcraft.Cobblestone Ball
-[10:26:12] [Client thread/DEBUG] [FML/arkcraft]: Skipping automatic mod arkcraft entity registration for already registered class com.arkcraft.mod.core.entity.EntityRaptor
-[10:26:12] [Client thread/TRACE] [arkcraft/arkcraft]: Sent event FMLPreInitializationEvent to mod arkcraft
-[10:26:12] [Client thread/DEBUG] [FML/]: Bar Step: PreInitialization - arkcraft took 0.374s
-[10:26:12] [Client thread/DEBUG] [FML/]: Bar Finished: PreInitialization took 0.498s
-[10:26:12] [Client thread/INFO] [FML/]: Applying holder lookups
-[10:26:12] [Client thread/INFO] [FML/]: Holder lookups applied
-[10:26:12] [Client thread/INFO] [FML/]: Injecting itemstacks
-[10:26:12] [Client thread/INFO] [FML/]: Itemstack injection complete
-[10:26:12] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - TextureManager took 0.001s
-[10:26:14] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - SoundHandler took 1.787s
-[10:26:14] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - FontRenderer took 0.011s
-[10:26:14] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - FontRenderer took 0.017s
-[10:26:14] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - GrassColorReloadListener took 0.023s
-[10:26:14] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - FoliageColorReloadListener took 0.025s
-[10:26:14] [Client thread/DEBUG] [FML/]: Bar Step: Rendering Setup - GL Setup took 0.001s
-[10:26:14] [Client thread/DEBUG] [FML/]: Bar Step: Rendering Setup - Loading Texture Map took 0.028s
-[10:26:14] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - ModelLoaderRegistry$1 took 0.001s
-[10:26:14] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - ModelLoaderRegistry$1 took 0.000s
-[10:26:14] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - ModelLoaderRegistry$1 took 0.000s
-[10:26:17] [Client thread/DEBUG] [FML/]: Item json isn't found for 'arkcraft:bone_helm#inventory', trying to load the variant from the blockstate json
-[10:26:17] [Client thread/INFO] [FML/]: Max texture size: 8192
-[10:26:17] [Client thread/DEBUG] [FML/]: Bar Finished: Texture stitching - missingno took 0.002s
-[10:26:17] [Client thread/DEBUG] [FML/]: Bar Finished: Texture creation took 0.013s
-[10:26:18] [Client thread/ERROR] [FML/]: Model definition for location arkcraft:bone_helm#inventory not found
-[10:26:18] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - ModelManager took 3.449s
-[10:26:18] [Client thread/DEBUG] [FML/]: Bar Step: Rendering Setup - Loading Model Manager took 3.587s
-[10:26:18] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - RenderItem took 0.005s
-[10:26:18] [Client thread/DEBUG] [FML/]: Bar Step: Rendering Setup - Loading Item Renderer took 0.360s
-[10:26:18] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - EntityRenderer took 0.000s
-[10:26:18] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - BlockRendererDispatcher took 0.000s
-[10:26:19] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - RenderGlobal took 0.000s
-[10:26:19] [Client thread/DEBUG] [FML/]: Bar Step: Rendering Setup - Loading Entity Renderer took 0.659s
-[10:26:19] [Client thread/DEBUG] [FML/]: Bar Finished: Rendering Setup took 4.634s
-[10:26:19] [Client thread/TRACE] [mcp/mcp]: Sending event FMLInitializationEvent to mod mcp
-[10:26:19] [Client thread/TRACE] [mcp/mcp]: Sent event FMLInitializationEvent to mod mcp
-[10:26:19] [Client thread/DEBUG] [FML/]: Bar Step: Initialization - Minecraft Coder Pack took 0.001s
-[10:26:19] [Client thread/TRACE] [FML/FML]: Sending event FMLInitializationEvent to mod FML
-[10:26:19] [Client thread/TRACE] [FML/FML]: Sent event FMLInitializationEvent to mod FML
-[10:26:19] [Client thread/DEBUG] [FML/]: Bar Step: Initialization - Forge Mod Loader took 0.001s
-[10:26:19] [Client thread/TRACE] [Forge/Forge]: Sending event FMLInitializationEvent to mod Forge
-[10:26:19] [Client thread/TRACE] [Forge/Forge]: Sent event FMLInitializationEvent to mod Forge
-[10:26:19] [Client thread/DEBUG] [FML/]: Bar Step: Initialization - Minecraft Forge took 0.002s
-[10:26:19] [Client thread/TRACE] [arkcraft/arkcraft]: Sending event FMLInitializationEvent to mod arkcraft
-[10:26:19] [Client thread/TRACE] [arkcraft/arkcraft]: Sent event FMLInitializationEvent to mod arkcraft
-[10:26:19] [Client thread/DEBUG] [FML/]: Bar Step: Initialization - arkcraft took 0.012s
-[10:26:19] [Client thread/DEBUG] [FML/]: Bar Finished: Initialization took 0.015s
-[10:26:19] [Client thread/TRACE] [FML/]: Attempting to deliver 0 IMC messages to mod mcp
-[10:26:19] [Client thread/TRACE] [mcp/mcp]: Sending event IMCEvent to mod mcp
-[10:26:19] [Client thread/TRACE] [mcp/mcp]: Sent event IMCEvent to mod mcp
-[10:26:19] [Client thread/DEBUG] [FML/]: Bar Step: InterModComms$IMC - Minecraft Coder Pack took 0.006s
-[10:26:19] [Client thread/TRACE] [FML/]: Attempting to deliver 0 IMC messages to mod FML
-[10:26:19] [Client thread/TRACE] [FML/FML]: Sending event IMCEvent to mod FML
-[10:26:19] [Client thread/TRACE] [FML/FML]: Sent event IMCEvent to mod FML
-[10:26:19] [Client thread/DEBUG] [FML/]: Bar Step: InterModComms$IMC - Forge Mod Loader took 0.001s
-[10:26:19] [Client thread/TRACE] [FML/]: Attempting to deliver 0 IMC messages to mod Forge
-[10:26:19] [Client thread/TRACE] [Forge/Forge]: Sending event IMCEvent to mod Forge
-[10:26:19] [Client thread/TRACE] [Forge/Forge]: Sent event IMCEvent to mod Forge
-[10:26:19] [Client thread/DEBUG] [FML/]: Bar Step: InterModComms$IMC - Minecraft Forge took 0.008s
-[10:26:19] [Client thread/TRACE] [FML/]: Attempting to deliver 0 IMC messages to mod arkcraft
-[10:26:19] [Client thread/TRACE] [arkcraft/arkcraft]: Sending event IMCEvent to mod arkcraft
-[10:26:19] [Client thread/TRACE] [arkcraft/arkcraft]: Sent event IMCEvent to mod arkcraft
-[10:26:19] [Client thread/DEBUG] [FML/]: Bar Step: InterModComms$IMC - arkcraft took 0.001s
-[10:26:19] [Client thread/DEBUG] [FML/]: Bar Finished: InterModComms$IMC took 0.016s
-[10:26:19] [Client thread/INFO] [FML/]: Injecting itemstacks
-[10:26:19] [Client thread/INFO] [FML/]: Itemstack injection complete
-[10:26:19] [Client thread/TRACE] [mcp/mcp]: Sending event FMLPostInitializationEvent to mod mcp
-[10:26:19] [Client thread/TRACE] [mcp/mcp]: Sent event FMLPostInitializationEvent to mod mcp
-[10:26:19] [Client thread/DEBUG] [FML/]: Bar Step: PostInitialization - Minecraft Coder Pack took 0.000s
-[10:26:19] [Client thread/TRACE] [FML/FML]: Sending event FMLPostInitializationEvent to mod FML
-[10:26:19] [Client thread/TRACE] [FML/FML]: Sent event FMLPostInitializationEvent to mod FML
-[10:26:19] [Client thread/DEBUG] [FML/]: Bar Step: PostInitialization - Forge Mod Loader took 0.000s
-[10:26:19] [Client thread/TRACE] [Forge/Forge]: Sending event FMLPostInitializationEvent to mod Forge
-[10:26:19] [Client thread/TRACE] [Forge/Forge]: Sent event FMLPostInitializationEvent to mod Forge
-[10:26:19] [Client thread/DEBUG] [FML/]: Bar Step: PostInitialization - Minecraft Forge took 0.017s
-[10:26:19] [Client thread/TRACE] [arkcraft/arkcraft]: Sending event FMLPostInitializationEvent to mod arkcraft
-[10:26:19] [Client thread/TRACE] [arkcraft/arkcraft]: Sent event FMLPostInitializationEvent to mod arkcraft
-[10:26:19] [Client thread/DEBUG] [FML/]: Bar Step: PostInitialization - arkcraft took 0.001s
-[10:26:19] [Client thread/DEBUG] [FML/]: Bar Finished: PostInitialization took 0.018s
-[10:26:19] [Client thread/TRACE] [mcp/mcp]: Sending event FMLLoadCompleteEvent to mod mcp
-[10:26:19] [Client thread/TRACE] [mcp/mcp]: Sent event FMLLoadCompleteEvent to mod mcp
-[10:26:19] [Client thread/DEBUG] [FML/]: Bar Step: LoadComplete - Minecraft Coder Pack took 0.000s
-[10:26:19] [Client thread/TRACE] [FML/FML]: Sending event FMLLoadCompleteEvent to mod FML
-[10:26:19] [Client thread/TRACE] [FML/FML]: Sent event FMLLoadCompleteEvent to mod FML
-[10:26:19] [Client thread/DEBUG] [FML/]: Bar Step: LoadComplete - Forge Mod Loader took 0.001s
-[10:26:19] [Client thread/TRACE] [Forge/Forge]: Sending event FMLLoadCompleteEvent to mod Forge
-[10:26:19] [Client thread/DEBUG] [FML/Forge]: Forge RecipeSorter Baking:
-[10:26:19] [Client thread/DEBUG] [FML/Forge]:   14: RecipeEntry("Before", UNKNOWN, )
-[10:26:19] [Client thread/DEBUG] [FML/Forge]:   13: RecipeEntry("minecraft:shaped", SHAPED, net.minecraft.item.crafting.ShapedRecipes) Before: minecraft:shapeless
-[10:26:19] [Client thread/DEBUG] [FML/Forge]:   12: RecipeEntry("forge:shapedore", SHAPED, net.minecraftforge.oredict.ShapedOreRecipe) Before: minecraft:shapeless After: minecraft:shaped
-[10:26:19] [Client thread/DEBUG] [FML/Forge]:   11: RecipeEntry("minecraft:mapextending", SHAPED, net.minecraft.item.crafting.RecipesMapExtending) Before: minecraft:shapeless After: minecraft:shaped
-[10:26:19] [Client thread/DEBUG] [FML/Forge]:   10: RecipeEntry("minecraft:shapeless", SHAPELESS, net.minecraft.item.crafting.ShapelessRecipes) After: minecraft:shaped
-[10:26:19] [Client thread/DEBUG] [FML/Forge]:   9: RecipeEntry("minecraft:repair", SHAPELESS, net.minecraft.item.crafting.RecipeRepairItem) After: minecraft:shapeless
-[10:26:19] [Client thread/DEBUG] [FML/Forge]:   8: RecipeEntry("forge:shapelessore", SHAPELESS, net.minecraftforge.oredict.ShapelessOreRecipe) After: minecraft:shapeless
-[10:26:19] [Client thread/DEBUG] [FML/Forge]:   7: RecipeEntry("minecraft:armordyes", SHAPELESS, net.minecraft.item.crafting.RecipesArmorDyes) After: minecraft:shapeless
-[10:26:19] [Client thread/DEBUG] [FML/Forge]:   6: RecipeEntry("minecraft:fireworks", SHAPELESS, net.minecraft.item.crafting.RecipeFireworks) After: minecraft:shapeless
-[10:26:19] [Client thread/DEBUG] [FML/Forge]:   5: RecipeEntry("minecraft:pattern_add", SHAPELESS, net.minecraft.item.crafting.RecipesBanners$RecipeAddPattern) After: minecraft:shapeless
-[10:26:19] [Client thread/DEBUG] [FML/Forge]:   4: RecipeEntry("minecraft:pattern_dupe", SHAPELESS, net.minecraft.item.crafting.RecipesBanners$RecipeDuplicatePattern) After: minecraft:shapeless
-[10:26:19] [Client thread/DEBUG] [FML/Forge]:   3: RecipeEntry("minecraft:bookcloning", SHAPELESS, net.minecraft.item.crafting.RecipeBookCloning) After: minecraft:shapeless
-[10:26:19] [Client thread/DEBUG] [FML/Forge]:   2: RecipeEntry("minecraft:mapcloning", SHAPELESS, net.minecraft.item.crafting.RecipesMapCloning) After: minecraft:shapeless
-[10:26:19] [Client thread/DEBUG] [FML/Forge]:   1: RecipeEntry("After", UNKNOWN, )
-[10:26:19] [Client thread/DEBUG] [FML/Forge]: Sorting recipies
-[10:26:19] [Client thread/TRACE] [Forge/Forge]: Sent event FMLLoadCompleteEvent to mod Forge
-[10:26:19] [Client thread/DEBUG] [FML/]: Bar Step: LoadComplete - Minecraft Forge took 0.014s
-[10:26:19] [Client thread/TRACE] [arkcraft/arkcraft]: Sending event FMLLoadCompleteEvent to mod arkcraft
-[10:26:19] [Client thread/TRACE] [arkcraft/arkcraft]: Sent event FMLLoadCompleteEvent to mod arkcraft
-[10:26:19] [Client thread/DEBUG] [FML/]: Bar Step: LoadComplete - arkcraft took 0.001s
-[10:26:19] [Client thread/DEBUG] [FML/]: Bar Finished: LoadComplete took 0.016s
-[10:26:19] [Client thread/DEBUG] [FML/]: Freezing block and item id maps
-[10:26:19] [Client thread/DEBUG] [FML/]: Registry consistency check successful
-[10:26:19] [Client thread/DEBUG] [FML/]: Registry consistency check successful
-[10:26:19] [Client thread/INFO] [FML/]: Forge Mod Loader has successfully loaded 4 mods
-[10:26:19] [Client thread/DEBUG] [FML/]: Bar Step: Loading Resources - Default took 0.000s
-[10:26:19] [Client thread/DEBUG] [FML/]: Bar Step: Loading Resources - FMLFileResourcePack:Forge Mod Loader took 0.080s
-[10:26:19] [Client thread/DEBUG] [FML/]: Bar Step: Loading Resources - FMLFileResourcePack:Minecraft Forge took 0.089s
-[10:26:19] [Client thread/DEBUG] [FML/]: Bar Step: Loading Resources - FMLFileResourcePack:arkcraft took 0.001s
-[10:26:19] [Client thread/DEBUG] [FML/]: Bar Step: Reloading Texture Manager - minecraft:textures/atlas/blocks.png took 0.000s
-[10:26:19] [Client thread/DEBUG] [FML/]: Bar Step: Reloading Texture Manager - minecraft:textures/font/ascii.png took 0.026s
-[10:26:19] [Client thread/DEBUG] [FML/]: Bar Step: Reloading Texture Manager - minecraft:dynamic/lightMap_1 took 0.000s
-[10:26:19] [Client thread/DEBUG] [FML/]: Bar Step: Reloading Texture Manager - minecraft:textures/misc/forcefield.png took 0.010s
-[10:26:19] [Client thread/DEBUG] [FML/]: Bar Step: Reloading Texture Manager - minecraft:textures/font/ascii_sga.png took 0.019s
-[10:26:19] [Client thread/DEBUG] [FML/]: Bar Finished: Reloading Texture Manager took 0.055s
-[10:26:22] [Client thread/DEBUG] [FML/]: Item json isn't found for 'arkcraft:bone_helm#inventory', trying to load the variant from the blockstate json
-[10:26:22] [Client thread/INFO] [FML/]: Max texture size: 8192
-[10:26:23] [Client thread/DEBUG] [FML/]: Bar Finished: Texture stitching took 0.686s
-[10:26:23] [Client thread/DEBUG] [FML/]: Bar Finished: Mipmap generation took 0.373s
-[10:26:23] [Client thread/DEBUG] [FML/]: Bar Finished: Texture stitching took 0.105s
-[10:26:23] [Client thread/DEBUG] [FML/]: Bar Finished: Texture creation took 0.179s
-[10:26:24] [Client thread/ERROR] [FML/]: Model definition for location arkcraft:bone_helm#inventory not found
-[10:26:24] [Client thread/DEBUG] [FML/]: Bar Finished: Reloading took 4.763s
-[10:26:24] [Client thread/DEBUG] [FML/]: Bar Step: Loading Resources - Reloading listeners took 4.764s
-[10:26:24] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resources took 4.934s
-[10:26:24] [Client thread/DEBUG] [Forge Mod Loader/]: Mod Forge Mod Loader is missing a pack.mcmeta file, substituting a dummy one
-[10:26:24] [Client thread/DEBUG] [Minecraft Forge/]: Mod Minecraft Forge is missing a pack.mcmeta file, substituting a dummy one
-[10:26:24] [Client thread/DEBUG] [arkcraft/]: Mod arkcraft is missing a pack.mcmeta file, substituting a dummy one
-[10:26:24] [Client thread/DEBUG] [FML/]: Bar Finished: Loading took 19.061s
-[10:26:32] [Server thread/TRACE] [mcp/mcp]: Sending event FMLServerAboutToStartEvent to mod mcp
-[10:26:32] [Server thread/TRACE] [mcp/mcp]: Sent event FMLServerAboutToStartEvent to mod mcp
-[10:26:32] [Server thread/DEBUG] [FML/]: Bar Step: ServerAboutToStart - Minecraft Coder Pack took 0.002s
-[10:26:32] [Server thread/TRACE] [FML/FML]: Sending event FMLServerAboutToStartEvent to mod FML
-[10:26:32] [Server thread/TRACE] [FML/FML]: Sent event FMLServerAboutToStartEvent to mod FML
-[10:26:32] [Server thread/DEBUG] [FML/]: Bar Step: ServerAboutToStart - Forge Mod Loader took 0.000s
-[10:26:32] [Server thread/TRACE] [Forge/Forge]: Sending event FMLServerAboutToStartEvent to mod Forge
-[10:26:32] [Server thread/TRACE] [Forge/Forge]: Sent event FMLServerAboutToStartEvent to mod Forge
-[10:26:32] [Server thread/DEBUG] [FML/]: Bar Step: ServerAboutToStart - Minecraft Forge took 0.000s
-[10:26:32] [Server thread/TRACE] [arkcraft/arkcraft]: Sending event FMLServerAboutToStartEvent to mod arkcraft
-[10:26:32] [Server thread/TRACE] [arkcraft/arkcraft]: Sent event FMLServerAboutToStartEvent to mod arkcraft
-[10:26:32] [Server thread/DEBUG] [FML/]: Bar Step: ServerAboutToStart - arkcraft took 0.002s
-[10:26:32] [Server thread/DEBUG] [FML/]: Bar Finished: ServerAboutToStart took 0.005s
-[10:26:32] [Server thread/INFO] [FML/]: Injecting existing block and item data into this server instance
-[10:26:32] [Server thread/DEBUG] [FML/]: Registry consistency check successful
-[10:26:32] [Server thread/DEBUG] [FML/]: Fixed item id mismatch arkcraft:ironPike: 4121 (init) -> 4120 (map).
-[10:26:32] [Server thread/DEBUG] [FML/]: Fixed item id mismatch arkcraft:stoneSpear: 4120 (init) -> 4119 (map).
-[10:26:32] [Server thread/DEBUG] [FML/]: Fixed item id mismatch arkcraft:bone_helm: 4119 (init) -> 4121 (map).
-[10:26:32] [Server thread/DEBUG] [FML/]: Registry consistency check successful
-[10:26:32] [Server thread/TRACE] [mcp/mcp]: Sending event FMLModIdMappingEvent to mod mcp
-[10:26:32] [Server thread/TRACE] [mcp/mcp]: Sent event FMLModIdMappingEvent to mod mcp
-[10:26:32] [Server thread/DEBUG] [FML/]: Bar Step: ModIdMapping - Minecraft Coder Pack took 0.001s
-[10:26:32] [Server thread/TRACE] [FML/FML]: Sending event FMLModIdMappingEvent to mod FML
-[10:26:32] [Server thread/TRACE] [FML/FML]: Sent event FMLModIdMappingEvent to mod FML
-[10:26:32] [Server thread/DEBUG] [FML/]: Bar Step: ModIdMapping - Forge Mod Loader took 0.000s
-[10:26:32] [Server thread/TRACE] [Forge/Forge]: Sending event FMLModIdMappingEvent to mod Forge
-[10:26:32] [Server thread/TRACE] [Forge/Forge]: Sent event FMLModIdMappingEvent to mod Forge
-[10:26:32] [Server thread/DEBUG] [FML/]: Bar Step: ModIdMapping - Minecraft Forge took 0.001s
-[10:26:32] [Server thread/TRACE] [arkcraft/arkcraft]: Sending event FMLModIdMappingEvent to mod arkcraft
-[10:26:32] [Server thread/TRACE] [arkcraft/arkcraft]: Sent event FMLModIdMappingEvent to mod arkcraft
-[10:26:32] [Server thread/DEBUG] [FML/]: Bar Step: ModIdMapping - arkcraft took 0.000s
-[10:26:32] [Server thread/DEBUG] [FML/]: Bar Finished: ModIdMapping took 0.002s
-[10:26:32] [Server thread/INFO] [FML/]: Applying holder lookups
-[10:26:32] [Server thread/INFO] [FML/]: Holder lookups applied
-[10:26:32] [Server thread/DEBUG] [FML/]: Loading persistent fluid defaults from world
-[10:26:32] [Server thread/DEBUG] [FML/]: The fluid minecraft:lava has been selected as the default fluid for lava
-[10:26:32] [Server thread/DEBUG] [FML/]: The fluid minecraft:water has been selected as the default fluid for water
-[10:26:33] [Server thread/INFO] [FML/]: Loading dimension 0 (New World) (net.minecraft.server.integrated.IntegratedServer@49b5da44)
-[10:26:33] [Server thread/INFO] [FML/]: Loading dimension 1 (New World) (net.minecraft.server.integrated.IntegratedServer@49b5da44)
-[10:26:33] [Server thread/INFO] [FML/]: Loading dimension -1 (New World) (net.minecraft.server.integrated.IntegratedServer@49b5da44)
-[10:26:36] [Server thread/TRACE] [mcp/mcp]: Sending event FMLServerStartingEvent to mod mcp
-[10:26:36] [Server thread/TRACE] [mcp/mcp]: Sent event FMLServerStartingEvent to mod mcp
-[10:26:36] [Server thread/DEBUG] [FML/]: Bar Step: ServerStarting - Minecraft Coder Pack took 0.001s
-[10:26:36] [Server thread/TRACE] [FML/FML]: Sending event FMLServerStartingEvent to mod FML
-[10:26:36] [Server thread/TRACE] [FML/FML]: Sent event FMLServerStartingEvent to mod FML
-[10:26:36] [Server thread/DEBUG] [FML/]: Bar Step: ServerStarting - Forge Mod Loader took 0.000s
-[10:26:36] [Server thread/TRACE] [Forge/Forge]: Sending event FMLServerStartingEvent to mod Forge
-[10:26:36] [Server thread/TRACE] [Forge/Forge]: Sent event FMLServerStartingEvent to mod Forge
-[10:26:36] [Server thread/DEBUG] [FML/]: Bar Step: ServerStarting - Minecraft Forge took 0.004s
-[10:26:36] [Server thread/TRACE] [arkcraft/arkcraft]: Sending event FMLServerStartingEvent to mod arkcraft
-[10:26:36] [Server thread/TRACE] [arkcraft/arkcraft]: Sent event FMLServerStartingEvent to mod arkcraft
-[10:26:36] [Server thread/DEBUG] [FML/]: Bar Step: ServerStarting - arkcraft took 0.000s
-[10:26:36] [Server thread/DEBUG] [FML/]: Bar Finished: ServerStarting took 0.006s
-[10:26:36] [Server thread/TRACE] [mcp/mcp]: Sending event FMLServerStartedEvent to mod mcp
-[10:26:36] [Server thread/TRACE] [mcp/mcp]: Sent event FMLServerStartedEvent to mod mcp
-[10:26:36] [Server thread/DEBUG] [FML/]: Bar Step: ServerStarted - Minecraft Coder Pack took 0.000s
-[10:26:36] [Server thread/TRACE] [FML/FML]: Sending event FMLServerStartedEvent to mod FML
-[10:26:36] [Server thread/TRACE] [FML/FML]: Sent event FMLServerStartedEvent to mod FML
-[10:26:36] [Server thread/DEBUG] [FML/]: Bar Step: ServerStarted - Forge Mod Loader took 0.001s
-[10:26:36] [Server thread/TRACE] [Forge/Forge]: Sending event FMLServerStartedEvent to mod Forge
-[10:26:36] [Server thread/TRACE] [Forge/Forge]: Sent event FMLServerStartedEvent to mod Forge
-[10:26:36] [Server thread/DEBUG] [FML/]: Bar Step: ServerStarted - Minecraft Forge took 0.000s
-[10:26:36] [Server thread/TRACE] [arkcraft/arkcraft]: Sending event FMLServerStartedEvent to mod arkcraft
-[10:26:36] [Server thread/TRACE] [arkcraft/arkcraft]: Sent event FMLServerStartedEvent to mod arkcraft
-[10:26:36] [Server thread/DEBUG] [FML/]: Bar Step: ServerStarted - arkcraft took 0.000s
-[10:26:36] [Server thread/DEBUG] [FML/]: Bar Finished: ServerStarted took 0.002s
-[10:26:38] [Netty Local Client IO #0/TRACE] [FML/]: Handshake channel activating
-[10:26:38] [Netty Local Client IO #0/DEBUG] [FML/]: FMLHandshakeClientState: null->FMLHandshakeClientState$1:START
-[10:26:38] [Netty Local Client IO #0/DEBUG] [FML/]:   Next: HELLO
-[10:26:38] [Netty Server IO #1/TRACE] [FML/]: Handshake channel activating
-[10:26:38] [Netty Server IO #1/DEBUG] [FML/]: FMLHandshakeServerState: null->FMLHandshakeServerState$1:START
-[10:26:38] [Netty Server IO #1/DEBUG] [FML/]:   Next: HELLO
-[10:26:38] [Netty Local Client IO #0/DEBUG] [FML/]: Server FML protocol version 2, 4 byte dimension received 0
-[10:26:38] [Netty Local Client IO #0/DEBUG] [FML/]: FMLHandshakeClientState: $ServerHello->FMLHandshakeClientState$2:HELLO
-[10:26:38] [Netty Local Client IO #0/INFO] [FML/]: Server protocol version 2
-[10:26:38] [Netty Local Client IO #0/DEBUG] [FML/]: Received override dimension 0
-[10:26:38] [Netty Local Client IO #0/DEBUG] [FML/]:   Next: WAITINGSERVERDATA
-[10:26:38] [Netty Server IO #1/DEBUG] [FML/]: FMLHandshakeServerState: $ClientHello->FMLHandshakeServerState$2:HELLO
-[10:26:38] [Netty Server IO #1/INFO] [FML/]: Client protocol version 2
-[10:26:38] [Netty Server IO #1/DEBUG] [FML/]:   Next: HELLO
-[10:26:38] [Netty Server IO #1/DEBUG] [FML/]: FMLHandshakeServerState: $ModList:4 mods->FMLHandshakeServerState$2:HELLO
-[10:26:38] [Netty Server IO #1/INFO] [FML/]: Client attempting to join with 4 mods : arkcraft@0.1 Alpha,FML@8.0.99.99,Forge@11.14.3.1493,mcp@9.05
-[10:26:38] [Netty Server IO #1/DEBUG] [FML/]:   Next: WAITINGCACK
-[10:26:38] [Netty Local Client IO #0/DEBUG] [FML/]: FMLHandshakeClientState: $ModList:4 mods->FMLHandshakeClientState$3:WAITINGSERVERDATA
-[10:26:38] [Netty Local Client IO #0/DEBUG] [FML/]:   Next: PENDINGCOMPLETE
-[10:26:38] [Netty Server IO #1/DEBUG] [FML/]: FMLHandshakeServerState: $HandshakeAck:{2}->FMLHandshakeServerState$3:WAITINGCACK
-[10:26:38] [Netty Local Client IO #0/DEBUG] [FML/]: FMLHandshakeClientState: $HandshakeAck:{2}->FMLHandshakeClientState$5:PENDINGCOMPLETE
-[10:26:38] [Netty Local Client IO #0/DEBUG] [FML/]:   Next: COMPLETE
-[10:26:38] [Netty Server IO #1/DEBUG] [FML/]:   Next: COMPLETE
-[10:26:38] [Netty Server IO #1/DEBUG] [FML/]: FMLHandshakeServerState: $HandshakeAck:{4}->FMLHandshakeServerState$4:COMPLETE
-[10:26:38] [Netty Server IO #1/DEBUG] [FML/]:   Next: DONE
-[10:26:38] [Netty Local Client IO #0/DEBUG] [FML/]: The fluid minecraft:lava has been selected as the default fluid for lava
-[10:26:38] [Netty Local Client IO #0/DEBUG] [FML/]: The fluid minecraft:water has been selected as the default fluid for water
-[10:26:38] [Netty Local Client IO #0/DEBUG] [FML/]: FMLHandshakeClientState: $HandshakeAck:{3}->FMLHandshakeClientState$6:COMPLETE
-[10:26:38] [Netty Local Client IO #0/DEBUG] [FML/]:   Next: DONE
-[10:26:38] [Netty Server IO #1/DEBUG] [FML/]: FMLHandshakeServerState: $HandshakeAck:{5}->FMLHandshakeServerState$5:DONE
-[10:26:38] [Netty Server IO #1/DEBUG] [FML/]:   Next: DONE
-[10:26:38] [Netty Local Client IO #0/INFO] [FML/]: [Netty Local Client IO #0] Client side modded connection established
-[10:26:38] [Server thread/INFO] [FML/]: [Server thread] Server side modded connection established
-[10:26:38] [Client thread/DEBUG] [FML/]: Overriding dimension: using 0
-[10:27:13] [Client Shutdown Thread/DEBUG] [FML/]: Gathering id map for writing to world save New World
-[10:27:13] [Server thread/TRACE] [mcp/mcp]: Sending event FMLServerStoppingEvent to mod mcp
-[10:27:13] [Server thread/TRACE] [mcp/mcp]: Sent event FMLServerStoppingEvent to mod mcp
-[10:27:13] [Server thread/TRACE] [FML/FML]: Sending event FMLServerStoppingEvent to mod FML
-[10:27:13] [Server thread/TRACE] [FML/FML]: Sent event FMLServerStoppingEvent to mod FML
-[10:27:13] [Server thread/TRACE] [Forge/Forge]: Sending event FMLServerStoppingEvent to mod Forge
-[10:27:13] [Server thread/TRACE] [Forge/Forge]: Sent event FMLServerStoppingEvent to mod Forge
-[10:27:13] [Server thread/TRACE] [arkcraft/arkcraft]: Sending event FMLServerStoppingEvent to mod arkcraft
-[10:27:13] [Server thread/TRACE] [arkcraft/arkcraft]: Sent event FMLServerStoppingEvent to mod arkcraft
+[10:38:31] [Client thread/DEBUG] [FML/]: Found an mcmod.info file in directory bin
+[10:38:31] [Client thread/TRACE] [FML/]: Recursing into package assets
+[10:38:31] [Client thread/TRACE] [FML/]: Recursing into package assets.arkcraft
+[10:38:31] [Client thread/TRACE] [FML/]: Recursing into package assets.arkcraft.blockstates
+[10:38:31] [Client thread/TRACE] [FML/]: Recursing into package assets.arkcraft.lang
+[10:38:31] [Client thread/TRACE] [FML/]: Recursing into package assets.arkcraft.models
+[10:38:31] [Client thread/TRACE] [FML/]: Recursing into package assets.arkcraft.models.block
+[10:38:31] [Client thread/TRACE] [FML/]: Recursing into package assets.arkcraft.models.item
+[10:38:31] [Client thread/TRACE] [FML/]: Recursing into package assets.arkcraft.textures
+[10:38:31] [Client thread/TRACE] [FML/]: Recursing into package assets.arkcraft.textures.armor
+[10:38:31] [Client thread/TRACE] [FML/]: Recursing into package assets.arkcraft.textures.blocks
+[10:38:31] [Client thread/TRACE] [FML/]: Recursing into package assets.arkcraft.textures.gui
+[10:38:31] [Client thread/TRACE] [FML/]: Recursing into package assets.arkcraft.textures.items
+[10:38:31] [Client thread/TRACE] [FML/]: Recursing into package assets.arkcraft.textures.model
+[10:38:31] [Client thread/TRACE] [FML/]: Recursing into package com
+[10:38:31] [Client thread/TRACE] [FML/]: Recursing into package com.arkcraft
+[10:38:31] [Client thread/TRACE] [FML/]: Recursing into package com.arkcraft.mod
+[10:38:31] [Client thread/TRACE] [FML/]: Recursing into package com.arkcraft.mod.core
+[10:38:31] [Client thread/DEBUG] [FML/]: Identified a mod of type Lnet/minecraftforge/fml/common/Mod; (com.arkcraft.mod.core.Main) - loading
+[10:38:31] [Client thread/TRACE] [arkcraft/]: Parsed dependency info : [] [] []
+[10:38:31] [Client thread/TRACE] [FML/]: Recursing into package com.arkcraft.mod.core.blocks
+[10:38:31] [Client thread/TRACE] [FML/]: Recursing into package com.arkcraft.mod.core.creativetabs
+[10:38:31] [Client thread/TRACE] [FML/]: Recursing into package com.arkcraft.mod.core.entity
+[10:38:31] [Client thread/TRACE] [FML/]: Recursing into package com.arkcraft.mod.core.entity.model
+[10:38:31] [Client thread/TRACE] [FML/]: Recursing into package com.arkcraft.mod.core.entity.render
+[10:38:31] [Client thread/TRACE] [FML/]: Recursing into package com.arkcraft.mod.core.handler
+[10:38:31] [Client thread/TRACE] [FML/]: Recursing into package com.arkcraft.mod.core.items
+[10:38:31] [Client thread/TRACE] [FML/]: Recursing into package com.arkcraft.mod.core.machine
+[10:38:31] [Client thread/TRACE] [FML/]: Recursing into package com.arkcraft.mod.core.machine.gui
+[10:38:31] [Client thread/TRACE] [FML/]: Recursing into package com.arkcraft.mod.core.proxy
+[10:38:31] [Client thread/DEBUG] [FML/]: Examining file forgeSrc-1.8-11.14.3.1493.jar for potential mods
+[10:38:31] [Client thread/DEBUG] [FML/]: The mod container forgeSrc-1.8-11.14.3.1493.jar appears to be missing an mcmod.info file
+[10:38:33] [Client thread/DEBUG] [FML/]: Examining file asm-debug-all-5.0.3.jar for potential mods
+[10:38:33] [Client thread/DEBUG] [FML/]: The mod container asm-debug-all-5.0.3.jar appears to be missing an mcmod.info file
+[10:38:33] [Client thread/DEBUG] [FML/]: Examining file libraryjavasound-20101123.jar for potential mods
+[10:38:33] [Client thread/DEBUG] [FML/]: The mod container libraryjavasound-20101123.jar appears to be missing an mcmod.info file
+[10:38:33] [Client thread/DEBUG] [FML/]: Examining file guava-17.0.jar for potential mods
+[10:38:33] [Client thread/DEBUG] [FML/]: The mod container guava-17.0.jar appears to be missing an mcmod.info file
+[10:38:34] [Client thread/DEBUG] [FML/]: Examining file jsr305-2.0.1.jar for potential mods
+[10:38:34] [Client thread/DEBUG] [FML/]: The mod container jsr305-2.0.1.jar appears to be missing an mcmod.info file
+[10:38:34] [Client thread/DEBUG] [FML/]: Examining directory start for potential mods
+[10:38:34] [Client thread/DEBUG] [FML/]: No mcmod.info file found in directory start
+[10:38:34] [Client thread/TRACE] [FML/]: Recursing into package net
+[10:38:34] [Client thread/TRACE] [FML/]: Recursing into package net.minecraftforge
+[10:38:34] [Client thread/TRACE] [FML/]: Recursing into package net.minecraftforge.gradle
+[10:38:34] [Client thread/TRACE] [FML/]: Recursing into package net.minecraftforge.gradle.tweakers
+[10:38:34] [Client thread/INFO] [FML/]: Forge Mod Loader has identified 4 mods to load
+[10:38:34] [Client thread/TRACE] [FML/]: Received a system property request ''
+[10:38:34] [Client thread/TRACE] [FML/]: System property request managing the state of 0 mods
+[10:38:34] [Client thread/DEBUG] [FML/]: After merging, found state information for 0 mods
+[10:38:35] [Client thread/DEBUG] [FML/]: Found translations in forgeSrc-1.8-11.14.3.1493.jar [en_US, af_ZA, ar_SA, br_FR, ca_ES, cs_CZ, da_DK, de_DE, el_GR, en_US, es_ES, fa_IR, fi_FI, fr_FR, he_IL, hu_HU, it_IT, ja_JP, ko_KR, lt_LT, nb_NO, nl_NL, nn_NO, no_NO, pl_PL, pt_BR, pt_PT, ro_RO, ru_RU, sl_SI, sr_SP, sv_SE, tr_TR, uk_UA, vi_VN, zh_CN, zh_TW, en_US]
+[10:38:36] [Client thread/DEBUG] [FML/]: Found translations in forgeSrc-1.8-11.14.3.1493.jar [en_US, af_ZA, ar_SA, br_FR, ca_ES, cs_CZ, da_DK, de_DE, el_GR, en_US, es_ES, fa_IR, fi_FI, fr_FR, he_IL, hu_HU, it_IT, ja_JP, ko_KR, lt_LT, nb_NO, nl_NL, nn_NO, no_NO, pl_PL, pt_BR, pt_PT, ro_RO, ru_RU, sl_SI, sr_SP, sv_SE, tr_TR, uk_UA, vi_VN, zh_CN, zh_TW, en_US]
+[10:38:36] [Client thread/DEBUG] [arkcraft/]: Enabling mod arkcraft
+[10:38:36] [Client thread/DEBUG] [FML/]: Injecting found translation assets for lang en_US at assets/arkcraft/lang/en_US.lang into language system
+[10:38:36] [Client thread/TRACE] [FML/]: Verifying mod requirements are satisfied
+[10:38:36] [Client thread/TRACE] [FML/]: All mod requirements are satisfied
+[10:38:36] [Client thread/TRACE] [FML/]: Sorting mods into an ordered list
+[10:38:36] [Client thread/TRACE] [FML/]: Mod sorting completed successfully
+[10:38:36] [Client thread/DEBUG] [FML/]: Mod sorting data
+[10:38:36] [Client thread/DEBUG] [FML/]: 	arkcraft(arkcraft:0.1 Alpha): bin ()
+[10:38:36] [Client thread/TRACE] [mcp/mcp]: Sending event FMLConstructionEvent to mod mcp
+[10:38:36] [Client thread/TRACE] [mcp/mcp]: Sent event FMLConstructionEvent to mod mcp
+[10:38:36] [Client thread/DEBUG] [FML/]: Bar Step: Construction - Minecraft Coder Pack took 0.003s
+[10:38:36] [Client thread/TRACE] [FML/FML]: Sending event FMLConstructionEvent to mod FML
+[10:38:36] [Client thread/TRACE] [FML/FML]: Mod FML is using network checker : Invoking method checkModLists
+[10:38:36] [Client thread/TRACE] [FML/FML]: Testing mod FML to verify it accepts its own version in a remote connection
+[10:38:36] [Client thread/TRACE] [FML/FML]: The mod FML accepts its own version (8.0.99.99)
+[10:38:36] [Client thread/INFO] [FML/FML]: Attempting connection with missing mods [mcp, FML, Forge, arkcraft] at CLIENT
+[10:38:36] [Client thread/INFO] [FML/FML]: Attempting connection with missing mods [mcp, FML, Forge, arkcraft] at SERVER
+[10:38:36] [Client thread/TRACE] [FML/FML]: Sent event FMLConstructionEvent to mod FML
+[10:38:36] [Client thread/DEBUG] [FML/]: Bar Step: Construction - Forge Mod Loader took 0.569s
+[10:38:36] [Client thread/TRACE] [Forge/Forge]: Sending event FMLConstructionEvent to mod Forge
+[10:38:36] [Client thread/TRACE] [FML/Forge]: Mod Forge is using network checker : No network checking performed
+[10:38:36] [Client thread/TRACE] [FML/Forge]: Testing mod Forge to verify it accepts its own version in a remote connection
+[10:38:36] [Client thread/TRACE] [FML/Forge]: The mod Forge accepts its own version (11.14.3.1493)
+[10:38:36] [Client thread/TRACE] [Forge/Forge]: Sent event FMLConstructionEvent to mod Forge
+[10:38:36] [Client thread/DEBUG] [FML/]: Bar Step: Construction - Minecraft Forge took 0.013s
+[10:38:36] [Client thread/TRACE] [arkcraft/arkcraft]: Sending event FMLConstructionEvent to mod arkcraft
+[10:38:36] [Client thread/TRACE] [FML/arkcraft]: Mod arkcraft is using network checker : Accepting version 0.1 Alpha
+[10:38:36] [Client thread/TRACE] [FML/arkcraft]: Testing mod arkcraft to verify it accepts its own version in a remote connection
+[10:38:36] [Client thread/TRACE] [FML/arkcraft]: The mod arkcraft accepts its own version (0.1 Alpha)
+[10:38:36] [Client thread/DEBUG] [FML/arkcraft]: Attempting to inject @SidedProxy classes into arkcraft
+[10:38:36] [Client thread/TRACE] [arkcraft/arkcraft]: Sent event FMLConstructionEvent to mod arkcraft
+[10:38:36] [Client thread/DEBUG] [FML/]: Bar Step: Construction - arkcraft took 0.054s
+[10:38:36] [Client thread/DEBUG] [FML/]: Bar Finished: Construction took 0.639s
+[10:38:36] [Client thread/DEBUG] [FML/]: Mod signature data
+[10:38:36] [Client thread/DEBUG] [FML/]:  	Valid Signatures:
+[10:38:36] [Client thread/DEBUG] [FML/]:  	Missing Signatures:
+[10:38:36] [Client thread/DEBUG] [FML/]: 		mcp	(Minecraft Coder Pack	9.05)	minecraft.jar
+[10:38:36] [Client thread/DEBUG] [FML/]: 		FML	(Forge Mod Loader	8.0.99.99)	forgeSrc-1.8-11.14.3.1493.jar
+[10:38:36] [Client thread/DEBUG] [FML/]: 		Forge	(Minecraft Forge	11.14.3.1493)	forgeSrc-1.8-11.14.3.1493.jar
+[10:38:36] [Client thread/DEBUG] [FML/]: 		arkcraft	(arkcraft	0.1 Alpha)	bin
+[10:38:36] [Client thread/DEBUG] [FML/]: Bar Step: Loading Resources - Default took 0.007s
+[10:38:36] [Client thread/DEBUG] [FML/]: Bar Step: Loading Resources - FMLFileResourcePack:Forge Mod Loader took 0.109s
+[10:38:36] [Client thread/DEBUG] [FML/]: Bar Step: Loading Resources - FMLFileResourcePack:Minecraft Forge took 0.093s
+[10:38:36] [Client thread/DEBUG] [FML/]: Bar Step: Loading Resources - FMLFileResourcePack:arkcraft took 0.007s
+[10:38:37] [Client thread/DEBUG] [FML/]: Bar Finished: Reloading - LanguageManager took 0.073s
+[10:38:37] [Client thread/DEBUG] [FML/]: Bar Step: Loading Resources - Reloading listeners took 0.074s
+[10:38:37] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resources took 0.289s
+[10:38:37] [Client thread/DEBUG] [Forge Mod Loader/]: Mod Forge Mod Loader is missing a pack.mcmeta file, substituting a dummy one
+[10:38:37] [Client thread/DEBUG] [Minecraft Forge/]: Mod Minecraft Forge is missing a pack.mcmeta file, substituting a dummy one
+[10:38:37] [Client thread/DEBUG] [arkcraft/]: Mod arkcraft is missing a pack.mcmeta file, substituting a dummy one
+[10:38:37] [Client thread/INFO] [FML/]: Processing ObjectHolder annotations
+[10:38:37] [Client thread/INFO] [FML/]: Found 384 ObjectHolder annotations
+[10:38:37] [Client thread/INFO] [FML/]: Identifying ItemStackHolder annotations
+[10:38:37] [Client thread/INFO] [FML/]: Found 0 ItemStackHolder annotations
+[10:38:37] [Client thread/TRACE] [mcp/mcp]: Sending event FMLPreInitializationEvent to mod mcp
+[10:38:37] [Client thread/TRACE] [mcp/mcp]: Sent event FMLPreInitializationEvent to mod mcp
+[10:38:37] [Client thread/DEBUG] [FML/]: Bar Step: PreInitialization - Minecraft Coder Pack took 0.001s
+[10:38:37] [Client thread/TRACE] [FML/FML]: Sending event FMLPreInitializationEvent to mod FML
+[10:38:37] [Client thread/TRACE] [FML/FML]: Sent event FMLPreInitializationEvent to mod FML
+[10:38:37] [Client thread/DEBUG] [FML/]: Bar Step: PreInitialization - Forge Mod Loader took 0.066s
+[10:38:37] [Client thread/TRACE] [Forge/Forge]: Sending event FMLPreInitializationEvent to mod Forge
+[10:38:37] [Client thread/INFO] [FML/Forge]: Configured a dormant chunk cache size of 0
+[10:38:37] [Client thread/TRACE] [Forge/Forge]: Sent event FMLPreInitializationEvent to mod Forge
+[10:38:37] [Client thread/DEBUG] [FML/]: Bar Step: PreInitialization - Minecraft Forge took 0.071s
+[10:38:37] [Client thread/TRACE] [arkcraft/arkcraft]: Sending event FMLPreInitializationEvent to mod arkcraft
+[10:38:37] [Client thread/TRACE] [FML/arkcraft]: Automatically registered mod arkcraft entity Explosive Cobblestone Ball as arkcraft.Explosive Cobblestone Ball
+[10:38:37] [Client thread/TRACE] [FML/arkcraft]: Automatically registered mod arkcraft entity Cobblestone Ball as arkcraft.Cobblestone Ball
+[10:38:37] [Client thread/DEBUG] [FML/arkcraft]: Skipping automatic mod arkcraft entity registration for already registered class com.arkcraft.mod.core.entity.EntityRaptor
+[10:38:37] [Client thread/TRACE] [arkcraft/arkcraft]: Sent event FMLPreInitializationEvent to mod arkcraft
+[10:38:37] [Client thread/DEBUG] [FML/]: Bar Step: PreInitialization - arkcraft took 0.363s
+[10:38:37] [Client thread/DEBUG] [FML/]: Bar Finished: PreInitialization took 0.501s
+[10:38:37] [Client thread/INFO] [FML/]: Applying holder lookups
+[10:38:37] [Client thread/INFO] [FML/]: Holder lookups applied
+[10:38:37] [Client thread/INFO] [FML/]: Injecting itemstacks
+[10:38:37] [Client thread/INFO] [FML/]: Itemstack injection complete
+[10:38:37] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - TextureManager took 0.001s
+[10:38:39] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - SoundHandler took 2.033s
+[10:38:39] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - FontRenderer took 0.008s
+[10:38:39] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - FontRenderer took 0.006s
+[10:38:39] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - GrassColorReloadListener took 0.017s
+[10:38:39] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - FoliageColorReloadListener took 0.021s
+[10:38:39] [Client thread/DEBUG] [FML/]: Bar Step: Rendering Setup - GL Setup took 0.000s
+[10:38:39] [Client thread/DEBUG] [FML/]: Bar Step: Rendering Setup - Loading Texture Map took 0.014s
+[10:38:40] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - ModelLoaderRegistry$1 took 0.000s
+[10:38:40] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - ModelLoaderRegistry$1 took 0.000s
+[10:38:40] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - ModelLoaderRegistry$1 took 0.000s
+[10:38:42] [Client thread/DEBUG] [FML/]: Item json isn't found for 'arkcraft:bone_helm#inventory', trying to load the variant from the blockstate json
+[10:38:42] [Client thread/INFO] [FML/]: Max texture size: 8192
+[10:38:42] [Client thread/DEBUG] [FML/]: Bar Finished: Texture stitching - missingno took 0.003s
+[10:38:42] [Client thread/DEBUG] [FML/]: Bar Finished: Texture creation took 0.005s
+[10:38:43] [Client thread/ERROR] [FML/]: Model definition for location arkcraft:bone_helm#inventory not found
+[10:38:43] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - ModelManager took 3.095s
+[10:38:43] [Client thread/DEBUG] [FML/]: Bar Step: Rendering Setup - Loading Model Manager took 3.253s
+[10:38:43] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - RenderItem took 0.005s
+[10:38:43] [Client thread/DEBUG] [FML/]: Bar Step: Rendering Setup - Loading Item Renderer took 0.519s
+[10:38:43] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - EntityRenderer took 0.000s
+[10:38:43] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - BlockRendererDispatcher took 0.000s
+[10:38:44] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - RenderGlobal took 0.000s
+[10:38:44] [Client thread/DEBUG] [FML/]: Bar Step: Rendering Setup - Loading Entity Renderer took 0.600s
+[10:38:44] [Client thread/DEBUG] [FML/]: Bar Finished: Rendering Setup took 4.388s
+[10:38:44] [Client thread/TRACE] [mcp/mcp]: Sending event FMLInitializationEvent to mod mcp
+[10:38:44] [Client thread/TRACE] [mcp/mcp]: Sent event FMLInitializationEvent to mod mcp
+[10:38:44] [Client thread/DEBUG] [FML/]: Bar Step: Initialization - Minecraft Coder Pack took 0.003s
+[10:38:44] [Client thread/TRACE] [FML/FML]: Sending event FMLInitializationEvent to mod FML
+[10:38:44] [Client thread/TRACE] [FML/FML]: Sent event FMLInitializationEvent to mod FML
+[10:38:44] [Client thread/DEBUG] [FML/]: Bar Step: Initialization - Forge Mod Loader took 0.001s
+[10:38:44] [Client thread/TRACE] [Forge/Forge]: Sending event FMLInitializationEvent to mod Forge
+[10:38:44] [Client thread/TRACE] [Forge/Forge]: Sent event FMLInitializationEvent to mod Forge
+[10:38:44] [Client thread/DEBUG] [FML/]: Bar Step: Initialization - Minecraft Forge took 0.001s
+[10:38:44] [Client thread/TRACE] [arkcraft/arkcraft]: Sending event FMLInitializationEvent to mod arkcraft
+[10:38:44] [Client thread/TRACE] [arkcraft/arkcraft]: Sent event FMLInitializationEvent to mod arkcraft
+[10:38:44] [Client thread/DEBUG] [FML/]: Bar Step: Initialization - arkcraft took 0.015s
+[10:38:44] [Client thread/DEBUG] [FML/]: Bar Finished: Initialization took 0.019s
+[10:38:44] [Client thread/TRACE] [FML/]: Attempting to deliver 0 IMC messages to mod mcp
+[10:38:44] [Client thread/TRACE] [mcp/mcp]: Sending event IMCEvent to mod mcp
+[10:38:44] [Client thread/TRACE] [mcp/mcp]: Sent event IMCEvent to mod mcp
+[10:38:44] [Client thread/DEBUG] [FML/]: Bar Step: InterModComms$IMC - Minecraft Coder Pack took 0.015s
+[10:38:44] [Client thread/TRACE] [FML/]: Attempting to deliver 0 IMC messages to mod FML
+[10:38:44] [Client thread/TRACE] [FML/FML]: Sending event IMCEvent to mod FML
+[10:38:44] [Client thread/TRACE] [FML/FML]: Sent event IMCEvent to mod FML
+[10:38:44] [Client thread/DEBUG] [FML/]: Bar Step: InterModComms$IMC - Forge Mod Loader took 0.014s
+[10:38:44] [Client thread/TRACE] [FML/]: Attempting to deliver 0 IMC messages to mod Forge
+[10:38:44] [Client thread/TRACE] [Forge/Forge]: Sending event IMCEvent to mod Forge
+[10:38:44] [Client thread/TRACE] [Forge/Forge]: Sent event IMCEvent to mod Forge
+[10:38:44] [Client thread/DEBUG] [FML/]: Bar Step: InterModComms$IMC - Minecraft Forge took 0.001s
+[10:38:44] [Client thread/TRACE] [FML/]: Attempting to deliver 0 IMC messages to mod arkcraft
+[10:38:44] [Client thread/TRACE] [arkcraft/arkcraft]: Sending event IMCEvent to mod arkcraft
+[10:38:44] [Client thread/TRACE] [arkcraft/arkcraft]: Sent event IMCEvent to mod arkcraft
+[10:38:44] [Client thread/DEBUG] [FML/]: Bar Step: InterModComms$IMC - arkcraft took 0.013s
+[10:38:44] [Client thread/DEBUG] [FML/]: Bar Finished: InterModComms$IMC took 0.044s
+[10:38:44] [Client thread/INFO] [FML/]: Injecting itemstacks
+[10:38:44] [Client thread/INFO] [FML/]: Itemstack injection complete
+[10:38:44] [Client thread/TRACE] [mcp/mcp]: Sending event FMLPostInitializationEvent to mod mcp
+[10:38:44] [Client thread/TRACE] [mcp/mcp]: Sent event FMLPostInitializationEvent to mod mcp
+[10:38:44] [Client thread/DEBUG] [FML/]: Bar Step: PostInitialization - Minecraft Coder Pack took 0.001s
+[10:38:44] [Client thread/TRACE] [FML/FML]: Sending event FMLPostInitializationEvent to mod FML
+[10:38:44] [Client thread/TRACE] [FML/FML]: Sent event FMLPostInitializationEvent to mod FML
+[10:38:44] [Client thread/DEBUG] [FML/]: Bar Step: PostInitialization - Forge Mod Loader took 0.001s
+[10:38:44] [Client thread/TRACE] [Forge/Forge]: Sending event FMLPostInitializationEvent to mod Forge
+[10:38:44] [Client thread/TRACE] [Forge/Forge]: Sent event FMLPostInitializationEvent to mod Forge
+[10:38:44] [Client thread/DEBUG] [FML/]: Bar Step: PostInitialization - Minecraft Forge took 0.016s
+[10:38:44] [Client thread/TRACE] [arkcraft/arkcraft]: Sending event FMLPostInitializationEvent to mod arkcraft
+[10:38:44] [Client thread/TRACE] [arkcraft/arkcraft]: Sent event FMLPostInitializationEvent to mod arkcraft
+[10:38:44] [Client thread/DEBUG] [FML/]: Bar Step: PostInitialization - arkcraft took 0.002s
+[10:38:44] [Client thread/DEBUG] [FML/]: Bar Finished: PostInitialization took 0.020s
+[10:38:44] [Client thread/TRACE] [mcp/mcp]: Sending event FMLLoadCompleteEvent to mod mcp
+[10:38:44] [Client thread/TRACE] [mcp/mcp]: Sent event FMLLoadCompleteEvent to mod mcp
+[10:38:44] [Client thread/DEBUG] [FML/]: Bar Step: LoadComplete - Minecraft Coder Pack took 0.002s
+[10:38:44] [Client thread/TRACE] [FML/FML]: Sending event FMLLoadCompleteEvent to mod FML
+[10:38:44] [Client thread/TRACE] [FML/FML]: Sent event FMLLoadCompleteEvent to mod FML
+[10:38:44] [Client thread/DEBUG] [FML/]: Bar Step: LoadComplete - Forge Mod Loader took 0.002s
+[10:38:44] [Client thread/TRACE] [Forge/Forge]: Sending event FMLLoadCompleteEvent to mod Forge
+[10:38:44] [Client thread/DEBUG] [FML/Forge]: Forge RecipeSorter Baking:
+[10:38:44] [Client thread/DEBUG] [FML/Forge]:   14: RecipeEntry("Before", UNKNOWN, )
+[10:38:44] [Client thread/DEBUG] [FML/Forge]:   13: RecipeEntry("minecraft:shaped", SHAPED, net.minecraft.item.crafting.ShapedRecipes) Before: minecraft:shapeless
+[10:38:44] [Client thread/DEBUG] [FML/Forge]:   12: RecipeEntry("forge:shapedore", SHAPED, net.minecraftforge.oredict.ShapedOreRecipe) Before: minecraft:shapeless After: minecraft:shaped
+[10:38:44] [Client thread/DEBUG] [FML/Forge]:   11: RecipeEntry("minecraft:mapextending", SHAPED, net.minecraft.item.crafting.RecipesMapExtending) Before: minecraft:shapeless After: minecraft:shaped
+[10:38:44] [Client thread/DEBUG] [FML/Forge]:   10: RecipeEntry("minecraft:shapeless", SHAPELESS, net.minecraft.item.crafting.ShapelessRecipes) After: minecraft:shaped
+[10:38:44] [Client thread/DEBUG] [FML/Forge]:   9: RecipeEntry("minecraft:repair", SHAPELESS, net.minecraft.item.crafting.RecipeRepairItem) After: minecraft:shapeless
+[10:38:44] [Client thread/DEBUG] [FML/Forge]:   8: RecipeEntry("forge:shapelessore", SHAPELESS, net.minecraftforge.oredict.ShapelessOreRecipe) After: minecraft:shapeless
+[10:38:44] [Client thread/DEBUG] [FML/Forge]:   7: RecipeEntry("minecraft:armordyes", SHAPELESS, net.minecraft.item.crafting.RecipesArmorDyes) After: minecraft:shapeless
+[10:38:44] [Client thread/DEBUG] [FML/Forge]:   6: RecipeEntry("minecraft:fireworks", SHAPELESS, net.minecraft.item.crafting.RecipeFireworks) After: minecraft:shapeless
+[10:38:44] [Client thread/DEBUG] [FML/Forge]:   5: RecipeEntry("minecraft:pattern_add", SHAPELESS, net.minecraft.item.crafting.RecipesBanners$RecipeAddPattern) After: minecraft:shapeless
+[10:38:44] [Client thread/DEBUG] [FML/Forge]:   4: RecipeEntry("minecraft:pattern_dupe", SHAPELESS, net.minecraft.item.crafting.RecipesBanners$RecipeDuplicatePattern) After: minecraft:shapeless
+[10:38:44] [Client thread/DEBUG] [FML/Forge]:   3: RecipeEntry("minecraft:bookcloning", SHAPELESS, net.minecraft.item.crafting.RecipeBookCloning) After: minecraft:shapeless
+[10:38:44] [Client thread/DEBUG] [FML/Forge]:   2: RecipeEntry("minecraft:mapcloning", SHAPELESS, net.minecraft.item.crafting.RecipesMapCloning) After: minecraft:shapeless
+[10:38:44] [Client thread/DEBUG] [FML/Forge]:   1: RecipeEntry("After", UNKNOWN, )
+[10:38:44] [Client thread/DEBUG] [FML/Forge]: Sorting recipies
+[10:38:44] [Client thread/TRACE] [Forge/Forge]: Sent event FMLLoadCompleteEvent to mod Forge
+[10:38:44] [Client thread/DEBUG] [FML/]: Bar Step: LoadComplete - Minecraft Forge took 0.025s
+[10:38:44] [Client thread/TRACE] [arkcraft/arkcraft]: Sending event FMLLoadCompleteEvent to mod arkcraft
+[10:38:44] [Client thread/TRACE] [arkcraft/arkcraft]: Sent event FMLLoadCompleteEvent to mod arkcraft
+[10:38:44] [Client thread/DEBUG] [FML/]: Bar Step: LoadComplete - arkcraft took 0.019s
+[10:38:44] [Client thread/DEBUG] [FML/]: Bar Finished: LoadComplete took 0.048s
+[10:38:44] [Client thread/DEBUG] [FML/]: Freezing block and item id maps
+[10:38:44] [Client thread/DEBUG] [FML/]: Registry consistency check successful
+[10:38:44] [Client thread/DEBUG] [FML/]: Registry consistency check successful
+[10:38:44] [Client thread/INFO] [FML/]: Forge Mod Loader has successfully loaded 4 mods
+[10:38:44] [Client thread/DEBUG] [FML/]: Bar Step: Loading Resources - Default took 0.003s
+[10:38:44] [Client thread/DEBUG] [FML/]: Bar Step: Loading Resources - FMLFileResourcePack:Forge Mod Loader took 0.043s
+[10:38:44] [Client thread/DEBUG] [FML/]: Bar Step: Loading Resources - FMLFileResourcePack:Minecraft Forge took 0.063s
+[10:38:44] [Client thread/DEBUG] [FML/]: Bar Step: Loading Resources - FMLFileResourcePack:arkcraft took 0.003s
+[10:38:44] [Client thread/DEBUG] [FML/]: Bar Step: Reloading Texture Manager - minecraft:textures/atlas/blocks.png took 0.001s
+[10:38:44] [Client thread/DEBUG] [FML/]: Bar Step: Reloading Texture Manager - minecraft:textures/font/ascii.png took 0.023s
+[10:38:44] [Client thread/DEBUG] [FML/]: Bar Step: Reloading Texture Manager - minecraft:dynamic/lightMap_1 took 0.000s
+[10:38:44] [Client thread/DEBUG] [FML/]: Bar Step: Reloading Texture Manager - minecraft:textures/misc/forcefield.png took 0.023s
+[10:38:44] [Client thread/DEBUG] [FML/]: Bar Step: Reloading Texture Manager - minecraft:textures/font/ascii_sga.png took 0.025s
+[10:38:44] [Client thread/DEBUG] [FML/]: Bar Finished: Reloading Texture Manager took 0.072s
+[10:38:47] [Client thread/DEBUG] [FML/]: Item json isn't found for 'arkcraft:bone_helm#inventory', trying to load the variant from the blockstate json
+[10:38:47] [Client thread/INFO] [FML/]: Max texture size: 8192
+[10:38:48] [Client thread/DEBUG] [FML/]: Bar Finished: Texture stitching took 0.782s
+[10:38:48] [Client thread/DEBUG] [FML/]: Bar Finished: Mipmap generation took 0.400s
+[10:38:48] [Client thread/DEBUG] [FML/]: Bar Finished: Texture stitching took 0.066s
+[10:38:49] [Client thread/DEBUG] [FML/]: Bar Finished: Texture creation took 0.203s
+[10:38:49] [Client thread/ERROR] [FML/]: Model definition for location arkcraft:bone_helm#inventory not found
+[10:38:49] [Client thread/DEBUG] [FML/]: Bar Finished: Reloading took 5.141s
+[10:38:49] [Client thread/DEBUG] [FML/]: Bar Step: Loading Resources - Reloading listeners took 5.142s
+[10:38:49] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resources took 5.254s
+[10:38:49] [Client thread/DEBUG] [Forge Mod Loader/]: Mod Forge Mod Loader is missing a pack.mcmeta file, substituting a dummy one
+[10:38:49] [Client thread/DEBUG] [Minecraft Forge/]: Mod Minecraft Forge is missing a pack.mcmeta file, substituting a dummy one
+[10:38:49] [Client thread/DEBUG] [arkcraft/]: Mod arkcraft is missing a pack.mcmeta file, substituting a dummy one
+[10:38:49] [Client thread/DEBUG] [FML/]: Bar Finished: Loading took 18.815s
+[10:40:00] [Server thread/TRACE] [mcp/mcp]: Sending event FMLServerAboutToStartEvent to mod mcp
+[10:40:00] [Server thread/TRACE] [mcp/mcp]: Sent event FMLServerAboutToStartEvent to mod mcp
+[10:40:00] [Server thread/DEBUG] [FML/]: Bar Step: ServerAboutToStart - Minecraft Coder Pack took 0.002s
+[10:40:00] [Server thread/TRACE] [FML/FML]: Sending event FMLServerAboutToStartEvent to mod FML
+[10:40:00] [Server thread/TRACE] [FML/FML]: Sent event FMLServerAboutToStartEvent to mod FML
+[10:40:00] [Server thread/DEBUG] [FML/]: Bar Step: ServerAboutToStart - Forge Mod Loader took 0.001s
+[10:40:00] [Server thread/TRACE] [Forge/Forge]: Sending event FMLServerAboutToStartEvent to mod Forge
+[10:40:00] [Server thread/TRACE] [Forge/Forge]: Sent event FMLServerAboutToStartEvent to mod Forge
+[10:40:00] [Server thread/DEBUG] [FML/]: Bar Step: ServerAboutToStart - Minecraft Forge took 0.000s
+[10:40:00] [Server thread/TRACE] [arkcraft/arkcraft]: Sending event FMLServerAboutToStartEvent to mod arkcraft
+[10:40:00] [Server thread/TRACE] [arkcraft/arkcraft]: Sent event FMLServerAboutToStartEvent to mod arkcraft
+[10:40:00] [Server thread/DEBUG] [FML/]: Bar Step: ServerAboutToStart - arkcraft took 0.002s
+[10:40:00] [Server thread/DEBUG] [FML/]: Bar Finished: ServerAboutToStart took 0.005s
+[10:40:00] [Server thread/INFO] [FML/]: Injecting existing block and item data into this server instance
+[10:40:00] [Server thread/DEBUG] [FML/]: Registry consistency check successful
+[10:40:00] [Server thread/DEBUG] [FML/]: Fixed item id mismatch arkcraft:ironPike: 4121 (init) -> 4120 (map).
+[10:40:00] [Server thread/DEBUG] [FML/]: Fixed item id mismatch arkcraft:stoneSpear: 4120 (init) -> 4119 (map).
+[10:40:00] [Server thread/DEBUG] [FML/]: Fixed item id mismatch arkcraft:bone_helm: 4119 (init) -> 4121 (map).
+[10:40:00] [Server thread/DEBUG] [FML/]: Registry consistency check successful
+[10:40:00] [Server thread/TRACE] [mcp/mcp]: Sending event FMLModIdMappingEvent to mod mcp
+[10:40:00] [Server thread/TRACE] [mcp/mcp]: Sent event FMLModIdMappingEvent to mod mcp
+[10:40:00] [Server thread/DEBUG] [FML/]: Bar Step: ModIdMapping - Minecraft Coder Pack took 0.012s
+[10:40:00] [Server thread/TRACE] [FML/FML]: Sending event FMLModIdMappingEvent to mod FML
+[10:40:00] [Server thread/TRACE] [FML/FML]: Sent event FMLModIdMappingEvent to mod FML
+[10:40:00] [Server thread/DEBUG] [FML/]: Bar Step: ModIdMapping - Forge Mod Loader took 0.001s
+[10:40:00] [Server thread/TRACE] [Forge/Forge]: Sending event FMLModIdMappingEvent to mod Forge
+[10:40:00] [Server thread/TRACE] [Forge/Forge]: Sent event FMLModIdMappingEvent to mod Forge
+[10:40:00] [Server thread/DEBUG] [FML/]: Bar Step: ModIdMapping - Minecraft Forge took 0.002s
+[10:40:00] [Server thread/TRACE] [arkcraft/arkcraft]: Sending event FMLModIdMappingEvent to mod arkcraft
+[10:40:00] [Server thread/TRACE] [arkcraft/arkcraft]: Sent event FMLModIdMappingEvent to mod arkcraft
+[10:40:00] [Server thread/DEBUG] [FML/]: Bar Step: ModIdMapping - arkcraft took 0.000s
+[10:40:00] [Server thread/DEBUG] [FML/]: Bar Finished: ModIdMapping took 0.014s
+[10:40:00] [Server thread/INFO] [FML/]: Applying holder lookups
+[10:40:00] [Server thread/INFO] [FML/]: Holder lookups applied
+[10:40:00] [Server thread/DEBUG] [FML/]: Loading persistent fluid defaults from world
+[10:40:00] [Server thread/DEBUG] [FML/]: The fluid minecraft:lava has been selected as the default fluid for lava
+[10:40:00] [Server thread/DEBUG] [FML/]: The fluid minecraft:water has been selected as the default fluid for water
+[10:40:01] [Server thread/INFO] [FML/]: Loading dimension 0 (New World) (net.minecraft.server.integrated.IntegratedServer@59bcb6e5)
+[10:40:01] [Server thread/INFO] [FML/]: Loading dimension 1 (New World) (net.minecraft.server.integrated.IntegratedServer@59bcb6e5)
+[10:40:01] [Server thread/INFO] [FML/]: Loading dimension -1 (New World) (net.minecraft.server.integrated.IntegratedServer@59bcb6e5)
+[10:40:04] [Server thread/TRACE] [mcp/mcp]: Sending event FMLServerStartingEvent to mod mcp
+[10:40:04] [Server thread/TRACE] [mcp/mcp]: Sent event FMLServerStartingEvent to mod mcp
+[10:40:04] [Server thread/DEBUG] [FML/]: Bar Step: ServerStarting - Minecraft Coder Pack took 0.000s
+[10:40:04] [Server thread/TRACE] [FML/FML]: Sending event FMLServerStartingEvent to mod FML
+[10:40:04] [Server thread/TRACE] [FML/FML]: Sent event FMLServerStartingEvent to mod FML
+[10:40:04] [Server thread/DEBUG] [FML/]: Bar Step: ServerStarting - Forge Mod Loader took 0.000s
+[10:40:04] [Server thread/TRACE] [Forge/Forge]: Sending event FMLServerStartingEvent to mod Forge
+[10:40:04] [Server thread/TRACE] [Forge/Forge]: Sent event FMLServerStartingEvent to mod Forge
+[10:40:04] [Server thread/DEBUG] [FML/]: Bar Step: ServerStarting - Minecraft Forge took 0.004s
+[10:40:04] [Server thread/TRACE] [arkcraft/arkcraft]: Sending event FMLServerStartingEvent to mod arkcraft
+[10:40:04] [Server thread/TRACE] [arkcraft/arkcraft]: Sent event FMLServerStartingEvent to mod arkcraft
+[10:40:04] [Server thread/DEBUG] [FML/]: Bar Step: ServerStarting - arkcraft took 0.000s
+[10:40:04] [Server thread/DEBUG] [FML/]: Bar Finished: ServerStarting took 0.006s
+[10:40:04] [Server thread/TRACE] [mcp/mcp]: Sending event FMLServerStartedEvent to mod mcp
+[10:40:04] [Server thread/TRACE] [mcp/mcp]: Sent event FMLServerStartedEvent to mod mcp
+[10:40:04] [Server thread/DEBUG] [FML/]: Bar Step: ServerStarted - Minecraft Coder Pack took 0.001s
+[10:40:04] [Server thread/TRACE] [FML/FML]: Sending event FMLServerStartedEvent to mod FML
+[10:40:04] [Server thread/TRACE] [FML/FML]: Sent event FMLServerStartedEvent to mod FML
+[10:40:04] [Server thread/DEBUG] [FML/]: Bar Step: ServerStarted - Forge Mod Loader took 0.000s
+[10:40:04] [Server thread/TRACE] [Forge/Forge]: Sending event FMLServerStartedEvent to mod Forge
+[10:40:04] [Server thread/TRACE] [Forge/Forge]: Sent event FMLServerStartedEvent to mod Forge
+[10:40:04] [Server thread/DEBUG] [FML/]: Bar Step: ServerStarted - Minecraft Forge took 0.000s
+[10:40:04] [Server thread/TRACE] [arkcraft/arkcraft]: Sending event FMLServerStartedEvent to mod arkcraft
+[10:40:04] [Server thread/TRACE] [arkcraft/arkcraft]: Sent event FMLServerStartedEvent to mod arkcraft
+[10:40:04] [Server thread/DEBUG] [FML/]: Bar Step: ServerStarted - arkcraft took 0.001s
+[10:40:04] [Server thread/DEBUG] [FML/]: Bar Finished: ServerStarted took 0.002s
+[10:40:06] [Netty Local Client IO #0/TRACE] [FML/]: Handshake channel activating
+[10:40:06] [Netty Local Client IO #0/DEBUG] [FML/]: FMLHandshakeClientState: null->FMLHandshakeClientState$1:START
+[10:40:06] [Netty Local Client IO #0/DEBUG] [FML/]:   Next: HELLO
+[10:40:06] [Netty Server IO #1/TRACE] [FML/]: Handshake channel activating
+[10:40:06] [Netty Server IO #1/DEBUG] [FML/]: FMLHandshakeServerState: null->FMLHandshakeServerState$1:START
+[10:40:06] [Netty Server IO #1/DEBUG] [FML/]:   Next: HELLO
+[10:40:06] [Netty Local Client IO #0/DEBUG] [FML/]: Server FML protocol version 2, 4 byte dimension received 0
+[10:40:06] [Netty Local Client IO #0/DEBUG] [FML/]: FMLHandshakeClientState: $ServerHello->FMLHandshakeClientState$2:HELLO
+[10:40:06] [Netty Local Client IO #0/INFO] [FML/]: Server protocol version 2
+[10:40:06] [Netty Local Client IO #0/DEBUG] [FML/]: Received override dimension 0
+[10:40:06] [Netty Server IO #1/DEBUG] [FML/]: FMLHandshakeServerState: $ClientHello->FMLHandshakeServerState$2:HELLO
+[10:40:06] [Netty Server IO #1/INFO] [FML/]: Client protocol version 2
+[10:40:06] [Netty Server IO #1/DEBUG] [FML/]:   Next: HELLO
+[10:40:06] [Netty Local Client IO #0/DEBUG] [FML/]:   Next: WAITINGSERVERDATA
+[10:40:06] [Netty Server IO #1/DEBUG] [FML/]: FMLHandshakeServerState: $ModList:4 mods->FMLHandshakeServerState$2:HELLO
+[10:40:06] [Netty Server IO #1/INFO] [FML/]: Client attempting to join with 4 mods : arkcraft@0.1 Alpha,FML@8.0.99.99,Forge@11.14.3.1493,mcp@9.05
+[10:40:06] [Netty Server IO #1/DEBUG] [FML/]:   Next: WAITINGCACK
+[10:40:06] [Netty Local Client IO #0/DEBUG] [FML/]: FMLHandshakeClientState: $ModList:4 mods->FMLHandshakeClientState$3:WAITINGSERVERDATA
+[10:40:06] [Netty Local Client IO #0/DEBUG] [FML/]:   Next: PENDINGCOMPLETE
+[10:40:06] [Netty Server IO #1/DEBUG] [FML/]: FMLHandshakeServerState: $HandshakeAck:{2}->FMLHandshakeServerState$3:WAITINGCACK
+[10:40:06] [Netty Local Client IO #0/DEBUG] [FML/]: FMLHandshakeClientState: $HandshakeAck:{2}->FMLHandshakeClientState$5:PENDINGCOMPLETE
+[10:40:06] [Netty Local Client IO #0/DEBUG] [FML/]:   Next: COMPLETE
+[10:40:06] [Netty Server IO #1/DEBUG] [FML/]:   Next: COMPLETE
+[10:40:06] [Netty Server IO #1/DEBUG] [FML/]: FMLHandshakeServerState: $HandshakeAck:{4}->FMLHandshakeServerState$4:COMPLETE
+[10:40:06] [Netty Server IO #1/DEBUG] [FML/]:   Next: DONE
+[10:40:06] [Netty Local Client IO #0/DEBUG] [FML/]: The fluid minecraft:lava has been selected as the default fluid for lava
+[10:40:06] [Netty Local Client IO #0/DEBUG] [FML/]: The fluid minecraft:water has been selected as the default fluid for water
+[10:40:06] [Netty Local Client IO #0/DEBUG] [FML/]: FMLHandshakeClientState: $HandshakeAck:{3}->FMLHandshakeClientState$6:COMPLETE
+[10:40:06] [Netty Local Client IO #0/DEBUG] [FML/]:   Next: DONE
+[10:40:06] [Netty Local Client IO #0/INFO] [FML/]: [Netty Local Client IO #0] Client side modded connection established
+[10:40:06] [Netty Server IO #1/DEBUG] [FML/]: FMLHandshakeServerState: $HandshakeAck:{5}->FMLHandshakeServerState$5:DONE
+[10:40:06] [Netty Server IO #1/DEBUG] [FML/]:   Next: DONE
+[10:40:06] [Server thread/INFO] [FML/]: [Server thread] Server side modded connection established
+[10:40:06] [Client thread/DEBUG] [FML/]: Overriding dimension: using 0
+[10:40:10] [Server thread/DEBUG] [FML/]: Gathering id map for writing to world save New World
+[10:41:07] [Server thread/DEBUG] [FML/]: Gathering id map for writing to world save New World
+[10:41:52] [Server thread/DEBUG] [FML/]: Gathering id map for writing to world save New World
+[10:42:37] [Server thread/DEBUG] [FML/]: Gathering id map for writing to world save New World
+[10:43:21] [Client Shutdown Thread/DEBUG] [FML/]: Gathering id map for writing to world save New World
+[10:43:21] [Server thread/TRACE] [mcp/mcp]: Sending event FMLServerStoppingEvent to mod mcp
+[10:43:21] [Server thread/TRACE] [mcp/mcp]: Sent event FMLServerStoppingEvent to mod mcp
+[10:43:21] [Server thread/TRACE] [FML/FML]: Sending event FMLServerStoppingEvent to mod FML
+[10:43:21] [Server thread/TRACE] [FML/FML]: Sent event FMLServerStoppingEvent to mod FML
+[10:43:21] [Server thread/TRACE] [Forge/Forge]: Sending event FMLServerStoppingEvent to mod Forge
+[10:43:21] [Server thread/TRACE] [Forge/Forge]: Sent event FMLServerStoppingEvent to mod Forge
+[10:43:21] [Server thread/TRACE] [arkcraft/arkcraft]: Sending event FMLServerStoppingEvent to mod arkcraft
+[10:43:21] [Server thread/TRACE] [arkcraft/arkcraft]: Sent event FMLServerStoppingEvent to mod arkcraft

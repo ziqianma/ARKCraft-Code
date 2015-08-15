@@ -1,8 +1,8 @@
 package com.arkcraft.mod.core.handler;
 
 import com.arkcraft.mod.core.GlobalAdditions;
-import com.arkcraft.mod.core.machine.gui.ContainerSmithy;
-import com.arkcraft.mod.core.machine.gui.GuiSmithy;
+import com.arkcraft.mod.core.container.gui.ContainerSmithy;
+import com.arkcraft.mod.core.container.gui.GuiSmithy;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.BlockPos;

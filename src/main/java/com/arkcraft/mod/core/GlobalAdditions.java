@@ -5,7 +5,7 @@ import java.util.Map;
 
 import com.arkcraft.mod.core.blocks.ARKBlock;
 import com.arkcraft.mod.core.blocks.ARKBush;
-import com.arkcraft.mod.core.blocks.ARKSmithy;
+import com.arkcraft.mod.core.conatiner.blocks.ContainerBlockSmithy;
 import com.arkcraft.mod.core.creativetabs.ARKTabs;
 import com.arkcraft.mod.core.entity.EntityCobble;
 import com.arkcraft.mod.core.entity.EntityExplosive;
@@ -53,8 +53,8 @@ public class GlobalAdditions {
 	public static ArmorMaterial CHITIN = EnumHelper.addArmorMaterial("CHITIN_MAT", "CHITIN_MAT", 16, new int[] { 3,7,6,3 } , 10);
 	public static ArmorMaterial BONE = EnumHelper.addArmorMaterial("BONE", "BONE_MAT", 40, new int[] { 3, 8, 6, 3 }, 30);
 	public static CreativeTabs tabARK = new ARKTabs(CreativeTabs.getNextID(), "tabARKCraft");
-	public static ARKSmithy smithy;
-	public static int guiID = 0;
+	public static ContainerBlockSmithy smithy;
+	public static final int guiIDSmithy = 1, guiIDMP = 2;
 	
 	public static void init() {
 		tintoBerry = addFood("tinto", 4, 0.3F, false, new PotionEffect(Potion.fireResistance.id, 60, 1));
@@ -111,8 +111,8 @@ public class GlobalAdditions {
 		return b;
 	}
 	
-	protected static ARKSmithy addSmithy(String name, float hardness) {
-		ARKSmithy s = new ARKSmithy(name, hardness);
+	protected static ContainerBlockSmithy addSmithy(String name, float hardness) {
+		ContainerBlockSmithy s = new ContainerBlockSmithy(name, hardness);
 		allBlocks.put(name, s);
 		return s;
 	}
