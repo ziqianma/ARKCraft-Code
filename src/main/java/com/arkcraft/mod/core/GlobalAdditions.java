@@ -17,7 +17,7 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 import com.arkcraft.mod.core.blocks.ARKBlock;
 import com.arkcraft.mod.core.blocks.ARKBush;
-import com.arkcraft.mod.core.blocks.ARKSmithy;
+import com.arkcraft.mod.core.blocks.ARKContainerBlock;
 import com.arkcraft.mod.core.creativetabs.ARKTabs;
 import com.arkcraft.mod.core.entity.EntityCobble;
 import com.arkcraft.mod.core.entity.EntityExplosive;
@@ -42,9 +42,9 @@ public class GlobalAdditions {
 
 	public static Map<String, Block> allBlocks = new HashMap<String, Block>();
 	public static Map<String, Item> allItems = new HashMap<String, Item>();
+	
 	public static ARKFood tintoBerry, amarBerry, azulBerry, mejoBerry, narcoBerry, porkchop_raw, porkchop_cooked, primemeat_raw, primemeat_cooked;
 	public static ARKBush berryBush;
-	public static ARKBlock pestle_and_mortar;
 	public static ARKItem cobble_ball, fiber, chitin, narcotics, tranq_arrow, explosive_ball, dodo_bag;
 	public static ARKSlingshot slingshot;
 	public static ARKSaddle saddle_small, saddle_medium, saddle_large;
@@ -52,17 +52,26 @@ public class GlobalAdditions {
 	public static ARKArmorItem clothHelm, clothChest, clothLegs, clothBoots;
 	public static ARKArmorItem boneHelm, boneChest, boneLegs, boneBoots;
 	public static ARKWeapon stoneSpear, ironPike;
+	
 	public static ArmorMaterial CLOTH = EnumHelper.addArmorMaterial("CLOTH_MAT", "CLOTH_MAT", 4, new int[] {1,2,1,1}, 15);
 	public static ArmorMaterial CHITIN = EnumHelper.addArmorMaterial("CHITIN_MAT", "CHITIN_MAT", 16, new int[] { 3,7,6,3 } , 10);
 	public static ArmorMaterial BONE = EnumHelper.addArmorMaterial("BONE", "BONE_MAT", 40, new int[] { 3, 8, 6, 3 }, 30);
-	public static CreativeTabs tabARK = new ARKTabs(CreativeTabs.getNextID(), "tabARKCraft");
-	public static ARKSmithy smithy;
-	public static WrappedOreGenerator generator;
 	
-	public enum GUI_ENUM {
-		SMITHY, PESTLE_AND_MORTAR, INV_DODO
+	public static CreativeTabs tabARK = new ARKTabs(CreativeTabs.getNextID(), "tabARKCraft");
+	
+	public static ARKContainerBlock smithy, pestle;
+	
+	public enum GUI {
+		SMITHY(0), PESTLE_AND_MORTAR(1), INV_DODO(2);
+		int id;
+		GUI(int id) {
+			this.id = id;
+		}
+		
+		public int getID() { return id; }
 	}
-	public static int guiIDSmithy = 1, guiIDPestleAndMortar = 2, guiIDInvDodo = 3;
+	
+	public static WrappedOreGenerator generator;
 	
 	public static void init() {
 		// Food
@@ -87,7 +96,10 @@ public class GlobalAdditions {
 		saddle_small = addSaddle("saddle_small");
 		saddle_medium = addSaddle("saddle_medium");
 		saddle_large = addSaddle("saddle_large");
-		smithy = addSmithy("smithy", 0.4F);
+		
+		smithy = addContainer("smithy", 0.4F, Material.wood, GUI.SMITHY.getID(), false, false, 3);
+		pestle = addContainer("mortar_and_pestle", 0.4F, Material.rock, GUI.PESTLE_AND_MORTAR.getID(), false, false, 3);
+		
 		stoneSpear = addWeapon("stoneSpear", ToolMaterial.STONE);
 		ironPike = addWeapon("ironPike", ToolMaterial.IRON);
 		
@@ -107,9 +119,6 @@ public class GlobalAdditions {
 		clothLegs = addArmorItem("cloth_legs", CLOTH, "clothArmor", 2);
 		clothBoots = addArmorItem("cloth_boots", CLOTH, "clothArmor", 3);
 		boneHelm = addArmorItem("bone_helm", BONE, "boneArmor", 0);
-		
-		// Blocks
-		pestle_and_mortar = addBlock(Material.rock, "mortar_and_pestle", 3.0F);
 		
 		// Other stuff
 		RecipeHandler.registerVanillaCraftingRecipes();
@@ -139,10 +148,13 @@ public class GlobalAdditions {
 		return b;
 	}
 	
-	protected static ARKSmithy addSmithy(String name, float hardness) {
-		ARKSmithy s = new ARKSmithy(name, hardness);
-		allBlocks.put(name, s);
-		return s;
+	protected static ARKContainerBlock addContainer(String name, float hardness, Material mat, int ID, boolean renderAsNormalBlock, boolean isOpaque, int renderType) {
+		ARKContainerBlock container = new ARKContainerBlock(name, hardness, mat, ID);
+		container.setRenderAsNormalBlock(renderAsNormalBlock);
+		container.setOpaque(isOpaque);
+		container.setRenderType(renderType);
+		allBlocks.put(name, container);
+		return container;
 	}
 	
 	protected static ARKItem addItem(String name) {

@@ -18,6 +18,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
 import com.arkcraft.mod.core.GlobalAdditions;
+import com.arkcraft.mod.core.GlobalAdditions.GUI;
 import com.arkcraft.mod.core.Main;
 import com.arkcraft.mod.core.lib.LogHelper;
 
@@ -264,7 +265,7 @@ public abstract class DinoTameable extends EntityTameable {
 	            }				
 			}
     		if (isSaddled()) {
-    			player.openGui(Main.instance, GlobalAdditions.guiIDInvDodo, worldObj, player
+    			player.openGui(Main.instance, GUI.INV_DODO.getID(), worldObj, player
     					.getPosition().getX(), player.getPosition().getY(), player.getPosition().getZ());
     			return true;
     		}

@@ -12,10 +12,11 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 
-import com.arkcraft.mod.core.GlobalAdditions;
+import com.arkcraft.mod.core.GlobalAdditions.GUI;
 import com.arkcraft.mod.core.entity.passive.EntityDodo;
 import com.arkcraft.mod.core.lib.LogHelper;
 import com.arkcraft.mod.core.machine.gui.ContainerInventoryDodo;
+import com.arkcraft.mod.core.machine.gui.ContainerMP;
 import com.arkcraft.mod.core.machine.gui.ContainerSmithy;
 import com.arkcraft.mod.core.machine.gui.GuiInventoryDodo;
 import com.arkcraft.mod.core.machine.gui.GuiSmithy;
@@ -24,9 +25,9 @@ public class GuiHandler implements IGuiHandler {
 
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-		if(ID == GlobalAdditions.guiIDSmithy) return new ContainerSmithy(player.inventory, world, new BlockPos(x, y, z)); 
-		if(ID == GlobalAdditions.guiIDPestleAndMortar) return new ContainerSmithy(player.inventory, world, new BlockPos(x, y, z));
-		if(ID == GlobalAdditions.guiIDInvDodo) {
+		if(ID == GUI.SMITHY.getID()) return new ContainerSmithy(player.inventory, world, new BlockPos(x, y, z)); 
+		if(ID == GUI.PESTLE_AND_MORTAR.getID()) return new ContainerMP(player.inventory, world, new BlockPos(x, y, z));
+		if(ID == GUI.INV_DODO.getID()) {
 			EntityDodo entityDodo = (EntityDodo) getEntityAt(player, x, y, z);
 			if(entityDodo != null) return new ContainerInventoryDodo(player.inventory, entityDodo.invDodo, entityDodo, player);
 		}
@@ -35,9 +36,9 @@ public class GuiHandler implements IGuiHandler {
 
 	@Override
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-		if(ID == GlobalAdditions.guiIDSmithy) return ID == GlobalAdditions.guiIDSmithy ? new GuiSmithy(player.inventory, world, new BlockPos(x, y, z)) : null; 
-		if(ID == GlobalAdditions.guiIDPestleAndMortar) return ID == GlobalAdditions.guiIDPestleAndMortar && world.getBlockState(new BlockPos(x, y, z)).getBlock() == GlobalAdditions.pestle_and_mortar ? new GuiSmithy(player.inventory, world, new BlockPos(x, y, z)) : null;
-		if(ID == GlobalAdditions.guiIDInvDodo) {
+		if(ID == GUI.SMITHY.getID()) return new GuiSmithy(player.inventory, world, new BlockPos(x, y, z));
+		if(ID == GUI.PESTLE_AND_MORTAR.getID()) return new GuiSmithy(player.inventory, world, new BlockPos(x, y, z));
+		if(ID == GUI.INV_DODO.getID()) {
 			Entity entity = getEntityLookingAt(player);
 			if(entity != null && entity instanceof EntityDodo) 
 				return new GuiInventoryDodo(player.inventory, ((EntityDodo)entity).invDodo, (EntityDodo)entity);

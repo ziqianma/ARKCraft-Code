@@ -27,6 +27,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 import com.arkcraft.mod.core.GlobalAdditions;
+import com.arkcraft.mod.core.GlobalAdditions.GUI;
 import com.arkcraft.mod.core.Main;
 import com.arkcraft.mod.core.entity.ai.EntityDodoAILookIdle;
 import com.arkcraft.mod.core.items.ARKFood;
@@ -185,7 +186,7 @@ public class EntityDodo extends EntityTameable implements IInvBasic {
 		LogHelper.info("The player right clicked a Dodo.");
         ItemStack itemstack = player.inventory.getCurrentItem();
 		if (isChested()) {
-			player.openGui(Main.instance, GlobalAdditions.guiIDInvDodo, worldObj, player
+			player.openGui(Main.instance, GUI.INV_DODO.getID(), worldObj, player
 					.getPosition().getX(), player.getPosition().getY(), player.getPosition().getZ());
 			return true;
 		}
