@@ -16,7 +16,7 @@ public class ARKContainerBlock extends Block {
 
 	private int renderType = 3; //default value
 	private boolean isOpaque = false;
-	private int ID;
+	private int ID; //
 	private boolean render = false;
 	
 	public ARKContainerBlock(String name, float hardness, Material mat, int ID) {
