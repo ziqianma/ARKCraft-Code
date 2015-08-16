@@ -1,6 +1,11 @@
 package com.arkcraft.mod.core;
 
+<<<<<<< .merge_file_sEhsCV
+import com.arkcraft.mod.core.proxy.CommonProxy;
+
+=======
 import net.minecraftforge.common.MinecraftForge;
+>>>>>>> .merge_file_KUlw2J
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;

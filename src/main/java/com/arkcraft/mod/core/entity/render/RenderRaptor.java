@@ -7,9 +7,15 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.ResourceLocation;
 
+import java.util.Random;
+
 import com.arkcraft.mod.core.Main;
+<<<<<<< .merge_file_dR0CCj
+import com.arkcraft.mod.core.entity.EntityRaptor;
+=======
 import com.arkcraft.mod.core.entity.aggressive.EntityRaptor;
 import com.arkcraft.mod.core.entity.aggressive.RaptorType;
+>>>>>>> .merge_file_4tvEXm
 import com.arkcraft.mod.core.entity.model.ModelRaptor;
 
 /***
@@ -18,7 +24,15 @@ import com.arkcraft.mod.core.entity.model.ModelRaptor;
  *
  */
 public class RenderRaptor extends RenderLiving {
+<<<<<<< .merge_file_dR0CCj
+
+	private static final ResourceLocation texture = new ResourceLocation(Main.MODID, "textures/model/raptor.png");
+	private static final ResourceLocation texture_rainbow = new ResourceLocation(Main.MODID,
+			"textures/model/raptor_rainbow.png");
+
+=======
 	private static ResourceLocation[] texture;
+>>>>>>> .merge_file_4tvEXm
 	protected ModelRaptor modelEntity;
 
 	public RenderRaptor(ModelBase base, float par2) {
@@ -52,6 +66,11 @@ public class RenderRaptor extends RenderLiving {
 
 	@Override
 	protected ResourceLocation getEntityTexture(Entity e) {
+<<<<<<< .merge_file_dR0CCj
+		return new Random().nextInt(1000) == 1000 ? texture_rainbow : texture;
+=======
 		return texture[((EntityRaptor)e).raptorType];
+>>>>>>> .merge_file_4tvEXm
 	}
+
 }

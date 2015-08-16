@@ -1,13 +1,13 @@
 package com.arkcraft.mod.core.handler;
 
-<<<<<<< .merge_file_EGxFch
+<<<<<<< HEAD
 import com.arkcraft.mod.core.GlobalAdditions;
 import com.arkcraft.mod.core.container.gui.ContainerSmithy;
 import com.arkcraft.mod.core.container.gui.GuiSmithy;
 =======
 import java.util.Iterator;
 import java.util.List;
->>>>>>> .merge_file_6S8T7l
+>>>>>>> 542b2cb16e021ea45232bd40a5c25199ac549449
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;

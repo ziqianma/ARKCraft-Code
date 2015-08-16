@@ -17,7 +17,11 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 import com.arkcraft.mod.core.blocks.ARKBlock;
 import com.arkcraft.mod.core.blocks.ARKBush;
+<<<<<<< .merge_file_oEYgFx
+import com.arkcraft.mod.core.conatiner.blocks.ContainerBlockSmithy;
+=======
 import com.arkcraft.mod.core.blocks.ARKContainerBlock;
+>>>>>>> .merge_file_34qSNe
 import com.arkcraft.mod.core.creativetabs.ARKTabs;
 import com.arkcraft.mod.core.entity.EntityCobble;
 import com.arkcraft.mod.core.entity.EntityExplosive;
@@ -58,6 +62,10 @@ public class GlobalAdditions {
 	public static ArmorMaterial BONE = EnumHelper.addArmorMaterial("BONE", "BONE_MAT", 40, new int[] { 3, 8, 6, 3 }, 30);
 	
 	public static CreativeTabs tabARK = new ARKTabs(CreativeTabs.getNextID(), "tabARKCraft");
+<<<<<<< .merge_file_oEYgFx
+	public static ContainerBlockSmithy smithy;
+	public static final int guiIDSmithy = 1, guiIDMP = 2;
+=======
 	
 	public static ARKContainerBlock smithy, pestle;
 	
@@ -72,6 +80,7 @@ public class GlobalAdditions {
 	}
 	
 	public static WrappedOreGenerator generator;
+>>>>>>> .merge_file_34qSNe
 	
 	public static void init() {
 		// Food
@@ -148,6 +157,12 @@ public class GlobalAdditions {
 		return b;
 	}
 	
+<<<<<<< .merge_file_oEYgFx
+	protected static ContainerBlockSmithy addSmithy(String name, float hardness) {
+		ContainerBlockSmithy s = new ContainerBlockSmithy(name, hardness);
+		allBlocks.put(name, s);
+		return s;
+=======
 	protected static ARKContainerBlock addContainer(String name, float hardness, Material mat, int ID, boolean renderAsNormalBlock, boolean isOpaque, int renderType) {
 		ARKContainerBlock container = new ARKContainerBlock(name, hardness, mat, ID);
 		container.setRenderAsNormalBlock(renderAsNormalBlock);
@@ -155,6 +170,7 @@ public class GlobalAdditions {
 		container.setRenderType(renderType);
 		allBlocks.put(name, container);
 		return container;
+>>>>>>> .merge_file_34qSNe
 	}
 	
 	protected static ARKItem addItem(String name) {

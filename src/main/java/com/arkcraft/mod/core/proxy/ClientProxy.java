@@ -14,8 +14,12 @@ import com.arkcraft.mod.core.GlobalAdditions;
 import com.arkcraft.mod.core.Main;
 import com.arkcraft.mod.core.entity.EntityCobble;
 import com.arkcraft.mod.core.entity.EntityExplosive;
+<<<<<<< .merge_file_S6MKgd
+import com.arkcraft.mod.core.entity.EntityRaptor;
+=======
 import com.arkcraft.mod.core.entity.aggressive.EntityRaptor;
 import com.arkcraft.mod.core.entity.model.ModelDodo;
+>>>>>>> .merge_file_4J2hRk
 import com.arkcraft.mod.core.entity.model.ModelRaptor;
 import com.arkcraft.mod.core.entity.passive.EntityDodo;
 import com.arkcraft.mod.core.entity.render.RenderDodo;
