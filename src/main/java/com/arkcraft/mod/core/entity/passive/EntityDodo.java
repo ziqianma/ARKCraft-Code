@@ -32,6 +32,7 @@ import com.arkcraft.mod.core.Main;
 import com.arkcraft.mod.core.entity.ai.EntityDodoAILookIdle;
 import com.arkcraft.mod.core.items.ARKFood;
 import com.arkcraft.mod.core.lib.LogHelper;
+import com.arkcraft.mod.core.machine.gui.DinoInventory;
 
 /***
  * 
@@ -82,7 +83,8 @@ public class EntityDodo extends EntityTameable implements IInvBasic {
 		this.getDataWatcher().addObject(DODO_EYE_WATCHER, Byte.valueOf((byte) 1));
 		this.getDataWatcher().addObject(DODO_CHEST_WATCHER,	Byte.valueOf((byte) 0));
 		
-		this.invDodo = new InventoryBasic("Items", false, 27);
+//		this.invDodo = new InventoryBasic("Items", true, 9);
+		this.invDodo = new DinoInventory("Items", true, 9);
 
 		this.tasks.taskEntries.clear();
 		this.tasks.addTask(0, new EntityAISwimming(this));
@@ -320,6 +322,7 @@ public class EntityDodo extends EntityTameable implements IInvBasic {
 	public void onInventoryChanged(InventoryBasic invBasic) {
 		// Normally used to add and remove the armor and saddle or pack, but not
 		// needed for the Dodo, as we don't have the armor and saddle slots
+		LogHelper.info("EntityDodo - onInventoryChanged");
 	}
 	
     @Override

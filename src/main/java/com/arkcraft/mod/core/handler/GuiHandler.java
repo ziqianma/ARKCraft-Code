@@ -1,12 +1,8 @@
 package com.arkcraft.mod.core.handler;
 
-import java.util.Iterator;
-import java.util.List;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
@@ -18,7 +14,7 @@ import com.arkcraft.mod.core.lib.LogHelper;
 import com.arkcraft.mod.core.machine.gui.ContainerInventoryDodo;
 import com.arkcraft.mod.core.machine.gui.ContainerMP;
 import com.arkcraft.mod.core.machine.gui.ContainerSmithy;
-import com.arkcraft.mod.core.machine.gui.GuiInventoryDodo;
+import com.arkcraft.mod.core.machine.gui.GuiInventoryDodo2;
 import com.arkcraft.mod.core.machine.gui.GuiSmithy;
 
 public class GuiHandler implements IGuiHandler {
@@ -28,8 +24,11 @@ public class GuiHandler implements IGuiHandler {
 		if(ID == GUI.SMITHY.getID()) return new ContainerSmithy(player.inventory, world, new BlockPos(x, y, z)); 
 		if(ID == GUI.PESTLE_AND_MORTAR.getID()) return new ContainerMP(player.inventory, world, new BlockPos(x, y, z));
 		if(ID == GUI.INV_DODO.getID()) {
-			EntityDodo entityDodo = (EntityDodo) getEntityAt(player, x, y, z);
-			if(entityDodo != null) return new ContainerInventoryDodo(player.inventory, entityDodo.invDodo, entityDodo, player);
+			Entity entity = getEntityLookingAt(player);
+			if(entity != null && entity instanceof EntityDodo) 
+				return new ContainerInventoryDodo(player.inventory, ((EntityDodo)entity).invDodo, (EntityDodo)entity, player);
+			else
+				LogHelper.error("GuiHandler - getServerGuiElement: Did not find entity with inventory!");
 		}
 		return null;
 	}
@@ -41,7 +40,9 @@ public class GuiHandler implements IGuiHandler {
 		if(ID == GUI.INV_DODO.getID()) {
 			Entity entity = getEntityLookingAt(player);
 			if(entity != null && entity instanceof EntityDodo) 
-				return new GuiInventoryDodo(player.inventory, ((EntityDodo)entity).invDodo, (EntityDodo)entity);
+				return new GuiInventoryDodo2(player.inventory, ((EntityDodo)entity).invDodo, (EntityDodo)entity);
+			else
+				LogHelper.error("GuiHandler - getClientGuiElement: Did not find entity with inventory!");
 		}
 		return null;
 	}
@@ -54,19 +55,19 @@ public class GuiHandler implements IGuiHandler {
 			return null;
 	}
 
-	private Entity getEntityAt(EntityPlayer player, int x, int y, int z) {
-	    AxisAlignedBB targetBox = new AxisAlignedBB(x-0.5D, y-0.0D, z-0.5D, x+0.5D, y+1.5D, z+0.5D);
-    	@SuppressWarnings("rawtypes")
-		List entities = player.worldObj.getEntitiesWithinAABBExcludingEntity(player, targetBox);
-        @SuppressWarnings("rawtypes")
-		Iterator iterator = entities.iterator();
-        while (iterator.hasNext()) {
-            Entity entity = (Entity)iterator.next();
-            if (entity instanceof EntityDodo) {
-            	LogHelper.info("GuiHandler: Found Dodo with chest!");
-            	return entity;
-            }
-        }
-        return null;
-	}
+//	private Entity getEntityAt(EntityPlayer player, int x, int y, int z) {
+//	    AxisAlignedBB targetBox = new AxisAlignedBB(x-0.5D, y-0.0D, z-0.5D, x+0.5D, y+1.5D, z+0.5D);
+//    	@SuppressWarnings("rawtypes")
+//		List entities = player.worldObj.getEntitiesWithinAABBExcludingEntity(player, targetBox);
+//        @SuppressWarnings("rawtypes")
+//		Iterator iterator = entities.iterator();
+//        while (iterator.hasNext()) {
+//            Entity entity = (Entity)iterator.next();
+//            if (entity instanceof EntityDodo) {
+//            	LogHelper.info("GuiHandler: Found Dodo with chest!");
+//            	return entity;
+//            }
+//        }
+//        return null;
+//	}
 }

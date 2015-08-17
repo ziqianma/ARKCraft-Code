@@ -15,7 +15,10 @@ public class GuiInventoryDodo extends GuiBase {
 		this.dodo = dodo;
 	}
 
-	public void onGuiClosed() { super.onGuiClosed(); }
+	public void onGuiClosed() { 
+		super.onGuiClosed(); 
+	}
+	
 	protected void drawGuiContainerForegroundLayer(int i, int j) { super.drawGuiContainerForegroundLayer(i, j); }
 	
 	@Override

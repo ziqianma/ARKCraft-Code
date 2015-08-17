@@ -7,38 +7,45 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
 import com.arkcraft.mod.core.entity.passive.EntityDodo;
+import com.arkcraft.mod.core.lib.LogHelper;
 
 public class ContainerInventoryDodo extends Container {
 
 	private IInventory invDodo;
 	private EntityDodo dodo;
+	private final int DODO_SLOT_COUNT = 9;
 	
 	public ContainerInventoryDodo(IInventory invPlayer, final IInventory invDodo, final EntityDodo dodo, EntityPlayer player) {
 		this.invDodo = invDodo;
 		this.dodo = dodo;
-		invDodo.openInventory(player);
-		
+		((DinoInventory)invDodo).openInventory(player);  // BW: Why is this here?
 		
 		/* Hotbar inventory */
+		final int HOTBAR_YPOS = 142;
 		for(int col = 0; col < 9; col++) {
-			addSlotToContainer(new Slot(invPlayer, col, 8 + col * 18, 142));
+			addSlotToContainer(new Slot(invPlayer, col, 8 + col * 18, HOTBAR_YPOS));
 		}
 		
 		/* Player inventory */
+		final int PLAYER_INVENTORY_YPOS = 84;
 		for(int row = 0; row < 3; row++) {
 			for(int col = 0; col < 9; col++) {
 				int slotIndex =  col + row * 9 + 9;
-				addSlotToContainer(new Slot(invPlayer, slotIndex, 8 + col * 18, 84 + row * 18));
+				addSlotToContainer(new Slot(invPlayer, slotIndex, 8 + col * 18, PLAYER_INVENTORY_YPOS + row * 18));
 			}
 		}
 		
 		/* Chest inventory */
+		if (DODO_SLOT_COUNT != invDodo.getSizeInventory()) {
+			LogHelper.error("Mismatched slot count in container(" + DODO_SLOT_COUNT + ") and DodoInventory (" + invDodo.getSizeInventory()+")");
+		}
+		final int DODO_INVENTORY_XPOS = 98;
+		final int DODO_INVENTORY_YPOS = 18;
 		if(dodo.isChested()) {
 			for(int col = 0; col < 3; col++) {
 				for(int row = 0; row < 3; row++) {
 					int slotIndex = col + row * 3;
-//					addSlotToContainer(new Slot(invDodo, slotIndex, 98 + col * 18, 18 + row * 18));
-					addSlotToContainer(new Slot(invDodo, slotIndex, 62 + col * 18, 17 + row * 18));
+					addSlotToContainer(new Slot(invDodo, slotIndex, DODO_INVENTORY_XPOS + col * 18, DODO_INVENTORY_YPOS + row * 18));
 				}
 			}
 		}
@@ -49,6 +56,7 @@ public class ContainerInventoryDodo extends Container {
         return this.invDodo.isUseableByPlayer(playerIn) && this.dodo.isEntityAlive() && this.dodo.getDistanceToEntity(playerIn) < 8.0F;
     }
 
+	// Called when you shift click
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int sourceSlotIndex) {
 		Slot sourceSlot = (Slot)inventorySlots.get(sourceSlotIndex);
@@ -57,25 +65,29 @@ public class ContainerInventoryDodo extends Container {
 		ItemStack copyOfSourceStack = sourceStack.copy();
 
 		// Check if the slot clicked is one of the vanilla container slots
-		if(sourceSlotIndex >= 0 && sourceSlotIndex < 9) {
+//		if(sourceSlotIndex >= 0 && sourceSlotIndex < 9) {
 //			if(!mergeItemStack(sourceStack, 36, 45, false));
-			if(!mergeItemStack(sourceStack, invDodo.getSizeInventory(), 36 + invDodo.getSizeInventory(), true)) {
+		if(sourceSlotIndex >= 0 && sourceSlotIndex < 36) {
+			// This is a vanilla container slot so merge the stack into the dodo inventory
+			if(!mergeItemStack(sourceStack, 36, 36 + DODO_SLOT_COUNT, false)) {
 				return null;
 			}
 		}
-		else if (sourceSlotIndex >= 9 && sourceSlotIndex < 36) {
-			// This is a vanilla container slot so merge the stack into the tile inventory
+		// Check if the slot clicked is a dodo container slot
+//		else if (sourceSlotIndex >= 9 && sourceSlotIndex < 36) {
 //			if (!mergeItemStack(sourceStack, 36, 45, false)){
-			if (!mergeItemStack(sourceStack, 0, invDodo.getSizeInventory(), false)){
+		else if (sourceSlotIndex >= 36 && sourceSlotIndex < 36 + DODO_SLOT_COUNT) {
+			// This is a dodo slot so merge the stack into the players inventory
+			if (!mergeItemStack(sourceStack, 0, 36, false)){
 				return null;
 			}
-		} else if (sourceSlotIndex >= 36 && sourceSlotIndex < 45) {
-			// This is a TE slot so merge the stack into the players inventory
-			if (!mergeItemStack(sourceStack, 9, 36, false) || !mergeItemStack(sourceStack, 0, 9, false)) {
-				return null;
-			}
+//		} else if (sourceSlotIndex >= 36 && sourceSlotIndex < 45) {
+//			// This is a TE slot so merge the stack into the players inventory
+//			if (!mergeItemStack(sourceStack, 9, 36, false) || !mergeItemStack(sourceStack, 0, 9, false)) {
+//				return null;
+//			}
 		} else {
-			System.err.print("Invalid slotIndex:" + sourceSlotIndex);
+			LogHelper.error("Invalid slotIndex:" + sourceSlotIndex);
 			return null;
 		}
 
@@ -86,17 +98,14 @@ public class ContainerInventoryDodo extends Container {
 			sourceSlot.onSlotChanged();
 		}
 		
-        if (sourceStack.stackSize == copyOfSourceStack.stackSize) {
-            return null;
-        }
-
 		sourceSlot.onPickupFromSlot(player, sourceStack);
 		return copyOfSourceStack;
 	}
 	
 	@Override
-	public void onContainerClosed(EntityPlayer playerIn)
-	{
+	public void onContainerClosed(EntityPlayer playerIn) {
 		super.onContainerClosed(playerIn);
+		((DinoInventory)invDodo).closeInventory(playerIn);
+		// TODO: Add animation to close lid?
 	}
 }
