@@ -1,14 +1,16 @@
 package com.arkcraft.mod.core.machine.gui;
 
+import com.arkcraft.mod.core.lib.LogHelper;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
-public class DinoInventory extends InventoryBasic {
+public class CopyOfDinoInventory extends InventoryBasic {
 	
-	public DinoInventory(String title, boolean customName, int slotCount) {
+	public CopyOfDinoInventory(String title, boolean customName, int slotCount) {
 		super(title, customName, slotCount);
 	}
 
@@ -36,13 +38,14 @@ public class DinoInventory extends InventoryBasic {
                 nbttagcompound.setByte("Slot", (byte)i);
                 itemstack.writeToNBT(nbttagcompound);
                 nbttaglist.appendTag(nbttagcompound);
+                LogHelper.info("DinoInventory: Saved a " + itemstack.getItem() + " to inventory.");
             }
         }
         return nbttaglist;
     }
 
     /**
-     * Do not make give this method the name canInteractWith because it clashes with Container
+     * Do not give this method the name canInteractWith because it clashes with Container
      */
     public boolean isUseableByPlayer(EntityPlayer player) {
         return super.isUseableByPlayer(player);
@@ -54,5 +57,5 @@ public class DinoInventory extends InventoryBasic {
 
     public void closeInventory(EntityPlayer player) {
         super.closeInventory(player);
-    }
+    }    
 }

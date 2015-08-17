@@ -46,6 +46,7 @@ public class EntityDodoAILookIdle extends EntityAIBase {
         this.lookX = Math.cos(d0);
         this.lookZ = Math.sin(d0);
         this.idleTime = 20 + this.idleEntity.getRNG().nextInt(20);
+    	((EntityDodo)this.idleEntity).setEyesOpen(true);
     }
 
     /**
@@ -57,7 +58,7 @@ public class EntityDodoAILookIdle extends EntityAIBase {
         if (this.idleTime == 20) {
         	((EntityDodo)this.idleEntity).setEyesOpen(false);
 //        	LogHelper.info("EntityDodoAILookIdle: Closed eyes");
-        } else if (this.idleTime == 10) {
+        } else if (this.idleTime <= 10) {
         	((EntityDodo)this.idleEntity).setEyesOpen(true);
 //        	LogHelper.info("EntityDodoAILookIdle: Opened eyes");
         }

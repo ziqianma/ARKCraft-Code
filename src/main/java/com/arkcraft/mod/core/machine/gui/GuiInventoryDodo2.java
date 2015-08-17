@@ -8,7 +8,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.util.ResourceLocation;
 
 import com.arkcraft.mod.core.Main;
@@ -16,15 +15,16 @@ import com.arkcraft.mod.core.entity.passive.EntityDodo;
 
 public class GuiInventoryDodo2 extends GuiContainer {
 
-	private InventoryBasic invDodo;
+//	private InventoryBasic invDodo;
+	private InventoryDino invDodo;
 	private EntityDodo dodo;
 	// This is the resource location for the background image for the GUI
 	private static final ResourceLocation texture = new ResourceLocation(Main.MODID, "textures/gui/dodo_gui.png");
 
 	public GuiInventoryDodo2(IInventory playerInv, IInventory invDodo, EntityDodo dodo) {
 		super(new ContainerInventoryDodo(playerInv, invDodo, dodo, Minecraft.getMinecraft().thePlayer));
-		this.invDodo = (InventoryBasic) invDodo;
-		this.invDodo.setCustomName("Dodo Inventory");
+		this.invDodo = (InventoryDino) invDodo;
+//		this.invDodo.setCustomName("Dodo Inventory");
 		this.dodo = dodo;
 		// Set the width and height of the gui.  Should match the size of the texture!
 		xSize = 176;

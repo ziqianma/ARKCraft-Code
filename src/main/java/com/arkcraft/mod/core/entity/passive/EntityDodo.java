@@ -15,9 +15,7 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
-import net.minecraft.inventory.IInvBasic;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -32,7 +30,7 @@ import com.arkcraft.mod.core.Main;
 import com.arkcraft.mod.core.entity.ai.EntityDodoAILookIdle;
 import com.arkcraft.mod.core.items.ARKFood;
 import com.arkcraft.mod.core.lib.LogHelper;
-import com.arkcraft.mod.core.machine.gui.DinoInventory;
+import com.arkcraft.mod.core.machine.gui.InventoryDino;
 
 /***
  * 
@@ -40,8 +38,10 @@ import com.arkcraft.mod.core.machine.gui.DinoInventory;
  *
  */
 //public class EntityDodo extends EntityChicken implements IInvBasic {
-public class EntityDodo extends EntityTameable implements IInvBasic {
-	public IInventory invDodo;
+//public class EntityDodo extends EntityTameable implements IInvBasic {
+public class EntityDodo extends EntityTameable {
+//	public IInventory invDodo;
+	public InventoryDino invDodo;
 	private boolean isChested = false;
 
 	// Stuff from chicken:
@@ -84,19 +84,21 @@ public class EntityDodo extends EntityTameable implements IInvBasic {
 		this.getDataWatcher().addObject(DODO_CHEST_WATCHER,	Byte.valueOf((byte) 0));
 		
 //		this.invDodo = new InventoryBasic("Items", true, 9);
-		this.invDodo = new DinoInventory("Items", true, 9);
+		this.invDodo = new InventoryDino("Items", true, 9);
 
 		this.tasks.taskEntries.clear();
-		this.tasks.addTask(0, new EntityAISwimming(this));
-		this.tasks.addTask(1, new EntityAIPanic(this, 1.4D));
-		this.tasks.addTask(2, new EntityAIMate(this, 1.0D));
-		this.tasks.addTask(3, new EntityAITempt(this, 1.0D,	GlobalAdditions.narcoBerry, false));
-		this.tasks.addTask(4, new EntityAIFollowParent(this, 1.1D));
-		this.tasks.addTask(5, new EntityAIWander(this, 1.0D));
-        this.tasks.addTask(5, new EntityAIFollowOwner(this, 1.0D, 8.0F, 5.0F));
-		this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+        int p = 0;
+		this.tasks.addTask(++p, new EntityAISwimming(this));
+        this.tasks.addTask(++p, this.aiSit);
+		this.tasks.addTask(++p, new EntityAIPanic(this, 1.4D));
+		this.tasks.addTask(++p, new EntityAIMate(this, 1.0D));
+		this.tasks.addTask(++p, new EntityAITempt(this, 1.0D,	GlobalAdditions.narcoBerry, false));
+		this.tasks.addTask(++p, new EntityAIFollowParent(this, 1.1D));
+		this.tasks.addTask(++p, new EntityAIWander(this, 1.0D));
+        this.tasks.addTask(++p, new EntityAIFollowOwner(this, 1.0D, 8.0F, 5.0F));
+		this.tasks.addTask(++p, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
 		// Replace Idle task with one that blinks eyes
-		this.tasks.addTask(7, new EntityDodoAILookIdle(this));
+		this.tasks.addTask(++p, new EntityDodoAILookIdle(this));
 		
 		this.riddenByEntity = null;
 	}
@@ -185,18 +187,27 @@ public class EntityDodo extends EntityTameable implements IInvBasic {
 
 	@Override
 	public boolean interact(EntityPlayer player) {
-		LogHelper.info("The player right clicked a Dodo.");
+        if (!this.worldObj.isRemote)
+        	LogHelper.info("The player right clicked a Dodo.");
         ItemStack itemstack = player.inventory.getCurrentItem();
-		if (isChested()) {
-			player.openGui(Main.instance, GUI.INV_DODO.getID(), worldObj, player
-					.getPosition().getX(), player.getPosition().getY(), player.getPosition().getZ());
-			return true;
-		}
-		else if (isTamed()) {
+        
+		if (isTamed()) {
 			LogHelper.info("The Dodo is tamed.");
-			if (player.isSneaking()) {
-				// Put Dodo Bag on Dodo
+			
+            if (player.isSneaking()) {
+				if (isChested()) {
+					player.openGui(Main.instance, GUI.INV_DODO.getID(), worldObj, player
+							.getPosition().getX(), player.getPosition().getY(), player.getPosition().getZ());
+					
+		            if (this.isOwner(player) && !this.worldObj.isRemote) {
+		                this.aiSit.setSitting(this.isSitting());
+		                this.isJumping = false;
+		                this.navigator.clearPathEntity();
+		            }
+					return true;
+				}
 				if (itemstack.getItem() == GlobalAdditions.dodo_bag) {
+					// Put Dodo Bag on Dodo
 					if (!player.capabilities.isCreativeMode) {
 						itemstack.stackSize--;
 						if (itemstack.stackSize == 0)
@@ -205,7 +216,16 @@ public class EntityDodo extends EntityTameable implements IInvBasic {
 					setChested(true);
 					return true;
 				}
-			}
+			} // not sneaking
+			else
+				this.setSitting(!this.isSitting());
+
+            if (!this.worldObj.isRemote) {
+	            if (this.isSitting())
+	            	LogHelper.info("Dodo is sitting");
+	            else
+	            	LogHelper.info("Dodo is not sitting");
+            }
 		}
         // Tame the Dodo with meat
         else if (itemstack != null && (itemstack.getItem() == GlobalAdditions.porkchop_raw 
@@ -220,6 +240,7 @@ public class EntityDodo extends EntityTameable implements IInvBasic {
                 if (this.rand.nextInt(2) == 0) {
                     this.setTamed(true);
                     this.navigator.clearPathEntity();
+                    this.aiSit.setSitting(true);
                     this.setHealth(10.0F);
                     this.setOwnerId(player.getUniqueID().toString());
                     this.playTameEffect(true);
@@ -232,7 +253,8 @@ public class EntityDodo extends EntityTameable implements IInvBasic {
             }
             return true;
         }
-		return super.interact(player);
+		return false;
+//		return super.interact(player);
 	}
 
 	@Override
@@ -273,17 +295,20 @@ public class EntityDodo extends EntityTameable implements IInvBasic {
 		 *  other dinos though.
 		 */
 		if(this.isChested()) {
-			NBTTagList nbtTags = new NBTTagList();
-			for(int i = 0; i < this.invDodo.getSizeInventory(); i++) {
-				ItemStack currentItemStack = this.invDodo.getStackInSlot(i);
-				if(currentItemStack != null) {
-					NBTTagCompound nbtCompound = new NBTTagCompound();
-					nbtCompound.setByte("Slot", (byte)i);
-					currentItemStack.writeToNBT(nbtCompound);
-					nbtTags.appendTag(nbtCompound);
-				}
-			}
+			NBTTagList nbtTags = this.invDodo.saveInventoryToNBT();
 			nbt.setTag("Items", nbtTags);
+			LogHelper.info("EntityDodo - writeEntityToNBT: Saved chest inventory.");
+//			NBTTagList nbtTags = new NBTTagList();
+//			for(int i = 0; i < this.invDodo.getSizeInventory(); i++) {
+//				ItemStack currentItemStack = this.invDodo.getStackInSlot(i);
+//				if(currentItemStack != null) {
+//					NBTTagCompound nbtCompound = new NBTTagCompound();
+//					nbtCompound.setByte("Slot", (byte)i);
+//					currentItemStack.writeToNBT(nbtCompound);
+//					nbtTags.appendTag(nbtCompound);
+//				}
+//			}
+//			nbt.setTag("Items", nbtTags);
 		}
 	}
 
@@ -298,15 +323,16 @@ public class EntityDodo extends EntityTameable implements IInvBasic {
         }
 		final byte NBT_TYPE_COMPOUND = 10;  
 		NBTTagList dataForAllSlots = nbt.getTagList("Items", NBT_TYPE_COMPOUND);
+        this.invDodo.loadInventoryFromNBT(dataForAllSlots);
 
-		for (int i = 0; i < dataForAllSlots.tagCount(); ++i) {
-			NBTTagCompound dataForOneSlot = dataForAllSlots.getCompoundTagAt(i);
-			int slotIndex = dataForOneSlot.getByte("Slot") & 255;
-
-			if (slotIndex >= 0 && slotIndex < this.invDodo.getSizeInventory()) {
-				this.invDodo.setInventorySlotContents(slotIndex, ItemStack.loadItemStackFromNBT(dataForOneSlot));
-			}
-		}
+//		for (int i = 0; i < dataForAllSlots.tagCount(); ++i) {
+//			NBTTagCompound dataForOneSlot = dataForAllSlots.getCompoundTagAt(i);
+//			int slotIndex = dataForOneSlot.getByte("Slot") & 255;
+//
+//			if (slotIndex >= 0 && slotIndex < this.invDodo.getSizeInventory()) {
+//				this.invDodo.setInventorySlotContents(slotIndex, ItemStack.loadItemStackFromNBT(dataForOneSlot));
+//			}
+//		}
 	}
 
 	/**
@@ -318,12 +344,12 @@ public class EntityDodo extends EntityTameable implements IInvBasic {
     }
 	
 	// From IInvBasic 
-	@Override
-	public void onInventoryChanged(InventoryBasic invBasic) {
-		// Normally used to add and remove the armor and saddle or pack, but not
-		// needed for the Dodo, as we don't have the armor and saddle slots
-		LogHelper.info("EntityDodo - onInventoryChanged");
-	}
+//	@Override
+//	public void onInventoryChanged(InventoryBasic invBasic) {
+//		// Normally used to add and remove the armor and saddle or pack, but not
+//		// needed for the Dodo, as we don't have the armor and saddle slots
+//		LogHelper.info("EntityDodo - onInventoryChanged");
+//	}
 	
     @Override
     protected String getLivingSound() {

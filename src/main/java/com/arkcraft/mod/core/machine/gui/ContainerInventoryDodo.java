@@ -18,7 +18,7 @@ public class ContainerInventoryDodo extends Container {
 	public ContainerInventoryDodo(IInventory invPlayer, final IInventory invDodo, final EntityDodo dodo, EntityPlayer player) {
 		this.invDodo = invDodo;
 		this.dodo = dodo;
-		((DinoInventory)invDodo).openInventory(player);  // BW: Why is this here?
+		((InventoryDino)invDodo).openInventory(player);  // BW: Why is this here?
 		
 		/* Hotbar inventory */
 		final int HOTBAR_YPOS = 142;
@@ -105,7 +105,7 @@ public class ContainerInventoryDodo extends Container {
 	@Override
 	public void onContainerClosed(EntityPlayer playerIn) {
 		super.onContainerClosed(playerIn);
-		((DinoInventory)invDodo).closeInventory(playerIn);
+		((InventoryDino)invDodo).closeInventory(playerIn);
 		// TODO: Add animation to close lid?
 	}
 }
