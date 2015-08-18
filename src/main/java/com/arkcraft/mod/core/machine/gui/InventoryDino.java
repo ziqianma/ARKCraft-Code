@@ -90,11 +90,10 @@ public class InventoryDino implements IInventory {
 	}
 
     public void loadInventoryFromNBT(NBTTagList nbt)  {
-        int i;
-        for (i = 0; i < this.getSizeInventory(); ++i) {
+        for (int i = 0; i < this.getSizeInventory(); ++i) {
             this.setInventorySlotContents(i, (ItemStack)null);
         }
-        for (i = 0; i < nbt.tagCount(); ++i) {
+        for (int i = 0; i < nbt.tagCount(); ++i) {
             NBTTagCompound nbttagcompound = nbt.getCompoundTagAt(i);
             int j = nbttagcompound.getByte("Slot") & 255;
 
