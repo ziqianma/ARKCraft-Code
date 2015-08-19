@@ -2,6 +2,7 @@ package com.arkcraft.mod.core.machine.gui;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
+import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -51,6 +52,20 @@ public class ContainerInventoryDodo extends Container {
 		}
 	}
 	
+	@Override
+    public void addCraftingToCrafters(ICrafting listener)  {
+        super.addCraftingToCrafters(listener);
+        listener.func_175173_a(this, invDodo);
+    }
+
+    /**
+     * Looks for changes made in the container, sends them to every listener.
+     */
+    @Override
+    public void detectAndSendChanges() {
+        super.detectAndSendChanges();
+    }
+
 	@Override
     public boolean canInteractWith(EntityPlayer playerIn) {
         return this.invDodo.isUseableByPlayer(playerIn) && this.dodo.isEntityAlive() && this.dodo.getDistanceToEntity(playerIn) < 8.0F;
