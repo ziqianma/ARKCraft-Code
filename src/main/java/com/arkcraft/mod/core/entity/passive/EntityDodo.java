@@ -190,8 +190,7 @@ public class EntityDodo extends EntityTameable {
 		if (isTamed()) {
             if (this.isOwner(player)) {
             	if (!this.worldObj.isRemote)
-            		LogHelper.info("The Dodo is tamed.");
-			
+            		LogHelper.info("The Dodo is tamed.");    		
 	            if (player.isSneaking()) {
 					if (isChested()) {
 			            if (!this.worldObj.isRemote) {
@@ -206,7 +205,7 @@ public class EntityDodo extends EntityTameable {
 			            }
 						return true;
 					}
-					if (itemstack.getItem() == GlobalAdditions.dodo_bag) {
+					if (itemstack != null && itemstack.getItem() == GlobalAdditions.dodo_bag) {
 						// Put Dodo Bag on Dodo
 						if (!player.capabilities.isCreativeMode) {
 							itemstack.stackSize--;
@@ -226,6 +225,10 @@ public class EntityDodo extends EntityTameable {
 		            else
 		            	LogHelper.info("Dodo is not sitting");
 	            }
+            }
+            else {
+            	if (!this.worldObj.isRemote)
+            		LogHelper.info("The Dodo is tamed, but not yours.");
             }
 		}
         // Tame the Dodo with meat
