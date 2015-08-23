@@ -87,7 +87,7 @@ public class GlobalAdditions {
 		
 		// world generated
 		berryBush = addBush("berryBush", 0.4F);
-				
+		
 		// Weapons and tools
 		cobble_ball = addItemWithTooltip("cobble_ball", EnumChatFormatting.GOLD + "A Rocky Road to Victory");
 		explosive_ball = addItemWithTooltip("explosive_ball", EnumChatFormatting.RED + "A Rocky Road to Destruction");
