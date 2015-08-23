@@ -37,10 +37,7 @@ import com.arkcraft.mod.core.machine.gui.InventoryDino;
  * @author wildbill22
  *
  */
-//public class EntityDodo extends EntityChicken implements IInvBasic {
-//public class EntityDodo extends EntityTameable implements IInvBasic {
 public class EntityDodo extends EntityTameable {
-//	public IInventory invDodo;
 	public InventoryDino invDodo;
 	private boolean isChested = false;
 
@@ -83,7 +80,6 @@ public class EntityDodo extends EntityTameable {
 		this.getDataWatcher().addObject(DODO_EYE_WATCHER, Byte.valueOf((byte) 1));
 		this.getDataWatcher().addObject(DODO_CHEST_WATCHER,	Byte.valueOf((byte) 0));
 		
-//		this.invDodo = new InventoryBasic("Items", true, 9);
 		this.invDodo = new InventoryDino("Items", true, 9);
 
 		this.tasks.taskEntries.clear();
@@ -192,39 +188,41 @@ public class EntityDodo extends EntityTameable {
         ItemStack itemstack = player.inventory.getCurrentItem();
         
 		if (isTamed()) {
-			LogHelper.info("The Dodo is tamed.");
+            if (this.isOwner(player)) {
+            	if (!this.worldObj.isRemote)
+            		LogHelper.info("The Dodo is tamed.");
 			
-            if (player.isSneaking()) {
-				if (isChested()) {
-					player.openGui(Main.instance, GUI.INV_DODO.getID(), worldObj, player
-							.getPosition().getX(), player.getPosition().getY(), player.getPosition().getZ());
-					
-		            if (this.isOwner(player) && !this.worldObj.isRemote) {
-		                this.aiSit.setSitting(this.isSitting());
-		                this.isJumping = false;
-		                this.navigator.clearPathEntity();
-		            }
-					return true;
-				}
-				if (itemstack.getItem() == GlobalAdditions.dodo_bag) {
-					// Put Dodo Bag on Dodo
-					if (!player.capabilities.isCreativeMode) {
-						itemstack.stackSize--;
-						if (itemstack.stackSize == 0)
-		                    player.inventory.mainInventory[player.inventory.currentItem] = null;
+	            if (player.isSneaking()) {
+					if (isChested()) {
+			            if (!this.worldObj.isRemote) {
+			            	player.openGui(Main.instance, GUI.INV_DODO.getID(), this.worldObj, (int) this.posX, (int) this.posY, (int) this.posZ);
+			                this.aiSit.setSitting(this.isSitting());
+			            	LogHelper.info("Dodo is sitting");
+			                this.isJumping = false;
+			                this.navigator.clearPathEntity();
+			            }
+						return true;
 					}
-					setChested(true);
-					return true;
-				}
-			} // not sneaking
-			else
-				this.setSitting(!this.isSitting());
-
-            if (!this.worldObj.isRemote) {
-	            if (this.isSitting())
-	            	LogHelper.info("Dodo is sitting");
-	            else
-	            	LogHelper.info("Dodo is not sitting");
+					if (itemstack.getItem() == GlobalAdditions.dodo_bag) {
+						// Put Dodo Bag on Dodo
+						if (!player.capabilities.isCreativeMode) {
+							itemstack.stackSize--;
+							if (itemstack.stackSize == 0)
+			                    player.inventory.mainInventory[player.inventory.currentItem] = null;
+						}
+						setChested(true);
+						return true;
+					}
+				} // not sneaking
+				else
+					this.setSitting(!this.isSitting());
+	
+	            if (!this.worldObj.isRemote) {
+		            if (this.isSitting())
+		            	LogHelper.info("Dodo is sitting");
+		            else
+		            	LogHelper.info("Dodo is not sitting");
+	            }
             }
 		}
         // Tame the Dodo with meat
@@ -254,7 +252,6 @@ public class EntityDodo extends EntityTameable {
             return true;
         }
 		return false;
-//		return super.interact(player);
 	}
 
 	@Override
@@ -276,39 +273,9 @@ public class EntityDodo extends EntityTameable {
 		super.writeEntityToNBT(nbt);
 		nbt.setInteger("EggLayTime", this.timeUntilNextEgg);
 		nbt.setBoolean("IsChested", isChested);
-		/***
-		 * So, some quick notes (Vastatio):
-		 * Basically, I've seen that in EntityHorse the for loop starts with 2 right?
-		 * Its because of the two checks of the getStackInSlot(1) and getStackInSlot(2) for armor/saddle.
-		 * Because apparently, minecraft needs to register those as two separate nbt slots.
-		 * So, here, i check if the EntityDodo isChested() before.
-		 * I can get the items that are in each slot of the chest by using this.invDodo.getStackInSlot(i)
-		 * if the slots in invDodo are not empty, then write that slot to nbt using a byte.
-		 * then I write nbt to the currentItemStack?
-		 * Then, after the for loop, I create another tag called "Items" that stores all the values that have been put into the NBTTagList.
-		 * This is how I think this whole process works (this is from EntityHorse)
-		 */
-		
-		/** (Bill): This is good, the horse needs a way to remove the saddle without killing it.
-		 *  For the Dodo, we will just kill it when we want the saddle back, so we don't need those other two slots.
-		 *  Also the Dodo will not have armor that goes in one of those slots. We do need those special slots for
-		 *  other dinos though.
-		 */
 		if(this.isChested()) {
-			NBTTagList nbtTags = this.invDodo.saveInventoryToNBT();
-			nbt.setTag("Items", nbtTags);
-			LogHelper.info("EntityDodo - writeEntityToNBT: Saved chest inventory.");
-//			NBTTagList nbtTags = new NBTTagList();
-//			for(int i = 0; i < this.invDodo.getSizeInventory(); i++) {
-//				ItemStack currentItemStack = this.invDodo.getStackInSlot(i);
-//				if(currentItemStack != null) {
-//					NBTTagCompound nbtCompound = new NBTTagCompound();
-//					nbtCompound.setByte("Slot", (byte)i);
-//					currentItemStack.writeToNBT(nbtCompound);
-//					nbtTags.appendTag(nbtCompound);
-//				}
-//			}
-//			nbt.setTag("Items", nbtTags);
+			this.invDodo.saveInventoryToNBT(nbt);
+//			LogHelper.info("EntityDodo - writeEntityToNBT: Saved chest inventory.");
 		}
 	}
 
@@ -324,15 +291,6 @@ public class EntityDodo extends EntityTameable {
 		final byte NBT_TYPE_COMPOUND = 10;  
 		NBTTagList dataForAllSlots = nbt.getTagList("Items", NBT_TYPE_COMPOUND);
         this.invDodo.loadInventoryFromNBT(dataForAllSlots);
-
-//		for (int i = 0; i < dataForAllSlots.tagCount(); ++i) {
-//			NBTTagCompound dataForOneSlot = dataForAllSlots.getCompoundTagAt(i);
-//			int slotIndex = dataForOneSlot.getByte("Slot") & 255;
-//
-//			if (slotIndex >= 0 && slotIndex < this.invDodo.getSizeInventory()) {
-//				this.invDodo.setInventorySlotContents(slotIndex, ItemStack.loadItemStackFromNBT(dataForOneSlot));
-//			}
-//		}
 	}
 
 	/**
@@ -342,14 +300,6 @@ public class EntityDodo extends EntityTameable {
     protected boolean canDespawn() {
         return !this.isTamed() && this.ticksExisted > 2400;
     }
-	
-	// From IInvBasic 
-//	@Override
-//	public void onInventoryChanged(InventoryBasic invBasic) {
-//		// Normally used to add and remove the armor and saddle or pack, but not
-//		// needed for the Dodo, as we don't have the armor and saddle slots
-//		LogHelper.info("EntityDodo - onInventoryChanged");
-//	}
 	
     @Override
     protected String getLivingSound() {

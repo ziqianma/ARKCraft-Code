@@ -20,11 +20,13 @@ import com.arkcraft.mod.core.entity.model.ModelRaptor;
 import com.arkcraft.mod.core.entity.passive.EntityDodo;
 import com.arkcraft.mod.core.entity.render.RenderDodo;
 import com.arkcraft.mod.core.entity.render.RenderRaptor;
+import com.arkcraft.mod.core.lib.LogHelper;
 
 public class ClientProxy extends CommonProxy {
 	
 	boolean initDone = false;
 	
+	@Override
 	public void init() {
 		if(initDone) return;
 		RenderingRegistry.registerEntityRenderingHandler(EntityCobble.class, new RenderSnowball(Minecraft.getMinecraft().getRenderManager(), GlobalAdditions.cobble_ball, Minecraft.getMinecraft().getRenderItem()));
@@ -32,6 +34,7 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityRaptor.class, new RenderRaptor(new ModelRaptor(), 0.5F));
 		ModelBakery.addVariantName(GlobalAdditions.slingshot, "arkcraft:slingshot", "arkcraft:slingshot_pulled");
 		RenderingRegistry.registerEntityRenderingHandler(EntityDodo.class, new RenderDodo(new ModelDodo(), 0.3F));
+		LogHelper.info("CommonProxy: Init run!");
 		initDone = true;
 	}
 	
