@@ -58,7 +58,7 @@ public class GuiHandler implements IGuiHandler {
 	}
 	
 	private Entity getEntityAt(EntityPlayer player, int x, int y, int z) {
-	    AxisAlignedBB targetBox = new AxisAlignedBB(x-0.5D, y-0.0D, z-0.5D, x+0.5D, y+1.5D, z+0.5D);
+	    AxisAlignedBB targetBox = new AxisAlignedBB(x, y, z, x+1, y+1, z+1);
     	@SuppressWarnings("rawtypes")
 		List entities = player.worldObj.getEntitiesWithinAABBExcludingEntity(player, targetBox);
         @SuppressWarnings("rawtypes")

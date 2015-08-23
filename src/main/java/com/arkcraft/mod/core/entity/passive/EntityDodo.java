@@ -195,7 +195,10 @@ public class EntityDodo extends EntityTameable {
 	            if (player.isSneaking()) {
 					if (isChested()) {
 			            if (!this.worldObj.isRemote) {
-			            	player.openGui(Main.instance, GUI.INV_DODO.getID(), this.worldObj, (int) this.posX, (int) this.posY, (int) this.posZ);
+			            	player.openGui(Main.instance, GUI.INV_DODO.getID(), this.worldObj, 
+			            			(int) Math.floor(this.posX), (int) this.posY, (int) Math.floor(this.posZ));
+			            	LogHelper.info("EnityDodo: Opening GUI on Dodo at: " + this.posX + "," + this.posY + "," + this.posZ + " (" +
+			            			(int) Math.floor(this.posX) + "," + (int) this.posY  + "," + (int) Math.floor(this.posZ) + ")");
 			                this.aiSit.setSitting(this.isSitting());
 			            	LogHelper.info("Dodo is sitting");
 			                this.isJumping = false;
