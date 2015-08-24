@@ -37,22 +37,23 @@ public abstract class DinoTameable extends EntityTameable {
 	protected int progress = 0;
 	protected boolean isTameable = false;
 	protected boolean isRideable = false;
-//	protected EntityDinoAIFollowOwner dinoAIFollowOwner;
 	protected EntityAIBase attackPlayerTarget;
 	SaddleType saddleType;
 	
 	private int DINO_SADDLED_WATCHER = 22;
 	public boolean isSaddled() {
-		isSaddled = (this.dataWatcher.getWatchableObjectByte(DINO_SADDLED_WATCHER) & 3) != 0;
+		isSaddled = (this.dataWatcher.getWatchableObjectByte(DINO_SADDLED_WATCHER) & 1) != 0;
 		return isSaddled;
 	}
 	public void setSaddled(boolean saddled) {
 		if (!this.isChild() && this.isTamed()) {
 			isSaddled = saddled;
-//			byte b0 = (byte) (saddled ? 1 : 0);
-			byte b0 = (byte) this.saddleType.getSaddleID();
+			byte b0 = (byte) (saddled ? 1 : 0);
 			this.dataWatcher.updateObject(DINO_SADDLED_WATCHER, Byte.valueOf(b0));
 		}
+	}
+	public Item getSaddleType() {
+		return this.saddleType.getSaddleType();
 	}
 	public void setSaddleType(int type) {
 		switch (type) {
@@ -161,7 +162,6 @@ public abstract class DinoTameable extends EntityTameable {
     public void writeEntityToNBT(NBTTagCompound nbt) {
         super.writeEntityToNBT(nbt);
 		nbt.setBoolean("IsSaddled", isSaddled);
-		nbt.setInteger("SaddleType", this.saddleType.getSaddleID());
 		if(this.isSaddled()) {
 			this.invDino.saveInventoryToNBT(nbt);
 //			LogHelper.info("EntityDodo - writeEntityToNBT: Saved chest inventory.");
@@ -176,9 +176,6 @@ public abstract class DinoTameable extends EntityTameable {
         super.readEntityFromNBT(nbt);
         if (nbt.hasKey("IsSaddled")) {
         	this.setSaddled(nbt.getBoolean("IsSaddled"));
-        }
-        if (nbt.hasKey("SaddleType")) {
-        	this.setSaddleType(nbt.getInteger("SaddleType"));
         }
 		final byte NBT_TYPE_COMPOUND = 10;  
 		NBTTagList dataForAllSlots = nbt.getTagList("Items", NBT_TYPE_COMPOUND);
@@ -275,25 +272,39 @@ public abstract class DinoTameable extends EntityTameable {
 
 		if (isTamed()) {
             if (this.isOwner(player)) {
-            	player.addChatMessage(new ChatComponentText("DinoTameable: This dino is tamed."));
-	            if (itemstack != null) {
-	            	if (player.isSneaking()) {
-						// Put saddle on Dino
-						if (!isSaddled() && itemstack.getItem() == this.getSaddleType()) {
+            	if (!this.worldObj.isRemote)
+            		player.addChatMessage(new ChatComponentText("DinoTameable: This dino is tamed."));
+            	if (player.isSneaking()) {
+    	    		if (isSaddled()) {
+    	    			player.openGui(Main.instance, GUI.INV_DODO.getID(), this.worldObj, 
+		            			(int) Math.floor(this.posX), (int) this.posY, (int) Math.floor(this.posZ));
+		                this.aiSit.setSitting(this.isSitting());
+		            	LogHelper.info("Dino is sitting");
+		                this.isJumping = false;
+		                this.navigator.clearPathEntity();
+    	    			return true;
+    	    		}
+            	} // not sneaking     	
+	    		else if (itemstack != null) {
+					if (itemIsSaddle(itemstack)) {
+						if (this.isSaddled) {
+			            	LogHelper.info("Dino is saddled.");							
+						} else if (itemstack.getItem() == this.getSaddleType()) {
 							if (!player.capabilities.isCreativeMode) {
 								itemstack.stackSize--;
 								if (itemstack.stackSize == 0)
 				                    player.inventory.mainInventory[player.inventory.currentItem] = null;
 							}
 							setSaddled(true);
+			            	LogHelper.info("Dino is saddled.");
 							return true;
 						}
 						else {
-							player.addChatMessage(new ChatComponentText("This dino can only be saddled with a: " + this.saddleType + " saddle."));					
+							player.addChatMessage(new ChatComponentText("This dino can only be saddled with a: " + this.saddleType + " saddle."));
 						}
 					}
 			        // Heal the Dino with meat
-					else if (itemstack.getItem() instanceof ItemFood) {
+					else if (itemstack != null && itemstack.getItem() instanceof ItemFood) {
 	                    ItemFood itemfood = (ItemFood)itemstack.getItem();
 	                    if (!player.capabilities.isCreativeMode) {
 	                         --itemstack.stackSize;
@@ -305,13 +316,14 @@ public abstract class DinoTameable extends EntityTameable {
 						player.addChatMessage(new ChatComponentText("This dino's health is: " + this.getHealth() + " Max is: " 
 								+ this.getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue()));					
 	                    return true;
-		            }				
-	            } 
-	    		if (isSaddled()) {
-	    			player.openGui(Main.instance, GUI.INV_DODO.getID(), worldObj, 
-	    					player.getPosition().getX(), player.getPosition().getY(), player.getPosition().getZ());
-	    			return true;
-	    		}
+		            }
+					else {
+	            		this.setSitting(!this.isSitting());
+					}
+				}
+            	else {
+            		this.setSitting(!this.isSitting());
+            	}
 			} else { // end of owner's dino
             	player.addChatMessage(new ChatComponentText("DinoTameable: This dino is tamed, but not yours."));				
 			}
@@ -346,10 +358,16 @@ public abstract class DinoTameable extends EntityTameable {
         else {
 			player.addChatMessage(new ChatComponentText("DinoTameable: Use a Raw Porkchop to tame the dino."));
         }
-        return super.interact(player);
+		return false;
+//        return super.interact(player);
     }
     
-	public Item getSaddleType() {
-		return this.saddleType.getSaddleType();
-	}
+	private boolean itemIsSaddle(ItemStack itemstack) {
+		if (itemstack.getItem() == GlobalAdditions.saddle_small ||
+			itemstack.getItem() == GlobalAdditions.saddle_medium ||
+			itemstack.getItem() == GlobalAdditions.saddle_large)
+			return true;
+		else
+			return false;
+	}    
 }
