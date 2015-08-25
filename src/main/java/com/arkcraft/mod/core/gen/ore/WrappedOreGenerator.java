@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
@@ -154,6 +155,36 @@ public class WrappedOreGenerator implements IWorldGenerator {
 		}
 	}
 	
+	protected Block[] getValidSpawnBlocks() {
+		Block[] validSpawnBlocks = { Blocks.grass, Blocks.gravel, Blocks.sand, Blocks.stone };
+		return validSpawnBlocks;
+	}
+	
+	public boolean isValidSpawn(World world, int x, int y, int z) {
+		int distanceToAir = 0;
+		BlockPos pos = new BlockPos(x,y,z);
+		Block check = world.getBlockState(pos).getBlock();
+		while(check != Blocks.air) {
+			if(distanceToAir > 3) return false;
+			distanceToAir++;
+			check = world.getBlockState(new BlockPos(x,y-distanceToAir,z)).getBlock();
+		}
+		y += distanceToAir-1;
+		
+		Block block = world.getBlockState(pos).getBlock();
+		Block above = world.getBlockState(new BlockPos(x,y+1,z)).getBlock();
+		Block below = world.getBlockState(new BlockPos(x,y-1,z)).getBlock();
+		
+		for(Block b : getValidSpawnBlocks()) {
+			if(above != Blocks.air) return false;
+			if(block == b) return true;
+			else if(block == Blocks.snow && below == b) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
 		for (Instruction var: this.generations.values()) {
@@ -206,7 +237,10 @@ public class WrappedOreGenerator implements IWorldGenerator {
 			int chunkX = x + random.nextInt(16);
 			int chunkY = random.nextInt(par1.getMaxHeight());
 			int chunkZ = z + random.nextInt(16);
-			
+			//TODO Implement the below if() statement
+			//if(world.getBlockState(instruction.getBlockType() == GlobalAdditions.surfaceCrystals)) {
+				if(!isValidSpawn(world, chunkX, chunkY, chunkZ)) return;
+			//}
 			new WorldGenMinable(par1.getBlockType().getDefaultState(), par1.getBlocksPerVein()).generate(world, random, new BlockPos(chunkX, chunkY, chunkZ));
 			
 		}

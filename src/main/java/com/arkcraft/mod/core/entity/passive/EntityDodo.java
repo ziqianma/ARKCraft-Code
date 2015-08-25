@@ -192,7 +192,7 @@ public class EntityDodo extends EntityTameable {
             	if (!this.worldObj.isRemote)
             		LogHelper.info("The Dodo is tamed.");
 			
-	            if (player.isSneaking()) {
+	            if (player.isSneaking()) { 
 					if (isChested()) {
 			            if (!this.worldObj.isRemote) {
 			            	player.openGui(Main.instance, GUI.INV_DODO.getID(), this.worldObj, (int) this.posX, (int) this.posY, (int) this.posZ);
@@ -235,7 +235,7 @@ public class EntityDodo extends EntityTameable {
                 player.inventory.setInventorySlotContents(player.inventory.currentItem, (ItemStack)null);
             }
             if (!this.worldObj.isRemote) {
-                if (this.rand.nextInt(2) == 0) {
+                if (this.rand.nextInt(2) == 0 || (player.capabilities.isCreativeMode)) { //no random chance for creative mode people?
                     this.setTamed(true);
                     this.navigator.clearPathEntity();
                     this.aiSit.setSitting(true);

@@ -11,8 +11,6 @@ import com.arkcraft.mod.core.entity.EntityCobble;
 import com.arkcraft.mod.core.entity.EntityExplosive;
 import com.arkcraft.mod.core.entity.aggressive.EntityRaptor;
 import com.arkcraft.mod.core.entity.passive.EntityDodo;
-import com.arkcraft.mod.core.gen.ore.WrappedOreGenerator;
-import com.arkcraft.mod.core.gen.ore.WrappedOreGenerator.Instruction;
 import com.arkcraft.mod.core.handler.EntityHandler;
 import com.arkcraft.mod.core.handler.GuiHandler;
 import com.arkcraft.mod.core.handler.RecipeHandler;
@@ -22,6 +20,7 @@ import com.arkcraft.mod.core.items.ARKItem;
 import com.arkcraft.mod.core.items.ARKSaddle;
 import com.arkcraft.mod.core.items.ARKSlingshot;
 import com.arkcraft.mod.core.items.ARKWeapon;
+import com.arkcraft.mod.core.items.ItemDossier;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -52,6 +51,7 @@ public class GlobalAdditions {
 	public static ARKArmorItem clothHelm, clothChest, clothLegs, clothBoots;
 	public static ARKArmorItem boneHelm, boneChest, boneLegs, boneBoots;
 	public static ARKWeapon stoneSpear, ironPike;
+	public static ItemDossier dinoBook;
 	
 	public static ArmorMaterial CLOTH = EnumHelper.addArmorMaterial("CLOTH_MAT", "CLOTH_MAT", 4, new int[] {1,2,1,1}, 15);
 	public static ArmorMaterial CHITIN = EnumHelper.addArmorMaterial("CHITIN_MAT", "CHITIN_MAT", 16, new int[] { 3,7,6,3 } , 10);
@@ -70,8 +70,6 @@ public class GlobalAdditions {
 		
 		public int getID() { return id; }
 	}
-	
-	public static WrappedOreGenerator generator;
 	
 	public static void init() {
 		// Food
@@ -100,6 +98,8 @@ public class GlobalAdditions {
 		smithy = addContainer("smithy", 0.4F, Material.wood, GUI.SMITHY.getID(), false, false, 3);
 		pestle = addContainer("mortar_and_pestle", 0.4F, Material.rock, GUI.PESTLE_AND_MORTAR.getID(), false, false, 3);
 		
+		//TODO add book
+		
 		stoneSpear = addWeapon("stoneSpear", ToolMaterial.STONE);
 		ironPike = addWeapon("ironPike", ToolMaterial.IRON);
 		
@@ -119,15 +119,20 @@ public class GlobalAdditions {
 		clothLegs = addArmorItem("cloth_legs", CLOTH, "clothArmor", 2);
 		clothBoots = addArmorItem("cloth_boots", CLOTH, "clothArmor", 3);
 		boneHelm = addArmorItem("bone_helm", BONE, "boneArmor", 0);
+		boneChest = addArmorItem("bone_chest", BONE, "boneArmor", 1);
+		boneLegs = addArmorItem("bone_legs", BONE, "boneArmor", 2);
+		boneBoots = addArmorItem("bone_boots", BONE, "boneArmor", 3);
 		
 		// Other stuff
 		RecipeHandler.registerVanillaCraftingRecipes();
 		EntityHandler.registerModEntity(EntityExplosive.class, "Explosive Cobblestone Ball", 1, Main.instance, 64, 10, true);
 		EntityHandler.registerModEntity(EntityCobble.class, "Cobblestone Ball", 2, Main.instance, 64, 10, true);
+		
 		NetworkRegistry.INSTANCE.registerGuiHandler(Main.instance, new GuiHandler());
+		
 		EntityHandler.registerMonster(EntityRaptor.class, "raptor");
 		EntityHandler.registerPassive(EntityDodo.class, "dodo");
-		//generateOre(new Instruction(), new Instruction());
+	
 	}
 	
 	protected static ARKBush addBush(String name, float hardness) {
@@ -202,13 +207,5 @@ public class GlobalAdditions {
 	public static GlobalAdditions getInstance() { return new GlobalAdditions(); }
 	public static Map<String, Block> getAllBlocks() { return allBlocks; }
 	public static Map<String, Item> getAllItems() { return allItems; }
-
-	public static void generateOre(Instruction... instructions) {
-		{
-			for(int i = 0; i < instructions.length; i++) {
-				generator = new WrappedOreGenerator(0, instructions[i]);			
-			}
-		}
-	}
 	
 }
