@@ -190,12 +190,14 @@ public class EntityDodo extends EntityTameable {
 		if (isTamed()) {
             if (this.isOwner(player)) {
             	if (!this.worldObj.isRemote)
-            		LogHelper.info("The Dodo is tamed.");
-			
-	            if (player.isSneaking()) { 
+            		LogHelper.info("The Dodo is tamed.");    		
+	            if (player.isSneaking()) {
 					if (isChested()) {
 			            if (!this.worldObj.isRemote) {
-			            	player.openGui(Main.instance, GUI.INV_DODO.getID(), this.worldObj, (int) this.posX, (int) this.posY, (int) this.posZ);
+			            	player.openGui(Main.instance, GUI.INV_DODO.getID(), this.worldObj, 
+			            			(int) Math.floor(this.posX), (int) this.posY, (int) Math.floor(this.posZ));
+			            	LogHelper.info("EnityDodo: Opening GUI on Dodo at: " + this.posX + "," + this.posY + "," + this.posZ + " (" +
+			            			(int) Math.floor(this.posX) + "," + (int) this.posY  + "," + (int) Math.floor(this.posZ) + ")");
 			                this.aiSit.setSitting(this.isSitting());
 			            	LogHelper.info("Dodo is sitting");
 			                this.isJumping = false;
@@ -203,7 +205,7 @@ public class EntityDodo extends EntityTameable {
 			            }
 						return true;
 					}
-					if (itemstack.getItem() == GlobalAdditions.dodo_bag) {
+					if (itemstack != null && itemstack.getItem() == GlobalAdditions.dodo_bag) {
 						// Put Dodo Bag on Dodo
 						if (!player.capabilities.isCreativeMode) {
 							itemstack.stackSize--;
@@ -224,6 +226,10 @@ public class EntityDodo extends EntityTameable {
 		            	LogHelper.info("Dodo is not sitting");
 	            }
             }
+            else {
+            	if (!this.worldObj.isRemote)
+            		LogHelper.info("The Dodo is tamed, but not yours.");
+            }
 		}
         // Tame the Dodo with meat
         else if (itemstack != null && (itemstack.getItem() == GlobalAdditions.porkchop_raw 
@@ -235,7 +241,7 @@ public class EntityDodo extends EntityTameable {
                 player.inventory.setInventorySlotContents(player.inventory.currentItem, (ItemStack)null);
             }
             if (!this.worldObj.isRemote) {
-                if (this.rand.nextInt(2) == 0 || (player.capabilities.isCreativeMode)) { //no random chance for creative mode people?
+                if (this.rand.nextInt(2) == 0) {
                     this.setTamed(true);
                     this.navigator.clearPathEntity();
                     this.aiSit.setSitting(true);

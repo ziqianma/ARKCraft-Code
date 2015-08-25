@@ -22,7 +22,6 @@ import net.minecraft.entity.passive.EntityRabbit;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.pathfinding.PathNavigateGround;
 import net.minecraft.util.BlockPos;
@@ -31,6 +30,7 @@ import net.minecraft.world.World;
 import com.arkcraft.mod.core.GlobalAdditions;
 import com.arkcraft.mod.core.Main;
 import com.arkcraft.mod.core.entity.DinoTameable;
+import com.arkcraft.mod.core.entity.SaddleType;
 import com.arkcraft.mod.core.lib.LogHelper;
 import com.google.common.base.Predicate;
 
@@ -45,7 +45,7 @@ public class EntityRaptor extends DinoTameable {
 
 	@SuppressWarnings("rawtypes")
 	public EntityRaptor(World world) {
-		super(world);
+		super(world, SaddleType.SMALL);
         this.setSize(0.8F, 1.5F);
 
         ((PathNavigateGround)this.getNavigator()).func_179690_a(true);
@@ -197,10 +197,5 @@ public class EntityRaptor extends DinoTameable {
 	@Override
 	public EntityAgeable createChild(EntityAgeable ageable) {
 		return new EntityRaptor(this.worldObj);
-	}
-
-	@Override
-	public Item getSaddleType() {
-		return GlobalAdditions.saddle_small;
 	}
 }
