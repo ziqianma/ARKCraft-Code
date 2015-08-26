@@ -6,10 +6,16 @@
  MCP Data version : snapshot_20141130
 ****************************
 :eclipseClasspath
+Download https://libraries.minecraft.net/net/minecraft/launchwrapper/1.12/launchwrapper-1.12-sources.jar
+Download http://repo1.maven.org/maven2/org/scala-lang/modules/scala-swing_2.11/1.0.1/scala-swing_2.11-1.0.1-sources.jar
+Download https://libraries.minecraft.net/java3d/vecmath/1.5.2/vecmath-1.5.2-sources.jar
+Download http://repo1.maven.org/maven2/net/sf/jopt-simple/jopt-simple/4.6/jopt-simple-4.6-sources.jar
+Download http://repo1.maven.org/maven2/io/netty/netty-all/4.0.15.Final/netty-all-4.0.15.Final-sources.jar
+Download https://libraries.minecraft.net/com/mojang/authlib/1.5.17/authlib-1.5.17-sources.jar
 :eclipseJdt
 :eclipseProject
 :eclipse
 
 BUILD SUCCESSFUL
 
-Total time: 12.291 secs
+Total time: 15.34 secs
