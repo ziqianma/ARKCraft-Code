@@ -1,5 +1,6 @@
 package com.arkcraft.mod.core.items;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.arkcraft.mod.core.Main;
@@ -19,7 +20,7 @@ import net.minecraft.world.World;
 public class ItemDossier extends Item {
 
 	private int guiID;
-	private List<String> entriesToAdd;
+	private ArrayList<String> entriesToAdd = new ArrayList<String>();
 	
 	public ItemDossier(String name, int guiID) {
 		super();
@@ -27,7 +28,7 @@ public class ItemDossier extends Item {
 	}
 	
 	public void addMoreInformation(String... entries) {
-		for(String e : entries) entriesToAdd.add(e);
+		for(String e : entries) if(e!=null) entriesToAdd.add(e);
 	}
 	
 	public int getGuiID() { return guiID; }

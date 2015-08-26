@@ -12,6 +12,7 @@ import com.arkcraft.mod.core.entity.EntityExplosive;
 import com.arkcraft.mod.core.entity.aggressive.EntityRaptor;
 import com.arkcraft.mod.core.entity.passive.EntityDodo;
 import com.arkcraft.mod.core.handler.EntityHandler;
+import com.arkcraft.mod.core.handler.GenerationHandler;
 import com.arkcraft.mod.core.handler.GuiHandler;
 import com.arkcraft.mod.core.handler.RecipeHandler;
 import com.arkcraft.mod.core.items.ARKArmorItem;
@@ -51,6 +52,7 @@ public class GlobalAdditions {
 	public static ARKArmorItem clothHelm, clothChest, clothLegs, clothBoots;
 	public static ARKArmorItem boneHelm, boneChest, boneLegs, boneBoots;
 	public static ARKWeapon stoneSpear, ironPike;
+	public static ARKBlock oreSurface;
 	public static ItemDossier dinoBook;
 	
 	public static ArmorMaterial CLOTH = EnumHelper.addArmorMaterial("CLOTH_MAT", "CLOTH_MAT", 4, new int[] {1,2,1,1}, 15);
@@ -62,7 +64,7 @@ public class GlobalAdditions {
 	public static ARKContainerBlock smithy, pestle;
 	
 	public enum GUI {
-		SMITHY(0), PESTLE_AND_MORTAR(1), INV_DODO(2);
+		SMITHY(0), PESTLE_AND_MORTAR(1), INV_DODO(2), BOOK_GUI(3);
 		int id;
 		GUI(int id) {
 			this.id = id;
@@ -98,7 +100,7 @@ public class GlobalAdditions {
 		smithy = addContainer("smithy", 0.4F, Material.wood, GUI.SMITHY.getID(), false, false, 3);
 		pestle = addContainer("mortar_and_pestle", 0.4F, Material.rock, GUI.PESTLE_AND_MORTAR.getID(), false, false, 3);
 		
-		//TODO add book
+		oreSurface = addBlock(Material.rock, "oreSurface", 3.0F);
 		
 		stoneSpear = addWeapon("stoneSpear", ToolMaterial.STONE);
 		ironPike = addWeapon("ironPike", ToolMaterial.IRON);
@@ -109,6 +111,8 @@ public class GlobalAdditions {
 		tranq_arrow = addItem("tranq_arrow");
 		dodo_bag = addItemWithTooltip("dodo_bag", "Backpack for the Dodo");
 
+		dinoBook = addDossier("dinoBook", GUI.BOOK_GUI.getID(), EnumChatFormatting.GOLD + "Knowledge is Power");
+		
 		// Armor
 		chitinHelm = addArmorItem("chitin_helm", CHITIN, "chitinArmor", 0);
 		chitinChest = addArmorItem("chitin_chest", CHITIN, "chitinArmor", 1);
@@ -132,6 +136,7 @@ public class GlobalAdditions {
 		
 		EntityHandler.registerMonster(EntityRaptor.class, "raptor");
 		EntityHandler.registerPassive(EntityDodo.class, "dodo");
+		GenerationHandler.addOreToGen(oreSurface, 0); //5,5
 	
 	}
 	
@@ -172,6 +177,13 @@ public class GlobalAdditions {
 		ARKFood f = new ARKFood(name, heal, sat, fav);
 		allItems.put(name, f);
 		return f;
+	}
+	
+	protected static ItemDossier addDossier(String name, int guiID, String... tooltips) {
+		ItemDossier dossier = new ItemDossier(name, guiID);
+		dossier.addMoreInformation(tooltips);
+		allItems.put(name, dossier);
+		return dossier;
 	}
 	
 	public static ARKItem addItemWithTooltip(String name, String... tooltips) {

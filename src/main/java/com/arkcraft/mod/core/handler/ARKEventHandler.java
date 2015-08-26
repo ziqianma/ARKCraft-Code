@@ -6,7 +6,9 @@ import com.arkcraft.mod.core.lib.LogHelper;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.entity.item.ItemTossEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class ARKEventHandler {
@@ -37,6 +39,19 @@ public class ARKEventHandler {
 			LogHelper.info("EntityWorldJoinEvent: Gave Dino Dossier @ " + entity.toString());
 		}
 	}
-
+	
+	/***
+	 * @athor Vastatio
+	 * messing around w/ events
+	 */
+	
+	public void onItemTossEvent(ItemTossEvent event) {
+		if(event.entityItem.getEntityItem() == new ItemStack(GlobalAdditions.dinoBook)) {
+			LogHelper.info("Dropped the Dino Dossier!");
+			EnumParticleTypes type = EnumParticleTypes.EXPLOSION_NORMAL;
+			/* Explode if the player drops the item. No damage, just an explosion effect because I'm bored, and want to mess around with EnumParticleTypes */
+			event.entity.worldObj.spawnParticle(type, event.entityItem.posX, event.entityItem.posY, event.entityItem.posZ, 0.5D, 0.5D, 0.5D, new int[0]);
+		}
+	}
 	
 }
