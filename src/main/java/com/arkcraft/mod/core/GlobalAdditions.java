@@ -122,10 +122,10 @@ public class GlobalAdditions {
 		clothChest = addArmorItem("cloth_chest", CLOTH, "clothArmor", 1);
 		clothLegs = addArmorItem("cloth_legs", CLOTH, "clothArmor", 2);
 		clothBoots = addArmorItem("cloth_boots", CLOTH, "clothArmor", 3);
-		boneHelm = addArmorItem("bone_helm", BONE, "boneArmor", 0);
-		boneChest = addArmorItem("bone_chest", BONE, "boneArmor", 1);
-		boneLegs = addArmorItem("bone_legs", BONE, "boneArmor", 2);
-		boneBoots = addArmorItem("bone_boots", BONE, "boneArmor", 3);
+		boneHelm = addArmorItem("bone_helm", BONE, "boneArmor", 0, true, EnumChatFormatting.DARK_RED + "Armor of the Ancients");
+		boneChest = addArmorItem("bone_chest", BONE, "boneArmor", 1, true, EnumChatFormatting.DARK_RED + "Armor of the Ancients");
+		boneLegs = addArmorItem("bone_legs", BONE, "boneArmor", 2, true, EnumChatFormatting.DARK_RED + "Armor of the Ancients");
+		boneBoots = addArmorItem("bone_boots", BONE, "boneArmor", 3, true, EnumChatFormatting.DARK_RED + "Armor of the Ancients");
 		
 		// Other stuff
 		RecipeHandler.registerVanillaCraftingRecipes();
@@ -199,7 +199,15 @@ public class GlobalAdditions {
 	}
 	
 	public static ARKArmorItem addArmorItem(String name, ArmorMaterial mat, String armorTexName, int type) {
-		ARKArmorItem item = new ARKArmorItem(name, mat, armorTexName, type);
+		return addArmorItem(name, mat, armorTexName, type, false);
+	}
+	
+	public static ARKArmorItem addArmorItem(String name, ArmorMaterial mat, String armorTexName, int type, boolean golden) {
+		return addArmorItem(name, mat, armorTexName, type, false, EnumChatFormatting.ITALIC + "Armor, Made to Fit");
+	}
+	
+	public static ARKArmorItem addArmorItem(String name, ArmorMaterial mat, String armorTexName, int type, boolean golden, String... tooltips) {
+		ARKArmorItem item = new ARKArmorItem(name, mat, armorTexName, type, golden, tooltips);
 		allItems.put(name, item);
 		return item;
 	}

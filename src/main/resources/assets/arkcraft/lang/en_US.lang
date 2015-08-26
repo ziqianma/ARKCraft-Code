@@ -20,6 +20,10 @@ item.cloth_helm.name=Fiber Hat
 item.cloth_chest.name=Fiber Shirt
 item.cloth_legs.name=Fiber Pants
 item.cloth_boots.name=Fiber Shoes
+item.bone_helm.name=Dino Bone Helmet
+item.bone_chest.name=Dino Bone Chestplate
+item.bone_legs.name=Dino Bone Leggings
+item.bone_boots.name=Dino Bone Boots
 item.tranq_arrow.name=Tranquilizer Arrow
 item.slingshot.name=Slingshot
 item.ironPike.name=Iron Pike
@@ -35,6 +39,7 @@ item.porkchop_raw.name=Raw Porkchop
 item.primemeat_cooked.name=Cooked Prime Meat
 item.primemeat_raw.name=Raw Prime Meat
 item.dodo_bag.name=Dodo Bag
+item.dinoBook.name=Dino Dossier
 
 # miscelaneous
 itemGroup.tabARKCraft=ARKCraft: Survival Evolved

@@ -42,7 +42,7 @@ public class ContainerMP extends Container {
 
         if (!this.world.isRemote)
         {
-            for (int i = 0; i < 25; ++i)
+            for (int i = 0; i < 2; ++i)
             {
                 ItemStack itemstack = this.inputSlots.getStackInSlotOnClosing(i);
 
@@ -99,7 +99,7 @@ public class ContainerMP extends Container {
 
 	@Override
 	public void onCraftMatrixChanged(IInventory inventory) {
-		//craftResult.setInventorySlotContents(0, SmithyCraftingManager.getInstance().findMatchingRecipe(craftMatrix, world));
+		//craftResult.setInventorySlotContents(0, ARKCraftingHandler.getInstance().findMatchingRecipeMP(inputSlots, world));
 	}
 	
 	@Override

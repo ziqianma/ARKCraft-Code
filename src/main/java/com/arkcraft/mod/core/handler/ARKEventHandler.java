@@ -40,18 +40,4 @@ public class ARKEventHandler {
 		}
 	}
 	
-	/***
-	 * @athor Vastatio
-	 * messing around w/ events
-	 */
-	
-	public void onItemTossEvent(ItemTossEvent event) {
-		if(event.entityItem.getEntityItem() == new ItemStack(GlobalAdditions.dinoBook)) {
-			LogHelper.info("Dropped the Dino Dossier!");
-			EnumParticleTypes type = EnumParticleTypes.EXPLOSION_NORMAL;
-			/* Explode if the player drops the item. No damage, just an explosion effect because I'm bored, and want to mess around with EnumParticleTypes */
-			event.entity.worldObj.spawnParticle(type, event.entityItem.posX, event.entityItem.posY, event.entityItem.posZ, 0.5D, 0.5D, 0.5D, new int[0]);
-		}
-	}
-	
 }

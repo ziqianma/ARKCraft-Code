@@ -32,7 +32,7 @@ public class GuiMP extends GuiContainer {
 	
 	public void onGuiClosed() { super.onGuiClosed(); }
 	protected void drawGuiContainerForegroundLayer(int i, int j) {
-		this.fontRendererObj.drawString(name, 89 - name.length(), 5, Color.darkGray.getRGB());
+		this.fontRendererObj.drawString(name, (int)(xSize / 2) - name.length(), 5, Color.darkGray.getRGB());
 	}
 	
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {

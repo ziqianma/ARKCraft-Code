@@ -24,6 +24,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class GuiSmithy extends GuiContainer {
 	
 	public static final ResourceLocation texture = new ResourceLocation(Main.MODID, "textures/gui/smithy.png");
+	public String name = "Smithy";
 	
 	public GuiSmithy(InventoryPlayer invPlayer, World world, BlockPos pos) {
 		super(new ContainerSmithy(invPlayer, world, pos));
@@ -34,7 +35,7 @@ public class GuiSmithy extends GuiContainer {
 	public void onGuiClosed() { super.onGuiClosed(); }
 	
 	protected void drawGuiContainerForegroundLayer(int i, int j) {
-		this.fontRendererObj.drawString("Smithy", 91, 5, Color.darkGray.getRGB());
+		this.fontRendererObj.drawString(name, (int)(xSize / 2) - name.length(), 5, Color.darkGray.getRGB());
 	}
 	
 	protected void drawGuiContainerBackgroundLayer(float partTick, int mX, int mY) {

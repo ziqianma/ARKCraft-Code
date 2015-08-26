@@ -3,6 +3,7 @@ package com.arkcraft.mod.core.items;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.arkcraft.mod.core.GlobalAdditions;
 import com.arkcraft.mod.core.Main;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,6 +11,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 /**
  * 
@@ -25,6 +27,9 @@ public class ItemDossier extends Item {
 	public ItemDossier(String name, int guiID) {
 		super();
 		this.guiID = guiID;
+		this.setCreativeTab(GlobalAdditions.tabARK);
+		this.setUnlocalizedName(name);
+		GameRegistry.registerItem(this, name);
 	}
 	
 	public void addMoreInformation(String... entries) {
