@@ -48,20 +48,6 @@ Look Below for IntelliJ.
 
 Then your done! You have this repo inside your workspace, and can edit whatever you want.
 
-####Terminoligy:
-
-- *Commit* - Gets your changes ready to push.
-- *Push* - Gets your changes published onto the repo.
-- *Pull* - Synchs up your repo with other people's repos.
-
-####Useful Commands for git:
-
-- **git commit -m "My Commit Message"** - Commits your uncommited changes.
-- **git push -u origin master** - Pushes your commited changes.
-- **git pull -u origin master** - Pulls any unsynched changes.
-- **git rm --cached <filename>** - Ignores a file.
-- **git rm --cached -r <foldername>** - Ignores an entire folder and the contents within it. 
-
 ##IntelliJ IDEA
 
 If you preffer to use IntelliJ, steps are a little different.
@@ -76,13 +62,28 @@ Step 4: The final step is to open Eclipse and switch your workspace to /eclipse/
 If at any point you are missing libraries in your IDE, or you've run into problems you can run "gradlew --refresh-dependencies" to refresh the local cache. "gradlew clean" to reset everything {this does not effect your code} and then start the processs again.
 
 Should it still not work, 
-Refer to #ForgeGradle on EsperNet for more information about the gradle environment.
+Ask Vastatio or wildbill22 for help.
 
-Tip:
+####Terminoligy:
+
+- *Commit* - Gets your changes ready to push.
+- *Push* - Gets your changes published onto the repo.
+- *Pull* - Synchs up your repo with other people's repos.
+
+####Useful Commands for git:
+
+- **git commit -m "My Commit Message"** - Commits your uncommited changes.
+- **git push -u origin master** - Pushes your commited changes.
+- **git pull -u origin master** - Pulls any unsynched changes.
+- **git rm --cached <filename>** - Ignores a file.
+- **git rm --cached -r <foldername>** - Ignores an entire folder and the contents within it. 
+
+
+####Tip:
 If you do not care about seeing Minecraft's source code you can replace "setupDecompWorkspace" with one of the following:
 "setupDevWorkspace": Will patch, deobfusicated, and gather required assets to run minecraft, but will not generated human readable source code.
 "setupCIWorkspace": Same as Dev but will not download any assets. This is useful in build servers as it is the fastest because it does the least work.
 
-Tip:
+####Tip:
 When using Decomp workspace, the Minecraft source code is NOT added to your workspace in a editable way. Minecraft is treated like a normal Library. Sources are there for documentation and research purposes and usually can be accessed under the 'referenced libraries' section of your IDE.
 
