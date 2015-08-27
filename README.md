@@ -35,7 +35,7 @@ Then your done! You have this repo inside your workspace, and can edit whatever 
 
 **Useful Commands for git:**
 **git commit -m "My Commit Message"** - Commits your uncommited changes.
-** git push -u origin master** - Pushes your commited changes.
+**git push -u origin master** - Pushes your commited changes.
 **git pull -u origin master** - Pulls any unsynched changes.
 **git rm --cached <filename>** - Ignores a file.
 **git rm --cached -r <foldername>** - Ignores an entire folder and the contents within it. 
