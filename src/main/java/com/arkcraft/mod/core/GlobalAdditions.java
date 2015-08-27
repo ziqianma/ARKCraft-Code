@@ -45,7 +45,7 @@ public class GlobalAdditions {
 
 	public static ARKFood tintoBerry, amarBerry, azulBerry, mejoBerry, narcoBerry, porkchop_raw, porkchop_cooked, primemeat_raw, primemeat_cooked;
 	public static ARKBush berryBush;
-	public static ARKItem cobble_ball, fiber, chitin, narcotics, tranq_arrow, explosive_ball, dodo_bag;
+	public static ARKItem cobble_ball, fiber, chitin, narcotics, tranq_arrow, explosive_ball, dodo_bag, dodo_egg, dodo_feather;
 	public static ARKSlingshot slingshot;
 	public static ARKSaddle saddle_small, saddle_medium, saddle_large;
 	public static ARKArmorItem chitinHelm, chitinChest, chitinLegs, chitinBoots;
@@ -110,6 +110,8 @@ public class GlobalAdditions {
 		chitin = addItem("chitin");
 		tranq_arrow = addItem("tranq_arrow");
 		dodo_bag = addItemWithTooltip("dodo_bag", "Backpack for the Dodo");
+		dodo_egg = addItem("dodo_egg");
+		dodo_feather = addItem("dodo_feather");
 
 		dinoBook = addDossier("dinoBook", GUI.BOOK_GUI.getID(), EnumChatFormatting.GOLD + "Knowledge is Power");
 		
