@@ -39,6 +39,8 @@ item.porkchop_raw.name=Raw Porkchop
 item.primemeat_cooked.name=Cooked Prime Meat
 item.primemeat_raw.name=Raw Prime Meat
 item.dodo_bag.name=Dodo Bag
+item.dodo_feather.name=Dodo Feather
+item.dodo_egg.name=Dodo Egg
 item.dinoBook.name=Dino Dossier
 
 # miscelaneous

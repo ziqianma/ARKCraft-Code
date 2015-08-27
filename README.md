@@ -26,19 +26,19 @@ For eclipse, run "gradlew eclipse" (./gradlew eclipse if you are on Mac/Linux)
 
 Step 4: Create another folder, for your workspace.
 
-Step 5: Set your workspace to that folder, then import your built cloned repo folder using File>Import. Select the root folder as your built cloned repo folder.
+Step 5: Set your workspace to that folder, then import your built cloned repo folder using **File>Import.** Select the root folder as your built cloned repo folder.
 
 Then your done! You have this repo inside your workspace, and can edit whatever you want.
-Commit - Gets your changes ready to push.
-Push - Gets your changes published onto the repo.
-Pull - Synchs up your repo with other people's repos.
+*Commit* - Gets your changes ready to push.
+*Push* - Gets your changes published onto the repo.
+*Pull* - Synchs up your repo with other people's repos.
 
-Useful Commands for git:
-git commit -m "My Commit Message" - Commits your uncommited changes.
-git push -u origin master - Pushes your commited changes.
-git pull -u origin master - Pulls any unsynched changes.
-git rm --cached <filename> - Ignores a file.
-git rm --cached -r <foldername> - Ignores an entire folder and the contents within it. 
+**Useful Commands for git:**
+**git commit -m "My Commit Message"** - Commits your uncommited changes.
+** git push -u origin master** - Pushes your commited changes.
+**git pull -u origin master** - Pulls any unsynched changes.
+**git rm --cached <filename>** - Ignores a file.
+**git rm --cached -r <foldername>** - Ignores an entire folder and the contents within it. 
 
 If you preffer to use IntelliJ, steps are a little different.
 1. Open IDEA, and import project.
