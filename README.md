@@ -3,7 +3,8 @@
 ARKCraft Survival Evolved is a mod that adds the features from ARK: Survival Evolved into minecraft.
 ![Image of Logo](http://i61.tinypic.com/ou8phc.jpg)
 
-Many features are added, such as
+Many features are added, such as:
+
 1. Dinos, birds, prehistoric creatures and more models are added into the game.
 2. New breeding and taming mechanics are added into the game, enabling you to ride and play with the creatures that ARKCraft    provides.
 3. Many items and new GUI's are added into the game, enabling you to tame and breed dinos.
@@ -30,26 +31,29 @@ Source pack installation information:
 
 ##Eclipse
 
-Step 1: Open your command line to where you cloned this repo.
+1. Open your command line to where you cloned this repo.
 
-Step 2: Once you have a command window up in the folder that the downloaded material was placed, type:
+2. Once you have a command window up in the folder that the downloaded material was placed, type:
 
 Windows: "gradlew setupDecompWorkspace"
 Linux/Mac OS: "./gradlew setupDecompWorkspace"
 
-Step 3: After all that finished, you're left with a choice.
+3. After all that finished, you're left with a choice.
 For eclipse, run "gradlew eclipse" (./gradlew eclipse if you are on Mac/Linux)
+Look Below for IntelliJ.
 
-Step 4: Create another folder, for your workspace.
+4. Create another folder, for your workspace.
 
-Step 5: Set your workspace to that folder, then import your built cloned repo folder using **File>Import.** Select the root folder as your built cloned repo folder.
+5. Set your workspace to that folder, then import your built cloned repo folder using **File>Import.** Select the root folder as your built cloned repo folder.
 
 Then your done! You have this repo inside your workspace, and can edit whatever you want.
+
+####Terminoligy:
 *Commit* - Gets your changes ready to push.
 *Push* - Gets your changes published onto the repo.
 *Pull* - Synchs up your repo with other people's repos.
 
-**Useful Commands for git:**
+####Useful Commands for git:
 **git commit -m "My Commit Message"** - Commits your uncommited changes.
 **git push -u origin master** - Pushes your commited changes.
 **git pull -u origin master** - Pulls any unsynched changes.
