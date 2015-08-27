@@ -14,13 +14,16 @@ import com.arkcraft.mod.core.GlobalAdditions;
 public class ARKFood extends ItemFood {
 	
 	private PotionEffect[] effects;
+	private boolean alwaysEdible;
 	
-	public ARKFood(String name, int healAmount, float sat, boolean fav, PotionEffect... effects) {
+	public ARKFood(String name, int healAmount, float sat, boolean fav, boolean alwaysEdible, PotionEffect... effects) {
 		super(healAmount, sat, fav);
 		this.setUnlocalizedName(name);
 		this.setCreativeTab(GlobalAdditions.tabARK);
 		GameRegistry.registerItem(this, name);
 		this.effects = effects;
+		this.alwaysEdible = alwaysEdible;
+		
 	}
 
 	@Override
@@ -32,6 +35,24 @@ public class ARKFood extends ItemFood {
 	            player.addPotionEffect(new PotionEffect(this.effects[i].getPotionID(), this.effects[i].getDuration(), this.effects[i].getAmplifier(), this.effects[i].getIsAmbient(), this.effects[i].getIsShowParticles()));
 	    }
 	}
+	@Override
+	public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn)
+    {
+        if (playerIn.canEat(this.alwaysEdible))
+        {
+            playerIn.setItemInUse(itemStackIn, this.getMaxItemUseDuration(itemStackIn));
+        }
+
+        return itemStackIn;
+    }
+		
+	@Override
+	  public ItemFood setAlwaysEdible()
+    {
+        this.alwaysEdible = true;
+        return this;
+    }
+	
 	
 	
 	
