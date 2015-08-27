@@ -9,7 +9,7 @@ Many features are added, such as:
 2. New breeding and taming mechanics are added into the game, enabling you to ride and play with the creatures that ARKCraft    provides.
 3. Many items and new GUI's are added into the game, enabling you to tame and breed dinos.
 
-If you would like more information and screenshots, take a look at our [!forum page](http://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/wip-mods/2482915-wip-arkcraft-survival-evolved-dinos-taming).
+If you would like more information and screenshots, take a look at our [forum page](http://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/wip-mods/2482915-wip-arkcraft-survival-evolved-dinos-taming).
 
 
 
@@ -49,16 +49,18 @@ Look Below for IntelliJ.
 Then your done! You have this repo inside your workspace, and can edit whatever you want.
 
 ####Terminoligy:
-*Commit* - Gets your changes ready to push.
-*Push* - Gets your changes published onto the repo.
-*Pull* - Synchs up your repo with other people's repos.
+
+- *Commit* - Gets your changes ready to push.
+- *Push* - Gets your changes published onto the repo.
+- *Pull* - Synchs up your repo with other people's repos.
 
 ####Useful Commands for git:
-**git commit -m "My Commit Message"** - Commits your uncommited changes.
-**git push -u origin master** - Pushes your commited changes.
-**git pull -u origin master** - Pulls any unsynched changes.
-**git rm --cached <filename>** - Ignores a file.
-**git rm --cached -r <foldername>** - Ignores an entire folder and the contents within it. 
+
+- **git commit -m "My Commit Message"** - Commits your uncommited changes.
+- **git push -u origin master** - Pushes your commited changes.
+- **git pull -u origin master** - Pulls any unsynched changes.
+- **git rm --cached <filename>** - Ignores a file.
+- **git rm --cached -r <foldername>** - Ignores an entire folder and the contents within it. 
 
 ##IntelliJ IDEA
 
@@ -84,14 +86,3 @@ If you do not care about seeing Minecraft's source code you can replace "setupDe
 Tip:
 When using Decomp workspace, the Minecraft source code is NOT added to your workspace in a editable way. Minecraft is treated like a normal Library. Sources are there for documentation and research purposes and usually can be accessed under the 'referenced libraries' section of your IDE.
 
-Forge source installation
-=========================
-MinecraftForge ships with this code and installs it as part of the forge
-installation process, no further action is required on your part.
-
-LexManos' Install Video
-=======================
-https://www.youtube.com/watch?v=8VEdtQLuLO0&feature=youtu.be
-
-For more details update more often refer to the Forge Forums:
-http://www.minecraftforge.net/forum/index.php/topic,14048.0.html
