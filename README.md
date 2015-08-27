@@ -1,6 +1,21 @@
+#ARKCraft: Survival Evolved Code
+
+ARKCraft Survival Evolved is a mod that adds the features from ARK: Survival Evolved into minecraft.
+![Image of Logo](http://i61.tinypic.com/ou8phc.jpg)
+
+Many features are added, such as
+1. Dinos, birds, prehistoric creatures and more models are added into the game.
+2. New breeding and taming mechanics are added into the game, enabling you to ride and play with the creatures that ARKCraft    provides.
+3. Many items and new GUI's are added into the game, enabling you to tame and breed dinos.
+
+If you would like more information and screenshots, take a look at our [!forum page](http://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/wip-mods/2482915-wip-arkcraft-survival-evolved-dinos-taming).
+
+
+
 -------------------------------------------
-Source installation information for modders
+Source installation information for Contributers
 -------------------------------------------
+
 This code follows the Minecraft Forge installation methodology. It will apply
 some small patches to the vanilla MCP source code, giving you and it access 
 to some of the data and functions you need to build a successful mod.
@@ -11,8 +26,9 @@ normal code.
 
 Source pack installation information:
 
-Standalone source installation
-==============================
+#Standalone source installation
+
+##Eclipse
 
 Step 1: Open your command line to where you cloned this repo.
 
@@ -39,6 +55,8 @@ Then your done! You have this repo inside your workspace, and can edit whatever 
 **git pull -u origin master** - Pulls any unsynched changes.
 **git rm --cached <filename>** - Ignores a file.
 **git rm --cached -r <foldername>** - Ignores an entire folder and the contents within it. 
+
+##IntelliJ IDEA
 
 If you preffer to use IntelliJ, steps are a little different.
 1. Open IDEA, and import project.
