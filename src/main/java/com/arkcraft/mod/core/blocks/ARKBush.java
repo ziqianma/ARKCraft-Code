@@ -6,9 +6,13 @@ import com.arkcraft.mod.core.GlobalAdditions;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumWorldBlockLayer;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -20,7 +24,6 @@ public class ARKBush extends ARKBlock {
 
 	public ARKBush(String name, float hardness) {
 		super(Material.leaves, name, hardness);
-		
 	}
 	
 	@Override
@@ -31,14 +34,34 @@ public class ARKBush extends ARKBlock {
 		else { return GlobalAdditions.azulBerry; }
 	}
 	
-/*	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumFacing side, float hitX, float hitY, float hitZ)
-    {
-
-	return false;
+	// Called when bush is right clicked
+	@Override
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumFacing side, float hitX, float hitY, float hitZ) {
+		if (!worldIn.isRemote) {
+			for (int i = 0; i < worldIn.rand.nextInt(5); i++) {
+				Item itemPicked = getItemDropped(state, worldIn.rand, 0);
+		        this.entityDropItem(worldIn, pos, playerIn, new ItemStack(itemPicked, 1, 0));
+			}
+		}
+		return true;
     }
 	
-	@Override
+    /**
+     * Drops an item at the position of the bush.
+     */
+    private void entityDropItem(World worldIn, BlockPos pos, EntityPlayer playerIn, ItemStack itemStackIn) {
+        if (itemStackIn.stackSize != 0 && itemStackIn.getItem() != null) {
+        	Float offset = worldIn.rand.nextFloat();
+            EntityItem entityitem = new EntityItem(worldIn, pos.getX() + offset, pos.getY() + this.maxY, pos.getZ() + offset, itemStackIn);
+            entityitem.setDefaultPickupDelay();
+            if (playerIn.captureDrops)
+            	playerIn.capturedDrops.add(entityitem);
+            else
+                worldIn.spawnEntityInWorld(entityitem);
+        }
+    }
+	
+	/*	@Override
 	public void onBlockClicked(World worldIn, BlockPos pos, EntityPlayer playerIn) {}
 
     public Vec3 modifyAcceleration(World worldIn, BlockPos pos, Entity entityIn, Vec3 motion)
