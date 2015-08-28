@@ -6,9 +6,11 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
+import com.arkcraft.mod.core.Main;
+
 public class GuiDosierScreen extends GuiScreen {
 
-    private static final ResourceLocation texture = new ResourceLocation("textures/gui/dino_book_gui.png");
+    private static final ResourceLocation texture = new ResourceLocation(Main.MODID, "textures/gui/dino_book_gui.png");
 
 	private int guiWidth = 256;
 	private int guiHeight = 180;

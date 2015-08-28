@@ -10,6 +10,10 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import com.arkcraft.mod.core.GlobalAdditions;
 import com.arkcraft.mod.core.entity.EntityDodoEgg;
 
+/**
+ * @author BubbleTrouble
+ */
+
 public class ARKEggItem extends Item {
 
 	public ARKEggItem(String name) {
