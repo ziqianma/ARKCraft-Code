@@ -1,5 +1,6 @@
 package com.arkcraft.mod.core.machine.gui;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.util.ResourceLocation;
@@ -47,7 +48,8 @@ public class GuiDosierScreen extends GuiScreen {
 		this.mc.getTextureManager().bindTexture(texture);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		this.drawTexturedModalRect(x, y, 0, 0, guiWidth, guiHeight);
-		
+		bButton.drawButton(Minecraft.getMinecraft(), mouseX, mouseY);
+		nButton.drawButton(Minecraft.getMinecraft(), mouseX, mouseY);
 	}
 
 	@Override
