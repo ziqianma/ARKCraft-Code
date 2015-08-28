@@ -12,6 +12,7 @@ import com.arkcraft.mod.core.Main;
  * @author BubbleTrouble
  */
 
+@SuppressWarnings({"unchecked", "unused"})
 public class GuiDosierScreen extends GuiScreen {
 
     private static final ResourceLocation texture = new ResourceLocation(Main.MODID, "textures/gui/dino_book_gui.png");
@@ -46,7 +47,7 @@ public class GuiDosierScreen extends GuiScreen {
 		this.mc.getTextureManager().bindTexture(texture);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		this.drawTexturedModalRect(x, y, 0, 0, guiWidth, guiHeight);
-
+		
 	}
 
 	@Override

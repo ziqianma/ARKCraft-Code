@@ -1,9 +1,7 @@
 package com.arkcraft.mod.core.machine.gui;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 
 import org.apache.logging.log4j.LogManager;
@@ -18,8 +16,9 @@ import com.arkcraft.mod.core.Main;
 
 public class PageButton extends GuiButton{
 
+	@SuppressWarnings("unused")
     private static final Logger logger = LogManager.getLogger();
-    private static final ResourceLocation texture = new ResourceLocation(Main.MODID, "textures/gui/dino_book_gui.png");;
+    private static final ResourceLocation texture = new ResourceLocation(Main.MODID, "textures/gui/dino_book_gui.png");
     private final boolean nextPage;
 
     public PageButton(int id, int x, int y, boolean nextPage) {
