@@ -9,6 +9,7 @@ import com.arkcraft.mod.core.lib.LogHelper;
 import com.arkcraft.mod.core.machine.gui.ContainerInventoryDodo;
 import com.arkcraft.mod.core.machine.gui.ContainerMP;
 import com.arkcraft.mod.core.machine.gui.ContainerSmithy;
+import com.arkcraft.mod.core.machine.gui.GuiDosierScreen;
 import com.arkcraft.mod.core.machine.gui.GuiInventoryDodo;
 import com.arkcraft.mod.core.machine.gui.GuiMP;
 import com.arkcraft.mod.core.machine.gui.GuiSmithy;
@@ -48,7 +49,8 @@ public class GuiHandler implements IGuiHandler {
 			LogHelper.info("GuiHandler: getClientGuiElement called from server");
 		if(ID == GUI.SMITHY.getID()) return new GuiSmithy(player.inventory, world, new BlockPos(x, y, z));
 		if(ID == GUI.PESTLE_AND_MORTAR.getID()) return new GuiMP(player.inventory, world, new BlockPos(x, y, z));
-		if(ID == GUI.INV_DODO.getID()) {
+		if(ID == GUI.INV_DODO.getID());
+		if(ID == GUI.BOOK_GUI.ordinal()) return new GuiDosierScreen();{
 			Entity entity = getEntityAt(player, x, y, z);
 			if(entity != null && entity instanceof EntityDodo) 
 				return new GuiInventoryDodo(player.inventory, ((EntityDodo)entity).invDodo, (EntityDodo)entity);
@@ -73,4 +75,5 @@ public class GuiHandler implements IGuiHandler {
         }
         return null;
 	}
+	
 }

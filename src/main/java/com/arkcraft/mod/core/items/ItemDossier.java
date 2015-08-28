@@ -29,6 +29,7 @@ public class ItemDossier extends Item {
 		this.guiID = guiID;
 		this.setCreativeTab(GlobalAdditions.tabARK);
 		this.setUnlocalizedName(name);
+		this.setMaxStackSize(1);
 		GameRegistry.registerItem(this, name);
 	}
 	
