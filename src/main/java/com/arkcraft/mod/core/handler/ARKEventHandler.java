@@ -35,7 +35,7 @@ public class ARKEventHandler {
 		 */
 		if(event.entity instanceof EntityPlayer) {
 			EntityPlayer entity = (EntityPlayer)event.entity;
-			entity.inventory.addItemStackToInventory(new ItemStack(GlobalAdditions.dinoBook));
+			entity.inventory.addItemStackToInventory(new ItemStack(GlobalAdditions.dino_book));
 			LogHelper.info("EntityWorldJoinEvent: Gave Dino Dossier @ " + entity.toString());
 		}
 	}

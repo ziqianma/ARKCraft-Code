@@ -14,7 +14,6 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -126,7 +125,7 @@ public class EntityDodo extends EntityTameable {
         this.field_70886_e += this.field_70889_i * 2.0F;
         if (!this.worldObj.isRemote && !this.isChild() && --this.timeUntilNextEgg <= 0) {
             this.playSound("mob.chicken.plop", 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
-            this.dropItem(Items.egg, 1);
+            this.dropItem(GlobalAdditions.dodo_egg, 1);
             this.timeUntilNextEgg = this.rand.nextInt(6000) + 6000;
         }
     }
@@ -135,10 +134,9 @@ public class EntityDodo extends EntityTameable {
 	@Override
     public void fall(float distance, float damageMultiplier) {}
 
-	// TODO: Update when we have a dodo feather
 	@Override
 	protected Item getDropItem() {
-		return Items.feather;
+		return GlobalAdditions.dodo_feather;
 	}
 
 	/**
@@ -148,7 +146,7 @@ public class EntityDodo extends EntityTameable {
 	protected void dropFewItems(boolean p_70628_1_, int p_70628_2_) {
 		int j = this.rand.nextInt(3) + this.rand.nextInt(1 + p_70628_2_);
 		for (int k = 0; k < j; ++k) {
-			this.dropItem(Items.feather, 1); // TODO: Dodo feather instead
+			this.dropItem(GlobalAdditions.dodo_feather, 1);
 		}
 		if (this.isBurning()) {
 			this.dropItem(GlobalAdditions.porkchop_cooked, 1);

@@ -16,6 +16,7 @@ import com.arkcraft.mod.core.handler.GenerationHandler;
 import com.arkcraft.mod.core.handler.GuiHandler;
 import com.arkcraft.mod.core.handler.RecipeHandler;
 import com.arkcraft.mod.core.items.ARKArmorItem;
+import com.arkcraft.mod.core.items.ARKEggItem;
 import com.arkcraft.mod.core.items.ARKFood;
 import com.arkcraft.mod.core.items.ARKItem;
 import com.arkcraft.mod.core.items.ARKSaddle;
@@ -45,15 +46,16 @@ public class GlobalAdditions {
 
 	public static ARKFood tintoBerry, amarBerry, azulBerry, mejoBerry, narcoBerry, porkchop_raw, porkchop_cooked, primemeat_raw, primemeat_cooked;
 	public static ARKBush berryBush;
-	public static ARKItem cobble_ball, fiber, chitin, narcotics, tranq_arrow, explosive_ball, dodo_bag, dodo_egg, dodo_feather;
+	public static ARKItem cobble_ball, fiber, chitin, narcotics, tranq_arrow, explosive_ball, dodo_bag, dodo_feather;
 	public static ARKSlingshot slingshot;
+	public static ARKEggItem dodo_egg;
 	public static ARKSaddle saddle_small, saddle_medium, saddle_large;
 	public static ARKArmorItem chitinHelm, chitinChest, chitinLegs, chitinBoots;
 	public static ARKArmorItem clothHelm, clothChest, clothLegs, clothBoots;
 	public static ARKArmorItem boneHelm, boneChest, boneLegs, boneBoots;
 	public static ARKWeapon stoneSpear, ironPike;
 	public static ARKBlock oreSurface;
-	public static ItemDossier dinoBook;
+	public static ItemDossier dino_book;
 	
 	public static ArmorMaterial CLOTH = EnumHelper.addArmorMaterial("CLOTH_MAT", "CLOTH_MAT", 4, new int[] {1,2,1,1}, 15);
 	public static ArmorMaterial CHITIN = EnumHelper.addArmorMaterial("CHITIN_MAT", "CHITIN_MAT", 16, new int[] { 3,7,6,3 } , 10);
@@ -110,10 +112,10 @@ public class GlobalAdditions {
 		chitin = addItem("chitin");
 		tranq_arrow = addItem("tranq_arrow");
 		dodo_bag = addItemWithTooltip("dodo_bag", "Backpack for the Dodo");
-		dodo_egg = addItem("dodo_egg");
+		dodo_egg = addEggItem("dodo_egg");
 		dodo_feather = addItem("dodo_feather");
 
-		dinoBook = addDossier("dinoBook", GUI.BOOK_GUI.getID(), EnumChatFormatting.GOLD + "Knowledge is Power");
+		dino_book = addDossier("dino_book", GUI.BOOK_GUI.getID(), EnumChatFormatting.GOLD + "Knowledge is Power");
 		
 		// Armor
 		chitinHelm = addArmorItem("chitin_helm", CHITIN, "chitinArmor", 0);
@@ -174,6 +176,12 @@ public class GlobalAdditions {
 		allItems.put(name, i);
 		return i;
 	}
+	
+	protected static ARKEggItem addEggItem(String name) {
+		ARKEggItem i = new ARKEggItem(name);
+		allItems.put(name, i);
+		return i;
+	}	
 	
 	protected static ARKFood addFood(String name, int heal, float sat, boolean fav, boolean alwaysEdible) {
 		ARKFood f = new ARKFood(name, heal, sat, fav, alwaysEdible);
