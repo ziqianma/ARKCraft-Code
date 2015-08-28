@@ -62,9 +62,6 @@ public class GuiDosierScreen extends GuiScreen {
 		}
 		if (currentPage % 2 == 1) currentPage--;
 		if (currentPage < 0) currentPage = 0;
-
-		//everything under here *should* work correctly!
-		
 		
 		oldPage = currentPage;
 	}
