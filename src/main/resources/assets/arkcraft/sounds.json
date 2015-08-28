@@ -151,5 +151,14 @@
                 "stream": false
             }
         ]
+    },
+    "dodo_defficating": {
+        "category": "neutral",
+        "sounds": [
+            {
+                "name": "dodo_defficating",
+                "stream": false
+            }
+        ]
     }
 }
