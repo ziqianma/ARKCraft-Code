@@ -12,6 +12,10 @@ import org.lwjgl.opengl.GL11;
 
 import com.arkcraft.mod.core.Main;
 
+/**
+ * @author BubbleTrouble
+ */
+
 public class PageButton extends GuiButton{
 
     private static final Logger logger = LogManager.getLogger();

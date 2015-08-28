@@ -8,6 +8,10 @@ import org.lwjgl.opengl.GL11;
 
 import com.arkcraft.mod.core.Main;
 
+/**
+ * @author BubbleTrouble
+ */
+
 public class GuiDosierScreen extends GuiScreen {
 
     private static final ResourceLocation texture = new ResourceLocation(Main.MODID, "textures/gui/dino_book_gui.png");
