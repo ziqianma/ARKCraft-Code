@@ -12,7 +12,7 @@ import org.apache.logging.log4j.Logger;
 public class PageButton extends GuiButton{
 
     private static final Logger logger = LogManager.getLogger();
-    private static final ResourceLocation texture = new ResourceLocation("textures/gui/dosier_book.png");
+    private static final ResourceLocation texture = new ResourceLocation("textures/gui/dino_book_gui.png");
     private final boolean nextPage;
 
     public PageButton(int id, int x, int y, boolean nextPage) {

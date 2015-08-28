@@ -8,7 +8,7 @@ import org.lwjgl.opengl.GL11;
 
 public class GuiDosierScreen extends GuiScreen {
 
-    private static final ResourceLocation texture = new ResourceLocation("textures/gui/dosier_book.png");
+    private static final ResourceLocation texture = new ResourceLocation("textures/gui/dino_book_gui.png");
 
 	private int guiWidth = 256;
 	private int guiHeight = 180;

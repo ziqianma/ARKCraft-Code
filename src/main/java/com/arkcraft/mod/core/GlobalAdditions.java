@@ -55,7 +55,7 @@ public class GlobalAdditions {
 	public static ARKArmorItem boneHelm, boneChest, boneLegs, boneBoots;
 	public static ARKWeapon stoneSpear, ironPike;
 	public static ARKBlock oreSurface;
-	public static ItemDossier dinoBook;
+	public static ItemDossier dino_book;
 	
 	public static ArmorMaterial CLOTH = EnumHelper.addArmorMaterial("CLOTH_MAT", "CLOTH_MAT", 4, new int[] {1,2,1,1}, 15);
 	public static ArmorMaterial CHITIN = EnumHelper.addArmorMaterial("CHITIN_MAT", "CHITIN_MAT", 16, new int[] { 3,7,6,3 } , 10);
@@ -115,7 +115,7 @@ public class GlobalAdditions {
 		dodo_egg = addEggItem("dodo_egg");
 		dodo_feather = addItem("dodo_feather");
 
-		dinoBook = addDossier("dinoBook", GUI.BOOK_GUI.getID(), EnumChatFormatting.GOLD + "Knowledge is Power");
+		dino_book = addDossier("dino_book", GUI.BOOK_GUI.getID(), EnumChatFormatting.GOLD + "Knowledge is Power");
 		
 		// Armor
 		chitinHelm = addArmorItem("chitin_helm", CHITIN, "chitinArmor", 0);
