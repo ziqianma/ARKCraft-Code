@@ -2,9 +2,12 @@ package com.arkcraft.mod.core.handler;
 
 import java.awt.Color;
 
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.inventory.GuiInventory;
+import net.minecraft.client.renderer.GlStateManager;
 
 import com.arkcraft.mod.core.entity.aggressive.EntityRaptor;
 
@@ -69,8 +72,8 @@ public class BookDrawHandler {
 		if(currentPage == 0) {
 			/* Page 1 */
 			drawTitle(renderer, true, DINO_NAMES.UTAHRAPTORS);
-			GuiInventory.drawEntityOnScreen(getLeft() + 14, 90, 20, -350F, 10, new EntityRaptor(Minecraft.getMinecraft().theWorld, 1));
-			drawDiet(renderer, getLeft() - 26, 110, DINO_NAMES.UTAHRAPTORS);
+			GuiInventory.drawEntityOnScreen(getLeft() + 14, 90, 20, -350f, -5F, new EntityRaptor(Minecraft.getMinecraft().theWorld, 1));
+			drawDiet(renderer, getLeft() + 32, 140, DINO_NAMES.UTAHRAPTORS);
 			
 			/* Page 2 */
 			drawTitle(renderer, false, DINO_NAMES.TRICERATOPS);
@@ -82,10 +85,12 @@ public class BookDrawHandler {
 	}
 	
 	public static void drawDiet(FontRenderer renderer, int x, int y, DINO_NAMES dinoName) {
-		renderer.FONT_HEIGHT = 5;
-		renderer.drawString("Diet: " + dinoName.getPreference(), x, y, Color.darkGray.getRGB()); 
-		renderer.FONT_HEIGHT = 9;
+        GlStateManager.pushMatrix(); /* Start the rendering */
+		GL11.glScalef(0.7f, 0.7f, 1); /* 70% the normal size */
+		renderer.drawString("Diet: " + dinoName.getPreference(), x + dinoName.getPreference().length(), y, Color.darkGray.getRGB()); 
+        GlStateManager.popMatrix(); /* End the rendering */
 	}
+	
 	
 	public static void drawTitle(FontRenderer renderer, boolean left, DINO_NAMES dinoName) {
 		boolean right = !left;
