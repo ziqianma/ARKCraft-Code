@@ -10,6 +10,11 @@ import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+/***
+ * 
+ * @author wildbill22
+ *
+ */
 public class Config {
 	public static Configuration config;
 	public static final String CATEGORY_GENERAL = Configuration.CATEGORY_GENERAL;

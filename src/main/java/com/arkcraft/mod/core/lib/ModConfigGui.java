@@ -13,6 +13,11 @@ import net.minecraftforge.fml.client.config.GuiConfigEntries;
 import net.minecraftforge.fml.client.config.GuiConfigEntries.CategoryEntry;
 import net.minecraftforge.fml.client.config.IConfigElement;
 
+/***
+ * 
+ * @author wildbill22
+ *
+ */
 public class ModConfigGui extends GuiConfig {
 	
 	// Creates the Balance Screen (2nd Level)

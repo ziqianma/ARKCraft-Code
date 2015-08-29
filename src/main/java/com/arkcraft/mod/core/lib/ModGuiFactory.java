@@ -6,6 +6,11 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraftforge.fml.client.IModGuiFactory;
 
+/***
+ * 
+ * @author wildbill22
+ *
+ */
 public class ModGuiFactory implements IModGuiFactory  {
 	@Override
 	public RuntimeOptionGuiHandler getHandlerFor(RuntimeOptionCategoryElement element) {
