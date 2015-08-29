@@ -31,10 +31,12 @@ public class ARKEventHandler {
 		 * @author Vastatio
 		 * this is so we can give the player the dino dossier, when the player joins.
 		 */
-		if(event.entity instanceof EntityPlayer) {
+		if (event.entity instanceof EntityPlayer) {
 			EntityPlayer entity = (EntityPlayer)event.entity;
-			entity.inventory.addItemStackToInventory(new ItemStack(GlobalAdditions.dino_book));
-			LogHelper.info("EntityWorldJoinEvent: Gave Dino Dossier @ " + entity.toString());
+			if (!event.entity.worldObj.isRemote && event.world.getTotalWorldTime() < 100) {
+				entity.inventory.addItemStackToInventory(new ItemStack(GlobalAdditions.dino_book));
+				LogHelper.info("EntityWorldJoinEvent: Gave Dino Dossier @ " + entity.toString());
+			}
 		}
 	}
 	

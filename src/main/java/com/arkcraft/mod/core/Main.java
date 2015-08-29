@@ -11,6 +11,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 import com.arkcraft.mod.core.handler.ARKEventHandler;
+import com.arkcraft.mod.core.handler.ARKPlayerEventHandler;
 import com.arkcraft.mod.core.lib.Config;
 import com.arkcraft.mod.core.proxy.CommonProxy;
 
@@ -34,6 +35,7 @@ public class Main {
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 		MinecraftForge.EVENT_BUS.register(new ARKEventHandler());
+		MinecraftForge.EVENT_BUS.register(new ARKPlayerEventHandler());
 		proxy.init();
 		proxy.registerRenderers();
 		FMLCommonHandler.instance().bus().register(new Config());
