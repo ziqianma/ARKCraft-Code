@@ -77,6 +77,41 @@ public class EntityRaptor extends DinoTameable {
         raptorType = RaptorType.getRandomRaptorType(); // Set to a random type for now        
         this.setTamed(false);
 	}
+	
+	@SuppressWarnings("rawtypes")
+	public EntityRaptor(World world, int raptorType) {
+		super(world, SaddleType.SMALL);
+        this.setSize(0.8F, 1.5F);
+
+        ((PathNavigateGround)this.getNavigator()).func_179690_a(true);
+        this.tasks.addTask(0, new EntityAISwimming(this));
+//        this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.0D, false));
+        this.tasks.addTask(2, new EntityAIAttackOnCollide(this, 1.0D, false));
+        this.tasks.addTask(5, new EntityAIMoveTowardsRestriction(this, 1.0D)); // For going through doors
+        this.tasks.addTask(5, new EntityAIFollowOwner(this, 1.5D, 10.0F, 2.0F)); // like wolf, but faster (wolf is 1.0D speed)
+        this.tasks.addTask(7, new EntityAIWander(this, 1.0D));
+        this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
+        this.tasks.addTask(8, new EntityAILookIdle(this));
+
+        int p = 1;
+        attackPlayerTarget = new EntityAINearestAttackableTarget(this, EntityPlayer.class, true);
+        this.targetTasks.addTask(p++, attackPlayerTarget);
+        this.targetTasks.addTask(p++, new EntityAIOwnerHurtByTarget(this));
+        this.targetTasks.addTask(p++, new EntityAIOwnerHurtTarget(this));
+//        this.targetTasks.addTask(p++, new EntityAIHurtByTarget(this, true));
+        this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true, new Class[0]));
+        this.targetTasks.addTask(p++, new EntityAITargetNonTamed(this, EntityAnimal.class, false, new Predicate() {
+            public boolean func_180094_a(Entity p_180094_1_) {
+                return p_180094_1_ instanceof EntitySheep || p_180094_1_ instanceof EntityRabbit;
+            }
+            public boolean apply(Object p_apply_1_) {
+                return this.func_180094_a((Entity)p_apply_1_);
+            }
+        }));
+        
+        this.raptorType = raptorType;
+        this.setTamed(false);
+	}
 
     protected void applyEntityAttributes() {
     	super.applyEntityAttributes();
@@ -96,6 +131,8 @@ public class EntityRaptor extends DinoTameable {
         	this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(4.0D); //2.5 hearts without armor
     	}
     }
+    
+    
     
 	@Override
 	public void setTamed(boolean tamed) {

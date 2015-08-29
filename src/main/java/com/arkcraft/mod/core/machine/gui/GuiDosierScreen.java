@@ -1,16 +1,24 @@
 package com.arkcraft.mod.core.machine.gui;
 
+import java.awt.Color;
+
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.inventory.GuiInventory;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
 import com.arkcraft.mod.core.Main;
+import com.arkcraft.mod.core.entity.aggressive.EntityRaptor;
+import com.arkcraft.mod.core.handler.BookDrawHandler;
+import com.arkcraft.mod.core.lib.LogHelper;
 
 /**
- * @author BubbleTrouble
+ * @author BubbleTrouble / Vastatio (Page Content)
  */
 
 @SuppressWarnings({"unchecked", "unused"})
@@ -27,7 +35,7 @@ public class GuiDosierScreen extends GuiScreen {
 	private int maxPages;
 	private PageButton bButton;
 	private PageButton nButton;
-
+	
 	@Override
 	public void initGui() {
 		currentPage = 0;
@@ -47,11 +55,13 @@ public class GuiDosierScreen extends GuiScreen {
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
 		this.mc.getTextureManager().bindTexture(texture);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+		LogHelper.info("CurrentPage: " + currentPage);
 		this.drawTexturedModalRect(x, y, 0, 0, guiWidth, guiHeight);
+		BookDrawHandler.drawPages(this.fontRendererObj, mouseX, mouseY, currentPage);
 		bButton.drawButton(Minecraft.getMinecraft(), mouseX, mouseY);
 		nButton.drawButton(Minecraft.getMinecraft(), mouseX, mouseY);
 	}
-
+	
 	@Override
 	protected void actionPerformed(GuiButton button) {
 		if (button.enabled) {
