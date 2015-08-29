@@ -54,6 +54,7 @@ public class EntityDodoEgg extends EntityThrowable
             }
         }
 
+        @SuppressWarnings("unused")
         double d0 = 0.08D;
 
         for (int j = 0; j < 8; ++j)
