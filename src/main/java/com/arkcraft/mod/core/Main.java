@@ -15,10 +15,11 @@ import com.arkcraft.mod.core.handler.ARKPlayerEventHandler;
 import com.arkcraft.mod.core.lib.Config;
 import com.arkcraft.mod.core.proxy.CommonProxy;
 
-@Mod(modid=Main.MODID, version=Main.VERSION, name=Main.MODID)
+@Mod(modid=Main.MODID, version=Main.VERSION, name=Main.MODID,
+	guiFactory = "com.arkcraft.mod.core.lib.ModGuiFactory")
 public class Main {
 	
-	public static final String MODID = "arkcraft", VERSION = "0.1 Alpha";
+	public static final String MODID = "arkcraft", VERSION = "0.1 Alpha", NAME = "ARKCraft";
 	@SidedProxy(clientSide="com.arkcraft.mod.core.proxy.ClientProxy", serverSide="com.arkcraft.mod.core.proxy.CommonProxy")
 	public static CommonProxy proxy;
 	@Instance("arkcraft")
