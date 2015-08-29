@@ -6,6 +6,11 @@ import com.arkcraft.mod.core.Main;
 
 import net.minecraftforge.fml.common.FMLLog;
 
+/***
+ * 
+ * @author wildbill22
+ *
+ */
 public class LogHelper
 { 
 	public static void log(Level logLevel, Object object){FMLLog.log(Main.MODID, logLevel, String.valueOf(object));} 

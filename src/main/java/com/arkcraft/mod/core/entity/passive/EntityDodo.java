@@ -128,7 +128,14 @@ public class EntityDodo extends EntityTameable {
             this.dropItem(GlobalAdditions.dodo_egg, 1);
             this.timeUntilNextEgg = this.rand.nextInt(6000) + 6000;
         }
-    }
+        this.field_70886_e += this.field_70889_i * 2.0F;
+        if (!this.worldObj.isRemote && !this.isChild() && --this.timeUntilNextEgg <= 0) {
+            this.playSound(Main.MODID + ":" + "dodo_defficating", 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
+            this.dropItem(GlobalAdditions.dodo_feces, 1);
+            this.timeUntilNextEgg = this.rand.nextInt(3000) + 3000;
+        }
+	}
+    
 
     // No fall damage
 	@Override

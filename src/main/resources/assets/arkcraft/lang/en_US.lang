@@ -42,6 +42,7 @@ item.dodo_bag.name=Dodo Bag
 item.dodo_feather.name=Dodo Feather
 item.dodo_egg.name=Dodo Egg
 item.dino_book.name=Dino Dossier
+item.dodo_feces.name=Dodo Feces
 
 # miscelaneous
 itemGroup.tabARKCraft=ARKCraft: Survival Evolved

@@ -17,6 +17,7 @@ import com.arkcraft.mod.core.handler.GuiHandler;
 import com.arkcraft.mod.core.handler.RecipeHandler;
 import com.arkcraft.mod.core.items.ARKArmorItem;
 import com.arkcraft.mod.core.items.ARKEggItem;
+import com.arkcraft.mod.core.items.ARKFecesItem;
 import com.arkcraft.mod.core.items.ARKFood;
 import com.arkcraft.mod.core.items.ARKItem;
 import com.arkcraft.mod.core.items.ARKSaddle;
@@ -48,6 +49,7 @@ public class GlobalAdditions {
 	public static ARKBush berryBush;
 	public static ARKItem cobble_ball, fiber, chitin, narcotics, tranq_arrow, explosive_ball, dodo_bag, dodo_feather;
 	public static ARKSlingshot slingshot;
+	public static ARKFecesItem dodo_feces;
 	public static ARKEggItem dodo_egg;
 	public static ARKSaddle saddle_small, saddle_medium, saddle_large;
 	public static ARKArmorItem chitinHelm, chitinChest, chitinLegs, chitinBoots;
@@ -114,6 +116,8 @@ public class GlobalAdditions {
 		dodo_bag = addItemWithTooltip("dodo_bag", "Backpack for the Dodo");
 		dodo_egg = addEggItem("dodo_egg");
 		dodo_feather = addItem("dodo_feather");
+		
+		dodo_feces = addFecesItem("dodo_feces");
 
 		dino_book = addDossier("dino_book", GUI.BOOK_GUI.getID(), EnumChatFormatting.GOLD + "Knowledge is Power");
 		
@@ -179,6 +183,12 @@ public class GlobalAdditions {
 	
 	protected static ARKEggItem addEggItem(String name) {
 		ARKEggItem i = new ARKEggItem(name);
+		allItems.put(name, i);
+		return i;
+	}	
+	
+	protected static ARKFecesItem addFecesItem(String name) {
+		ARKFecesItem i = new ARKFecesItem(name);
 		allItems.put(name, i);
 		return i;
 	}	

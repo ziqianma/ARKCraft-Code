@@ -23,7 +23,7 @@ public class ARKEggItem extends Item {
 	public ARKEggItem(String name) {
 		this.setUnlocalizedName(name);
 		this.setCreativeTab(GlobalAdditions.tabARK);
-		this.maxStackSize = 16;
+		this.setMaxStackSize(16);
 		GameRegistry.registerItem(this, this.getUnlocalizedName().substring(5));
 	}
 	
