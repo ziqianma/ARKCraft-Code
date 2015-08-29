@@ -10,6 +10,11 @@ import net.minecraft.item.ItemStack;
 import com.arkcraft.mod.core.entity.passive.EntityDodo;
 import com.arkcraft.mod.core.lib.LogHelper;
 
+/***
+ * 
+ * @author wildbill22
+ *
+ */
 public class ContainerInventoryDodo extends Container {
 
 	private IInventory invDodo;

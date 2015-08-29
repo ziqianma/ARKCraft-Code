@@ -2,6 +2,11 @@ package com.arkcraft.mod.core.entity.aggressive;
 
 import java.util.Random;
 
+/***
+ * 
+ * @author wildbill22
+ *
+ */
 public enum RaptorType {
     ALBINO(0),
     BREEN_WHITE(1),

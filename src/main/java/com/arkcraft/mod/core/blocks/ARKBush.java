@@ -3,6 +3,7 @@ package com.arkcraft.mod.core.blocks;
 import java.util.Random;
 
 import com.arkcraft.mod.core.GlobalAdditions;
+import com.arkcraft.mod.core.lib.BALANCE;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -38,7 +39,7 @@ public class ARKBush extends ARKBlock {
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumFacing side, float hitX, float hitY, float hitZ) {
 		if (!worldIn.isRemote) {
-			for (int i = 0; i < worldIn.rand.nextInt(5); i++) {
+			for (int i = 0; i < BALANCE.PLANTS.BERRIES_MIN_PER_PICKING || i <= worldIn.rand.nextInt(BALANCE.PLANTS.BERRIES_MAX_PER_PICKING); i++) {
 				Item itemPicked = getItemDropped(state, worldIn.rand, 0);
 		        this.entityDropItem(worldIn, pos, playerIn, new ItemStack(itemPicked, 1, 0));
 			}

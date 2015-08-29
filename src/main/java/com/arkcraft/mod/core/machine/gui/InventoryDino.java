@@ -8,6 +8,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
+/***
+ * 
+ * @author wildbill22
+ *
+ */
 public class InventoryDino extends InventoryBasic {
 	
 	public InventoryDino(String title, boolean customName, int slotCount) {
