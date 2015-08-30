@@ -25,7 +25,7 @@ public class ContainerSmithy extends Container {
 	public IInventory craftResult;
 	private World world;
 	private BlockPos pos;
-	
+
 	public ContainerSmithy(InventoryPlayer invPlayer, World world, BlockPos pos) {
 		this.world = world;
 		this.pos = pos;
@@ -41,20 +41,22 @@ public class ContainerSmithy extends Container {
 		}
 		
 		/* Output slot */
-		this.addSlotToContainer(new SlotCrafting(invPlayer.player, craftMatrix,
-				craftResult, 0, 131, 36));
+		final int OUTPUT_SLOT_YPOS = 140;
+		this.addSlotToContainer(new SlotCrafting(invPlayer.player, craftMatrix,	craftResult, 0, 131, 36));
 
 		/* Player inventory */
+		final int PLAYER_INVENTORY_YPOS = 140;
 		for (int row = 0; row < 3; row++) {
 			for (int col = 0; col < 9; col++) {
-				this.addSlotToContainer(new Slot(invPlayer, col + row * 9 + 9,
-						8 + col * 18, 122 + row * 18));
+				int slotIndex =  col + row * 9 + 9;
+				addSlotToContainer(new Slot(invPlayer, slotIndex, 8 + col * 18, PLAYER_INVENTORY_YPOS + row * 18));
 			}
 		}
 
-		/* Player hotbar */
-		for (int col = 0; col < 9; col++) {
-			this.addSlotToContainer(new Slot(invPlayer, col, 8 + col * 18, 180));
+		/* Hotbar inventory */
+		final int HOTBAR_YPOS = 198;
+		for(int col = 0; col < 9; col++) {
+			addSlotToContainer(new Slot(invPlayer, col, 8 + col * 18, HOTBAR_YPOS));
 		}
 
 		this.onCraftMatrixChanged(craftMatrix);
