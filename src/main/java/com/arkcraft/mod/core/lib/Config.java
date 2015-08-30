@@ -10,15 +10,36 @@ import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+/***
+ * 
+ * @author wildbill22
+ *
+ */
 public class Config {
 	public static Configuration config;
-	public static final String CATEGORY_BALANCE_PLANTS = "balance_plants";
+	public static final String CATEGORY_GENERAL = Configuration.CATEGORY_GENERAL;
+	public static final String CATEGORY_BALANCE = "balance";
 
-	public static void balancePlantsConfiguration() {
-		// Categories
-		ConfigCategory cat_balance_plants = config.getCategory(CATEGORY_BALANCE_PLANTS);
-		cat_balance_plants.setComment("You can adjust these values to change the balancing of this mod");
-		loadFields(cat_balance_plants, BALANCE.PLANTS.class);
+	/**
+	 * Loads/refreshes the configuration and adds comments if there aren't any
+	 * {@link #init(File) init} has to be called once before using this
+	 */
+	private static void loadConfiguration() {
+		// Load all the Categories (a function for each just below this function)
+		balanceCategoryConfiguration();
+		
+		if (config.hasChanged()) {
+			LogHelper.info("Configs: Configuration has changed, saving.");
+			config.save();
+		}
+	}
+
+	public static void balanceCategoryConfiguration() {
+		// Balance settings
+		ConfigCategory cat_balance = config.getCategory(CATEGORY_BALANCE);
+		cat_balance.setComment("You can adjust these values to change the balancing of this mod");
+		loadFields(cat_balance, BALANCE.PLANTS.class);
+		// TODO: Add more classes from BALANCE here when available
 	}
 
 	public static void init(File configFile) {
@@ -26,19 +47,6 @@ public class Config {
 			config = new Configuration(configFile);
 		}
 		loadConfiguration();
-	}
-	/**
-	 * Loads/refreshes the configuration and adds comments if there aren't any
-	 * {@link #init(File) init} has to be called once before using this
-	 */
-	private static void loadConfiguration() {
-		// Balance settings
-		balancePlantsConfiguration();
-		
-		if (config.hasChanged()) {
-			LogHelper.info("Configs: Configuration has changed, saving.");
-			config.save();
-		}
 	}
 
 	/**
