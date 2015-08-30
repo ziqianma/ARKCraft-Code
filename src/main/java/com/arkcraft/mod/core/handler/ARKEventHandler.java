@@ -30,6 +30,7 @@ public class ARKEventHandler {
 		/***
 		 * @author Vastatio
 		 * this is so we can give the player the dino dossier, when the player joins.
+		 * FIXME gives the player the dossier only once on join, not again.
 		 */
 		if (event.entity instanceof EntityPlayer) {
 			EntityPlayer entity = (EntityPlayer)event.entity;

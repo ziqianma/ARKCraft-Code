@@ -21,15 +21,15 @@ public class ARKPlayerEventHandler {
 		if (event.entity instanceof EntityPlayer && ARKPlayer.get((EntityPlayer) event.entity) == null) {
 			ARKPlayer.register((EntityPlayer) event.entity, event.entity.worldObj);
 			if (event.entity.worldObj.isRemote) // On client
-				LogHelper.info("DragonPlayerEventHandler: Registered a new ARKPlayer on client.");
+				LogHelper.info("ARKPlayerEventHandler: Registered a new ARKPlayer on client.");
 			else
-				LogHelper.info("DragonPlayerEventHandler: Registered a new ARKPlayer on server.");
+				LogHelper.info("ARKPlayerEventHandler: Registered a new ARKPlayer on server.");
 		}
 	}
 	
 	@SubscribeEvent
 	public void onClonePlayer(PlayerEvent.Clone event) {
-		LogHelper.info("DragonPlayerEventHandler: Cloning player extended properties");
+		LogHelper.info("ARKPlayerEventHandler: Cloning player extended properties");
 		ARKPlayer.get(event.entityPlayer).copy(ARKPlayer.get(event.original));
 	}
 }
