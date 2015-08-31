@@ -119,10 +119,10 @@ public class ContainerInventoryDodo extends Container {
 	
 	@Override
 	public void onContainerClosed(EntityPlayer playerIn) {
-//		if (playerIn.worldObj.isRemote)
-//			LogHelper.info("ContainerInventoryDodo: onContainerClosed called on client.");
-//		else
-//			LogHelper.info("ContainerInventoryDodo: onContainerClosed called on server.");
+		if (playerIn.worldObj.isRemote)
+			LogHelper.info("ContainerInventoryDodo: onContainerClosed called on client.");
+		else
+			LogHelper.info("ContainerInventoryDodo: onContainerClosed called on server.");
 
 		super.onContainerClosed(playerIn);
 		

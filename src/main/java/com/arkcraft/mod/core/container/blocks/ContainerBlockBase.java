@@ -1,4 +1,4 @@
-package com.arkcraft.mod.core.conatiner.blocks;
+package com.arkcraft.mod.core.container.blocks;
 
 import com.arkcraft.mod.core.GlobalAdditions;
 import com.arkcraft.mod.core.Main;
@@ -28,7 +28,8 @@ public class ContainerBlockBase extends Block {
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ) {
 		if(player.isSneaking()) return false;
-		player.openGui(Main.instance, guiID, world, pos.getX(), pos.getY(), pos.getZ());
+//		player.openGui(Main.instance, guiID, world, pos.getX(), pos.getY(), pos.getZ());
+    	player.openGui(Main.instance(), guiID, world, (int) Math.floor(hitX), (int) Math.floor(hitY), (int) Math.floor(hitZ));
 		return true;
 	}
 	
