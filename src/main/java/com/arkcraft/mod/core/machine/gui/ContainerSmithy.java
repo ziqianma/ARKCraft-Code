@@ -1,7 +1,7 @@
 package com.arkcraft.mod.core.machine.gui;
 
 import com.arkcraft.mod.core.GlobalAdditions;
-import com.arkcraft.mod.core.handler.PestleCraftingManager;
+import com.arkcraft.mod.core.handler.SmithyCraftingManager;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -31,41 +31,42 @@ public class ContainerSmithy extends Container {
 		this.world = world;
 		this.pos = pos;
 		craftMatrix = new InventoryCrafting(this, 4, 6);
-		final int MATRIX_SLOT_YPOS = 18;
 		for (int i = 0; i < 24; i++)
 			craftResult[i] = new InventoryCraftResult();
 		
 		/* Crafting Matrix */
-		final int MATRIX_SLOT_XPOS = 98;
-		for (int row = 0; row < 4; row++) {
-			for (int col = 0; col < 6; col++) {
+		final int MATRIX_SLOT_XPOS = 8;
+		final int MATRIX_SLOT_YPOS = 18;
+		for (int row = 0; row < 6; row++) {
+			for (int col = 0; col < 4; col++) {
 				this.addSlotToContainer(new Slot(craftMatrix, col + row * 4, MATRIX_SLOT_XPOS + col * 18, MATRIX_SLOT_YPOS + row * 18));
 			}
 		}
 		
 		/* Output slot */
-		final int OUTPUT_SLOT_YPOS = 140;
 		final int OUTPUT_SLOT_XPOS = 98;
-		for (int row = 0; row < 4; row++) {
-			for (int col = 0; col < 6; col++) {
+		final int OUTPUT_SLOT_YPOS = 18;
+		for (int row = 0; row < 6; row++) {
+			for (int col = 0; col < 4; col++) {
 				this.addSlotToContainer(new SlotCrafting(invPlayer.player, craftMatrix,	craftResult[col + row * 4], col + row * 4, 
 						OUTPUT_SLOT_XPOS + col * 18, OUTPUT_SLOT_YPOS + row * 18));
 			}
 		}
 
 		/* Player inventory */
+		final int PLAYER_INVENTORY_XPOS = 8;
 		final int PLAYER_INVENTORY_YPOS = 140;
 		for (int row = 0; row < 3; row++) {
 			for (int col = 0; col < 9; col++) {
 				int slotIndex =  col + row * 9 + 9;
-				addSlotToContainer(new Slot(invPlayer, slotIndex, 8 + col * 18, PLAYER_INVENTORY_YPOS + row * 18));
+				addSlotToContainer(new Slot(invPlayer, slotIndex, PLAYER_INVENTORY_XPOS + col * 18, PLAYER_INVENTORY_YPOS + row * 18));
 			}
 		}
 
 		/* Hotbar inventory */
 		final int HOTBAR_YPOS = 198;
 		for(int col = 0; col < 9; col++) {
-			addSlotToContainer(new Slot(invPlayer, col, 8 + col * 18, HOTBAR_YPOS));
+			addSlotToContainer(new Slot(invPlayer, col, PLAYER_INVENTORY_XPOS + col * 18, HOTBAR_YPOS));
 		}
 
 		this.onCraftMatrixChanged(craftMatrix);
@@ -132,7 +133,7 @@ public class ContainerSmithy extends Container {
 	@Override
 	public void onCraftMatrixChanged(IInventory inventory) {
 		//craftResult.setInventorySlotContents(0, SmithyCraftingManager.getInstance().findMatchingRecipe(craftMatrix, world));
-		ItemStack[] itemStacks = PestleCraftingManager.getInstance().findMatchingRecipes(this.craftMatrix, this.world);
+		ItemStack[] itemStacks = SmithyCraftingManager.getInstance().findMatchingRecipes(this.craftMatrix, this.world);
 		for (int i = 0; i < 24 && itemStacks[i] != null; i++)
 			this.craftResult[i].setInventorySlotContents(0, itemStacks[i]);
 	}

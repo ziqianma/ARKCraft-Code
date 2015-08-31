@@ -139,6 +139,7 @@ public class GlobalAdditions {
 		// Handlers
 		RecipeHandler.registerVanillaCraftingRecipes();
 		RecipeHandler.registerPestleCraftingRecipes();
+		RecipeHandler.registerSmithyCraftingRecipes();
 		EntityHandler.registerModEntity(EntityExplosive.class, "Explosive Cobblestone Ball", 1, Main.instance, 64, 10, true);
 		EntityHandler.registerModEntity(EntityCobble.class, "Cobblestone Ball", 2, Main.instance, 64, 10, true);
 		EntityHandler.registerMonster(EntityRaptor.class, "raptor");

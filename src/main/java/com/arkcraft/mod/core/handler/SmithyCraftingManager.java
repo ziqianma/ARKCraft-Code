@@ -110,35 +110,26 @@ public class SmithyCraftingManager {
      *  
      * @param recipeComponents An array of ItemStack's Item's and Block's that make up the recipe.
      */
-    public void addShapelessRecipe(ItemStack stack, Object ... recipeComponents)
-    {
+    public void addShapelessRecipe(ItemStack stack, Object ... recipeComponents) {
         ArrayList arraylist = Lists.newArrayList();
         Object[] aobject = recipeComponents;
         int i = recipeComponents.length;
 
-        for (int j = 0; j < i; ++j)
-        {
+        for (int j = 0; j < i; ++j) {
             Object object1 = aobject[j];
-
-            if (object1 instanceof ItemStack)
-            {
+            if (object1 instanceof ItemStack) {
                 arraylist.add(((ItemStack)object1).copy());
             }
-            else if (object1 instanceof Item)
-            {
+            else if (object1 instanceof Item) {
                 arraylist.add(new ItemStack((Item)object1));
             }
-            else
-            {
-                if (!(object1 instanceof Block))
-                {
+            else {
+                if (!(object1 instanceof Block)) {
                     throw new IllegalArgumentException("Invalid shapeless recipe: unknown type " + object1.getClass().getName() + "!");
                 }
-
                 arraylist.add(new ItemStack((Block)object1));
             }
         }
-
         this.recipes.add(new ShapelessRecipes(stack, arraylist));
     }
 
@@ -147,52 +138,65 @@ public class SmithyCraftingManager {
      *  
      * @param recipe A recipe that will be added to the recipe list.
      */
-    public void addRecipe(IRecipe recipe)
-    {
+    public void addRecipe(IRecipe recipe) {
         this.recipes.add(recipe);
     }
 
     /**
      * Retrieves an ItemStack that has multiple recipes for it.
      */
-    public ItemStack findMatchingRecipe(InventoryCrafting p_82787_1_, World worldIn)
-    {
+    public ItemStack findMatchingRecipe(InventoryCrafting craftInv, World worldIn) {
         Iterator iterator = this.recipes.iterator();
         IRecipe irecipe;
 
-        do
-        {
-            if (!iterator.hasNext())
-            {
+        do {
+            if (!iterator.hasNext()) {
                 return null;
             }
-
             irecipe = (IRecipe)iterator.next();
         }
-        while (!irecipe.matches(p_82787_1_, worldIn));
+        while (!irecipe.matches(craftInv, worldIn));
 
-        return irecipe.getCraftingResult(p_82787_1_);
+        return irecipe.getCraftingResult(craftInv);
     }
 
-    public ItemStack[] func_180303_b(InventoryCrafting p_180303_1_, World worldIn)
-    {
+    /**
+     * Retrieves an ItemStack that has multiple recipes for it.
+     */
+    public ItemStack[] findMatchingRecipes(InventoryCrafting craftInv, World worldIn) {
+        Iterator iterator = this.recipes.iterator();
+        IRecipe irecipe;
+        ItemStack[] itemStacks = new ItemStack[24];
+        int i = 0;
+
+        do {
+            if (!iterator.hasNext()) {
+                return itemStacks;
+            }
+            irecipe = (IRecipe)iterator.next();
+            if (irecipe.matches(craftInv, worldIn)) {
+            	itemStacks[i] = irecipe.getCraftingResult(craftInv);
+            	i++;
+            }
+        }
+        while (i < 24);
+
+        return itemStacks;
+    }
+
+    public ItemStack[] func_180303_b(InventoryCrafting craftInv, World worldIn) {
         Iterator iterator = this.recipes.iterator();
 
-        while (iterator.hasNext())
-        {
+        while (iterator.hasNext()) {
             IRecipe irecipe = (IRecipe)iterator.next();
-
-            if (irecipe.matches(p_180303_1_, worldIn))
-            {
-                return irecipe.getRemainingItems(p_180303_1_);
+            if (irecipe.matches(craftInv, worldIn)) {
+                return irecipe.getRemainingItems(craftInv);
             }
         }
 
-        ItemStack[] aitemstack = new ItemStack[p_180303_1_.getSizeInventory()];
-
-        for (int i = 0; i < aitemstack.length; ++i)
-        {
-            aitemstack[i] = p_180303_1_.getStackInSlot(i);
+        ItemStack[] aitemstack = new ItemStack[craftInv.getSizeInventory()];
+        for (int i = 0; i < aitemstack.length; ++i) {
+            aitemstack[i] = craftInv.getStackInSlot(i);
         }
 
         return aitemstack;
@@ -201,8 +205,7 @@ public class SmithyCraftingManager {
     /**
      * returns the List<> of all recipes
      */
-    public List getRecipeList()
-    {
+    public List getRecipeList() {
         return this.recipes;
     }
 }
