@@ -36,8 +36,8 @@ public class RecipeHandler {
 	}
 
 	public static void registerSmithyCraftingRecipes() {
-		SmithyCraftingManager.getInstance().addShapelessRecipe(new ItemStack(GlobalAdditions.saddle_small, 15), new ItemStack(Items.leather, 15), new ItemStack(Items.iron_ingot, 10), new ItemStack(GlobalAdditions.fiber, 15));
-		SmithyCraftingManager.getInstance().addShapelessRecipe(new ItemStack(GlobalAdditions.saddle_medium, 15), new ItemStack(Items.leather, 48), new ItemStack(Items.iron_ingot, 32), new ItemStack(GlobalAdditions.fiber, 32));
-		SmithyCraftingManager.getInstance().addShapelessRecipe(new ItemStack(GlobalAdditions.saddle_small, 15), new ItemStack(GlobalAdditions.chitin, 32), new ItemStack(Items.diamond, 4), new ItemStack(Items.iron_ingot, 16), new ItemStack(GlobalAdditions.fiber, 15));
+		SmithyCraftingManager.getInstance().addShapelessRecipe(new ItemStack(GlobalAdditions.saddle_small, 1), new ItemStack(Items.leather, 15), new ItemStack(Items.iron_ingot, 10), new ItemStack(GlobalAdditions.fiber, 15));
+		SmithyCraftingManager.getInstance().addShapelessRecipe(new ItemStack(GlobalAdditions.saddle_medium, 1), new ItemStack(Items.leather, 48), new ItemStack(Items.iron_ingot, 32), new ItemStack(GlobalAdditions.fiber, 32));
+		SmithyCraftingManager.getInstance().addShapelessRecipe(new ItemStack(GlobalAdditions.saddle_small, 1), new ItemStack(GlobalAdditions.chitin, 32), new ItemStack(Items.diamond, 4), new ItemStack(Items.iron_ingot, 16), new ItemStack(GlobalAdditions.fiber, 15));
 	}
 }
