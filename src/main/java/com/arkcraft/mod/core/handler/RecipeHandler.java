@@ -1,5 +1,6 @@
 package com.arkcraft.mod.core.handler;
 
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
@@ -7,7 +8,9 @@ import com.arkcraft.mod.core.GlobalAdditions;
 
 public class RecipeHandler {
 
-	public RecipeHandler() {}
+	public RecipeHandler() {
+		
+	}
 	
 	public static void registerVanillaCraftingRecipes() {
 			GameRegistry.addRecipe(new ItemStack(GlobalAdditions.chitinHelm),
@@ -28,4 +31,7 @@ public class RecipeHandler {
 			*/
 	}
 	
+	public static void registerPestleCraftingRecipes() {
+		PestleCraftingManager.getInstance().addShapelessRecipe(new ItemStack(GlobalAdditions.narcotics, 1), new ItemStack(Items.bowl), new ItemStack(GlobalAdditions.narcoBerry));
+	}
 }

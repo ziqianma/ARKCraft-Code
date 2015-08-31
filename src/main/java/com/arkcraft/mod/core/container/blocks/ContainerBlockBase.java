@@ -26,10 +26,10 @@ public class ContainerBlockBase extends Block {
 	}
 	
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ) {
-		if(player.isSneaking()) return false;
-//		player.openGui(Main.instance, guiID, world, pos.getX(), pos.getY(), pos.getZ());
-    	player.openGui(Main.instance(), guiID, world, (int) Math.floor(hitX), (int) Math.floor(hitY), (int) Math.floor(hitZ));
+	public boolean onBlockActivated(World world, BlockPos blockPos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ) {
+		if(player.isSneaking()) 
+			return false;
+		player.openGui(Main.instance, guiID, world, blockPos.getX(), blockPos.getY(), blockPos.getZ());
 		return true;
 	}
 	

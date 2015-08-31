@@ -1,6 +1,7 @@
 package com.arkcraft.mod.core.machine.gui;
 
 import com.arkcraft.mod.core.GlobalAdditions;
+import com.arkcraft.mod.core.handler.PestleCraftingManager;
 import com.arkcraft.mod.core.lib.LogHelper;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,7 +13,6 @@ import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.inventory.SlotCrafting;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
@@ -119,13 +119,15 @@ public class ContainerMP extends Container {
 
 	@Override
 	public void onCraftMatrixChanged(IInventory inventory) {
-		//craftResult.setInventorySlotContents(0, ARKCraftingHandler.getInstance().findMatchingRecipeMP(inputSlots, world));
-        this.outputSlot.setInventorySlotContents(0, CraftingManager.getInstance().findMatchingRecipe(this.inputSlots, this.world));
+//        this.outputSlot.setInventorySlotContents(0, CraftingManager.getInstance().findMatchingRecipe(this.inputSlots, this.world));
+        this.outputSlot.setInventorySlotContents(0, PestleCraftingManager.getInstance().findMatchingRecipe(this.inputSlots, this.world));
 	}
 	
 	@Override
 	public boolean canInteractWith(EntityPlayer playerIn) {
-		if(world.getBlockState(pos).getBlock() != GlobalAdditions.smithy) return false;
-		return playerIn.getDistanceSq((double)pos.getX() + 0.5D, (double)pos.getY() + 0.5D, (double)pos.getZ() + 0.5D) <= 64.0D;	
+		if (world.getBlockState(pos).getBlock() != GlobalAdditions.pestle) 
+			return false;
+		else
+			return playerIn.getDistanceSq((double)pos.getX() + 0.5D, (double)pos.getY() + 0.5D, (double)pos.getZ() + 0.5D) <= 64.0D;	
 	}
 }

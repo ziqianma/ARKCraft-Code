@@ -42,7 +42,7 @@ public class ContainerSmithy extends Container {
 		
 		/* Output slot */
 		final int OUTPUT_SLOT_YPOS = 140;
-		this.addSlotToContainer(new SlotCrafting(invPlayer.player, craftMatrix,	craftResult, 0, 131, 36));
+		this.addSlotToContainer(new SlotCrafting(invPlayer.player, craftMatrix,	craftResult, 0, 131, OUTPUT_SLOT_YPOS));
 
 		/* Player inventory */
 		final int PLAYER_INVENTORY_YPOS = 140;

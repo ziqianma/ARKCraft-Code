@@ -35,12 +35,11 @@ public class ARKContainerBlock extends Block {
 	public boolean isOpaqueCube() { return isOpaque; }
 	
 	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumFacing side,	
+	public boolean onBlockActivated(World worldIn, BlockPos blockPos, IBlockState state, EntityPlayer playerIn, EnumFacing side,	
 			float hitX, float hitY, float hitZ) {
 		if(!playerIn.isSneaking()) {
-//			playerIn.openGui(Main.instance(), ID, worldIn, pos.getX(), pos.getY(), pos.getZ());
             if (!worldIn.isRemote) {
-            	playerIn.openGui(Main.instance(), ID, worldIn, (int) Math.floor(hitX), (int) Math.floor(hitY), (int) Math.floor(hitZ));
+    			playerIn.openGui(Main.instance(), ID, worldIn, blockPos.getX(), blockPos.getY(), blockPos.getZ());
             	return true;
             }
 		}
