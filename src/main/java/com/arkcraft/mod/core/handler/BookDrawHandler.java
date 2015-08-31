@@ -2,24 +2,19 @@ package com.arkcraft.mod.core.handler;
 
 import java.awt.Color;
 
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.StatCollector;
 
+import org.lwjgl.opengl.GL11;
+
 import com.arkcraft.mod.core.entity.aggressive.EntityRaptor;
+import com.arkcraft.mod.core.machine.gui.GuiDosierScreen;
+import com.arkcraft.mod.core.machine.gui.GuiDosierScreen.CATEGORY;
 
 public class BookDrawHandler {
-	
-	public enum CATEGORY {
-		DINO_CARNIVORE,
-		DINO_OMNIVORE,
-		DINO_HERBIVORE,
-		DINO_OTHER;
-	}
 	
 	public enum DINO_NAME {
 		ANKLOSAURUS("Ankylosaurus", "Ankylosaurus Crassacutis", "ark.book.ankylo.description", 0, 0),
@@ -80,16 +75,19 @@ public class BookDrawHandler {
 	public static int left = 132;
 	public static int right = 256;
 	
-	public static void drawPages(FontRenderer renderer, int mouseX, int mouseY, int currentPage) {
-		if(currentPage == 0) {
-			/* Page 1 / 2*/
-			drawTitle(renderer, DINO_NAME.UTAHRAPTOR);
-			GuiInventory.drawEntityOnScreen(getLeft() + 14, 90, 20, -350f, -5F, new EntityRaptor(Minecraft.getMinecraft().theWorld, 1));
-			drawDiet(renderer, getLeft() + 40, 135, DINO_NAME.UTAHRAPTOR);
-			drawSpecies(renderer, getLeft() + 15, 150, DINO_NAME.UTAHRAPTOR);
-		}
-		else if(currentPage == 2) {
-			
+	public static void drawPages(FontRenderer renderer, int mouseX, int mouseY, int currentPage, CATEGORY currentCategory) {
+		
+		if(currentCategory == CATEGORY.DINOS) {
+			if(currentPage == 0) {
+				/* Page 1 / 2*/
+				drawTitle(renderer, DINO_NAME.UTAHRAPTOR);
+				GuiInventory.drawEntityOnScreen(getLeft() + 14, 90, 20, -350f, -5F, new EntityRaptor(Minecraft.getMinecraft().theWorld, 1));
+				drawDiet(renderer, getLeft() + 40, 135, DINO_NAME.UTAHRAPTOR);
+				drawSpecies(renderer, getLeft() + 15, 150, DINO_NAME.UTAHRAPTOR);
+			}
+			else if(currentPage == 2) {
+				
+			}
 		}
 	}
 	

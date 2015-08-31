@@ -20,7 +20,7 @@ public class PageButton extends GuiButton{
     private static final Logger logger = LogManager.getLogger();
     private static final ResourceLocation texture = new ResourceLocation(Main.MODID, "textures/gui/dino_book_gui.png");
     private final boolean nextPage;
-
+    
     public PageButton(int id, int x, int y, boolean nextPage) {
         super(id, x, y, 16, 11,"");
         this.nextPage = nextPage;
