@@ -25,7 +25,7 @@ import net.minecraft.world.World;
 @SuppressWarnings("all")
 public class SmithyCraftingManager {
 	
-	public static SmithyCraftingManager instance;
+	private static SmithyCraftingManager instance;
     private final List recipes = Lists.newArrayList();
     
 	public SmithyCraftingManager() {
@@ -41,7 +41,11 @@ public class SmithyCraftingManager {
         });
 	}
 	
-	public static SmithyCraftingManager getInstance() { return instance; }
+	public static SmithyCraftingManager getInstance() { 
+		if (instance == null)
+			instance = new SmithyCraftingManager();
+		return instance; 
+	}
 	
 	public ShapedRecipes addRecipe(ItemStack stack, Object ... recipeComponents) {
         String s = "";

@@ -174,6 +174,30 @@ public class PestleCraftingManager {
         return irecipe.getCraftingResult(p_82787_1_);
     }
 
+    /**
+     * Retrieves an ItemStack that has multiple recipes for it.
+     */
+    public ItemStack[] findMatchingRecipes(InventoryCrafting p_82787_1_, World worldIn) {
+        Iterator iterator = this.recipes.iterator();
+        IRecipe irecipe;
+        ItemStack[] itemStacks = new ItemStack[24];
+        int i = 0;
+
+        do {
+            if (!iterator.hasNext()) {
+                return itemStacks;
+            }
+
+            irecipe = (IRecipe)iterator.next();
+            if (irecipe.matches(p_82787_1_, worldIn)) {
+            	itemStacks[i] = irecipe.getCraftingResult(p_82787_1_); 
+            }
+        }
+        while (i < 24);
+
+        return itemStacks;
+    }
+
     public ItemStack[] func_180303_b(InventoryCrafting p_180303_1_, World worldIn)
     {
         Iterator iterator = this.recipes.iterator();
