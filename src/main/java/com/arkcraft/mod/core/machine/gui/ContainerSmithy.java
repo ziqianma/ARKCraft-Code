@@ -1,6 +1,7 @@
 package com.arkcraft.mod.core.machine.gui;
 
 import com.arkcraft.mod.core.GlobalAdditions;
+import com.arkcraft.mod.core.handler.SmithyCraftingManager;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -22,39 +23,50 @@ import net.minecraft.world.World;
 public class ContainerSmithy extends Container {
 
 	public InventoryCrafting craftMatrix;
-	public IInventory craftResult;
+	public IInventory craftResult[] = new IInventory[24];
 	private World world;
 	private BlockPos pos;
-	
+
 	public ContainerSmithy(InventoryPlayer invPlayer, World world, BlockPos pos) {
 		this.world = world;
 		this.pos = pos;
-		craftMatrix = new InventoryCrafting(this, 5, 5);
-		craftResult = new InventoryCraftResult();
+		craftMatrix = new InventoryCrafting(this, 4, 6);
+		for (int i = 0; i < 24; i++)
+			craftResult[i] = new InventoryCraftResult();
 		
 		/* Crafting Matrix */
-		for (int i = 0; i < 5; i++) {
-			for (int k = 0; k < 5; k++) {
-				this.addSlotToContainer(new Slot(craftMatrix, k + i * 5,
-						8 + k * 18, 18 + i * 18));
+		final int MATRIX_SLOT_XPOS = 8;
+		final int MATRIX_SLOT_YPOS = 18;
+		for (int row = 0; row < 6; row++) {
+			for (int col = 0; col < 4; col++) {
+				this.addSlotToContainer(new Slot(craftMatrix, col + row * 4, MATRIX_SLOT_XPOS + col * 18, MATRIX_SLOT_YPOS + row * 18));
 			}
 		}
 		
 		/* Output slot */
-		this.addSlotToContainer(new SlotCrafting(invPlayer.player, craftMatrix,
-				craftResult, 0, 131, 36));
-
-		/* Player inventory */
-		for (int row = 0; row < 3; row++) {
-			for (int col = 0; col < 9; col++) {
-				this.addSlotToContainer(new Slot(invPlayer, col + row * 9 + 9,
-						8 + col * 18, 122 + row * 18));
+		final int OUTPUT_SLOT_XPOS = 98;
+		final int OUTPUT_SLOT_YPOS = 18;
+		for (int row = 0; row < 6; row++) {
+			for (int col = 0; col < 4; col++) {
+				this.addSlotToContainer(new SlotCrafting(invPlayer.player, craftMatrix,	craftResult[col + row * 4], col + row * 4, 
+						OUTPUT_SLOT_XPOS + col * 18, OUTPUT_SLOT_YPOS + row * 18));
 			}
 		}
 
-		/* Player hotbar */
-		for (int col = 0; col < 9; col++) {
-			this.addSlotToContainer(new Slot(invPlayer, col, 8 + col * 18, 180));
+		/* Player inventory */
+		final int PLAYER_INVENTORY_XPOS = 8;
+		final int PLAYER_INVENTORY_YPOS = 140;
+		for (int row = 0; row < 3; row++) {
+			for (int col = 0; col < 9; col++) {
+				int slotIndex =  col + row * 9 + 9;
+				addSlotToContainer(new Slot(invPlayer, slotIndex, PLAYER_INVENTORY_XPOS + col * 18, PLAYER_INVENTORY_YPOS + row * 18));
+			}
+		}
+
+		/* Hotbar inventory */
+		final int HOTBAR_YPOS = 198;
+		for(int col = 0; col < 9; col++) {
+			addSlotToContainer(new Slot(invPlayer, col, PLAYER_INVENTORY_XPOS + col * 18, HOTBAR_YPOS));
 		}
 
 		this.onCraftMatrixChanged(craftMatrix);
@@ -64,14 +76,11 @@ public class ContainerSmithy extends Container {
     public void onContainerClosed(EntityPlayer playerIn) {
         super.onContainerClosed(playerIn);
 
-        if (!this.world.isRemote)
-        {
-            for (int i = 0; i < 25; ++i)
-            {
+        if (!this.world.isRemote) {
+            for (int i = 0; i < 24; ++i) {
                 ItemStack itemstack = this.craftMatrix.getStackInSlotOnClosing(i);
 
-                if (itemstack != null)
-                {
+                if (itemstack != null) {
                     playerIn.dropPlayerItemWithRandomChoice(itemstack, false);
                 }
             }
@@ -124,13 +133,15 @@ public class ContainerSmithy extends Container {
 	@Override
 	public void onCraftMatrixChanged(IInventory inventory) {
 		//craftResult.setInventorySlotContents(0, SmithyCraftingManager.getInstance().findMatchingRecipe(craftMatrix, world));
+		ItemStack[] itemStacks = SmithyCraftingManager.getInstance().findMatchingRecipes(this.craftMatrix, this.world);
+		for (int i = 0; i < 24 && itemStacks[i] != null; i++)
+			this.craftResult[i].setInventorySlotContents(0, itemStacks[i]);
 	}
 	
 	@Override
 	public boolean canInteractWith(EntityPlayer playerIn) {
-		if(world.getBlockState(pos).getBlock() != GlobalAdditions.smithy) return false;
-		return playerIn.getDistanceSq((double)pos.getX() + 0.5D, (double)pos.getY() + 0.5D, (double)pos.getZ() + 0.5D) <= 64.0D;
-		
+		if(world.getBlockState(pos).getBlock() != GlobalAdditions.smithy) 
+			return false;
+		return playerIn.getDistanceSq((double)pos.getX() + 0.5D, (double)pos.getY() + 0.5D, (double)pos.getZ() + 0.5D) <= 64.0D;	
 	}
-
 }

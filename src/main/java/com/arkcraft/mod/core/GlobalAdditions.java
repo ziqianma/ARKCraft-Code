@@ -96,30 +96,31 @@ public class GlobalAdditions {
 		cobble_ball = addItemWithTooltip("cobble_ball", EnumChatFormatting.GOLD + "A Rocky Road to Victory");
 		explosive_ball = addItemWithTooltip("explosive_ball", EnumChatFormatting.RED + "A Rocky Road to Destruction");
 		slingshot = addSlingshot("slingshot");
-		narcotics = addItemWithTooltip("narcotics", EnumChatFormatting.RED + "A Knockout of a Drink");
-		saddle_small = addSaddle("saddle_small");
-		saddle_medium = addSaddle("saddle_medium");
-		saddle_large = addSaddle("saddle_large");
-		
+		stoneSpear = addWeapon("stoneSpear", ToolMaterial.STONE);
+		ironPike = addWeapon("ironPike", ToolMaterial.IRON);
+
+		// Containers
 		smithy = addContainer("smithy", 0.4F, Material.wood, GUI.SMITHY.getID(), false, false, 3);
 		pestle = addContainer("mortar_and_pestle", 0.4F, Material.rock, GUI.PESTLE_AND_MORTAR.getID(), false, false, 3);
 		
+		// Blocks
 		oreSurface = addBlock(Material.rock, "oreSurface", 3.0F);
-		
-		stoneSpear = addWeapon("stoneSpear", ToolMaterial.STONE);
-		ironPike = addWeapon("ironPike", ToolMaterial.IRON);
 		
 		// Regular Items
 		fiber = addItem("fiber");
 		chitin = addItem("chitin");
 		tranq_arrow = addItem("tranq_arrow");
-		dodo_bag = addItemWithTooltip("dodo_bag", "Backpack for the Dodo");
-		dodo_egg = addEggItem("dodo_egg");
 		dodo_feather = addItem("dodo_feather");
+		dodo_bag = addItemWithTooltip("dodo_bag", "Backpack for the Dodo");
 		
+		// Other Types of Items
+		dodo_egg = addEggItem("dodo_egg");
 		dodo_feces = addFecesItem("dodo_feces");
-
 		dino_book = addDossier("dino_book", GUI.BOOK_GUI.getID(), EnumChatFormatting.GOLD + "Knowledge is Power");
+		narcotics = addItemWithTooltip("narcotics", EnumChatFormatting.RED + "A Knockout of a Drink");
+		saddle_small = addSaddle("saddle_small");
+		saddle_medium = addSaddle("saddle_medium");
+		saddle_large = addSaddle("saddle_large");
 		
 		// Armor
 		chitinHelm = addArmorItem("chitin_helm", CHITIN, "chitinArmor", 0);
@@ -134,18 +135,19 @@ public class GlobalAdditions {
 		boneChest = addArmorItem("bone_chest", BONE, "boneArmor", 1, true, EnumChatFormatting.DARK_RED + "Armor of the Ancients");
 		boneLegs = addArmorItem("bone_legs", BONE, "boneArmor", 2, true, EnumChatFormatting.DARK_RED + "Armor of the Ancients");
 		boneBoots = addArmorItem("bone_boots", BONE, "boneArmor", 3, true, EnumChatFormatting.DARK_RED + "Armor of the Ancients");
-		
-		// Other stuff
+
+		// Handlers
 		RecipeHandler.registerVanillaCraftingRecipes();
+		RecipeHandler.registerPestleCraftingRecipes();
+		RecipeHandler.registerSmithyCraftingRecipes();
 		EntityHandler.registerModEntity(EntityExplosive.class, "Explosive Cobblestone Ball", 1, Main.instance, 64, 10, true);
 		EntityHandler.registerModEntity(EntityCobble.class, "Cobblestone Ball", 2, Main.instance, 64, 10, true);
-		
-		NetworkRegistry.INSTANCE.registerGuiHandler(Main.instance, new GuiHandler());
-		
 		EntityHandler.registerMonster(EntityRaptor.class, "raptor");
 		EntityHandler.registerPassive(EntityDodo.class, "dodo");
+
+		// Other Stuff
+		NetworkRegistry.INSTANCE.registerGuiHandler(Main.instance, new GuiHandler());
 		GenerationHandler.addOreToGen(oreSurface, 0); //5,5
-	
 	}
 	
 	protected static ARKBush addBush(String name, float hardness) {

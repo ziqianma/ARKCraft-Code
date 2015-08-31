@@ -29,8 +29,10 @@ public class GuiHandler implements IGuiHandler {
 			LogHelper.info("GuiHandler: getServerGuiElement called from client");
 		else
 			LogHelper.info("GuiHandler: getServerGuiElement called from server");
-		if(ID == GUI.SMITHY.getID()) return new ContainerSmithy(player.inventory, world, new BlockPos(x, y, z)); 
-		if(ID == GUI.PESTLE_AND_MORTAR.getID()) return new ContainerMP(player.inventory, world, new BlockPos(x, y, z));
+		if(ID == GUI.SMITHY.getID()) 
+			return new ContainerSmithy(player.inventory, world, new BlockPos(x, y, z)); 
+		if(ID == GUI.PESTLE_AND_MORTAR.getID()) 
+			return new ContainerMP(player.inventory, world, new BlockPos(x, y, z));
 		if(ID == GUI.INV_DODO.getID()) {
 			Entity entity = getEntityAt(player, x, y, z);
 			if(entity != null && entity instanceof EntityDodo) 
@@ -47,10 +49,13 @@ public class GuiHandler implements IGuiHandler {
 			LogHelper.info("GuiHandler: getClientGuiElement called from client");
 		else
 			LogHelper.info("GuiHandler: getClientGuiElement called from server");
-		if(ID == GUI.SMITHY.getID()) return new GuiSmithy(player.inventory, world, new BlockPos(x, y, z));
-		if(ID == GUI.PESTLE_AND_MORTAR.getID()) return new GuiMP(player.inventory, world, new BlockPos(x, y, z));
-		if(ID == GUI.INV_DODO.getID());
-		if(ID == GUI.BOOK_GUI.ordinal()) return new GuiDosierScreen();{
+		if(ID == GUI.SMITHY.getID()) 
+			return new GuiSmithy(player.inventory, world, new BlockPos(x, y, z));
+		if(ID == GUI.PESTLE_AND_MORTAR.getID()) 
+			return new GuiMP(player.inventory, world, new BlockPos(x, y, z));
+		if(ID == GUI.BOOK_GUI.ordinal()) 
+			return new GuiDosierScreen();
+		if(ID == GUI.INV_DODO.getID()) {
 			Entity entity = getEntityAt(player, x, y, z);
 			if(entity != null && entity instanceof EntityDodo) 
 				return new GuiInventoryDodo(player.inventory, ((EntityDodo)entity).invDodo, (EntityDodo)entity);

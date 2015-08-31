@@ -1,4 +1,4 @@
-package com.arkcraft.mod.core.conatiner.blocks;
+package com.arkcraft.mod.core.container.blocks;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

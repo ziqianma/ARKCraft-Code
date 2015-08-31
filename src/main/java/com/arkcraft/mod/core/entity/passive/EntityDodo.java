@@ -210,19 +210,25 @@ public class EntityDodo extends EntityTameable {
 			            }
 						return true;
 					}
-					if (itemstack != null && itemstack.getItem() == GlobalAdditions.dodo_bag) {
-						// Put Dodo Bag on Dodo
-						if (!player.capabilities.isCreativeMode) {
-							itemstack.stackSize--;
-							if (itemstack.stackSize == 0)
-			                    player.inventory.mainInventory[player.inventory.currentItem] = null;
-						}
-						setChested(true);
-						return true;
-					}
 				} // not sneaking
-				else
+				else {
+					if (itemstack != null) {
+						if (itemstack.getItem() == GlobalAdditions.dodo_bag) {
+							// Put Dodo Bag on Dodo
+							if (!player.capabilities.isCreativeMode) {
+								itemstack.stackSize--;
+								if (itemstack.stackSize == 0)
+				                    player.inventory.mainInventory[player.inventory.currentItem] = null;
+							}
+							setChested(true);
+							return true;
+						} else {
+							// Breeding stuff
+							return super.interact(player);
+						}
+					}
 					this.setSitting(!this.isSitting());
+				}
 	
 	            if (!this.worldObj.isRemote) {
 		            if (this.isSitting())
