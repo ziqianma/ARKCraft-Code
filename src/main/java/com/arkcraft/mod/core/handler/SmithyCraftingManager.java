@@ -30,10 +30,13 @@ public class SmithyCraftingManager {
     
 	public SmithyCraftingManager() {
 		instance = this; 
-		this.addRecipe(new ItemStack(GlobalAdditions.cobble_ball), "AA ", "AA ", 'A', new ItemStack(Blocks.cobblestone));
+//		this.addRecipe(new ItemStack(GlobalAdditions.cobble_ball), "AA ", "AA ", 'A', new ItemStack(Blocks.cobblestone));
 		Collections.sort(this.recipes, new Comparator() {
             public int compare(IRecipe p_compare_1_, IRecipe p_compare_2_) {
-                return p_compare_1_ instanceof ShapelessRecipes && p_compare_2_ instanceof ShapedRecipes ? 1 : (p_compare_2_ instanceof ShapelessRecipes && p_compare_1_ instanceof ShapedRecipes ? -1 : (p_compare_2_.getRecipeSize() < p_compare_1_.getRecipeSize() ? -1 : (p_compare_2_.getRecipeSize() > p_compare_1_.getRecipeSize() ? 1 : 0)));
+                return p_compare_1_ instanceof ShapelessRecipes 
+                		&& p_compare_2_ instanceof ShapedRecipes ? 1 : (p_compare_2_ instanceof ShapelessRecipes 
+                		&& p_compare_1_ instanceof ShapedRecipes ? -1 : (p_compare_2_.getRecipeSize() < p_compare_1_.getRecipeSize() ? -1 : 
+                			(p_compare_2_.getRecipeSize() > p_compare_1_.getRecipeSize() ? 1 : 0)));
             }
             public int compare(Object p_compare_1_, Object p_compare_2_) {
                 return this.compare((IRecipe)p_compare_1_, (IRecipe)p_compare_2_);

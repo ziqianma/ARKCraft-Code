@@ -23,16 +23,22 @@ import net.minecraft.world.World;
 public class ContainerSmithy extends Container {
 
 	public InventoryCrafting craftMatrix;
-	public IInventory craftResult[] = new IInventory[24];
+	public IInventory craftResult[] = new InventoryCraftResult[24];
+//	public IInventory craftResult;
 	private World world;
 	private BlockPos pos;
+	private boolean oneOutputSlot = false;
 
 	public ContainerSmithy(InventoryPlayer invPlayer, World world, BlockPos pos) {
 		this.world = world;
 		this.pos = pos;
 		craftMatrix = new InventoryCrafting(this, 4, 6);
-		for (int i = 0; i < 24; i++)
-			craftResult[i] = new InventoryCraftResult();
+		if (oneOutputSlot)
+			craftResult[0] = new InventoryCraftResult();
+		else {
+			for (int i = 0; i < 24; i++)
+				craftResult[i] = new InventoryCraftResult();
+		}
 		
 		/* Crafting Matrix */
 		final int MATRIX_SLOT_XPOS = 8;
@@ -46,10 +52,14 @@ public class ContainerSmithy extends Container {
 		/* Output slot */
 		final int OUTPUT_SLOT_XPOS = 98;
 		final int OUTPUT_SLOT_YPOS = 18;
-		for (int row = 0; row < 6; row++) {
-			for (int col = 0; col < 4; col++) {
-				this.addSlotToContainer(new SlotCrafting(invPlayer.player, craftMatrix,	craftResult[col + row * 4], col + row * 4, 
-						OUTPUT_SLOT_XPOS + col * 18, OUTPUT_SLOT_YPOS + row * 18));
+		if (oneOutputSlot)
+			this.addSlotToContainer(new SlotCrafting(invPlayer.player, craftMatrix,	craftResult[0], 0,	OUTPUT_SLOT_XPOS, OUTPUT_SLOT_YPOS));
+		else {
+			for (int row = 0; row < 6; row++) {
+				for (int col = 0; col < 4; col++) {
+					this.addSlotToContainer(new SlotCrafting(invPlayer.player, craftMatrix,	craftResult[col + row * 4], col + row * 4, 
+							OUTPUT_SLOT_XPOS + col * 18, OUTPUT_SLOT_YPOS + row * 18));
+				}
 			}
 		}
 
@@ -132,10 +142,13 @@ public class ContainerSmithy extends Container {
 
 	@Override
 	public void onCraftMatrixChanged(IInventory inventory) {
-		//craftResult.setInventorySlotContents(0, SmithyCraftingManager.getInstance().findMatchingRecipe(craftMatrix, world));
-		ItemStack[] itemStacks = SmithyCraftingManager.getInstance().findMatchingRecipes(this.craftMatrix, this.world);
-		for (int i = 0; i < 24 && itemStacks[i] != null; i++)
-			this.craftResult[i].setInventorySlotContents(0, itemStacks[i]);
+		if (oneOutputSlot)
+			this.craftResult[0].setInventorySlotContents(0, SmithyCraftingManager.getInstance().findMatchingRecipe(craftMatrix, world));
+		else {
+			ItemStack[] itemStacks = SmithyCraftingManager.getInstance().findMatchingRecipes(this.craftMatrix, this.world);
+			for (int i = 0; i < 24 && itemStacks[i] != null; i++)
+				this.craftResult[i].setInventorySlotContents(0, itemStacks[i]);
+		}
 	}
 	
 	@Override
