@@ -97,9 +97,11 @@ public class ARKPlayer implements IExtendedEntityProperties {
 
 	public void Poop() {
 		if (canPoop()) {
-			player.playSound(Main.MODID + ":" + "dodo_defficating", 1.0F, (player.worldObj.rand.nextFloat() - player.worldObj.rand.nextFloat()) * 0.2F + 1.0F);
-			Main.modChannel.sendToServer(new PlayerPoop(true));
-			LogHelper.info("Player is pooping!");
+			if (player.worldObj.isRemote) {
+				player.playSound(Main.MODID + ":" + "dodo_defficating", 1.0F, (player.worldObj.rand.nextFloat() - player.worldObj.rand.nextFloat()) * 0.2F + 1.0F);
+				Main.modChannel.sendToServer(new PlayerPoop(true));
+				LogHelper.info("Player is pooping!");
+			}
 			setCanPoop(false);
 		}
 		else {

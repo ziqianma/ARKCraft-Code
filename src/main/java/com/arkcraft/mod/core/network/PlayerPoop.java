@@ -40,7 +40,7 @@ public class PlayerPoop  implements IMessage {
 		public IMessage onMessage(PlayerPoop message, MessageContext ctx) {
 			EntityPlayer player = ctx.getServerHandler().playerEntity;
 			if (player != null) {
-				player.dropItem(GlobalAdditions.dodo_feces, 1);
+				player.dropItem(GlobalAdditions.player_feces, 1);
 			}
 			return null;
 		}
