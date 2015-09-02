@@ -10,7 +10,7 @@ public class ARKFecesItem extends Item{
 	public ARKFecesItem(String name) {
 		this.setUnlocalizedName(name);
 		this.setCreativeTab(GlobalAdditions.tabARK);
-		this.setMaxStackSize(1);
+		this.setMaxStackSize(16);
 		GameRegistry.registerItem(this, this.getUnlocalizedName().substring(5));
 	
 	}

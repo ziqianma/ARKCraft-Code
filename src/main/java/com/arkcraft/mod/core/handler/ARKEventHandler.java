@@ -9,6 +9,11 @@ import com.arkcraft.mod.core.GlobalAdditions;
 import com.arkcraft.mod.core.entity.aggressive.EntityRaptor;
 import com.arkcraft.mod.core.lib.LogHelper;
 
+/**
+ * 
+ * @author wildbill22
+ *
+ */
 public class ARKEventHandler {
 	
 	/**

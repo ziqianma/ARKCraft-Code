@@ -43,6 +43,7 @@ item.dodo_feather.name=Dodo Feather
 item.dodo_egg.name=Dodo Egg
 item.dino_book.name=Dino Dossier
 item.dodo_feces.name=Dodo Feces
+item.player_feces.name=Player Feces
 
 # Miscellaneous
 itemGroup.tabARKCraft=ARKCraft: Survival Evolved
@@ -54,3 +55,9 @@ category.arkcraft.balance.tooltip=Balance settings
 # Entities
 entity.raptor.name=Raptor
 entity.dodo.name=Dodo
+
+# Key Bindings
+key.playerPoop=Player Pooping Function
+
+# Chat Messages
+chat.canNotPoop=Can't poop right now

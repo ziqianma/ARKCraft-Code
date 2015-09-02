@@ -5,6 +5,7 @@ import com.arkcraft.mod.core.lib.LogHelper;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
+import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -31,5 +32,16 @@ public class ARKPlayerEventHandler {
 	public void onClonePlayer(PlayerEvent.Clone event) {
 		LogHelper.info("ARKPlayerEventHandler: Cloning player extended properties");
 		ARKPlayer.get(event.entityPlayer).copy(ARKPlayer.get(event.original));
+	}
+
+	@SubscribeEvent
+	public void onLivingUpdateEvent(LivingUpdateEvent event) {
+		if (event.entity instanceof EntityPlayer) {
+			EntityPlayer player = (EntityPlayer) event.entity;
+			
+			// Enable pooping once a minute
+			if (player.ticksExisted % 600 == 0)
+				ARKPlayer.get(player).setCanPoop(true);
+		}
 	}
 }
