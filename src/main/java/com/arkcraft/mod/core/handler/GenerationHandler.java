@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.arkcraft.mod.core.gen.ore.WrappedOreGenerator;
 import com.arkcraft.mod.core.gen.ore.WrappedOreGenerator.Instruction;
+import com.arkcraft.mod.core.lib.BALANCE;
 import com.arkcraft.mod.core.lib.LogHelper;
 
 import net.minecraft.block.Block;
@@ -16,16 +17,22 @@ public class GenerationHandler {
 	
 	public GenerationHandler() {}
 	
+	/***
+	 * The only 
+	 */
 	public static void addOreToGen(Block block, int height) {
 		/* This is for standard ore generation. */
-		addOreToGen(block, height, 5, 5);
+		addOreToGen(block, height, BALANCE.GEN.MAX_DEFAULT_ORE_BLOCKS_SPAWN_PER_VEIN, BALANCE.GEN.MAX_DEFAULT_ORE_VEIN_SPAWN_PER_CHUNK);
 		
 	}
 	
 	public static void addOreToGen(Block block, int height, int maxBlocksInVain) {
-		addOreToGen(block, height, maxBlocksInVain, 5);
+		addOreToGen(block, height, maxBlocksInVain, BALANCE.GEN.MAX_DEFAULT_ORE_VEIN_SPAWN_PER_CHUNK);
 	}
 	
+	/***
+	 * Full Override method - Doesn't follow @BALANCE.GEN.class
+	 */
 	public static void addOreToGen(Block block, int height, int maxBlocksInVain, int maxVeinsInChunk) {
 		/* Gen ID is where to generate it. -1 is in nether, 0 is overworld, 1 is end. */
 		Instruction instruction = new Instruction(block, height, maxBlocksInVain, maxVeinsInChunk);

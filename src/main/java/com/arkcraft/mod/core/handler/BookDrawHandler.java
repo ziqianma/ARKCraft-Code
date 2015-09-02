@@ -11,7 +11,6 @@ import net.minecraft.util.StatCollector;
 import org.lwjgl.opengl.GL11;
 
 import com.arkcraft.mod.core.entity.aggressive.EntityRaptor;
-import com.arkcraft.mod.core.machine.gui.GuiDosierScreen;
 import com.arkcraft.mod.core.machine.gui.GuiDosierScreen.CATEGORY;
 
 public class BookDrawHandler {

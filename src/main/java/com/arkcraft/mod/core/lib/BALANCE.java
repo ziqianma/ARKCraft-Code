@@ -18,7 +18,12 @@ public final class BALANCE {
 		@DefaultInt(value = 5, minValue = 1, maxValue = 10, name = "Maximum berries per pick", comment = "Maximum number of berries you get when picking")
 		public static int BERRIES_MAX_PER_PICKING;
 
-		@DefaultInt(value = 5, minValue = 1, maxValue = 10, name = "Maximum Surface Crystals that can spawn", comment = "How many Veins can spawn")
-		public static int MAXIMUM_SURFACE_CYRSTAL_VEIN_SPAWN;
+	}
+	
+	public static class GEN {
+		@DefaultInt(value = 5, minValue = 1, maxValue = 10, name = "Default max veins that can spawn per chunk", comment = "Default max veins that can spawn per chunk")
+		public static int MAX_DEFAULT_ORE_VEIN_SPAWN_PER_CHUNK;
+		@DefaultInt(value = 7, minValue = 2, maxValue = 10, name = "Default max ore blocks that can spawn per vein loaded", comment = "Default max ore blocks that can spawn per vein loaded")
+		public static int MAX_DEFAULT_ORE_BLOCKS_SPAWN_PER_VEIN;
 	}
 }

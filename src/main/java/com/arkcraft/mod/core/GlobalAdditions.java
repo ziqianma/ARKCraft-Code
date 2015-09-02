@@ -144,10 +144,10 @@ public class GlobalAdditions {
 		EntityHandler.registerModEntity(EntityCobble.class, "Cobblestone Ball", 2, Main.instance, 64, 10, true);
 		EntityHandler.registerMonster(EntityRaptor.class, "raptor");
 		EntityHandler.registerPassive(EntityDodo.class, "dodo");
-
+		GenerationHandler.addOreToGen(oreSurface, 0); 
+		
 		// Other Stuff
 		NetworkRegistry.INSTANCE.registerGuiHandler(Main.instance, new GuiHandler());
-		GenerationHandler.addOreToGen(oreSurface, 0); //5,5
 	}
 	
 	protected static ARKBush addBush(String name, float hardness) {
