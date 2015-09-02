@@ -1,10 +1,13 @@
 package com.arkcraft.mod.core.entity.player;
 
+import com.arkcraft.mod.core.Main;
 import com.arkcraft.mod.core.lib.LogHelper;
+import com.arkcraft.mod.core.network.PlayerPoop;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
 
@@ -18,12 +21,12 @@ public class ARKPlayer implements IExtendedEntityProperties {
 	private final EntityPlayer player;
 	
 	// The extended player properties (anything below should be initialized in constructor and in NBT):
-	private boolean isPooping; // Probably isn't need, but added as an example
+	private boolean canPoop;         // True if player can poop (timer sets this)
 
 	public ARKPlayer(EntityPlayer player, World world) {
 		// Initialize some stuff
 		this.player = player;
-		this.setPooping(false);
+		this.setCanPoop(false);
 	}
 
 	/**
@@ -48,8 +51,8 @@ public class ARKPlayer implements IExtendedEntityProperties {
 	public void saveNBTData(NBTTagCompound compound) {
 		NBTTagCompound properties = new NBTTagCompound();
 		// ARK player properties
-		properties.setBoolean("isPooping", isPooping());
-		LogHelper.info("ARKPlayer saveNBTData: Player is " + (isPooping ? "" : "not") + " pooping.");
+		properties.setBoolean("canPoop", canPoop());
+		LogHelper.info("ARKPlayer saveNBTData: Player can " + (canPoop ? "" : "not") + " poop.");
 		compound.setTag(EXT_PROP_NAME, properties);
 	}
 
@@ -59,8 +62,8 @@ public class ARKPlayer implements IExtendedEntityProperties {
 		if (properties == null)
 			return;
 		// ARK player properties 
-		this.setPooping(properties.getBoolean("isPooping"));
-		LogHelper.info("ARKPlayer loadNBTData: Player is " + (isPooping ? "" : "not") + " pooping.");
+		this.setCanPoop(properties.getBoolean("canPoop"));
+		LogHelper.info("ARKPlayer loadNBTData: Player can " + (canPoop ? "" : "not") + " poop.");
 	}
 
 	/**
@@ -68,7 +71,7 @@ public class ARKPlayer implements IExtendedEntityProperties {
 	 * Avoids NBT disk I/O overhead when cloning a player after respawn
 	 */
 	public void copy(ARKPlayer props) {
-		this.isPooping = props.isPooping;
+		this.canPoop = props.canPoop;
 	}
 	
 	@Override
@@ -84,11 +87,23 @@ public class ARKPlayer implements IExtendedEntityProperties {
 		return player;
 	}
 
-	public boolean isPooping() {
-		return isPooping;
+	public boolean canPoop() {
+		return canPoop;
 	}
 
-	public void setPooping(boolean isPooping) {
-		this.isPooping = isPooping;
+	public void setCanPoop(boolean canPoop) {
+		this.canPoop = canPoop;
+	}
+
+	public void Poop() {
+		if (canPoop()) {
+			player.playSound(Main.MODID + ":" + "dodo_defficating", 1.0F, (player.worldObj.rand.nextFloat() - player.worldObj.rand.nextFloat()) * 0.2F + 1.0F);
+			Main.modChannel.sendToServer(new PlayerPoop(true));
+			LogHelper.info("Player is pooping!");
+			setCanPoop(false);
+		}
+		else {
+			player.addChatMessage(new ChatComponentTranslation("chat.canNotPoop"));	
+		}		
 	}
 }

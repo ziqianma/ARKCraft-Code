@@ -24,6 +24,7 @@ import com.arkcraft.mod.core.items.ARKSaddle;
 import com.arkcraft.mod.core.items.ARKSlingshot;
 import com.arkcraft.mod.core.items.ARKWeapon;
 import com.arkcraft.mod.core.items.ItemDossier;
+import com.arkcraft.mod.core.lib.KeyBindings;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -49,7 +50,7 @@ public class GlobalAdditions {
 	public static ARKBush berryBush;
 	public static ARKItem cobble_ball, fiber, chitin, narcotics, tranq_arrow, explosive_ball, dodo_bag, dodo_feather;
 	public static ARKSlingshot slingshot;
-	public static ARKFecesItem dodo_feces;
+	public static ARKFecesItem dodo_feces, player_feces;
 	public static ARKEggItem dodo_egg;
 	public static ARKSaddle saddle_small, saddle_medium, saddle_large;
 	public static ARKArmorItem chitinHelm, chitinChest, chitinLegs, chitinBoots;
@@ -116,6 +117,7 @@ public class GlobalAdditions {
 		// Other Types of Items
 		dodo_egg = addEggItem("dodo_egg");
 		dodo_feces = addFecesItem("dodo_feces");
+		player_feces = addFecesItem("player_feces");
 		dino_book = addDossier("dino_book", GUI.BOOK_GUI.getID(), EnumChatFormatting.GOLD + "Knowledge is Power");
 		narcotics = addItemWithTooltip("narcotics", EnumChatFormatting.RED + "A Knockout of a Drink");
 		saddle_small = addSaddle("saddle_small");
@@ -144,10 +146,11 @@ public class GlobalAdditions {
 		EntityHandler.registerModEntity(EntityCobble.class, "Cobblestone Ball", 2, Main.instance, 64, 10, true);
 		EntityHandler.registerMonster(EntityRaptor.class, "raptor");
 		EntityHandler.registerPassive(EntityDodo.class, "dodo");
-		GenerationHandler.addOreToGen(oreSurface, 0); 
-		
+		KeyBindings.preInit();
+
 		// Other Stuff
 		NetworkRegistry.INSTANCE.registerGuiHandler(Main.instance, new GuiHandler());
+		GenerationHandler.addOreToGen(oreSurface, 0); //5,5
 	}
 	
 	protected static ARKBush addBush(String name, float hardness) {
