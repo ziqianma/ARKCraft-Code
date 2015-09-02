@@ -4,6 +4,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.arkcraft.mod.core.GlobalAdditions.GUI;
+import com.arkcraft.mod.core.blocks.crop_test.ARKContainerCropPlot;
+import com.arkcraft.mod.core.blocks.crop_test.GUICropPlot;
 import com.arkcraft.mod.core.entity.passive.EntityDodo;
 import com.arkcraft.mod.core.lib.LogHelper;
 import com.arkcraft.mod.core.machine.gui.ContainerInventoryDodo;
@@ -33,6 +35,8 @@ public class GuiHandler implements IGuiHandler {
 			return new ContainerSmithy(player.inventory, world, new BlockPos(x, y, z)); 
 		if(ID == GUI.PESTLE_AND_MORTAR.getID()) 
 			return new ContainerMP(player.inventory, world, new BlockPos(x, y, z));
+		if(ID == GUI.CROP_PLOT.getID()) 
+			return new ARKContainerCropPlot(player.inventory, world, new BlockPos(x, y, z));
 		if(ID == GUI.INV_DODO.getID()) {
 			Entity entity = getEntityAt(player, x, y, z);
 			if(entity != null && entity instanceof EntityDodo) 
@@ -53,6 +57,8 @@ public class GuiHandler implements IGuiHandler {
 			return new GuiSmithy(player.inventory, world, new BlockPos(x, y, z));
 		if(ID == GUI.PESTLE_AND_MORTAR.getID()) 
 			return new GuiMP(player.inventory, world, new BlockPos(x, y, z));
+		if(ID == GUI.CROP_PLOT.getID()) 
+			return new GUICropPlot(player.inventory, world, new BlockPos(x, y, z));	
 		if(ID == GUI.BOOK_GUI.ordinal()) 
 			return new GuiDosierScreen();
 		if(ID == GUI.INV_DODO.getID()) {

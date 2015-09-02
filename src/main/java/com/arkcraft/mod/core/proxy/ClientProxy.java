@@ -13,6 +13,7 @@ import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import com.arkcraft.mod.core.GlobalAdditions;
 import com.arkcraft.mod.core.Main;
 import com.arkcraft.mod.core.entity.EntityCobble;
+import com.arkcraft.mod.core.entity.EntityDodoEgg;
 import com.arkcraft.mod.core.entity.EntityExplosive;
 import com.arkcraft.mod.core.entity.aggressive.EntityRaptor;
 import com.arkcraft.mod.core.entity.model.ModelDodo;
@@ -30,6 +31,7 @@ public class ClientProxy extends CommonProxy {
 	public void init() {
 		if(initDone) return;
 		RenderingRegistry.registerEntityRenderingHandler(EntityCobble.class, new RenderSnowball(Minecraft.getMinecraft().getRenderManager(), GlobalAdditions.cobble_ball, Minecraft.getMinecraft().getRenderItem()));
+		RenderingRegistry.registerEntityRenderingHandler(EntityDodoEgg.class, new RenderSnowball(Minecraft.getMinecraft().getRenderManager(), GlobalAdditions.dodo_egg, Minecraft.getMinecraft().getRenderItem()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityExplosive.class, new RenderSnowball(Minecraft.getMinecraft().getRenderManager(), GlobalAdditions.explosive_ball, Minecraft.getMinecraft().getRenderItem()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityRaptor.class, new RenderRaptor(new ModelRaptor(), 0.5F));
 		ModelBakery.addVariantName(GlobalAdditions.slingshot, "arkcraft:slingshot", "arkcraft:slingshot_pulled");

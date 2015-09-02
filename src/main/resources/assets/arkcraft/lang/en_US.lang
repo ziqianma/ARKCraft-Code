@@ -2,6 +2,7 @@
 tile.berryBush.name=Berry Bush
 tile.smithy.name=Smithy
 tile.mortar_and_pestle.name=Mortar and Pestle
+tile.crop_plot.name=Crop Plot
 
 # Items
 item.narco.name=Narco Berry

@@ -1,5 +1,6 @@
 package com.arkcraft.mod.core.handler;
 
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -23,14 +24,78 @@ public class RecipeHandler {
 					"AAA", "A A", "A A", 'A', GlobalAdditions.chitin);
 			GameRegistry.addRecipe(new ItemStack(GlobalAdditions.chitinBoots),
 					"   ", "A A", "A A", 'A', GlobalAdditions.chitin);
+			//Iron Pike
+			GameRegistry.addRecipe(new ItemStack(GlobalAdditions.ironPike),
+					"  A", 
+					" B ", 
+					"B  ", 
+					'A', Items.iron_ingot, 
+					'B', Items.stick);
+			
+			//Stone Spear
+			GameRegistry.addRecipe(new ItemStack(GlobalAdditions.stoneSpear),
+					"  A", 
+					" B ", 
+					"B  ", 
+					'A', Blocks.stone, 
+					'B', Items.stick);
+			
+			//Cobble Ball
+			GameRegistry.addRecipe(new ItemStack(GlobalAdditions.cobble_ball, 4),
+					" B ", 
+					"BAB", 
+					" B ", 
+					'B', Blocks.stone, 
+					'A', Blocks.cobblestone);
+			
+			//Slingshot
+			GameRegistry.addRecipe(new ItemStack(GlobalAdditions.slingshot),
+					"ACA", 
+					"B B", 
+					" B ", 
+					'A', GlobalAdditions.fiber,
+					'B', Items.stick,
+					'C', Items.leather);
+			
+			//Motar and Pestle
+			GameRegistry.addRecipe(new ItemStack(GlobalAdditions.pestle),
+					"   ", 
+					"ABA", 
+					" A ", 
+					'A', Blocks.stone, 
+					'B', Blocks.cobblestone);
+			
+			//Smithy
+			GameRegistry.addRecipe(new ItemStack(GlobalAdditions.smithy),
+					"AAA", 
+					"B B", 
+					"B B", 
+					'A', Blocks.iron_block, 
+					'B', Blocks.planks);
+	
+			//Tranc Arrow
+			GameRegistry.addShapelessRecipe(new ItemStack(GlobalAdditions.tranq_arrow), GlobalAdditions.narcotics, Items.arrow);
+			
+			
+			
+			//Pistol
+			//GameRegistry.addRecipe(new ItemStack(GlobalAdditions.),
+			//		"AAA", 
+			//		"A  ", 
+			//		"   ", 
+			//		'A', Items.iron_ingot); 
+
+			//Ammo
+			//GameRegistry.addShapelessRecipe(new ItemStack(GlobalAdditions. ,3), Items.gunpowder, Items.iron_ingot);
+					
 			/*
 			GameRegistry.addShapelessRecipe(new ItemStack(GlobalAdditions.narcotics, 1), new ItemStack(Items.bowl), new ItemStack(GlobalAdditions.narcoBerry), new ItemStack(GlobalAdditions.fiber,1));
 			GameRegistry.addRecipe(new ItemStack(GlobalAdditions.stoneSpear), "B  ", " A ", "  A", 'A', new ItemStack(Items.stick), 'B', new ItemStack(Blocks.stone));
 			GameRegistry.addRecipe(new ItemStack(GlobalAdditions.ironPike), "B  ", " A ", "  A", 'A', new ItemStack(Items.stick), 'B', new ItemStack(Items.iron_ingot));
 			GameRegistry.addRecipe(new ItemStack(GlobalAdditions.cobble_ball), "BB ", "BB ", 'B', new ItemStack(Blocks.cobblestone));
 			*/
-			GameRegistry.addShapelessRecipe(new ItemStack(GlobalAdditions.saddle_small, 1), Items.leather, Items.iron_ingot, 
-					GlobalAdditions.fiber, GlobalAdditions.fiber, GlobalAdditions.fiber, GlobalAdditions.fiber, GlobalAdditions.fiber);
+//			GameRegistry.addShapelessRecipe(new ItemStack(GlobalAdditions.saddle_small, 1), Items.leather, Items.iron_ingot, 
+//					GlobalAdditions.fiber, GlobalAdditions.fiber, GlobalAdditions.fiber, GlobalAdditions.fiber, GlobalAdditions.fiber);
 	}
 	
 	public static void registerPestleCraftingRecipes() {
