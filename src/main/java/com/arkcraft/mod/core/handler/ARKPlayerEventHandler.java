@@ -1,6 +1,7 @@
 package com.arkcraft.mod.core.handler;
 
 import com.arkcraft.mod.core.entity.player.ARKPlayer;
+import com.arkcraft.mod.core.lib.BALANCE;
 import com.arkcraft.mod.core.lib.LogHelper;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -39,8 +40,8 @@ public class ARKPlayerEventHandler {
 		if (event.entity instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) event.entity;
 			
-			// Enable pooping once a minute
-			if (player.ticksExisted % 600 == 0)
+			// Enable pooping once every (the value in the config) ticks
+			if (player.ticksExisted % BALANCE.PLAYER.TICKS_BETWEEN_PLAYER_POOP == 0)
 				ARKPlayer.get(player).setCanPoop(true);
 		}
 	}

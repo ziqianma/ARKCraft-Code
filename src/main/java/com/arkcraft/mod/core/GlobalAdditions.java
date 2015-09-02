@@ -147,10 +147,10 @@ public class GlobalAdditions {
 		EntityHandler.registerMonster(EntityRaptor.class, "raptor");
 		EntityHandler.registerPassive(EntityDodo.class, "dodo");
 		KeyBindings.preInit();
-
+		GenerationHandler.addOreToGen(oreSurface, 0); //Sets to the values in BALENCE.GEN.class
+		
 		// Other Stuff
 		NetworkRegistry.INSTANCE.registerGuiHandler(Main.instance, new GuiHandler());
-		GenerationHandler.addOreToGen(oreSurface, 0); //5,5
 	}
 	
 	protected static ARKBush addBush(String name, float hardness) {

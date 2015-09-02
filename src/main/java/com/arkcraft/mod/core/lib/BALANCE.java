@@ -26,4 +26,10 @@ public final class BALANCE {
 		@DefaultInt(value = 7, minValue = 2, maxValue = 10, name = "Default max ore blocks that can spawn per vein loaded", comment = "Default max ore blocks that can spawn per vein loaded")
 		public static int MAX_DEFAULT_ORE_BLOCKS_SPAWN_PER_VEIN;
 	}
+	
+	public static class PLAYER {
+		//minValue 1min, maxValue, 5mins, default value 2:30mins
+		@DefaultInt(value = 1500, minValue = 600, maxValue = 3000, name = "Default max ticks between player poops.", comment = "Ticks between the player poops inside the game")
+		public static int TICKS_BETWEEN_PLAYER_POOP;
+	}
 }
