@@ -40,6 +40,7 @@ public class Config {
 		cat_balance.setComment("You can adjust these values to change the balancing of this mod");
 		loadFields(cat_balance, BALANCE.PLANTS.class);
 		loadFields(cat_balance, BALANCE.GEN.class);
+		loadFields(cat_balance, BALANCE.PLAYER.class);
 		// TODO: Add more classes from BALANCE here when available
 	}
 
