@@ -4,12 +4,15 @@ import java.awt.Color;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 
 import org.lwjgl.opengl.GL11;
 
+import com.arkcraft.mod.core.Main;
 import com.arkcraft.mod.core.entity.aggressive.EntityRaptor;
 import com.arkcraft.mod.core.machine.gui.GuiDosierScreen.CATEGORY;
 
@@ -69,25 +72,37 @@ public class BookDrawHandler {
 				default: return null;
 			}
 		}
+		
+		public ResourceLocation getPreferenceImage() {
+			ResourceLocation location = null;
+			if(this.getPreference() == "Herbivore") location = new ResourceLocation(Main.MODID, "textures/items/amar.png");
+			if(this.getPreference() == "Carnivore") location = new ResourceLocation(Main.MODID, "textures/items/primemeat_raw.png");
+			if(this.getPreference() == "Omnivore") location = new ResourceLocation(Main.MODID, "textures/items/amar.png");
+			return location;
+		}
 	}
 	
 	public static int left = 132;
 	public static int right = 256;
 	
-	public static void drawPages(FontRenderer renderer, int mouseX, int mouseY, int currentPage, CATEGORY currentCategory) {
-		
+	public static void drawPages(FontRenderer renderer, int mouseX, int mouseY, int currentPage, CATEGORY currentCategory, GuiScreen gui) {
+		if(currentCategory == null) drawCategoryModels();
 		if(currentCategory == CATEGORY.DINOS) {
 			if(currentPage == 0) {
 				/* Page 1 / 2*/
-				drawTitle(renderer, DINO_NAME.UTAHRAPTOR);
 				GuiInventory.drawEntityOnScreen(getLeft() + 14, 90, 20, -350f, -5F, new EntityRaptor(Minecraft.getMinecraft().theWorld, 1));
-				drawDiet(renderer, getLeft() + 40, 135, DINO_NAME.UTAHRAPTOR);
+				drawTitle(renderer, DINO_NAME.UTAHRAPTOR);
+				drawDiet(renderer, getLeft() + 40, 135, DINO_NAME.UTAHRAPTOR, gui);
 				drawSpecies(renderer, getLeft() + 15, 150, DINO_NAME.UTAHRAPTOR);
 			}
 			else if(currentPage == 2) {
 				
 			}
 		}
+	}
+	
+	public static void drawCategoryModels() {
+		GuiInventory.drawEntityOnScreen(getLeft() + 14, 90, 25, -350f, -5F, new EntityRaptor(Minecraft.getMinecraft().theWorld, 1));
 	}
 	
 	public static void drawSpecies(FontRenderer renderer, int x, int y, DINO_NAME dinoName) {
@@ -104,11 +119,13 @@ public class BookDrawHandler {
 		GlStateManager.popMatrix();
 	}
 	
-	public static void drawDiet(FontRenderer renderer, int x, int y, DINO_NAME dinoName) {
+	public static void drawDiet(FontRenderer renderer, int x, int y, DINO_NAME dinoName, GuiScreen gui) {
         GlStateManager.pushMatrix(); /* Start the rendering */
 		GL11.glScalef(0.7f, 0.7f, 1); /* 70% the normal size */
 		renderer.drawString("Diet: " + dinoName.getPreference(), x, y, Color.darkGray.getRGB()); 
         GlStateManager.popMatrix(); /* End the rendering */
+        Minecraft.getMinecraft().getTextureManager().bindTexture(dinoName.getPreferenceImage());
+        gui.drawTexturedModalRect(x + 5, y, 16,16,16,16);
 	}
 	
 	public static void drawTitle(FontRenderer renderer, DINO_NAME dinoName) {

@@ -31,14 +31,14 @@ public class GuiDosierScreen extends GuiScreen {
 	private int maxPages;
 	public PageButton bButton;
 	public PageButton nButton;
-	public CategoryButton catBackButton;
-	private GuiButton dinos, fish, mammals, reptiles;
+	public PageButton cat_bButton;
+	private GuiButton dinos, reptiles, mammals, other;
 	
 	public enum CATEGORY {
 		DINOS(0),
-		FISH(1),
+		REPTILES(1),
 		MAMMALS(2),
-		REPTILES(3);
+		OTHER(3);
 		
 		int id;
 		CATEGORY(int id) {
@@ -60,12 +60,18 @@ public class GuiDosierScreen extends GuiScreen {
 
 		bButton = new PageButton(1, x + 20, y + guiHeight - 20, false);
 		nButton = new PageButton(2, x + guiWidth - 36, y + guiHeight - 20, true);
-		dinos = new GuiButton(3, x + 14, 50, 100, 20, "Dinos");
-		catBackButton = new CategoryButton(4, 10, 10);
+		dinos = new GuiButton(3, x + 15, (y + (guiHeight / 2)) - 20, 100, 20, "Dinos");
+		cat_bButton = new PageButton(4, x + 15, y + 15, false);
+		reptiles = new GuiButton(5, x + 15, y + guiHeight - 40, 100, 20, "Reptiles");
+		mammals = new GuiButton(6, (x + (guiWidth / 2)) + 15, (y + (guiHeight / 2)) - 20, 100, 20, "Mammals");
+		other = new GuiButton(7, (x + (guiWidth / 2)) + 15, y + guiHeight - 40, 100, 20, "Other");
 		this.buttonList.add(bButton);
 		this.buttonList.add(nButton);
 		this.buttonList.add(dinos);
-		this.buttonList.add(catBackButton);
+		this.buttonList.add(cat_bButton);
+		this.buttonList.add(reptiles);
+		this.buttonList.add(mammals);
+		this.buttonList.add(other);
 	}
 	
 	@Override
@@ -74,13 +80,18 @@ public class GuiDosierScreen extends GuiScreen {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		LogHelper.info("CurrentPage: " + currentPage);
 		this.drawTexturedModalRect(x, y, 0, 0, guiWidth, guiHeight);
-		BookDrawHandler.drawPages(this.fontRendererObj, mouseX, mouseY, currentPage, currentCategory);
+		BookDrawHandler.drawPages(this.fontRendererObj, mouseX, mouseY, currentPage, currentCategory, this);
 		if(currentCategory != null) {
 			bButton.drawButton(Minecraft.getMinecraft(), mouseX, mouseY);
 			nButton.drawButton(Minecraft.getMinecraft(), mouseX, mouseY);
-			catBackButton.drawButton(Minecraft.getMinecraft(), mouseX, mouseY);
+			if(currentPage == 0) cat_bButton.drawButton(Minecraft.getMinecraft(), mouseX, mouseY);
 		}
-		if(currentCategory == null) dinos.drawButton(Minecraft.getMinecraft(), mouseX, mouseY);
+		if(currentCategory == null) {
+			dinos.drawButton(Minecraft.getMinecraft(), mouseX, mouseY);
+			reptiles.drawButton(Minecraft.getMinecraft(), mouseX, mouseY);
+			mammals.drawButton(Minecraft.getMinecraft(), mouseX, mouseY);
+			other.drawButton(Minecraft.getMinecraft(), mouseX, mouseY);
+		}
 	}
 	
 	@Override

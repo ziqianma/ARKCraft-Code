@@ -1,8 +1,5 @@
 package com.arkcraft.mod.core.blocks.crop_test;
 
-import com.arkcraft.mod.core.GlobalAdditions;
-import com.arkcraft.mod.core.lib.LogHelper;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -11,9 +8,11 @@ import net.minecraft.inventory.InventoryCraftResult;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
+
+import com.arkcraft.mod.core.GlobalAdditions;
+import com.arkcraft.mod.core.lib.LogHelper;
 
 public class ARKContainerCropPlot extends Container {
 
@@ -36,7 +35,7 @@ public class ARKContainerCropPlot extends Container {
 		this.addSlotToContainer(new Slot(inputSlots, 2, 62, 26));
 		this.addSlotToContainer(new Slot(inputSlots, 3, 80, 26));
 		this.addSlotToContainer(new Slot(inputSlots, 4, 98, 26));
-
+		
 		this.addSlotToContainer(new Slot(inputSlots, 5, 62, 44));
 		this.addSlotToContainer(new Slot(inputSlots, 6, 80, 44));
 		this.addSlotToContainer(new Slot(inputSlots, 7, 98, 44));
