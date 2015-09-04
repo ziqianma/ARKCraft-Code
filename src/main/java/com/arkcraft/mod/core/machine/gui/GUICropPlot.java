@@ -1,7 +1,5 @@
 package com.arkcraft.mod.core.machine.gui;
 
-import java.awt.Color;
-
 import org.lwjgl.opengl.GL11;
 
 import com.arkcraft.mod.core.Main;
@@ -21,9 +19,11 @@ public class GUICropPlot extends GuiContainer {
 	
 	public static final ResourceLocation texture = new ResourceLocation(Main.MODID, "textures/gui/crop_plot_gui.png");
 	public String name = "Crop Plot";
+	private final InventoryPlayer playerInventory;
 	
 	public GUICropPlot(InventoryPlayer invPlayer, World world, BlockPos pos) {
 		super(new ARKContainerCropPlot(invPlayer, world, pos));
+		this.playerInventory = invPlayer;
 		this.xSize = 176;
 		this.ySize = 166;
 	}
@@ -31,7 +31,10 @@ public class GUICropPlot extends GuiContainer {
 	public void onGuiClosed() { super.onGuiClosed(); }
 	
 	protected void drawGuiContainerForegroundLayer(int i, int j) {
-		this.fontRendererObj.drawString(name, (int)(xSize / 2) - name.length(), 5, Color.darkGray.getRGB());
+		
+		//this.fontRendererObj.drawString(name, (int)(xSize / 2) - name.length(), 5, Color.darkGray.getRGB());
+		 this.fontRendererObj.drawString(name, this.xSize / 2 - this.fontRendererObj.getStringWidth(name) / 1, 6, 4210752);
+		 this.fontRendererObj.drawString(this.playerInventory.getDisplayName().getUnformattedText(), 8, this.ySize - 96 + 2, 4210752);
 	}
 	
 	protected void drawGuiContainerBackgroundLayer(float partTick, int mX, int mY) {

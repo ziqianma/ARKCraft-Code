@@ -5,12 +5,12 @@ import java.util.List;
 
 import com.arkcraft.mod.core.GlobalAdditions.GUI;
 import com.arkcraft.mod.core.blocks.crop_test.ARKContainerCropPlot;
-import com.arkcraft.mod.core.blocks.crop_test.GUICropPlot;
 import com.arkcraft.mod.core.entity.passive.EntityDodo;
 import com.arkcraft.mod.core.lib.LogHelper;
 import com.arkcraft.mod.core.machine.gui.ContainerInventoryDodo;
 import com.arkcraft.mod.core.machine.gui.ContainerMP;
 import com.arkcraft.mod.core.machine.gui.ContainerSmithy;
+import com.arkcraft.mod.core.machine.gui.GUICropPlot;
 import com.arkcraft.mod.core.machine.gui.GuiDosierScreen;
 import com.arkcraft.mod.core.machine.gui.GuiInventoryDodo;
 import com.arkcraft.mod.core.machine.gui.GuiMP;
