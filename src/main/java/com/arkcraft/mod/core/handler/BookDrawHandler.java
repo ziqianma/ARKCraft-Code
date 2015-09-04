@@ -1,6 +1,7 @@
 package com.arkcraft.mod.core.handler;
 
 import java.awt.Color;
+import java.util.Random;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -14,9 +15,17 @@ import org.lwjgl.opengl.GL11;
 
 import com.arkcraft.mod.core.Main;
 import com.arkcraft.mod.core.entity.aggressive.EntityRaptor;
+import com.arkcraft.mod.core.entity.passive.EntityDodo;
 import com.arkcraft.mod.core.machine.gui.GuiDosierScreen.CATEGORY;
 
 public class BookDrawHandler {
+	
+	static int random;
+	
+	public BookDrawHandler() {
+		Random random = new Random();
+		BookDrawHandler.random = random.nextInt(); 
+	}
 	
 	public enum DINO_NAME {
 		ANKLOSAURUS("Ankylosaurus", "Ankylosaurus Crassacutis", "ark.book.ankylo.description", 0, 0),
@@ -102,7 +111,8 @@ public class BookDrawHandler {
 	}
 	
 	public static void drawCategoryModels() {
-		GuiInventory.drawEntityOnScreen(getLeft() + 14, 90, 25, -350f, -5F, new EntityRaptor(Minecraft.getMinecraft().theWorld, 1));
+		GuiInventory.drawEntityOnScreen(getLeft() + 14, 90, 25, -350f, -5F, new EntityRaptor(Minecraft.getMinecraft().theWorld, random));
+		GuiInventory.drawEntityOnScreen((getLeft() + (256 / 2)) + 20, 155, 25, -350F, -5F, new EntityDodo(Minecraft.getMinecraft().theWorld));
 	}
 	
 	public static void drawSpecies(FontRenderer renderer, int x, int y, DINO_NAME dinoName) {
