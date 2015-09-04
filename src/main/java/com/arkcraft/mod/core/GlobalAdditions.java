@@ -6,12 +6,14 @@ import java.util.Map;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 
@@ -151,9 +153,9 @@ public class GlobalAdditions {
 		EntityHandler.registerModEntity(EntityCobble.class, "Cobblestone Ball", 2, Main.instance, 64, 10, true);
 		EntityHandler.registerModEntity(EntityDodoEgg.class, "Dodo Egg", 6, Main.instance, 64, 10, true);
 		EntityHandler.registerMonster(EntityRaptor.class, "raptor");
-		EntityHandler.registerPassive(EntityDodo.class, "dodo");
-		EntityHandler.registerPassive(EntityBrontosaurus.class, "brontosaurus");
-		//EntityHandler.registerPassive(EntityCoelacanth.class, "coelacanth");
+		EntityHandler.registerMonster(EntityDodo.class, "dodo", BiomeGenBase.beach, BiomeGenBase.desert, BiomeGenBase.forest, BiomeGenBase.birchForest, BiomeGenBase.extremeHills);
+		EntityHandler.registerMonster(EntityBrontosaurus.class, "brontosaurus");
+		//EntityHandler.registerMonster(EntityCoelacanth.class, "coelacanth", BiomeGenBase.deepOcean, BiomeGenBase.ocean, BiomeGenBase.river);
 		
 		KeyBindings.preInit();
 		GenerationHandler.addOreToGen(oreSurface, 0); //Sets to the values in BALENCE.GEN.class

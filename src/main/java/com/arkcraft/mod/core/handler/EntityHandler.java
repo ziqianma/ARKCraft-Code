@@ -15,6 +15,19 @@ import net.minecraftforge.fml.common.registry.EntityRegistry;
 public class EntityHandler {
 	
 	public EntityHandler() {}
+	
+	public static void registerMonster(Class eClass, String name, BiomeGenBase... biomes) {
+		int entityID = EntityRegistry.findGlobalUniqueEntityId();
+		Random rand = new Random(name.hashCode());
+		int mainColor = rand.nextInt() * 16777215;
+		int secondColor = rand.nextInt() * 16777215;
+		
+		EntityRegistry.registerGlobalEntityID(eClass, name, entityID);
+		EntityRegistry.addSpawn(eClass, 25, 2, 4, EnumCreatureType.CREATURE, biomes);
+		EntityRegistry.registerModEntity(eClass, name, entityID, Main.instance(), 64, 3, true);
+		EntityList.entityEggs.put(Integer.valueOf(entityID), new EntityList.EntityEggInfo(entityID, mainColor, secondColor));
+	}
+	
 	public static void registerMonster(Class eClass, String name) {
 		int entityID = EntityRegistry.findGlobalUniqueEntityId();
 		Random rand = new Random(name.hashCode());
@@ -27,19 +40,19 @@ public class EntityHandler {
 		EntityList.entityEggs.put(Integer.valueOf(entityID), new EntityList.EntityEggInfo(entityID, mainColor, secondColor));
 	}
 	
-	public static void registerPassive(Class eClass, String name) {
-		int entityID = EntityRegistry.findGlobalUniqueEntityId();
-		Random rand = new Random(name.hashCode());
-		int mainColor = rand.nextInt() * 16777215;
-		int secondColor = rand.nextInt() * 16777215;
-		
-		EntityRegistry.registerGlobalEntityID(eClass, name, entityID);
-		EntityRegistry.addSpawn(eClass, 15, 2, 4, EnumCreatureType.CREATURE, BiomeGenBase.plains, BiomeGenBase.savanna, 
-				BiomeGenBase.beach, BiomeGenBase.desert, BiomeGenBase.extremeHills, BiomeGenBase.coldBeach, BiomeGenBase.jungleEdge, 
-				BiomeGenBase.jungle, BiomeGenBase.plains, BiomeGenBase.swampland);
-		EntityRegistry.registerModEntity(eClass, name, entityID, Main.instance(), 64, 10, true);
-		EntityList.entityEggs.put(Integer.valueOf(entityID), new EntityList.EntityEggInfo(entityID, mainColor, secondColor));
-	}
+//	public static void registerPassive(Class eClass, String name) {
+//		int entityID = EntityRegistry.findGlobalUniqueEntityId();
+//		Random rand = new Random(name.hashCode());
+//		int mainColor = rand.nextInt() * 16777215;
+//		int secondColor = rand.nextInt() * 16777215;
+//		
+//		EntityRegistry.registerGlobalEntityID(eClass, name, entityID);
+//		EntityRegistry.addSpawn(eClass, 15, 2, 4, EnumCreatureType.CREATURE, BiomeGenBase.plains, BiomeGenBase.savanna, 
+//				BiomeGenBase.beach, BiomeGenBase.desert, BiomeGenBase.extremeHills, BiomeGenBase.coldBeach, BiomeGenBase.jungleEdge, 
+//				BiomeGenBase.jungle, BiomeGenBase.plains, BiomeGenBase.swampland);
+//		EntityRegistry.registerModEntity(eClass, name, entityID, Main.instance(), 64, 10, true);
+//		EntityList.entityEggs.put(Integer.valueOf(entityID), new EntityList.EntityEggInfo(entityID, mainColor, secondColor));
+//	}
 	
 	public static void registerModEntity(Class<? extends Entity> eClass, String name, int entityID, Object mainClass, int trackRange, int updateFreq, boolean sVU) {
 		EntityRegistry.registerModEntity(eClass, name, entityID, mainClass, trackRange, updateFreq, sVU);
