@@ -149,9 +149,9 @@ public class GlobalAdditions {
 		RecipeHandler.registerVanillaCraftingRecipes();
 		RecipeHandler.registerPestleCraftingRecipes();
 		RecipeHandler.registerSmithyCraftingRecipes();
-		EntityHandler.registerModEntity(EntityExplosive.class, "Explosive Cobblestone Ball", 1, Main.instance, 64, 10, true);
-		EntityHandler.registerModEntity(EntityCobble.class, "Cobblestone Ball", 2, Main.instance, 64, 10, true);
-		EntityHandler.registerModEntity(EntityDodoEgg.class, "Dodo Egg", 6, Main.instance, 64, 10, true);
+		EntityHandler.registerModEntity(EntityExplosive.class, "Explosive Cobblestone Ball", Main.instance, 64, 10, true);
+		EntityHandler.registerModEntity(EntityCobble.class, "Cobblestone Ball", Main.instance, 64, 10, true);
+		EntityHandler.registerModEntity(EntityDodoEgg.class, "Dodo Egg", Main.instance, 64, 10, true);
 		EntityHandler.registerMonster(EntityRaptor.class, "raptor");
 		EntityHandler.registerMonster(EntityDodo.class, "dodo", BiomeGenBase.beach, BiomeGenBase.desert, BiomeGenBase.forest, BiomeGenBase.birchForest, BiomeGenBase.extremeHills);
 		EntityHandler.registerMonster(EntityBrontosaurus.class, "brontosaurus");
