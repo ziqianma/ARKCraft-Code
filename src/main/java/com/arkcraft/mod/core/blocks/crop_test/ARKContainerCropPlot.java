@@ -21,27 +21,30 @@ public class ARKContainerCropPlot extends Container {
 	public BlockPos pos;
 	public InventoryCrafting inputSlots;
 	public IInventory outputSlots;
+	private final int CROP_SLOT_COUNT = 7;
 
 	public ARKContainerCropPlot(InventoryPlayer invPlayer, World world, BlockPos pos) {
-		LogHelper.info("ContainerMP: constructor called.");
+		LogHelper.info("ARKContainerCropPlot: constructor called.");
 		this.world = world;
 		this.invPlayer = invPlayer;
 		this.pos = pos;
-		inputSlots = new InventoryCrafting(this, 7,7);
+		inputSlots = new InventoryCrafting(this, 7, 7);
 		outputSlots = new InventoryCraftResult();
 		
-		this.addSlotToContainer(new Slot(inputSlots, 1, 26, 35));
-
-		this.addSlotToContainer(new Slot(inputSlots, 2, 62, 26));
-		this.addSlotToContainer(new Slot(inputSlots, 3, 80, 26));
-		this.addSlotToContainer(new Slot(inputSlots, 4, 98, 26));
+		/* Crop inventory */
+		if (CROP_SLOT_COUNT != inputSlots.getSizeInventory()) {
+			LogHelper.error("Mismatched slot count in container(" + CROP_SLOT_COUNT + ") and CropInventory (" + inputSlots.getSizeInventory()+")");
+		}
+		final int INPUT_SLOT_YPOS = 53;
+		for(int col = 0; col < CROP_SLOT_COUNT; col++) {
+			if (col != 1)
+				addSlotToContainer(new Slot(invPlayer, col, 8 + col * 18, INPUT_SLOT_YPOS));
+			else
+				this.addSlotToContainer(new Slot(inputSlots, 1, 44, 17)); // Seed input slot
+		}
 		
-		this.addSlotToContainer(new Slot(inputSlots, 5, 62, 44));
-		this.addSlotToContainer(new Slot(inputSlots, 6, 80, 44));
-		this.addSlotToContainer(new Slot(inputSlots, 7, 98, 44));
-
-		this.addSlotToContainer(new Slot(outputSlots, 1, 134, 26));
-		this.addSlotToContainer(new Slot(outputSlots, 2, 134, 44));
+		// Berry output slot
+		this.addSlotToContainer(new Slot(outputSlots, 1, 100, 13));
 		
 		/* Hotbar inventory */
 		final int HOTBAR_YPOS = 142;
@@ -56,17 +59,16 @@ public class ARKContainerCropPlot extends Container {
 				int slotIndex =  col + row * 9 + 9;
 				addSlotToContainer(new Slot(invPlayer, slotIndex, 8 + col * 18, PLAYER_INVENTORY_YPOS + row * 18));
 			}
-		}
-		
+		}	
 		this.onCraftMatrixChanged(inputSlots);
 	}
 	
 	/* GET ITEMS OUT ONCE CLOSED */
     public void onContainerClosed(EntityPlayer playerIn) {
 		if (playerIn.worldObj.isRemote)
-			LogHelper.info("ContainerInventoryDodo: onContainerClosed called on client.");
+			LogHelper.info("ARKContainerCropPlot: onContainerClosed called on client.");
 		else
-			LogHelper.info("ContainerInventoryDodo: onContainerClosed called on server.");
+			LogHelper.info("ARKContainerCropPlot: onContainerClosed called on server.");
 
     	super.onContainerClosed(playerIn);
 
@@ -81,47 +83,40 @@ public class ARKContainerCropPlot extends Container {
         }
     }
     
-	public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
-		super.transferStackInSlot(playerIn, index);
-		ItemStack itemstack = null;
-		Slot slot = (Slot) this.inventorySlots.get(index);
+	public ItemStack transferStackInSlot(EntityPlayer playerIn, int sourceSlotIndex) {
+		LogHelper.info("ARKContainerCropPlot: transferStackInSlot called.");
+		Slot sourceSlot = (Slot)inventorySlots.get(sourceSlotIndex);
+		if (sourceSlot == null || !sourceSlot.getHasStack()) return null;
+		ItemStack sourceStack = sourceSlot.getStack();
+		ItemStack copyOfSourceStack = sourceStack.copy();
 
-		if (slot != null && slot.getHasStack()) {
-			ItemStack itemstack1 = slot.getStack();
-			itemstack = itemstack1.copy();
-
-			if (index == 0) {
-				if (!this.mergeItemStack(itemstack1, 10, 46, true)) {
-					return null;
-				}
-
-				slot.onSlotChange(itemstack1, itemstack);
-			} else if (index >= 10 && index < 37) {
-				if (!this.mergeItemStack(itemstack1, 37, 46, false)) {
-					return null;
-				}
-			} else if (index >= 37 && index < 46) {
-				if (!this.mergeItemStack(itemstack1, 10, 37, false)) {
-					return null;
-				}
-			} else if (!this.mergeItemStack(itemstack1, 10, 46, false)) {
+		// Check if the slot clicked is one of the vanilla container slots
+		if(sourceSlotIndex >= 0 && sourceSlotIndex < 36) {
+			// This is a vanilla container slot so merge the stack into the dodo inventory
+			if(!mergeItemStack(sourceStack, 36, 36 + CROP_SLOT_COUNT, false)) {
 				return null;
 			}
-
-			if (itemstack1.stackSize == 0) {
-				slot.putStack((ItemStack) null);
-			} else {
-				slot.onSlotChanged();
-			}
-
-			if (itemstack1.stackSize == itemstack.stackSize) {
+		}
+		// Check if the slot clicked is a dodo container slot
+		else if (sourceSlotIndex >= 36 && sourceSlotIndex < 36 + CROP_SLOT_COUNT) {
+			// This is a dodo slot so merge the stack into the players inventory
+			if (!mergeItemStack(sourceStack, 0, 36, false)){
 				return null;
 			}
-
-			slot.onPickupFromSlot(playerIn, itemstack1);
+		} else {
+			LogHelper.error("Invalid slotIndex:" + sourceSlotIndex);
+			return null;
 		}
 
-		return itemstack;
+		// If stack size == 0 (the entire stack was moved) set slot contents to null
+		if (sourceStack.stackSize == 0) {
+			sourceSlot.putStack(null);
+		} else {
+			sourceSlot.onSlotChanged();
+		}
+		
+		sourceSlot.onPickupFromSlot(playerIn, sourceStack);
+		return copyOfSourceStack;
 	}
 	  
 	@Override
