@@ -209,23 +209,53 @@ public class ModelBrontosaurus extends ModelBase {
 
     @Override
     public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) { 
-        this.body.render(f5);
-        GlStateManager.pushMatrix();
-        GlStateManager.translate(this.toplegleft.offsetX, this.toplegleft.offsetY, this.toplegleft.offsetZ);
-        GlStateManager.translate(this.toplegleft.rotationPointX * f5, this.toplegleft.rotationPointY * f5, this.toplegleft.rotationPointZ * f5);
-        GlStateManager.scale(0.9D, 1.0D, 1.0D);
-        GlStateManager.translate(-this.toplegleft.offsetX, -this.toplegleft.offsetY, -this.toplegleft.offsetZ);
-        GlStateManager.translate(-this.toplegleft.rotationPointX * f5, -this.toplegleft.rotationPointY * f5, -this.toplegleft.rotationPointZ * f5);
-        this.toplegleft.render(f5);
-        GlStateManager.popMatrix();
-        GlStateManager.pushMatrix();
-        GlStateManager.translate(this.toplegright.offsetX, this.toplegright.offsetY, this.toplegright.offsetZ);
-        GlStateManager.translate(this.toplegright.rotationPointX * f5, this.toplegright.rotationPointY * f5, this.toplegright.rotationPointZ * f5);
-        GlStateManager.scale(0.9D, 1.0D, 1.0D);
-        GlStateManager.translate(-this.toplegright.offsetX, -this.toplegright.offsetY, -this.toplegright.offsetZ);
-        GlStateManager.translate(-this.toplegright.rotationPointX * f5, -this.toplegright.rotationPointY * f5, -this.toplegright.rotationPointZ * f5);
-        this.toplegright.render(f5);
-        GlStateManager.popMatrix();
+    	super.render(entity, f, f1, f2, f3, f4, f5);
+    	setRotationAngles(entity, f, f1, f2, f3, f4, f5);
+    	
+    	if(this.isChild) {
+    		float scaling = 3F;
+            GlStateManager.pushMatrix();
+            
+            GlStateManager.scale(1.0F / scaling, 1.0F / scaling, 1.0F / scaling);
+    		this.body.render(f5);
+    		GlStateManager.pushMatrix();
+    		GlStateManager.translate(this.toplegleft.offsetX, this.toplegleft.offsetY, this.toplegleft.offsetZ);
+    		GlStateManager.translate(this.toplegleft.rotationPointX * f5, this.toplegleft.rotationPointY * f5, this.toplegleft.rotationPointZ * f5);
+    		GlStateManager.scale(0.9D, 1.0D, 1.0D);
+    		GlStateManager.translate(-this.toplegleft.offsetX, -this.toplegleft.offsetY, -this.toplegleft.offsetZ);
+    		GlStateManager.translate(-this.toplegleft.rotationPointX * f5, -this.toplegleft.rotationPointY * f5, -this.toplegleft.rotationPointZ * f5);
+    		this.toplegleft.render(f5);
+    		GlStateManager.popMatrix();
+    		GlStateManager.pushMatrix();
+    		GlStateManager.translate(this.toplegright.offsetX, this.toplegright.offsetY, this.toplegright.offsetZ);
+    		GlStateManager.translate(this.toplegright.rotationPointX * f5, this.toplegright.rotationPointY * f5, this.toplegright.rotationPointZ * f5);
+    		GlStateManager.scale(0.9D, 1.0D, 1.0D);
+    		GlStateManager.translate(-this.toplegright.offsetX, -this.toplegright.offsetY, -this.toplegright.offsetZ);
+    		GlStateManager.translate(-this.toplegright.rotationPointX * f5, -this.toplegright.rotationPointY * f5, -this.toplegright.rotationPointZ * f5);
+    		this.toplegright.render(f5);
+    		GlStateManager.popMatrix();
+    		
+    		GlStateManager.popMatrix();
+    	}
+    	else {
+    		this.body.render(f5);
+    		GlStateManager.pushMatrix();
+    		GlStateManager.translate(this.toplegleft.offsetX, this.toplegleft.offsetY, this.toplegleft.offsetZ);
+    		GlStateManager.translate(this.toplegleft.rotationPointX * f5, this.toplegleft.rotationPointY * f5, this.toplegleft.rotationPointZ * f5);
+    		GlStateManager.scale(0.9D, 1.0D, 1.0D);
+    		GlStateManager.translate(-this.toplegleft.offsetX, -this.toplegleft.offsetY, -this.toplegleft.offsetZ);
+    		GlStateManager.translate(-this.toplegleft.rotationPointX * f5, -this.toplegleft.rotationPointY * f5, -this.toplegleft.rotationPointZ * f5);
+    		this.toplegleft.render(f5);
+    		GlStateManager.popMatrix();
+    		GlStateManager.pushMatrix();
+    		GlStateManager.translate(this.toplegright.offsetX, this.toplegright.offsetY, this.toplegright.offsetZ);
+    		GlStateManager.translate(this.toplegright.rotationPointX * f5, this.toplegright.rotationPointY * f5, this.toplegright.rotationPointZ * f5);
+    		GlStateManager.scale(0.9D, 1.0D, 1.0D);
+    		GlStateManager.translate(-this.toplegright.offsetX, -this.toplegright.offsetY, -this.toplegright.offsetZ);
+    		GlStateManager.translate(-this.toplegright.rotationPointX * f5, -this.toplegright.rotationPointY * f5, -this.toplegright.rotationPointZ * f5);
+    		this.toplegright.render(f5);
+    		GlStateManager.popMatrix();
+    	}
     }
 
     /**
@@ -242,5 +272,7 @@ public class ModelBrontosaurus extends ModelBase {
 		
 		this.toplegright.rotateAngleX = MathHelper.cos(f * 0.6662F) * 0.9F * f1;
 		this.toplegleft.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 0.9F * f1;
+		this.frontrighttopleg.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 0.9F * f1;
+		this.frontlefttopleg.rotateAngleX = MathHelper.cos(f * 0.6662F) * 0.9F * f1;
 	}
 }

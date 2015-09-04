@@ -4,6 +4,7 @@ import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIFollowOwner;
 import net.minecraft.entity.ai.EntityAIFollowParent;
+import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIMate;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAITempt;
@@ -11,7 +12,7 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.pathfinding.PathNavigateGround;
 import net.minecraft.world.World;
 
 import com.arkcraft.mod.core.GlobalAdditions;
@@ -20,11 +21,13 @@ public class EntityBrontosaurus extends EntityTameable {
 
 	public EntityBrontosaurus(World w) {
 		super(w); 
-		this.setSize(4F, 4F);
+		this.setSize(4.5F, 4.5F);
+		((PathNavigateGround)this.getNavigator()).func_179690_a(true);
 		this.tasks.taskEntries.clear();
         int p = 0;
 		this.tasks.addTask(++p, new EntityAISwimming(this));
-        this.tasks.addTask(++p, this.aiSit);
+		this.tasks.addTask(++p, new EntityAIWander(this, 1.0D));
+    	this.tasks.addTask(++p, new EntityAILookIdle(this));
 		this.tasks.addTask(++p, new EntityAIMate(this, 1.0D));
 		this.tasks.addTask(++p, new EntityAITempt(this, 1.0D,	GlobalAdditions.narcoBerry, false));
 		this.tasks.addTask(++p, new EntityAIFollowParent(this, 1.1D));
@@ -50,7 +53,7 @@ public class EntityBrontosaurus extends EntityTameable {
         super.setTamed(tamed);
         if (tamed) {
             this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(10.0D);
-            this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5D);
+            this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.23000000417232513D); //zombie move speed
         }
     }
 	
