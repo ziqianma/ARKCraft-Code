@@ -40,7 +40,7 @@ public class EntityBrontosaurus extends EntityTameable {
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(30.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.7D);
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.23000000417232513D);
     }
 
 	@Override
@@ -52,7 +52,7 @@ public class EntityBrontosaurus extends EntityTameable {
     public void setTamed(boolean tamed) {
         super.setTamed(tamed);
         if (tamed) {
-            this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(10.0D);
+            this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(40.0D);
             this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.23000000417232513D); //zombie move speed
         }
     }
