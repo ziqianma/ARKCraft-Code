@@ -1,20 +1,16 @@
-package com.arkcraft.mod.core.blocks.crop_test;
+package com.arkcraft.mod.core.machine.gui;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.InventoryCraftResult;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
-import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.arkcraft.mod.core.GlobalAdditions;
 import com.arkcraft.mod.core.lib.LogHelper;
 
 /***
@@ -22,55 +18,40 @@ import com.arkcraft.mod.core.lib.LogHelper;
  * @author wildbill22
  *
  */
-public class ContainerInventoryCropPlot extends Container {
+public class ContainerInventoryTaming extends Container {
 
-//	public World world;
-//	public BlockPos pos;
-//	private InventoryPlayer invPlayer;
-	private TileInventoryCropPlot tileInventoryCropPlot;
+	private InventoryTaming invTaming;
 	public InventoryCrafting inputSlots;
-	public IInventory outputSlots;
-	private final int CROP_SLOT_COUNT = 9;
+	private final int TAMING_SLOT_COUNT = 2;
 
 	// These store cache values, used by the server to only update the client side tile entity when values have changed
 	private int [] cachedFields;
 
-	public ContainerInventoryCropPlot(InventoryPlayer invPlayer, TileInventoryCropPlot tileInventoryCropPlot) {
+	public ContainerInventoryTaming(InventoryPlayer invPlayer, InventoryTaming inventoryTaming) {
 //		this.invPlayer = invPlayer;
-		this.tileInventoryCropPlot = tileInventoryCropPlot;
-		LogHelper.info("TileInventoryCropPlot: constructor called.");
+		this.invTaming = inventoryTaming;
+		LogHelper.info("ContainerInventoryTaming: constructor called.");
 		
-//		this.world = world;
-//		this.pos = pos;
-//		inputSlots = new InventoryCrafting(this, 7, 7);
-//		outputSlots = new InventoryCraftResult();
-		
-		/* Crop inventory */
-		if (CROP_SLOT_COUNT != tileInventoryCropPlot.getSizeInventory()) {
-			LogHelper.error("Mismatched slot count in container(" + CROP_SLOT_COUNT + ") and CropInventory (" + inputSlots.getSizeInventory()+")");
+		/* Taming inventory */
+		if (TAMING_SLOT_COUNT != invTaming.getSizeInventory()) {
+			LogHelper.error("Mismatched slot count in container(" + TAMING_SLOT_COUNT + ") and InventoryTaming (" + inputSlots.getSizeInventory()+")");
 		}
-		this.addSlotToContainer(new SlotWater(tileInventoryCropPlot, TileInventoryCropPlot.WATER_SLOT, 44, 17)); // Water input slot
-		this.addSlotToContainer(new SlotSeed(tileInventoryCropPlot, TileInventoryCropPlot.SEED_SLOT, 44, 17));   // Seed input slot
-		final int INPUT_SLOT_YPOS = 53;
-		for(int col = TileInventoryCropPlot.FIRST_FERTILIZER_SLOT; col < CROP_SLOT_COUNT; col++) {
-			addSlotToContainer(new SlotFertilizer(tileInventoryCropPlot, col, 8 + col * 18, INPUT_SLOT_YPOS));
-		}
-		
-		// Berry output slot
-		this.addSlotToContainer(new Slot(tileInventoryCropPlot, TileInventoryCropPlot.BERRY_SLOT, 100, 13));
-		
+		this.addSlotToContainer(new SlotNarco(invTaming, InventoryTaming.NARCO_SLOT, 72, 101)); // Narco input slot
+		this.addSlotToContainer(new SlotFood(invTaming, InventoryTaming.FOOD_SLOT, 144, 101));  // Food input slot
+			
 		/* Hotbar inventory */
-		final int HOTBAR_YPOS = 142;
+		final int PLAYER_INVENTORY_XPOS = 36;
+		final int HOTBAR_YPOS = 195;
 		for(int col = 0; col < 9; col++) {
-			addSlotToContainer(new Slot(invPlayer, col, 8 + col * 18, HOTBAR_YPOS));
+			addSlotToContainer(new Slot(invPlayer, col, PLAYER_INVENTORY_XPOS + col * 18, HOTBAR_YPOS));
 		}
 		
 		/* Player inventory */
-		final int PLAYER_INVENTORY_YPOS = 84;
+		final int PLAYER_INVENTORY_YPOS = 137;
 		for(int row = 0; row < 3; row++) {
 			for(int col = 0; col < 9; col++) {
 				int slotIndex =  col + row * 9 + 9;
-				addSlotToContainer(new Slot(invPlayer, slotIndex, 8 + col * 18, PLAYER_INVENTORY_YPOS + row * 18));
+				addSlotToContainer(new Slot(invPlayer, slotIndex, PLAYER_INVENTORY_XPOS + col * 18, PLAYER_INVENTORY_YPOS + row * 18));
 			}
 		}	
 		this.onCraftMatrixChanged(inputSlots);
@@ -79,9 +60,9 @@ public class ContainerInventoryCropPlot extends Container {
 	/* GET ITEMS OUT ONCE CLOSED ???? */
     public void onContainerClosed(EntityPlayer playerIn) {
 		if (playerIn.worldObj.isRemote)
-			LogHelper.info("ARKContainerCropPlot: onContainerClosed called on client.");
+			LogHelper.info("ContainerTaming: onContainerClosed called on client.");
 		else
-			LogHelper.info("ARKContainerCropPlot: onContainerClosed called on server.");
+			LogHelper.info("ContainerTaming: onContainerClosed called on server.");
 
     	super.onContainerClosed(playerIn);
     }
@@ -95,28 +76,21 @@ public class ContainerInventoryCropPlot extends Container {
 
 		// Check if the slot clicked is one of the vanilla container slots
 		if(sourceSlotIndex >= 0 && sourceSlotIndex < 36) {
-			if (tileInventoryCropPlot.isItemValidForWaterSlot(sourceStack)) {
-				// This is a vanilla container slot so merge the stack into the crop plot inventory
-				if(!mergeItemStack(sourceStack, 36, 36 + TileInventoryCropPlot.WATER_SLOT, false)) {
+			if (invTaming.isItemValidForNarcoSlot(sourceStack)) {
+				// This is a vanilla container slot so merge the stack into the taming inventory
+				if(!mergeItemStack(sourceStack, 36, 36 + InventoryTaming.NARCO_SLOT, false)) {
 					return null;
 				}
 			}
-			if (tileInventoryCropPlot.isItemValidForSeedSlot(sourceStack)) {
-				// This is a vanilla container slot so merge the stack into the crop plot inventory
-				if(!mergeItemStack(sourceStack, 36, 36 + TileInventoryCropPlot.SEED_SLOT, false)) {
+			if (invTaming.isItemValidForFoodSlot(sourceStack)) {
+				// This is a vanilla container slot so merge the stack into the taming inventory
+				if(!mergeItemStack(sourceStack, 36, 36 + InventoryTaming.FOOD_SLOT, false)) {
 					return null;
 				}
 			}
-			if (tileInventoryCropPlot.isItemValidForWaterSlot(sourceStack)) {
-				// This is a vanilla container slot so merge the stack into the crop plot inventory
-				if(!mergeItemStack(sourceStack, 36, 36 + TileInventoryCropPlot.FIRST_FERTILIZER_SLOT 
-						+ TileInventoryCropPlot.FERTILIZER_SLOTS_COUNT, false)) {
-					return null;
-				}
-			}				
 		}
 		// Check if the slot clicked is a crop plot container slot
-		else if (sourceSlotIndex >= 36 && sourceSlotIndex < 36 + CROP_SLOT_COUNT) {
+		else if (sourceSlotIndex >= 36 && sourceSlotIndex < 36 + TAMING_SLOT_COUNT) {
 			// This is a crop plot slot so merge the stack into the players inventory
 			if (!mergeItemStack(sourceStack, 0, 36, false)){
 				return null;
@@ -139,7 +113,7 @@ public class ContainerInventoryCropPlot extends Container {
 
 	@Override
 	public boolean canInteractWith(EntityPlayer playerIn) {
-		return tileInventoryCropPlot.isUseableByPlayer(playerIn);
+		return invTaming.isUseableByPlayer(playerIn);
 	}	  
 
 	// This is where you check if any values have changed and if so send an update to any clients accessing this container
@@ -155,14 +129,14 @@ public class ContainerInventoryCropPlot extends Container {
 		super.detectAndSendChanges();
 
 		boolean allFieldsHaveChanged = false;
-		boolean fieldHasChanged [] = new boolean[tileInventoryCropPlot.getFieldCount()];
+		boolean fieldHasChanged [] = new boolean[invTaming.getFieldCount()];
 		if (cachedFields == null) {
-			cachedFields = new int[tileInventoryCropPlot.getFieldCount()];
+			cachedFields = new int[invTaming.getFieldCount()];
 			allFieldsHaveChanged = true;
 		}
 		for (int i = 0; i < cachedFields.length; ++i) {
-			if (allFieldsHaveChanged || cachedFields[i] != tileInventoryCropPlot.getField(i)) {
-				cachedFields[i] = tileInventoryCropPlot.getField(i);
+			if (allFieldsHaveChanged || cachedFields[i] != invTaming.getField(i)) {
+				cachedFields[i] = invTaming.getField(i);
 				fieldHasChanged[i] = true;
 			}
 		}
@@ -170,7 +144,7 @@ public class ContainerInventoryCropPlot extends Container {
 		// go through the list of crafters (players using this container) and update them if necessary
 		for (int i = 0; i < this.crafters.size(); ++i) {
 			ICrafting icrafting = (ICrafting)this.crafters.get(i);
-			for (int fieldID = 0; fieldID < tileInventoryCropPlot.getFieldCount(); ++fieldID) {
+			for (int fieldID = 0; fieldID < invTaming.getFieldCount(); ++fieldID) {
 				if (fieldHasChanged[fieldID]) {
 					// Note that although sendProgressBarUpdate takes 2 ints on a server these are truncated to shorts
 					icrafting.sendProgressBarUpdate(this, fieldID, cachedFields[fieldID]);
@@ -184,46 +158,32 @@ public class ContainerInventoryCropPlot extends Container {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void updateProgressBar(int id, int data) {
-		tileInventoryCropPlot.setField(id, data);
+		invTaming.setField(id, data);
 	}
 
-	// SlotFertilizer is a slot for fertilizer items
-	public class SlotFertilizer extends Slot {
-		public SlotFertilizer(IInventory inventoryIn, int index, int xPosition, int yPosition) {
+	// SlotNarco is a slot for narcotics
+	public class SlotNarco extends Slot {
+		public SlotNarco(IInventory inventoryIn, int index, int xPosition, int yPosition) {
 			super(inventoryIn, index, xPosition, yPosition);
 		}
 
 		// if this function returns false, the player won't be able to insert the given item into this slot
 		@Override
 		public boolean isItemValid(ItemStack stack) {
-			return tileInventoryCropPlot.isItemValidForFertilizerSlot(stack);
+			return invTaming.isItemValidForNarcoSlot(stack);
 		}
 	}
 	
-	// SlotWater is a slot for water
-	public class SlotWater extends Slot {
-		public SlotWater(IInventory inventoryIn, int index, int xPosition, int yPosition) {
+	// SlotFood is a slot for taming food
+	public class SlotFood extends Slot {
+		public SlotFood(IInventory inventoryIn, int index, int xPosition, int yPosition) {
 			super(inventoryIn, index, xPosition, yPosition);
 		}
 
 		// if this function returns false, the player won't be able to insert the given item into this slot
 		@Override
 		public boolean isItemValid(ItemStack stack) {
-			return tileInventoryCropPlot.isItemValidForWaterSlot(stack);
+			return invTaming.isItemValidForFoodSlot(stack);
 		}
 	}
-	
-	// SlotSeed is a slot for seeds
-	public class SlotSeed extends Slot {
-		public SlotSeed(IInventory inventoryIn, int index, int xPosition, int yPosition) {
-			super(inventoryIn, index, xPosition, yPosition);
-		}
-
-		// if this function returns false, the player won't be able to insert the given item into this slot
-		@Override
-		public boolean isItemValid(ItemStack stack) {
-			return tileInventoryCropPlot.isItemValidForSeedSlot(stack);
-		}
-	}
-	
 }

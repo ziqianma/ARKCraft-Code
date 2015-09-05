@@ -23,6 +23,7 @@ import com.arkcraft.mod.core.GlobalAdditions.GUI;
 import com.arkcraft.mod.core.Main;
 import com.arkcraft.mod.core.lib.LogHelper;
 import com.arkcraft.mod.core.machine.gui.InventoryDino;
+import com.arkcraft.mod.core.machine.gui.InventoryTaming;
 
 /***
  * 
@@ -32,10 +33,12 @@ import com.arkcraft.mod.core.machine.gui.InventoryDino;
 public abstract class DinoTameable extends EntityTameable {
 
 	public InventoryDino invDino;
+	public InventoryTaming invTaming;
 	protected boolean isSaddled = false;
 	protected int torpor = 0;
 	protected int progress = 0;
 	protected boolean isTameable = false;
+	protected int tamingSeconds = 0;
 	protected boolean isRideable = false;
 	protected EntityAIBase attackPlayerTarget;
 	SaddleType saddleType;
@@ -77,7 +80,21 @@ public abstract class DinoTameable extends EntityTameable {
 		this.getDataWatcher().addObject(DINO_SADDLED_WATCHER, Byte.valueOf((byte) 0));
         this.isTameable = true;
 		this.invDino = new InventoryDino("Items", true, saddleType.getInventorySize());
+		this.invTaming = new InventoryTaming(this);
 		this.saddleType = saddleType;
+	}
+	
+	// Use this constructor if you want to create a dino that is not tameable
+	protected DinoTameable(World worldIn, SaddleType saddleType, boolean isTameable, int tamingSeconds) {
+		super(worldIn);
+		this.getDataWatcher().addObject(DINO_SADDLED_WATCHER, Byte.valueOf((byte) 0));
+        this.isTameable = isTameable;
+        if (isTameable) {
+        	this.tamingSeconds = tamingSeconds; // This must be before the InventoryTaming
+        	this.invDino = new InventoryDino("Items", true, saddleType.getInventorySize());
+        	this.invTaming = new InventoryTaming(this);
+        }
+        this.saddleType = saddleType;
 	}
 	
 	/**
@@ -182,10 +199,18 @@ public abstract class DinoTameable extends EntityTameable {
         this.invDino.loadInventoryFromNBT(dataForAllSlots);
     }
 
-	@Override
-	public void setTamed(boolean tamed) {
-		if (tamed && attackPlayerTarget != null)
-			this.targetTasks.removeTask(attackPlayerTarget);
+	public void setTamed(EntityPlayer player, boolean tamed) {
+		if (tamed) {
+			player.addChatMessage(new ChatComponentText("DinoTameable: You have tamed the dino!"));
+            this.setAttackTarget((EntityLivingBase)null);
+//            this.aiSit.setSitting(true);
+            this.setHealth(25.0F);
+            this.setOwnerId(player.getUniqueID().toString());
+            this.playTameEffect(true);
+            this.worldObj.setEntityState(this, (byte)7);
+    		if (attackPlayerTarget != null)
+    			this.targetTasks.removeTask(attackPlayerTarget);
+		}
 		super.setTamed(tamed);
 	}
     
@@ -195,7 +220,8 @@ public abstract class DinoTameable extends EntityTameable {
     }
 
 	public boolean isTameable() {
-		return torpor > 0;
+		return this.isTameable;
+//		return torpor > 0;
 	}
 
 	public void setTorpor(int i) {
@@ -329,7 +355,7 @@ public abstract class DinoTameable extends EntityTameable {
 			}
 		} // end of is tamed
         // Tame the dino with meat
-        else if (itemstack != null && itemstack.getItem() == GlobalAdditions.porkchop_raw) {
+        else if (isTameable() && itemstack != null && itemstack.getItem() == GlobalAdditions.porkchop_raw) {
             if (!player.capabilities.isCreativeMode) {
                 --itemstack.stackSize;
             }
@@ -338,14 +364,7 @@ public abstract class DinoTameable extends EntityTameable {
             }
             if (!this.worldObj.isRemote) {
                 if (this.rand.nextInt(2) == 0) {
-                    this.setTamed(true);
-        			player.addChatMessage(new ChatComponentText("DinoTameable: You have tamed the dino!"));
-                    this.setAttackTarget((EntityLivingBase)null);
-//                    this.aiSit.setSitting(true);
-                    this.setHealth(25.0F);
-                    this.setOwnerId(player.getUniqueID().toString());
-                    this.playTameEffect(true);
-                    this.worldObj.setEntityState(this, (byte)7);
+                    this.setTamed(player, true);
                 }
                 else {
         			player.addChatMessage(new ChatComponentText("DinoTameable: Taming the dino failed, try again!"));
@@ -355,8 +374,15 @@ public abstract class DinoTameable extends EntityTameable {
             }
             return true;
         }
-        else {
-			player.addChatMessage(new ChatComponentText("DinoTameable: Use a Raw Porkchop to tame the dino."));
+        else if (isTameable()) {
+            if (!this.worldObj.isRemote) {
+            	player.openGui(Main.instance, GUI.TAMING_GUI.getID(), this.worldObj, 
+            			(int) Math.floor(this.posX), (int) this.posY, (int) Math.floor(this.posZ));
+            	LogHelper.info("DinoTameable: Opening GUI on Dino at: " + this.posX + "," + this.posY + "," + this.posZ + " (" +
+            			(int) Math.floor(this.posX) + "," + (int) this.posY  + "," + (int) Math.floor(this.posZ) + ")");
+                return true;
+            }
+//			player.addChatMessage(new ChatComponentText("DinoTameable: Use a Raw Porkchop to tame the dino."));
         }
 		return false;
 //        return super.interact(player);
@@ -369,5 +395,22 @@ public abstract class DinoTameable extends EntityTameable {
 			return true;
 		else
 			return false;
+	}
+	
+	public boolean isUseableByPlayer(EntityPlayer player) {
+		final double X_CENTRE_OFFSET = 0.5;
+		final double Y_CENTRE_OFFSET = 0.5;
+		final double Z_CENTRE_OFFSET = 0.5;
+		final double MAXIMUM_DISTANCE_SQ = 8.0 * 8.0;
+		return player.getDistanceSq(this.posX + X_CENTRE_OFFSET, this.posY + Y_CENTRE_OFFSET, this.posZ + Z_CENTRE_OFFSET) < MAXIMUM_DISTANCE_SQ;
+	}
+	
+	public void markDirty() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public int getTamingSeconds() {
+		return this.tamingSeconds;
 	}    
 }

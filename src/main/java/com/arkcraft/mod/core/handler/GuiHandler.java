@@ -6,12 +6,15 @@ import java.util.List;
 import com.arkcraft.mod.core.GlobalAdditions.GUI;
 import com.arkcraft.mod.core.blocks.crop_test.ContainerInventoryCropPlot;
 import com.arkcraft.mod.core.blocks.crop_test.TileInventoryCropPlot;
+import com.arkcraft.mod.core.entity.DinoTameable;
 import com.arkcraft.mod.core.entity.passive.EntityDodo;
 import com.arkcraft.mod.core.lib.LogHelper;
 import com.arkcraft.mod.core.machine.gui.ContainerInventoryDodo;
+import com.arkcraft.mod.core.machine.gui.ContainerInventoryTaming;
 import com.arkcraft.mod.core.machine.gui.ContainerMP;
 import com.arkcraft.mod.core.machine.gui.ContainerSmithy;
 import com.arkcraft.mod.core.machine.gui.GUICropPlot;
+import com.arkcraft.mod.core.machine.gui.GUITaming;
 import com.arkcraft.mod.core.machine.gui.GuiDosierScreen;
 import com.arkcraft.mod.core.machine.gui.GuiInventoryDodo;
 import com.arkcraft.mod.core.machine.gui.GuiMP;
@@ -33,11 +36,11 @@ public class GuiHandler implements IGuiHandler {
 			LogHelper.info("GuiHandler: getServerGuiElement called from client");
 		else
 			LogHelper.info("GuiHandler: getServerGuiElement called from server");
-		if(ID == GUI.SMITHY.getID()) 
+		if (ID == GUI.SMITHY.getID()) 
 			return new ContainerSmithy(player.inventory, world, new BlockPos(x, y, z)); 
-		if(ID == GUI.PESTLE_AND_MORTAR.getID()) 
+		if (ID == GUI.PESTLE_AND_MORTAR.getID()) 
 			return new ContainerMP(player.inventory, world, new BlockPos(x, y, z));
-		if(ID == GUI.CROP_PLOT.getID()) {
+		if (ID == GUI.CROP_PLOT.getID()) {
 			BlockPos xyz = new BlockPos(x, y, z);
 			TileEntity tileEntity = world.getTileEntity(xyz);
 			if (tileEntity instanceof TileInventoryCropPlot)
@@ -46,12 +49,19 @@ public class GuiHandler implements IGuiHandler {
 				LogHelper.info("GuiHandler - getServerGuiElement: TileEntityCropPlot not found!");
 			}
 		}
-		if(ID == GUI.INV_DODO.getID()) {
+		if (ID == GUI.INV_DODO.getID()) {
 			Entity entity = getEntityAt(player, x, y, z);
-			if(entity != null && entity instanceof EntityDodo) 
+			if (entity != null && entity instanceof EntityDodo) 
 				return new ContainerInventoryDodo(player.inventory, ((EntityDodo)entity).invDodo, (EntityDodo)entity);
 			else
 				LogHelper.error("GuiHandler - getServerGuiElement: Did not find entity with inventory!");
+		}
+		if (ID == GUI.TAMING_GUI.getID()) {
+			Entity entity = getEntityAt(player, x, y, z);
+			if (entity != null && entity instanceof DinoTameable) 
+				return new ContainerInventoryTaming(player.inventory, ((DinoTameable)entity).invTaming);
+			else
+				LogHelper.error("GuiHandler - getServerGuiElement: Did not find entity to tame!");			
 		}
 		return null;
 	}
@@ -62,11 +72,11 @@ public class GuiHandler implements IGuiHandler {
 			LogHelper.info("GuiHandler: getClientGuiElement called from client");
 		else
 			LogHelper.info("GuiHandler: getClientGuiElement called from server");
-		if(ID == GUI.SMITHY.getID()) 
+		if (ID == GUI.SMITHY.getID()) 
 			return new GuiSmithy(player.inventory, world, new BlockPos(x, y, z));
-		if(ID == GUI.PESTLE_AND_MORTAR.getID()) 
+		if (ID == GUI.PESTLE_AND_MORTAR.getID()) 
 			return new GuiMP(player.inventory, world, new BlockPos(x, y, z));
-		if(ID == GUI.CROP_PLOT.getID()) {
+		if (ID == GUI.CROP_PLOT.getID()) {
 			BlockPos xyz = new BlockPos(x, y, z);
 			TileEntity tileEntity = world.getTileEntity(xyz);
 			if (tileEntity instanceof TileInventoryCropPlot)			
@@ -75,14 +85,21 @@ public class GuiHandler implements IGuiHandler {
 				LogHelper.info("GuiHandler - getClientGuiElement: TileEntityCropPlot not found!");				
 			}
 		}
-		if(ID == GUI.BOOK_GUI.ordinal()) 
+		if (ID == GUI.BOOK_GUI.ordinal()) 
 			return new GuiDosierScreen();
-		if(ID == GUI.INV_DODO.getID()) {
+		if (ID == GUI.INV_DODO.getID()) {
 			Entity entity = getEntityAt(player, x, y, z);
-			if(entity != null && entity instanceof EntityDodo) 
+			if (entity != null && entity instanceof EntityDodo) 
 				return new GuiInventoryDodo(player.inventory, ((EntityDodo)entity).invDodo, (EntityDodo)entity);
 			else
 				LogHelper.error("GuiHandler - getClientGuiElement: Did not find entity with inventory!");
+		}
+		if (ID == GUI.TAMING_GUI.getID()) {
+			Entity entity = getEntityAt(player, x, y, z);
+			if (entity != null && entity instanceof DinoTameable) 
+				return new GUITaming(player.inventory, ((DinoTameable)entity).invTaming, player);
+			else
+				LogHelper.error("GuiHandler - getClientGuiElement: Did not find entity to tame!");			
 		}
 		return null;
 	}
@@ -95,8 +112,8 @@ public class GuiHandler implements IGuiHandler {
 		Iterator iterator = entities.iterator();
         while (iterator.hasNext()) {
             Entity entity = (Entity)iterator.next();
-            if (entity instanceof EntityDodo) {
-            	LogHelper.info("GuiHandler: Found Dodo with chest!");
+            if (entity instanceof EntityDodo || entity instanceof DinoTameable) {
+            	LogHelper.info("GuiHandler: Found entity!");
             	return entity;
             }
         }

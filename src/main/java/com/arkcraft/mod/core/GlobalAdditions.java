@@ -77,7 +77,7 @@ public class GlobalAdditions {
 	public static ARKCropPlotBlock crop_plot;
 
 	public enum GUI {
-		SMITHY(0), PESTLE_AND_MORTAR(1), INV_DODO(2), BOOK_GUI(3), CROP_PLOT(4);
+		SMITHY(0), PESTLE_AND_MORTAR(1), INV_DODO(2), BOOK_GUI(3), CROP_PLOT(4), TAMING_GUI(5);
 		int id;
 		GUI(int id) {
 			this.id = id;

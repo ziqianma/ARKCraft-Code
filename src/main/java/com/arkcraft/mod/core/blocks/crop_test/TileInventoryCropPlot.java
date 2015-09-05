@@ -28,7 +28,7 @@ import net.minecraft.world.EnumSkyBlock;
  * @author wildbill22
  *
  */
-public class TileInventoryCropPlot extends TileEntity  implements IInventory, IUpdatePlayerListBox  {
+public class TileInventoryCropPlot extends TileEntity implements IInventory, IUpdatePlayerListBox {
 	// Create and initialize the itemStacks variable that will store store the itemStacks
 	public static final int WATER_SLOTS_COUNT = 1;
 	public static final int FERTILIZER_SLOTS_COUNT = 6;
@@ -36,7 +36,10 @@ public class TileInventoryCropPlot extends TileEntity  implements IInventory, IU
 	public static final int OUTPUT_SLOTS_COUNT = 1;
 	public static final int TOTAL_SLOTS_COUNT = WATER_SLOTS_COUNT + FERTILIZER_SLOTS_COUNT + SEED_SLOTS_COUNT + OUTPUT_SLOTS_COUNT;
 
+	public static final int WATER_SLOT = 0;
+	public static final int SEED_SLOT = 1;
 	public static final int FIRST_FERTILIZER_SLOT = 2;
+	public static final int BERRY_SLOT = 8;
 	public static final int FIRST_INPUT_SLOT = FIRST_FERTILIZER_SLOT + FERTILIZER_SLOTS_COUNT;
 	public static final int FIRST_OUTPUT_SLOT = WATER_SLOTS_COUNT + FIRST_FERTILIZER_SLOT + SEED_SLOTS_COUNT;
 
