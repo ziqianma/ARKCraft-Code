@@ -21,7 +21,7 @@ public class EntityBrontosaurus extends EntityTameable {
 
 	public EntityBrontosaurus(World w) {
 		super(w); 
-		this.setSize(4.5F, 4.5F);
+		this.setSize(5.5F, 4.5F);
 		((PathNavigateGround)this.getNavigator()).func_179690_a(true);
 		this.tasks.taskEntries.clear();
         int p = 0;

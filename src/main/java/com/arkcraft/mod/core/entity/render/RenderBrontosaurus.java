@@ -12,7 +12,7 @@ import com.arkcraft.mod.core.entity.passive.EntityBrontosaurus;
 
 public class RenderBrontosaurus extends RenderLiving {
 	
-	public static final ResourceLocation entityTexture = new ResourceLocation(Main.MODID, "textures/model/bronto.png");
+	public static final ResourceLocation entityTexture = new ResourceLocation(Main.MODID, "textures/model/brontosaurus.png");
 	
 	public RenderBrontosaurus(ModelBase base, float par2) {
 		super(Minecraft.getMinecraft().getRenderManager(), base, par2);
