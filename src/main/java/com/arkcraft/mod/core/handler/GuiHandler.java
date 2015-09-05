@@ -4,7 +4,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.arkcraft.mod.core.GlobalAdditions.GUI;
-import com.arkcraft.mod.core.blocks.crop_test.ARKContainerCropPlot;
+import com.arkcraft.mod.core.blocks.crop_test.ContainerInventoryCropPlot;
+import com.arkcraft.mod.core.blocks.crop_test.TileInventoryCropPlot;
 import com.arkcraft.mod.core.entity.passive.EntityDodo;
 import com.arkcraft.mod.core.lib.LogHelper;
 import com.arkcraft.mod.core.machine.gui.ContainerInventoryDodo;
@@ -18,6 +19,7 @@ import com.arkcraft.mod.core.machine.gui.GuiSmithy;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
@@ -35,8 +37,15 @@ public class GuiHandler implements IGuiHandler {
 			return new ContainerSmithy(player.inventory, world, new BlockPos(x, y, z)); 
 		if(ID == GUI.PESTLE_AND_MORTAR.getID()) 
 			return new ContainerMP(player.inventory, world, new BlockPos(x, y, z));
-		if(ID == GUI.CROP_PLOT.getID()) 
-			return new ARKContainerCropPlot(player.inventory, world, new BlockPos(x, y, z));
+		if(ID == GUI.CROP_PLOT.getID()) {
+			BlockPos xyz = new BlockPos(x, y, z);
+			TileEntity tileEntity = world.getTileEntity(xyz);
+			if (tileEntity instanceof TileInventoryCropPlot)
+				return new ContainerInventoryCropPlot(player.inventory, (TileInventoryCropPlot) tileEntity);
+			else {
+				LogHelper.info("GuiHandler - getServerGuiElement: TileEntityCropPlot not found!");
+			}
+		}
 		if(ID == GUI.INV_DODO.getID()) {
 			Entity entity = getEntityAt(player, x, y, z);
 			if(entity != null && entity instanceof EntityDodo) 
@@ -57,8 +66,15 @@ public class GuiHandler implements IGuiHandler {
 			return new GuiSmithy(player.inventory, world, new BlockPos(x, y, z));
 		if(ID == GUI.PESTLE_AND_MORTAR.getID()) 
 			return new GuiMP(player.inventory, world, new BlockPos(x, y, z));
-		if(ID == GUI.CROP_PLOT.getID()) 
-			return new GUICropPlot(player.inventory, world, new BlockPos(x, y, z));	
+		if(ID == GUI.CROP_PLOT.getID()) {
+			BlockPos xyz = new BlockPos(x, y, z);
+			TileEntity tileEntity = world.getTileEntity(xyz);
+			if (tileEntity instanceof TileInventoryCropPlot)			
+				return new GUICropPlot(player.inventory, (TileInventoryCropPlot) tileEntity);
+			else {
+				LogHelper.info("GuiHandler - getClientGuiElement: TileEntityCropPlot not found!");				
+			}
+		}
 		if(ID == GUI.BOOK_GUI.ordinal()) 
 			return new GuiDosierScreen();
 		if(ID == GUI.INV_DODO.getID()) {

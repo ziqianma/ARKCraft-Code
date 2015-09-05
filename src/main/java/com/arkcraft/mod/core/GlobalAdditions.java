@@ -20,7 +20,7 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import com.arkcraft.mod.core.blocks.ARKBlock;
 import com.arkcraft.mod.core.blocks.ARKBush;
 import com.arkcraft.mod.core.blocks.ARKContainerBlock;
-import com.arkcraft.mod.core.blocks.crop_test.ARKCropPlotContainerBlock;
+import com.arkcraft.mod.core.blocks.crop_test.ARKCropPlotBlock;
 import com.arkcraft.mod.core.creativetabs.ARKTabs;
 import com.arkcraft.mod.core.entity.EntityCobble;
 import com.arkcraft.mod.core.entity.EntityDodoEgg;
@@ -38,6 +38,7 @@ import com.arkcraft.mod.core.items.ARKFecesItem;
 import com.arkcraft.mod.core.items.ARKFood;
 import com.arkcraft.mod.core.items.ARKItem;
 import com.arkcraft.mod.core.items.ARKSaddle;
+import com.arkcraft.mod.core.items.ARKSeedItem;
 import com.arkcraft.mod.core.items.ARKSlingshot;
 import com.arkcraft.mod.core.items.ARKWeapon;
 import com.arkcraft.mod.core.items.ItemDossier;
@@ -52,6 +53,7 @@ public class GlobalAdditions {
 	public static Map<String, Item> allItems = new HashMap<String, Item>();
 
 	public static ARKFood tintoBerry, amarBerry, azulBerry, mejoBerry, narcoBerry, porkchop_raw, porkchop_cooked, primemeat_raw, primemeat_cooked;
+	public static ARKSeedItem tintoBerrySeed, amarBerrySeed, azulBerrySeed, mejoBerrySeed, narcoBerrySeed;
 	public static ARKBush berryBush;
 	public static ARKItem cobble_ball, fiber, chitin, narcotics, tranq_arrow, explosive_ball, dodo_bag, dodo_feather;
 	public static ARKSlingshot slingshot;
@@ -72,7 +74,7 @@ public class GlobalAdditions {
 	public static CreativeTabs tabARK = new ARKTabs(CreativeTabs.getNextID(), "tabARKCraft");
 	
 	public static ARKContainerBlock smithy, pestle;
-	public static ARKCropPlotContainerBlock crop_plot;
+	public static ARKCropPlotBlock crop_plot;
 
 	public enum GUI {
 		SMITHY(0), PESTLE_AND_MORTAR(1), INV_DODO(2), BOOK_GUI(3), CROP_PLOT(4);
@@ -191,8 +193,8 @@ public class GlobalAdditions {
 		return container;
 	}
 	
-	protected static ARKCropPlotContainerBlock addCropPlotContainer(String name, float hardness, Material mat, int ID, boolean renderAsNormalBlock, boolean isOpaque, int renderType) {
-		ARKCropPlotContainerBlock container = new ARKCropPlotContainerBlock(name, hardness, mat, ID);
+	protected static ARKCropPlotBlock addCropPlotContainer(String name, float hardness, Material mat, int ID, boolean renderAsNormalBlock, boolean isOpaque, int renderType) {
+		ARKCropPlotBlock container = new ARKCropPlotBlock(name, hardness, mat, ID);
 		container.setRenderAsNormalBlock(renderAsNormalBlock);
 		container.setOpaque(isOpaque);
 		container.setRenderType(renderType);
