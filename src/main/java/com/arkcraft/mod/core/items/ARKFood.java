@@ -1,6 +1,7 @@
 package com.arkcraft.mod.core.items;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
@@ -53,7 +54,21 @@ public class ARKFood extends ItemFood {
         return this;
     }
 	
-	
-	
-	
+	public static ItemStack getSeedForBerry(ItemStack stack) {
+		if (stack != null) {
+			if (stack.getItem() instanceof ARKSeedItem) {
+				if (stack.getItem() == (Item) GlobalAdditions.amarBerrySeed)
+					return new ItemStack(GlobalAdditions.amarBerry);
+				if (stack.getItem() == (Item) GlobalAdditions.azulBerrySeed)
+					return new ItemStack(GlobalAdditions.azulBerry);
+				if (stack.getItem() == (Item) GlobalAdditions.mejoBerrySeed)
+					return new ItemStack(GlobalAdditions.mejoBerry);
+				if (stack.getItem() == (Item) GlobalAdditions.narcoBerrySeed)
+					return new ItemStack(GlobalAdditions.narcoBerry);
+				if (stack.getItem() == (Item) GlobalAdditions.tintoBerrySeed)
+					return new ItemStack(GlobalAdditions.tintoBerry);
+			}
+		}
+		return null;
+	}
 }
