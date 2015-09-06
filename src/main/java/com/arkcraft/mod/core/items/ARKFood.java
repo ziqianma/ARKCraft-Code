@@ -88,4 +88,15 @@ public class ARKFood extends ItemFood {
 		}
 		return 0;
 	}
+	
+	// ticks that this food will keep a dino unconscious
+	public static int getItemTorporTime(ItemStack stack) {
+		if (stack != null) {
+			if (stack.getItem() instanceof ARKFood) {
+				if (stack.getItem() == (Item) GlobalAdditions.narcoBerry)
+					return 500;
+			}
+		}
+		return 0;
+	}
 }

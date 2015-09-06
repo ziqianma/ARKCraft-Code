@@ -27,9 +27,9 @@ public class ContainerInventoryTaming extends Container {
 	// These store cache values, used by the server to only update the client side tile entity when values have changed
 	private int [] cachedFields;
 
-	public ContainerInventoryTaming(InventoryPlayer invPlayer, InventoryTaming inventoryTaming) {
-//		this.invPlayer = invPlayer;
+	public ContainerInventoryTaming(InventoryPlayer invPlayer, InventoryTaming inventoryTaming, EntityPlayer player) {
 		this.invTaming = inventoryTaming;
+		inventoryTaming.playerTaming = player;
 		LogHelper.info("ContainerInventoryTaming: constructor called.");
 		
 		/* Taming inventory */
@@ -57,6 +57,13 @@ public class ContainerInventoryTaming extends Container {
 		this.onCraftMatrixChanged(inputSlots);
 	}
 	
+	@Override
+    public void addCraftingToCrafters(ICrafting listener)  {
+//		LogHelper.info("ContainerInventoryTaming: addCraftingToCrafters called.");
+        super.addCraftingToCrafters(listener);
+        listener.func_175173_a(this, invTaming);
+    }
+
 	/* GET ITEMS OUT ONCE CLOSED ???? */
     public void onContainerClosed(EntityPlayer playerIn) {
 		if (playerIn.worldObj.isRemote)
@@ -122,7 +129,7 @@ public class ContainerInventoryTaming extends Container {
 	// You don't have to use fields if you don't wish to; just manually match the ID in sendProgressBarUpdate with the value in
 	//   updateProgressBar()
 	// The progress bar values are restricted to shorts.  If you have a larger value (eg int), it's not a good idea to try and split it
-	//   up into two shorts because the progress bar values are sent independently, and unless you add synchronisation logic at the
+	//   up into two shorts because the progress bar values are sent independently, and unless you add synchronization logic at the
 	//   receiving side, your int value will be wrong until the second short arrives.  Use a custom packet instead.
 	@Override
 	public void detectAndSendChanges() {

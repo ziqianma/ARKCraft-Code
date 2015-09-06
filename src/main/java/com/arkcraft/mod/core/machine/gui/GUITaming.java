@@ -1,5 +1,9 @@
 package com.arkcraft.mod.core.machine.gui;
 
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.lwjgl.opengl.GL11;
 
 import com.arkcraft.mod.core.Main;
@@ -24,9 +28,8 @@ public class GUITaming extends GuiContainer {
 	private InventoryTaming inventoryTaming;
 	
 	public GUITaming(InventoryPlayer invPlayer, InventoryTaming inventoryTaming, EntityPlayer player) {
-		super(new ContainerInventoryTaming(invPlayer, inventoryTaming));
+		super(new ContainerInventoryTaming(invPlayer, inventoryTaming, player));
 		this.inventoryTaming = inventoryTaming;
-		inventoryTaming.playerTaming = player;
 		
 		// Width and height of the gui:
 		this.xSize = 229;
@@ -51,7 +54,33 @@ public class GUITaming extends GuiContainer {
 	public void onGuiClosed() { super.onGuiClosed(); }
 	
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-		super.drawGuiContainerForegroundLayer(mouseX, mouseY);		
+		super.drawGuiContainerForegroundLayer(mouseX, mouseY);
+		
+		// Display Dino name at top center
+		final int LABEL_XPOS = 98;
+		final int LABEL_YPOS = 7;
+		fontRendererObj.drawString(inventoryTaming.getDisplayName().getUnformattedText(), LABEL_XPOS, LABEL_YPOS, Color.darkGray.getRGB());
+		
+		List<String> hoveringText = new ArrayList<String>();
+
+		// If the mouse is over the unconscious progress bar add the progress bar hovering text
+		if (isInRect(guiLeft + UNCONSCIOUS_BAR_XPOS, guiTop + UNCONSCIOUS_BAR_YPOS, UNCONSCIOUS_BAR_WIDTH, UNCONSCIOUS_BAR_HEIGHT, mouseX, mouseY)){
+			hoveringText.add("Progress:");
+			int unconsciousPercentage =(int)(inventoryTaming.unconciousLevel() * 100);
+			hoveringText.add(unconsciousPercentage + "%");
+		}
+
+		// If the mouse is over the taming progress bar add the progress bar hovering text
+		if (isInRect(guiLeft + TAMING_BAR_XPOS, guiTop + TAMING_BAR_YPOS, TAMING_BAR_WIDTH, TAMING_BAR_HEIGHT, mouseX, mouseY)){
+			hoveringText.add("Progress:");
+			int tamingPercentage =(int)(inventoryTaming.tamingLevel() * 100);
+			hoveringText.add(tamingPercentage + "%");
+		}
+
+		// If hoveringText is not empty draw the hovering text
+		if (!hoveringText.isEmpty()){
+			drawHoveringText(hoveringText, mouseX - guiLeft, mouseY - guiTop, fontRendererObj);
+		}
 	}
 	
 	protected void drawGuiContainerBackgroundLayer(float partTick, int mX, int mY) {
@@ -70,5 +99,10 @@ public class GUITaming extends GuiContainer {
 		// draw the taming progress bar
 		drawTexturedModalRect(guiLeft + TAMING_BAR_XPOS, guiTop + TAMING_BAR_YPOS, TAMING_BAR_ICON_U, TAMING_BAR_ICON_V,
 				(int)(tamingProgress * TAMING_BAR_WIDTH), TAMING_BAR_HEIGHT);
+	}
+
+	// Returns true if the given x,y coordinates are within the given rectangle
+	public static boolean isInRect(int x, int y, int xSize, int ySize, int mouseX, int mouseY){
+		return ((mouseX >= x && mouseX <= x+xSize) && (mouseY >= y && mouseY <= y+ySize));
 	}
 }

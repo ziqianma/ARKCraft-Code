@@ -79,6 +79,7 @@ public abstract class DinoTameable extends EntityTameable {
 		super(worldIn);
 		this.getDataWatcher().addObject(DINO_SADDLED_WATCHER, Byte.valueOf((byte) 0));
         this.isTameable = true;
+		this.tamingSeconds = 120; // Set this before the InventoryTaming
 		this.invDino = new InventoryDino("Items", true, saddleType.getInventorySize());
 		this.invTaming = new InventoryTaming(this);
 		this.saddleType = saddleType;
@@ -95,6 +96,9 @@ public abstract class DinoTameable extends EntityTameable {
         	this.invTaming = new InventoryTaming(this);
         }
         this.saddleType = saddleType;
+        
+        // Stuff for when tamed
+        this.tasks.addTask(1, this.aiSit);
 	}
 	
 	/**
@@ -179,6 +183,7 @@ public abstract class DinoTameable extends EntityTameable {
     public void writeEntityToNBT(NBTTagCompound nbt) {
         super.writeEntityToNBT(nbt);
 		nbt.setBoolean("IsSaddled", isSaddled);
+		this.invTaming.saveInventoryToNBT(nbt);
 		if(this.isSaddled()) {
 			this.invDino.saveInventoryToNBT(nbt);
 //			LogHelper.info("EntityDodo - writeEntityToNBT: Saved chest inventory.");
@@ -194,13 +199,16 @@ public abstract class DinoTameable extends EntityTameable {
         if (nbt.hasKey("IsSaddled")) {
         	this.setSaddled(nbt.getBoolean("IsSaddled"));
         }
-		final byte NBT_TYPE_COMPOUND = 10;  
+        // Dino taming inventory
+        this.invTaming.loadInventoryFromNBT(nbt);
+        // Dino Inventory
+		final byte NBT_TYPE_COMPOUND = 10;
 		NBTTagList dataForAllSlots = nbt.getTagList("Items", NBT_TYPE_COMPOUND);
         this.invDino.loadInventoryFromNBT(dataForAllSlots);
     }
 
 	public void setTamed(EntityPlayer player, boolean tamed) {
-		if (tamed) {
+		if (player != null && tamed) {
 			player.addChatMessage(new ChatComponentText("DinoTameable: You have tamed the dino!"));
             this.setAttackTarget((EntityLivingBase)null);
 //            this.aiSit.setSitting(true);
@@ -227,26 +235,29 @@ public abstract class DinoTameable extends EntityTameable {
 	public void setTorpor(int i) {
 		torpor = i;
 	}
-
-	public void addTorpor(int i) {
-		torpor += i;
+	public int getTorpor() {
+		return torpor;
 	}
-
-	public void removeTorpor(int i) {
-		torpor -= i;
-	}
-
-	public void setProgress(int i) {
-		progress = i;
-	}
-
-	public void addProgress(int i) {
-		progress += i;
-	}
-
-	public void removeProgress(int i) {
-		progress -= i;
-	}
+//
+//	public void addTorpor(int i) {
+//		torpor += i;
+//	}
+//
+//	public void removeTorpor(int i) {
+//		torpor -= i;
+//	}
+//
+//	public void setProgress(int i) {
+//		progress = i;
+//	}
+//
+//	public void addProgress(int i) {
+//		progress += i;
+//	}
+//
+//	public void removeProgress(int i) {
+//		progress -= i;
+//	}
 	
     /**
      * Called when the entity is attacked. (Needed to attack other mobs)
@@ -406,11 +417,25 @@ public abstract class DinoTameable extends EntityTameable {
 	}
 	
 	public void markDirty() {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub		
 	}
 	
 	public int getTamingSeconds() {
 		return this.tamingSeconds;
 	}    
+
+    @Override
+	public void onLivingUpdate() {
+    	if (torpor == 0) {
+    		super.onLivingUpdate();
+    	}
+    	// Paralyze
+    	else {
+            this.isJumping = false;
+            this.moveStrafing = 0.0F;
+            this.moveForward = 0.0F;
+            this.randomYawVelocity = 0.0F;
+            this.invTaming.update();
+    	}
+    }
 }

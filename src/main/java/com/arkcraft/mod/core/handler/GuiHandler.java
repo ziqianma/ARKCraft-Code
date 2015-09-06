@@ -58,8 +58,13 @@ public class GuiHandler implements IGuiHandler {
 		}
 		if (ID == GUI.TAMING_GUI.getID()) {
 			Entity entity = getEntityAt(player, x, y, z);
-			if (entity != null && entity instanceof DinoTameable) 
-				return new ContainerInventoryTaming(player.inventory, ((DinoTameable)entity).invTaming);
+			if (entity != null && entity instanceof DinoTameable) {
+				DinoTameable dino = (DinoTameable)entity;
+				dino.setSitting(true);
+				dino.setTorpor(60);
+				dino.invTaming.setTorporTime((short) (60 * 20));
+				return new ContainerInventoryTaming(player.inventory, dino.invTaming, player);
+			}
 			else
 				LogHelper.error("GuiHandler - getServerGuiElement: Did not find entity to tame!");			
 		}
@@ -96,8 +101,13 @@ public class GuiHandler implements IGuiHandler {
 		}
 		if (ID == GUI.TAMING_GUI.getID()) {
 			Entity entity = getEntityAt(player, x, y, z);
-			if (entity != null && entity instanceof DinoTameable) 
+			if (entity != null && entity instanceof DinoTameable) {
+				DinoTameable dino = (DinoTameable)entity;
+				dino.setSitting(true);
+				dino.setTorpor(60);
+				dino.invTaming.setTorporTime((short) (60 * 20));
 				return new GUITaming(player.inventory, ((DinoTameable)entity).invTaming, player);
+			}
 			else
 				LogHelper.error("GuiHandler - getClientGuiElement: Did not find entity to tame!");			
 		}
@@ -119,5 +129,4 @@ public class GuiHandler implements IGuiHandler {
         }
         return null;
 	}
-	
 }
