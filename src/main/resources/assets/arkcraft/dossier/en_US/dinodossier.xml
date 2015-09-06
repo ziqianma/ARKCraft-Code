@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<book>
+
+<page type="intro">
+<text>A Guide to Dinos in the ARKCraft World
+Getting to know which dinos are which
+
+Volume 1</text>
+</page>
+
+<page type="category">
+<title>Table of Contents</title>
+
+<chapter>
+<text>Dinos</text>
+<model>raptor</model>
+</chapter>
+
+<chapter>
+<text>Mammals</text>
+<model>dodo</model>
+</chapter>
+
+<chapter>
+<text>Reptiles</text>
+<model>dodo</model>
+</chapter>
+
+<chapter>
+<text>Other</text>
+<model>dodo</model>
+</chapter>
+</page>
+
+<page type="title">
+<text>Dinos</text>
+<icon>dinoIcon</icon>
+</page>
+
+<page type="blank"></page>
+
+<page type="dinos">
+<title>Utahraptor</title>
+<model>raptor</model>
+<text>Common Name: Raptor
+Species: Utahraptor Prime
+Diet: Carnivore
+Temperance: Aggresive</text>
+</page>
+
+<page type="text">
+<text>Utahraptor Prime is an incredibly aggressive sub-species of Utahraptor. It tends to travel in small hunting packs, attacking smaller prey with its sharp teeth or enlarged foreclaws.
+One of the faster creatures around, they often use hit-and-run tactics against larger opponents. The large curved talon on the second toe of this sub-species seems particularly suited for attacking while jumping, and does a devestating amount of damage.
+I've seen they usually kill their prey with numerous slashing and leaping attacks in rapid sequence. 
+Domesticated: Despite its normally aggressive nature, Utahraptor Prime has become one of the main mounts for roaming bands of raiders, as well as scouts for the larger collectives. Those who ride them claim they are difficult to tame, but fiercely loyal once they are.</text>
+</page>
+
+</book>
