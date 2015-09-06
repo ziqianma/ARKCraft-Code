@@ -13,14 +13,19 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import com.arkcraft.mod.core.GlobalAdditions;
 import com.arkcraft.mod.core.Main;
 
-public class ARKCropPlotContainerBlock extends Block {
+/***
+ * 
+ * @author wildbill22
+ *
+ */
+public class ARKCropPlotBlock extends Block {
 
 	private int renderType = 3; //default value
 	private boolean isOpaque = false;
 	private int ID;
 	private boolean render = false;
 	
-	public ARKCropPlotContainerBlock(String name, float hardness, Material mat, int ID) {
+	public ARKCropPlotBlock(String name, float hardness, Material mat, int ID) {
 		super(mat);
 		
 		this.ID = ID;
@@ -36,11 +41,10 @@ public class ARKCropPlotContainerBlock extends Block {
 	public boolean isOpaqueCube() { return isOpaque; }
 	
 	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos,
-			IBlockState state, EntityPlayer playerIn, EnumFacing side,
+	public boolean onBlockActivated(World worldIn, BlockPos blockPos, IBlockState state, EntityPlayer playerIn, EnumFacing side,
 			float hitX, float hitY, float hitZ) {
 		if(!playerIn.isSneaking()) {
-			playerIn.openGui(Main.instance(), ID, worldIn, pos.getX(), pos.getY(), pos.getZ());
+			playerIn.openGui(Main.instance(), ID, worldIn, blockPos.getX(), blockPos.getY(), blockPos.getZ());
 			return true;
 		}
 		return false;
@@ -50,8 +54,6 @@ public class ARKCropPlotContainerBlock extends Block {
 	public boolean renderAsNormalBlock() { return render; }
 
 	public TileEntity createNewTileEntity(World worldIn, int meta) {
-	
-	     return new TileEntityCropPlot();
-		
+	     return new TileInventoryCropPlot();
      }	
 }

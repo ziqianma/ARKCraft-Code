@@ -63,3 +63,10 @@ key.playerPoop=Player Pooping Function
 
 # Chat Messages
 chat.canNotPoop=Can't poop right now
+
+# Book Descriptions
+ark.book.utahraptor.description=Utahraptor Prime is an incredibly aggressive sub-species of Utahraptor.\n It tends to travel in small hunting packs, attacking smaller prey with its sharp teeth or enlarged foreclaws.\n\nOne of the faster creatures around, Utahraptor Prime often uses hit-and-run tactics against larger opponents. The large curved talon on the second toe of this sub-species seems particularly suited for attacking while jumping.
+
+# Containers
+container.crop_plot.name=Crop Plot 
+

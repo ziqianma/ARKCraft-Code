@@ -41,4 +41,14 @@ public class ARKItem extends Item {
 		if(tooltips == null) tooltip.add(EnumChatFormatting.GOLD + "Material of the Ages");
 	}
 
+	// ticks that this food will keep a dino unconscious
+	public static int getItemTorporTime(ItemStack stack) {
+		if (stack != null) {
+			if (stack.getItem() instanceof ARKFood) {
+				if (stack.getItem() == (Item) GlobalAdditions.narcotics)
+					return 1000;
+			}
+		}
+		return 0;
+	}
 }
