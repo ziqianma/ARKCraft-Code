@@ -5,7 +5,6 @@ import java.util.List;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
@@ -24,12 +23,10 @@ import com.arkcraft.mod.core.machine.gui.ContainerMP;
 import com.arkcraft.mod.core.machine.gui.ContainerSmithy;
 import com.arkcraft.mod.core.machine.gui.GUICropPlot;
 import com.arkcraft.mod.core.machine.gui.GUITaming;
+import com.arkcraft.mod.core.machine.gui.GuiDosierScreen;
 import com.arkcraft.mod.core.machine.gui.GuiInventoryDodo;
 import com.arkcraft.mod.core.machine.gui.GuiMP;
 import com.arkcraft.mod.core.machine.gui.GuiSmithy;
-import com.arkcraft.mod.core.machine.gui.book.BookData;
-import com.arkcraft.mod.core.machine.gui.book.BookDataStore;
-import com.arkcraft.mod.core.machine.gui.book.GuiDossier;
 
 public class GuiHandler implements IGuiHandler {
 
@@ -95,15 +92,8 @@ public class GuiHandler implements IGuiHandler {
 		}
 
 		if(ID == GUI.BOOK_GUI.getID()) {
-			LogHelper.info("GuiHandler - getClientGuiElement(): GuiDossier book called to open.");
-			ItemStack stack = player.getCurrentEquippedItem();
-			if(stack == null) LogHelper.error("Null Stack in Book");
-			if(stack != null && stack.getItem() == null) LogHelper.error("Null Item in Book");
-			if(stack != null && stack.getItem() != null && stack.getUnlocalizedName() == null) LogHelper.error("Null Unlocalized Name in Book");
-			else {
-				LogHelper.info("GuiHandler - getClientGuiElement(): GuiDossier book trying to open.");
-				return new GuiDossier(stack, GuiHandler.getBookDataFromStack(stack)); 
-			}
+			LogHelper.info("GuiHandler - getClientGuiElement(): GuiDossier book trying to open.");
+			return new GuiDosierScreen();
 		}
 		
 		if (ID == GUI.INV_DODO.getID()) {
@@ -146,10 +136,4 @@ public class GuiHandler implements IGuiHandler {
         return null;
 	}
 	
-	private static BookData getBookDataFromStack (ItemStack stack)
-    {
-		LogHelper.info("GuiHandler.getBookDataFromStack(): stack unlocalizedName: " + stack.getUnlocalizedName() + ", " + stack.getUnlocalizedName().substring(5));
-        LogHelper.info("GuiHandler - getBookDataFromStack(): Getting bookdata from BookDataStore from unlocalized name.substring(5) null: " +  BookDataStore.getBookFromName(stack.getItem().getUnlocalizedName(stack).substring(5)) == null);
-		return BookDataStore.getBookFromName(stack.getItem().getUnlocalizedName(stack).substring(5));
-    }
 }

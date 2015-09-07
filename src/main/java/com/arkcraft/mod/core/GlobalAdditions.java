@@ -20,6 +20,7 @@ import com.arkcraft.mod.core.blocks.ARKBlock;
 import com.arkcraft.mod.core.blocks.ARKBush;
 import com.arkcraft.mod.core.blocks.ARKContainerBlock;
 import com.arkcraft.mod.core.blocks.crop_test.ARKCropPlotBlock;
+import com.arkcraft.mod.core.book.Dossier;
 import com.arkcraft.mod.core.creativetabs.ARKTabs;
 import com.arkcraft.mod.core.entity.EntityCobble;
 import com.arkcraft.mod.core.entity.EntityDodoEgg;
@@ -41,7 +42,6 @@ import com.arkcraft.mod.core.items.ARKSeedItem;
 import com.arkcraft.mod.core.items.ARKSlingshot;
 import com.arkcraft.mod.core.items.ARKWeapon;
 import com.arkcraft.mod.core.lib.KeyBindings;
-import com.arkcraft.mod.core.machine.gui.book.Dossier;
 
 /**
  * @author Vastatio
@@ -126,7 +126,7 @@ public class GlobalAdditions {
 		dodo_egg = addEggItem("dodo_egg");
 		dodo_feces = addFecesItem("dodo_feces");
 		player_feces = addFecesItem("player_feces");
-		dino_book = addDossier("dossier", GUI.BOOK_GUI.getID(), EnumChatFormatting.GOLD + "Knowledge is Power");
+		dino_book = addDossier("dossier");
 		narcotics = addItemWithTooltip("narcotics", EnumChatFormatting.RED + "A Knockout of a Drink");
 		saddle_small = addSaddle("saddle_small");
 		saddle_medium = addSaddle("saddle_medium");
@@ -225,9 +225,8 @@ public class GlobalAdditions {
 		return f;
 	}
 	
-	protected static Dossier addDossier(String name, int guiID, String... tooltips) {
-		Dossier dossier = new Dossier(name, guiID);
-		dossier.addMoreInformation(tooltips);
+	protected static Dossier addDossier(String name) {
+		Dossier dossier = new Dossier(name);
 		allItems.put(name, dossier);
 		return dossier;
 	}
