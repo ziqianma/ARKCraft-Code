@@ -6,7 +6,6 @@ import java.util.Map;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
@@ -41,8 +40,8 @@ import com.arkcraft.mod.core.items.ARKSaddle;
 import com.arkcraft.mod.core.items.ARKSeedItem;
 import com.arkcraft.mod.core.items.ARKSlingshot;
 import com.arkcraft.mod.core.items.ARKWeapon;
-import com.arkcraft.mod.core.items.ItemDossier;
 import com.arkcraft.mod.core.lib.KeyBindings;
+import com.arkcraft.mod.core.machine.gui.book.Dossier;
 
 /**
  * @author Vastatio
@@ -65,7 +64,7 @@ public class GlobalAdditions {
 	public static ARKArmorItem boneHelm, boneChest, boneLegs, boneBoots;
 	public static ARKWeapon stoneSpear, ironPike;
 	public static ARKBlock oreSurface;
-	public static ItemDossier dino_book;
+	public static Dossier dino_book;
 	
 	public static ArmorMaterial CLOTH = EnumHelper.addArmorMaterial("CLOTH_MAT", "CLOTH_MAT", 4, new int[] {1,2,1,1}, 15);
 	public static ArmorMaterial CHITIN = EnumHelper.addArmorMaterial("CHITIN_MAT", "CHITIN_MAT", 16, new int[] { 3,7,6,3 } , 10);
@@ -226,8 +225,8 @@ public class GlobalAdditions {
 		return f;
 	}
 	
-	protected static ItemDossier addDossier(String name, int guiID, String... tooltips) {
-		ItemDossier dossier = new ItemDossier(name, guiID);
+	protected static Dossier addDossier(String name, int guiID, String... tooltips) {
+		Dossier dossier = new Dossier(name, guiID);
 		dossier.addMoreInformation(tooltips);
 		allItems.put(name, dossier);
 		return dossier;

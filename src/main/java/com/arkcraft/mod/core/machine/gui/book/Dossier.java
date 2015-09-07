@@ -1,17 +1,19 @@
-package com.arkcraft.mod.core.items;
+package com.arkcraft.mod.core.machine.gui.book;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.arkcraft.mod.core.GlobalAdditions;
-import com.arkcraft.mod.core.Main;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+
+import com.arkcraft.mod.core.GlobalAdditions;
+import com.arkcraft.mod.core.GlobalAdditions.GUI;
+import com.arkcraft.mod.core.Main;
+import com.arkcraft.mod.core.lib.LogHelper;
 
 /**
  * 
@@ -19,12 +21,12 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
  * Pointless to create a manager class like "ARKBook" or something, since we only have one type of dossier.
  * Tempted to make it fully to just that one dossier, but that would be messy, so I'm going to ask for the GUI-ID in the constructor.
  */
-public class ItemDossier extends Item {
+public class Dossier extends Item {
 
 	private int guiID;
 	private ArrayList<String> entriesToAdd = new ArrayList<String>();
 	
-	public ItemDossier(String name, int guiID) {
+	public Dossier(String name, int guiID) {
 		super();
 		this.guiID = guiID;
 		this.setCreativeTab(GlobalAdditions.tabARK);
@@ -48,11 +50,16 @@ public class ItemDossier extends Item {
 
 	/* Use this on the item stack's right click */
 	@Override
-	public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn) {
-		BlockPos pos = playerIn.getPosition();
-		playerIn.openGui(Main.instance(), guiID, worldIn, pos.getX(), pos.getY(), pos.getZ());
-		return super.onItemRightClick(itemStackIn, worldIn, playerIn);
+	public ItemStack onItemRightClick(ItemStack stack, World worldIn, EntityPlayer playerIn) {
+		playerIn.openGui(Main.instance, GUI.BOOK_GUI.getID(), worldIn, 0, 0, 0);
+        FMLClientHandler.instance().displayGuiScreen(playerIn, new GuiDossier(stack, getData()));
+		return super.onItemRightClick(stack, worldIn, playerIn);
 	}
 	
+	private BookData getData() {
+		/* FIXME DClient.dossierInfo.dossier is throwing a nullpointer */
+		LogHelper.error(DClient.dossierInfo == null ? "dossierInfo is null!" : "dossierInfo is not null.");
+		return DClient.dossierInfo.dossier;
+	}
 	
 }

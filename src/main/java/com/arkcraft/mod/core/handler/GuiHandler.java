@@ -3,6 +3,15 @@ package com.arkcraft.mod.core.handler;
 import java.util.Iterator;
 import java.util.List;
 
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.BlockPos;
+import net.minecraft.world.World;
+import net.minecraftforge.fml.common.network.IGuiHandler;
+
 import com.arkcraft.mod.core.GlobalAdditions.GUI;
 import com.arkcraft.mod.core.blocks.crop_test.ContainerInventoryCropPlot;
 import com.arkcraft.mod.core.blocks.crop_test.TileInventoryCropPlot;
@@ -15,18 +24,12 @@ import com.arkcraft.mod.core.machine.gui.ContainerMP;
 import com.arkcraft.mod.core.machine.gui.ContainerSmithy;
 import com.arkcraft.mod.core.machine.gui.GUICropPlot;
 import com.arkcraft.mod.core.machine.gui.GUITaming;
-import com.arkcraft.mod.core.machine.gui.GuiDosierScreen;
 import com.arkcraft.mod.core.machine.gui.GuiInventoryDodo;
 import com.arkcraft.mod.core.machine.gui.GuiMP;
 import com.arkcraft.mod.core.machine.gui.GuiSmithy;
-
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.BlockPos;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.common.network.IGuiHandler;
+import com.arkcraft.mod.core.machine.gui.book.BookData;
+import com.arkcraft.mod.core.machine.gui.book.BookDataStore;
+import com.arkcraft.mod.core.machine.gui.book.GuiDossier;
 
 public class GuiHandler implements IGuiHandler {
 
@@ -90,8 +93,17 @@ public class GuiHandler implements IGuiHandler {
 				LogHelper.info("GuiHandler - getClientGuiElement: TileEntityCropPlot not found!");				
 			}
 		}
-		if (ID == GUI.BOOK_GUI.ordinal()) 
-			return new GuiDosierScreen();
+
+		if(ID == GUI.BOOK_GUI.getID()) {
+			ItemStack stack = player.getCurrentEquippedItem();
+			if(stack == null) LogHelper.error("Null Stack in Book");
+			if(stack != null && stack.getItem() == null) LogHelper.error("Null Item in Book");
+			if(stack != null && stack.getItem() != null && stack.getUnlocalizedName() == null) LogHelper.error("Null Unlocalized Name in Book");
+			else {
+				return new GuiDossier(stack, GuiHandler.getBookDataFromStack(stack)); 
+			}
+		}
+		
 		if (ID == GUI.INV_DODO.getID()) {
 			Entity entity = getEntityAt(player, x, y, z);
 			if (entity != null && entity instanceof EntityDodo) 
@@ -111,6 +123,8 @@ public class GuiHandler implements IGuiHandler {
 			else
 				LogHelper.error("GuiHandler - getClientGuiElement: Did not find entity to tame!");			
 		}
+		
+		
 		return null;
 	}
 	
@@ -129,4 +143,9 @@ public class GuiHandler implements IGuiHandler {
         }
         return null;
 	}
+	
+	private static BookData getBookDataFromStack (ItemStack stack)
+    {
+        return BookDataStore.getBookFromName(stack.getItem().getUnlocalizedName(stack));
+    }
 }

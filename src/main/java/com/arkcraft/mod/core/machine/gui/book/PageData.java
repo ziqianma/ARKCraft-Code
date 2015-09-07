@@ -31,6 +31,7 @@ public class PageData {
 		PageData.registerPage("blank", BlankPage.class);
 		PageData.registerPage("text", TextPage.class);
 		PageData.registerPage("category", CategoryPage.class);
+		PageData.registerPage("title", TitlePage.class);
 	}
 	
 	public static Class<? extends EntityLivingBase> getEntityClass(String type) { return entityClasses.get(type); }

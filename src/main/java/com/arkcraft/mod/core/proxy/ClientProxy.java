@@ -9,6 +9,7 @@ import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
+import net.minecraftforge.fml.common.SidedProxy;
 
 import com.arkcraft.mod.core.GlobalAdditions;
 import com.arkcraft.mod.core.Main;
@@ -25,14 +26,18 @@ import com.arkcraft.mod.core.entity.render.RenderBrontosaurus;
 import com.arkcraft.mod.core.entity.render.RenderDodo;
 import com.arkcraft.mod.core.entity.render.RenderRaptor;
 import com.arkcraft.mod.core.lib.LogHelper;
+import com.arkcraft.mod.core.machine.gui.book.DCommon;
 
 public class ClientProxy extends CommonProxy {
 	
 	boolean initDone = false;
+	@SidedProxy(clientSide="com.arkcraft.mod.core.machine.gui.book.DClient", serverSide="com.arkcraft.mod.core.machine.gui.book.DCommon")
+	public static DCommon proxy;
 	
 	@Override
 	public void init() {
 		if(initDone) return;
+		proxy.init();
 		RenderingRegistry.registerEntityRenderingHandler(EntityCobble.class, new RenderSnowball(Minecraft.getMinecraft().getRenderManager(), GlobalAdditions.cobble_ball, Minecraft.getMinecraft().getRenderItem()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityDodoEgg.class, new RenderSnowball(Minecraft.getMinecraft().getRenderManager(), GlobalAdditions.dodo_egg, Minecraft.getMinecraft().getRenderItem()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityExplosive.class, new RenderSnowball(Minecraft.getMinecraft().getRenderManager(), GlobalAdditions.explosive_ball, Minecraft.getMinecraft().getRenderItem()));
