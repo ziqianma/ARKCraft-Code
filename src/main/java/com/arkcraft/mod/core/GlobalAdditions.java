@@ -126,7 +126,7 @@ public class GlobalAdditions {
 		dodo_egg = addEggItem("dodo_egg");
 		dodo_feces = addFecesItem("dodo_feces");
 		player_feces = addFecesItem("player_feces");
-		dino_book = addDossier("dino_book", GUI.BOOK_GUI.getID(), EnumChatFormatting.GOLD + "Knowledge is Power");
+		dino_book = addDossier("dossier", GUI.BOOK_GUI.getID(), EnumChatFormatting.GOLD + "Knowledge is Power");
 		narcotics = addItemWithTooltip("narcotics", EnumChatFormatting.RED + "A Knockout of a Drink");
 		saddle_small = addSaddle("saddle_small");
 		saddle_medium = addSaddle("saddle_medium");

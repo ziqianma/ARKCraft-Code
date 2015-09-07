@@ -24,7 +24,8 @@ public class DClient extends DCommon {
 	public void init() {
 		Minecraft mc = Minecraft.getMinecraft();
 		smallFontRenderer = new SmallFontRenderer(mc.gameSettings, new ResourceLocation("textures/font/ascii.png"), mc.renderEngine, false);
-	    
+		dossierInfo = new DossierInfo();
+		readManuals();
 	}
 	
 	public void readManuals() {
@@ -36,7 +37,6 @@ public class DClient extends DCommon {
         dossier = dossier_cl != null ? dossier_cl : readManual("/assets/arkcraft/dossier/en_US/dinodossier.xml", dbFactory);
 
         initManualPages();
-        dossierInfo = new DossierInfo();
     }
 	
 	Document readManual(String location, DocumentBuilderFactory dbFactory) {
@@ -52,7 +52,9 @@ public class DClient extends DCommon {
         }
     }
 	
-	public static Document getDossier() { return dossier; }
+	public static Document getDossier() {
+		return dossier;
+	}
 	
 	void initManualPages() {}
 }

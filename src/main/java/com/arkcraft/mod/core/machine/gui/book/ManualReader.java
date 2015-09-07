@@ -12,16 +12,13 @@ import com.arkcraft.mod.core.lib.LogHelper;
 
 public class ManualReader
 {
-	@SuppressWarnings("unused")
     public static Document readManual (String location)
     {
-        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-
         try
         {
             LogHelper.info("Loading Manual XML from: " + location);
             InputStream stream = Main.class.getResourceAsStream(location);
-            System.out.println(Main.class.getResourceAsStream(location).toString());
+            LogHelper.info(stream == null ? "ManualReader - the inputStream with the specified location is null." : "ManualReader - the inputStream is not null with the specified location.");
             return readManual(stream, location);
         }
         catch (Exception e)
@@ -39,6 +36,7 @@ public class ManualReader
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.parse(is);
             doc.getDocumentElement().normalize();
+            LogHelper.info(doc == null ? "ManualReader.readManual(InputStream, String) is returning a null object." : "ManualReader.readManual(InputStream, String) is not returning a null object.");
             return doc;
         }
         catch (Exception e)
@@ -48,4 +46,5 @@ public class ManualReader
             return null;
         }
     }
+    	
 }

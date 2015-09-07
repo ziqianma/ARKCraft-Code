@@ -5,6 +5,7 @@ import net.minecraft.util.ResourceLocation;
 import org.w3c.dom.Document;
 
 import com.arkcraft.mod.core.Main;
+import com.arkcraft.mod.core.lib.LogHelper;
 
 public class BookData {
 
@@ -15,14 +16,19 @@ public class BookData {
 	public ResourceLocation rightImage = new ResourceLocation(Main.MODID, "textures/gui/dino_book_right.png");
 
 	public ResourceLocation itemImage = new ResourceLocation(Main.MODID, "textures/items/dino_book.png");
+	/* FIXME Doc is null. */
 	public Document doc = ManualReader.readManual("/assets/arkcraft/dossier/en_US/dinodossier.xml");
 	public SmallFontRenderer font;
 	public Boolean canTranslate = false;
 	
-	public Document getDoc() { return this.doc; }
+	public Document getDoc() {
+		LogHelper.info("getDoc() called");
+		LogHelper.info(doc == null ? "Doc is null!" : "Doc is not null");
+		return this.doc; 
+	}
 	
 	public String getFullUnlocalizedName() {
-		return this.modID + ":" + this.unlocalizedName;
+		return this.unlocalizedName;
 	}
 }
 

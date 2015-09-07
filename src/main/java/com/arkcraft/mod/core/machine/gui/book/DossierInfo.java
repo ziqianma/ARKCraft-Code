@@ -14,6 +14,7 @@ public class DossierInfo {
 	BookData dossier = new BookData();
 	
 	public DossierInfo() {
+		LogHelper.info("DossierInfo - Constructor Called");
 		Side side = FMLCommonHandler.instance().getEffectiveSide();
 		dossier = initManual(dossier, "dossier", side == Side.CLIENT ? DClient.dossier : null, "textures/items/dino_book.png");
 	}
@@ -24,7 +25,7 @@ public class DossierInfo {
 		data.itemImage = new ResourceLocation(data.modID, itemImage);
 		data.doc = xmlDoc;
 		BookDataStore.addBook(data);
-		LogHelper.error(data == null ? "Data is null!" : "Data is not null.");
+		LogHelper.info(data == null ? "DossierInfo - Data is null!" : "DossierInfo - Data is not null.");
 		return data;
 	}
 }

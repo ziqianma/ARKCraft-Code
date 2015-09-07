@@ -57,8 +57,8 @@ public class Dossier extends Item {
 	}
 	
 	private BookData getData() {
-		/* FIXME DClient.dossierInfo.dossier is throwing a nullpointer */
-		LogHelper.error(DClient.dossierInfo == null ? "dossierInfo is null!" : "dossierInfo is not null.");
+		LogHelper.info(DClient.dossierInfo == null ? "Dossier - dossierInfo is null!" : "Dossier - dossierInfo is not null.");
+		LogHelper.info(DClient.dossier == null ?  "Dossier - the BookData from DClient is null!" : "Dossier - the BookData from DClient is not null.");
 		return DClient.dossierInfo.dossier;
 	}
 	

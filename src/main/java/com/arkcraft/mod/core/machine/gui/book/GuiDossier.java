@@ -48,10 +48,12 @@ public class GuiDossier extends GuiScreen {
     private BookPage pageRight;
 	
 	public GuiDossier(ItemStack stack, BookData data) {
+		LogHelper.info("GuiDossier: Constructor Called.");
         this.mc = Minecraft.getMinecraft();
         this.dossierItem = stack;
         currentPage = 0; //Stack page
-        LogHelper.info("Is data null?: " + data == null);
+        /* FIXME This code isn't even executing, but the crash says that line 55 is null */
+        LogHelper.info("GuiDossier: Is data null?: " + data == null);
         dossier = data.getDoc();
         if (data.font != null) this.fonts = data.font;
         bookLeft = data.leftImage;

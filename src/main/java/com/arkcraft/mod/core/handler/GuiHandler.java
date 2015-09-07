@@ -95,11 +95,13 @@ public class GuiHandler implements IGuiHandler {
 		}
 
 		if(ID == GUI.BOOK_GUI.getID()) {
+			LogHelper.info("GuiHandler - getClientGuiElement(): GuiDossier book called to open.");
 			ItemStack stack = player.getCurrentEquippedItem();
 			if(stack == null) LogHelper.error("Null Stack in Book");
 			if(stack != null && stack.getItem() == null) LogHelper.error("Null Item in Book");
 			if(stack != null && stack.getItem() != null && stack.getUnlocalizedName() == null) LogHelper.error("Null Unlocalized Name in Book");
 			else {
+				LogHelper.info("GuiHandler - getClientGuiElement(): GuiDossier book trying to open.");
 				return new GuiDossier(stack, GuiHandler.getBookDataFromStack(stack)); 
 			}
 		}
@@ -146,6 +148,8 @@ public class GuiHandler implements IGuiHandler {
 	
 	private static BookData getBookDataFromStack (ItemStack stack)
     {
-        return BookDataStore.getBookFromName(stack.getItem().getUnlocalizedName(stack));
+		LogHelper.info("GuiHandler.getBookDataFromStack(): stack unlocalizedName: " + stack.getUnlocalizedName() + ", " + stack.getUnlocalizedName().substring(5));
+        LogHelper.info("GuiHandler - getBookDataFromStack(): Getting bookdata from BookDataStore from unlocalized name.substring(5) null: " +  BookDataStore.getBookFromName(stack.getItem().getUnlocalizedName(stack).substring(5)) == null);
+		return BookDataStore.getBookFromName(stack.getItem().getUnlocalizedName(stack).substring(5));
     }
 }
