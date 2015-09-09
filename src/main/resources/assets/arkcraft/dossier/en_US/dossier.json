@@ -1,0 +1,14 @@
+{
+	"entries": [
+		{
+			"type": "dino",
+			"title": "Utahraptor Prime",		
+			"temperance": "Aggresive",
+			"model": "raptor",
+			"diet": "Carnivourous"
+		},
+		{
+			
+		}
+	]
+}
