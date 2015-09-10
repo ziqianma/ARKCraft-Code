@@ -14,10 +14,11 @@ import com.google.gson.GsonBuilder;
 
 public class DossierParser {
 
-	public static BookDocument parseJSON(GsonBuilder builder, String location) {
-		builder.registerTypeAdapter(BookDocument.class, new BookDeserializer());
-		builder.registerTypeAdapter(IPage.class, new PageDeserializer());
-		Gson gson = builder.create();
+	public static BookDocument parseJSON(GsonBuilder gBuilder, String location) {
+		gBuilder = new GsonBuilder();
+		gBuilder.registerTypeAdapter(BookDocument.class, new BookDeserializer());
+		gBuilder.registerTypeAdapter(IPage.class, new PageDeserializer());
+		Gson gson = gBuilder.create();
 		ResourceLocation rloc = new ResourceLocation(Main.MODID, location);
 		try {
 			LogHelper.info("Trying to read in JSON File....");

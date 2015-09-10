@@ -7,8 +7,9 @@ import com.arkcraft.mod.core.lib.LogHelper;
 import com.google.gson.GsonBuilder;
 
 public class BookData {
-
-	public BookDocument doc = DossierParser.parseJSON(new GsonBuilder(), "dossier/en_US/dossier.json");
+	
+	public GsonBuilder gBuilder = new GsonBuilder();
+	public BookDocument doc = DossierParser.parseJSON(gBuilder, "dossier/en_US/dossier.json");
 	public String modID = new String();
 	public String unlocalizedName = new String();
 	public String tooltip = new String();
@@ -25,5 +26,6 @@ public class BookData {
 		return this.doc; 
 	}
 	public String getUnlocalizedName() { return unlocalizedName; }
+	public GsonBuilder getGsonBuilder() { return gBuilder; }
 	
 }
