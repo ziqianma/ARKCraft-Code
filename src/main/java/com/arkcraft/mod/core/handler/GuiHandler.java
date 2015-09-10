@@ -5,6 +5,7 @@ import java.util.List;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
@@ -14,6 +15,9 @@ import net.minecraftforge.fml.common.network.IGuiHandler;
 import com.arkcraft.mod.core.GlobalAdditions.GUI;
 import com.arkcraft.mod.core.blocks.crop_test.ContainerInventoryCropPlot;
 import com.arkcraft.mod.core.blocks.crop_test.TileInventoryCropPlot;
+import com.arkcraft.mod.core.book.BookData;
+import com.arkcraft.mod.core.book.BookDataStore;
+import com.arkcraft.mod.core.book.GuiDossier;
 import com.arkcraft.mod.core.entity.DinoTameable;
 import com.arkcraft.mod.core.entity.passive.EntityDodo;
 import com.arkcraft.mod.core.lib.LogHelper;
@@ -23,7 +27,6 @@ import com.arkcraft.mod.core.machine.gui.ContainerMP;
 import com.arkcraft.mod.core.machine.gui.ContainerSmithy;
 import com.arkcraft.mod.core.machine.gui.GUICropPlot;
 import com.arkcraft.mod.core.machine.gui.GUITaming;
-import com.arkcraft.mod.core.machine.gui.GuiDosierScreen;
 import com.arkcraft.mod.core.machine.gui.GuiInventoryDodo;
 import com.arkcraft.mod.core.machine.gui.GuiMP;
 import com.arkcraft.mod.core.machine.gui.GuiSmithy;
@@ -93,7 +96,8 @@ public class GuiHandler implements IGuiHandler {
 
 		if(ID == GUI.BOOK_GUI.getID()) {
 			LogHelper.info("GuiHandler - getClientGuiElement(): GuiDossier book trying to open.");
-			return new GuiDosierScreen();
+			ItemStack stack = player.getCurrentEquippedItem();
+			return new GuiDossier(stack, GuiHandler.getBookDataFromStack(stack));
 		}
 		
 		if (ID == GUI.INV_DODO.getID()) {
@@ -134,6 +138,10 @@ public class GuiHandler implements IGuiHandler {
             }
         }
         return null;
+	}
+	
+	private static BookData getBookDataFromStack(ItemStack stack) {
+		return BookDataStore.getBookFromName(stack.getUnlocalizedName().substring(5));
 	}
 	
 }

@@ -26,21 +26,21 @@ public class DClient extends DCommon {
 		fonts = new SmallFontRenderer(mc.gameSettings, new ResourceLocation("textures/font/ascii.png"), mc.renderEngine, false);
 		
 		String lang = mc.getLanguageManager().getCurrentLanguage().getLanguageCode();
+		registerPageClasses();
+		registerModelClasses();
 		GsonBuilder gBuilder = new GsonBuilder();
 		gBuilder.registerTypeAdapter(BookDocument.class, new BookDeserializer());
 		gBuilder.registerTypeAdapter(IPage.class, new PageDeserializer());
-		BookDocument dossier_cl = readManual(gBuilder, "assets/arkcraft/dossier/" + lang + "/dossier.json");
-		dossier = dossier_cl != null ? dossier_cl : readManual(gBuilder, "assets/arkcraft/dossier/en_US/dossier.json");
+		BookDocument dossier_cl = readManual(gBuilder, "dossier/" + lang + "/dossier.json");
+		dossier = dossier_cl != null ? dossier_cl : readManual(gBuilder, "dossier/en_US/dossier.json");
 		info = new DossierInfo();
-		
-		registerPageClasses();
-		registerModelClasses();
 	}
 	
 	public BookDocument readManual(GsonBuilder gBuilder, String location) {
 		Gson gson = gBuilder.create();
-		InputStream stream = Main.class.getResourceAsStream(location);
+		ResourceLocation rloc = new ResourceLocation(Main.MODID, location);
 		try {
+			InputStream stream = Minecraft.getMinecraft().getResourceManager().getResource(rloc).getInputStream();
 			Reader reader = new InputStreamReader(stream, "UTF-8");
 			BookDocument doc = gson.fromJson(reader, BookDocument.class);
 			return doc;

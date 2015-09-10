@@ -1,5 +1,6 @@
 package com.arkcraft.mod.core.book;
 
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
@@ -12,14 +13,15 @@ public class DossierInfo {
 	
 	public DossierInfo() {
 		Side side = FMLCommonHandler.instance().getEffectiveSide();
-		data = initManual(data, "dossier", side == Side.CLIENT ? DClient.dossier : null, "textures/items/dino_book.png");
+		data = initManual(data, "dossier", "Knowledge is Power" + EnumChatFormatting.GOLD, side == Side.CLIENT ? DClient.dossier : null, "textures/items/dino_book.png");
 	}
 	
-	public BookData initManual(BookData data, String unlocalizedName, BookDocument doc, String itemImage) {
+	public BookData initManual(BookData data, String unlocalizedName, String tooltip, BookDocument doc, String itemImage) {
 		data.unlocalizedName = unlocalizedName;
 		data.modID = Main.MODID;
 		data.itemImage = new ResourceLocation(data.modID, itemImage);
 		data.doc = doc;
+		data.tooltip = tooltip;
 		BookDataStore.addBook(data);
 		return data;
 	}

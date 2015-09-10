@@ -3,11 +3,12 @@ package com.arkcraft.mod.core.book;
 import net.minecraft.util.ResourceLocation;
 
 import com.arkcraft.mod.core.Main;
+import com.arkcraft.mod.core.lib.LogHelper;
 import com.google.gson.GsonBuilder;
 
 public class BookData {
 
-	public BookDocument doc = DossierParser.parseJSON(new GsonBuilder(), "/assets/arkcraft/dossier/en_US/dossier.json");
+	public BookDocument doc = DossierParser.parseJSON(new GsonBuilder(), "dossier/en_US/dossier.json");
 	public String modID = new String();
 	public String unlocalizedName = new String();
 	public String tooltip = new String();
@@ -19,7 +20,10 @@ public class BookData {
 	public SmallFontRenderer font;
 	public Boolean canTranslate = false;
 	
-	public BookDocument getBookDocument() { return this.doc; }
+	public BookDocument getBookDocument() {
+		LogHelper.info(doc == null ? "BookDocument in BookData is null!" : "BookDocument in BookData is not null.");
+		return this.doc; 
+	}
 	public String getUnlocalizedName() { return unlocalizedName; }
 	
 }
