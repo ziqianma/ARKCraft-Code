@@ -97,6 +97,8 @@ public class GuiHandler implements IGuiHandler {
 		if(ID == GUI.BOOK_GUI.getID()) {
 			LogHelper.info("GuiHandler - getClientGuiElement(): GuiDossier book trying to open.");
 			ItemStack stack = player.getCurrentEquippedItem();
+			if(stack == null) LogHelper.info("Stack in GuiHandler is null!");
+			if(stack != null && stack.getUnlocalizedName() == null) LogHelper.info("Stack in GuiHandler is null!");
 			return new GuiDossier(stack, GuiHandler.getBookDataFromStack(stack));
 		}
 		
@@ -141,7 +143,7 @@ public class GuiHandler implements IGuiHandler {
 	}
 	
 	private static BookData getBookDataFromStack(ItemStack stack) {
-		return BookDataStore.getBookFromName(stack.getUnlocalizedName().substring(5));
+		return BookDataStore.getBookFromName(stack.getUnlocalizedName());
 	}
 	
 }

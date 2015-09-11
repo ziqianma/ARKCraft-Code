@@ -4,7 +4,7 @@ import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.StatCollector;
 
-public class PageDino implements IPage {
+public class PageDino extends Page {
 
 	public String title;
 	public EntityLivingBase model;
@@ -46,7 +46,4 @@ public class PageDino implements IPage {
 	public void setDiet(String diet) { this.diet = diet; }
 	public void setEntityModel(EntityLivingBase model) { this.model = model; }
 	
-	Class<? extends IPage> type;
-	public Class<? extends IPage> getType() { return type; }
-	public void setType(Class<? extends IPage> type) { this.type = type; }
 }

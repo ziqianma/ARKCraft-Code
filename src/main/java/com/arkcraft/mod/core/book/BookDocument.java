@@ -2,9 +2,9 @@ package com.arkcraft.mod.core.book;
 
 public class BookDocument {
 	
-	public IPage[] entries;
+	public Page[] entries;
 
-	public IPage[] getEntries() { return entries; }
-	public void setEntries(IPage[] entries) { this.entries = entries; }
+	public Page[] getEntries() { return entries; }
+	public void setEntries(Page[] entries) { this.entries = entries; }
 	
 }

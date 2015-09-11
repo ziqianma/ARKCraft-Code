@@ -6,7 +6,7 @@ import net.minecraft.util.StatCollector;
 
 import com.arkcraft.mod.core.Main;
 
-public class PageTitle implements IPage {
+public class PageTitle extends Page {
 
 	public String title;
 	public String text;
@@ -30,7 +30,4 @@ public class PageTitle implements IPage {
 	public String getText() { return text; }
 	public String getImagePath() { return image; }
 	
-	Class<? extends IPage> type;
-	public Class<? extends IPage> getType() { return type; }
-	public void setType(Class<? extends IPage> type) { this.type = type; }
 }

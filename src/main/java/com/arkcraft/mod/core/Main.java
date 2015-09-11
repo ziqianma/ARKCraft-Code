@@ -38,6 +38,7 @@ public class Main {
 		Config.init(event.getSuggestedConfigurationFile());// Keep first
 		GlobalAdditions.init();
 		setupNetwork();
+		
 	}
 	
 	@EventHandler
@@ -45,8 +46,8 @@ public class Main {
 		MinecraftForge.EVENT_BUS.register(new ARKEventHandler());
 		MinecraftForge.EVENT_BUS.register(new ARKPlayerEventHandler());
 		FMLCommonHandler.instance().bus().register(new FMLCommonEventHandler());
-		proxy.init();
 		proxy.registerRenderers();
+		proxy.init();
 		FMLCommonHandler.instance().bus().register(new Config());
 	}
 	

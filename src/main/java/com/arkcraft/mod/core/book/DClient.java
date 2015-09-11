@@ -5,6 +5,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 
 import com.arkcraft.mod.core.Main;
@@ -23,15 +24,15 @@ public class DClient extends DCommon {
 	public static DossierInfo info;
 	
 	public void init() {
+		info = new DossierInfo();
 		mc = Minecraft.getMinecraft();
 		fonts = new SmallFontRenderer(mc.gameSettings, new ResourceLocation("textures/font/ascii.png"), mc.renderEngine, false);
 		registerPageClasses();
 		registerModelClasses();
-		info = new DossierInfo();
 		GsonBuilder gBuilder = info.data.getGsonBuilder();
 		gBuilder.registerTypeAdapter(BookDocument.class, new BookDeserializer());
-		gBuilder.registerTypeAdapter(IPage.class, new PageDeserializer());
-		
+		gBuilder.registerTypeAdapter(Page.class, new PageDeserializer());
+		gBuilder.registerTypeAdapter(EntityLivingBase.class, new EntityLivingBaseDeserializer());
 		String lang = mc.getLanguageManager().getCurrentLanguage().getLanguageCode();
 		BookDocument dossier_cl = readManual(gBuilder, "dossier/" + lang + "/dossier.json");
 		dossier = dossier_cl != null ? dossier_cl : readManual(gBuilder, "dossier/en_US/dossier.json");

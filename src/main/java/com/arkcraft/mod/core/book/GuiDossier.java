@@ -10,6 +10,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.lwjgl.opengl.GL11;
 
+import com.arkcraft.mod.core.lib.LogHelper;
 import com.arkcraft.mod.core.machine.gui.PageButton;
 
 @SideOnly(Side.CLIENT)
@@ -17,7 +18,7 @@ import com.arkcraft.mod.core.machine.gui.PageButton;
 public class GuiDossier extends GuiScreen {
 	
 	private ItemStack dossierItem;
-	private int guiWidth = 256;
+	private int guiWidth = 128;
 	private int guiHeight = 180;
 	private int currentPage;
 	private int maxPages;
@@ -29,13 +30,14 @@ public class GuiDossier extends GuiScreen {
 	private static ResourceLocation bookLeft;
 	private BookData bData;
 	
-	private IPage pageLeft;
-	private IPage pageRight;
+	private Page pageLeft;
+	private Page pageRight;
 	
 	public GuiDossier(ItemStack stack, BookData data) {
 		this.mc = Minecraft.getMinecraft();
 		this.dossierItem = stack;
 		currentPage = 0;
+		LogHelper.info(data == null ? "Data in GuiDossier is null!" : "Data is not null in GuiDossier");
 		dossier = data.getBookDocument();
 		if(data.font != null) this.fonts = data.font;
 		bookLeft = data.leftImage;
@@ -70,68 +72,42 @@ public class GuiDossier extends GuiScreen {
 			if(currentPage % 2 == 1) currentPage--;
 			if(currentPage < 0) currentPage = 0;
 			
-			IPage[] pages = dossier.getEntries();
-			IPage page = pages[currentPage];
+			Page[] pages = dossier.getEntries();
+			Page page = pages[currentPage];
+			pageLeft = page;
 			
-			Class<? extends IPage> clazz = page.getType();
-			if(clazz != null) {
-				try {
-					pageLeft = clazz.newInstance();
-				}
-				catch(Exception e) {
-					e.printStackTrace();
-				}
-			}
-			else {
-				pageLeft = null;
-			}
 			page = pages[currentPage+1];
-			if(page != null) {
-				Class<? extends IPage> newClass = page.getType();
-				if(newClass != null) {
-					try {
-						pageRight = newClass.newInstance();
-					}
-					catch(Exception e) {
-						e.printStackTrace();
-					}
-				}
-				else {
-					pageLeft = null;
-				}
-			}
-			else {
-				pageRight = null;
-			}
+			pageRight = page;
 		}
 	}
 	
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        /* Book Right drawing! */
-        this.mc.getTextureManager().bindTexture(bookRight);
-        int localWidth = (this.width / 2);
-        byte localHeight = 8;
-        this.drawTexturedModalRect(localWidth, localHeight, 0, 0, this.guiWidth, this.guiHeight);
-        
-        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        /* Book Left Drawing! */
-        this.mc.getTextureManager().bindTexture(bookLeft);
-        localWidth = localWidth - this.guiWidth;
-        this.drawTexturedModalRect(localWidth, localHeight, 256 - this.guiWidth, 0, this.guiWidth, this.guiHeight);
-        
-        super.drawScreen(mouseX, mouseY, partialTicks);
-        
-        if(pageLeft != null) {
-        	pageLeft.draw(localWidth + 16, localHeight + 12, mouseX, mouseY, DClient.fonts, bData.canTranslate, this);
-        }
-        if(pageRight != null) {
-        	pageLeft.draw(localWidth + 220, localHeight + 12, mouseX, mouseY, DClient.fonts, bData.canTranslate, this);
-        }
-        
-        nButton.drawButton(mc, mouseX, mouseY);
-        prevButton.drawButton(mc, mouseX, mouseY);
+		int x = (this.width / 2);
+		int y = (height - this.guiHeight) / 2;
+		
+		GL11.glColor4f(1F, 1F, 1F, 1F);
+		this.mc.getTextureManager().bindTexture(bookRight);
+        this.drawTexturedModalRect(x,y, 0 ,0,this.guiWidth,this.guiHeight);
+		
+		GL11.glColor4f(1F, 1F, 1F, 1F);
+		this.mc.getTextureManager().bindTexture(bookLeft);
+		x -= this.guiWidth;
+		this.drawTexturedModalRect(x, y, 256 - this.guiWidth, 0, this.guiWidth, this.guiHeight);
+		
+		super.drawScreen(mouseX, mouseY, partialTicks);
+		
+		if(pageLeft != null) {
+			LogHelper.info("Trying to draw the left page!");
+			pageLeft.draw(x + 16, y + 12, mouseX, mouseY, fonts, bData.canTranslate, this);
+		}
+		if(pageRight != null) {
+			LogHelper.info("Trying to draw the right page!");
+			pageRight.draw(x + 220, y + 12, mouseX, mouseY, fonts, bData.canTranslate, this);
+		}
+		
+        nButton.drawButton(Minecraft.getMinecraft(), mouseX, mouseY);
+        prevButton.drawButton(Minecraft.getMinecraft(), mouseX, mouseY);
 	}
 	
 	public Minecraft getMC() {
