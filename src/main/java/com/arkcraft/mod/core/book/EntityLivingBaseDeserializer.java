@@ -6,6 +6,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.world.World;
 
+import com.arkcraft.mod.core.lib.LogHelper;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
@@ -15,6 +16,7 @@ public class EntityLivingBaseDeserializer implements JsonDeserializer<EntityLivi
 
 	public EntityLivingBase deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
 		Class<? extends EntityLivingBase> clazz = PageData.getModelClass(json.getAsString());
+		LogHelper.info(clazz == null ? "EntityLivingBaseDeserializer: CLAZZ is null." : "EntityLivingBaseDeserializer: CLAZZ is not null.");
 		if(clazz != null) {
 			try {
 				return clazz.getConstructor(World.class).newInstance(Minecraft.getMinecraft().theWorld);

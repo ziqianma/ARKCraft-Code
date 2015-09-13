@@ -1,5 +1,7 @@
 package com.arkcraft.mod.core.book;
 
+import com.arkcraft.mod.core.lib.LogHelper;
+
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.StatCollector;
@@ -13,16 +15,17 @@ public class PageDino extends Page {
 
 	@Override
 	public void draw(int guiLeft, int guiTop, int mouseX, int mouseY, SmallFontRenderer renderer, boolean canTranslate, GuiDossier dossier) {
+		LogHelper.info("DinoPage draw() called!");
+		LogHelper.info(model == null ? "Model is null!" : "Model is not null.");
+		LogHelper.info(title == null ? "Title is null!" : "Title is not null. Its value is: " + title);
+		LogHelper.info(temperance == null ? "Temperance is null!" : "Temperance is not null. Its value is: " + temperance);
+		LogHelper.info(diet == null ? "Diet is null!" : "Diet is not null. Its value is: " + diet);
+		
+		if(model != null) GuiInventory.drawEntityOnScreen(guiLeft + 50, guiTop + 15, 25, -350F, -5F, model);
+		
 		if(title != null) {
 			if(canTranslate) StatCollector.translateToLocal(title);
 			renderer.drawString("\u00a7n" + title, guiLeft + 25 + renderer.getStringWidth(title) / 2, guiTop + 5, 0);
-		}
-		
-		if(model != null) {
-			float angleX = -350F;
-			float angleY = -5F;
-			int size = 25;
-			GuiInventory.drawEntityOnScreen(guiLeft + 50, guiTop + 15, size, angleX, angleY, model);
 		}
 		
 		if(temperance != null) {
