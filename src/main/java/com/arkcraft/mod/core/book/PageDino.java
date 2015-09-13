@@ -1,10 +1,9 @@
 package com.arkcraft.mod.core.book;
 
-import com.arkcraft.mod.core.lib.LogHelper;
-
-import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.StatCollector;
+
+import com.arkcraft.mod.core.lib.LogHelper;
 
 public class PageDino extends Page {
 
@@ -21,21 +20,21 @@ public class PageDino extends Page {
 		LogHelper.info(temperance == null ? "Temperance is null!" : "Temperance is not null. Its value is: " + temperance);
 		LogHelper.info(diet == null ? "Diet is null!" : "Diet is not null. Its value is: " + diet);
 		
-		if(model != null) GuiInventory.drawEntityOnScreen(guiLeft + 50, guiTop + 15, 25, -350F, -5F, model);
+		if(model != null) //GuiInventory.drawEntityOnScreen(guiLeft + 50, guiTop + 15, 25, -350F, -5F, model);
 		
 		if(title != null) {
 			if(canTranslate) StatCollector.translateToLocal(title);
-			renderer.drawString("\u00a7n" + title, guiLeft + 25 + renderer.getStringWidth(title) / 2, guiTop + 5, 0);
+			renderer.drawString("\u00a7n" + title, guiLeft + 22 + renderer.getStringWidth(title) / 2, guiTop + 5, 0);
 		}
 		
 		if(temperance != null) {
-			if(canTranslate) StatCollector.translateToLocal(temperance);
-			renderer.drawString(temperance, guiLeft + 25 + renderer.getStringWidth(temperance), guiTop + 22, 0);
+			if(canTranslate) StatCollector.translateToLocal(diet);
+			renderer.drawString("Diet: " + diet, guiLeft + 22 + renderer.getStringWidth(diet) / 2, guiTop + 57, 0);
 		}
 		
 		if(diet != null) {
-			if(canTranslate) StatCollector.translateToLocal(diet);
-			renderer.drawString(temperance, guiLeft + 25 + renderer.getStringWidth(diet), guiTop + 27, 0);
+			if(canTranslate) StatCollector.translateToLocal(temperance);
+			renderer.drawString("Temperance: " + temperance, guiLeft + 22 + renderer.getStringWidth(temperance) / 2, guiTop + 65, 0);
 		}
 	}
 	

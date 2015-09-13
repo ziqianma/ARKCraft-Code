@@ -7,12 +7,29 @@
 			"model": "raptor",
 			"diet": "Carnivourous"
 		},
+		
 		{
 			"type": "dino",
-			"title": "Utahraptor Prime",		
-			"temperance": "Aggresive",
+			"title": "Brontosaurus Lazurus",		
+			"temperance": "Passive",
+			"model": "raptor",
+			"diet": "Herbivore"
+		},
+		
+		{
+			"type": "dino",
+			"title": "Spinosaurus Aquareliga",		
+			"temperance": "Territorial",
 			"model": "raptor",
 			"diet": "Carnivourous"
+		},
+		
+		{
+			"type": "dino",
+			"title": "Dilophosaurus Sputatrix",		
+			"temperance": "Skittish",
+			"model": "raptor",
+			"diet": "Carnivorous"
 		}
 	]
 }

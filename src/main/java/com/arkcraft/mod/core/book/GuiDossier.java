@@ -37,10 +37,10 @@ public class GuiDossier extends GuiScreen {
 		LogHelper.info("GuiDossier constructor is called!");
 		this.mc = Minecraft.getMinecraft();
 		this.dossierItem = stack;
-		currentPage = 0;
 		LogHelper.info(data == null ? "Data in GuiDossier is null!"
 				: "Data is not null in GuiDossier");
 		dossier = data.getBookDocument();
+		LogHelper.info(dossier == null ? "Dossier in GuiDossier is null!" : "Dossier is not null in GuiDossier");
 		if (data.font != null)
 			this.fonts = data.font;
 		bookLeft = data.leftImage;
@@ -51,21 +51,23 @@ public class GuiDossier extends GuiScreen {
 	@SuppressWarnings("unchecked")
 	public void initGui() {
 		LogHelper.info("initGui() is called!");
+		currentPage = 0;
 		maxPages = dossier.getEntries().length;
 		updateContent();
 		int xPos = (this.width - guiWidth) / 2;
-		this.buttonList.add(this.prevButton = new PageButton(1, xPos - 45, 185,
-				false));
-		this.buttonList.add(this.nButton = new PageButton(2, xPos + guiWidth
+		this.buttonList.add(this.nButton = new PageButton(1, xPos + guiWidth
 				+ 26, 185, true));
+		this.buttonList.add(this.prevButton = new PageButton(2, xPos - 45, 185,
+				false));
+		
 	}
 
 	protected void actionPerformed(GuiButton button) {
 		LogHelper.info("actionPerformed() is called!");
 		if (button.enabled) {
-			if (button.id == 1)
+			if (button.id == 1 && currentPage != maxPages)
 				currentPage += 2;
-			if (button.id == 2)
+			if (button.id == 2 && currentPage != 0)
 				currentPage -= 2;
 			updateContent();
 		}
@@ -74,6 +76,7 @@ public class GuiDossier extends GuiScreen {
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
 		LogHelper.info("drawScreen() in GuiDossier is called!");
+		LogHelper.info("CurrentPage: " + currentPage);
 		int x = (this.width / 2);
 		int y = (height - this.guiHeight) / 2;
 
@@ -93,11 +96,11 @@ public class GuiDossier extends GuiScreen {
 		LogHelper.info(pageRight == null ? "pageRight is null!" : "pageRight is not null");
 		if (pageLeft != null && pageRight != null) {
 			LogHelper.info("Trying to draw the left page!");
-			pageLeft.draw(x + 16, y + 12, mouseX, mouseY, fonts,
+			pageLeft.draw(x + 8, y + 12, mouseX, mouseY, fonts,
 					bData.canTranslate, this);
 
 			LogHelper.info("Trying to draw the right page!");
-			pageRight.draw(x + 220, y + 12, mouseX, mouseY, fonts,
+			pageRight.draw(x + 110, y + 12, mouseX, mouseY, fonts,
 					bData.canTranslate, this);
 		}
 
@@ -107,21 +110,22 @@ public class GuiDossier extends GuiScreen {
 
 	void updateContent() {
 		LogHelper.info("updateContent() is called!");
-		if (maxPages % 2 == 1) {
-			LogHelper.info("maxPages % 2 == 1");
-			if (currentPage > maxPages)
-				currentPage = maxPages;
-		}
-		else {
-			if (currentPage >= maxPages)
-				currentPage = maxPages - 2;
-		}
-		if (currentPage % 2 == 1)
-				currentPage--;
-		if (currentPage < 0)
-				currentPage = 0;
-		
-
+		if (maxPages % 2 == 1)
+        {
+            if (currentPage > maxPages)
+                currentPage = maxPages;
+        }
+        else
+        {
+            if (currentPage >= maxPages)
+                currentPage = maxPages - 2;
+        }
+        if (currentPage % 2 == 1)
+            currentPage--;
+        if (currentPage < 0)
+            currentPage = 0;
+        
+        
 		Page[] pages = dossier.getEntries();
 		LogHelper.info(pages == null ? "Pages are null!"
 				: "Pages are not null.");
