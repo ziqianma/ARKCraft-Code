@@ -23,7 +23,6 @@ public class GuiDossier extends GuiScreen {
 	private int currentPage;
 	private int maxPages;
 	private BookDocument dossier;
-
 	private PageButton nButton, prevButton;
 	private SmallFontRenderer fonts = DClient.fonts;
 	private static ResourceLocation bookRight;
@@ -77,7 +76,7 @@ public class GuiDossier extends GuiScreen {
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
 		LogHelper.info("drawScreen() in GuiDossier is called!");
 		LogHelper.info("CurrentPage: " + currentPage);
-		int x = (this.width / 2);
+		int x = (width - this.guiWidth / 2);
 		int y = (height - this.guiHeight) / 2;
 
 		GL11.glColor4f(1F, 1F, 1F, 1F);
@@ -96,11 +95,11 @@ public class GuiDossier extends GuiScreen {
 		LogHelper.info(pageRight == null ? "pageRight is null!" : "pageRight is not null");
 		if (pageLeft != null && pageRight != null) {
 			LogHelper.info("Trying to draw the left page!");
-			pageLeft.draw(x + 8, y + 12, mouseX, mouseY, fonts,
+			pageLeft.draw(x, y + 12, mouseX, mouseY, fonts,
 					bData.canTranslate, this);
 
 			LogHelper.info("Trying to draw the right page!");
-			pageRight.draw(x + 110, y + 12, mouseX, mouseY, fonts,
+			pageRight.draw(x + 128, y + 12, mouseX, mouseY, fonts,
 					bData.canTranslate, this);
 		}
 
