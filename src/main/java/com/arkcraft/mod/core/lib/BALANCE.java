@@ -31,5 +31,11 @@ public final class BALANCE {
 		//minValue 1min, maxValue, 5mins, default value 2:30mins
 		@DefaultInt(value = 1500, minValue = 600, maxValue = 3000, name = "Default max ticks between player poops.", comment = "Ticks between the player poops inside the game")
 		public static int TICKS_BETWEEN_PLAYER_POOP;
+		@DefaultDouble(value = 3.5D, minValue = 1.0D, maxValue = 10.0D, name = "Spear Damage", 
+				comment = "Spear Damage")
+		public static double SPEAR_DAMAGE;
+		@DefaultDouble(value = 3.5D, minValue = 1.0D, maxValue = 10.0D, name = "Tranq Ammo Damage", 
+				comment = "Tranq Ammo Damage")
+		public static double TRANQ_ARROW_DAMAGE;
 	}
 }

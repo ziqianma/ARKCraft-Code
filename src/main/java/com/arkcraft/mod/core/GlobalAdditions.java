@@ -22,6 +22,7 @@ import com.arkcraft.mod.core.blocks.ARKContainerBlock;
 import com.arkcraft.mod.core.blocks.crop_test.ARKCropPlotBlock;
 import com.arkcraft.mod.core.book.Dossier;
 import com.arkcraft.mod.core.creativetabs.ARKTabs;
+import com.arkcraft.mod.core.entity.EntityStoneSpear;
 import com.arkcraft.mod.core.entity.EntityTranqAmmo;
 import com.arkcraft.mod.core.entity.EntityCobble;
 import com.arkcraft.mod.core.entity.EntityDodoEgg;
@@ -44,6 +45,7 @@ import com.arkcraft.mod.core.items.ARKSlingshot;
 import com.arkcraft.mod.core.items.ARKTranqAmmo;
 import com.arkcraft.mod.core.items.ARKTranqGun;
 import com.arkcraft.mod.core.items.ARKWeapon;
+import com.arkcraft.mod.core.items.ARKWeaponThrowable;
 import com.arkcraft.mod.core.lib.KeyBindings;
 
 /**
@@ -65,7 +67,8 @@ public class GlobalAdditions {
 	public static ARKArmorItem chitinHelm, chitinChest, chitinLegs, chitinBoots;
 	public static ARKArmorItem clothHelm, clothChest, clothLegs, clothBoots;
 	public static ARKArmorItem boneHelm, boneChest, boneLegs, boneBoots;
-	public static ARKWeapon stoneSpear, ironPike;
+	public static ARKWeapon ironPike;
+	public static ARKWeaponThrowable stoneSpear;
 	public static ARKBlock oreSurface;
 	public static Dossier dino_book;
 	public static ARKTranqGun tranq_gun;
@@ -109,7 +112,7 @@ public class GlobalAdditions {
 		cobble_ball = addItemWithTooltip("cobble_ball", EnumChatFormatting.GOLD + "A Rocky Road to Victory");
 		explosive_ball = addItemWithTooltip("explosive_ball", EnumChatFormatting.RED + "A Rocky Road to Destruction");
 		slingshot = addSlingshot("slingshot");
-		stoneSpear = addWeapon("stoneSpear", ToolMaterial.STONE);
+		stoneSpear = addWeaponThrowable("stoneSpear", ToolMaterial.STONE);
 		ironPike = addWeapon("ironPike", ToolMaterial.IRON);
 
 		// Containers
@@ -159,6 +162,7 @@ public class GlobalAdditions {
 		RecipeHandler.registerSmithyCraftingRecipes();
 		EntityHandler.registerModEntity(EntityExplosive.class, "Explosive Cobblestone Ball", Main.instance, 64, 10, true);
 		EntityHandler.registerModEntity(EntityTranqAmmo.class, "Tranc Ammo", Main.instance, 64, 10, true);
+		EntityHandler.registerModEntity(EntityStoneSpear.class, "Stone Spear", Main.instance, 64, 10, true);
 		EntityHandler.registerModEntity(EntityCobble.class, "Cobblestone Ball", Main.instance, 64, 10, true);
 		EntityHandler.registerModEntity(EntityDodoEgg.class, "Dodo Egg", Main.instance, 64, 10, true);
 		
@@ -284,6 +288,11 @@ public class GlobalAdditions {
 	}
 	public static ARKWeapon addWeapon(String name, ToolMaterial mat) {
 		ARKWeapon weapon = new ARKWeapon(name, mat);
+		allItems.put(name, weapon);
+		return weapon;
+	}
+	public static ARKWeaponThrowable addWeaponThrowable(String name, ToolMaterial mat) {
+		ARKWeaponThrowable weapon = new ARKWeaponThrowable(name, mat);
 		allItems.put(name, weapon);
 		return weapon;
 	}

@@ -17,6 +17,7 @@ import com.arkcraft.mod.core.book.DCommon;
 import com.arkcraft.mod.core.entity.EntityCobble;
 import com.arkcraft.mod.core.entity.EntityDodoEgg;
 import com.arkcraft.mod.core.entity.EntityExplosive;
+import com.arkcraft.mod.core.entity.EntityStoneSpear;
 import com.arkcraft.mod.core.entity.EntityTranqAmmo;
 import com.arkcraft.mod.core.entity.aggressive.EntityRaptor;
 import com.arkcraft.mod.core.entity.model.ModelBrontosaurus;
@@ -27,6 +28,7 @@ import com.arkcraft.mod.core.entity.passive.EntityDodo;
 import com.arkcraft.mod.core.entity.render.RenderBrontosaurus;
 import com.arkcraft.mod.core.entity.render.RenderDodo;
 import com.arkcraft.mod.core.entity.render.RenderRaptor;
+import com.arkcraft.mod.core.entity.render.RenderStoneSpear;
 import com.arkcraft.mod.core.entity.render.RenderTranqAmmo;
 import com.arkcraft.mod.core.lib.LogHelper;
 
@@ -47,6 +49,7 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityDodo.class, new RenderDodo(new ModelDodo(), 0.3F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityBrontosaurus.class, new RenderBrontosaurus(new ModelBrontosaurus(), 0.5f));
 		RenderingRegistry.registerEntityRenderingHandler(EntityTranqAmmo.class, new RenderTranqAmmo());
+		RenderingRegistry.registerEntityRenderingHandler(EntityStoneSpear.class, new RenderStoneSpear());
 		ModelBakery.addVariantName(GlobalAdditions.slingshot, "arkcraft:slingshot", "arkcraft:slingshot_pulled");
 		proxy.init();
 		LogHelper.info("CommonProxy: Init run!");
