@@ -2,12 +2,19 @@ package com.arkcraft.mod.core.entity;
 
 import com.arkcraft.mod.core.items.ARKTranqAmmo;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityThrowable;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
 public class EntityTranqAmmo extends EntityThrowable
@@ -56,10 +63,11 @@ public class EntityTranqAmmo extends EntityThrowable
 			this.setDead();
 	}
     
+}
+    
 //    @Override
 //    protected float getGravityVelocity() 
 //    {
 //    	return 0;
 //    }   
 
-}

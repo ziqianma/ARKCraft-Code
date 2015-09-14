@@ -30,6 +30,8 @@ import com.arkcraft.mod.core.entity.render.RenderDodo;
 import com.arkcraft.mod.core.entity.render.RenderRaptor;
 import com.arkcraft.mod.core.entity.render.RenderStoneSpear;
 import com.arkcraft.mod.core.entity.render.RenderTranqAmmo;
+import com.arkcraft.mod.core.entity.test.EntitySpear;
+import com.arkcraft.mod.core.entity.test.RenderSpear;
 import com.arkcraft.mod.core.lib.LogHelper;
 
 public class ClientProxy extends CommonProxy {
@@ -50,6 +52,7 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityBrontosaurus.class, new RenderBrontosaurus(new ModelBrontosaurus(), 0.5f));
 		RenderingRegistry.registerEntityRenderingHandler(EntityTranqAmmo.class, new RenderTranqAmmo());
 		RenderingRegistry.registerEntityRenderingHandler(EntityStoneSpear.class, new RenderStoneSpear());
+		RenderingRegistry.registerEntityRenderingHandler(EntitySpear.class, new RenderSpear());
 		ModelBakery.addVariantName(GlobalAdditions.slingshot, "arkcraft:slingshot", "arkcraft:slingshot_pulled");
 		proxy.init();
 		LogHelper.info("CommonProxy: Init run!");

@@ -12,7 +12,7 @@ import com.arkcraft.mod.core.lib.BALANCE;
 
 public class ARKWeaponThrowable extends ItemSword {
 	
-	public static double spearDamage = BALANCE.PLAYER.SPEAR_DAMAGE;
+	public static double spearDamage = BALANCE.WEAPONS.SPEAR_DAMAGE;
 
 	public ARKWeaponThrowable(String name, ToolMaterial m) {
 		super(m);

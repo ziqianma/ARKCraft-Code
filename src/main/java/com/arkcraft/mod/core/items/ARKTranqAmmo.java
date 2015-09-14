@@ -14,7 +14,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 @SuppressWarnings("all")
 public class ARKTranqAmmo extends ItemSaddle {
 	
-	public static double tranqArrowDamage = BALANCE.PLAYER.TRANQ_ARROW_DAMAGE;
+	public static double tranqArrowDamage = BALANCE.WEAPONS.TRANQ_ARROW_DAMAGE;
 	
 	public ARKTranqAmmo(String name) {
 		super();

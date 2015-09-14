@@ -15,9 +15,9 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
 public class EntityStoneSpear extends EntityThrowable {
-    public Entity shootingEntity;
-    /** 1 if the player can pick up the arrow */
-    public int canBePickedUp;
+	    public int canBePickedUp;
+	    public Entity shootingEntity;
+
 
 	public EntityStoneSpear(World world, double p_i1778_2_, double p_i1778_4_, double p_i1778_6_) {
 		super(world, p_i1778_2_, p_i1778_4_, p_i1778_6_);
@@ -84,23 +84,26 @@ public class EntityStoneSpear extends EntityThrowable {
 			this.setDead();
 	}
 	
-    /**
-     * Called by a player entity when they collide with an entity
-     */
-    public void onCollideWithPlayer(EntityPlayer player) {
-//        if (!this.worldObj.isRemote && this.inGround && this.arrowShake <= 0)
-    	if (!this.worldObj.isRemote && this.inGround) {
-            boolean flag = this.canBePickedUp == 1 || this.canBePickedUp == 2 && player.capabilities.isCreativeMode;
+	@Override
+	  public void onCollideWithPlayer(EntityPlayer entityIn)
+	    {
+	        if (!this.worldObj.isRemote && this.inGround)
+	        {
+	            boolean flag = this.canBePickedUp == 1 || this.canBePickedUp == 2 && entityIn.capabilities.isCreativeMode;
 
-            if (this.canBePickedUp == 1 && !player.inventory.addItemStackToInventory(new ItemStack(GlobalAdditions.stoneSpear, 1))) {
-                flag = false;
-            }
+	            if (this.canBePickedUp == 1 && !entityIn.inventory.addItemStackToInventory(new ItemStack(GlobalAdditions.stoneSpear, 1)))
+	            {
+	                flag = false;
+	            }
 
-            if (flag) {
-                this.playSound("random.pop", 0.2F, ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
-                player.onItemPickup(this, 1);
-                this.setDead();
-            }
-        }
-    }
+	            if (flag)
+	            {
+	                this.playSound("random.pop", 0.2F, ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
+	                entityIn.onItemPickup(this, 1);
+	                this.setDead();
+	            }
+	        }
+	    }
 }
+    
+    
