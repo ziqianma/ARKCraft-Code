@@ -76,7 +76,7 @@ public class GuiDossier extends GuiScreen {
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
 		LogHelper.info("drawScreen() in GuiDossier is called!");
 		LogHelper.info("CurrentPage: " + currentPage);
-		int x = (width - this.guiWidth / 2);
+		int x = (width / 2);
 		int y = (height - this.guiHeight) / 2;
 
 		GL11.glColor4f(1F, 1F, 1F, 1F);
