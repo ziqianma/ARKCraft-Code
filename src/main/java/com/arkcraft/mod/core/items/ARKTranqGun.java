@@ -19,15 +19,17 @@ public class ARKTranqGun extends Item{
 	}
 	
 	@Override
-	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World,EntityPlayer par3EntityPlayer) {
-	    if(par3EntityPlayer.capabilities.isCreativeMode||par3EntityPlayer.inventory.consumeInventoryItem(GlobalAdditions.tranq_ammo))
-	    {
-	        par2World.playSoundAtEntity(par3EntityPlayer, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
-	        if (!par2World.isRemote)
-	        {
-	            par2World.spawnEntityInWorld(new EntityTranqAmmo(par2World, par3EntityPlayer));
-	        }
-	    }
-	        return par1ItemStack;
-	    }	
+	 public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
+	   {
+	       if (!par3EntityPlayer.capabilities.isCreativeMode)
+	       {
+	           --par1ItemStack.stackSize;
+	       }
+	       par2World.playSoundAtEntity(par3EntityPlayer, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+	       if (!par2World.isRemote)
+	       {
+	           par2World.spawnEntityInWorld(new EntityTranqAmmo(par2World, par3EntityPlayer));
+	       }
+	       return par1ItemStack;
+	   }
 }
