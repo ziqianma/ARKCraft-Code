@@ -60,6 +60,7 @@ public class DClient extends DCommon {
 		LogHelper.info("Registering page classes!");
 		PageData.addBookPage("dino", PageDino.class);
 		PageData.addBookPage("text", PageText.class);
+		PageData.addBookPage("title", PageTitle.class);
 	}
 	
 	@Override

@@ -18,8 +18,8 @@ import com.arkcraft.mod.core.machine.gui.PageButton;
 public class GuiDossier extends GuiScreen {
 
 	private ItemStack dossierItem;
-	private int guiWidth = 128;
-	private int guiHeight = 180;
+	public int guiWidth = 128;
+	public int guiHeight = 180;
 	private int currentPage;
 	private int maxPages;
 	private BookDocument dossier;
@@ -53,10 +53,11 @@ public class GuiDossier extends GuiScreen {
 		currentPage = 0;
 		maxPages = dossier.getEntries().length;
 		updateContent();
-		int xPos = (this.width - guiWidth) / 2;
-		this.buttonList.add(this.nButton = new PageButton(1, xPos + guiWidth
-				+ 26, 185, true));
-		this.buttonList.add(this.prevButton = new PageButton(2, xPos - 45, 185,
+		int x = (this.width - guiWidth) / 2;
+		int y = (this.height - guiHeight) / 2;
+		this.buttonList.add(this.nButton = new PageButton(1, x + guiWidth
+				+ 26, y + guiHeight - 20, true));
+		this.buttonList.add(this.prevButton = new PageButton(2, x - 45, y + guiHeight - 20,
 				false));
 		
 	}
@@ -85,8 +86,7 @@ public class GuiDossier extends GuiScreen {
 
 		GL11.glColor4f(1F, 1F, 1F, 1F);
 		this.mc.getTextureManager().bindTexture(bookLeft);
-		x -= this.guiWidth;
-		this.drawTexturedModalRect(x, y, 256 - this.guiWidth, 0, this.guiWidth,
+		this.drawTexturedModalRect(x - guiWidth, y, 256 - this.guiWidth, 0, this.guiWidth,
 				this.guiHeight);
 
 		super.drawScreen(mouseX, mouseY, partialTicks);
@@ -99,7 +99,7 @@ public class GuiDossier extends GuiScreen {
 					bData.canTranslate, this);
 
 			LogHelper.info("Trying to draw the right page!");
-			pageRight.draw(x + 128, y + 12, mouseX, mouseY, fonts,
+			pageRight.draw(x + guiWidth, y + 12, mouseX, mouseY, fonts,
 					bData.canTranslate, this);
 		}
 

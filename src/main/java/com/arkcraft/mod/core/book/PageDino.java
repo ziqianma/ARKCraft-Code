@@ -27,17 +27,17 @@ public class PageDino extends Page {
 		
 		if(title != null) {
 			if(canTranslate) StatCollector.translateToLocal(title);
-			renderer.drawString("\u00a7n" + title, (guiLeft + 64 - renderer.getStringWidth(title)), guiTop + 5, 0);
+			renderer.drawString("\u00a7n" + title, guiLeft + (dossier.guiWidth-renderer.getStringWidth(title)) / 2, guiTop + 5, 0);
 		}
 		
 		if(temperance != null) {
 			if(canTranslate) StatCollector.translateToLocal(diet);
-			renderer.drawString("Diet: " + diet, (guiLeft + 64 - renderer.getStringWidth(diet)), guiTop + 45, 0);
+			renderer.drawString("Diet: " + diet, guiLeft + (dossier.guiWidth-renderer.getStringWidth("Diet: " + diet)) / 2, guiTop + 75, 0);
 		}
 		
 		if(diet != null) {
 			if(canTranslate) StatCollector.translateToLocal(temperance);
-			renderer.drawString("Temperance: " + temperance, (guiLeft + 64 - renderer.getStringWidth(temperance)), guiTop + 55, 0);
+			renderer.drawString("Temperance: " + temperance, guiLeft + (dossier.guiWidth-renderer.getStringWidth("Temperance: " + temperance)) / 2, guiTop + 85, 0);
 		}
 	}
 	

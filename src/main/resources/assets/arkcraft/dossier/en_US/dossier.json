@@ -1,6 +1,11 @@
 {
 	"entries": [
 		{
+			"type": "title",
+			"title": "ARKCraft : Survival Evolved",
+			"text": "Your guide to creatures in the ARKCraft Universe"
+		},
+		{
 			"type": "dino",
 			"title": "Utahraptor Prime",		
 			"temperance": "Aggresive",
