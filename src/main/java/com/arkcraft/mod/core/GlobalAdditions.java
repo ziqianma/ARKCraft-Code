@@ -31,7 +31,7 @@ import com.arkcraft.mod.core.entity.aggressive.EntityRaptor;
 import com.arkcraft.mod.core.entity.passive.EntityBrontosaurus;
 import com.arkcraft.mod.core.entity.passive.EntityDodo;
 import com.arkcraft.mod.core.entity.test.EntitySpear;
-import com.arkcraft.mod.core.entity.test.ItemSpear;
+import com.arkcraft.mod.core.entity.test.ItemStoneSpear;
 import com.arkcraft.mod.core.handler.EntityHandler;
 import com.arkcraft.mod.core.handler.GenerationHandler;
 import com.arkcraft.mod.core.handler.GuiHandler;
@@ -70,12 +70,11 @@ public class GlobalAdditions {
 	public static ARKArmorItem clothHelm, clothChest, clothLegs, clothBoots;
 	public static ARKArmorItem boneHelm, boneChest, boneLegs, boneBoots;
 	public static ARKWeapon ironPike;
-	public static ARKWeaponThrowable stoneSpear;
 	public static ARKBlock oreSurface;
 	public static Dossier dino_book;
 	public static ARKTranqGun tranq_gun;
 	public static ARKTranqAmmo tranq_ammo;
-	public static ItemSpear spear;
+	public static ItemStoneSpear stoneSpear;
 	
 	public static ArmorMaterial CLOTH = EnumHelper.addArmorMaterial("CLOTH_MAT", "CLOTH_MAT", 4, new int[] {1,2,1,1}, 15);
 	public static ArmorMaterial CHITIN = EnumHelper.addArmorMaterial("CHITIN_MAT", "CHITIN_MAT", 16, new int[] { 3,7,6,3 } , 10);
@@ -115,7 +114,7 @@ public class GlobalAdditions {
 		cobble_ball = addItemWithTooltip("cobble_ball", EnumChatFormatting.GOLD + "A Rocky Road to Victory");
 		explosive_ball = addItemWithTooltip("explosive_ball", EnumChatFormatting.RED + "A Rocky Road to Destruction");
 		slingshot = addSlingshot("slingshot");
-		stoneSpear = addWeaponThrowable("stoneSpear", ToolMaterial.STONE);
+		//stoneSpear = addWeaponThrowable("stoneSpear", ToolMaterial.STONE);
 		ironPike = addWeapon("ironPike", ToolMaterial.IRON);
 
 		// Containers
@@ -135,7 +134,7 @@ public class GlobalAdditions {
 		tranq_gun = addTranqGun("tranq_gun");
 		tranq_ammo = addTranqAmmo("tranq_ammo");
 		
-		spear = addSpearItem("spear", ToolMaterial.STONE);
+		stoneSpear = addSpearItem("stoneSpear", ToolMaterial.STONE);
 		
 		// Other Types of Items
 		dodo_egg = addEggItem("dodo_egg");
@@ -231,8 +230,8 @@ public class GlobalAdditions {
 		allItems.put(name, i);
 		return i;
 	}	
-	public static ItemSpear addSpearItem(String name, ToolMaterial mat) {
-		ItemSpear weapon = new ItemSpear(name, mat);
+	public static ItemStoneSpear addSpearItem(String name, ToolMaterial mat) {
+		ItemStoneSpear weapon = new ItemStoneSpear(name, mat);
 		allItems.put(name, weapon);
 		return weapon;
 	}

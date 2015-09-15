@@ -14,7 +14,7 @@ import com.arkcraft.mod.core.Main;
 
 public class RenderSpear extends Render
 {
-	private static final ResourceLocation texture = new ResourceLocation(Main.MODID, "textures/models/item/spear.png");
+	private static final ResourceLocation texture = new ResourceLocation(Main.MODID, "textures/entity/spear.png");
 	
 	public RenderSpear() 
 	{
