@@ -8,6 +8,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
 
 import com.arkcraft.mod.core.Main;
+import com.arkcraft.mod.core.book.deserialization.BookDeserializer;
+import com.arkcraft.mod.core.book.deserialization.PageDeserializer;
+import com.arkcraft.mod.core.book.pages.IPage;
 import com.arkcraft.mod.core.lib.LogHelper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

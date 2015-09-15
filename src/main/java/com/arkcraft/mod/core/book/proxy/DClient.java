@@ -1,4 +1,4 @@
-package com.arkcraft.mod.core.book;
+package com.arkcraft.mod.core.book.proxy;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -9,6 +9,17 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 
 import com.arkcraft.mod.core.Main;
+import com.arkcraft.mod.core.book.BookDocument;
+import com.arkcraft.mod.core.book.DossierInfo;
+import com.arkcraft.mod.core.book.deserialization.BookDeserializer;
+import com.arkcraft.mod.core.book.deserialization.EntityLivingBaseDeserializer;
+import com.arkcraft.mod.core.book.deserialization.PageDeserializer;
+import com.arkcraft.mod.core.book.fonts.SmallFontRenderer;
+import com.arkcraft.mod.core.book.pages.Page;
+import com.arkcraft.mod.core.book.pages.PageData;
+import com.arkcraft.mod.core.book.pages.PageDino;
+import com.arkcraft.mod.core.book.pages.PageText;
+import com.arkcraft.mod.core.book.pages.PageTitle;
 import com.arkcraft.mod.core.entity.aggressive.EntityRaptor;
 import com.arkcraft.mod.core.entity.passive.EntityBrontosaurus;
 import com.arkcraft.mod.core.entity.passive.EntityDodo;

@@ -1,4 +1,4 @@
-package com.arkcraft.mod.core.book;
+package com.arkcraft.mod.core.book.proxy;
 
 public class DCommon {
 

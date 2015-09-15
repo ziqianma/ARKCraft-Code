@@ -2,8 +2,9 @@
 	"entries": [
 		{
 			"type": "title",
-			"title": "ARKCraft : Survival Evolved",
-			"text": "Your guide to creatures in the ARKCraft Universe"
+			"title": "ARKCraft Creature Dossier",
+			"text": "Your guide to creatures in the ARKCraft Universe.",
+			"image": "textures/gui/logo.png"
 		},
 		{
 			"type": "dino",

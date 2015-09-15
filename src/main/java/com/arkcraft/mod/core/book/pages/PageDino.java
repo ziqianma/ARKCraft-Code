@@ -1,8 +1,10 @@
-package com.arkcraft.mod.core.book;
+package com.arkcraft.mod.core.book.pages;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.StatCollector;
 
+import com.arkcraft.mod.core.book.GuiDossier;
+import com.arkcraft.mod.core.book.fonts.SmallFontRenderer;
 import com.arkcraft.mod.core.lib.LogHelper;
 
 public class PageDino extends Page {

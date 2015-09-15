@@ -1,4 +1,4 @@
-package com.arkcraft.mod.core.book;
+package com.arkcraft.mod.core.book.pages;
 
 import java.util.HashMap;
 

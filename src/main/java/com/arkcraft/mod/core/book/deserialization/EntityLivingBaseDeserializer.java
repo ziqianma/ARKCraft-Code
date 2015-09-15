@@ -1,4 +1,4 @@
-package com.arkcraft.mod.core.book;
+package com.arkcraft.mod.core.book.deserialization;
 
 import java.lang.reflect.Type;
 
@@ -6,6 +6,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.world.World;
 
+import com.arkcraft.mod.core.book.pages.PageData;
 import com.arkcraft.mod.core.lib.LogHelper;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;

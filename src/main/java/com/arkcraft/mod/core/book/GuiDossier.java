@@ -10,6 +10,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.lwjgl.opengl.GL11;
 
+import com.arkcraft.mod.core.book.fonts.SmallFontRenderer;
+import com.arkcraft.mod.core.book.pages.Page;
+import com.arkcraft.mod.core.book.proxy.DClient;
 import com.arkcraft.mod.core.lib.LogHelper;
 import com.arkcraft.mod.core.machine.gui.PageButton;
 
@@ -75,8 +78,8 @@ public class GuiDossier extends GuiScreen {
 
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-		LogHelper.info("drawScreen() in GuiDossier is called!");
-		LogHelper.info("CurrentPage: " + currentPage);
+		//LogHelper.info("CurrentPage: " + currentPage);
+		LogHelper.info("Mouse X: " + mouseX + ", Mouse Y: " + mouseY);
 		int x = (width / 2);
 		int y = (height - this.guiHeight) / 2;
 
@@ -95,11 +98,11 @@ public class GuiDossier extends GuiScreen {
 		LogHelper.info(pageRight == null ? "pageRight is null!" : "pageRight is not null");
 		if (pageLeft != null && pageRight != null) {
 			LogHelper.info("Trying to draw the left page!");
-			pageLeft.draw(x, y + 12, mouseX, mouseY, fonts,
+			pageLeft.draw(x - guiWidth, y + 12, mouseX, mouseY, fonts,
 					bData.canTranslate, this);
 
 			LogHelper.info("Trying to draw the right page!");
-			pageRight.draw(x + guiWidth, y + 12, mouseX, mouseY, fonts,
+			pageRight.draw(x, y + 12, mouseX, mouseY, fonts,
 					bData.canTranslate, this);
 		}
 

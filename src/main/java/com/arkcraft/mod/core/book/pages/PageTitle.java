@@ -1,10 +1,12 @@
-package com.arkcraft.mod.core.book;
+package com.arkcraft.mod.core.book.pages;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 
 import com.arkcraft.mod.core.Main;
+import com.arkcraft.mod.core.book.GuiDossier;
+import com.arkcraft.mod.core.book.fonts.SmallFontRenderer;
 
 public class PageTitle extends Page {
 
@@ -13,21 +15,23 @@ public class PageTitle extends Page {
 	public String image;
 
 	public void draw(int guiLeft, int guiTop, int mouseX, int mouseY, SmallFontRenderer renderer, boolean canTranslate, GuiDossier dossier) {
-		if(title != null) {
-			if(canTranslate) StatCollector.translateToLocal(title);
-			renderer.drawString(title, guiLeft + (dossier.guiWidth-renderer.getStringWidth(title)) / 2, guiTop + 5, 0);
-		}
-		
 		if(image != null) {
 			ResourceLocation imagePath = new ResourceLocation(Main.MODID, image);
 			if(imagePath != null) {
 				Minecraft.getMinecraft().getTextureManager().bindTexture(imagePath);
 			}
+			dossier.drawTexturedModalRect(guiLeft + (dossier.guiWidth-64)/2, guiTop + 15,0,0,64,64);
+			
+		}
+		
+		if(title != null) {
+			if(canTranslate) StatCollector.translateToLocal(title);
+			renderer.drawString(title, guiLeft + (dossier.guiWidth-renderer.getStringWidth(title)) / 2, guiTop + 5, 0);
 		}
 		
 		if(text != null) {
 			if(canTranslate) StatCollector.translateToLocal(text);
-			renderer.drawSplitString(text, guiLeft- ((dossier.guiWidth - 4) /2), guiTop + 25, dossier.guiWidth - 4, 0);
+			renderer.drawSplitString(text, guiLeft + (dossier.guiWidth-renderer.getStringWidth(title)) / 2, guiTop + 85, dossier.guiWidth - 20, 0);
 		}
 	}
 	

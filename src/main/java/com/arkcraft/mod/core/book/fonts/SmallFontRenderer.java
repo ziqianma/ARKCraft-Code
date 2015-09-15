@@ -1,4 +1,4 @@
-package com.arkcraft.mod.core.book;
+package com.arkcraft.mod.core.book.fonts;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;

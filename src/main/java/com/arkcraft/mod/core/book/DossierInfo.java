@@ -7,11 +7,12 @@ import net.minecraftforge.fml.relauncher.Side;
 
 import com.arkcraft.mod.core.GlobalAdditions;
 import com.arkcraft.mod.core.Main;
+import com.arkcraft.mod.core.book.proxy.DClient;
 import com.arkcraft.mod.core.lib.LogHelper;
 
 public class DossierInfo {
 
-	BookData data = new BookData();
+	public BookData data = new BookData();
 	
 	public DossierInfo() {
 		Side side = FMLCommonHandler.instance().getEffectiveSide();

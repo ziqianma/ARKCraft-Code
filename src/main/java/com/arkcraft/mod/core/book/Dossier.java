@@ -13,6 +13,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.arkcraft.mod.core.GlobalAdditions;
 import com.arkcraft.mod.core.GlobalAdditions.GUI;
+import com.arkcraft.mod.core.book.proxy.DClient;
 import com.arkcraft.mod.core.Main;
 
 public class Dossier extends Item {

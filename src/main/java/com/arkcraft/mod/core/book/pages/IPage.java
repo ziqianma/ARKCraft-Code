@@ -1,4 +1,7 @@
-package com.arkcraft.mod.core.book;
+package com.arkcraft.mod.core.book.pages;
+
+import com.arkcraft.mod.core.book.GuiDossier;
+import com.arkcraft.mod.core.book.fonts.SmallFontRenderer;
 
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;

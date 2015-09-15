@@ -13,7 +13,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 
 import com.arkcraft.mod.core.GlobalAdditions;
 import com.arkcraft.mod.core.Main;
-import com.arkcraft.mod.core.book.DCommon;
+import com.arkcraft.mod.core.book.proxy.DCommon;
 import com.arkcraft.mod.core.entity.EntityCobble;
 import com.arkcraft.mod.core.entity.EntityDodoEgg;
 import com.arkcraft.mod.core.entity.EntityExplosive;
