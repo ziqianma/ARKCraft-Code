@@ -1,6 +1,7 @@
 package com.arkcraft.mod.core;
 
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -30,6 +31,7 @@ public class Main {
 	@Instance("arkcraft")
 	public static Main instance;
 	public static SimpleNetworkWrapper modChannel;
+	public Config modConfig;
 	
 	public Main() { instance = this; }
 	
@@ -37,8 +39,7 @@ public class Main {
 	public void preInit(FMLPreInitializationEvent event) {
 		Config.init(event.getSuggestedConfigurationFile());// Keep first
 		GlobalAdditions.init();
-		setupNetwork();
-		
+		setupNetwork();	
 	}
 	
 	@EventHandler
@@ -49,6 +50,7 @@ public class Main {
 		proxy.registerRenderers();
 		proxy.init();
 		FMLCommonHandler.instance().bus().register(new Config());
+
 	}
 	
 	@EventHandler

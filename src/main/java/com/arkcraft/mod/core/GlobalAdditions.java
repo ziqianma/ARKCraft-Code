@@ -22,6 +22,7 @@ import com.arkcraft.mod.core.blocks.ARKContainerBlock;
 import com.arkcraft.mod.core.blocks.crop_test.ARKCropPlotBlock;
 import com.arkcraft.mod.core.book.Dossier;
 import com.arkcraft.mod.core.creativetabs.ARKTabs;
+import com.arkcraft.mod.core.entity.EntityStoneSpear;
 import com.arkcraft.mod.core.entity.EntityTranqAmmo;
 import com.arkcraft.mod.core.entity.EntityCobble;
 import com.arkcraft.mod.core.entity.EntityDodoEgg;
@@ -29,6 +30,8 @@ import com.arkcraft.mod.core.entity.EntityExplosive;
 import com.arkcraft.mod.core.entity.aggressive.EntityRaptor;
 import com.arkcraft.mod.core.entity.passive.EntityBrontosaurus;
 import com.arkcraft.mod.core.entity.passive.EntityDodo;
+import com.arkcraft.mod.core.entity.test.EntitySpear;
+import com.arkcraft.mod.core.entity.test.ItemSpear;
 import com.arkcraft.mod.core.handler.EntityHandler;
 import com.arkcraft.mod.core.handler.GenerationHandler;
 import com.arkcraft.mod.core.handler.GuiHandler;
@@ -44,6 +47,7 @@ import com.arkcraft.mod.core.items.ARKSlingshot;
 import com.arkcraft.mod.core.items.ARKTranqAmmo;
 import com.arkcraft.mod.core.items.ARKTranqGun;
 import com.arkcraft.mod.core.items.ARKWeapon;
+import com.arkcraft.mod.core.items.ARKWeaponThrowable;
 import com.arkcraft.mod.core.lib.KeyBindings;
 
 /**
@@ -65,11 +69,13 @@ public class GlobalAdditions {
 	public static ARKArmorItem chitinHelm, chitinChest, chitinLegs, chitinBoots;
 	public static ARKArmorItem clothHelm, clothChest, clothLegs, clothBoots;
 	public static ARKArmorItem boneHelm, boneChest, boneLegs, boneBoots;
-	public static ARKWeapon stoneSpear, ironPike;
+	public static ARKWeapon ironPike;
+	public static ARKWeaponThrowable stoneSpear;
 	public static ARKBlock oreSurface;
 	public static Dossier dino_book;
 	public static ARKTranqGun tranq_gun;
 	public static ARKTranqAmmo tranq_ammo;
+	public static ItemSpear spear;
 	
 	public static ArmorMaterial CLOTH = EnumHelper.addArmorMaterial("CLOTH_MAT", "CLOTH_MAT", 4, new int[] {1,2,1,1}, 15);
 	public static ArmorMaterial CHITIN = EnumHelper.addArmorMaterial("CHITIN_MAT", "CHITIN_MAT", 16, new int[] { 3,7,6,3 } , 10);
@@ -109,7 +115,7 @@ public class GlobalAdditions {
 		cobble_ball = addItemWithTooltip("cobble_ball", EnumChatFormatting.GOLD + "A Rocky Road to Victory");
 		explosive_ball = addItemWithTooltip("explosive_ball", EnumChatFormatting.RED + "A Rocky Road to Destruction");
 		slingshot = addSlingshot("slingshot");
-		stoneSpear = addWeapon("stoneSpear", ToolMaterial.STONE);
+		stoneSpear = addWeaponThrowable("stoneSpear", ToolMaterial.STONE);
 		ironPike = addWeapon("ironPike", ToolMaterial.IRON);
 
 		// Containers
@@ -128,6 +134,8 @@ public class GlobalAdditions {
 		dodo_bag = addItemWithTooltip("dodo_bag", "Backpack for the Dodo");
 		tranq_gun = addTranqGun("tranq_gun");
 		tranq_ammo = addTranqAmmo("tranq_ammo");
+		
+		spear = addSpearItem("spear", ToolMaterial.STONE);
 		
 		// Other Types of Items
 		dodo_egg = addEggItem("dodo_egg");
@@ -158,7 +166,9 @@ public class GlobalAdditions {
 		RecipeHandler.registerPestleCraftingRecipes();
 		RecipeHandler.registerSmithyCraftingRecipes();
 		EntityHandler.registerModEntity(EntityExplosive.class, "Explosive Cobblestone Ball", Main.instance, 64, 10, true);
+		EntityHandler.registerModEntity(EntitySpear.class, "Spear", Main.instance, 64, 10, true);
 		EntityHandler.registerModEntity(EntityTranqAmmo.class, "Tranc Ammo", Main.instance, 64, 10, true);
+		EntityHandler.registerModEntity(EntityStoneSpear.class, "Stone Spear", Main.instance, 64, 10, true);
 		EntityHandler.registerModEntity(EntityCobble.class, "Cobblestone Ball", Main.instance, 64, 10, true);
 		EntityHandler.registerModEntity(EntityDodoEgg.class, "Dodo Egg", Main.instance, 64, 10, true);
 		
@@ -221,6 +231,11 @@ public class GlobalAdditions {
 		allItems.put(name, i);
 		return i;
 	}	
+	public static ItemSpear addSpearItem(String name, ToolMaterial mat) {
+		ItemSpear weapon = new ItemSpear(name, mat);
+		allItems.put(name, weapon);
+		return weapon;
+	}
 	
 	protected static ARKFecesItem addFecesItem(String name) {
 		ARKFecesItem i = new ARKFecesItem(name);
@@ -284,6 +299,11 @@ public class GlobalAdditions {
 	}
 	public static ARKWeapon addWeapon(String name, ToolMaterial mat) {
 		ARKWeapon weapon = new ARKWeapon(name, mat);
+		allItems.put(name, weapon);
+		return weapon;
+	}
+	public static ARKWeaponThrowable addWeaponThrowable(String name, ToolMaterial mat) {
+		ARKWeaponThrowable weapon = new ARKWeaponThrowable(name, mat);
 		allItems.put(name, weapon);
 		return weapon;
 	}
