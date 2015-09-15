@@ -512,6 +512,12 @@ public abstract class EntityProjectile extends EntityArrow implements IThrowable
 		return false;
 	}
 	
+	protected float getGravityVelocity()
+	{
+	    return 0.03F;
+	}
+
+	
 	@Override
 	public void setIsCritical(boolean flag)
 	{
