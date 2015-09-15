@@ -2,8 +2,6 @@ package com.arkcraft.mod.core.entity.test;
 
 import java.util.List;
 
-import com.arkcraft.mod.core.Main;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -29,6 +27,7 @@ import net.minecraftforge.fml.common.registry.IThrowableEntity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+@SuppressWarnings("rawtypes")
 public abstract class EntityProjectile extends EntityArrow implements IThrowableEntity
 {
 	public static final int	NO_PICKUP	= 0, PICKUP_ALL = 1, PICKUP_CREATIVE = 2, PICKUP_OWNER = 3;
