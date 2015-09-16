@@ -1,8 +1,10 @@
 package com.arkcraft.mod.core.items;
 
+import java.util.HashMap;
 import java.util.List;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -90,8 +92,7 @@ public class ARKTranqGun extends Item{
 			
 				return itemstack;
 		}
-
-
+	
 	//public void addInformation(ItemStack itemstack, EntityPlayer player, List list, boolean on){
 	//	list.add("");
 	//}
