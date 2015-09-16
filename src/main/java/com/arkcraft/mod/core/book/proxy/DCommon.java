@@ -1,5 +1,9 @@
 package com.arkcraft.mod.core.book.proxy;
-
+/***
+ * 
+ * @author Vastatio
+ *
+ */
 public class DCommon {
 
 	public void init() {}

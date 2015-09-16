@@ -6,7 +6,11 @@ import net.minecraft.util.StatCollector;
 import com.arkcraft.mod.core.book.GuiDossier;
 import com.arkcraft.mod.core.book.fonts.SmallFontRenderer;
 import com.arkcraft.mod.core.lib.LogHelper;
-
+/***
+ * 
+ * @author Vastatio
+ *
+ */
 public class PageDino extends Page {
 
 	public String title;
@@ -24,7 +28,7 @@ public class PageDino extends Page {
 		
 		if(model != null) {
 			//int size = 25;
-			//GuiInventory.drawEntityOnScreen(guiLeft + 64 - size, guiTop + 15, size, -350F, -5F, model);
+			//GuiInventory.drawEntityOnScreen(guiLeft + (dossier.guiWidth-size)/2, guiTop + 15, size, -350F, -5F, model);
 		}
 		
 		if(title != null) {

@@ -5,7 +5,11 @@ import com.arkcraft.mod.core.book.fonts.SmallFontRenderer;
 
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
+/***
+ * 
+ * @author Vastatio
+ *
+ */
 public interface IPage {
 	
 	@SideOnly(Side.CLIENT)

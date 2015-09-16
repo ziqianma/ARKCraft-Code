@@ -9,7 +9,11 @@ import com.arkcraft.mod.core.GlobalAdditions;
 import com.arkcraft.mod.core.Main;
 import com.arkcraft.mod.core.book.proxy.DClient;
 import com.arkcraft.mod.core.lib.LogHelper;
-
+/***
+ * 
+ * @author Vastatio
+ *
+ */
 public class DossierInfo {
 
 	public BookData data = new BookData();

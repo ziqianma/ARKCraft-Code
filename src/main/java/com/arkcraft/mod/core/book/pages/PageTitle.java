@@ -7,7 +7,11 @@ import net.minecraft.util.StatCollector;
 import com.arkcraft.mod.core.Main;
 import com.arkcraft.mod.core.book.GuiDossier;
 import com.arkcraft.mod.core.book.fonts.SmallFontRenderer;
-
+/***
+ * 
+ * @author Vastatio
+ *
+ */
 public class PageTitle extends Page {
 
 	public String title;

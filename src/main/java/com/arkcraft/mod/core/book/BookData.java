@@ -6,7 +6,11 @@ import com.arkcraft.mod.core.Main;
 import com.arkcraft.mod.core.book.fonts.SmallFontRenderer;
 import com.arkcraft.mod.core.lib.LogHelper;
 import com.google.gson.GsonBuilder;
-
+/***
+ * 
+ * @author Vastatio
+ *
+ */
 public class BookData {
 	
 	public GsonBuilder gBuilder = new GsonBuilder();

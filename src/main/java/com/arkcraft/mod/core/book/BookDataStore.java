@@ -2,7 +2,11 @@ package com.arkcraft.mod.core.book;
 
 import com.arkcraft.mod.core.lib.LogHelper;
 import com.google.common.collect.HashBiMap;
-
+/***
+ * 
+ * @author Vastatio
+ *
+ */
 public class BookDataStore {
 	
 	private static HashBiMap<String, BookData> data = HashBiMap.create();

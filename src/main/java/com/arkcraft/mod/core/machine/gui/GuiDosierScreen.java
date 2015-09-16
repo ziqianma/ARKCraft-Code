@@ -10,6 +10,7 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import com.arkcraft.mod.core.Main;
+import com.arkcraft.mod.core.book.PageButton;
 import com.arkcraft.mod.core.handler.BookDrawHandler;
 import com.arkcraft.mod.core.lib.LogHelper;
 

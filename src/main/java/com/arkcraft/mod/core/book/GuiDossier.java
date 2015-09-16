@@ -14,10 +14,14 @@ import com.arkcraft.mod.core.book.fonts.SmallFontRenderer;
 import com.arkcraft.mod.core.book.pages.Page;
 import com.arkcraft.mod.core.book.proxy.DClient;
 import com.arkcraft.mod.core.lib.LogHelper;
-import com.arkcraft.mod.core.machine.gui.PageButton;
 
 @SideOnly(Side.CLIENT)
 @SuppressWarnings("unused")
+/***
+ * 
+ * @author Vastatio
+ *
+ */
 public class GuiDossier extends GuiScreen {
 
 	private ItemStack dossierItem;

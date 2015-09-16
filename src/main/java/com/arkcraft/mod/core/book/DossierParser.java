@@ -14,7 +14,11 @@ import com.arkcraft.mod.core.book.pages.IPage;
 import com.arkcraft.mod.core.lib.LogHelper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
+/***
+ * 
+ * @author Vastatio
+ *
+ */
 public class DossierParser {
 
 	public static BookDocument parseJSON(GsonBuilder gBuilder, String location) {

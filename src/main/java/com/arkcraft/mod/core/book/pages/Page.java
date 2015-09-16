@@ -3,7 +3,11 @@ package com.arkcraft.mod.core.book.pages;
 import com.arkcraft.mod.core.book.GuiDossier;
 import com.arkcraft.mod.core.book.fonts.SmallFontRenderer;
 
-
+/***
+ * 
+ * @author Vastatio
+ *
+ */
 public class Page implements IPage {
 	
 	public Page() {}

@@ -38,8 +38,8 @@ public class ClientProxy extends CommonProxy {
 	
 	boolean initDone = false;
 	
-	@SidedProxy(clientSide="com.arkcraft.mod.core.book.DClient", serverSide="com.arkcraft.mod.core.book.DCommon")
-	public static DCommon proxy;
+	@SidedProxy(clientSide="com.arkcraft.mod.core.book.proxy.DClient", serverSide="com.arkcraft.mod.core.book.proxy.DCommon")
+	public static DCommon dossierProxy;
 	
 	@Override
 	public void init() {
@@ -54,8 +54,8 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityStoneSpear.class, new RenderStoneSpear());
 		RenderingRegistry.registerEntityRenderingHandler(EntitySpear.class, new RenderSpear());
 		ModelBakery.addVariantName(GlobalAdditions.slingshot, "arkcraft:slingshot", "arkcraft:slingshot_pulled");
-		proxy.init();
-		LogHelper.info("CommonProxy: Init run!");
+		dossierProxy.init();
+		LogHelper.info("CommonProxy: Init run finished.");
 		initDone = true;
 	}
 	

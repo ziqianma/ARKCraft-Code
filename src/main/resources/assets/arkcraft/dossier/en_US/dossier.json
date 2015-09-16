@@ -7,18 +7,22 @@
 			"image": "textures/gui/logo.png"
 		},
 		{
+			"type": "chapter",
+			"title": "Section 1: Dinos",
+			"icon": "dinosaur"
+		},
+		{
 			"type": "dino",
 			"title": "Utahraptor Prime",		
 			"temperance": "Aggresive",
-			"model": "raptor",
+			"model": "dodo",
 			"diet": "Carnivourous"
 		},
-		
 		{
 			"type": "dino",
 			"title": "Brontosaurus Lazurus",		
 			"temperance": "Passive",
-			"model": "raptor",
+			"model": "dodo",
 			"diet": "Herbivore"
 		},
 		
@@ -26,7 +30,7 @@
 			"type": "dino",
 			"title": "Spinosaurus Aquareliga",		
 			"temperance": "Territorial",
-			"model": "raptor",
+			"model": "dodo",
 			"diet": "Carnivourous"
 		},
 		
@@ -34,7 +38,7 @@
 			"type": "dino",
 			"title": "Dilophosaurus Sputatrix",		
 			"temperance": "Skittish",
-			"model": "raptor",
+			"model": "dodo",
 			"diet": "Carnivorous"
 		}
 	]

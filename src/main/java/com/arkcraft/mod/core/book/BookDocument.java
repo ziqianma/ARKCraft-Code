@@ -1,7 +1,11 @@
 package com.arkcraft.mod.core.book;
 
 import com.arkcraft.mod.core.book.pages.Page;
-
+/***
+ * 
+ * @author Vastatio
+ *
+ */
 public class BookDocument {
 	
 	public Page[] entries;

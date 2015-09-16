@@ -15,7 +15,11 @@ import com.arkcraft.mod.core.GlobalAdditions;
 import com.arkcraft.mod.core.GlobalAdditions.GUI;
 import com.arkcraft.mod.core.book.proxy.DClient;
 import com.arkcraft.mod.core.Main;
-
+/***
+ * 
+ * @author Vastatio
+ *
+ */
 public class Dossier extends Item {
 
 	public Dossier(String name) {

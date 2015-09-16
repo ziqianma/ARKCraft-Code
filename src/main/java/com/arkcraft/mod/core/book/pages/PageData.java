@@ -3,7 +3,11 @@ package com.arkcraft.mod.core.book.pages;
 import java.util.HashMap;
 
 import net.minecraft.entity.EntityLivingBase;
-
+/***
+ * 
+ * @author Vastatio
+ *
+ */
 public class PageData {
 
 	public static HashMap<String, Class<? extends Page>> pageClasses = new HashMap<String, Class<? extends Page>>();

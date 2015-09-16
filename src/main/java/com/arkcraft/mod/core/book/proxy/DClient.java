@@ -16,6 +16,7 @@ import com.arkcraft.mod.core.book.deserialization.EntityLivingBaseDeserializer;
 import com.arkcraft.mod.core.book.deserialization.PageDeserializer;
 import com.arkcraft.mod.core.book.fonts.SmallFontRenderer;
 import com.arkcraft.mod.core.book.pages.Page;
+import com.arkcraft.mod.core.book.pages.PageChapter;
 import com.arkcraft.mod.core.book.pages.PageData;
 import com.arkcraft.mod.core.book.pages.PageDino;
 import com.arkcraft.mod.core.book.pages.PageText;
@@ -26,7 +27,11 @@ import com.arkcraft.mod.core.entity.passive.EntityDodo;
 import com.arkcraft.mod.core.lib.LogHelper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
+/***
+ * 
+ * @author Vastatio
+ *
+ */
 public class DClient extends DCommon {
 
 	public static Minecraft mc;
@@ -72,6 +77,7 @@ public class DClient extends DCommon {
 		PageData.addBookPage("dino", PageDino.class);
 		PageData.addBookPage("text", PageText.class);
 		PageData.addBookPage("title", PageTitle.class);
+		PageData.addBookPage("chapter", PageChapter.class);
 	}
 	
 	@Override
