@@ -6,6 +6,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
@@ -14,7 +15,6 @@ public class EntitySpear extends EntityProjectile
 	public EntitySpear(World world)
 	{
 		super(world);
-		setSpeed();
 	}
 	
 	public EntitySpear(World world, double x, double y, double z)
@@ -22,7 +22,6 @@ public class EntitySpear extends EntityProjectile
 		this(world);
 		setPickupMode(PICKUP_ALL);
 		setPosition(x, y, z);
-		setSpeed();
 	}
 	
 	public EntitySpear(World world, EntityLivingBase entityliving, float f)
@@ -38,13 +37,13 @@ public class EntitySpear extends EntityProjectile
 		motionX = -MathHelper.sin((rotationYaw / 180F) * 3.141593F) * MathHelper.cos((rotationPitch / 180F) * 3.141593F);
 		motionY = -MathHelper.sin((rotationPitch / 180F) * 3.141593F);
 		motionZ = MathHelper.cos((rotationYaw / 180F) * 3.141593F) * MathHelper.cos((rotationPitch / 180F) * 3.141593F);
-		setSpeed();
+		setSpeed(f);
 		
 	}
 	
-	private void setSpeed()
+	private void setSpeed(float f)
     {
-    	setThrowableHeading(this.motionX, this.motionY, this.motionZ, 2.0F, 2.0F);
+		setThrowableHeading(motionX, motionY, motionZ, f * 1.1F, 2.0F);
     }
 	
 	@Override
@@ -75,6 +74,14 @@ public class EntitySpear extends EntityProjectile
 		}
 	}
 	
+	public void drawCritParticles()
+    {
+        for (int i = 0; i < 4; ++i)
+        {
+        	 this.worldObj.spawnParticle(EnumParticleTypes.CRIT, this.posX + this.motionX * (double)i / 4.0D, this.posY + this.motionY * (double)i / 4.0D, this.posZ + this.motionZ * (double)i / 4.0D, -this.motionX, -this.motionY + 0.2D, -this.motionZ);
+        }
+    }
+	
 	@Override
 	public void playHitSound()
 	{
@@ -96,12 +103,12 @@ public class EntitySpear extends EntityProjectile
 	@Override
 	public float getGravity()
 	{
-		return 0.03F;
+		return 0.07F;
 	}
 	
 	@Override
 	public ItemStack getPickupItem()
 	{
-		return new ItemStack(GlobalAdditions.spear, 1);
+		return new ItemStack(GlobalAdditions.stoneSpear, 1);
 	}
 }

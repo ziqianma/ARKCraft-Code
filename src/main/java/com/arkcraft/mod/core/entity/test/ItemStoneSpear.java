@@ -12,15 +12,16 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemSpear extends ItemSword
+public class ItemStoneSpear extends ItemSword
 {
 	public static double spearDamage = BALANCE.WEAPONS.SPEAR_DAMAGE;
 	
-	public ItemSpear(String name, ToolMaterial m) {
+	public ItemStoneSpear(String name, ToolMaterial m) {
 		super(m);
+		this.setUnlocalizedName(name);
 		this.setCreativeTab(GlobalAdditions.tabARK);
 		this.setMaxStackSize(1);
-		GameRegistry.registerItem(this, name);	
+		GameRegistry.registerItem(this, this.getUnlocalizedName().substring(5));
 	}
 	
 	@Override
@@ -48,9 +49,9 @@ public class ItemSpear extends ItemSword
 			world.playSoundAtEntity(entityplayer, "random.bow", 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 0.8F));
 			if (!world.isRemote)
 			{
-				EntitySpear entityjavelin = new EntitySpear(world, entityplayer, f * (1.0F + (crit ? 0.5F : 0F)));
-				entityjavelin.setIsCritical(crit);
-				world.spawnEntityInWorld(entityjavelin);
+				EntitySpear entitySpear = new EntitySpear(world, entityplayer, f * (1.0F + (crit ? 0.5F : 0F)));
+				entitySpear.setIsCritical(crit);
+				world.spawnEntityInWorld(entitySpear);
 			}
 		}
 	}

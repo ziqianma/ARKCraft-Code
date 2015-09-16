@@ -1,66 +1,112 @@
 package com.arkcraft.mod.core.entity;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.projectile.EntityThrowable;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-import com.arkcraft.mod.core.items.ARKTranqAmmo;
+import com.arkcraft.mod.core.entity.test.EntityProjectile;
 
-public class EntityTranqAmmo extends EntityThrowable
+public class EntityTranqAmmo extends EntityProjectile
 {
-    public EntityTranqAmmo(World par1World)
-    {
-        super(par1World);
-        setSpeed();
-    }
-    public EntityTranqAmmo(World par1World, EntityLivingBase par2EntityLivingBase)
-    {
-        super(par1World, par2EntityLivingBase);
-        setSpeed();
-    }
-    public EntityTranqAmmo(World par1World, double par2, double par4, double par6)
-    {
-        super(par1World, par2, par4, par6);
-        setSpeed();
-    }
-    
-    private void setSpeed()
-    {
-    	setThrowableHeading(this.motionX, this.motionY, this.motionZ, 3.0F, 1.0F);
-    }
-    
-    /**
-    * Called when this EntityThrowable hits a block or entity.
-    */
-    protected void onImpact(MovingObjectPosition movObjPos)
-    {
-    	if (movObjPos != null) {
-			if (movObjPos.entityHit instanceof Entity) {
-				movObjPos.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), 
-						(float) ARKTranqAmmo.tranqArrowDamage);
-			}
-			else {
-				// Do something for instance if it hits a tree
-				return;  // no crit and not dead
-			}
-		}
-		for (int i = 0; i < 4; ++i)	{
-			this.worldObj.spawnParticle(EnumParticleTypes.CRIT, this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D);
-		}
-		// Get rid of the used spear
-		if (!this.worldObj.isRemote)
-			this.setDead();
+	public EntityTranqAmmo(World world)
+	{
+		super(world);
+		setSpeed();	
 	}
-    
+	
+	public EntityTranqAmmo(World world, double x, double y, double z)
+	{
+		this(world);
+		setPosition(x, y, z);
+		setSpeed();	
+	}
+	
+	public EntityTranqAmmo(World world, EntityLivingBase entityliving)
+	{
+		this(world);
+		shootingEntity = entityliving;
+		setPickupModeFromEntity(entityliving);
+		setLocationAndAngles(entityliving.posX, entityliving.posY + entityliving.getEyeHeight(), entityliving.posZ, entityliving.rotationYaw, entityliving.rotationPitch);
+		posX -= MathHelper.cos((rotationYaw / 180F) * 3.141593F) * 0.16F;
+		posY -= 0.1D;
+		posZ -= MathHelper.sin((rotationYaw / 180F) * 3.141593F) * 0.16F;
+		setPosition(posX, posY, posZ);
+		motionX = -MathHelper.sin((rotationYaw / 180F) * 3.141593F) * MathHelper.cos((rotationPitch / 180F) * 3.141593F);
+		motionY = -MathHelper.sin((rotationPitch / 180F) * 3.141593F);
+		motionZ = MathHelper.cos((rotationYaw / 180F) * 3.141593F) * MathHelper.cos((rotationPitch / 180F) * 3.141593F);
+		setSpeed();	
+	}
+	
+	private void setSpeed()
+    {
+		 setThrowableHeading(this.motionX, this.motionY, this.motionZ, 3.0F, 1.0F);
+    }
+	
+	/*
+	@Override
+	public void onEntityHit(Entity entity)
+	{
+		double vel = getTotalVelocity();
+		int damage = MathHelper.ceiling_double_int(vel * (3D + extraDamage));
+		if (getIsCritical())
+		{
+			damage += rand.nextInt(damage / 2 + 2);
+		}
+		DamageSource damagesource = null;
+		if (shootingEntity == null)
+		{
+			damagesource = DamageSource.causeThrownDamage(this, this);
+		} else
+		{
+			damagesource = DamageSource.causeThrownDamage(this, shootingEntity);
+		}	
+		if (entity.attackEntityFrom(damagesource, damage))
+		{
+			applyEntityHitEffects(entity);
+			playHitSound();
+			setDead();
+		} else
+		{
+			bounceBack();
+		}
+	}	*/
+	
+	public void drawCritParticles()
+    {
+        for (int i = 0; i < 4; ++i)
+        {
+        	 this.worldObj.spawnParticle(EnumParticleTypes.CRIT, this.posX + this.motionX * (double)i / 4.0D, this.posY + this.motionY * (double)i / 4.0D, this.posZ + this.motionZ * (double)i / 4.0D, -this.motionX, -this.motionY + 0.2D, -this.motionZ);
+        }
+    }
+	
+	@Override
+	public void playHitSound()
+	{
+		worldObj.playSoundAtEntity(this, "random.bowhit", 1.0F, 1.0F / (rand.nextFloat() * 0.4F + 0.9F));
+	}
+	
+	@Override
+	public boolean canBeCritical()
+	{
+		return true;
+	}
+	
+	@Override
+	public int getMaxArrowShake()
+	{
+		return 10;
+	}
+	
+	@Override
+	public float getGravity()
+	{
+		return 0.07F;
+	}
+	@Override
+	protected float getGravityVelocity() 
+	{
+		return 0;
+	}
+	
 }
-    
-//    @Override
-//    protected float getGravityVelocity() 
-//    {
-//    	return 0;
-//    }   
-

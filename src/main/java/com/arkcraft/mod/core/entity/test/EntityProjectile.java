@@ -458,38 +458,6 @@ public abstract class EntityProjectile extends EntityArrow implements IThrowable
 			}
 		}
 	}
-
-/*	public void onGroundHit(MovingObjectPosition mop)
-	{
-	   BlockPos blockpos = new BlockPos(this.xTile, this.yTile, this.zTile);
-	   IBlockState iblockstate = this.worldObj.getBlockState(blockpos);
-	   Block block = iblockstate.getBlock();
-       BlockPos blockpos1 = mop.getBlockPos();
-       this.xTile = blockpos1.getX();
-       this.yTile = blockpos1.getY();
-       this.zTile = blockpos1.getZ();
-       iblockstate = this.worldObj.getBlockState(blockpos1);
-       this.inTile = iblockstate.getBlock();
-       this.inData = this.inTile.getMetaFromState(iblockstate);
-       this.motionX = (double)((float)(mop.hitVec.xCoord - this.posX));
-       this.motionY = (double)((float)(mop.hitVec.yCoord - this.posY));
-       this.motionZ = (double)((float)(mop.hitVec.zCoord - this.posZ));
-       float f3 = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ);
-       this.posX -= this.motionX / (double)f3 * 0.05000000074505806D;
-       this.posY -= this.motionY / (double)f3 * 0.05000000074505806D;
-       this.posZ -= this.motionZ / (double)f3 * 0.05000000074505806D;
-       this.playSound("random.bowhit", 1.0F, 1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
-       this.inGround = true;
-       this.arrowShake = 7;
-       this.setIsCritical(false);
-
-       if (this.inTile.getMaterial() != Material.air)
-       {
-           this.inTile.onEntityCollidedWithBlock(this.worldObj, blockpos1, iblockstate, this);
-       }
-   }	*/
-
-	
 	protected void bounceBack()
 	{
 		motionX *= -0.1D;
@@ -543,6 +511,12 @@ public abstract class EntityProjectile extends EntityArrow implements IThrowable
 	{
 		return false;
 	}
+	
+	protected float getGravityVelocity()
+	{
+	    return 0.03F;
+	}
+
 	
 	@Override
 	public void setIsCritical(boolean flag)
