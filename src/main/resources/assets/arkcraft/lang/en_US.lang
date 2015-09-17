@@ -45,6 +45,7 @@ item.dodo_egg.name=Dodo Egg
 item.dossier.name=Dino Dossier
 item.dodo_feces.name=Dodo Feces
 item.player_feces.name=Player Feces
+item.tranq_gun.name=Tranquilizer Gun
 
 # Miscellaneous
 itemGroup.tabARKCraft=ARKCraft: Survival Evolved
