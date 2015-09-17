@@ -12,6 +12,7 @@ import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
@@ -71,6 +72,7 @@ public class GlobalAdditions {
 	public static ARKArmorItem boneHelm, boneChest, boneLegs, boneBoots;
 	public static ARKWeapon ironPike;
 	public static ARKBlock oreSurface;
+	public static Block blockNarcoBrerry;
 	public static Dossier dino_book;
 	public static ARKTranqGun tranq_gun;
 	public static ARKTranqAmmo tranq_ammo;
@@ -124,6 +126,8 @@ public class GlobalAdditions {
 		
 		// Blocks
 		oreSurface = addBlock(Material.rock, "oreSurface", 3.0F);
+		//blockNarcoBrerry = addBlock(Material.ground, "narcoBerryBlock", 3.0F);
+		blockNarcoBrerry = getRegisteredBlock("blockNarcoBerry");
 		
 		// Regular Items
 		fiber = addItem("fiber");
@@ -181,6 +185,10 @@ public class GlobalAdditions {
 		
 		// Other Stuff
 		NetworkRegistry.INSTANCE.registerGuiHandler(Main.instance, new GuiHandler());
+	}
+	protected static Block getRegisteredBlock(String name)
+	{
+		return (Block)Block.blockRegistry.getObject(new ResourceLocation(name));
 	}
 	
 	protected static ARKBush addBush(String name, float hardness) {

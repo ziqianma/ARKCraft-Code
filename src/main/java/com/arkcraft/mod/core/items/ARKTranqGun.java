@@ -1,7 +1,11 @@
 package com.arkcraft.mod.core.items;
 
+import java.util.HashMap;
+import java.util.List;
+
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -10,9 +14,20 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.arkcraft.mod.core.GlobalAdditions;
-import com.arkcraft.mod.core.entity.test.EntitySpear;
+import com.arkcraft.mod.core.entity.EntityTranqAmmo;
 
 public class ARKTranqGun extends Item{
+	
+	private int shotDelay = 100;
+	private int recoil = 20;
+	private int velocity = 4;
+
+	private int recoilDown = recoil / 2;
+	
+	private int firingDelay;
+	private int recoilDelay;
+	private boolean hasRecoiled;
+	private boolean hasFired;
 	
 	public ARKTranqGun(String name) {
 		super();
@@ -22,64 +37,63 @@ public class ARKTranqGun extends Item{
 	}
 	
 	@Override
-	public void onPlayerStoppedUsing(ItemStack itemstack, World world, EntityPlayer entityplayer, int i)
-	{
-		if (!entityplayer.inventory.hasItem(this)) return;
+	public void onUpdate(ItemStack itemstack, World world, Entity entity, int i, boolean j) {
+		EntityPlayer player = (EntityPlayer)entity;
+
+		firingDelay++;
+		recoilDelay++;	
 		
-		int j = getMaxItemUseDuration(itemstack) - i;
-		float f = j / 20F;
-		f = (f * f + f * 2.0F) / 3F;
-		if (f < 0.1F) return;
-		if (f > 1.0F)
-		{
-			f = 1.0F;
-		}
-		
-		boolean crit = false;
-		if (!entityplayer.onGround && !entityplayer.isInWater())
-		{
-			crit = true;
-		}
-		
-		if (entityplayer.capabilities.isCreativeMode || entityplayer.inventory.consumeInventoryItem(this))
-		{
-			world.playSoundAtEntity(entityplayer, "random.bow", 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 0.8F));
-			if (!world.isRemote)
-			{
-				EntitySpear entitySpear = new EntitySpear(world, entityplayer, f * (1.0F + (crit ? 0.5F : 0F)));
-				entitySpear.setIsCritical(crit);
-				world.spawnEntityInWorld(entitySpear);
+		if(hasRecoiled){
+			if(recoilDelay >= 4){
+				player.rotationPitch = player.rotationPitch + recoilDown;
+				recoilDelay = 0;
+				hasRecoiled = false;
 			}
 		}
-	}
 	
-	@Override
-	public int getMaxItemUseDuration(ItemStack itemstack)
-	{
-		return 0x11940;
-	}
-	
-	@Override
-	public EnumAction getItemUseAction(ItemStack itemstack)
-	{
-		return EnumAction.BOW;
-	}
-	
-	@Override
-	public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entityplayer)
-	{
-		if (entityplayer.inventory.hasItem(this))
-		{
-			entityplayer.setItemInUse(itemstack, getMaxItemUseDuration(itemstack));
+		if(hasFired){
+			hasFired = false;
 		}
-		return itemstack;
+		
 	}
-	
-	@Override
-	@SideOnly(Side.CLIENT)
-	public boolean isFull3D()
-	{
+
+	@SideOnly (Side.CLIENT)
+	public boolean isFull3D(){
 		return true;
 	}
-}
 
+	@Override
+	public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer player) {
+
+		// vvv Only for debugging :P
+		System.out.println("Firing Delay: " + firingDelay);
+
+		if(firingDelay >= shotDelay){		
+				
+				player.inventory.consumeInventoryItem(GlobalAdditions.tranq_ammo);
+				
+			//	if(timesFired >= 2){
+			//		player.inventory.consumeInventoryItem(Items.gunpowder);
+			//		timesFired = 0;
+				}
+								
+				if(player.capabilities.isCreativeMode || player.inventory.hasItem(GlobalAdditions.tranq_ammo))
+				{
+					if (!world.isRemote)
+					{			
+						SoundHandler.onEntityPlay("tranqGunShot", world, player, 10F, 1F);
+						world.spawnEntityInWorld(new EntityTranqAmmo(world, player, velocity));
+						firingDelay = 0;
+						hasFired = true;
+					}
+				}
+				player.rotationPitch = player.rotationPitch - recoil;
+				hasRecoiled = true;
+			
+				return itemstack;
+		}
+	
+	//public void addInformation(ItemStack itemstack, EntityPlayer player, List list, boolean on){
+	//	list.add("");
+	//}
+}
