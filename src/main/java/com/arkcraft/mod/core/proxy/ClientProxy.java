@@ -18,6 +18,7 @@ import com.arkcraft.mod.core.entity.EntityCobble;
 import com.arkcraft.mod.core.entity.EntityDodoEgg;
 import com.arkcraft.mod.core.entity.EntityExplosive;
 import com.arkcraft.mod.core.entity.EntityStoneSpear;
+import com.arkcraft.mod.core.entity.EntityTranqAmmo;
 import com.arkcraft.mod.core.entity.aggressive.EntityRaptor;
 import com.arkcraft.mod.core.entity.model.ModelBrontosaurus;
 import com.arkcraft.mod.core.entity.model.ModelDodo;

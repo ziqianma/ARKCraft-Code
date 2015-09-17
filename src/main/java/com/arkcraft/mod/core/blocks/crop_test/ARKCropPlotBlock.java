@@ -2,10 +2,6 @@ package com.arkcraft.mod.core.blocks.crop_test;
 
 import java.util.Random;
 
-import com.arkcraft.mod.core.GlobalAdditions;
-import com.arkcraft.mod.core.Main;
-import com.arkcraft.mod.core.blocks.crop_test.TileInventoryCropPlot;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
@@ -24,6 +20,11 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+import com.arkcraft.mod.core.GlobalAdditions;
+import com.arkcraft.mod.core.Main;
 
 /***
  * 
