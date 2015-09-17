@@ -23,11 +23,11 @@ import com.arkcraft.mod.core.blocks.ARKContainerBlock;
 import com.arkcraft.mod.core.blocks.crop_test.ARKCropPlotBlock;
 import com.arkcraft.mod.core.book.Dossier;
 import com.arkcraft.mod.core.creativetabs.ARKTabs;
-import com.arkcraft.mod.core.entity.EntityStoneSpear;
-import com.arkcraft.mod.core.entity.EntityTranqAmmo;
 import com.arkcraft.mod.core.entity.EntityCobble;
 import com.arkcraft.mod.core.entity.EntityDodoEgg;
 import com.arkcraft.mod.core.entity.EntityExplosive;
+import com.arkcraft.mod.core.entity.EntityStoneSpear;
+import com.arkcraft.mod.core.entity.EntityTranqAmmo;
 import com.arkcraft.mod.core.entity.aggressive.EntityRaptor;
 import com.arkcraft.mod.core.entity.passive.EntityBrontosaurus;
 import com.arkcraft.mod.core.entity.passive.EntityDodo;
@@ -128,7 +128,7 @@ public class GlobalAdditions {
 		oreSurface = addBlock(Material.rock, "oreSurface", 3.0F);
 		//blockNarcoBrerry = addBlock(Material.ground, "narcoBerryBlock", 3.0F);
 		blockNarcoBrerry = getRegisteredBlock("blockNarcoBerry");
-		
+
 		// Regular Items
 		fiber = addItem("fiber");
 		chitin = addItem("chitin");
