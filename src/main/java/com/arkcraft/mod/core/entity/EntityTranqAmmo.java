@@ -29,7 +29,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntityTranqAmmo extends Entity implements IProjectile
 {
-	//Copied from EntityArrow changed by Muggles.
 	
 	//Speaks for itself - these are the variables for how far you want your
 	//bullet to travel, how fast, and how much damage you want it to deal.

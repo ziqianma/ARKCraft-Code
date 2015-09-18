@@ -1,4 +1,4 @@
-package com.arkcraft.mod.core.entity.test;
+package com.arkcraft.mod.core.items.weapons.projectiles;
 
 import com.arkcraft.mod.core.GlobalAdditions;
 
@@ -20,7 +20,6 @@ public class EntitySpear extends EntityProjectile
 	public EntitySpear(World world, double x, double y, double z)
 	{
 		this(world);
-		setPickupMode(PICKUP_ALL);
 		setPosition(x, y, z);
 	}
 	
@@ -28,7 +27,6 @@ public class EntitySpear extends EntityProjectile
 	{
 		this(world);
 		shootingEntity = entityliving;
-		setPickupModeFromEntity(entityliving);
 		setLocationAndAngles(entityliving.posX, entityliving.posY + entityliving.getEyeHeight(), entityliving.posZ, entityliving.rotationYaw, entityliving.rotationPitch);
 		posX -= MathHelper.cos((rotationYaw / 180F) * 3.141593F) * 0.16F;
 		posY -= 0.1D;

@@ -1,4 +1,4 @@
-package com.arkcraft.mod.core.items;
+package com.arkcraft.mod.core.items.weapons;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,9 +10,9 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.arkcraft.mod.core.GlobalAdditions;
-import com.arkcraft.mod.core.entity.EntityTranqAmmo;
+import com.arkcraft.mod.core.items.weapons.projectiles.EntityTranquilizer;
 
-public class ARKTranqGun extends Item{
+public class ItemTranqGun extends Item{
 	
 	private int shotDelay = 100;
 	//private int recoil = 20;
@@ -21,11 +21,9 @@ public class ARKTranqGun extends Item{
 	//private int recoilDown = recoil / 2;
 	
 	private int firingDelay;
-	private int recoilDelay;
-	private boolean hasRecoiled;
 	private boolean hasFired;
 	
-	public ARKTranqGun(String name) {
+	public ItemTranqGun(String name) {
 		super();
 		this.setUnlocalizedName(name);
 		this.setCreativeTab(GlobalAdditions.tabARK);
@@ -66,19 +64,19 @@ public class ARKTranqGun extends Item{
 
 		if(firingDelay >= shotDelay){		
 				
-				player.inventory.consumeInventoryItem(GlobalAdditions.tranq_ammo);
+				player.inventory.consumeInventoryItem(GlobalAdditions.tranquilizer);
 				
 			//	if(timesFired >= 2){
 			//		player.inventory.consumeInventoryItem(Items.gunpowder);
 			//		timesFired = 0;
 				}
 								
-				if(player.capabilities.isCreativeMode || player.inventory.hasItem(GlobalAdditions.tranq_ammo))
+				if(player.capabilities.isCreativeMode || player.inventory.hasItem(GlobalAdditions.tranquilizer))
 				{
 					if (!world.isRemote)
 					{			
 						SoundHandler.onEntityPlay("tranqGunShot", world, player, 10F, 1F);
-						world.spawnEntityInWorld(new EntityTranqAmmo(world, player, velocity));
+						world.spawnEntityInWorld(new EntityTranquilizer (world, player, velocity));
 						firingDelay = 0;
 						hasFired = true;
 					}

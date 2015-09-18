@@ -1,4 +1,4 @@
-package com.arkcraft.mod.core.entity.test;
+package com.arkcraft.mod.core.entity.render;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
@@ -11,6 +11,7 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import com.arkcraft.mod.core.Main;
+import com.arkcraft.mod.core.items.weapons.projectiles.EntitySpear;
 
 public class RenderSpear extends Render
 {
