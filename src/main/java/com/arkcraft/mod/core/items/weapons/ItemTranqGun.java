@@ -10,6 +10,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.arkcraft.mod.core.GlobalAdditions;
+import com.arkcraft.mod.core.items.weapons.handlers.SoundHandler;
 import com.arkcraft.mod.core.items.weapons.projectiles.EntityTranquilizer;
 
 public class ItemTranqGun extends Item{

@@ -1,4 +1,4 @@
-package com.arkcraft.mod.core.items.weapons;
+package com.arkcraft.mod.core.items.weapons.handlers;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.util.DamageSource;

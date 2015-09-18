@@ -7,7 +7,7 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-import com.arkcraft.mod.core.items.weapons.WeaponDamageSource;
+import com.arkcraft.mod.core.items.weapons.handlers.WeaponDamageSource;
 
 public class EntitySimpleBullet extends EntityProjectile
 {
@@ -17,7 +17,7 @@ public class EntitySimpleBullet extends EntityProjectile
 	public EntitySimpleBullet(World world)
 	{
 		super(world);
-		//inGround = false;
+		inGround = false;
 		
 	}
 	

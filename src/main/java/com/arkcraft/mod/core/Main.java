@@ -1,6 +1,9 @@
 package com.arkcraft.mod.core;
 
+import org.apache.logging.log4j.Logger;
+
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -16,6 +19,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import com.arkcraft.mod.core.handler.ARKEventHandler;
 import com.arkcraft.mod.core.handler.ARKPlayerEventHandler;
 import com.arkcraft.mod.core.handler.FMLCommonEventHandler;
+import com.arkcraft.mod.core.items.weapons.handlers.WeaponModConfig;
 import com.arkcraft.mod.core.lib.Config;
 import com.arkcraft.mod.core.network.PlayerPoop;
 import com.arkcraft.mod.core.proxy.CommonProxy;
@@ -31,6 +35,8 @@ public class Main {
 	public static Main instance;
 	public static SimpleNetworkWrapper modChannel;
 	public Config modConfig;
+	public WeaponModConfig WeaponConfig;
+	public static Logger	modLog;
 	
 	public Main() { instance = this; }
 	
@@ -39,6 +45,10 @@ public class Main {
 		Config.init(event.getSuggestedConfigurationFile());// Keep first
 		GlobalAdditions.init();
 		setupNetwork();	
+		modLog = event.getModLog();
+		
+		WeaponConfig = new WeaponModConfig(new Configuration(event.getSuggestedConfigurationFile()));
+		WeaponConfig.addReloadTimeSetting("simple_pistol", 30);
 	}
 	
 	@EventHandler
