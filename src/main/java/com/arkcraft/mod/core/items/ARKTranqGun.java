@@ -1,10 +1,6 @@
 package com.arkcraft.mod.core.items;
 
-import java.util.HashMap;
-import java.util.List;
-
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -19,10 +15,10 @@ import com.arkcraft.mod.core.entity.EntityTranqAmmo;
 public class ARKTranqGun extends Item{
 	
 	private int shotDelay = 100;
-	private int recoil = 20;
+	//private int recoil = 20;
 	private int velocity = 4;
 
-	private int recoilDown = recoil / 2;
+	//private int recoilDown = recoil / 2;
 	
 	private int firingDelay;
 	private int recoilDelay;
@@ -41,15 +37,15 @@ public class ARKTranqGun extends Item{
 		EntityPlayer player = (EntityPlayer)entity;
 
 		firingDelay++;
-		recoilDelay++;	
+		//recoilDelay++;	
 		
-		if(hasRecoiled){
-			if(recoilDelay >= 4){
-				player.rotationPitch = player.rotationPitch + recoilDown;
-				recoilDelay = 0;
-				hasRecoiled = false;
-			}
-		}
+//		if(hasRecoiled){
+//			if(recoilDelay >= 4){
+//				player.rotationPitch = player.rotationPitch + recoilDown;
+//				recoilDelay = 0;
+//				hasRecoiled = false;
+//			}
+//		}
 	
 		if(hasFired){
 			hasFired = false;
@@ -87,8 +83,8 @@ public class ARKTranqGun extends Item{
 						hasFired = true;
 					}
 				}
-				player.rotationPitch = player.rotationPitch - recoil;
-				hasRecoiled = true;
+//				player.rotationPitch = player.rotationPitch - recoil;
+//				hasRecoiled = true;
 			
 				return itemstack;
 		}
