@@ -22,6 +22,7 @@ import com.arkcraft.mod.core.entity.aggressive.EntityRaptor;
 import com.arkcraft.mod.core.entity.model.ModelBrontosaurus;
 import com.arkcraft.mod.core.entity.model.ModelDodo;
 import com.arkcraft.mod.core.entity.model.ModelRaptor;
+import com.arkcraft.mod.core.entity.model.TranquilizerModel;
 import com.arkcraft.mod.core.entity.passive.EntityBrontosaurus;
 import com.arkcraft.mod.core.entity.passive.EntityDodo;
 import com.arkcraft.mod.core.entity.render.RenderBrontosaurus;
@@ -30,6 +31,7 @@ import com.arkcraft.mod.core.entity.render.RenderRaptor;
 import com.arkcraft.mod.core.entity.render.RenderSimpleBullet;
 import com.arkcraft.mod.core.entity.render.RenderSpear;
 import com.arkcraft.mod.core.entity.render.RenderStoneSpear;
+import com.arkcraft.mod.core.entity.render.RenderTranquilizer;
 import com.arkcraft.mod.core.items.weapons.projectiles.EntitySimpleBullet;
 import com.arkcraft.mod.core.items.weapons.projectiles.EntitySpear;
 import com.arkcraft.mod.core.items.weapons.projectiles.EntityTranquilizer;
@@ -53,7 +55,7 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityBrontosaurus.class, new RenderBrontosaurus(new ModelBrontosaurus(), 0.5f));
 	//	RenderingRegistry.registerEntityRenderingHandler(EntityTranqAmmo.class, new RenderTranqAmmo());
 		
-		RenderingRegistry.registerEntityRenderingHandler(EntityTranquilizer.class, new RenderSnowball(Minecraft.getMinecraft().getRenderManager(), GlobalAdditions.tranquilizer, Minecraft.getMinecraft().getRenderItem()));
+		RenderingRegistry.registerEntityRenderingHandler(EntityTranquilizer.class, new RenderTranquilizer());
 		RenderingRegistry.registerEntityRenderingHandler(EntityStoneSpear.class, new RenderStoneSpear());
 		RenderingRegistry.registerEntityRenderingHandler(EntitySimpleBullet.class, new RenderSimpleBullet());
 		RenderingRegistry.registerEntityRenderingHandler(EntitySpear.class, new RenderSpear());

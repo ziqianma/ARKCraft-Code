@@ -1,7 +1,5 @@
 package com.arkcraft.mod.core;
 
-import org.apache.logging.log4j.Logger;
-
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -15,6 +13,8 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
+
+import org.apache.logging.log4j.Logger;
 
 import com.arkcraft.mod.core.handler.ARKEventHandler;
 import com.arkcraft.mod.core.handler.ARKPlayerEventHandler;
@@ -48,7 +48,7 @@ public class Main {
 		modLog = event.getModLog();
 		
 		WeaponConfig = new WeaponModConfig(new Configuration(event.getSuggestedConfigurationFile()));
-		WeaponConfig.addReloadTimeSetting("simple_pistol", 30);
+		WeaponConfig.addReloadTimeSetting("simple_pistol", 5);
 	}
 	
 	@EventHandler
@@ -59,7 +59,6 @@ public class Main {
 		proxy.registerRenderers();
 		proxy.init();
 		FMLCommonHandler.instance().bus().register(new Config());
-
 	}
 	
 	@EventHandler
@@ -72,4 +71,5 @@ public class Main {
 		int id = 0;
 		modChannel.registerMessage(PlayerPoop.Handler.class, PlayerPoop.class, id++, Side.SERVER);
 	}
+
 }

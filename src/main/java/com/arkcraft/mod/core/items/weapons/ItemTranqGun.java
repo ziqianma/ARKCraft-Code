@@ -10,7 +10,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.arkcraft.mod.core.GlobalAdditions;
-import com.arkcraft.mod.core.items.weapons.handlers.SoundHandler;
 import com.arkcraft.mod.core.items.weapons.projectiles.EntityTranquilizer;
 
 public class ItemTranqGun extends Item{
@@ -75,7 +74,7 @@ public class ItemTranqGun extends Item{
 				{
 					if (!world.isRemote)
 					{			
-						SoundHandler.onEntityPlay("tranqGunShot", world, player, 10F, 1F);
+						//SoundHandler.onEntityPlay("tranqGunShot", world, player, 10F, 1F);
 						world.spawnEntityInWorld(new EntityTranquilizer (world, player, velocity));
 						firingDelay = 0;
 						hasFired = true;

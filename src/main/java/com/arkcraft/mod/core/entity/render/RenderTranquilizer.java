@@ -1,30 +1,35 @@
 package com.arkcraft.mod.core.entity.render;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
-
-import org.lwjgl.opengl.GL11;
 
 import com.arkcraft.mod.core.Main;
 import com.arkcraft.mod.core.entity.EntityTranqAmmo;
+import com.arkcraft.mod.core.entity.model.TranquilizerModel;
 import com.arkcraft.mod.core.items.weapons.projectiles.EntitySpear;
 
-public class RenderTranqAmmo extends Render
+public class RenderTranquilizer extends Render
 {
 	private static final ResourceLocation texture = new ResourceLocation(Main.MODID, "textures/entity/tranqAmmo.png");
-
-	public RenderTranqAmmo() 
+	private final TranquilizerModel model;
+     
+	//protected TranquilizerModel tranquilizerModel;
+	
+	public RenderTranquilizer() 
 	{
 		super(Minecraft.getMinecraft().getRenderManager());
+		model = new TranquilizerModel();
+	//	tranquilizerModel = new TranquilizerModel();
 	}
 	
 	public void doRender(EntitySpear entityarrow, double d, double d1, double d2, float f, float f1)
 	{
+		super.doRender(entityarrow, d, d1, d2, f, f1);
+	}
+		
+		/*
 		bindEntityTexture(entityarrow);
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float) d, (float) d1, (float) d2);
@@ -45,8 +50,8 @@ public class RenderTranqAmmo extends Render
 		
 		double length = 7D;
 		
-		GL11.glEnable(32826 /*GL_RESCALE_NORMAL_EXT*/);
-		float f11 = entityarrow.arrowShake - f1;
+	//	GL11.glEnable(32826 /*GL_RESCALE_NORMAL_EXT*///);
+	/*	float f11 = entityarrow.arrowShake - f1;
 		if (f11 > 0.0F)
 		{
 			float f12 = -MathHelper.sin(f11 * 3F) * f11;
@@ -84,9 +89,9 @@ public class RenderTranqAmmo extends Render
 			tess.draw();
 		}
 		
-		GL11.glDisable(32826 /*GL_RESCALE_NORMAL_EXT*/);
-		GL11.glPopMatrix();
-	}
+	/*	GL11.glDisable(32826 /*GL_RESCALE_NORMAL_EXT*///);
+	//	GL11.glPopMatrix();
+//	} */
 	
 	@Override
 	public void doRender(Entity entity, double d, double d1, double d2, float f, float f1)

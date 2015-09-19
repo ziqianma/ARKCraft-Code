@@ -20,7 +20,12 @@ import com.google.common.collect.Multimap;
 
 public abstract class RangedComponent extends AbstractWeaponComponent
 {
+	protected static final int recoil = 5;
 	protected static final int	MAX_DELAY	= 72000;
+	protected static final int recoilDown = 10;
+	private int recoilDelay;
+	private boolean hasFired;
+	private boolean hasRecoiled;
 	
 	public static boolean isReloaded(ItemStack itemstack)
 	{
@@ -131,7 +136,6 @@ public abstract class RangedComponent extends AbstractWeaponComponent
 			return EnumAction.BLOCK;
 		} else if (state == ReloadHelper.STATE_READY)
 		{
-			return EnumAction.BOW;
 		}
 		return EnumAction.NONE;
 	}
@@ -145,27 +149,32 @@ public abstract class RangedComponent extends AbstractWeaponComponent
 	@Override
 	public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entityplayer)
 	{
-		if (itemstack.stackSize <= 0 || entityplayer.isUsingItem()) return itemstack;
+		if (itemstack.stackSize <= 0 || entityplayer.isUsingItem()) return itemstack;	
 		
 		if (hasAmmo(itemstack, world, entityplayer)) //Check can reload
 		{
-			if (isReadyToFire(itemstack))
-			{
-				//Start aiming weapon to fire
-				soundCharge(itemstack, world, entityplayer);
-				entityplayer.setItemInUse(itemstack, getMaxItemUseDuration(itemstack));
-			} else
-			{
-				//Begin reloading
-				entityplayer.setItemInUse(itemstack, getMaxItemUseDuration(itemstack));
-			}
+				if (isReadyToFire(itemstack))
+				{
+					//Start aiming weapon to fire
+					soundCharge(itemstack, world, entityplayer);
+					entityplayer.setItemInUse(itemstack, getMaxItemUseDuration(itemstack));
+
+					entityplayer.rotationPitch = entityplayer.rotationPitch - recoil;
+					hasRecoiled = true;
+	
+				} else
+				{
+					//Begin reloading
+					entityplayer.setItemInUse(itemstack, getMaxItemUseDuration(itemstack));		
+				}
+				
 		} else
 		{
 			//Can't reload; no ammo
 			soundEmpty(itemstack, world, entityplayer);
 			setReloadState(itemstack, ReloadHelper.STATE_NONE);
 		}
-		
+				
 		return itemstack;
 	}
 	
@@ -197,9 +206,29 @@ public abstract class RangedComponent extends AbstractWeaponComponent
 		}
 	}
 	
+//	@Override
+//	public void onUpdate(ItemStack itemstack, World world, Entity entity, int i, boolean flag)
+//	{
+//	}
+	
 	@Override
-	public void onUpdate(ItemStack itemstack, World world, Entity entity, int i, boolean flag)
-	{
+	public void onUpdate(ItemStack itemstack, World world, Entity entity, int i, boolean j) {
+		EntityPlayer player = (EntityPlayer)entity;
+		
+		recoilDelay++;	
+		
+		if(hasRecoiled){
+			if(recoilDelay >= 2){
+				player.rotationPitch = player.rotationPitch + recoilDown;
+				recoilDelay = 0;
+				hasRecoiled = false;
+			}
+		}
+	
+		if(hasFired){
+			hasFired = false;
+		}
+		
 	}
 	
 	@SideOnly(Side.CLIENT)
@@ -299,11 +328,7 @@ public abstract class RangedComponent extends AbstractWeaponComponent
 	
 	public static enum RangedSpecs
 	{
-		BLOWGUN("weaponmod:dart", "blowgun", 250, 1),
-		CROSSBOW("weaponmod:bolt", "crossbow", 250, 1),
-		SIMPLEPISTOL("weaponmod:bullet", "simple_pistol", 80, 1),
-		BLUNDERBUSS("weaponmod:shot", "blunderbuss", 80, 1),
-		FLINTLOCK("weaponmod:bullet", "flintlock", 80, 1);
+		SIMPLEPISTOL("weaponmod:bullet", "simple_pistol", 80, 1);
 		
 		RangedSpecs(String ammoitemtag, String reloadtimetag, int durability, int stacksize)
 		{

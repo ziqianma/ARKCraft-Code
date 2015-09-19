@@ -34,7 +34,7 @@ public class RangedCompSimplePistol extends RangedComponent
 		entityplayer.swingItem();
 		world.playSoundAtEntity(entityplayer, "random.click", 1.0F, 1.0F / (weapon.getItemRand().nextFloat() * 0.4F + 0.8F));
 	}
-
+	
 	@Override
 	public void fire(ItemStack itemstack, World world, EntityPlayer entityplayer, int i)
 	{
@@ -52,16 +52,6 @@ public class RangedCompSimplePistol extends RangedComponent
 			EntitySimpleBullet entitymusketbullet = new EntitySimpleBullet(world, entityplayer, 1F / f);
 			applyProjectileEnchantments(entitymusketbullet, itemstack);
 			world.spawnEntityInWorld(entitymusketbullet);
-		}
-
-		int deltadamage = 1;
-
-		boolean flag = itemstack.getItemDamage() + deltadamage > itemstack.getMaxDamage();
-		itemstack.damageItem(deltadamage, entityplayer);
-		if (flag)
-		{
-//			int bayonetdamage = itemstack.stackTagCompound == null ? 0 : itemstack.stackTagCompound.getShort("bayonetDamage");
-//			entityplayer.inventory.addItemStackToInventory(new ItemStack(simple_pistol.bayonetItem, 1, bayonetdamage));
 		} else
 		{
 			setReloadState(itemstack, ReloadHelper.STATE_NONE);

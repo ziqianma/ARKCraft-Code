@@ -12,8 +12,6 @@ import com.arkcraft.mod.core.items.weapons.handlers.WeaponDamageSource;
 public class EntitySimpleBullet extends EntityProjectile
 {
 	
-	//protected boolean inGround;
-	
 	public EntitySimpleBullet(World world)
 	{
 		super(world);
