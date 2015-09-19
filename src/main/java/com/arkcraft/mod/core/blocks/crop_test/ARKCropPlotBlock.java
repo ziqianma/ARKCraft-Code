@@ -271,6 +271,7 @@ public class ARKCropPlotBlock extends BlockBush implements IGrowable
 
         if (age >= 11)
         {
+        	@SuppressWarnings("unused")
             int k = 3 + fortune;
 
             for (int i = 0; i < 3 + fortune; ++i)

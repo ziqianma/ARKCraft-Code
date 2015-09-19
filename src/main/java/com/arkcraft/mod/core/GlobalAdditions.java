@@ -27,7 +27,6 @@ import com.arkcraft.mod.core.entity.EntityCobble;
 import com.arkcraft.mod.core.entity.EntityDodoEgg;
 import com.arkcraft.mod.core.entity.EntityExplosive;
 import com.arkcraft.mod.core.entity.EntityStoneSpear;
-import com.arkcraft.mod.core.entity.EntityTranqAmmo;
 import com.arkcraft.mod.core.entity.aggressive.EntityRaptor;
 import com.arkcraft.mod.core.entity.passive.EntityBrontosaurus;
 import com.arkcraft.mod.core.entity.passive.EntityDodo;
@@ -313,6 +312,7 @@ public class GlobalAdditions {
 		allItems.put(name, item);
 		return item;
 	}
+	
 	public static ItemSimplePistol addSimplePistol(String name) {
 		ItemSimplePistol item = new ItemSimplePistol(name);
 		allItems.put(name, item);

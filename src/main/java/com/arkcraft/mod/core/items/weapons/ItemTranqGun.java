@@ -33,8 +33,7 @@ public class ItemTranqGun extends Item{
 	
 	@Override
 	public void onUpdate(ItemStack itemstack, World world, Entity entity, int i, boolean j) {
-		EntityPlayer player = (EntityPlayer)entity;
-
+		
 		firingDelay++;
 		//recoilDelay++;	
 		

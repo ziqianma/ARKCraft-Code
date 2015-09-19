@@ -12,8 +12,6 @@ import net.minecraft.entity.IProjectile;
 import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.play.server.S2BPacketChangeGameState;
 import net.minecraft.util.AxisAlignedBB;
@@ -49,7 +47,6 @@ public class EntityTranqAmmo extends Entity implements IProjectile
     private int ticksInGround;
     private int ticksInAir;
     private int knockbackStrength;
-    private static final String __OBFID = "CL_00001715";
 
     private int field_145791_d = -1;
     private int field_145792_e = -1;
@@ -262,6 +259,7 @@ public class EntityTranqAmmo extends Entity implements IProjectile
             }
 
             Entity entity = null;
+            @SuppressWarnings("rawtypes")
             List list = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.getEntityBoundingBox().addCoord(this.motionX, this.motionY, this.motionZ).expand(1.0D, 1.0D, 1.0D));
             double d0 = 0.0D;
             int i;
