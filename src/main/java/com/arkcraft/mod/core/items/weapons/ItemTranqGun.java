@@ -1,10 +1,6 @@
-package com.arkcraft.mod.core.items;
-
-import java.util.HashMap;
-import java.util.List;
+package com.arkcraft.mod.core.items.weapons;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -14,22 +10,21 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.arkcraft.mod.core.GlobalAdditions;
-import com.arkcraft.mod.core.entity.EntityTranqAmmo;
+import com.arkcraft.mod.core.items.weapons.handlers.SoundHandler;
+import com.arkcraft.mod.core.items.weapons.projectiles.EntityTranquilizer;
 
-public class ARKTranqGun extends Item{
+public class ItemTranqGun extends Item{
 	
 	private int shotDelay = 100;
-	private int recoil = 20;
+	//private int recoil = 20;
 	private int velocity = 4;
 
-	private int recoilDown = recoil / 2;
+	//private int recoilDown = recoil / 2;
 	
 	private int firingDelay;
-	private int recoilDelay;
-	private boolean hasRecoiled;
 	private boolean hasFired;
 	
-	public ARKTranqGun(String name) {
+	public ItemTranqGun(String name) {
 		super();
 		this.setUnlocalizedName(name);
 		this.setCreativeTab(GlobalAdditions.tabARK);
@@ -41,15 +36,15 @@ public class ARKTranqGun extends Item{
 		EntityPlayer player = (EntityPlayer)entity;
 
 		firingDelay++;
-		recoilDelay++;	
+		//recoilDelay++;	
 		
-		if(hasRecoiled){
-			if(recoilDelay >= 4){
-				player.rotationPitch = player.rotationPitch + recoilDown;
-				recoilDelay = 0;
-				hasRecoiled = false;
-			}
-		}
+//		if(hasRecoiled){
+//			if(recoilDelay >= 4){
+//				player.rotationPitch = player.rotationPitch + recoilDown;
+//				recoilDelay = 0;
+//				hasRecoiled = false;
+//			}
+//		}
 	
 		if(hasFired){
 			hasFired = false;
@@ -70,25 +65,25 @@ public class ARKTranqGun extends Item{
 
 		if(firingDelay >= shotDelay){		
 				
-				player.inventory.consumeInventoryItem(GlobalAdditions.tranq_ammo);
+				player.inventory.consumeInventoryItem(GlobalAdditions.tranquilizer);
 				
 			//	if(timesFired >= 2){
 			//		player.inventory.consumeInventoryItem(Items.gunpowder);
 			//		timesFired = 0;
 				}
 								
-				if(player.capabilities.isCreativeMode || player.inventory.hasItem(GlobalAdditions.tranq_ammo))
+				if(player.capabilities.isCreativeMode || player.inventory.hasItem(GlobalAdditions.tranquilizer))
 				{
 					if (!world.isRemote)
 					{			
 						SoundHandler.onEntityPlay("tranqGunShot", world, player, 10F, 1F);
-						world.spawnEntityInWorld(new EntityTranqAmmo(world, player, velocity));
+						world.spawnEntityInWorld(new EntityTranquilizer (world, player, velocity));
 						firingDelay = 0;
 						hasFired = true;
 					}
 				}
-				player.rotationPitch = player.rotationPitch - recoil;
-				hasRecoiled = true;
+//				player.rotationPitch = player.rotationPitch - recoil;
+//				hasRecoiled = true;
 			
 				return itemstack;
 		}

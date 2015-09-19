@@ -1,4 +1,4 @@
-package com.arkcraft.mod.core.entity.test;
+package com.arkcraft.mod.core.items.weapons.projectiles;
 
 import java.util.List;
 
@@ -12,6 +12,7 @@ import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.projectile.EntityArrow;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.play.server.S2BPacketChangeGameState;
@@ -27,11 +28,8 @@ import net.minecraftforge.fml.common.registry.IThrowableEntity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-@SuppressWarnings("rawtypes")
 public abstract class EntityProjectile extends EntityArrow implements IThrowableEntity
 {
-	public static final int	NO_PICKUP	= 0, PICKUP_ALL = 1, PICKUP_CREATIVE = 2, PICKUP_OWNER = 3;
-	
 	protected int			xTile;
 	protected int			yTile;
 	protected int			zTile;
@@ -57,7 +55,6 @@ public abstract class EntityProjectile extends EntityArrow implements IThrowable
 		inGround = false;
 		arrowShake = 0;
 		ticksInAir = 0;
-		pickupMode = NO_PICKUP;
 		
 		extraDamage = 0;
 		knockBack = 0;
@@ -83,23 +80,23 @@ public abstract class EntityProjectile extends EntityArrow implements IThrowable
 		shootingEntity = entity;
 	}
 	
-	protected void setPickupModeFromEntity(EntityLivingBase entityliving)
-	{
-		if (entityliving instanceof EntityPlayer)
-		{
-			if (((EntityPlayer) entityliving).capabilities.isCreativeMode)
-			{
-				setPickupMode(PICKUP_CREATIVE);
-			} else
-			{
-				setPickupMode(PICKUP_OWNER);
-			}
-		} else
-		{
-			setPickupMode(NO_PICKUP);
-		}
-	}
-	
+//	protected void setPickupModeFromEntity(EntityLivingBase entityliving)
+//	{
+//		if (entityliving instanceof EntityPlayer)
+//		{
+//			if (((EntityPlayer) entityliving).capabilities.isCreativeMode)
+//			{
+//				setPickupMode(PICKUP_CREATIVE);
+//			} else
+//			{
+//				setPickupMode(BalkonsWeaponMod.instance.modConfig.allCanPickup ? PICKUP_ALL : PICKUP_OWNER);
+//			}
+//		} else
+//		{
+//			setPickupMode(NO_PICKUP);
+//		}
+//	}
+		    
 	@Override
 	public void setThrowableHeading(double x, double y, double z, float speed, float deviation)
 	{
@@ -140,8 +137,14 @@ public abstract class EntityProjectile extends EntityArrow implements IThrowable
 	
 	@Override
 	public void onUpdate()
+	{
+		onEntityUpdate();
+	}
+	
+	@Override
+	public void onEntityUpdate()
     {
-        super.onUpdate();
+		super.onEntityUpdate();
 
         if (this.prevRotationPitch == 0.0F && this.prevRotationYaw == 0.0F)
         {
@@ -208,7 +211,8 @@ public abstract class EntityProjectile extends EntityArrow implements IThrowable
             }
 
             Entity entity = null;
-            List list = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.getEntityBoundingBox().addCoord(this.motionX, this.motionY, this.motionZ).expand(1.0D, 1.0D, 1.0D));
+            @SuppressWarnings("rawtypes")
+			List list = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.getEntityBoundingBox().addCoord(this.motionX, this.motionY, this.motionZ).expand(1.0D, 1.0D, 1.0D));
             double d0 = 0.0D;
             int i;
             float f1;
@@ -423,7 +427,8 @@ public abstract class EntityProjectile extends EntityArrow implements IThrowable
             this.setPosition(this.posX, this.posY, this.posZ);
             this.doBlockCollisions();
         }
-    }	
+    }
+	
 	public void onEntityHit(Entity entity)
 	{
 		bounceBack();
@@ -458,6 +463,7 @@ public abstract class EntityProjectile extends EntityArrow implements IThrowable
 			}
 		}
 	}
+	
 	protected void bounceBack()
 	{
 		motionX *= -0.1D;
@@ -512,12 +518,6 @@ public abstract class EntityProjectile extends EntityArrow implements IThrowable
 		return false;
 	}
 	
-	protected float getGravityVelocity()
-	{
-	    return 0.03F;
-	}
-
-	
 	@Override
 	public void setIsCritical(boolean flag)
 	{
@@ -544,55 +544,26 @@ public abstract class EntityProjectile extends EntityArrow implements IThrowable
 		knockBack = i;
 	}
 	
-	public void setPickupMode(int i)
-	{
-		pickupMode = i;
-	}
-	
-	public int getPickupMode()
-	{
-		return pickupMode;
-	}
-	
-	public boolean canPickup(EntityPlayer entityplayer)
-	{
-		if (pickupMode == PICKUP_ALL)
-		{
-			return true;
-		} else if (pickupMode == PICKUP_CREATIVE)
-		{
-			return entityplayer.capabilities.isCreativeMode;
-		} else if (pickupMode == PICKUP_OWNER)
-		{
-			return entityplayer == shootingEntity;
-		} else
-		{
-			return false;
-		}
-	}
-	
 	@Override
-	public void onCollideWithPlayer(EntityPlayer entityplayer)
-	{
-		if (inGround && arrowShake <= 0)
-		{
-			if (canPickup(entityplayer))
-			{
-				if (!worldObj.isRemote)
-				{
-					ItemStack item = getPickupItem();
-					if (item == null) return;
-					
-					if (pickupMode == PICKUP_CREATIVE && entityplayer.capabilities.isCreativeMode || entityplayer.inventory.addItemStackToInventory(item))
-					{
-						worldObj.playSoundAtEntity(this, "random.pop", 0.2F, ((rand.nextFloat() - rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
-						onItemPickup(entityplayer);
-						setDead();
-					}
-				}
-			}
-		}
-	}
+    public void onCollideWithPlayer(EntityPlayer entityIn)
+    {
+        if (!this.worldObj.isRemote && this.inGround && this.arrowShake <= 0)
+        {
+            boolean flag = this.canBePickedUp == 1 || this.canBePickedUp == 2 && entityIn.capabilities.isCreativeMode;
+
+            if (this.canBePickedUp == 1 && !entityIn.inventory.addItemStackToInventory(new ItemStack(Items.arrow, 1)))
+            {
+                flag = false;
+            }
+
+            if (flag)
+            {
+                this.playSound("random.pop", 0.2F, ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
+                entityIn.onItemPickup(this, 1);
+                this.setDead();
+            }
+        }
+    }
 	
 	protected void onItemPickup(EntityPlayer entityplayer)
 	{

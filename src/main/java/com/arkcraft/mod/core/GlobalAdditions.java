@@ -31,8 +31,6 @@ import com.arkcraft.mod.core.entity.EntityTranqAmmo;
 import com.arkcraft.mod.core.entity.aggressive.EntityRaptor;
 import com.arkcraft.mod.core.entity.passive.EntityBrontosaurus;
 import com.arkcraft.mod.core.entity.passive.EntityDodo;
-import com.arkcraft.mod.core.entity.test.EntitySpear;
-import com.arkcraft.mod.core.entity.test.ItemStoneSpear;
 import com.arkcraft.mod.core.handler.EntityHandler;
 import com.arkcraft.mod.core.handler.GenerationHandler;
 import com.arkcraft.mod.core.handler.GuiHandler;
@@ -45,10 +43,16 @@ import com.arkcraft.mod.core.items.ARKItem;
 import com.arkcraft.mod.core.items.ARKSaddle;
 import com.arkcraft.mod.core.items.ARKSeedItem;
 import com.arkcraft.mod.core.items.ARKSlingshot;
-import com.arkcraft.mod.core.items.ARKTranqAmmo;
-import com.arkcraft.mod.core.items.ARKTranqGun;
 import com.arkcraft.mod.core.items.ARKWeapon;
 import com.arkcraft.mod.core.items.ARKWeaponThrowable;
+import com.arkcraft.mod.core.items.weapons.ItemSimplePistol;
+import com.arkcraft.mod.core.items.weapons.ItemStoneSpear;
+import com.arkcraft.mod.core.items.weapons.ItemTranqGun;
+import com.arkcraft.mod.core.items.weapons.bullets.ItemSimpleBullet;
+import com.arkcraft.mod.core.items.weapons.bullets.ItemTranquilizer;
+import com.arkcraft.mod.core.items.weapons.projectiles.EntitySimpleBullet;
+import com.arkcraft.mod.core.items.weapons.projectiles.EntitySpear;
+import com.arkcraft.mod.core.items.weapons.projectiles.EntityTranquilizer;
 import com.arkcraft.mod.core.lib.KeyBindings;
 
 /**
@@ -74,9 +78,12 @@ public class GlobalAdditions {
 	public static ARKBlock oreSurface;
 	public static Block blockNarcoBrerry;
 	public static Dossier dino_book;
-	public static ARKTranqGun tranq_gun;
-	public static ARKTranqAmmo tranq_ammo;
 	public static ItemStoneSpear stoneSpear;
+	
+	public static ItemTranqGun tranq_gun;
+	public static ItemSimpleBullet simple_bullet;
+	public static ItemSimplePistol simple_pistol;
+	public static ItemTranquilizer tranquilizer;
 	
 	public static ArmorMaterial CLOTH = EnumHelper.addArmorMaterial("CLOTH_MAT", "CLOTH_MAT", 4, new int[] {1,2,1,1}, 15);
 	public static ArmorMaterial CHITIN = EnumHelper.addArmorMaterial("CHITIN_MAT", "CHITIN_MAT", 16, new int[] { 3,7,6,3 } , 10);
@@ -135,8 +142,14 @@ public class GlobalAdditions {
 		tranq_arrow = addItem("tranq_arrow");
 		dodo_feather = addItem("dodo_feather");
 		dodo_bag = addItemWithTooltip("dodo_bag", "Backpack for the Dodo");
+		
+		//Guns
 		tranq_gun = addTranqGun("tranq_gun");
-		tranq_ammo = addTranqAmmo("tranq_ammo");
+		simple_pistol = addSimplePistol("simple_pistol");
+		
+		//Bullets
+		simple_bullet = addSimpleBullet("simple_bullet");
+		tranquilizer = addTranquilizer("tranquilizer");
 		
 		stoneSpear = addSpearItem("stoneSpear", ToolMaterial.STONE);
 		
@@ -170,7 +183,8 @@ public class GlobalAdditions {
 		RecipeHandler.registerSmithyCraftingRecipes();
 		EntityHandler.registerModEntity(EntityExplosive.class, "Explosive Cobblestone Ball", Main.instance, 64, 10, true);
 		EntityHandler.registerModEntity(EntitySpear.class, "Spear", Main.instance, 64, 10, true);
-		EntityHandler.registerModEntity(EntityTranqAmmo.class, "Tranc Ammo", Main.instance, 64, 10, true);
+		EntityHandler.registerModEntity(EntityTranquilizer .class, "Tranquilizer ", Main.instance, 64, 10, true);
+		EntityHandler.registerModEntity(EntitySimpleBullet.class, "Simple Bullet", Main.instance, 64, 10, true);
 		EntityHandler.registerModEntity(EntityStoneSpear.class, "Stone Spear", Main.instance, 64, 10, true);
 		EntityHandler.registerModEntity(EntityCobble.class, "Cobblestone Ball", Main.instance, 64, 10, true);
 		EntityHandler.registerModEntity(EntityDodoEgg.class, "Dodo Egg", Main.instance, 64, 10, true);
@@ -294,13 +308,23 @@ public class GlobalAdditions {
 		allItems.put(name, item);
 		return item;
 	}
-	public static ARKTranqGun addTranqGun(String name) {
-		ARKTranqGun item = new ARKTranqGun(name);
+	public static ItemTranqGun addTranqGun(String name) {
+		ItemTranqGun item = new ItemTranqGun(name);
 		allItems.put(name, item);
 		return item;
 	}
-	public static ARKTranqAmmo addTranqAmmo(String name) {
-		ARKTranqAmmo item = new ARKTranqAmmo(name);
+	public static ItemSimplePistol addSimplePistol(String name) {
+		ItemSimplePistol item = new ItemSimplePistol(name);
+		allItems.put(name, item);
+		return item;
+	}
+	public static ItemSimpleBullet addSimpleBullet(String name) {
+		ItemSimpleBullet item = new ItemSimpleBullet(name);
+		allItems.put(name, item);
+		return item;
+	}
+	public static ItemTranquilizer  addTranquilizer (String name) {
+		ItemTranquilizer item = new ItemTranquilizer(name);
 		allItems.put(name, item);
 		return item;
 	}

@@ -1,4 +1,4 @@
-package com.arkcraft.mod.core.items;
+package com.arkcraft.mod.core.items.weapons.handlers;
 
 import com.arkcraft.mod.core.Main;
 

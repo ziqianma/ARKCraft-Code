@@ -1,6 +1,7 @@
-package com.arkcraft.mod.core.entity.test;
+package com.arkcraft.mod.core.items.weapons;
 
 import com.arkcraft.mod.core.GlobalAdditions;
+import com.arkcraft.mod.core.items.weapons.projectiles.EntitySpear;
 import com.arkcraft.mod.core.lib.BALANCE;
 
 import net.minecraft.entity.player.EntityPlayer;

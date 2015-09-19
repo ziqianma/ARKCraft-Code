@@ -12,7 +12,7 @@ import org.lwjgl.opengl.GL11;
 
 import com.arkcraft.mod.core.Main;
 import com.arkcraft.mod.core.entity.EntityTranqAmmo;
-import com.arkcraft.mod.core.entity.test.EntitySpear;
+import com.arkcraft.mod.core.items.weapons.projectiles.EntitySpear;
 
 public class RenderTranqAmmo extends Render
 {
