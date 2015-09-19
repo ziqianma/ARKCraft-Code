@@ -20,7 +20,9 @@ public class PageChapter extends Page {
 	
 	@Override
 	public void draw(int guiLeft, int guiTop, int mouseX, int mouseY, SmallFontRenderer renderer, boolean canTranslate, GuiDossier dossier) {
-		if(icon != null) this.drawIcon(icon, dossier, guiTop, guiLeft);
+		if(icon != null) {
+			this.drawIcon(icon, dossier, guiTop, guiLeft);
+		}
 		
 		if(title != null) {
 			if(canTranslate) title = StatCollector.translateToLocal(title);
