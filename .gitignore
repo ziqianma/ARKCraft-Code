@@ -5,3 +5,5 @@
 !.gitattributes
 !*.md
 !*.txt
+/build
+/gradle
