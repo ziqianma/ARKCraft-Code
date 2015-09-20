@@ -1,6 +1,10 @@
 {
-	"variants": {
-		"normal": { "model": "arkcraft:crop_plot" }
-	}
-
+    "variants": {
+        "age=0": { "model": "arkcraft:crop_plot" },
+        "age=1": { "model": "arkcraft:crop_plot_seeded" },
+        "age=2": { "model": "arkcraft:crop_plot_seedling" },
+        "age=3": { "model": "arkcraft:crop_plot_midling" },
+        "age=4": { "model": "arkcraft:crop_plot_growthling" },
+        "age=5": { "model": "arkcraft:crop_plot_fruitling" }
+    }
 }

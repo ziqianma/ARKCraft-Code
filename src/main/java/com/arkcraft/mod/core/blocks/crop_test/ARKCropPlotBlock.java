@@ -33,7 +33,8 @@ import com.arkcraft.mod.core.Main;
  */
 public class ARKCropPlotBlock extends BlockBush implements IGrowable
 {
-    public static final PropertyInteger AGE = PropertyInteger.create("age", 0, 11);
+	public static final int GROWTH_STAGES = 6;
+    public static final PropertyInteger AGE = PropertyInteger.create("age", 0, GROWTH_STAGES);
     private int renderType = 3; //default value
 	private boolean isOpaque = false;
 	private int ID;
@@ -112,15 +113,12 @@ public class ARKCropPlotBlock extends BlockBush implements IGrowable
         }
     }
 	
-    public void grow(World worldIn, BlockPos pos, IBlockState state)
-    {
+    public void grow(World worldIn, BlockPos pos, IBlockState state) {
         int i = ((Integer)state.getValue(AGE)).intValue() + MathHelper.getRandomIntegerInRange(worldIn.rand, 2, 5);
 
-        if (i > 11)
-        {
-            i = 11;
+        if (i > GROWTH_STAGES) {
+            i = GROWTH_STAGES;
         }
-
         worldIn.setBlockState(pos, state.withProperty(AGE, Integer.valueOf(i)), 2);
     }
     
@@ -271,7 +269,6 @@ public class ARKCropPlotBlock extends BlockBush implements IGrowable
 
         if (age >= 11)
         {
-        	@SuppressWarnings("unused")
             int k = 3 + fortune;
 
             for (int i = 0; i < 3 + fortune; ++i)
