@@ -7,3 +7,11 @@
 !*.txt
 /build
 /gradle
+options.txt
+license.txt
+forge-1.8-11.14.3.1493-changelog.txt
+forge_Client.launch
+forge_Server.launch
+gradlew.bat
+gradlew
+servers.dat
