@@ -31,7 +31,7 @@ public class InventoryTaming implements IInventory, IUpdatePlayerListBox {
 	public InventoryTaming(DinoTameable entityDino) {
 		this.entityDino = entityDino;
 		TAMING_TIME_FOR_COMPLETION = (short) (entityDino.getTamingSeconds() * 20);
-//		torporTime = (short) (entityDino.getTorpor() * 20);
+		torporTime = (short) (entityDino.getTorpor() * 20);
 	}
 
 	// Create and initialize the itemStacks variable that will store store the itemStacks
@@ -58,7 +58,7 @@ public class InventoryTaming implements IInventory, IUpdatePlayerListBox {
 	// Number of ticks dino will remain unconscious
 	private short torporTime;
 	// Torpor time maximum that can be set
-	private static short MAX_TORPOR_TIME = 2500;
+	private static short MAX_TORPOR_TIME = 3000;
 
 	@SuppressWarnings("unused")
 	private int cachedNumberOfFeedingSlots = -1;
@@ -302,13 +302,11 @@ public class InventoryTaming implements IInventory, IUpdatePlayerListBox {
 	@Override
 	public void openInventory(EntityPlayer player) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void closeInventory(EntityPlayer player) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

@@ -44,7 +44,7 @@ public class EntityRaptor extends DinoTameable {
 	public int raptorType;
 
 	public EntityRaptor(World world) {
-		this(world, 1);
+		this(world, SaddleType.SMALL.getSaddleID());
 	}
 	
 	@SuppressWarnings("rawtypes")

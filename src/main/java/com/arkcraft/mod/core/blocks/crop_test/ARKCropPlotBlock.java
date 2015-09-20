@@ -33,7 +33,7 @@ import com.arkcraft.mod.core.Main;
  */
 public class ARKCropPlotBlock extends BlockBush implements IGrowable
 {
-	public static final int GROWTH_STAGES = 6;
+	public static final int GROWTH_STAGES = 5; // 0 - 5
     public static final PropertyInteger AGE = PropertyInteger.create("age", 0, GROWTH_STAGES);
     private int renderType = 3; //default value
 	private boolean isOpaque = false;

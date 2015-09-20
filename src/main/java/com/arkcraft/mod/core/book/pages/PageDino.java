@@ -1,5 +1,6 @@
 package com.arkcraft.mod.core.book.pages;
 
+import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.StatCollector;
 
@@ -27,8 +28,8 @@ public class PageDino extends Page {
 		LogHelper.info(diet == null ? "Diet is null!" : "Diet is not null. Its value is: " + diet);
 		
 		if(model != null) {
-			//int size = 25;
-			//GuiInventory.drawEntityOnScreen(guiLeft + (dossier.guiWidth-size)/2, guiTop + 15, size, -350F, -5F, model);
+			int size = 25;
+			GuiInventory.drawEntityOnScreen(guiLeft + (dossier.guiWidth-size)/2, guiTop + 15, size, -350F, -5F, model);
 		}
 		
 		if(title != null) {
