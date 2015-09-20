@@ -20,12 +20,7 @@ import com.google.common.collect.Multimap;
 
 public abstract class RangedComponent extends AbstractWeaponComponent
 {
-	protected static final int recoil = 5;
 	protected static final int	MAX_DELAY	= 72000;
-	protected static final int recoilDown = 10;
-	private int recoilDelay;
-	private boolean hasFired;
-	private boolean hasRecoiled;
 	
 	public static boolean isReloaded(ItemStack itemstack)
 	{
@@ -158,9 +153,6 @@ public abstract class RangedComponent extends AbstractWeaponComponent
 					//Start aiming weapon to fire
 					soundCharge(itemstack, world, entityplayer);
 					entityplayer.setItemInUse(itemstack, getMaxItemUseDuration(itemstack));
-
-					entityplayer.rotationPitch = entityplayer.rotationPitch - recoil;
-					hasRecoiled = true;
 	
 				} else
 				{
@@ -206,29 +198,9 @@ public abstract class RangedComponent extends AbstractWeaponComponent
 		}
 	}
 	
-//	@Override
-//	public void onUpdate(ItemStack itemstack, World world, Entity entity, int i, boolean flag)
-//	{
-//	}
-	
 	@Override
-	public void onUpdate(ItemStack itemstack, World world, Entity entity, int i, boolean j) {
-		EntityPlayer player = (EntityPlayer)entity;
-		
-		recoilDelay++;	
-		
-		if(hasRecoiled){
-			if(recoilDelay >= 2){
-				player.rotationPitch = player.rotationPitch + recoilDown;
-				recoilDelay = 0;
-				hasRecoiled = false;
-			}
-		}
-	
-		if(hasFired){
-			hasFired = false;
-		}
-		
+	public void onUpdate(ItemStack itemstack, World world, Entity entity, int i, boolean flag)
+	{
 	}
 	
 	@SideOnly(Side.CLIENT)
@@ -328,7 +300,7 @@ public abstract class RangedComponent extends AbstractWeaponComponent
 	
 	public static enum RangedSpecs
 	{
-		SIMPLEPISTOL("weaponmod:bullet", "simple_pistol", 80, 1);
+		SIMPLEPISTOL("weaponmod:bullet", "simple_pistol",  250, 1);
 		
 		RangedSpecs(String ammoitemtag, String reloadtimetag, int durability, int stacksize)
 		{

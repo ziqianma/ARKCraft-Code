@@ -1,13 +1,13 @@
 package com.arkcraft.mod.core.items.weapons.handlers;
 
-import com.arkcraft.mod.core.items.weapons.ItemSimplePistol;
-import com.arkcraft.mod.core.items.weapons.projectiles.EntitySimpleBullet;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+
+import com.arkcraft.mod.core.items.weapons.ItemSimplePistol;
+import com.arkcraft.mod.core.items.weapons.projectiles.EntitySimpleBullet;
 
 public class RangedCompSimplePistol extends RangedComponent
 {
@@ -50,7 +50,7 @@ public class RangedCompSimplePistol extends RangedComponent
 		if (!world.isRemote)
 		{
 			EntitySimpleBullet entitymusketbullet = new EntitySimpleBullet(world, entityplayer, 1F / f);
-			applyProjectileEnchantments(entitymusketbullet, itemstack);
+			//applyProjectileEnchantments(entitymusketbullet, itemstack);
 			world.spawnEntityInWorld(entitymusketbullet);
 		} else
 		{
@@ -85,7 +85,7 @@ public class RangedCompSimplePistol extends RangedComponent
 		}
 		world.spawnParticle(EnumParticleTypes.FLAME, x + particleX, y + particleY, z + particleZ, 0.0D, 0.0D, 0.0D);
 	}
-
+	
 	@Override
 	public float getMaxZoom()
 	{

@@ -1,21 +1,19 @@
 package com.arkcraft.mod.core.items.weapons.projectiles;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
-import com.arkcraft.mod.core.items.weapons.handlers.WeaponDamageSource;
-
-public class EntitySimpleBullet extends EntityProjectile
+public class EntitySimpleBullet extends EntityShootable
 {
 	
 	public EntitySimpleBullet(World world)
 	{
 		super(world);
-		inGround = false;
+	//	inGround = false;
 		
 	}
 	
@@ -28,7 +26,7 @@ public class EntitySimpleBullet extends EntityProjectile
 	public EntitySimpleBullet(World world, EntityLivingBase entityliving, float deviation)
 	{
 		this(world);
-		shootingEntity = entityliving;
+		thrower = entityliving;
 		setLocationAndAngles(entityliving.posX, entityliving.posY + entityliving.getEyeHeight(), entityliving.posZ, entityliving.rotationYaw, entityliving.rotationPitch);
 		posX -= MathHelper.cos((rotationYaw / 180F) * 3.141593F) * 0.16F;
 		posY -= 0.1D;
@@ -40,26 +38,7 @@ public class EntitySimpleBullet extends EntityProjectile
 		setThrowableHeading(motionX, motionY, motionZ, 5.0F, deviation);
 	}
 	
-	@Override
-	public void onEntityHit(Entity entity)
-	{
-		float damage = 20F + extraDamage;
-		DamageSource damagesource = null;
-		if (shootingEntity == null)
-		{
-			damagesource = WeaponDamageSource.causeProjectileWeaponDamage(this, this);
-		} else
-		{
-			damagesource = WeaponDamageSource.causeProjectileWeaponDamage(this, shootingEntity);
-		}
-		if (entity.attackEntityFrom(damagesource, damage))
-		{
-			applyEntityHitEffects(entity);
-			playHitSound();
-			setDead();
-		}
-	}
-	
+	/*
 	@Override
 	public void onUpdate()
 	{
@@ -73,7 +52,7 @@ public class EntitySimpleBullet extends EntityProjectile
 			}
 			return;
 		}
-		double speed = getTotalVelocity();
+		double speed = getGravityVelocity();
 		double amount = 16D;
 		if (speed > 2.0D)
 		{
@@ -87,35 +66,46 @@ public class EntitySimpleBullet extends EntityProjectile
 		            this.setDead();
 		        }
 		}
-	}
+	}	*/
+	/*
+	@Override
+	public void onEntityHit(Entity entity)
+	{
+		double vel = getTotalVelocity();
+		int damage = MathHelper.ceiling_double_int(vel * (3D + extraDamage));
+		if (getIsCritical())
+		{
+			damage += rand.nextInt(damage / 2 + 2);
+		}
+		DamageSource damagesource = null;
+		if (thrower == null)
+		{
+			damagesource = DamageSource.causeThrownDamage(this, this);
+		} else
+		{
+			damagesource = DamageSource.causeThrownDamage(this, thrower);
+		}	
+		if (entity.attackEntityFrom(damagesource, damage))
+		{
+			applyEntityHitEffects(entity);
+			playHitSound();
+			setDead();
+		} 
+	}	*/
 	
 	@Override
-	public boolean aimRotation()
+	public boolean canBeCritical()
 	{
-		return false;
+		return true;
 	}
-	
+
 	@Override
-	public int getMaxLifetime()
-	{
-		return 200;
-	}
-	
-	@Override
-	public float getAirResistance()
-	{
-		return 0.98F;
-	}
-	
-	@Override
-	public float getGravity()
-	{
-		return getTotalVelocity() < 3F ? 0.07F : 0F;
-	}
-	
-	@Override
-	public int getMaxArrowShake()
-	{
-		return 0;
+	protected void onImpact(MovingObjectPosition mop) {
+		/* Damage on impact */
+		float dmg = 5;
+		if(mop.entityHit != null) mop.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), dmg);
+		
+		for(int i = 0; i < 4; i++) this.worldObj.spawnParticle(EnumParticleTypes.CRIT, this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D);
+		if(this.worldObj.isRemote) this.setDead();
 	}
 }

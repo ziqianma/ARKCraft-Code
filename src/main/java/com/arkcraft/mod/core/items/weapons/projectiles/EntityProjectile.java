@@ -431,7 +431,6 @@ public abstract class EntityProjectile extends EntityArrow implements IThrowable
 	
 	public void onEntityHit(Entity entity)
 	{
-		bounceBack();
 		applyEntityHitEffects(entity);
 	}
 	
@@ -462,16 +461,6 @@ public abstract class EntityProjectile extends EntityArrow implements IThrowable
 				((EntityPlayerMP) shootingEntity).playerNetServerHandler.sendPacket(new S2BPacketChangeGameState(6, 0));
 			}
 		}
-	}
-	
-	protected void bounceBack()
-	{
-		motionX *= -0.1D;
-		motionY *= -0.1D;
-		motionZ *= -0.1D;
-		rotationYaw += 180F;
-		prevRotationYaw += 180F;
-		ticksInAir = 0;
 	}
 	
 	public final double getTotalVelocity()

@@ -66,9 +66,6 @@ public class EntitySpear extends EntityProjectile
 			applyEntityHitEffects(entity);
 			playHitSound();
 			setDead();
-		} else
-		{
-			bounceBack();
 		}
 	}
 	
