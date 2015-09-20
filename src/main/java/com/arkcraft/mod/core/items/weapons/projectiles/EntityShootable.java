@@ -3,12 +3,16 @@ package com.arkcraft.mod.core.items.weapons.projectiles;
 import java.util.List;
 
 import net.minecraft.block.Block;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IProjectile;
+import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.play.server.S2BPacketChangeGameState;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumParticleTypes;
@@ -100,6 +104,7 @@ public abstract class EntityShootable extends Entity implements IProjectile
     {
         return 0.0F;
     }
+    
 
     /**
      * Similar to setArrowHeading, it's point the throwable entity to a x, y, z direction.
@@ -234,17 +239,14 @@ public abstract class EntityShootable extends Entity implements IProjectile
         }
 
         if (movingobjectposition != null)
-        {
-            if (movingobjectposition.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK && this.worldObj.getBlockState(movingobjectposition.getBlockPos()).getBlock() == Blocks.portal)
-            {
-                this.setInPortal();
-            }
-            else
-            {
-                this.onImpact(movingobjectposition);
-            }
-        }
-
+		{
+			if (movingobjectposition.entityHit != null)
+			{
+				onEntityHit(movingobjectposition.entityHit);
+		
+			}
+		}
+        
         this.posX += this.motionX;
         this.posY += this.motionY;
         this.posZ += this.motionZ;
@@ -333,11 +335,45 @@ public abstract class EntityShootable extends Entity implements IProjectile
 	{
 		knockBack = i;
 	}
+	
+	public void onEntityHit(Entity entity)
+	{
+		applyEntityHitEffects(entity);
+	}
+	
+	public void applyEntityHitEffects(Entity entity)
+	{
+		if (isBurning() && !(entity instanceof EntityEnderman))
+		{
+			entity.setFire(5);
+		}
+		if (entity instanceof EntityLivingBase)
+		{
+			EntityLivingBase entityliving = (EntityLivingBase) entity;
+			if (knockBack > 0)
+			{
+				float f = MathHelper.sqrt_double(motionX * motionX + motionZ * motionZ);
+				if (f > 0.0F)
+				{
+					entity.addVelocity(motionX * knockBack * 0.6D / f, 0.1D, motionZ * knockBack * 0.6D / f);
+				}
+			}
+			if (thrower instanceof EntityLivingBase)
+			{
+				EnchantmentHelper.func_151384_a(entityliving, this.thrower);
+				EnchantmentHelper.func_151385_b((EntityLivingBase) this.thrower, entityliving);
+			}
+			if (thrower instanceof EntityPlayerMP && thrower != entity && entity instanceof EntityPlayer)
+			{
+				((EntityPlayerMP) thrower).playerNetServerHandler.sendPacket(new S2BPacketChangeGameState(6, 0));
+			}
+		}
+	}
 
     /**
      * Called when this EntityThrowable hits a block or entity.
      */
-    protected abstract void onImpact(MovingObjectPosition p_70184_1_);
+//    protected abstract void onImpact(MovingObjectPosition p_70184_1_);
 
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.

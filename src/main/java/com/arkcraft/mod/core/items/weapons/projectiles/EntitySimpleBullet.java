@@ -1,5 +1,8 @@
 package com.arkcraft.mod.core.items.weapons.projectiles;
 
+import com.arkcraft.mod.core.items.weapons.handlers.WeaponDamageSource;
+
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
@@ -38,7 +41,6 @@ public class EntitySimpleBullet extends EntityShootable
 		setThrowableHeading(motionX, motionY, motionZ, 5.0F, deviation);
 	}
 	
-	/*
 	@Override
 	public void onUpdate()
 	{
@@ -66,46 +68,45 @@ public class EntitySimpleBullet extends EntityShootable
 		            this.setDead();
 		        }
 		}
-	}	*/
-	/*
+	}	
+	
 	@Override
 	public void onEntityHit(Entity entity)
 	{
-		double vel = getTotalVelocity();
-		int damage = MathHelper.ceiling_double_int(vel * (3D + extraDamage));
-		if (getIsCritical())
-		{
-			damage += rand.nextInt(damage / 2 + 2);
-		}
+		float damage = 20F + extraDamage;
 		DamageSource damagesource = null;
 		if (thrower == null)
 		{
-			damagesource = DamageSource.causeThrownDamage(this, this);
+			damagesource = WeaponDamageSource.causeProjectileWeaponDamage(this, this);
 		} else
 		{
-			damagesource = DamageSource.causeThrownDamage(this, thrower);
-		}	
+			damagesource = WeaponDamageSource.causeProjectileWeaponDamage(this, thrower);
+		}
 		if (entity.attackEntityFrom(damagesource, damage))
 		{
-			applyEntityHitEffects(entity);
 			playHitSound();
 			setDead();
-		} 
-	}	*/
+		}
+	}
 	
+	@Override
+	protected float getVelocity()
+	{
+	        return 0F;
+	}
 	@Override
 	public boolean canBeCritical()
 	{
 		return true;
 	}
 
-	@Override
-	protected void onImpact(MovingObjectPosition mop) {
-		/* Damage on impact */
-		float dmg = 5;
-		if(mop.entityHit != null) mop.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), dmg);
-		
-		for(int i = 0; i < 4; i++) this.worldObj.spawnParticle(EnumParticleTypes.CRIT, this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D);
-		if(this.worldObj.isRemote) this.setDead();
-	}
+//	@Override
+//	protected void onImpact(MovingObjectPosition mop) {
+//		/* Damage on impact */
+//		float dmg = 5;
+//		if(mop.entityHit != null) mop.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), dmg);
+//		
+//		for(int i = 0; i < 4; i++) this.worldObj.spawnParticle(EnumParticleTypes.CRIT, this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D);
+//		if(this.worldObj.isRemote) this.setDead();
+//	}
 }

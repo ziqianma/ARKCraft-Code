@@ -68,10 +68,10 @@ public class EntityTranquilizer extends EntityProjectile
 		DamageSource damagesource = null;
 		if (shootingEntity == null)
 		{
-			damagesource = WeaponDamageSource.causeProjectileWeaponDamage(this, this);
+			//damagesource = WeaponDamageSource.causeProjectileWeaponDamage(this, this);
 		} else
 		{
-			damagesource = WeaponDamageSource.causeProjectileWeaponDamage(this, shootingEntity);
+			//damagesource = WeaponDamageSource.causeProjectileWeaponDamage(this, shootingEntity);
 		}
 		if (entity.attackEntityFrom(damagesource, damage))
 		{

@@ -5,31 +5,32 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSourceIndirect;
 
 import com.arkcraft.mod.core.items.weapons.projectiles.EntityProjectile;
+import com.arkcraft.mod.core.items.weapons.projectiles.EntityShootable;
 
 public class WeaponDamageSource extends EntityDamageSourceIndirect
 {
-	private EntityProjectile	projectileEntity;
-	private Entity				shooterEntity;
+	private EntityShootable	projectileEntity;
+	private Entity				thrower;
 	
-	public WeaponDamageSource(String s, EntityProjectile projectile, Entity entity)
+	public WeaponDamageSource(String s, EntityShootable projectile, Entity entity)
 	{
 		super(s, projectile, entity);
 		projectileEntity = projectile;
-		shooterEntity = entity;
+		thrower = entity;
 	}
 	
 	public Entity getProjectile()
 	{
-		return projectileEntity;
+		return projectileEntity;	
 	}
 	
 	@Override
 	public Entity getEntity()
 	{
-		return shooterEntity;
+		return thrower;
 	}
 	
-	public static DamageSource causeProjectileWeaponDamage(EntityProjectile projectile, Entity entity)
+	public static DamageSource causeProjectileWeaponDamage(EntityShootable projectile, Entity entity)
 	{
 		return (new WeaponDamageSource("weapon", projectile, entity)).setProjectile();
 	}

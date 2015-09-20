@@ -1,5 +1,6 @@
 package com.arkcraft.mod.core;
 
+import net.minecraft.block.BlockDispenser;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -20,6 +21,7 @@ import com.arkcraft.mod.core.handler.ARKEventHandler;
 import com.arkcraft.mod.core.handler.ARKPlayerEventHandler;
 import com.arkcraft.mod.core.handler.FMLCommonEventHandler;
 import com.arkcraft.mod.core.items.weapons.handlers.WeaponModConfig;
+import com.arkcraft.mod.core.items.weapons.projectiles.dispense.DispenseSimpleBullet;
 import com.arkcraft.mod.core.lib.Config;
 import com.arkcraft.mod.core.network.PlayerPoop;
 import com.arkcraft.mod.core.proxy.CommonProxy;
@@ -59,6 +61,7 @@ public class Main {
 		proxy.registerRenderers();
 		proxy.init();
 		FMLCommonHandler.instance().bus().register(new Config());
+		registerDispenseBehavior();
 	}
 	
 	@EventHandler
@@ -70,6 +73,14 @@ public class Main {
 		
 		int id = 0;
 		modChannel.registerMessage(PlayerPoop.Handler.class, PlayerPoop.class, id++, Side.SERVER);
+	}
+	
+	private void registerDispenseBehavior()
+	{
+		if (GlobalAdditions.simple_bullet != null)
+		{
+			BlockDispenser.dispenseBehaviorRegistry.putObject(GlobalAdditions.simple_bullet, new DispenseSimpleBullet());
+		}
 	}
 
 }
