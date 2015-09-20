@@ -339,4 +339,18 @@ public class EntityDodo extends EntityTameable {
     protected void playStepSound(BlockPos p_180429_1_, Block p_180429_2_) {
         this.playSound("mob.chicken.step", 0.15F, 1.0F);
     }
+	
+    /**
+     * The age value may be negative or positive or zero. If it's negative, it get's incremented on each tick, if it's
+     * positive, it get's decremented each tick. Don't confuse this with EntityLiving.getAge. With a negative value the
+     * Entity is considered a child.
+     */
+    @Override
+    public int getGrowingAge() {
+    	// Added the null check for the dossier
+    	if (this.worldObj != null)
+    		return this.worldObj.isRemote ? this.dataWatcher.getWatchableObjectByte(12) : this.field_175504_a;
+    	else
+    		return this.field_175504_a;
+    }
 }

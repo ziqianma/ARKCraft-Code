@@ -31,15 +31,17 @@ import com.arkcraft.mod.core.machine.gui.InventoryTaming;
  *
  */
 public abstract class DinoTameable extends EntityTameable {
-
+	// Stuff that needs to be saved to NBT:
 	public InventoryDino invDino;
 	public InventoryTaming invTaming;
 	protected boolean isSaddled = false;
 	protected int torpor = 0;
 	protected int progress = 0;
+
+	// Other non-NBT variables:
+	protected boolean isRideable = false;
 	protected boolean isTameable = false;
 	protected int tamingSeconds = 0;
-	protected boolean isRideable = false;
 	protected EntityAIBase attackPlayerTarget;
 	SaddleType saddleType;
 	
@@ -73,6 +75,10 @@ public abstract class DinoTameable extends EntityTameable {
 			this.saddleType = SaddleType.LARGE;
 			break;
 		}
+	}
+	
+	public DinoTameable(World worldIn) {
+		super(worldIn);
 	}
 
 	protected DinoTameable(World worldIn, SaddleType saddleType) {
@@ -182,12 +188,16 @@ public abstract class DinoTameable extends EntityTameable {
 	@Override
     public void writeEntityToNBT(NBTTagCompound nbt) {
         super.writeEntityToNBT(nbt);
-		nbt.setBoolean("IsSaddled", isSaddled);
-		this.invTaming.saveInventoryToNBT(nbt);
-		if(this.isSaddled()) {
-			this.invDino.saveInventoryToNBT(nbt);
-//			LogHelper.info("EntityDodo - writeEntityToNBT: Saved chest inventory.");
-		}
+        if (isTameable) {
+        	nbt.setBoolean("isSaddled", isSaddled);
+        	nbt.setInteger("torpor", torpor);
+        	nbt.setInteger("progress", progress);
+        	this.invTaming.saveInventoryToNBT(nbt);
+//    		if (this.isSaddled()) {
+    			this.invDino.saveInventoryToNBT(nbt);
+//    			LogHelper.info("EntityDodo - writeEntityToNBT: Saved chest inventory.");
+//    		}
+        }
     }
 
     /**
@@ -196,15 +206,23 @@ public abstract class DinoTameable extends EntityTameable {
 	@Override
     public void readEntityFromNBT(NBTTagCompound nbt) {
         super.readEntityFromNBT(nbt);
-        if (nbt.hasKey("IsSaddled")) {
-        	this.setSaddled(nbt.getBoolean("IsSaddled"));
+        if (isTameable) {
+	        if (nbt.hasKey("isSaddled")) {
+	        	this.setSaddled(nbt.getBoolean("isSaddled"));
+	        }
+	        if (nbt.hasKey("torpor")) {
+	        	torpor = (nbt.getInteger("torpor"));
+	        }
+	        if (nbt.hasKey("progress")) {
+	        	progress = (nbt.getInteger("progress"));
+	        }
+	        // Dino taming inventory
+	        this.invTaming.loadInventoryFromNBT(nbt);
+	        // Dino Inventory
+			final byte NBT_TYPE_COMPOUND = 10;
+			NBTTagList dataForAllSlots = nbt.getTagList("Items", NBT_TYPE_COMPOUND);
+	        this.invDino.loadInventoryFromNBT(dataForAllSlots);
         }
-        // Dino taming inventory
-        this.invTaming.loadInventoryFromNBT(nbt);
-        // Dino Inventory
-		final byte NBT_TYPE_COMPOUND = 10;
-		NBTTagList dataForAllSlots = nbt.getTagList("Items", NBT_TYPE_COMPOUND);
-        this.invDino.loadInventoryFromNBT(dataForAllSlots);
     }
 
 	public void setTamed(EntityPlayer player, boolean tamed) {
@@ -437,5 +455,19 @@ public abstract class DinoTameable extends EntityTameable {
             this.randomYawVelocity = 0.0F;
             this.invTaming.update();
     	}
+    }
+
+    /**
+     * The age value may be negative or positive or zero. If it's negative, it get's incremented on each tick, if it's
+     * positive, it get's decremented each tick. Don't confuse this with EntityLiving.getAge. With a negative value the
+     * Entity is considered a child.
+     */
+    @Override
+    public int getGrowingAge() {
+    	// Added the null check for the dossier
+    	if (this.worldObj != null)
+    		return this.worldObj.isRemote ? this.dataWatcher.getWatchableObjectByte(12) : this.field_175504_a;
+    	else
+    		return this.field_175504_a;
     }
 }
