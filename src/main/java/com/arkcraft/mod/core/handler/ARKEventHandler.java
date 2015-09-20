@@ -2,7 +2,9 @@ package com.arkcraft.mod.core.handler;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import com.arkcraft.mod.core.GlobalAdditions;
@@ -43,6 +45,11 @@ public class ARKEventHandler {
 				LogHelper.info("EntityWorldJoinEvent: Gave Dino Dossier @ " + entity.toString());
 			}
 		}
+	}
+	
+	@SubscribeEvent(priority = EventPriority.NORMAL)
+	public void onRender(RenderGameOverlayEvent event) {
+		//TODO
 	}
 	
 }
