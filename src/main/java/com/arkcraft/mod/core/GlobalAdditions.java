@@ -50,6 +50,8 @@ import com.arkcraft.mod.core.items.weapons.ItemSpear;
 import com.arkcraft.mod.core.items.weapons.ItemTranqGun;
 import com.arkcraft.mod.core.items.weapons.bullets.ItemProjectile;
 import com.arkcraft.mod.core.items.weapons.projectiles.EntitySimpleBullet;
+import com.arkcraft.mod.core.items.weapons.projectiles.EntitySimpleRifleAmmo;
+import com.arkcraft.mod.core.items.weapons.projectiles.EntitySimpleShotgunAmmo;
 import com.arkcraft.mod.core.items.weapons.projectiles.EntitySpear;
 import com.arkcraft.mod.core.items.weapons.projectiles.EntityTranquilizer;
 import com.arkcraft.mod.core.lib.KeyBindings;
@@ -191,6 +193,8 @@ public class GlobalAdditions {
 		EntityHandler.registerModEntity(EntitySpear.class, "Spear", Main.instance, 64, 10, true);
 		EntityHandler.registerModEntity(EntityTranquilizer .class, "Tranquilizer ", Main.instance, 64, 10, true);
 		EntityHandler.registerModEntity(EntitySimpleBullet.class, "Simple Bullet", Main.instance, 64, 10, true);
+		EntityHandler.registerModEntity(EntitySimpleRifleAmmo.class, "Simple Rifle Ammo", Main.instance, 64, 10, true);
+		EntityHandler.registerModEntity(EntitySimpleShotgunAmmo.class, "Simple Shotgun Ammo", Main.instance, 64, 10, true);
 		EntityHandler.registerModEntity(EntityCobble.class, "Cobblestone Ball", Main.instance, 64, 10, true);
 		EntityHandler.registerModEntity(EntityDodoEgg.class, "Dodo Egg", Main.instance, 64, 10, true);
 		

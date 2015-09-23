@@ -433,5 +433,4 @@ public abstract class EntityShootable extends Entity implements IProjectile
 
         return this.thrower;
     }
-
 }

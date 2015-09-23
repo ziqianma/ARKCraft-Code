@@ -2,6 +2,7 @@ package com.arkcraft.mod.core.items.weapons.projectiles;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.MathHelper;
@@ -10,8 +11,7 @@ import net.minecraft.world.World;
 import com.arkcraft.mod.core.items.weapons.handlers.WeaponDamageSource;
 
 public class EntitySimpleBullet extends EntityShootable
-{
-	
+{	
 	public EntitySimpleBullet(World world)
 	{
 		super(world);	
@@ -51,6 +51,7 @@ public class EntitySimpleBullet extends EntityShootable
 			}
 			return;
 		}
+		
 		double speed = getGravityVelocity();
 		double amount = 16D;
 		if (speed > 2.0D)
@@ -97,6 +98,7 @@ public class EntitySimpleBullet extends EntityShootable
 		return true;
 	}
 
+	
 //	@Override
 //	protected void onImpact(MovingObjectPosition mop) {
 //		/* Damage on impact */
