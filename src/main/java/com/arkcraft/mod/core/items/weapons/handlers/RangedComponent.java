@@ -300,7 +300,8 @@ public abstract class RangedComponent extends AbstractWeaponComponent
 	
 	public static enum RangedSpecs
 	{
-		SIMPLEPISTOL("weaponmod:bullet", "simple_pistol",  250, 1);
+		SIMPLEPISTOL("main:simple_bullet", "simple_pistol",  250, 1),
+		CROSSBOW("main:stone_arrow", "crossbow", 250, 1);
 		
 		RangedSpecs(String ammoitemtag, String reloadtimetag, int durability, int stacksize)
 		{

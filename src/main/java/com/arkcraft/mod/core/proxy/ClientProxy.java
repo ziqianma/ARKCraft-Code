@@ -17,7 +17,6 @@ import com.arkcraft.mod.core.book.proxy.DCommon;
 import com.arkcraft.mod.core.entity.EntityCobble;
 import com.arkcraft.mod.core.entity.EntityDodoEgg;
 import com.arkcraft.mod.core.entity.EntityExplosive;
-import com.arkcraft.mod.core.entity.EntityStoneSpear;
 import com.arkcraft.mod.core.entity.aggressive.EntityRaptor;
 import com.arkcraft.mod.core.entity.model.ModelBrontosaurus;
 import com.arkcraft.mod.core.entity.model.ModelDodo;
@@ -29,7 +28,6 @@ import com.arkcraft.mod.core.entity.render.RenderDodo;
 import com.arkcraft.mod.core.entity.render.RenderRaptor;
 import com.arkcraft.mod.core.entity.render.RenderSimpleBullet;
 import com.arkcraft.mod.core.entity.render.RenderSpear;
-import com.arkcraft.mod.core.entity.render.RenderStoneSpear;
 import com.arkcraft.mod.core.entity.render.RenderTranquilizer;
 import com.arkcraft.mod.core.items.weapons.projectiles.EntitySimpleBullet;
 import com.arkcraft.mod.core.items.weapons.projectiles.EntitySpear;
@@ -55,7 +53,6 @@ public class ClientProxy extends CommonProxy {
 	//	RenderingRegistry.registerEntityRenderingHandler(EntityTranqAmmo.class, new RenderTranqAmmo());
 		
 		RenderingRegistry.registerEntityRenderingHandler(EntityTranquilizer.class, new RenderTranquilizer());
-		RenderingRegistry.registerEntityRenderingHandler(EntityStoneSpear.class, new RenderStoneSpear());
 		RenderingRegistry.registerEntityRenderingHandler(EntitySimpleBullet.class, new RenderSimpleBullet());
 		RenderingRegistry.registerEntityRenderingHandler(EntitySpear.class, new RenderSpear());
 		

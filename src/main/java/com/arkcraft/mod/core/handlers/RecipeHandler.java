@@ -33,7 +33,7 @@ public class RecipeHandler {
 					'B', Items.stick);
 			
 			//Stone Spear
-			GameRegistry.addRecipe(new ItemStack(GlobalAdditions.stoneSpear),
+			GameRegistry.addRecipe(new ItemStack(GlobalAdditions.spear),
 					"  A", 
 					" B ", 
 					"B  ", 

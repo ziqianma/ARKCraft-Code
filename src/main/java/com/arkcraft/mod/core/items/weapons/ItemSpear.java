@@ -13,11 +13,11 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemStoneSpear extends ItemSword
+public class ItemSpear extends ItemSword
 {
 	public static double spearDamage = BALANCE.WEAPONS.SPEAR_DAMAGE;
 	
-	public ItemStoneSpear(String name, ToolMaterial m) {
+	public ItemSpear(String name, ToolMaterial m) {
 		super(m);
 		this.setUnlocalizedName(name);
 		this.setCreativeTab(GlobalAdditions.tabARK);

@@ -5,9 +5,9 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import com.arkcraft.mod.core.GlobalAdditions;
 
-public class ItemTranquilizer extends Item {
+public class ItemProjectile extends Item {
 	
-	public ItemTranquilizer(String name) {
+	public ItemProjectile(String name) {
 		super();
 		this.setUnlocalizedName(name);
 		this.setCreativeTab(GlobalAdditions.tabARK);
