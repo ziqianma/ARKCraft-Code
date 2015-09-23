@@ -17,6 +17,11 @@ import net.minecraft.world.World;
 
 import com.arkcraft.mod.core.GlobalAdditions;
 
+/***
+ * 
+ * @author Vastatio
+ *
+ */
 public class EntityBrontosaurus extends EntityTameable {
 
 	public EntityBrontosaurus(World w) {
