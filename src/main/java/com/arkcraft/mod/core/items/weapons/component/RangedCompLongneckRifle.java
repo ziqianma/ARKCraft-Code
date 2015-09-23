@@ -6,13 +6,13 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-import com.arkcraft.mod.core.items.weapons.ItemSimplePistol;
+import com.arkcraft.mod.core.items.weapons.ItemLongneckRifle;
 import com.arkcraft.mod.core.items.weapons.handlers.ReloadHelper;
-import com.arkcraft.mod.core.items.weapons.projectiles.EntitySimpleBullet;
+import com.arkcraft.mod.core.items.weapons.projectiles.EntitySimpleRifleAmmo;
 
 public class RangedCompLongneckRifle extends RangedComponent
 {
-	protected ItemSimplePistol	simple_pistol;
+	protected ItemLongneckRifle	longneck_rifle;
 
 	public RangedCompLongneckRifle()
 	{
@@ -23,9 +23,9 @@ public class RangedCompLongneckRifle extends RangedComponent
 	protected void onSetItem()
 	{
 		super.onSetItem();
-		if (item instanceof ItemSimplePistol)
+		if (item instanceof ItemLongneckRifle)
 		{
-			simple_pistol = (ItemSimplePistol) item;
+			longneck_rifle = (ItemLongneckRifle) item;
 		}
 	}
 
@@ -41,7 +41,7 @@ public class RangedCompLongneckRifle extends RangedComponent
 	{
 		if (!world.isRemote)
 		{
-			EntitySimpleBullet entitymusketbullet = new EntitySimpleBullet(world, entityplayer, 1F);
+			EntitySimpleRifleAmmo entitymusketbullet = new EntitySimpleRifleAmmo(world, entityplayer, 1F);
 			applyProjectileEnchantments(entitymusketbullet, itemstack);
 			world.spawnEntityInWorld(entitymusketbullet);
 		} else

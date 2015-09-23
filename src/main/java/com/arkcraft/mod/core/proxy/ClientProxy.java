@@ -32,8 +32,6 @@ import com.arkcraft.mod.core.entity.render.RenderSimpleBullet;
 import com.arkcraft.mod.core.entity.render.RenderSpear;
 import com.arkcraft.mod.core.items.weapons.handlers.WeaponModConfig;
 import com.arkcraft.mod.core.items.weapons.projectiles.EntitySimpleBullet;
-import com.arkcraft.mod.core.items.weapons.projectiles.EntitySimpleRifleAmmo;
-import com.arkcraft.mod.core.items.weapons.projectiles.EntitySimpleShotgunAmmo;
 import com.arkcraft.mod.core.items.weapons.projectiles.EntitySpear;
 import com.arkcraft.mod.core.lib.LogHelper;
 
@@ -81,16 +79,15 @@ public class ClientProxy extends CommonProxy {
 	}
 	if (config.isEnabled("shotgun"))
 	{
-		RenderingRegistry.registerEntityRenderingHandler(EntitySimpleShotgunAmmo.class, new RenderSimpleBullet());
+	//	RenderingRegistry.registerEntityRenderingHandler(EntitySimpleShotgunAmmo.class, new RenderSimpleShotgunAmmo());
 	}
 	if (config.isEnabled("longneck_rifle"))
 	{
-		RenderingRegistry.registerEntityRenderingHandler(EntitySimpleRifleAmmo.class, new RenderSimpleBullet());
+	//	RenderingRegistry.registerEntityRenderingHandler(EntitySimpleRifleAmmo.class, new RenderSimpleBullet());
 	}
 	if (config.isEnabled("spear"))
 	{
 		RenderingRegistry.registerEntityRenderingHandler(EntitySpear.class, new RenderSpear());
-		//MinecraftForgeClient.registerItemRenderer(BalkonsWeaponMod.javelin, longrender);
 	}
 }
 	

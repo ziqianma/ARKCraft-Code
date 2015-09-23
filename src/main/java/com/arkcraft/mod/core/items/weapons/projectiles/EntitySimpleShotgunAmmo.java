@@ -52,7 +52,7 @@ public class EntitySimpleShotgunAmmo extends EntityShootable
 	@Override
 	public void onEntityHit(Entity entity)
 	{
-		float damage = 8F + extraDamage;
+		float damage = 10F + extraDamage;
 		
 		DamageSource damagesource;
 		if (thrower == null)
