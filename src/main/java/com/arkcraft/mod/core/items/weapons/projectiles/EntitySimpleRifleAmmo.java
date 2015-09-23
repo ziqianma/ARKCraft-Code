@@ -9,20 +9,21 @@ import net.minecraft.world.World;
 
 import com.arkcraft.mod.core.items.weapons.handlers.WeaponDamageSource;
 
-public class EntitySimpleBullet extends EntityShootable
-{	
-	public EntitySimpleBullet(World world)
+public class EntitySimpleRifleAmmo extends EntityShootable
+{
+	
+	public EntitySimpleRifleAmmo(World world)
 	{
 		super(world);	
 	}
 	
-	public EntitySimpleBullet(World world, double d, double d1, double d2)
+	public EntitySimpleRifleAmmo(World world, double d, double d1, double d2)
 	{
 		this(world);
 		setPosition(d, d1, d2);
 	}
 	
-	public EntitySimpleBullet(World world, EntityLivingBase entityliving, float deviation)
+	public EntitySimpleRifleAmmo(World world, EntityLivingBase entityliving, float deviation)
 	{
 		this(world);
 		thrower = entityliving;
@@ -50,7 +51,6 @@ public class EntitySimpleBullet extends EntityShootable
 			}
 			return;
 		}
-		
 		double speed = getGravityVelocity();
 		double amount = 16D;
 		if (speed > 2.0D)
@@ -70,7 +70,7 @@ public class EntitySimpleBullet extends EntityShootable
 	@Override
 	public void onEntityHit(Entity entity)
 	{
-		float damage = 7F + extraDamage;
+		float damage = 15F + extraDamage;
 		DamageSource damagesource = null;
 		if (thrower == null)
 		{
@@ -97,7 +97,6 @@ public class EntitySimpleBullet extends EntityShootable
 		return true;
 	}
 
-	
 //	@Override
 //	protected void onImpact(MovingObjectPosition mop) {
 //		/* Damage on impact */

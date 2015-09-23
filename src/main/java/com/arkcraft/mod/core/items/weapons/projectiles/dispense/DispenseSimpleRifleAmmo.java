@@ -1,7 +1,5 @@
 package com.arkcraft.mod.core.items.weapons.projectiles.dispense;
 
-import com.arkcraft.mod.core.items.weapons.projectiles.EntitySimpleBullet;
-
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.dispenser.IBlockSource;
 import net.minecraft.dispenser.IPosition;
@@ -10,12 +8,14 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
 
-public class DispenseSimpleBullet extends DispenseWeaponProjectile
+import com.arkcraft.mod.core.items.weapons.projectiles.EntitySimpleRifleAmmo;
+
+public class DispenseSimpleRifleAmmo extends DispenseWeaponProjectile
 {
 	@Override
 	protected IProjectile getProjectileEntity(World world, IPosition pos)
 	{
-		return new EntitySimpleBullet(world, pos.getX(), pos.getY(), pos.getZ());
+		return new EntitySimpleRifleAmmo(world, pos.getX(), pos.getY(), pos.getZ());
 	}
 	
 	@Override
@@ -39,8 +39,8 @@ public class DispenseSimpleBullet extends DispenseWeaponProjectile
 	@Override
 	protected void playDispenseSound(IBlockSource blocksource)
 	{
-	//	blocksource.getWorld().playSoundEffect(blocksource.getX(), blocksource.getY(), blocksource.getZ(), "random.explode", 3.0F, 1.0F / (rand.nextFloat() * 0.4F + 0.7F));
-	//	blocksource.getWorld().playSoundEffect(blocksource.getX(), blocksource.getY(), blocksource.getZ(), "ambient.weather.thunder", 3.0F, 1.0F / (rand.nextFloat() * 0.4F + 0.4F));
+		blocksource.getWorld().playSoundEffect(blocksource.getX(), blocksource.getY(), blocksource.getZ(), "random.explode", 3.0F, 1.0F / (rand.nextFloat() * 0.4F + 0.7F));
+		blocksource.getWorld().playSoundEffect(blocksource.getX(), blocksource.getY(), blocksource.getZ(), "ambient.weather.thunder", 3.0F, 1.0F / (rand.nextFloat() * 0.4F + 0.4F));
 	}
 	
 	@Override

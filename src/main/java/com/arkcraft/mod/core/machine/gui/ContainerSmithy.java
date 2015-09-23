@@ -1,8 +1,5 @@
 package com.arkcraft.mod.core.machine.gui;
 
-import com.arkcraft.mod.core.GlobalAdditions;
-import com.arkcraft.mod.core.handler.SmithyCraftingManager;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -14,6 +11,9 @@ import net.minecraft.inventory.SlotCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
+
+import com.arkcraft.mod.core.GlobalAdditions;
+import com.arkcraft.mod.core.handlers.SmithyCraftingManager;
 
 /***
  * 

@@ -1,7 +1,5 @@
 package com.arkcraft.mod.core.machine.gui;
 
-import java.util.ArrayList;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
@@ -11,7 +9,7 @@ import org.lwjgl.opengl.GL11;
 
 import com.arkcraft.mod.core.Main;
 import com.arkcraft.mod.core.book.PageButton;
-import com.arkcraft.mod.core.handler.BookDrawHandler;
+import com.arkcraft.mod.core.handlers.BookDrawHandler;
 import com.arkcraft.mod.core.lib.LogHelper;
 
 /**

@@ -104,6 +104,6 @@ public class EntitySpear extends EntityProjectile
 	@Override
 	public ItemStack getPickupItem()
 	{
-		return new ItemStack(GlobalAdditions.stoneSpear, 1);
+		return new ItemStack(GlobalAdditions.spear, 1);
 	}
 }

@@ -26,14 +26,13 @@ import com.arkcraft.mod.core.creativetabs.ARKTabs;
 import com.arkcraft.mod.core.entity.EntityCobble;
 import com.arkcraft.mod.core.entity.EntityDodoEgg;
 import com.arkcraft.mod.core.entity.EntityExplosive;
-import com.arkcraft.mod.core.entity.EntityStoneSpear;
 import com.arkcraft.mod.core.entity.aggressive.EntityRaptor;
 import com.arkcraft.mod.core.entity.passive.EntityBrontosaurus;
 import com.arkcraft.mod.core.entity.passive.EntityDodo;
-import com.arkcraft.mod.core.handler.EntityHandler;
-import com.arkcraft.mod.core.handler.GenerationHandler;
-import com.arkcraft.mod.core.handler.GuiHandler;
-import com.arkcraft.mod.core.handler.RecipeHandler;
+import com.arkcraft.mod.core.handlers.EntityHandler;
+import com.arkcraft.mod.core.handlers.GenerationHandler;
+import com.arkcraft.mod.core.handlers.GuiHandler;
+import com.arkcraft.mod.core.handlers.RecipeHandler;
 import com.arkcraft.mod.core.items.ARKArmorItem;
 import com.arkcraft.mod.core.items.ARKEggItem;
 import com.arkcraft.mod.core.items.ARKFecesItem;
@@ -44,12 +43,15 @@ import com.arkcraft.mod.core.items.ARKSeedItem;
 import com.arkcraft.mod.core.items.ARKSlingshot;
 import com.arkcraft.mod.core.items.ARKWeapon;
 import com.arkcraft.mod.core.items.ARKWeaponThrowable;
+import com.arkcraft.mod.core.items.weapons.ItemLongneckRifle;
+import com.arkcraft.mod.core.items.weapons.ItemShotgun;
 import com.arkcraft.mod.core.items.weapons.ItemSimplePistol;
-import com.arkcraft.mod.core.items.weapons.ItemStoneSpear;
+import com.arkcraft.mod.core.items.weapons.ItemSpear;
 import com.arkcraft.mod.core.items.weapons.ItemTranqGun;
-import com.arkcraft.mod.core.items.weapons.bullets.ItemSimpleBullet;
-import com.arkcraft.mod.core.items.weapons.bullets.ItemTranquilizer;
+import com.arkcraft.mod.core.items.weapons.bullets.ItemProjectile;
 import com.arkcraft.mod.core.items.weapons.projectiles.EntitySimpleBullet;
+import com.arkcraft.mod.core.items.weapons.projectiles.EntitySimpleRifleAmmo;
+import com.arkcraft.mod.core.items.weapons.projectiles.EntitySimpleShotgunAmmo;
 import com.arkcraft.mod.core.items.weapons.projectiles.EntitySpear;
 import com.arkcraft.mod.core.items.weapons.projectiles.EntityTranquilizer;
 import com.arkcraft.mod.core.lib.KeyBindings;
@@ -65,7 +67,7 @@ public class GlobalAdditions {
 	public static ARKFood tintoBerry, amarBerry, azulBerry, mejoBerry, narcoBerry, porkchop_raw, porkchop_cooked, primemeat_raw, primemeat_cooked;
 	public static ARKSeedItem tintoBerrySeed, amarBerrySeed, azulBerrySeed, mejoBerrySeed, narcoBerrySeed;
 	public static ARKBush berryBush;
-	public static ARKItem cobble_ball, fiber, chitin, narcotics, tranq_arrow, explosive_ball, dodo_bag, dodo_feather;
+	public static ARKItem cobble_ball, fiber, chitin, narcotics, explosive_ball, dodo_bag, dodo_feather;
 	public static ARKSlingshot slingshot;
 	public static ARKFecesItem dodo_feces, player_feces;
 	public static ARKEggItem dodo_egg;
@@ -77,12 +79,13 @@ public class GlobalAdditions {
 	public static ARKBlock oreSurface;
 	public static Block blockNarcoBrerry;
 	public static Dossier dino_book;
-	public static ItemStoneSpear stoneSpear;
+	public static ItemSpear	spear;
 	
 	public static ItemTranqGun tranq_gun;
-	public static ItemSimpleBullet simple_bullet;
+	public static ItemLongneckRifle longneck_rifle;
+	public static ItemShotgun shotgun;
 	public static ItemSimplePistol simple_pistol;
-	public static ItemTranquilizer tranquilizer;
+	public static ItemProjectile tranquilizer, simple_bullet, stone_arrow, tranq_arrow, metal_arrow, simple_shotgun_ammo, simple_rifle_ammo;
 	
 	public static ArmorMaterial CLOTH = EnumHelper.addArmorMaterial("CLOTH_MAT", "CLOTH_MAT", 4, new int[] {1,2,1,1}, 15);
 	public static ArmorMaterial CHITIN = EnumHelper.addArmorMaterial("CHITIN_MAT", "CHITIN_MAT", 16, new int[] { 3,7,6,3 } , 10);
@@ -138,19 +141,25 @@ public class GlobalAdditions {
 		// Regular Items
 		fiber = addItem("fiber");
 		chitin = addItem("chitin");
-		tranq_arrow = addItem("tranq_arrow");
 		dodo_feather = addItem("dodo_feather");
 		dodo_bag = addItemWithTooltip("dodo_bag", "Backpack for the Dodo");
 		
 		//Guns
 		tranq_gun = addTranqGun("tranq_gun");
 		simple_pistol = addSimplePistol("simple_pistol");
-		
+		longneck_rifle = addLongneckRifle("longneck_rifle");
+		shotgun = addShotgun("shotgun");
+			
 		//Bullets
-		simple_bullet = addSimpleBullet("simple_bullet");
-		tranquilizer = addTranquilizer("tranquilizer");
+		simple_bullet = addItemProjectile("simple_bullet");
+		simple_shotgun_ammo = addItemProjectile("simple_shotgun_ammo");
+		simple_rifle_ammo = addItemProjectile("simple_rifle_ammo");
+		tranquilizer = addItemProjectile("tranquilizer");
+		tranq_arrow = addItemProjectile("tranq_arrow");
+		stone_arrow = addItemProjectile("stone_arrow");
+		metal_arrow = addItemProjectile("metal_arrow");
 		
-		stoneSpear = addSpearItem("stoneSpear", ToolMaterial.STONE);
+		spear = addSpearItem("spear", ToolMaterial.STONE);
 		
 		// Other Types of Items
 		dodo_egg = addEggItem("dodo_egg");
@@ -181,10 +190,13 @@ public class GlobalAdditions {
 		RecipeHandler.registerPestleCraftingRecipes();
 		RecipeHandler.registerSmithyCraftingRecipes();
 		EntityHandler.registerModEntity(EntityExplosive.class, "Explosive Cobblestone Ball", Main.instance, 64, 10, true);
+		
 		EntityHandler.registerModEntity(EntitySpear.class, "Spear", Main.instance, 64, 10, true);
 		EntityHandler.registerModEntity(EntityTranquilizer .class, "Tranquilizer ", Main.instance, 64, 10, true);
 		EntityHandler.registerModEntity(EntitySimpleBullet.class, "Simple Bullet", Main.instance, 64, 10, true);
-		EntityHandler.registerModEntity(EntityStoneSpear.class, "Stone Spear", Main.instance, 64, 10, true);
+		EntityHandler.registerModEntity(EntitySimpleRifleAmmo.class, "Simple Rifle Ammo", Main.instance, 64, 10, true);
+		EntityHandler.registerModEntity(EntitySimpleShotgunAmmo.class, "Simple Shotgun Ammo", Main.instance, 64, 10, true);
+		
 		EntityHandler.registerModEntity(EntityCobble.class, "Cobblestone Ball", Main.instance, 64, 10, true);
 		EntityHandler.registerModEntity(EntityDodoEgg.class, "Dodo Egg", Main.instance, 64, 10, true);
 		
@@ -251,8 +263,8 @@ public class GlobalAdditions {
 		allItems.put(name, i);
 		return i;
 	}	
-	public static ItemStoneSpear addSpearItem(String name, ToolMaterial mat) {
-		ItemStoneSpear weapon = new ItemStoneSpear(name, mat);
+	public static ItemSpear addSpearItem(String name, ToolMaterial mat) {
+		ItemSpear weapon = new ItemSpear(name, mat);
 		allItems.put(name, weapon);
 		return weapon;
 	}
@@ -301,7 +313,6 @@ public class GlobalAdditions {
 		allItems.put(name, item);
 		return item;
 	}
-	
 	public static ARKSaddle addSaddle(String name) {
 		ARKSaddle item = new ARKSaddle(name);
 		allItems.put(name, item);
@@ -312,19 +323,23 @@ public class GlobalAdditions {
 		allItems.put(name, item);
 		return item;
 	}
-	
 	public static ItemSimplePistol addSimplePistol(String name) {
 		ItemSimplePistol item = new ItemSimplePistol(name);
 		allItems.put(name, item);
 		return item;
 	}
-	public static ItemSimpleBullet addSimpleBullet(String name) {
-		ItemSimpleBullet item = new ItemSimpleBullet(name);
+	public static ItemShotgun addShotgun(String name) {
+		ItemShotgun item = new ItemShotgun(name);
 		allItems.put(name, item);
 		return item;
 	}
-	public static ItemTranquilizer  addTranquilizer (String name) {
-		ItemTranquilizer item = new ItemTranquilizer(name);
+	public static ItemLongneckRifle addLongneckRifle(String name) {
+		ItemLongneckRifle item = new ItemLongneckRifle(name);
+		allItems.put(name, item);
+		return item;
+	}
+	public static ItemProjectile  addItemProjectile (String name) {
+		ItemProjectile item = new ItemProjectile(name);
 		allItems.put(name, item);
 		return item;
 	}

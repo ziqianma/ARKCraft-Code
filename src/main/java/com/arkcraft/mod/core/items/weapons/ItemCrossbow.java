@@ -4,12 +4,12 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import com.arkcraft.mod.core.GlobalAdditions;
 import com.arkcraft.mod.core.items.weapons.component.ItemShooter;
-import com.arkcraft.mod.core.items.weapons.component.RangedCompSimplePistol;
+import com.arkcraft.mod.core.items.weapons.component.RangedCompCrossbow;
 
-public class ItemSimplePistol extends ItemShooter{
+public class ItemCrossbow extends ItemShooter{
 
-	public ItemSimplePistol(String name) {
-		super(name, new RangedCompSimplePistol());
+	public ItemCrossbow(String name) {
+		super(name, new RangedCompCrossbow());
 		this.setUnlocalizedName(name);
 		this.setCreativeTab(GlobalAdditions.tabARK);
 		GameRegistry.registerItem(this, name);

@@ -1,4 +1,4 @@
-package com.arkcraft.mod.core.handler;
+package com.arkcraft.mod.core.handlers;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -33,7 +33,7 @@ public class RecipeHandler {
 					'B', Items.stick);
 			
 			//Stone Spear
-			GameRegistry.addRecipe(new ItemStack(GlobalAdditions.stoneSpear),
+			GameRegistry.addRecipe(new ItemStack(GlobalAdditions.spear),
 					"  A", 
 					" B ", 
 					"B  ", 

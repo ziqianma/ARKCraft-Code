@@ -1,4 +1,4 @@
-package com.arkcraft.mod.core.items.weapons.handlers;
+package com.arkcraft.mod.core.items.weapons.component;
 
 import java.util.Random;
 import java.util.UUID;
@@ -15,6 +15,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.arkcraft.mod.core.Main;
+import com.arkcraft.mod.core.items.weapons.handlers.IItemWeapon;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 

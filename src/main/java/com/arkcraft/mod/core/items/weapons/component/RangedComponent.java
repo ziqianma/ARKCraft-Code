@@ -1,4 +1,4 @@
-package com.arkcraft.mod.core.items.weapons.handlers;
+package com.arkcraft.mod.core.items.weapons.component;
 
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
@@ -15,7 +15,9 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.arkcraft.mod.core.Main;
-import com.arkcraft.mod.core.items.weapons.projectiles.EntityProjectile;
+import com.arkcraft.mod.core.items.weapons.handlers.ReloadHelper;
+import com.arkcraft.mod.core.items.weapons.handlers.WeaponModAttributes;
+import com.arkcraft.mod.core.items.weapons.projectiles.EntityShootable;
 import com.google.common.collect.Multimap;
 
 public abstract class RangedComponent extends AbstractWeaponComponent
@@ -233,8 +235,9 @@ public abstract class RangedComponent extends AbstractWeaponComponent
 	
 	public abstract void effectShoot(World world, double x, double y, double z, float yaw, float pitch);
 	
-	public void applyProjectileEnchantments(EntityProjectile entity, ItemStack itemstack)
-	{	
+	public void applyProjectileEnchantments(EntityShootable entity, ItemStack itemstack)
+	{
+		
 		int damage = EnchantmentHelper.getEnchantmentLevel(Enchantment.power.effectId, itemstack);
 		if (damage > 0)
 		{
@@ -300,7 +303,10 @@ public abstract class RangedComponent extends AbstractWeaponComponent
 	
 	public static enum RangedSpecs
 	{
-		SIMPLEPISTOL("weaponmod:bullet", "simple_pistol",  250, 1);
+		SIMPLEPISTOL("Main:simple_bullet", "simple_pistol",  250, 1),
+		CROSSBOW("Main:stone_arrow", "crossbow", 250, 1),
+		SHOTGUN("Main:simple_shotgun_ammo", "shotgun", 250, 1),
+		LONGNECKRIFLE("Main:simple_rifle_ammo", "longneck_rifle", 250, 1);
 		
 		RangedSpecs(String ammoitemtag, String reloadtimetag, int durability, int stacksize)
 		{
@@ -339,4 +345,5 @@ public abstract class RangedComponent extends AbstractWeaponComponent
 		public final String	reloadTimeTag;
 		public final int	durability, stackSize;
 	}
+
 }

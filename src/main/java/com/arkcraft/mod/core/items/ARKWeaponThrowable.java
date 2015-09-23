@@ -7,7 +7,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import com.arkcraft.mod.core.GlobalAdditions;
-import com.arkcraft.mod.core.entity.EntityStoneSpear;
+import com.arkcraft.mod.core.items.weapons.projectiles.EntitySpear;
 import com.arkcraft.mod.core.lib.BALANCE;
 
 public class ARKWeaponThrowable extends ItemSword {
@@ -34,7 +34,7 @@ public class ARKWeaponThrowable extends ItemSword {
 			/* This method will spawn an entity in the World, you can use with anything that extends
 			* the Entity class, in this case it's the EntitySpear class
 			*/
-			world.spawnEntityInWorld(new EntityStoneSpear(world, player));
+			world.spawnEntityInWorld(new EntitySpear(world, player, 1F));
 		}
 		return stack;
 	}
