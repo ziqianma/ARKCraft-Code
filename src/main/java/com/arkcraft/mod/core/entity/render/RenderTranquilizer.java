@@ -13,6 +13,7 @@ import com.arkcraft.mod.core.items.weapons.projectiles.EntitySpear;
 public class RenderTranquilizer extends Render
 {
 	private static final ResourceLocation texture = new ResourceLocation(Main.MODID, "textures/entity/tranqAmmo.png");
+	@SuppressWarnings("unused")
 	private final TranquilizerModel model;
      
 	//protected TranquilizerModel tranquilizerModel;

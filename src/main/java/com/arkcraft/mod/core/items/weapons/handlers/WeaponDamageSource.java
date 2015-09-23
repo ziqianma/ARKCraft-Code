@@ -4,7 +4,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSourceIndirect;
 
-import com.arkcraft.mod.core.items.weapons.projectiles.EntityProjectile;
 import com.arkcraft.mod.core.items.weapons.projectiles.EntityShootable;
 
 public class WeaponDamageSource extends EntityDamageSourceIndirect
