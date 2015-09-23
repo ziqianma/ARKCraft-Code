@@ -10,13 +10,13 @@ import com.arkcraft.mod.core.items.weapons.ItemSimplePistol;
 import com.arkcraft.mod.core.items.weapons.handlers.ReloadHelper;
 import com.arkcraft.mod.core.items.weapons.projectiles.EntitySimpleBullet;
 
-public class RangedCompSimplePistol extends RangedComponent
+public class RangedCompLongneckRifle extends RangedComponent
 {
 	protected ItemSimplePistol	simple_pistol;
 
-	public RangedCompSimplePistol()
+	public RangedCompLongneckRifle()
 	{
-		super(RangedSpecs.SIMPLEPISTOL);
+		super(RangedSpecs.LONGNECKRIFLE);
 	}
 
 	@Override
@@ -39,18 +39,9 @@ public class RangedCompSimplePistol extends RangedComponent
 	@Override
 	public void fire(ItemStack itemstack, World world, EntityPlayer entityplayer, int i)
 	{
-		int j = getMaxItemUseDuration(itemstack) - i;
-		float f = j / 5F;
-		f = (f * f + f * 2F) / 3F;
-		if (f > 1.0F)
-		{
-			f = 1.0F;
-		}
-		f += 0.02F;
-
 		if (!world.isRemote)
 		{
-			EntitySimpleBullet entitymusketbullet = new EntitySimpleBullet(world, entityplayer, 1F / f);
+			EntitySimpleBullet entitymusketbullet = new EntitySimpleBullet(world, entityplayer, 1F);
 			applyProjectileEnchantments(entitymusketbullet, itemstack);
 			world.spawnEntityInWorld(entitymusketbullet);
 		} else
@@ -73,8 +64,8 @@ public class RangedCompSimplePistol extends RangedComponent
 	@Override
 	public void effectShoot(World world, double x, double y, double z, float yaw, float pitch)
 	{
-	//	world.playSoundEffect(x, y, z, "random.explode", 3F, 1F / (weapon.getItemRand().nextFloat() * 0.4F + 0.7F));
-	//	world.playSoundEffect(x, y, z, "ambient.weather.thunder", 3F, 1F / (weapon.getItemRand().nextFloat() * 0.4F + 0.4F));
+		world.playSoundEffect(x, y, z, "random.explode", 3F, 1F / (weapon.getItemRand().nextFloat() * 0.4F + 0.7F));
+		world.playSoundEffect(x, y, z, "ambient.weather.thunder", 3F, 1F / (weapon.getItemRand().nextFloat() * 0.4F + 0.4F));
 
 		float particleX = -MathHelper.sin(((yaw + 23) / 180F) * 3.141593F) * MathHelper.cos((pitch / 180F) * 3.141593F);
 		float particleY = -MathHelper.sin((pitch / 180F) * 3.141593F) - 0.1F;

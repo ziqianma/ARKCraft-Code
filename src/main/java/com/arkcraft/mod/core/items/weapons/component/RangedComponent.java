@@ -18,7 +18,6 @@ import com.arkcraft.mod.core.Main;
 import com.arkcraft.mod.core.items.weapons.handlers.ReloadHelper;
 import com.arkcraft.mod.core.items.weapons.handlers.WeaponModAttributes;
 import com.arkcraft.mod.core.items.weapons.projectiles.EntityShootable;
-import com.arkcraft.mod.core.items.weapons.projectiles.EntitySimpleShotgunAmmo;
 import com.google.common.collect.Multimap;
 
 public abstract class RangedComponent extends AbstractWeaponComponent
@@ -304,9 +303,10 @@ public abstract class RangedComponent extends AbstractWeaponComponent
 	
 	public static enum RangedSpecs
 	{
-		SIMPLEPISTOL("main:simple_bullet", "simple_pistol",  250, 1),
-		CROSSBOW("main:stone_arrow", "crossbow", 250, 1),
-		SHOTGUN("main:shotgun_ammo", "shotgun", 250, 1);
+		SIMPLEPISTOL("core:simple_bullet", "simple_pistol",  250, 1),
+		CROSSBOW("GlobalAdditions:stone_arrow", "crossbow", 250, 1),
+		SHOTGUN("GlobalAdditions:simple_shotgun_ammo", "shotgun", 250, 1),
+		LONGNECKRIFLE("GlobalAdditions:simple_rifle_ammo", "longneck_rifle", 250, 1);
 		
 		RangedSpecs(String ammoitemtag, String reloadtimetag, int durability, int stacksize)
 		{

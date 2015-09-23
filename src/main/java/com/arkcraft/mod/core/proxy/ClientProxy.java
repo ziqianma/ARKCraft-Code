@@ -8,8 +8,9 @@ import net.minecraft.client.renderer.entity.RenderSnowball;
 import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.item.Item;
-import net.minecraftforge.client.MinecraftForgeClient;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.SidedProxy;
 
 import com.arkcraft.mod.core.GlobalAdditions;
@@ -29,12 +30,11 @@ import com.arkcraft.mod.core.entity.render.RenderDodo;
 import com.arkcraft.mod.core.entity.render.RenderRaptor;
 import com.arkcraft.mod.core.entity.render.RenderSimpleBullet;
 import com.arkcraft.mod.core.entity.render.RenderSpear;
-import com.arkcraft.mod.core.entity.render.RenderTranquilizer;
 import com.arkcraft.mod.core.items.weapons.handlers.WeaponModConfig;
-import com.arkcraft.mod.core.items.weapons.projectiles.EntitySimpleShotgunAmmo;
 import com.arkcraft.mod.core.items.weapons.projectiles.EntitySimpleBullet;
+import com.arkcraft.mod.core.items.weapons.projectiles.EntitySimpleRifleAmmo;
+import com.arkcraft.mod.core.items.weapons.projectiles.EntitySimpleShotgunAmmo;
 import com.arkcraft.mod.core.items.weapons.projectiles.EntitySpear;
-import com.arkcraft.mod.core.items.weapons.projectiles.EntityTranquilizer;
 import com.arkcraft.mod.core.lib.LogHelper;
 
 public class ClientProxy extends CommonProxy {
@@ -54,13 +54,23 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityDodo.class, new RenderDodo(new ModelDodo(), 0.3F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityBrontosaurus.class, new RenderBrontosaurus(new ModelBrontosaurus(), 0.5f));
 	//	RenderingRegistry.registerEntityRenderingHandler(EntityTranqAmmo.class, new RenderTranqAmmo());
-		RenderingRegistry.registerEntityRenderingHandler(EntitySimpleBullet.class, new RenderSimpleBullet());
+	//	RenderingRegistry.registerEntityRenderingHandler(EntitySimpleBullet.class, new RenderSimpleBullet());
 		
 		ModelBakery.addVariantName(GlobalAdditions.slingshot, "arkcraft:slingshot", "arkcraft:slingshot_pulled");
 		dossierProxy.init();
 		LogHelper.info("CommonProxy: Init run finished.");
 		initDone = true;
 	}
+
+	@Override
+	public void registerEventHandlers()
+	{
+		super.registerEventHandlers();
+		ClientEventHandler eventhandler = new ClientEventHandler();
+		FMLCommonHandler.instance().bus().register(eventhandler);
+		MinecraftForge.EVENT_BUS.register(eventhandler);
+	}
+	
 	
 	@Override
 	public void registerWeapons(WeaponModConfig config){
@@ -69,12 +79,14 @@ public class ClientProxy extends CommonProxy {
 	{
 		RenderingRegistry.registerEntityRenderingHandler(EntitySimpleBullet.class, new RenderSimpleBullet());
 	}
-	
 	if (config.isEnabled("shotgun"))
 	{
 		RenderingRegistry.registerEntityRenderingHandler(EntitySimpleShotgunAmmo.class, new RenderSimpleBullet());
 	}
-	
+	if (config.isEnabled("longneck_rifle"))
+	{
+		RenderingRegistry.registerEntityRenderingHandler(EntitySimpleRifleAmmo.class, new RenderSimpleBullet());
+	}
 	if (config.isEnabled("spear"))
 	{
 		RenderingRegistry.registerEntityRenderingHandler(EntitySpear.class, new RenderSpear());

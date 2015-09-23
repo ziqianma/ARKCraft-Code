@@ -1,7 +1,5 @@
 package com.arkcraft.mod.core.items.weapons.component;
 
-import com.arkcraft.mod.core.items.weapons.component.RangedComponent.RangedSpecs;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;

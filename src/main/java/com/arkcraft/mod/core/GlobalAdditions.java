@@ -83,7 +83,7 @@ public class GlobalAdditions {
 	public static ItemLongneckRifle longneck_rifle;
 	public static ItemShotgun shotgun;
 	public static ItemSimplePistol simple_pistol;
-	public static ItemProjectile tranquilizer, simple_bullet, stone_arrow, tranq_arrow, metal_arrow, simple_shotgun_ammo;
+	public static ItemProjectile tranquilizer, simple_bullet, stone_arrow, tranq_arrow, metal_arrow, simple_shotgun_ammo, simple_rifle_ammo;
 	
 	public static ArmorMaterial CLOTH = EnumHelper.addArmorMaterial("CLOTH_MAT", "CLOTH_MAT", 4, new int[] {1,2,1,1}, 15);
 	public static ArmorMaterial CHITIN = EnumHelper.addArmorMaterial("CHITIN_MAT", "CHITIN_MAT", 16, new int[] { 3,7,6,3 } , 10);
@@ -151,6 +151,7 @@ public class GlobalAdditions {
 		//Bullets
 		simple_bullet = addItemProjectile("simple_bullet");
 		simple_shotgun_ammo = addItemProjectile("simple_shotgun_ammo");
+		simple_rifle_ammo = addItemProjectile("simple_rifle_ammo");
 		tranquilizer = addItemProjectile("tranquilizer");
 		tranq_arrow = addItemProjectile("tranq_arrow");
 		stone_arrow = addItemProjectile("stone_arrow");

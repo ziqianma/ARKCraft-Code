@@ -22,6 +22,7 @@ import com.arkcraft.mod.core.handlers.ARKPlayerEventHandler;
 import com.arkcraft.mod.core.handlers.FMLCommonEventHandler;
 import com.arkcraft.mod.core.items.weapons.handlers.WeaponModConfig;
 import com.arkcraft.mod.core.items.weapons.projectiles.dispense.DispenseSimpleBullet;
+import com.arkcraft.mod.core.items.weapons.projectiles.dispense.DispenseSimpleRifleAmmo;
 import com.arkcraft.mod.core.items.weapons.projectiles.dispense.DispenseSimpleShotgunAmmo;
 import com.arkcraft.mod.core.lib.Config;
 import com.arkcraft.mod.core.network.PlayerPoop;
@@ -51,6 +52,11 @@ public class Main {
 		modLog = event.getModLog();
 		
 		WeaponConfig = new WeaponModConfig(new Configuration(event.getSuggestedConfigurationFile()));
+		
+		WeaponConfig.addEnableSetting("simple_pistol");
+		WeaponConfig.addEnableSetting("longneck_rifle");
+		WeaponConfig.addEnableSetting("shotgun");
+		
 		WeaponConfig.addReloadTimeSetting("simple_pistol", 5);
 		WeaponConfig.addReloadTimeSetting("longneck_rifle", 25);
 		WeaponConfig.addReloadTimeSetting("shotgun", 15);
@@ -62,6 +68,7 @@ public class Main {
 		MinecraftForge.EVENT_BUS.register(new ARKPlayerEventHandler());
 		FMLCommonHandler.instance().bus().register(new FMLCommonEventHandler());
 		proxy.registerRenderers();
+		proxy.registerWeapons(WeaponConfig);
 		proxy.init();
 		FMLCommonHandler.instance().bus().register(new Config());
 		registerDispenseBehavior();
@@ -87,6 +94,10 @@ public class Main {
 		if (GlobalAdditions.simple_shotgun_ammo != null)
 		{
 			BlockDispenser.dispenseBehaviorRegistry.putObject(GlobalAdditions.simple_shotgun_ammo, new DispenseSimpleShotgunAmmo());
+		}
+		if (GlobalAdditions.simple_rifle_ammo != null)
+		{
+			BlockDispenser.dispenseBehaviorRegistry.putObject(GlobalAdditions.simple_rifle_ammo, new DispenseSimpleRifleAmmo());
 		}
 	}
 
