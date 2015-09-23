@@ -1,4 +1,4 @@
-package com.arkcraft.mod.core.handler;
+package com.arkcraft.mod.core.handlers;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;

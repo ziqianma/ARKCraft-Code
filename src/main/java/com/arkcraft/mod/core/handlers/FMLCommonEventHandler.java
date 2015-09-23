@@ -1,4 +1,4 @@
-package com.arkcraft.mod.core.handler;
+package com.arkcraft.mod.core.handlers;
 
 import com.arkcraft.mod.core.entity.player.ARKPlayer;
 import com.arkcraft.mod.core.lib.KeyBindings;

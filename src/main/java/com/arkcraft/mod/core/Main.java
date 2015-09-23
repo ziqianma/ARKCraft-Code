@@ -17,9 +17,9 @@ import net.minecraftforge.fml.relauncher.Side;
 
 import org.apache.logging.log4j.Logger;
 
-import com.arkcraft.mod.core.handler.ARKEventHandler;
-import com.arkcraft.mod.core.handler.ARKPlayerEventHandler;
-import com.arkcraft.mod.core.handler.FMLCommonEventHandler;
+import com.arkcraft.mod.core.handlers.ARKEventHandler;
+import com.arkcraft.mod.core.handlers.ARKPlayerEventHandler;
+import com.arkcraft.mod.core.handlers.FMLCommonEventHandler;
 import com.arkcraft.mod.core.items.weapons.handlers.WeaponModConfig;
 import com.arkcraft.mod.core.items.weapons.projectiles.dispense.DispenseSimpleBullet;
 import com.arkcraft.mod.core.lib.Config;

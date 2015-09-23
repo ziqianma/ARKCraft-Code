@@ -1,4 +1,4 @@
-package com.arkcraft.mod.core.handler;
+package com.arkcraft.mod.core.handlers;
 
 import java.util.Iterator;
 import java.util.List;

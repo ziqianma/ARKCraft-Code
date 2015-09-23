@@ -1,4 +1,4 @@
-package com.arkcraft.mod.core.handler;
+package com.arkcraft.mod.core.handlers;
 
 import java.awt.Color;
 import java.util.Random;
