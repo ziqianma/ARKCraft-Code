@@ -72,7 +72,7 @@ public class EntitySimpleBullet extends EntityShootable
 	@Override
 	public void onEntityHit(Entity entity)
 	{
-		float damage = 20F + extraDamage;
+		float damage = 7F + extraDamage;
 		DamageSource damagesource = null;
 		if (thrower == null)
 		{

@@ -3,6 +3,8 @@ package com.arkcraft.mod.core.items.weapons.handlers;
 import java.util.Random;
 import java.util.UUID;
 
+import com.arkcraft.mod.core.items.weapons.component.RangedComponent;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

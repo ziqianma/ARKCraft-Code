@@ -1,4 +1,7 @@
-package com.arkcraft.mod.core.items.weapons.handlers;
+package com.arkcraft.mod.core.items.weapons.component;
+
+import com.arkcraft.mod.core.items.weapons.component.RangedComponent.RangedSpecs;
+import com.arkcraft.mod.core.items.weapons.handlers.ReloadHelper;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

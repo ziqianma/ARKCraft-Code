@@ -1,6 +1,6 @@
 package com.arkcraft.mod.core.items.weapons.projectiles;
 
-import com.arkcraft.mod.core.items.weapons.handlers.RangedComponent;
+import com.arkcraft.mod.core.items.weapons.component.RangedComponent;
 import com.arkcraft.mod.core.items.weapons.handlers.WeaponDamageSource;
 
 import net.minecraft.entity.Entity;

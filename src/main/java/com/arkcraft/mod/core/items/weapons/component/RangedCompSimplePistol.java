@@ -1,4 +1,4 @@
-package com.arkcraft.mod.core.items.weapons.handlers;
+package com.arkcraft.mod.core.items.weapons.component;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -7,6 +7,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 import com.arkcraft.mod.core.items.weapons.ItemSimplePistol;
+import com.arkcraft.mod.core.items.weapons.handlers.ReloadHelper;
 import com.arkcraft.mod.core.items.weapons.projectiles.EntitySimpleBullet;
 
 public class RangedCompSimplePistol extends RangedComponent
@@ -62,10 +63,10 @@ public class RangedCompSimplePistol extends RangedComponent
 	@Override
 	public void effectPlayer(ItemStack itemstack, EntityPlayer entityplayer, World world)
 	{
-		float f = entityplayer.isSneaking() ? -0.05F : -0.1F;
+		float f = entityplayer.isSneaking() ? -0.01F : -0.02F;
 		double d = -MathHelper.sin((entityplayer.rotationYaw / 180F) * 3.141593F) * MathHelper.cos((0 / 180F) * 3.141593F) * f;
 		double d1 = MathHelper.cos((entityplayer.rotationYaw / 180F) * 3.141593F) * MathHelper.cos((0 / 180F) * 3.141593F) * f;
-		entityplayer.rotationPitch -= entityplayer.isSneaking() ? 7.5F : 15F;
+		entityplayer.rotationPitch -= entityplayer.isSneaking() ? 2.5F : 5F;
 		entityplayer.addVelocity(d, 0, d1);
 	}
 

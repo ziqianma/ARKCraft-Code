@@ -3,8 +3,8 @@ package com.arkcraft.mod.core.items.weapons;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import com.arkcraft.mod.core.GlobalAdditions;
-import com.arkcraft.mod.core.items.weapons.handlers.ItemShooter;
-import com.arkcraft.mod.core.items.weapons.handlers.RangedCompSimplePistol;
+import com.arkcraft.mod.core.items.weapons.component.ItemShooter;
+import com.arkcraft.mod.core.items.weapons.component.RangedCompSimplePistol;
 
 public class ItemLongneckRifle extends ItemShooter{
 

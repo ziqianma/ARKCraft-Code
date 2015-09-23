@@ -1,12 +1,14 @@
-package com.arkcraft.mod.core.items.weapons.handlers;
+package com.arkcraft.mod.core.items.weapons.component;
+
+import com.arkcraft.mod.core.items.weapons.component.RangedComponent.RangedSpecs;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class RangedCompTranqGun extends RangedComponent {
+public class RangedCompCompoundBow extends RangedComponent {
 
-	public RangedCompTranqGun(RangedSpecs rangedspecs) {
+	public RangedCompCompoundBow(RangedSpecs rangedspecs) {
 		super(rangedspecs);
 		// TODO Auto-generated constructor stub
 	}

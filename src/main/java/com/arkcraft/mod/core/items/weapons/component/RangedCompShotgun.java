@@ -1,5 +1,6 @@
-package com.arkcraft.mod.core.items.weapons.handlers;
+package com.arkcraft.mod.core.items.weapons.component;
 
+import com.arkcraft.mod.core.items.weapons.handlers.ReloadHelper;
 import com.arkcraft.mod.core.items.weapons.projectiles.EntitySimpleShotgunAmmo;
 
 import net.minecraft.entity.player.EntityPlayer;

@@ -1,4 +1,4 @@
-package com.arkcraft.mod.core.items.weapons.handlers;
+package com.arkcraft.mod.core.items.weapons.component;
 
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
@@ -15,6 +15,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.arkcraft.mod.core.Main;
+import com.arkcraft.mod.core.items.weapons.handlers.ReloadHelper;
+import com.arkcraft.mod.core.items.weapons.handlers.WeaponModAttributes;
 import com.arkcraft.mod.core.items.weapons.projectiles.EntityShootable;
 import com.arkcraft.mod.core.items.weapons.projectiles.EntitySimpleShotgunAmmo;
 import com.google.common.collect.Multimap;
