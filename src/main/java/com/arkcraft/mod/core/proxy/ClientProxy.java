@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.entity.RenderSnowball;
 import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.item.Item;
+import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.SidedProxy;
 
@@ -29,6 +30,8 @@ import com.arkcraft.mod.core.entity.render.RenderRaptor;
 import com.arkcraft.mod.core.entity.render.RenderSimpleBullet;
 import com.arkcraft.mod.core.entity.render.RenderSpear;
 import com.arkcraft.mod.core.entity.render.RenderTranquilizer;
+import com.arkcraft.mod.core.items.weapons.handlers.WeaponModConfig;
+import com.arkcraft.mod.core.items.weapons.projectiles.EntitySimpleShotgunAmmo;
 import com.arkcraft.mod.core.items.weapons.projectiles.EntitySimpleBullet;
 import com.arkcraft.mod.core.items.weapons.projectiles.EntitySpear;
 import com.arkcraft.mod.core.items.weapons.projectiles.EntityTranquilizer;
@@ -52,15 +55,31 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityBrontosaurus.class, new RenderBrontosaurus(new ModelBrontosaurus(), 0.5f));
 	//	RenderingRegistry.registerEntityRenderingHandler(EntityTranqAmmo.class, new RenderTranqAmmo());
 		
-		RenderingRegistry.registerEntityRenderingHandler(EntityTranquilizer.class, new RenderTranquilizer());
-		RenderingRegistry.registerEntityRenderingHandler(EntitySimpleBullet.class, new RenderSimpleBullet());
-		RenderingRegistry.registerEntityRenderingHandler(EntitySpear.class, new RenderSpear());
-		
 		ModelBakery.addVariantName(GlobalAdditions.slingshot, "arkcraft:slingshot", "arkcraft:slingshot_pulled");
 		dossierProxy.init();
 		LogHelper.info("CommonProxy: Init run finished.");
 		initDone = true;
 	}
+	
+	@Override
+	public void registerWeapons(WeaponModConfig config){
+	
+	if (config.isEnabled("simple_pistol"))
+	{
+		RenderingRegistry.registerEntityRenderingHandler(EntitySimpleBullet.class, new RenderSimpleBullet());
+	}
+	
+	if (config.isEnabled("shotgun"))
+	{
+		RenderingRegistry.registerEntityRenderingHandler(EntitySimpleShotgunAmmo.class, new RenderSimpleBullet());
+	}
+	
+	if (config.isEnabled("spear"))
+	{
+		RenderingRegistry.registerEntityRenderingHandler(EntitySpear.class, new RenderSpear());
+		//MinecraftForgeClient.registerItemRenderer(BalkonsWeaponMod.javelin, longrender);
+	}
+}
 	
 	/* We register the block/item textures and models here */
 	@Override
@@ -69,6 +88,7 @@ public class ClientProxy extends CommonProxy {
 			String name = e.getKey();
 			Block b = e.getValue();
 			registerBlockTexture(b, name);
+	
 		}
 		
 		for(Map.Entry<String, Item> e : GlobalAdditions.allItems.entrySet()) {

@@ -22,6 +22,7 @@ import com.arkcraft.mod.core.handlers.ARKPlayerEventHandler;
 import com.arkcraft.mod.core.handlers.FMLCommonEventHandler;
 import com.arkcraft.mod.core.items.weapons.handlers.WeaponModConfig;
 import com.arkcraft.mod.core.items.weapons.projectiles.dispense.DispenseSimpleBullet;
+import com.arkcraft.mod.core.items.weapons.projectiles.dispense.DispenseSimpleShotgunAmmo;
 import com.arkcraft.mod.core.lib.Config;
 import com.arkcraft.mod.core.network.PlayerPoop;
 import com.arkcraft.mod.core.proxy.CommonProxy;
@@ -51,6 +52,8 @@ public class Main {
 		
 		WeaponConfig = new WeaponModConfig(new Configuration(event.getSuggestedConfigurationFile()));
 		WeaponConfig.addReloadTimeSetting("simple_pistol", 5);
+		WeaponConfig.addReloadTimeSetting("longneck_rifle", 25);
+		WeaponConfig.addReloadTimeSetting("shotgun", 15);
 	}
 	
 	@EventHandler
@@ -80,6 +83,10 @@ public class Main {
 		if (GlobalAdditions.simple_bullet != null)
 		{
 			BlockDispenser.dispenseBehaviorRegistry.putObject(GlobalAdditions.simple_bullet, new DispenseSimpleBullet());
+		}
+		if (GlobalAdditions.simple_shotgun_ammo != null)
+		{
+			BlockDispenser.dispenseBehaviorRegistry.putObject(GlobalAdditions.simple_shotgun_ammo, new DispenseSimpleShotgunAmmo());
 		}
 	}
 

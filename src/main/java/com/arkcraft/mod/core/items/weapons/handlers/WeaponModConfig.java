@@ -8,9 +8,7 @@ import net.minecraftforge.common.config.Configuration;
 public class WeaponModConfig
 {
 	private final Configuration				config;
-	
-	public boolean							allCanPickup;
-	
+
 	private Map<String, EnableSetting>		enableSettings;
 	private Map<String, ReloadTimeSetting>	reloadTimeSettings;
 	

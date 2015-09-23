@@ -28,7 +28,7 @@ item.bone_boots.name=Dino Bone Boots
 item.tranq_arrow.name=Tranquilizer Arrow
 item.slingshot.name=Slingshot
 item.ironPike.name=Iron Pike
-item.stoneSpear.name=Stone Spear
+item.spear.name=Stone Spear
 item.saddle_small.name=Small Saddle
 item.saddle_medium.name=Medium Saddle
 item.saddle_large.name=Large Saddle
@@ -49,6 +49,10 @@ item.tranq_gun.name=Tranquilizer Gun
 item.simple_pistol.name=Simple Pistol
 item.tranquilizer.name=Tranquilizer
 item.simple_bullet.name=Simple Bullet
+item.shotgun.name=Shotgun
+item.longneck_rifle.name=Longneck Rifle
+item.stone_arrow.name=Stone Arrow
+item.metal_arrow.name=Metal Arrow
 
 
 # Miscellaneous
