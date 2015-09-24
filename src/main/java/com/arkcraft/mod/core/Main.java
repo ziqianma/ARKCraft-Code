@@ -20,6 +20,10 @@ import org.apache.logging.log4j.Logger;
 import com.arkcraft.mod.core.handlers.ARKEventHandler;
 import com.arkcraft.mod.core.handlers.ARKPlayerEventHandler;
 import com.arkcraft.mod.core.handlers.FMLCommonEventHandler;
+import com.arkcraft.mod.core.items.weapons.ItemLongneckRifle;
+import com.arkcraft.mod.core.items.weapons.ItemShotgun;
+import com.arkcraft.mod.core.items.weapons.ItemSimplePistol;
+import com.arkcraft.mod.core.items.weapons.bullets.ItemProjectile;
 import com.arkcraft.mod.core.items.weapons.handlers.WeaponModConfig;
 import com.arkcraft.mod.core.items.weapons.projectiles.dispense.DispenseSimpleBullet;
 import com.arkcraft.mod.core.items.weapons.projectiles.dispense.DispenseSimpleRifleAmmo;
@@ -42,6 +46,11 @@ public class Main {
 	public WeaponModConfig WeaponConfig;
 	public static Logger	modLog;
 	
+	public static ItemProjectile simple_bullet, simple_rifle_ammo, simple_shotgun_ammo;
+	public static ItemSimplePistol simple_pistol;
+	public static ItemLongneckRifle longneck_rifle;
+	public static ItemShotgun shotgun;
+	
 	public Main() { instance = this; }
 	
 	@EventHandler
@@ -60,6 +69,9 @@ public class Main {
 		WeaponConfig.addReloadTimeSetting("simple_pistol", 5);
 		WeaponConfig.addReloadTimeSetting("longneck_rifle", 25);
 		WeaponConfig.addReloadTimeSetting("shotgun", 15);
+		WeaponConfig.loadConfig();
+		
+		addWeapons();
 	}
 	
 	@EventHandler
@@ -85,19 +97,38 @@ public class Main {
 		modChannel.registerMessage(PlayerPoop.Handler.class, PlayerPoop.class, id++, Side.SERVER);
 	}
 	
-	private void registerDispenseBehavior()
+	public void addWeapons()
 	{
-		if (GlobalAdditions.simple_bullet != null)
+		if (WeaponConfig.isEnabled("simple_pistol"))
 		{
-			BlockDispenser.dispenseBehaviorRegistry.putObject(GlobalAdditions.simple_bullet, new DispenseSimpleBullet());
+			simple_pistol = new ItemSimplePistol("simple_pistol");
+			simple_bullet = new ItemProjectile("simple_bullet");
 		}
-		if (GlobalAdditions.simple_shotgun_ammo != null)
+		if (WeaponConfig.isEnabled("longneck_rifle"))
 		{
-			BlockDispenser.dispenseBehaviorRegistry.putObject(GlobalAdditions.simple_shotgun_ammo, new DispenseSimpleShotgunAmmo());
+			longneck_rifle = new ItemLongneckRifle("longneck_rifle");
+			simple_rifle_ammo = new ItemProjectile("simple_rifle_ammo");
 		}
-		if (GlobalAdditions.simple_rifle_ammo != null)
+		if (WeaponConfig.isEnabled("shotgun"))
 		{
-			BlockDispenser.dispenseBehaviorRegistry.putObject(GlobalAdditions.simple_rifle_ammo, new DispenseSimpleRifleAmmo());
+			shotgun = new ItemShotgun("shotgun");
+			simple_shotgun_ammo = new ItemProjectile("simple_shotgun_ammo");
+		}
+	}
+	
+	public void registerDispenseBehavior()
+	{
+		if (simple_bullet != null)
+		{
+			BlockDispenser.dispenseBehaviorRegistry.putObject(simple_bullet, new DispenseSimpleBullet());
+		}
+		if (simple_shotgun_ammo != null)
+		{
+			BlockDispenser.dispenseBehaviorRegistry.putObject(simple_shotgun_ammo, new DispenseSimpleShotgunAmmo());
+		}
+		if (simple_rifle_ammo != null)
+		{
+			BlockDispenser.dispenseBehaviorRegistry.putObject(simple_rifle_ammo, new DispenseSimpleRifleAmmo());
 		}
 	}
 

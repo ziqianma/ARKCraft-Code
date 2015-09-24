@@ -43,9 +43,6 @@ import com.arkcraft.mod.core.items.ARKSeedItem;
 import com.arkcraft.mod.core.items.ARKSlingshot;
 import com.arkcraft.mod.core.items.ARKWeapon;
 import com.arkcraft.mod.core.items.ARKWeaponThrowable;
-import com.arkcraft.mod.core.items.weapons.ItemLongneckRifle;
-import com.arkcraft.mod.core.items.weapons.ItemShotgun;
-import com.arkcraft.mod.core.items.weapons.ItemSimplePistol;
 import com.arkcraft.mod.core.items.weapons.ItemSpear;
 import com.arkcraft.mod.core.items.weapons.ItemTranqGun;
 import com.arkcraft.mod.core.items.weapons.bullets.ItemProjectile;
@@ -82,10 +79,7 @@ public class GlobalAdditions {
 	public static ItemSpear	spear;
 	
 	public static ItemTranqGun tranq_gun;
-	public static ItemLongneckRifle longneck_rifle;
-	public static ItemShotgun shotgun;
-	public static ItemSimplePistol simple_pistol;
-	public static ItemProjectile tranquilizer, simple_bullet, stone_arrow, tranq_arrow, metal_arrow, simple_shotgun_ammo, simple_rifle_ammo;
+	public static ItemProjectile tranquilizer, stone_arrow, tranq_arrow, metal_arrow;
 	
 	public static ArmorMaterial CLOTH = EnumHelper.addArmorMaterial("CLOTH_MAT", "CLOTH_MAT", 4, new int[] {1,2,1,1}, 15);
 	public static ArmorMaterial CHITIN = EnumHelper.addArmorMaterial("CHITIN_MAT", "CHITIN_MAT", 16, new int[] { 3,7,6,3 } , 10);
@@ -146,14 +140,8 @@ public class GlobalAdditions {
 		
 		//Guns
 		tranq_gun = addTranqGun("tranq_gun");
-		simple_pistol = addSimplePistol("simple_pistol");
-		longneck_rifle = addLongneckRifle("longneck_rifle");
-		shotgun = addShotgun("shotgun");
 			
 		//Bullets
-		simple_bullet = addItemProjectile("simple_bullet");
-		simple_shotgun_ammo = addItemProjectile("simple_shotgun_ammo");
-		simple_rifle_ammo = addItemProjectile("simple_rifle_ammo");
 		tranquilizer = addItemProjectile("tranquilizer");
 		tranq_arrow = addItemProjectile("tranq_arrow");
 		stone_arrow = addItemProjectile("stone_arrow");
@@ -320,21 +308,6 @@ public class GlobalAdditions {
 	}
 	public static ItemTranqGun addTranqGun(String name) {
 		ItemTranqGun item = new ItemTranqGun(name);
-		allItems.put(name, item);
-		return item;
-	}
-	public static ItemSimplePistol addSimplePistol(String name) {
-		ItemSimplePistol item = new ItemSimplePistol(name);
-		allItems.put(name, item);
-		return item;
-	}
-	public static ItemShotgun addShotgun(String name) {
-		ItemShotgun item = new ItemShotgun(name);
-		allItems.put(name, item);
-		return item;
-	}
-	public static ItemLongneckRifle addLongneckRifle(String name) {
-		ItemLongneckRifle item = new ItemLongneckRifle(name);
 		allItems.put(name, item);
 		return item;
 	}

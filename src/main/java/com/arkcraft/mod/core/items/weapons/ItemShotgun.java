@@ -12,7 +12,7 @@ public class ItemShotgun extends ItemShooter{
 		super(name, new RangedCompShotgun());
 		this.setUnlocalizedName(name);
 		this.setCreativeTab(GlobalAdditions.tabARK);
-		GameRegistry.registerItem(this, name);
+		GameRegistry.registerItem(this, this.getUnlocalizedName().substring(5));
 	}
 }
 	

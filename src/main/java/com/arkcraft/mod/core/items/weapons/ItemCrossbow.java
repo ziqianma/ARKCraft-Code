@@ -12,7 +12,7 @@ public class ItemCrossbow extends ItemShooter{
 		super(name, new RangedCompCrossbow());
 		this.setUnlocalizedName(name);
 		this.setCreativeTab(GlobalAdditions.tabARK);
-		GameRegistry.registerItem(this, name);
+		GameRegistry.registerItem(this, this.getUnlocalizedName().substring(5));
 	}
 }
 	

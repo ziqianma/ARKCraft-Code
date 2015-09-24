@@ -43,7 +43,7 @@ public class EntitySimpleShotgunAmmo extends EntityShootable
 	{
 		super.onUpdate();
 		
-		if (ticksInAir > 4)
+		if (ticksInAir > 5)
 		{
 			setDead();
 		}
@@ -76,7 +76,7 @@ public class EntitySimpleShotgunAmmo extends EntityShootable
 	public static void fireSpreadShot(World world, EntityLivingBase entityliving, RangedComponent item, ItemStack itemstack)
 	{
 		EntitySimpleShotgunAmmo entity;
-		for (int i = 0; i < 10; i++)
+		for (int i = 0; i < 2; i++)
 		{
 			entity = new EntitySimpleShotgunAmmo(world, entityliving);
 			if (item != null && itemstack != null)
@@ -89,7 +89,7 @@ public class EntitySimpleShotgunAmmo extends EntityShootable
 	
 	public static void fireSpreadShot(World world, double x, double y, double z)
 	{
-		for (int i = 0; i < 10; i++)
+		for (int i = 0; i < 2; i++)
 		{
 			world.spawnEntityInWorld(new EntitySimpleShotgunAmmo(world, x, y, z));
 		}
@@ -97,7 +97,7 @@ public class EntitySimpleShotgunAmmo extends EntityShootable
 	
 	public static void fireFromDispenser(World world, double d, double d1, double d2, int i, int j, int k)
 	{
-		for (int i1 = 0; i1 < 10; i1++)
+		for (int i1 = 0; i1 < 2; i1++)
 		{
 			EntitySimpleShotgunAmmo entityblundershot = new EntitySimpleShotgunAmmo(world, d, d1, d2);
 			
