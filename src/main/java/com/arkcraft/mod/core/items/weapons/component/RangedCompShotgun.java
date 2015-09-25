@@ -1,13 +1,13 @@
 package com.arkcraft.mod.core.items.weapons.component;
 
-import com.arkcraft.mod.core.items.weapons.handlers.ReloadHelper;
-import com.arkcraft.mod.core.items.weapons.projectiles.EntitySimpleShotgunAmmo;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+
+import com.arkcraft.mod.core.items.weapons.handlers.ReloadHelper;
+import com.arkcraft.mod.core.items.weapons.projectiles.EntitySimpleShotgunAmmo;
 
 public class RangedCompShotgun extends RangedComponent
 {
@@ -22,7 +22,7 @@ public class RangedCompShotgun extends RangedComponent
 		entityplayer.swingItem();
 		world.playSoundAtEntity(entityplayer, "random.door_close", 0.8F, 1.0F / (weapon.getItemRand().nextFloat() * 0.2F + 0.0F));
 	}
-
+	
 	@Override
 	public void fire(ItemStack itemstack, World world, EntityPlayer entityplayer, int i)
 	{
@@ -33,10 +33,11 @@ public class RangedCompShotgun extends RangedComponent
 
 		int damage = 1;
 		if (itemstack.getItemDamage() + damage <= itemstack.getMaxDamage())
+			
 		{
 			setReloadState(itemstack, ReloadHelper.STATE_NONE);
 		}
-
+		
 		itemstack.damageItem(damage, entityplayer);
 		postShootingEffects(itemstack, entityplayer, world);
 	}

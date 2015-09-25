@@ -188,9 +188,9 @@ public class GlobalAdditions {
 		EntityHandler.registerModEntity(EntityCobble.class, "Cobblestone Ball", Main.instance, 64, 10, true);
 		EntityHandler.registerModEntity(EntityDodoEgg.class, "Dodo Egg", Main.instance, 64, 10, true);
 		
-		EntityHandler.registerMonster(EntityRaptor.class, "raptor");
-		EntityHandler.registerMonster(EntityDodo.class, "dodo", BiomeGenBase.beach, BiomeGenBase.desert, BiomeGenBase.forest, BiomeGenBase.birchForest, BiomeGenBase.extremeHills);
-		EntityHandler.registerMonster(EntityBrontosaurus.class, "brontosaurus");
+		EntityHandler.registerEntityEgg(EntityRaptor.class,  "raptor");
+		EntityHandler.registerEntityEgg(EntityDodo.class, "dodo", BiomeGenBase.beach, BiomeGenBase.desert, BiomeGenBase.forest, BiomeGenBase.birchForest, BiomeGenBase.extremeHills);
+		EntityHandler.registerEntityEgg(EntityBrontosaurus.class, "brontosaurus");
 		//EntityHandler.registerMonster(EntityCoelacanth.class, "coelacanth", BiomeGenBase.deepOcean, BiomeGenBase.ocean, BiomeGenBase.river);
 		
 		KeyBindings.preInit();

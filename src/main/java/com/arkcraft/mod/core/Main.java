@@ -1,6 +1,10 @@
 package com.arkcraft.mod.core;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import net.minecraft.block.BlockDispenser;
+import net.minecraft.item.Item;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -45,6 +49,9 @@ public class Main {
 	public Config modConfig;
 	public WeaponModConfig WeaponConfig;
 	public static Logger	modLog;
+	
+	public static Map<String, Item> allItems = new HashMap<String, Item>();
+
 	
 	public static ItemProjectile simple_bullet, simple_rifle_ammo, simple_shotgun_ammo;
 	public static ItemSimplePistol simple_pistol;
@@ -131,5 +138,5 @@ public class Main {
 			BlockDispenser.dispenseBehaviorRegistry.putObject(simple_rifle_ammo, new DispenseSimpleRifleAmmo());
 		}
 	}
-
+	
 }

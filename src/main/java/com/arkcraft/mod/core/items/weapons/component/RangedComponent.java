@@ -40,6 +40,7 @@ public abstract class RangedComponent extends AbstractWeaponComponent
 	}
 	
 	public final RangedSpecs	rangedSpecs;
+	private Object[] mainInventory;
 	
 	public RangedComponent(RangedSpecs rangedspecs)
 	{
@@ -303,19 +304,20 @@ public abstract class RangedComponent extends AbstractWeaponComponent
 	
 	public static enum RangedSpecs
 	{
-		SIMPLEPISTOL("arkcraft:simple_bullet", "simple_pistol",  250, 1),
+		SIMPLEPISTOL("arkcraft:simple_bullet", "simple_pistol",  150, 1),
 		CROSSBOW("arkcraft:stone_arrow", "crossbow", 250, 1),
-		SHOTGUN("arkcraft:simple_shotgun_ammo", "shotgun", 250, 1),
-		LONGNECKRIFLE("arkcraft:simple_rifle_ammo", "longneck_rifle", 250, 1);
+		SHOTGUN("arkcraft:simple_shotgun_ammo", "shotgun", 200, 5),
+		LONGNECKRIFLE("arkcraft:simple_rifle_ammo", "longneck_rifle", 350, 1);
 		
 		RangedSpecs(String ammoitemtag, String reloadtimetag, int durability, int stacksize)
 		{
 			ammoItemTag = ammoitemtag;
 			reloadTimeTag = reloadtimetag;
 			this.durability = durability;
-			stackSize = stacksize;
+			this.stackSize = stacksize;
 			ammoItem = null;
 			reloadTime = -1;
+				
 		}
 		
 		public int getReloadTime()
@@ -327,7 +329,7 @@ public abstract class RangedComponent extends AbstractWeaponComponent
 			}
 			return reloadTime;
 		}
-		
+			
 		public Item getAmmoItem()
 		{
 			if (ammoItem == null && ammoItemTag != null)

@@ -44,12 +44,16 @@ public class RangedCompLongneckRifle extends RangedComponent
 			EntitySimpleRifleAmmo entitymusketbullet = new EntitySimpleRifleAmmo(world, entityplayer, 1F);
 			applyProjectileEnchantments(entitymusketbullet, itemstack);
 			world.spawnEntityInWorld(entitymusketbullet);
-		} else
-		{
-			setReloadState(itemstack, ReloadHelper.STATE_NONE);
 		}
-		postShootingEffects(itemstack, entityplayer, world);
-	}
+			int damage = 1;
+			if (itemstack.getItemDamage() + damage <= itemstack.getMaxDamage())
+			{
+				setReloadState(itemstack, ReloadHelper.STATE_NONE);
+			}
+
+			itemstack.damageItem(damage, entityplayer);
+			postShootingEffects(itemstack, entityplayer, world);
+		}
 
 	@Override
 	public void effectPlayer(ItemStack itemstack, EntityPlayer entityplayer, World world)

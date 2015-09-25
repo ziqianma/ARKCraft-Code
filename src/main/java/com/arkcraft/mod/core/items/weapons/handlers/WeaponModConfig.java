@@ -17,6 +17,7 @@ public class WeaponModConfig
 		config = configuration;
 		enableSettings = new LinkedHashMap<String, EnableSetting>();
 		reloadTimeSettings = new LinkedHashMap<String, ReloadTimeSetting>();
+
 	}
 	
 	public void addEnableSetting(String weapon)
