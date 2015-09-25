@@ -34,6 +34,7 @@ import com.arkcraft.mod.core.handlers.GenerationHandler;
 import com.arkcraft.mod.core.handlers.GuiHandler;
 import com.arkcraft.mod.core.handlers.RecipeHandler;
 import com.arkcraft.mod.core.items.ARKArmorItem;
+import com.arkcraft.mod.core.items.ARKBlockItem;
 import com.arkcraft.mod.core.items.ARKEggItem;
 import com.arkcraft.mod.core.items.ARKFecesItem;
 import com.arkcraft.mod.core.items.ARKFood;
@@ -46,9 +47,6 @@ import com.arkcraft.mod.core.items.ARKWeaponThrowable;
 import com.arkcraft.mod.core.items.weapons.ItemSpear;
 import com.arkcraft.mod.core.items.weapons.ItemTranqGun;
 import com.arkcraft.mod.core.items.weapons.bullets.ItemProjectile;
-import com.arkcraft.mod.core.items.weapons.projectiles.EntitySimpleBullet;
-import com.arkcraft.mod.core.items.weapons.projectiles.EntitySimpleRifleAmmo;
-import com.arkcraft.mod.core.items.weapons.projectiles.EntitySimpleShotgunAmmo;
 import com.arkcraft.mod.core.items.weapons.projectiles.EntitySpear;
 import com.arkcraft.mod.core.items.weapons.projectiles.EntityTranquilizer;
 import com.arkcraft.mod.core.lib.KeyBindings;
@@ -77,6 +75,7 @@ public class GlobalAdditions {
 	public static Block blockNarcoBrerry;
 	public static Dossier dino_book;
 	public static ItemSpear	spear;
+	public static ARKBlockItem item_crop_plot;
 	
 	public static ItemTranqGun tranq_gun;
 	public static ItemProjectile tranquilizer, stone_arrow, tranq_arrow, metal_arrow;
@@ -138,6 +137,9 @@ public class GlobalAdditions {
 		dodo_feather = addItem("dodo_feather");
 		dodo_bag = addItemWithTooltip("dodo_bag", "Backpack for the Dodo");
 		
+		//Block Items
+		item_crop_plot = addBlockItem("item_crop_plot");
+		
 		//Guns
 		tranq_gun = addTranqGun("tranq_gun");
 			
@@ -181,14 +183,14 @@ public class GlobalAdditions {
 		
 		EntityHandler.registerModEntity(EntitySpear.class, "Spear", Main.instance, 64, 10, true);
 		EntityHandler.registerModEntity(EntityTranquilizer .class, "Tranquilizer ", Main.instance, 64, 10, true);
-		EntityHandler.registerModEntity(EntitySimpleBullet.class, "Simple Bullet", Main.instance, 64, 10, true);
-		EntityHandler.registerModEntity(EntitySimpleRifleAmmo.class, "Simple Rifle Ammo", Main.instance, 64, 10, true);
-		EntityHandler.registerModEntity(EntitySimpleShotgunAmmo.class, "Simple Shotgun Ammo", Main.instance, 64, 10, true);
+	//	EntityHandler.registerModEntity(EntitySimpleBullet.class, "Simple Bullet", Main.instance, 64, 10, true);
+	//	EntityHandler.registerModEntity(EntitySimpleRifleAmmo.class, "Simple Rifle Ammo", Main.instance, 64, 10, true);
+	//	EntityHandler.registerModEntity(EntitySimpleShotgunAmmo.class, "Simple Shotgun Ammo", Main.instance, 64, 10, true);
 		
 		EntityHandler.registerModEntity(EntityCobble.class, "Cobblestone Ball", Main.instance, 64, 10, true);
 		EntityHandler.registerModEntity(EntityDodoEgg.class, "Dodo Egg", Main.instance, 64, 10, true);
 		
-		EntityHandler.registerEntityEgg(EntityRaptor.class,  "raptor");
+		EntityHandler.registerEntityEgg(EntityRaptor.class, "raptor");
 		EntityHandler.registerEntityEgg(EntityDodo.class, "dodo", BiomeGenBase.beach, BiomeGenBase.desert, BiomeGenBase.forest, BiomeGenBase.birchForest, BiomeGenBase.extremeHills);
 		EntityHandler.registerEntityEgg(EntityBrontosaurus.class, "brontosaurus");
 		//EntityHandler.registerMonster(EntityCoelacanth.class, "coelacanth", BiomeGenBase.deepOcean, BiomeGenBase.ocean, BiomeGenBase.river);
@@ -248,6 +250,11 @@ public class GlobalAdditions {
 	
 	protected static ARKEggItem addEggItem(String name) {
 		ARKEggItem i = new ARKEggItem(name);
+		allItems.put(name, i);
+		return i;
+	}	
+	protected static ARKBlockItem addBlockItem(String name) {
+		ARKBlockItem i = new ARKBlockItem(name);
 		allItems.put(name, i);
 		return i;
 	}	

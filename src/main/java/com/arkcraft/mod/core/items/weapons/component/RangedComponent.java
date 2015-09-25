@@ -40,8 +40,6 @@ public abstract class RangedComponent extends AbstractWeaponComponent
 	}
 	
 	public final RangedSpecs	rangedSpecs;
-	private Object[] mainInventory;
-	
 	public RangedComponent(RangedSpecs rangedspecs)
 	{
 		rangedSpecs = rangedspecs;

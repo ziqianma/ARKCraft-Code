@@ -53,6 +53,9 @@ item.shotgun.name=Shotgun
 item.longneck_rifle.name=Longneck Rifle
 item.stone_arrow.name=Stone Arrow
 item.metal_arrow.name=Metal Arrow
+item.simple_rifle_ammo=Simple Rifle Ammo
+item.simple_shotgun_ammo=Simple Rifle Ammo
+
 
 
 # Miscellaneous

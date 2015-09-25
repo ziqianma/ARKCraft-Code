@@ -11,6 +11,7 @@ public class WeaponModConfig
 
 	private Map<String, EnableSetting>		enableSettings;
 	private Map<String, ReloadTimeSetting>	reloadTimeSettings;
+	//public static Map<String, Item> enableSettings = new HashMap<String, Item>();
 	
 	public WeaponModConfig(Configuration configuration)
 	{

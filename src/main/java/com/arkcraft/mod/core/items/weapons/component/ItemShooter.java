@@ -7,7 +7,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -23,6 +22,7 @@ import com.google.common.collect.Multimap;
 public class ItemShooter extends ItemBow implements IItemWeapon
 {
 	protected static final int		MAX_DELAY	= 72000;
+	public String setTextureName;
 	
 	public final RangedComponent	rangedComponent;
 	
@@ -38,7 +38,7 @@ public class ItemShooter extends ItemBow implements IItemWeapon
 		
 		rangedcomponent.setThisItemProperties();
 	}
-	
+
 	@Override
 	public Multimap<String, AttributeModifier> getItemAttributeModifiers()
 	{

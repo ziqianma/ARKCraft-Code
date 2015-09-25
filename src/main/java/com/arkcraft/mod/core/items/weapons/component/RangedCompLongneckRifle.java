@@ -1,5 +1,6 @@
 package com.arkcraft.mod.core.items.weapons.component;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumParticleTypes;
@@ -37,8 +38,15 @@ public class RangedCompLongneckRifle extends RangedComponent
 	}
 	
 	@Override
+	public void onUpdate(ItemStack itemstack, World world, Entity entity, int i, boolean flag)
+	{	
+		
+	}
+	
+	@Override
 	public void fire(ItemStack itemstack, World world, EntityPlayer entityplayer, int i)
 	{
+		
 		if (!world.isRemote)
 		{
 			EntitySimpleRifleAmmo entitymusketbullet = new EntitySimpleRifleAmmo(world, entityplayer, 1F);
@@ -85,6 +93,6 @@ public class RangedCompLongneckRifle extends RangedComponent
 	@Override
 	public float getMaxZoom()
 	{
-		return 0.15f;
+		return 0.50f;
 	}
 }

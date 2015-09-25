@@ -14,5 +14,6 @@ public class ItemLongneckRifle extends ItemShooter{
 		this.setCreativeTab(GlobalAdditions.tabARK);
 		GameRegistry.registerItem(this, this.getUnlocalizedName().substring(5));
 	}
+	
 }
 	

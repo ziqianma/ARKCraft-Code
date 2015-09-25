@@ -12,6 +12,7 @@ import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -46,7 +47,8 @@ public class ARKCropPlotBlock extends BlockBush implements IGrowable
         this.setDefaultState(this.blockState.getBaseState().withProperty(AGE, Integer.valueOf(0)));
         this.setTickRandomly(true);
         float f = 0.5F;
-        this.setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, 0.25F, 0.5F + f);
+        float f1 = 0.015625F;
+        this.setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, f1, 0.5F + f);
         this.setCreativeTab((CreativeTabs)null);
         this.setHardness(0.0F);
 		this.ID = ID;
@@ -60,7 +62,7 @@ public class ARKCropPlotBlock extends BlockBush implements IGrowable
 //		this.setCreativeTab(GlobalAdditions.tabARK);
 //		GameRegistry.registerBlock(this, name);
     }
-
+    
     /**
      * is the block grass, dirt or farmland
      */
@@ -187,6 +189,12 @@ public class ARKCropPlotBlock extends BlockBush implements IGrowable
     {
         return GlobalAdditions.narcoBerrySeed;
     }
+	
+	  @SideOnly(Side.CLIENT)
+	    public Item getItem(World worldIn, BlockPos pos)
+	    {
+	        return Items.redstone;
+	    }
 
 //    protected Item getCrop()
 //    {
@@ -228,11 +236,11 @@ public class ARKCropPlotBlock extends BlockBush implements IGrowable
         return true;
     }
 
-    @SideOnly(Side.CLIENT)
-    public Item getItem(World worldIn, BlockPos pos)
-    {
-        return this.getSeed();
-    }
+//    @SideOnly(Side.CLIENT)
+//    public Item getItem(World worldIn, BlockPos pos)
+//    {
+//        return this.getSeed();
+//    }
 
     public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state)
     {
