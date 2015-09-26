@@ -305,7 +305,9 @@ public abstract class RangedComponent extends AbstractWeaponComponent
 		SIMPLEPISTOL("arkcraft:simple_bullet", "simple_pistol",  150, 1),
 		CROSSBOW("arkcraft:stone_arrow", "crossbow", 250, 1),
 		SHOTGUN("arkcraft:simple_shotgun_ammo", "shotgun", 200, 5),
-		LONGNECKRIFLE("arkcraft:simple_rifle_ammo", "longneck_rifle", 350, 1);
+		LONGNECKRIFLE("arkcraft:simple_rifle_ammo", "longneck_rifle", 350, 1),
+		COMPOUNDBOW("arkcraft:stone_arrow", "compoundbow", 350, 1);
+		
 		
 		RangedSpecs(String ammoitemtag, String reloadtimetag, int durability, int stacksize)
 		{

@@ -44,6 +44,7 @@ import com.arkcraft.mod.core.items.ARKSeedItem;
 import com.arkcraft.mod.core.items.ARKSlingshot;
 import com.arkcraft.mod.core.items.ARKWeapon;
 import com.arkcraft.mod.core.items.ARKWeaponThrowable;
+import com.arkcraft.mod.core.items.weapons.ItemCompoundBow;
 import com.arkcraft.mod.core.items.weapons.ItemSpear;
 import com.arkcraft.mod.core.items.weapons.ItemTranqGun;
 import com.arkcraft.mod.core.items.weapons.bullets.ItemProjectile;
@@ -78,6 +79,7 @@ public class GlobalAdditions {
 	public static ARKBlockItem item_crop_plot;
 	
 	public static ItemTranqGun tranq_gun;
+	public static ItemCompoundBow compound_bow;
 	public static ItemProjectile tranquilizer, stone_arrow, tranq_arrow, metal_arrow;
 	
 	public static ArmorMaterial CLOTH = EnumHelper.addArmorMaterial("CLOTH_MAT", "CLOTH_MAT", 4, new int[] {1,2,1,1}, 15);
@@ -142,6 +144,7 @@ public class GlobalAdditions {
 		
 		//Guns
 		tranq_gun = addTranqGun("tranq_gun");
+		compound_bow = new ItemCompoundBow("compound_bow");
 			
 		//Bullets
 		tranquilizer = addItemProjectile("tranquilizer");
