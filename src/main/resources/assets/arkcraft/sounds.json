@@ -152,6 +152,15 @@
             }
         ]
     },
+    "shotgun_shot": {
+        "category": "neutral",
+        "sounds": [
+            {
+                "name": "shotgun_shot",
+                "stream": false
+            }
+        ]
+    },
     "dodo_defficating": {
         "category": "neutral",
         "sounds": [

@@ -2,6 +2,7 @@ package com.arkcraft.mod.core.items.weapons.projectiles.dispense;
 
 import java.util.Random;
 
+import com.arkcraft.mod.core.Main;
 import com.arkcraft.mod.core.items.weapons.projectiles.EntitySimpleShotgunAmmo;
 
 import net.minecraft.block.BlockDispenser;
@@ -35,7 +36,7 @@ public class DispenseSimpleShotgunAmmo extends BehaviorDefaultDispenseItem
 	@Override
 	protected void playDispenseSound(IBlockSource blocksource)
 	{
-		blocksource.getWorld().playSoundEffect(blocksource.getX(), blocksource.getY(), blocksource.getZ(), "random.explode", 3.0F, 1.0F / (rand.nextFloat() * 0.4F + 0.6F));
+		blocksource.getWorld().playSoundEffect(blocksource.getX(), blocksource.getY(), blocksource.getZ(), Main.MODID + ":" + "shotgun_shot", 3.0F, 1.0F / (rand.nextFloat() * 0.4F + 0.6F));
 	}
 	
 	@Override

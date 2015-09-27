@@ -33,7 +33,7 @@ public class RangedCompSimplePistol extends RangedComponent
 	public void effectReloadDone(ItemStack itemstack, World world, EntityPlayer entityplayer)
 	{
 		entityplayer.swingItem();
-		world.playSoundAtEntity(entityplayer, "random.click", 1.0F, 1.0F / (weapon.getItemRand().nextFloat() * 0.4F + 0.8F));
+		world.playSoundAtEntity(entityplayer, "random.door_close", 0.7F, 0.9F / (weapon.getItemRand().nextFloat() * 0.2F + 0.0F));
 	}
 	
 	@Override

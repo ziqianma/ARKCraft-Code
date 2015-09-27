@@ -6,6 +6,7 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
+import com.arkcraft.mod.core.Main;
 import com.arkcraft.mod.core.items.weapons.handlers.ReloadHelper;
 import com.arkcraft.mod.core.items.weapons.projectiles.EntitySimpleShotgunAmmo;
 
@@ -55,7 +56,7 @@ public class RangedCompShotgun extends RangedComponent
 	@Override
 	public void effectShoot(World world, double x, double y, double z, float yaw, float pitch)
 	{
-		world.playSoundEffect(x, y, z, "random.explode", 3.0F, 1.0F / (weapon.getItemRand().nextFloat() * 0.4F + 0.6F));
+		world.playSoundEffect(x, y, z,  Main.MODID + ":" + "shotgun_shot", 5.0F, 0.7F / (weapon.getItemRand().nextFloat() * 0.4F + 0.6F));
 		float particleX = -MathHelper.sin(((yaw + 23) / 180F) * 3.141593F) * MathHelper.cos((pitch / 180F) * 3.141593F);
 		float particleY = -MathHelper.sin((pitch / 180F) * 3.141593F) - 0.1F;
 		float particleZ = MathHelper.cos(((yaw + 23) / 180F) * 3.141593F) * MathHelper.cos((pitch / 180F) * 3.141593F);

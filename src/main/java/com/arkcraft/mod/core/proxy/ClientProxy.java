@@ -27,11 +27,20 @@ import com.arkcraft.mod.core.entity.passive.EntityBrontosaurus;
 import com.arkcraft.mod.core.entity.passive.EntityDodo;
 import com.arkcraft.mod.core.entity.render.RenderBrontosaurus;
 import com.arkcraft.mod.core.entity.render.RenderDodo;
+import com.arkcraft.mod.core.entity.render.RenderMetalArrow;
 import com.arkcraft.mod.core.entity.render.RenderRaptor;
 import com.arkcraft.mod.core.entity.render.RenderSimpleBullet;
+import com.arkcraft.mod.core.entity.render.RenderSimpleShotgunAmmo;
 import com.arkcraft.mod.core.entity.render.RenderSpear;
+import com.arkcraft.mod.core.entity.render.RenderStoneArrow;
+import com.arkcraft.mod.core.entity.render.RenderTranqArrow;
+import com.arkcraft.mod.core.items.weapons.projectiles.EntityMetalArrow;
 import com.arkcraft.mod.core.items.weapons.projectiles.EntitySimpleBullet;
+import com.arkcraft.mod.core.items.weapons.projectiles.EntitySimpleRifleAmmo;
+import com.arkcraft.mod.core.items.weapons.projectiles.EntitySimpleShotgunAmmo;
 import com.arkcraft.mod.core.items.weapons.projectiles.EntitySpear;
+import com.arkcraft.mod.core.items.weapons.projectiles.EntityStoneArrow;
+import com.arkcraft.mod.core.items.weapons.projectiles.EntityTranqArrow;
 import com.arkcraft.mod.core.lib.BALANCE;
 import com.arkcraft.mod.core.lib.LogHelper;
 
@@ -46,6 +55,10 @@ public class ClientProxy extends CommonProxy {
 	public void init() {
 		if(initDone) return;
 		RenderingRegistry.registerEntityRenderingHandler(EntityCobble.class, new RenderSnowball(Minecraft.getMinecraft().getRenderManager(), GlobalAdditions.cobble_ball, Minecraft.getMinecraft().getRenderItem()));
+		RenderingRegistry.registerEntityRenderingHandler(EntityTranqArrow.class, new RenderTranqArrow());
+		RenderingRegistry.registerEntityRenderingHandler(EntityStoneArrow.class, new RenderStoneArrow());
+		RenderingRegistry.registerEntityRenderingHandler(EntityMetalArrow.class, new RenderMetalArrow());
+
 		RenderingRegistry.registerEntityRenderingHandler(EntityDodoEgg.class, new RenderSnowball(Minecraft.getMinecraft().getRenderManager(), GlobalAdditions.dodo_egg, Minecraft.getMinecraft().getRenderItem()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityExplosive.class, new RenderSnowball(Minecraft.getMinecraft().getRenderManager(), GlobalAdditions.explosive_ball, Minecraft.getMinecraft().getRenderItem()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityRaptor.class, new RenderRaptor(new ModelRaptor(), 0.5F));
