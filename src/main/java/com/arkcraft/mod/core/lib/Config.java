@@ -34,13 +34,14 @@ public class Config {
 		}
 	}
 
-	public static void balanceCategoryConfiguration() {
-		// Balance settings
+	// Balance settings
+	private static void balanceCategoryConfiguration() {
 		ConfigCategory cat_balance = config.getCategory(CATEGORY_BALANCE);
 		cat_balance.setComment("You can adjust these values to change the balancing of this mod");
 		loadFields(cat_balance, BALANCE.PLANTS.class);
 		loadFields(cat_balance, BALANCE.GEN.class);
 		loadFields(cat_balance, BALANCE.PLAYER.class);
+		loadFields(cat_balance, BALANCE.WEAPONS.class);		
 		// TODO: Add more classes from BALANCE here when available
 	}
 

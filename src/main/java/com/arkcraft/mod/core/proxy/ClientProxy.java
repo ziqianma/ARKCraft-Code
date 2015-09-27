@@ -30,9 +30,9 @@ import com.arkcraft.mod.core.entity.render.RenderDodo;
 import com.arkcraft.mod.core.entity.render.RenderRaptor;
 import com.arkcraft.mod.core.entity.render.RenderSimpleBullet;
 import com.arkcraft.mod.core.entity.render.RenderSpear;
-import com.arkcraft.mod.core.items.weapons.handlers.WeaponModConfig;
 import com.arkcraft.mod.core.items.weapons.projectiles.EntitySimpleBullet;
 import com.arkcraft.mod.core.items.weapons.projectiles.EntitySpear;
+import com.arkcraft.mod.core.lib.BALANCE;
 import com.arkcraft.mod.core.lib.LogHelper;
 
 public class ClientProxy extends CommonProxy {
@@ -61,8 +61,7 @@ public class ClientProxy extends CommonProxy {
 	}
 
 	@Override
-	public void registerEventHandlers()
-	{
+	public void registerEventHandlers()	{
 		super.registerEventHandlers();
 		ClientEventHandler eventhandler = new ClientEventHandler();
 		FMLCommonHandler.instance().bus().register(eventhandler);
@@ -71,22 +70,17 @@ public class ClientProxy extends CommonProxy {
 	
 	
 	@Override
-	public void registerWeapons(WeaponModConfig config){
-	
-	if (config.isEnabled("simple_pistol"))
-	{
+	public void registerWeapons(){
+	if (BALANCE.WEAPONS.SIMPLE_PISTOL){
 		RenderingRegistry.registerEntityRenderingHandler(EntitySimpleBullet.class, new RenderSimpleBullet());
 	}
-	if (config.isEnabled("shotgun"))
-	{
+	if (BALANCE.WEAPONS.SHOTGUN){
 	//	RenderingRegistry.registerEntityRenderingHandler(EntitySimpleShotgunAmmo.class, new RenderSimpleShotgunAmmo());
 	}
-	if (config.isEnabled("longneck_rifle"))
-	{
+	if (BALANCE.WEAPONS.LONGNECK_RIFLE)	{
 	//	RenderingRegistry.registerEntityRenderingHandler(EntitySimpleRifleAmmo.class, new RenderSimpleBullet());
 	}
-	if (config.isEnabled("spear"))
-	{
+	if (BALANCE.WEAPONS.SPEAR)	{
 		RenderingRegistry.registerEntityRenderingHandler(EntitySpear.class, new RenderSpear());
 	}
 }
@@ -98,7 +92,6 @@ public class ClientProxy extends CommonProxy {
 			String name = e.getKey();
 			Block b = e.getValue();
 			registerBlockTexture(b, name);
-	
 		}
 		
 		for(Map.Entry<String, Item> e : GlobalAdditions.allItems.entrySet()) {

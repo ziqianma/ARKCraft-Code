@@ -18,6 +18,7 @@ import com.arkcraft.mod.core.Main;
 import com.arkcraft.mod.core.items.weapons.handlers.ReloadHelper;
 import com.arkcraft.mod.core.items.weapons.handlers.WeaponModAttributes;
 import com.arkcraft.mod.core.items.weapons.projectiles.EntityShootable;
+import com.arkcraft.mod.core.lib.BALANCE;
 import com.google.common.collect.Multimap;
 
 public abstract class RangedComponent extends AbstractWeaponComponent
@@ -236,7 +237,6 @@ public abstract class RangedComponent extends AbstractWeaponComponent
 	
 	public void applyProjectileEnchantments(EntityShootable entity, ItemStack itemstack)
 	{
-		
 		int damage = EnchantmentHelper.getEnchantmentLevel(Enchantment.power.effectId, itemstack);
 		if (damage > 0)
 		{
@@ -300,19 +300,33 @@ public abstract class RangedComponent extends AbstractWeaponComponent
 		return 0.15f;
 	}
 	
-	public static enum RangedSpecs
-	{
-		SIMPLEPISTOL("arkcraft:simple_bullet", "simple_pistol",  150, 1),
-		CROSSBOW("arkcraft:stone_arrow", "crossbow", 250, 1),
-		SHOTGUN("arkcraft:simple_shotgun_ammo", "shotgun", 200, 5),
-		LONGNECKRIFLE("arkcraft:simple_rifle_ammo", "longneck_rifle", 350, 1),
-		COMPOUNDBOW("arkcraft:stone_arrow", "compoundbow", 350, 1);
+	public static enum RangedSpecs {
+		SIMPLEPISTOL("arkcraft:simple_bullet", 0,  150, 1),
+		CROSSBOW("arkcraft:stone_arrow", 1, 250, 1),
+		SHOTGUN("arkcraft:simple_shotgun_ammo", 2, 200, 5),
+		LONGNECKRIFLE("arkcraft:simple_rifle_ammo", 3, 350, 1),
+		COMPOUNDBOW("arkcraft:stone_arrow", 4, 350, 1);
 		
-		
-		RangedSpecs(String ammoitemtag, String reloadtimetag, int durability, int stacksize)
-		{
+		private int getReloadTime(int id){
+			switch (id) {
+			case 0:
+				return BALANCE.WEAPONS.SIMPLE_PISTOL_RELOAD;
+			case 1:
+				return 5;  // Not defined yet!
+			case 2:
+				return BALANCE.WEAPONS.SHOTGUN_RELOAD;
+			case 3:
+				return BALANCE.WEAPONS.LONGNECK_RIFLE_RELOAD;
+			case 4:
+				return 5;  // Not defined yet!
+			default:
+				return 5;  // just in case					
+			}
+		}
+			
+		RangedSpecs(String ammoitemtag, int reloadtimeid, int durability, int stacksize){
 			ammoItemTag = ammoitemtag;
-			reloadTimeTag = reloadtimetag;
+			reloadTimeId = reloadtimeid;
 			this.durability = durability;
 			this.stackSize = stacksize;
 			ammoItem = null;
@@ -320,20 +334,16 @@ public abstract class RangedComponent extends AbstractWeaponComponent
 				
 		}
 		
-		public int getReloadTime()
-		{
-			if (reloadTime < 0 && Main.instance != null)
-			{
-				reloadTime = Main.instance.WeaponConfig.getReloadTime(reloadTimeTag);
-				Main.modLog.debug("Found reaload time " + reloadTime + " for " + reloadTimeTag + " @" + this);
+		public int getReloadTime(){
+			if (reloadTime < 0 && Main.instance != null){
+				reloadTime = getReloadTime(reloadTimeId);
+				Main.modLog.debug("Found reaload time " + reloadTime + " for " + reloadTimeId + " @" + this);
 			}
 			return reloadTime;
 		}
-			
-		public Item getAmmoItem()
-		{
-			if (ammoItem == null && ammoItemTag != null)
-			{
+		
+		public Item getAmmoItem(){
+			if (ammoItem == null && ammoItemTag != null){
 				ammoItem = (Item) Item.itemRegistry.getObject(ammoItemTag);
 				Main.modLog.debug("Found item " + ammoItem + " for " + ammoItemTag + " @" + this);
 				ammoItemTag = null;
@@ -344,8 +354,7 @@ public abstract class RangedComponent extends AbstractWeaponComponent
 		private int			reloadTime;
 		private Item		ammoItem;
 		private String		ammoItemTag;
-		public final String	reloadTimeTag;
+		public final int	reloadTimeId;
 		public final int	durability, stackSize;
 	}
-
 }

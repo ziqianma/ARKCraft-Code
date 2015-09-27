@@ -10,11 +10,9 @@ import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.arkcraft.mod.core.Main;
 import com.arkcraft.mod.core.items.weapons.handlers.IItemWeapon;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
@@ -26,16 +24,11 @@ public class ItemShooter extends ItemBow implements IItemWeapon
 	
 	public final RangedComponent	rangedComponent;
 	
-	public ItemShooter(String name, RangedComponent rangedcomponent)
-	{
+	public ItemShooter(String name, RangedComponent rangedcomponent) {
 		super();
-		GameRegistry.registerItem(this, name, Main.MODID);
-		setUnlocalizedName(name);
 		
 		rangedComponent = rangedcomponent;
-		
 		rangedcomponent.setItem(this);
-		
 		rangedcomponent.setThisItemProperties();
 	}
 

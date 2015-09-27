@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockDispenser;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -45,11 +46,21 @@ import com.arkcraft.mod.core.items.ARKSlingshot;
 import com.arkcraft.mod.core.items.ARKWeapon;
 import com.arkcraft.mod.core.items.ARKWeaponThrowable;
 import com.arkcraft.mod.core.items.weapons.ItemCompoundBow;
+import com.arkcraft.mod.core.items.weapons.ItemLongneckRifle;
+import com.arkcraft.mod.core.items.weapons.ItemShotgun;
+import com.arkcraft.mod.core.items.weapons.ItemSimplePistol;
 import com.arkcraft.mod.core.items.weapons.ItemSpear;
 import com.arkcraft.mod.core.items.weapons.ItemTranqGun;
 import com.arkcraft.mod.core.items.weapons.bullets.ItemProjectile;
+import com.arkcraft.mod.core.items.weapons.projectiles.EntitySimpleBullet;
+import com.arkcraft.mod.core.items.weapons.projectiles.EntitySimpleRifleAmmo;
+import com.arkcraft.mod.core.items.weapons.projectiles.EntitySimpleShotgunAmmo;
 import com.arkcraft.mod.core.items.weapons.projectiles.EntitySpear;
 import com.arkcraft.mod.core.items.weapons.projectiles.EntityTranquilizer;
+import com.arkcraft.mod.core.items.weapons.projectiles.dispense.DispenseSimpleBullet;
+import com.arkcraft.mod.core.items.weapons.projectiles.dispense.DispenseSimpleRifleAmmo;
+import com.arkcraft.mod.core.items.weapons.projectiles.dispense.DispenseSimpleShotgunAmmo;
+import com.arkcraft.mod.core.lib.BALANCE;
 import com.arkcraft.mod.core.lib.KeyBindings;
 
 /**
@@ -64,24 +75,29 @@ public class GlobalAdditions {
 	public static ARKSeedItem tintoBerrySeed, amarBerrySeed, azulBerrySeed, mejoBerrySeed, narcoBerrySeed;
 	public static ARKBush berryBush;
 	public static ARKItem cobble_ball, fiber, chitin, narcotics, explosive_ball, dodo_bag, dodo_feather;
-	public static ARKSlingshot slingshot;
 	public static ARKFecesItem dodo_feces, player_feces;
 	public static ARKEggItem dodo_egg;
 	public static ARKSaddle saddle_small, saddle_medium, saddle_large;
 	public static ARKArmorItem chitinHelm, chitinChest, chitinLegs, chitinBoots;
 	public static ARKArmorItem clothHelm, clothChest, clothLegs, clothBoots;
 	public static ARKArmorItem boneHelm, boneChest, boneLegs, boneBoots;
-	public static ARKWeapon ironPike;
 	public static ARKBlock oreSurface;
 	public static Block blockNarcoBrerry;
 	public static Dossier dino_book;
-	public static ItemSpear	spear;
 	public static ARKBlockItem item_crop_plot;
-	
+
+	// Weapons
+	public static ARKSlingshot slingshot;
+	public static ARKWeapon ironPike;
+	public static ItemSpear	spear;
 	public static ItemTranqGun tranq_gun;
 	public static ItemCompoundBow compound_bow;
 	public static ItemProjectile tranquilizer, stone_arrow, tranq_arrow, metal_arrow;
-	
+	public static ItemProjectile simple_bullet, simple_rifle_ammo, simple_shotgun_ammo;
+	public static ItemSimplePistol simple_pistol;
+	public static ItemLongneckRifle longneck_rifle;
+	public static ItemShotgun shotgun;	
+
 	public static ArmorMaterial CLOTH = EnumHelper.addArmorMaterial("CLOTH_MAT", "CLOTH_MAT", 4, new int[] {1,2,1,1}, 15);
 	public static ArmorMaterial CHITIN = EnumHelper.addArmorMaterial("CHITIN_MAT", "CHITIN_MAT", 16, new int[] { 3,7,6,3 } , 10);
 	public static ArmorMaterial BONE = EnumHelper.addArmorMaterial("BONE_MAT", "BONE_MAT", 40, new int[] { 3, 8, 6, 3 }, 30);
@@ -122,6 +138,7 @@ public class GlobalAdditions {
 		slingshot = addSlingshot("slingshot");
 		//stoneSpear = addWeaponThrowable("stoneSpear", ToolMaterial.STONE);
 		ironPike = addWeapon("ironPike", ToolMaterial.IRON);
+		addGunPowderWeapons();
 
 		// Containers
 		smithy = addContainer("smithy", 0.4F, Material.wood, GUI.SMITHY.getID(), false, false, 3);
@@ -198,14 +215,77 @@ public class GlobalAdditions {
 		EntityHandler.registerEntityEgg(EntityBrontosaurus.class, "brontosaurus");
 		//EntityHandler.registerMonster(EntityCoelacanth.class, "coelacanth", BiomeGenBase.deepOcean, BiomeGenBase.ocean, BiomeGenBase.river);
 		
+		registerWeaponEntities();
+		registerDispenseBehavior();
+
 		KeyBindings.preInit();
 		GenerationHandler.addOreToGen(oreSurface, 0); //Sets to the values in BALENCE.GEN.class
 		
 		// Other Stuff
 		NetworkRegistry.INSTANCE.registerGuiHandler(Main.instance, new GuiHandler());
 	}
-	protected static Block getRegisteredBlock(String name)
-	{
+	
+	public static void registerWeaponEntities(){
+		if (BALANCE.WEAPONS.SIMPLE_PISTOL){
+			EntityHandler.registerModEntity(EntitySimpleBullet.class, "Simple Bullet", Main.instance, 64, 10, true);
+		}
+		if (BALANCE.WEAPONS.SHOTGUN){
+			EntityHandler.registerModEntity(EntitySimpleShotgunAmmo.class, "Simple Shotgun Ammo", Main.instance, 64, 10, true);		
+		}
+		if (BALANCE.WEAPONS.LONGNECK_RIFLE)	{
+			EntityHandler.registerModEntity(EntitySimpleRifleAmmo.class, "Simple Rifle Ammo", Main.instance, 64, 10, true);
+		}
+	}
+	
+	public static void addGunPowderWeapons(){
+		if (BALANCE.WEAPONS.SIMPLE_PISTOL) {
+			simple_pistol = addSimplePistol("simple_pistol");
+			simple_bullet = addItemProjectile("simple_bullet");
+		}
+		if (BALANCE.WEAPONS.LONGNECK_RIFLE) {
+			longneck_rifle = addLongneckRifle("longneck_rifle");
+			simple_rifle_ammo = addItemProjectile("simple_rifle_ammo");
+		}
+		if (BALANCE.WEAPONS.SHOTGUN) {
+			shotgun = addShotgun("shotgun");
+			simple_shotgun_ammo = addItemProjectile("simple_shotgun_ammo");
+		}
+	}	
+	
+	public static void registerDispenseBehavior(){
+		if (simple_bullet != null) {
+			BlockDispenser.dispenseBehaviorRegistry.putObject(simple_bullet, new DispenseSimpleBullet());
+		}
+		if (simple_shotgun_ammo != null) {
+			BlockDispenser.dispenseBehaviorRegistry.putObject(simple_shotgun_ammo, new DispenseSimpleShotgunAmmo());
+		}
+		if (simple_rifle_ammo != null) {
+			BlockDispenser.dispenseBehaviorRegistry.putObject(simple_rifle_ammo, new DispenseSimpleRifleAmmo());
+		}
+	}
+	
+	protected static ItemProjectile addItemProjectile(String name) {
+		ItemProjectile i = new ItemProjectile(name);
+		allItems.put(name, i);
+		return i;
+	}	
+	protected static ItemSimplePistol addSimplePistol(String name) {
+		ItemSimplePistol i = new ItemSimplePistol(name);
+		allItems.put(name, i);
+		return i;
+	}	
+	protected static ItemLongneckRifle addLongneckRifle(String name) {
+		ItemLongneckRifle i = new ItemLongneckRifle(name);
+		allItems.put(name, i);
+		return i;
+	}
+	protected static ItemShotgun addShotgun(String name) {
+		ItemShotgun i = new ItemShotgun(name);
+		allItems.put(name, i);
+		return i;
+	}
+	
+	protected static Block getRegisteredBlock(String name){
 		return (Block)Block.blockRegistry.getObject(new ResourceLocation(name));
 	}
 	
@@ -318,11 +398,6 @@ public class GlobalAdditions {
 	}
 	public static ItemTranqGun addTranqGun(String name) {
 		ItemTranqGun item = new ItemTranqGun(name);
-		allItems.put(name, item);
-		return item;
-	}
-	public static ItemProjectile  addItemProjectile (String name) {
-		ItemProjectile item = new ItemProjectile(name);
 		allItems.put(name, item);
 		return item;
 	}
