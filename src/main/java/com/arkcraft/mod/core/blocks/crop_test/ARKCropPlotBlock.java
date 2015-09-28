@@ -48,7 +48,7 @@ public class ARKCropPlotBlock extends BlockBush implements IGrowable
         this.setTickRandomly(true);
         float f = 0.5F;
         float f1 = 0.015625F;
-        this.setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, f1, 0.5F + f);
+        this.setBlockBounds(0.5F - f, 0.4F, 0.5F - f, 0.5F + f, f1, 0.5F + f);
         this.setCreativeTab((CreativeTabs)null);
         this.setHardness(0.0F);
 		this.ID = ID;

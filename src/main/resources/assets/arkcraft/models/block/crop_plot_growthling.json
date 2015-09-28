@@ -7,8 +7,8 @@
         "1": "blocks/farmland_wet",
         "2": "blocks/log_oak",
         "3": "blocks/log_oak_top",
-        "4": "blocks/leaf",
-        "5": "blocks/narco"
+        "4": "arkcraft:items/leaf",
+        "5": "arkcraft:items/narco_berry"
     },
     "elements": [
         {

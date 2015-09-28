@@ -7,7 +7,7 @@
         "1": "blocks/farmland_wet",
         "2": "blocks/log_oak",
         "3": "blocks/log_oak_top",
-        "4": "blocks/leaf"
+        "4": "arkcraft:items/leaf",
     },
     "elements": [
         {

@@ -22,6 +22,7 @@ import com.arkcraft.mod.core.blocks.ARKBlock;
 import com.arkcraft.mod.core.blocks.ARKBush;
 import com.arkcraft.mod.core.blocks.ARKContainerBlock;
 import com.arkcraft.mod.core.blocks.crop_test.ARKCropPlotBlock;
+import com.arkcraft.mod.core.blocks.crop_test.ContainerInventoryCropPlot;
 import com.arkcraft.mod.core.book.Dossier;
 import com.arkcraft.mod.core.creativetabs.ARKTabs;
 import com.arkcraft.mod.core.entity.EntityCobble;
@@ -109,6 +110,7 @@ public class GlobalAdditions {
 	
 	public static ARKContainerBlock smithy, pestle;
 	public static ARKCropPlotBlock crop_plot;
+	public static ContainerInventoryCropPlot inv_crop_plot;
 
 	public enum GUI {
 		SMITHY(0), PESTLE_AND_MORTAR(1), INV_DODO(2), BOOK_GUI(3), CROP_PLOT(4), TAMING_GUI(5);
