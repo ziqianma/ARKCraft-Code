@@ -5,7 +5,6 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
@@ -20,33 +19,23 @@ import com.arkcraft.mod.core.lib.LogHelper;
  */
 public class ContainerInventoryCropPlot extends Container {
 
-//	public World world;
-//	public BlockPos pos;
-//	private InventoryPlayer invPlayer;
 	private TileInventoryCropPlot tileInventoryCropPlot;
-	public InventoryCrafting inputSlots;
-	public IInventory outputSlots;
 	private final int CROP_SLOT_COUNT = 9;
 
 	// These store cache values, used by the server to only update the client side tile entity when values have changed
 	private int [] cachedFields;
 
 	public ContainerInventoryCropPlot(InventoryPlayer invPlayer, TileInventoryCropPlot tileInventoryCropPlot) {
-//		this.invPlayer = invPlayer;
 		this.tileInventoryCropPlot = tileInventoryCropPlot;
 		LogHelper.info("TileInventoryCropPlot: constructor called.");
 		
-//		this.world = world;
-//		this.pos = pos;
-//		inputSlots = new InventoryCrafting(this, 7, 7);
-//		outputSlots = new InventoryCraftResult();
-		
 		/* Crop inventory */
 		if (CROP_SLOT_COUNT != tileInventoryCropPlot.getSizeInventory()) {
-			LogHelper.error("Mismatched slot count in container(" + CROP_SLOT_COUNT + ") and CropInventory (" + inputSlots.getSizeInventory()+")");
+			LogHelper.error("Mismatched slot count in container(" + CROP_SLOT_COUNT + ") and CropInventory (" 
+						+ tileInventoryCropPlot.getSizeInventory()+")");
 		}
-		this.addSlotToContainer(new SlotWater(tileInventoryCropPlot, TileInventoryCropPlot.WATER_SLOT, 44, 17)); // Water input slot
-		this.addSlotToContainer(new SlotSeed(tileInventoryCropPlot, TileInventoryCropPlot.SEED_SLOT, 44, 17));   // Seed input slot
+		this.addSlotToContainer(new SlotWater(tileInventoryCropPlot, TileInventoryCropPlot.WATER_SLOT, 8, 53)); // Water input slot
+		this.addSlotToContainer(new SlotSeed(tileInventoryCropPlot, TileInventoryCropPlot.SEED_SLOT, 44, 17));  // Seed input slot
 		final int INPUT_SLOT_YPOS = 53;
 		for(int col = TileInventoryCropPlot.FIRST_FERTILIZER_SLOT; col < CROP_SLOT_COUNT; col++) {
 			addSlotToContainer(new SlotFertilizer(tileInventoryCropPlot, col, 8 + col * 18, INPUT_SLOT_YPOS));
@@ -69,7 +58,7 @@ public class ContainerInventoryCropPlot extends Container {
 				addSlotToContainer(new Slot(invPlayer, slotIndex, 8 + col * 18, PLAYER_INVENTORY_YPOS + row * 18));
 			}
 		}	
-		this.onCraftMatrixChanged(inputSlots);
+//		this.onCraftMatrixChanged(inputSlots);
 	}
 	
 	/* GET ITEMS OUT ONCE CLOSED ???? */
