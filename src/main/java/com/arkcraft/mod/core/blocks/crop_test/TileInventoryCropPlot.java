@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 import com.arkcraft.mod.core.items.ARKFecesItem;
 import com.arkcraft.mod.core.items.ARKSeedItem;
+import com.arkcraft.mod.core.lib.LogHelper;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -40,8 +41,8 @@ public class TileInventoryCropPlot extends TileEntity implements IInventory, IUp
 	public static final int SEED_SLOT = 1;
 	public static final int FIRST_FERTILIZER_SLOT = 2;
 	public static final int BERRY_SLOT = 8;
-	public static final int FIRST_INPUT_SLOT = FIRST_FERTILIZER_SLOT + FERTILIZER_SLOTS_COUNT;
-	public static final int FIRST_OUTPUT_SLOT = WATER_SLOTS_COUNT + FIRST_FERTILIZER_SLOT + SEED_SLOTS_COUNT;
+//	public static final int FIRST_INPUT_SLOT = 1;
+	public static final int FIRST_OUTPUT_SLOT = WATER_SLOTS_COUNT + FERTILIZER_SLOTS_COUNT + SEED_SLOTS_COUNT;
 
 	private ItemStack[] itemStacks = new ItemStack[TOTAL_SLOTS_COUNT];
 
@@ -200,12 +201,12 @@ public class TileInventoryCropPlot extends TileEntity implements IInventory, IUp
 		ItemStack result = null;
 
 		// finds the first input slot which is smeltable and whose result fits into an output slot (stacking if possible)
-		for (int inputSlot = FIRST_INPUT_SLOT; inputSlot < FIRST_INPUT_SLOT + WATER_SLOTS_COUNT; inputSlot++)	{
+		for (int inputSlot = SEED_SLOT; inputSlot < SEED_SLOTS_COUNT; inputSlot++)	{
 			if (itemStacks[inputSlot] != null) {
 				result = getGrowingResultForItem(itemStacks[inputSlot]);
   			if (result != null) {
 					// find the first suitable output slot- either empty, or with identical item that has enough space
-					for (int outputSlot = FIRST_OUTPUT_SLOT; outputSlot < FIRST_OUTPUT_SLOT + OUTPUT_SLOTS_COUNT; outputSlot++) {
+					for (int outputSlot = FIRST_OUTPUT_SLOT; outputSlot < OUTPUT_SLOTS_COUNT; outputSlot++) {
 						ItemStack outputStack = itemStacks[outputSlot];
 						if (outputStack == null) {
 							firstSuitableInputSlot = inputSlot;
@@ -388,7 +389,7 @@ public class TileInventoryCropPlot extends TileEntity implements IInventory, IUp
 	{
 		super.writeToNBT(parentNBTTagCompound); // The super call is required to save and load the tiles location
 
-//		// Save the stored item stacks
+		// Save the stored item stacks
 
 		// to use an analogy with Java, this code generates an array of hashmaps
 		// The itemStack in each slot is converted to an NBTTagCompound, which is effectively a hashmap of key->value pairs such
@@ -407,9 +408,10 @@ public class TileInventoryCropPlot extends TileEntity implements IInventory, IUp
 		parentNBTTagCompound.setTag("Items", dataForAllSlots);
 
 		// Save everything else
-		parentNBTTagCompound.setShort("CookTime", growTime);
-		parentNBTTagCompound.setTag("burnTimeRemaining", new NBTTagIntArray(growTimeRemaining));
-		parentNBTTagCompound.setTag("burnTimeInitial", new NBTTagIntArray(growTimeInitialValue));
+		parentNBTTagCompound.setShort("growTime", growTime);
+		parentNBTTagCompound.setTag("growTimeRemaining", new NBTTagIntArray(growTimeRemaining));
+		parentNBTTagCompound.setTag("growTimeInitialValue", new NBTTagIntArray(growTimeInitialValue));
+		LogHelper.info("TileInventoryCropPlot: Wrote inventory.");
 	}
 
 	// This is where you load the data that you saved in writeToNBT
@@ -430,10 +432,11 @@ public class TileInventoryCropPlot extends TileEntity implements IInventory, IUp
 		}
 
 		// Load everything else.  Trim the arrays (or pad with 0) to make sure they have the correct number of elements
-		growTime = nbtTagCompound.getShort("CookTime");
-		growTimeRemaining = Arrays.copyOf(nbtTagCompound.getIntArray("burnTimeRemaining"), FERTILIZER_SLOTS_COUNT);
-		growTimeInitialValue = Arrays.copyOf(nbtTagCompound.getIntArray("burnTimeInitial"), FERTILIZER_SLOTS_COUNT);
+		growTime = nbtTagCompound.getShort("growTime");
+		growTimeRemaining = Arrays.copyOf(nbtTagCompound.getIntArray("growTimeRemaining"), FERTILIZER_SLOTS_COUNT);
+		growTimeInitialValue = Arrays.copyOf(nbtTagCompound.getIntArray("growTimeInitialValue"), FERTILIZER_SLOTS_COUNT);
 		cachedNumberOfFertilizerSlots = -1;
+		LogHelper.info("TileInventoryCropPlot: Read inventory.");
 	}
 
 	// When the world loads from disk, the server needs to send the TileEntity information to the client

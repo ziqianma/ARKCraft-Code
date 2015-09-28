@@ -17,12 +17,15 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import com.arkcraft.mod.core.blocks.ARKBlock;
 import com.arkcraft.mod.core.blocks.ARKBush;
 import com.arkcraft.mod.core.blocks.ARKContainerBlock;
 import com.arkcraft.mod.core.blocks.crop_test.ARKCropPlotBlock;
+import com.arkcraft.mod.core.blocks.crop_test.BlockInventoryCropPlot;
 import com.arkcraft.mod.core.blocks.crop_test.ContainerInventoryCropPlot;
+import com.arkcraft.mod.core.blocks.crop_test.TileInventoryCropPlot;
 import com.arkcraft.mod.core.book.Dossier;
 import com.arkcraft.mod.core.creativetabs.ARKTabs;
 import com.arkcraft.mod.core.entity.EntityCobble;
@@ -109,8 +112,10 @@ public class GlobalAdditions {
 	public static CreativeTabs tabARK = new ARKTabs(CreativeTabs.getNextID(), "tabARKCraft");
 	
 	public static ARKContainerBlock smithy, pestle;
-	public static ARKCropPlotBlock crop_plot;
-	public static ContainerInventoryCropPlot inv_crop_plot;
+	
+//	public static ARKCropPlotBlock crop_plot;
+	public static BlockInventoryCropPlot crop_plot;
+
 
 	public enum GUI {
 		SMITHY(0), PESTLE_AND_MORTAR(1), INV_DODO(2), BOOK_GUI(3), CROP_PLOT(4), TAMING_GUI(5);
@@ -133,7 +138,14 @@ public class GlobalAdditions {
 		porkchop_cooked = addFood("porkchop_cooked", 6, 0.9F, false, false);
 		primemeat_raw = addFood("primemeat_raw", 3, 0.3F, false, false);
 		primemeat_cooked = addFood("primemeat_cooked", 8, 1.2F, false, false);
-		
+
+		// Seeds
+		tintoBerrySeed = addSeedItem("tintoBerrySeed"); 
+		amarBerrySeed = addSeedItem("amarBerrySeed");
+		azulBerrySeed = addSeedItem("azulBerrySeed");
+		mejoBerrySeed = addSeedItem("mejoBerrySeed");
+		narcoBerrySeed = addSeedItem("narcoBerrySeed");
+
 		// world generated
 		berryBush = addBush("berryBush", 0.4F);
 		
@@ -163,6 +175,7 @@ public class GlobalAdditions {
 		
 		//Block Items
 		item_crop_plot = addBlockItem("item_crop_plot");
+		GameRegistry.registerTileEntity(TileInventoryCropPlot.class, "TileInventoryCropPlot");
 		
 		//Guns
 		tranq_gun = addTranqGun("tranq_gun");
@@ -273,17 +286,20 @@ public class GlobalAdditions {
 		ItemProjectile i = new ItemProjectile(name);
 		allItems.put(name, i);
 		return i;
-	}	
+	}
+	
 	protected static ItemSimplePistol addSimplePistol(String name) {
 		ItemSimplePistol i = new ItemSimplePistol(name);
 		allItems.put(name, i);
 		return i;
-	}	
+	}
+	
 	protected static ItemLongneckRifle addLongneckRifle(String name) {
 		ItemLongneckRifle i = new ItemLongneckRifle(name);
 		allItems.put(name, i);
 		return i;
 	}
+	
 	protected static ItemShotgun addShotgun(String name) {
 		ItemShotgun i = new ItemShotgun(name);
 		allItems.put(name, i);
@@ -321,8 +337,10 @@ public class GlobalAdditions {
 		return container;
 	}
 	
-	protected static ARKCropPlotBlock addCropPlotContainer(String name, float hardness, Material mat, int ID, boolean renderAsNormalBlock, boolean isOpaque, int renderType) {
-		ARKCropPlotBlock container = new ARKCropPlotBlock(name, hardness, mat, ID);
+//	protected static ARKCropPlotBlock addCropPlotContainer(String name, float hardness, Material mat, int ID, boolean renderAsNormalBlock, boolean isOpaque, int renderType) {
+//	ARKCropPlotBlock container = new ARKCropPlotBlock(name, hardness, mat, ID);
+	protected static BlockInventoryCropPlot addCropPlotContainer(String name, float hardness, Material mat, int ID, boolean renderAsNormalBlock, boolean isOpaque, int renderType) {
+		BlockInventoryCropPlot container = new BlockInventoryCropPlot(name, hardness, mat, ID);
 		container.setRenderAsNormalBlock(renderAsNormalBlock);
 		container.setOpaque(isOpaque);
 		container.setRenderType(renderType);
@@ -336,16 +354,24 @@ public class GlobalAdditions {
 		return i;
 	}
 	
+	protected static ARKSeedItem addSeedItem(String name) {
+		ARKSeedItem i = new ARKSeedItem(name);
+		allItems.put(name, i);
+		return i;
+	}
+	
 	protected static ARKEggItem addEggItem(String name) {
 		ARKEggItem i = new ARKEggItem(name);
 		allItems.put(name, i);
 		return i;
-	}	
+	}
+	
 	protected static ARKBlockItem addBlockItem(String name) {
 		ARKBlockItem i = new ARKBlockItem(name);
 		allItems.put(name, i);
 		return i;
-	}	
+	}
+	
 	public static ItemSpear addSpearItem(String name, ToolMaterial mat) {
 		ItemSpear weapon = new ItemSpear(name, mat);
 		allItems.put(name, weapon);
@@ -379,8 +405,7 @@ public class GlobalAdditions {
 	public static ARKFood addFood(String name, int heal, float sat, boolean fav, boolean alwaysEdible, PotionEffect... effect) {
 		ARKFood f = new ARKFood(name, heal, sat, fav, alwaysEdible, effect);
 		allItems.put(name, f);
-		return f;
-			
+		return f;			
 	}
 	
 	public static ARKArmorItem addArmorItem(String name, ArmorMaterial mat, String armorTexName, int type) {
