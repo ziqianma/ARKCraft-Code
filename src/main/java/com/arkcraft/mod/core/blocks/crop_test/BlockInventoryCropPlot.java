@@ -81,21 +81,21 @@ public class BlockInventoryCropPlot extends BlockContainer {
 	public void setRenderAsNormalBlock(boolean b) { render = b; }
 	public boolean renderAsNormalBlock() { return render; }
 
-	@Override
-    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand){
-        super.updateTick(worldIn, pos, state, rand);
-        if (worldIn.getLightFromNeighbors(pos.up()) >= 9){
-            int i = ((Integer)state.getValue(AGE)).intValue();
-
-            if (i < 11){
-                float f = getGrowthChance(this, worldIn, pos);
-
-                if (rand.nextInt((int)(25.0F / f) + 1) == 0){
-                    worldIn.setBlockState(pos, state.withProperty(AGE, Integer.valueOf(i + 1)), 2);
-                }
-            }
-        }
-    }
+//	@Override
+//    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand){
+//        super.updateTick(worldIn, pos, state, rand);
+//        if (worldIn.getLightFromNeighbors(pos.up()) >= 9){
+//            int i = ((Integer)state.getValue(AGE)).intValue();
+//
+//            if (i < 11){
+//                float f = getGrowthChance(this, worldIn, pos);
+//
+//                if (rand.nextInt((int)(25.0F / f) + 1) == 0){
+//                    worldIn.setBlockState(pos, state.withProperty(AGE, Integer.valueOf(i + 1)), 2);
+//                }
+//            }
+//        }
+//    }
 	
     public void grow(World worldIn, BlockPos pos, IBlockState state) {
         int i = ((Integer)state.getValue(AGE)).intValue() + MathHelper.getRandomIntegerInRange(worldIn.rand, 2, 5);

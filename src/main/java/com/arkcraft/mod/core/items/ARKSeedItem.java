@@ -22,17 +22,17 @@ public class ARKSeedItem extends Item {
 	
 	public static ItemStack getBerryForSeed(ItemStack stack) {
 		if (stack != null) {
-			if (stack.getItem() instanceof ARKFood) {
-				if (stack.getItem() == (Item) GlobalAdditions.amarBerry)
-					return new ItemStack(GlobalAdditions.amarBerrySeed);
-				if (stack.getItem() == (Item) GlobalAdditions.azulBerry)
-					return new ItemStack(GlobalAdditions.azulBerrySeed);
-				if (stack.getItem() == (Item) GlobalAdditions.mejoBerry)
-					return new ItemStack(GlobalAdditions.mejoBerrySeed);
-				if (stack.getItem() == (Item) GlobalAdditions.narcoBerry)
-					return new ItemStack(GlobalAdditions.narcoBerrySeed);
-				if (stack.getItem() == (Item) GlobalAdditions.tintoBerry)
-					return new ItemStack(GlobalAdditions.tintoBerrySeed);
+			if (stack.getItem() instanceof ARKSeedItem) {
+				if (stack.getItem() == (Item) GlobalAdditions.amarBerrySeed)
+					return new ItemStack(GlobalAdditions.amarBerry);
+				if (stack.getItem() == (Item) GlobalAdditions.azulBerrySeed)
+					return new ItemStack(GlobalAdditions.azulBerry);
+				if (stack.getItem() == (Item) GlobalAdditions.mejoBerrySeed)
+					return new ItemStack(GlobalAdditions.mejoBerry);
+				if (stack.getItem() == (Item) GlobalAdditions.narcoBerrySeed)
+					return new ItemStack(GlobalAdditions.narcoBerry);
+				if (stack.getItem() == (Item) GlobalAdditions.tintoBerrySeed)
+					return new ItemStack(GlobalAdditions.tintoBerry);
 			}
 		}
 		return null;

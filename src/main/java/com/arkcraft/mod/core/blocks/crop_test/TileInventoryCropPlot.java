@@ -201,12 +201,12 @@ public class TileInventoryCropPlot extends TileEntity implements IInventory, IUp
 		ItemStack result = null;
 
 		// finds the first input slot which is smeltable and whose result fits into an output slot (stacking if possible)
-		for (int inputSlot = SEED_SLOT; inputSlot < SEED_SLOTS_COUNT; inputSlot++)	{
+		for (int inputSlot = SEED_SLOT; inputSlot < SEED_SLOT + SEED_SLOTS_COUNT; inputSlot++)	{
 			if (itemStacks[inputSlot] != null) {
 				result = getGrowingResultForItem(itemStacks[inputSlot]);
   			if (result != null) {
 					// find the first suitable output slot- either empty, or with identical item that has enough space
-					for (int outputSlot = FIRST_OUTPUT_SLOT; outputSlot < OUTPUT_SLOTS_COUNT; outputSlot++) {
+					for (int outputSlot = FIRST_OUTPUT_SLOT; outputSlot < FIRST_OUTPUT_SLOT + OUTPUT_SLOTS_COUNT; outputSlot++) {
 						ItemStack outputStack = itemStacks[outputSlot];
 						if (outputStack == null) {
 							firstSuitableInputSlot = inputSlot;
@@ -232,9 +232,11 @@ public class TileInventoryCropPlot extends TileEntity implements IInventory, IUp
 		if (firstSuitableInputSlot == null) return false;
 		if (!harvestBerry) return true;
 
-		// alter input and output
-		itemStacks[firstSuitableInputSlot].stackSize--;
-		if (itemStacks[firstSuitableInputSlot].stackSize <=0) itemStacks[firstSuitableInputSlot] = null;
+		// alter input slot (seed doesn't burn, so we do nothing
+//		itemStacks[firstSuitableInputSlot].stackSize--;
+//		if (itemStacks[firstSuitableInputSlot].stackSize <=0) itemStacks[firstSuitableInputSlot] = null;
+		
+		// alter output slot
 		if (itemStacks[firstSuitableOutputSlot] == null) {
 			itemStacks[firstSuitableOutputSlot] = result.copy(); // Use deep .copy() to avoid altering the recipe
 		} else {
