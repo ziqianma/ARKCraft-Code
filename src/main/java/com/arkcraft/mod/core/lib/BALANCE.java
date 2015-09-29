@@ -54,6 +54,10 @@ public final class BALANCE {
 		@DefaultBoolean(value=true, name = "Include Shotgun", comment = "Include Shotgun")
 		public static boolean SHOTGUN;
 		@DefaultInt(value = 15, minValue = 5, maxValue = 30, name = "Time to reload shotgun.", comment = "Seconds to reload")
-		public static int SHOTGUN_RELOAD;		
+		public static int SHOTGUN_RELOAD;	
+		@DefaultBoolean(value=true, name = "Include Tranq Gun", comment = "Include Tranq Gun")
+		public static boolean TRANQ_GUN;
+		@DefaultInt(value = 25, minValue = 5, maxValue = 50, name = "Time to reload tranq_gun.", comment = "Seconds to reload")
+		public static int TRANQ_GUN_RELOAD;
 	}
 }

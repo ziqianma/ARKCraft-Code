@@ -22,9 +22,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import com.arkcraft.mod.core.blocks.ARKBlock;
 import com.arkcraft.mod.core.blocks.ARKBush;
 import com.arkcraft.mod.core.blocks.ARKContainerBlock;
-import com.arkcraft.mod.core.blocks.crop_test.ARKCropPlotBlock;
 import com.arkcraft.mod.core.blocks.crop_test.BlockInventoryCropPlot;
-import com.arkcraft.mod.core.blocks.crop_test.ContainerInventoryCropPlot;
 import com.arkcraft.mod.core.blocks.crop_test.TileInventoryCropPlot;
 import com.arkcraft.mod.core.book.Dossier;
 import com.arkcraft.mod.core.creativetabs.ARKTabs;
@@ -67,6 +65,7 @@ import com.arkcraft.mod.core.items.weapons.projectiles.EntityTranquilizer;
 import com.arkcraft.mod.core.items.weapons.projectiles.dispense.DispenseSimpleBullet;
 import com.arkcraft.mod.core.items.weapons.projectiles.dispense.DispenseSimpleRifleAmmo;
 import com.arkcraft.mod.core.items.weapons.projectiles.dispense.DispenseSimpleShotgunAmmo;
+import com.arkcraft.mod.core.items.weapons.projectiles.dispense.DispenseTranquilizer;
 import com.arkcraft.mod.core.lib.BALANCE;
 import com.arkcraft.mod.core.lib.KeyBindings;
 
@@ -177,12 +176,10 @@ public class GlobalAdditions {
 		item_crop_plot = addBlockItem("item_crop_plot");
 		GameRegistry.registerTileEntity(TileInventoryCropPlot.class, "TileInventoryCropPlot");
 		
-		//Guns
-		tranq_gun = addTranqGun("tranq_gun");
+		//Bows
 		compound_bow = new ItemCompoundBow("compound_bow");
 			
 		//Bullets
-		tranquilizer = addItemProjectile("tranquilizer");
 		tranq_arrow = addItemProjectile("tranq_arrow");
 		stone_arrow = addItemProjectile("stone_arrow");
 		metal_arrow = addItemProjectile("metal_arrow");
@@ -223,7 +220,6 @@ public class GlobalAdditions {
 		EntityHandler.registerModEntity(EntityTranqArrow.class, "Tranq Arrow", Main.instance, 64, 10, true);
 		EntityHandler.registerModEntity(EntityStoneArrow.class, "Stone Arrow", Main.instance, 64, 10, true);
 		EntityHandler.registerModEntity(EntityMetalArrow.class, "Metal Arrow", Main.instance, 64, 10, true);
-		EntityHandler.registerModEntity(EntityTranquilizer .class, "Tranquilizer ", Main.instance, 64, 10, true);
 
 		EntityHandler.registerModEntity(EntityCobble.class, "Cobblestone Ball", Main.instance, 64, 10, true);
 		EntityHandler.registerModEntity(EntityDodoEgg.class, "Dodo Egg", Main.instance, 64, 10, true);
@@ -253,6 +249,9 @@ public class GlobalAdditions {
 		if (BALANCE.WEAPONS.LONGNECK_RIFLE)	{
 			EntityHandler.registerModEntity(EntitySimpleRifleAmmo.class, "Simple Rifle Ammo", Main.instance, 64, 10, true);
 		}
+		if (BALANCE.WEAPONS.TRANQ_GUN)	{
+			EntityHandler.registerModEntity(EntityTranquilizer.class, "Tranquilizer", Main.instance, 64, 10, true);
+		}
 	}
 	
 	public static void addGunPowderWeapons(){
@@ -268,6 +267,10 @@ public class GlobalAdditions {
 			shotgun = addShotgun("shotgun");
 			simple_shotgun_ammo = addItemProjectile("simple_shotgun_ammo");
 		}
+		if (BALANCE.WEAPONS.TRANQ_GUN) {
+			tranq_gun = addTranqGun("tranq_gun");
+			tranquilizer = addItemProjectile("tranquilizer");
+		}
 	}	
 	
 	public static void registerDispenseBehavior(){
@@ -279,6 +282,9 @@ public class GlobalAdditions {
 		}
 		if (simple_rifle_ammo != null) {
 			BlockDispenser.dispenseBehaviorRegistry.putObject(simple_rifle_ammo, new DispenseSimpleRifleAmmo());
+		}
+		if (tranquilizer != null) {
+			BlockDispenser.dispenseBehaviorRegistry.putObject(tranquilizer, new DispenseTranquilizer());
 		}
 	}
 	

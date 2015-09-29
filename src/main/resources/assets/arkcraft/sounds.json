@@ -161,6 +161,24 @@
             }
         ]
     },
+	"reload_tranq_gun": {
+        "category": "neutral",
+        "sounds": [
+            {
+                "name": "reload_tranq_gun",
+                "stream": false
+            }
+        ]
+    },
+	"shoot_tranq_gun": {
+        "category": "neutral",
+        "sounds": [
+            {
+                "name": "shoot_tranq_gun",
+                "stream": false
+            }
+        ]
+    },
     "dodo_defficating": {
         "category": "neutral",
         "sounds": [

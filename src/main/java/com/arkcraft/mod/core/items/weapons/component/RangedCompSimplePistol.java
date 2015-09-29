@@ -50,9 +50,9 @@ public class RangedCompSimplePistol extends RangedComponent
 
 		if (!world.isRemote)
 		{
-			EntitySimpleBullet entitymusketbullet = new EntitySimpleBullet(world, entityplayer, 1F / f);
-			applyProjectileEnchantments(entitymusketbullet, itemstack);
-			world.spawnEntityInWorld(entitymusketbullet);
+			EntitySimpleBullet entityprojectile = new EntitySimpleBullet(world, entityplayer, 1F / f);
+			applyProjectileEnchantments(entityprojectile, itemstack);
+			world.spawnEntityInWorld(entityprojectile);
 		} 
 		
 		int damage = 1;

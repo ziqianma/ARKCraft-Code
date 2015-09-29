@@ -49,9 +49,9 @@ public class RangedCompLongneckRifle extends RangedComponent
 		
 		if (!world.isRemote)
 		{
-			EntitySimpleRifleAmmo entitymusketbullet = new EntitySimpleRifleAmmo(world, entityplayer, 1F);
-			applyProjectileEnchantments(entitymusketbullet, itemstack);
-			world.spawnEntityInWorld(entitymusketbullet);
+			EntitySimpleRifleAmmo entityprojectile = new EntitySimpleRifleAmmo(world, entityplayer, 1F);
+			applyProjectileEnchantments(entityprojectile, itemstack);
+			world.spawnEntityInWorld(entityprojectile);
 		}
 			int damage = 1;
 			if (itemstack.getItemDamage() + damage <= itemstack.getMaxDamage())

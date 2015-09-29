@@ -7,7 +7,9 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public class EntityTranquilizer extends EntityProjectile
+import com.arkcraft.mod.core.items.weapons.handlers.WeaponDamageSource;
+
+public class EntityTranquilizer extends EntityShootable
 {
 	
 	public EntityTranquilizer(World world)
@@ -24,7 +26,7 @@ public class EntityTranquilizer extends EntityProjectile
 	public EntityTranquilizer(World world, EntityLivingBase entityliving, float deviation)
 	{
 		this(world);
-		shootingEntity = entityliving;
+		thrower = entityliving;
 		setLocationAndAngles(entityliving.posX, entityliving.posY + entityliving.getEyeHeight(), entityliving.posZ, entityliving.rotationYaw, entityliving.rotationPitch);
 		posX -= MathHelper.cos((rotationYaw / 180F) * 3.141593F) * 0.16F;
 		posY -= 0.1D;
@@ -40,6 +42,7 @@ public class EntityTranquilizer extends EntityProjectile
 	public void onUpdate()
 	{
 		super.onUpdate();
+		
 		if (inGround)
 		{
 			if (rand.nextInt(4) == 0)
@@ -48,7 +51,8 @@ public class EntityTranquilizer extends EntityProjectile
 			}
 			return;
 		}
-		double speed = getTotalVelocity();
+		
+		double speed = getGravityVelocity();
 		double amount = 16D;
 		if (speed > 2.0D)
 		{
@@ -56,56 +60,42 @@ public class EntityTranquilizer extends EntityProjectile
 			{
 				worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, posX + (motionX * i1) / amount, posY + (motionY * i1) / amount, posZ + (motionZ * i1) / amount, 0.0D, 0.0D, 0.0D);
 			}
+			
+			  if (!this.worldObj.isRemote)
+		        {
+		            this.setDead();
+		        }
 		}
-	}
+	}	
 	
 	@Override
 	public void onEntityHit(Entity entity)
 	{
-		float damage = 20F + extraDamage;
+		float damage = 7F + extraDamage;
 		DamageSource damagesource = null;
-		if (shootingEntity == null)
+		if (thrower == null)
 		{
-			//damagesource = WeaponDamageSource.causeProjectileWeaponDamage(this, this);
+			damagesource = WeaponDamageSource.causeProjectileWeaponDamage(this, this);
 		} else
 		{
-			//damagesource = WeaponDamageSource.causeProjectileWeaponDamage(this, shootingEntity);
+			damagesource = WeaponDamageSource.causeProjectileWeaponDamage(this, thrower);
 		}
 		if (entity.attackEntityFrom(damagesource, damage))
 		{
-			applyEntityHitEffects(entity);
 			playHitSound();
 			setDead();
 		}
 	}
 	
 	@Override
-	public boolean aimRotation()
+	protected float getVelocity()
 	{
-		return false;
+	        return 0F;
 	}
-	
 	@Override
-	public int getMaxLifetime()
+	public boolean canBeCritical()
 	{
-		return 200;
+		return true;
 	}
-	
-	@Override
-	public float getAirResistance()
-	{
-		return 0.98F;
-	}
-	
-	@Override
-	public float getGravity()
-	{
-		return getTotalVelocity() < 3F ? 0.07F : 0F;
-	}
-	
-	@Override
-	public int getMaxArrowShake()
-	{
-		return 0;
-	}
+
 }

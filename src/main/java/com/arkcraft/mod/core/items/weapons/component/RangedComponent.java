@@ -305,7 +305,7 @@ public abstract class RangedComponent extends AbstractWeaponComponent
 		CROSSBOW("arkcraft:stone_arrow", 1, 250, 1),
 		SHOTGUN("arkcraft:simple_shotgun_ammo", 2, 200, 5),
 		LONGNECKRIFLE("arkcraft:simple_rifle_ammo", 3, 350, 1),
-		COMPOUNDBOW("arkcraft:stone_arrow", 4, 350, 1);
+		TRANQGUN("arkcraft:tranquilizer", 4, 350, 1);
 		
 		private int getReloadTime(int id){
 			switch (id) {
@@ -318,7 +318,7 @@ public abstract class RangedComponent extends AbstractWeaponComponent
 			case 3:
 				return BALANCE.WEAPONS.LONGNECK_RIFLE_RELOAD;
 			case 4:
-				return 5;  // Not defined yet!
+				return BALANCE.WEAPONS.TRANQ_GUN_RELOAD;
 			default:
 				return 5;  // just in case					
 			}
