@@ -30,7 +30,6 @@ import net.minecraft.world.EnumSkyBlock;
  *
  */
 public class TileInventoryCropPlot extends TileEntity implements IInventory, IUpdatePlayerListBox {
-	// Create and initialize the itemStacks variable that will store store the itemStacks
 	public static final int WATER_SLOTS_COUNT = 1;
 	public static final int FERTILIZER_SLOTS_COUNT = 6;
 	public static final int SEED_SLOTS_COUNT = 1;
@@ -41,17 +40,17 @@ public class TileInventoryCropPlot extends TileEntity implements IInventory, IUp
 	public static final int SEED_SLOT = 1;
 	public static final int FIRST_FERTILIZER_SLOT = 2;
 	public static final int BERRY_SLOT = 8;
-//	public static final int FIRST_INPUT_SLOT = 1;
 	public static final int FIRST_OUTPUT_SLOT = WATER_SLOTS_COUNT + FERTILIZER_SLOTS_COUNT + SEED_SLOTS_COUNT;
 
+	// Create and initialize the itemStacks variable that will store store the itemStacks
 	private ItemStack[] itemStacks = new ItemStack[TOTAL_SLOTS_COUNT];
 
 	/** The number of grow ticks remaining for the water  */
-	private short waterTimeRemaining;
+	private int waterTimeRemaining;
 	/** The initial grow ticks value of one bucket of water (in ticks of grow duration) */
-	private int waterTimeInitialValue = 1200; // vanilla value is 1200 = 1 minute
+	private int waterTimeInitialValue = 1200; // vanilla value is 1200 = 5 minute
 	/** The maximum amount of water allowed in reservoir */
-	private short MAXIMUM_WATER_TIME = 12000;
+	private short MAXIMUM_WATER_TIME = 32000; // maximum is 32,767
 	
 	/** The number of grow ticks remaining on the current piece of fertilizer */
 	private int [] growTimeRemaining = new int[FERTILIZER_SLOTS_COUNT];
@@ -158,7 +157,7 @@ public class TileInventoryCropPlot extends TileEntity implements IInventory, IUp
 		boolean inventoryChanged = false;
 		
 		// Consume any water buckets
-		if (itemStacks[WATER_SLOT] != null && itemStacks[WATER_SLOT].getItem() != Items.water_bucket) {
+		if (itemStacks[WATER_SLOT] != null && itemStacks[WATER_SLOT].getItem() == Items.water_bucket) {
 			itemStacks[WATER_SLOT] = itemStacks[WATER_SLOT].getItem().getContainerItem(itemStacks[WATER_SLOT]);
 			waterTimeRemaining += waterTimeInitialValue;
 			if (waterTimeRemaining > MAXIMUM_WATER_TIME)
@@ -172,7 +171,8 @@ public class TileInventoryCropPlot extends TileEntity implements IInventory, IUp
 			if (growTimeRemaining[i] > 0) {
 				--growTimeRemaining[i];
 				++burningCount;
-				waterTimeRemaining--;
+				if (waterTimeRemaining > 0)
+					waterTimeRemaining--;
 			}
 			if (growTimeRemaining[i] == 0) {
 				if (itemStacks[fertilizerSlotNumber] != null && getItemGrowTime(itemStacks[fertilizerSlotNumber]) > 0) {
@@ -247,8 +247,13 @@ public class TileInventoryCropPlot extends TileEntity implements IInventory, IUp
 			}
 		}
 
-		if (firstSuitableInputSlot == null || ((itemStacks[WATER_SLOT] != null 
-				&& itemStacks[WATER_SLOT].getItem() != Items.water_bucket) && waterTimeRemaining <= 0)) {
+		if (firstSuitableInputSlot == null) 
+			return false;
+		else if (itemStacks[WATER_SLOT] != null) {
+			 if (itemStacks[WATER_SLOT].getItem() != Items.water_bucket && waterTimeRemaining <= 0)
+				 return false;
+		} else if (waterTimeRemaining <= 0) {
+			waterTimeRemaining = 0;
 			return false;
 		}
 		
@@ -374,7 +379,7 @@ public class TileInventoryCropPlot extends TileEntity implements IInventory, IUp
 	}
 
 	// Returns double between 0 and 1 representing % full level
-	public double waterLevel() {
+	public double fractionWaterLevelRemaining() {
 		double fraction = waterTimeRemaining / (double)MAXIMUM_WATER_TIME;
 		return MathHelper.clamp_double(fraction, 0.0, 1.0);
 	}
@@ -431,7 +436,7 @@ public class TileInventoryCropPlot extends TileEntity implements IInventory, IUp
 		parentNBTTagCompound.setTag("Items", dataForAllSlots);
 
 		// Save everything else
-		parentNBTTagCompound.setShort("waterTimeRemaining", waterTimeRemaining);
+		parentNBTTagCompound.setShort("waterTimeRemaining", (short)waterTimeRemaining);
 		parentNBTTagCompound.setShort("growTime", growTime);
 		parentNBTTagCompound.setTag("growTimeRemaining", new NBTTagIntArray(growTimeRemaining));
 		parentNBTTagCompound.setTag("growTimeInitialValue", new NBTTagIntArray(growTimeInitialValue));
@@ -485,13 +490,15 @@ public class TileInventoryCropPlot extends TileEntity implements IInventory, IUp
 	//   in the network packets)
 	// If you need more than this, or shorts are too small, use a custom packet in your container instead.
 
-	private static final byte GROW_FIELD_ID = 0;
-	private static final byte FIRST_GROW_TIME_REMAINING_FIELD_ID = 1;
+	private static final byte WATER_FIELD_ID = 0;
+	private static final byte GROW_FIELD_ID = 1;
+	private static final byte FIRST_GROW_TIME_REMAINING_FIELD_ID = 2;
 	private static final byte FIRST_GROW_TIME_INITIAL_FIELD_ID = FIRST_GROW_TIME_REMAINING_FIELD_ID + (byte)FERTILIZER_SLOTS_COUNT;
 	private static final byte NUMBER_OF_FIELDS = FIRST_GROW_TIME_INITIAL_FIELD_ID + (byte)FERTILIZER_SLOTS_COUNT;
 
 	@Override
 	public int getField(int id) {
+		if (id == WATER_FIELD_ID) return waterTimeRemaining;
 		if (id == GROW_FIELD_ID) return growTime;
 		if (id >= FIRST_GROW_TIME_REMAINING_FIELD_ID && id < FIRST_GROW_TIME_REMAINING_FIELD_ID + FERTILIZER_SLOTS_COUNT) {
 			return growTimeRemaining[id - FIRST_GROW_TIME_REMAINING_FIELD_ID];
@@ -505,7 +512,9 @@ public class TileInventoryCropPlot extends TileEntity implements IInventory, IUp
 
 	@Override
 	public void setField(int id, int value)	{
-		if (id == GROW_FIELD_ID) {
+		if (id == WATER_FIELD_ID) {
+			waterTimeRemaining = (short)value;
+		} else if (id == GROW_FIELD_ID) {
 			growTime = (short)value;
 		} else if (id >= FIRST_GROW_TIME_REMAINING_FIELD_ID && id < FIRST_GROW_TIME_REMAINING_FIELD_ID + FERTILIZER_SLOTS_COUNT) {
 			growTimeRemaining[id - FIRST_GROW_TIME_REMAINING_FIELD_ID] = value;

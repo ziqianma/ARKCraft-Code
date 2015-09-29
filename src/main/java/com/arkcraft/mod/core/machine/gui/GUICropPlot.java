@@ -72,6 +72,13 @@ public class GUICropPlot extends GuiContainer {
 
 		List<String> hoveringText = new ArrayList<String>();
 
+		// If the mouse is over the water progress bar add the progress bar hovering text
+		if (isInRect(guiLeft + WATER_BAR_XPOS, guiTop + WATER_BAR_YPOS, WATER_BAR_WIDTH, WATER_BAR_HEIGHT, mouseX, mouseY)){
+			hoveringText.add("Water Time:");
+			int growPercentage =(int)(tileEntity.fractionWaterLevelRemaining() * 100);
+			hoveringText.add(growPercentage + "%");
+		}
+		
 		// If the mouse is over the growth progress bar add the progress bar hovering text
 		if (isInRect(guiLeft + ARROW_XPOS, guiTop + ARROW_YPOS, ARROW_WIDTH, ARROW_HEIGHT, mouseX, mouseY)){
 			hoveringText.add("Growing a berry:");
@@ -108,7 +115,7 @@ public class GUICropPlot extends GuiContainer {
 		this.drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
 		
 		// get water progress as a double between 0 and 1, and draw it
-		double waterProgress = tileEntity.waterLevel();
+		double waterProgress = tileEntity.fractionWaterLevelRemaining();
 		drawTexturedModalRect(guiLeft + WATER_BAR_XPOS, guiTop + WATER_BAR_YPOS, WATER_BAR_ICON_U, WATER_BAR_ICON_V,
 						              WATER_BAR_WIDTH, (int)(waterProgress * WATER_BAR_HEIGHT));
 
