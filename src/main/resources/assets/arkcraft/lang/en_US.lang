@@ -5,6 +5,11 @@ tile.mortar_and_pestle.name=Mortar and Pestle
 tile.crop_plot.name=Crop Plot
 
 # Items
+item.narcoBerrySeed.name=Narco Berry Seed
+item.amarBerrySeed.name=Amar Berry Seed
+item.mejoBerrySeed.name=Mejo Berry Seed
+item.azulBerrySeed.name=Azul Berry Seed
+item.tintoBerrySeed.name=Tinto Berry Seed
 item.narco.name=Narco Berry
 item.amar.name=Amar Berry
 item.mejo.name=Mejo Berry
