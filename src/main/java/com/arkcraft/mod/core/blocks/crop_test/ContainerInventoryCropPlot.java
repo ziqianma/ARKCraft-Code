@@ -21,6 +21,7 @@ public class ContainerInventoryCropPlot extends Container {
 
 	private TileInventoryCropPlot tileInventoryCropPlot;
 	private final int CROP_SLOT_COUNT = 9;
+	public static final int FERTILIZER_SLOT_YPOS = 53;
 
 	// These store cache values, used by the server to only update the client side tile entity when values have changed
 	private int [] cachedFields;
@@ -36,9 +37,8 @@ public class ContainerInventoryCropPlot extends Container {
 		}
 		this.addSlotToContainer(new SlotWater(tileInventoryCropPlot, TileInventoryCropPlot.WATER_SLOT, 8, 53)); // Water input slot
 		this.addSlotToContainer(new SlotSeed(tileInventoryCropPlot, TileInventoryCropPlot.SEED_SLOT, 44, 17));  // Seed input slot
-		final int INPUT_SLOT_YPOS = 53;
 		for(int col = TileInventoryCropPlot.FIRST_FERTILIZER_SLOT; col < CROP_SLOT_COUNT; col++) {
-			addSlotToContainer(new SlotFertilizer(tileInventoryCropPlot, col, 8 + col * 18, INPUT_SLOT_YPOS));
+			addSlotToContainer(new SlotFertilizer(tileInventoryCropPlot, col, 8 + col * 18, FERTILIZER_SLOT_YPOS));
 		}
 		
 		// Berry output slot

@@ -46,15 +46,22 @@ public class TileInventoryCropPlot extends TileEntity implements IInventory, IUp
 
 	private ItemStack[] itemStacks = new ItemStack[TOTAL_SLOTS_COUNT];
 
-	/** The number of burn ticks remaining on the current piece of fuel */
+	/** The number of grow ticks remaining for the water  */
+	private short waterTimeRemaining;
+	/** The initial grow ticks value of one bucket of water (in ticks of grow duration) */
+	private int waterTimeInitialValue = 1200; // vanilla value is 1200 = 1 minute
+	/** The maximum amount of water allowed in reservoir */
+	private short MAXIMUM_WATER_TIME = 12000;
+	
+	/** The number of grow ticks remaining on the current piece of fertilizer */
 	private int [] growTimeRemaining = new int[FERTILIZER_SLOTS_COUNT];
-	/** The initial fuel value of the currently burning fuel (in ticks of burn duration) */
+	/** The initial grow ticks value of the current piece of fertilizer (in ticks of grow duration) */
 	private int [] growTimeInitialValue = new int[FERTILIZER_SLOTS_COUNT];
 
-	/**The number of ticks the current item has been growing*/
+	/** The number of ticks the current item has been growing */
 	private short growTime;
 	/** The number of ticks required to grow a berry */
-	private static final short GROW_TIME_FOR_COMPLETION = 200;  // vanilla value is 200 = 10 seconds
+	private static final short GROW_TIME_FOR_COMPLETION = 1200;  // vanilla value is 1200 = 1 minute
 
 	private int cachedNumberOfFertilizerSlots = -1;
 
@@ -149,12 +156,23 @@ public class TileInventoryCropPlot extends TileEntity implements IInventory, IUp
 	private int burnFertilizer() {
 		int burningCount = 0;
 		boolean inventoryChanged = false;
+		
+		// Consume any water buckets
+		if (itemStacks[WATER_SLOT] != null && itemStacks[WATER_SLOT].getItem() != Items.water_bucket) {
+			itemStacks[WATER_SLOT] = itemStacks[WATER_SLOT].getItem().getContainerItem(itemStacks[WATER_SLOT]);
+			waterTimeRemaining += waterTimeInitialValue;
+			if (waterTimeRemaining > MAXIMUM_WATER_TIME)
+				waterTimeRemaining = MAXIMUM_WATER_TIME;
+			inventoryChanged = true;
+		}
+		
 		// Iterate over all the fuel slots
 		for (int i = 0; i < FERTILIZER_SLOTS_COUNT; i++) {
 			int fertilizerSlotNumber = i + FIRST_FERTILIZER_SLOT;
 			if (growTimeRemaining[i] > 0) {
 				--growTimeRemaining[i];
 				++burningCount;
+				waterTimeRemaining--;
 			}
 			if (growTimeRemaining[i] == 0) {
 				if (itemStacks[fertilizerSlotNumber] != null && getItemGrowTime(itemStacks[fertilizerSlotNumber]) > 0) {
@@ -165,7 +183,7 @@ public class TileInventoryCropPlot extends TileEntity implements IInventory, IUp
 					++burningCount;
 					inventoryChanged = true;
 				// If the stack size now equals 0 set the slot contents to the items container item. This is for fuel
-				// items such as lava buckets so that the bucket is not consumed. If the item dose not have
+				// items such as lava buckets so that the bucket is not consumed. If the item does not have
 				// a container item getContainerItem returns null which sets the slot contents to null
 					if (itemStacks[fertilizerSlotNumber].stackSize == 0) {
 						itemStacks[fertilizerSlotNumber] = itemStacks[fertilizerSlotNumber].getItem().getContainerItem(itemStacks[fertilizerSlotNumber]);
@@ -189,9 +207,9 @@ public class TileInventoryCropPlot extends TileEntity implements IInventory, IUp
 	private void harvestBerry() {harvestBerry(true);}
 
 	/**
-	 * checks that there is an item to be smelted in one of the input slots and that there is room for the result in the output slots
-	 * If desired, performs the smelt
-	 * @param harvestBerry if true, harvest a berry.  if false, check whether harvesting is possible, but don't change the inventory
+	 * checks that there is an item to be harvested in one of the input slots and that there is room for the result in the output slots
+	 * If desired, performs the berry harvest
+	 * @param harvestBerry  If true, harvest a berry. If false, check whether harvesting is possible, but don't change the inventory
 	 * @return false if no berry can be harvested, true otherwise
 	 */
 	private boolean harvestBerry(boolean harvestBerry)
@@ -229,10 +247,15 @@ public class TileInventoryCropPlot extends TileEntity implements IInventory, IUp
 			}
 		}
 
-		if (firstSuitableInputSlot == null) return false;
+		if (firstSuitableInputSlot == null || ((itemStacks[WATER_SLOT] != null 
+				&& itemStacks[WATER_SLOT].getItem() != Items.water_bucket) && waterTimeRemaining <= 0)) {
+			return false;
+		}
+		
+		// If true, we harvest berry
 		if (!harvestBerry) return true;
 
-		// alter input slot (seed doesn't burn, so we do nothing
+		// alter input slot (seed doesn't burn, so we do nothing)
 //		itemStacks[firstSuitableInputSlot].stackSize--;
 //		if (itemStacks[firstSuitableInputSlot].stackSize <=0) itemStacks[firstSuitableInputSlot] = null;
 		
@@ -332,13 +355,11 @@ public class TileInventoryCropPlot extends TileEntity implements IInventory, IUp
 	@Override
 	public void openInventory(EntityPlayer player) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void closeInventory(EntityPlayer player) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -354,8 +375,8 @@ public class TileInventoryCropPlot extends TileEntity implements IInventory, IUp
 
 	// Returns double between 0 and 1 representing % full level
 	public double waterLevel() {
-		// TODO Auto-generated method stub
-		return 0.5;
+		double fraction = waterTimeRemaining / (double)MAXIMUM_WATER_TIME;
+		return MathHelper.clamp_double(fraction, 0.0, 1.0);
 	}
 
 	// Return true if stack is a valid fertilizer for the crop plot
@@ -410,6 +431,7 @@ public class TileInventoryCropPlot extends TileEntity implements IInventory, IUp
 		parentNBTTagCompound.setTag("Items", dataForAllSlots);
 
 		// Save everything else
+		parentNBTTagCompound.setShort("waterTimeRemaining", waterTimeRemaining);
 		parentNBTTagCompound.setShort("growTime", growTime);
 		parentNBTTagCompound.setTag("growTimeRemaining", new NBTTagIntArray(growTimeRemaining));
 		parentNBTTagCompound.setTag("growTimeInitialValue", new NBTTagIntArray(growTimeInitialValue));
@@ -434,6 +456,7 @@ public class TileInventoryCropPlot extends TileEntity implements IInventory, IUp
 		}
 
 		// Load everything else.  Trim the arrays (or pad with 0) to make sure they have the correct number of elements
+		waterTimeRemaining = nbtTagCompound.getShort("waterTimeRemaining");
 		growTime = nbtTagCompound.getShort("growTime");
 		growTimeRemaining = Arrays.copyOf(nbtTagCompound.getIntArray("growTimeRemaining"), FERTILIZER_SLOTS_COUNT);
 		growTimeInitialValue = Arrays.copyOf(nbtTagCompound.getIntArray("growTimeInitialValue"), FERTILIZER_SLOTS_COUNT);
@@ -481,8 +504,7 @@ public class TileInventoryCropPlot extends TileEntity implements IInventory, IUp
 	}
 
 	@Override
-	public void setField(int id, int value)
-	{
+	public void setField(int id, int value)	{
 		if (id == GROW_FIELD_ID) {
 			growTime = (short)value;
 		} else if (id >= FIRST_GROW_TIME_REMAINING_FIELD_ID && id < FIRST_GROW_TIME_REMAINING_FIELD_ID + FERTILIZER_SLOTS_COUNT) {
