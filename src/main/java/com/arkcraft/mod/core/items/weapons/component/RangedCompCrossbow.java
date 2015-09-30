@@ -5,6 +5,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 import com.arkcraft.mod.core.items.weapons.handlers.ReloadHelper;
+import com.arkcraft.mod.core.items.weapons.projectiles.EntityMetalArrow;
+import com.arkcraft.mod.core.items.weapons.projectiles.EntityStoneArrow;
+import com.arkcraft.mod.core.items.weapons.projectiles.EntityTranqArrow;
 
 public class RangedCompCrossbow extends RangedComponent
 {
@@ -39,9 +42,18 @@ public class RangedCompCrossbow extends RangedComponent
 		
 		if (!world.isRemote)
 		{
-		//	EntityCrossbowBolt entity = new EntityCrossbowBolt(world, entityplayer, 1.5F / f);
-		//	applyProjectileEnchantments(entity, itemstack);
-		//	world.spawnEntityInWorld(entity);
+			EntityStoneArrow entity = new EntityStoneArrow(world, entityplayer, 1.5F / f);
+			world.spawnEntityInWorld(entity);
+		}
+		else if	(!world.isRemote)
+		{
+			EntityMetalArrow entity = new EntityMetalArrow(world, entityplayer, 1.5F / f);
+			world.spawnEntityInWorld(entity);
+		}
+		else if	(!world.isRemote)
+		{
+			EntityTranqArrow entity = new EntityTranqArrow(world, entityplayer, 1.5F / f);
+			world.spawnEntityInWorld(entity);
 		}
 		
 		int damage = 1;

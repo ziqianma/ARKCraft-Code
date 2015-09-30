@@ -10,6 +10,7 @@ import net.minecraft.entity.IProjectile;
 import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.play.server.S2BPacketChangeGameState;
 import net.minecraft.util.AxisAlignedBB;
@@ -246,6 +247,17 @@ public abstract class EntityShootable extends Entity implements IProjectile
 		
 			}
 		}
+        if (movingobjectposition != null)
+        {
+            if (movingobjectposition.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK && this.worldObj.getBlockState(movingobjectposition.getBlockPos()).getBlock() == Blocks.portal)
+            {
+                this.setInPortal();
+            }
+            else
+            {
+                this.onImpact(movingobjectposition);
+            }
+        }
         
         this.posX += this.motionX;
         this.posY += this.motionY;
@@ -295,7 +307,6 @@ public abstract class EntityShootable extends Entity implements IProjectile
         this.motionY -= (double)f3;
         this.setPosition(this.posX, this.posY, this.posZ);
     }
-    
 	/**
      * Gets the amount of gravity to apply to the thrown entity with each tick.
      */
@@ -330,17 +341,19 @@ public abstract class EntityShootable extends Entity implements IProjectile
 	{
 		extraDamage = f;
 	}
-	
+	 
 	public void setKnockbackStrength(int i)
 	{
 		knockBack = i;
 	}
 	
+	public void onImpact(MovingObjectPosition movingobjectposition) {}
+	
 	public void onEntityHit(Entity entity)
 	{
 		applyEntityHitEffects(entity);
 	}
-	
+
 	public void applyEntityHitEffects(Entity entity)
 	{
 		if (isBurning() && !(entity instanceof EntityEnderman))
@@ -369,12 +382,6 @@ public abstract class EntityShootable extends Entity implements IProjectile
 			}
 		}
 	}
-
-    /**
-     * Called when this EntityThrowable hits a block or entity.
-     */
-//    protected abstract void onImpact(MovingObjectPosition p_70184_1_);
-
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */

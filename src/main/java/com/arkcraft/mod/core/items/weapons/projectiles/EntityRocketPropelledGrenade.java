@@ -5,25 +5,27 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
 import com.arkcraft.mod.core.items.weapons.handlers.WeaponDamageSource;
 
-public class EntityTranquilizer extends EntityShootable
+public class EntityRocketPropelledGrenade extends EntityShootable
 {
+	public int explosionRadius = 2;
 	
-	public EntityTranquilizer(World world)
+	public EntityRocketPropelledGrenade(World world)
 	{
-		super(world);
+		super(world);	
 	}
 	
-	public EntityTranquilizer(World world, double d, double d1, double d2)
+	public EntityRocketPropelledGrenade(World world, double d, double d1, double d2)
 	{
 		this(world);
 		setPosition(d, d1, d2);
 	}
 	
-	public EntityTranquilizer(World world, EntityLivingBase entityliving, float deviation)
+	public EntityRocketPropelledGrenade(World world, EntityLivingBase entityliving, float deviation)
 	{
 		this(world);
 		thrower = entityliving;
@@ -51,7 +53,6 @@ public class EntityTranquilizer extends EntityShootable
 			}
 			return;
 		}
-		
 		double speed = getGravityVelocity();
 		double amount = 16D;
 		if (speed > 2.0D)
@@ -71,7 +72,7 @@ public class EntityTranquilizer extends EntityShootable
 	@Override
 	public void onEntityHit(Entity entity)
 	{
-		float damage = 7F + extraDamage;
+		float damage = 6F + extraDamage;
 		DamageSource damagesource = null;
 		if (thrower == null)
 		{
@@ -85,6 +86,14 @@ public class EntityTranquilizer extends EntityShootable
 			playHitSound();
 			setDead();
 		}
+	}
+	
+	@Override
+	public void onImpact(MovingObjectPosition movingobjectposition)
+	{
+		this.worldObj.createExplosion(this, this.posX, this.posY, this.posZ, (float) this.explosionRadius, true);
+		if (worldObj.isRemote)
+			this.setDead();
 	}
 	
 	@Override

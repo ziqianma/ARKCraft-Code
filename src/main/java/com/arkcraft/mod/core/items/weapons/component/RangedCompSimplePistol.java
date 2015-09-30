@@ -6,27 +6,14 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-import com.arkcraft.mod.core.items.weapons.ItemSimplePistol;
 import com.arkcraft.mod.core.items.weapons.handlers.ReloadHelper;
 import com.arkcraft.mod.core.items.weapons.projectiles.EntitySimpleBullet;
 
 public class RangedCompSimplePistol extends RangedComponent
 {
-	protected ItemSimplePistol	simple_pistol;
-
 	public RangedCompSimplePistol()
 	{
 		super(RangedSpecs.SIMPLEPISTOL);
-	}
-
-	@Override
-	protected void onSetItem()
-	{
-		super.onSetItem();
-		if (item instanceof ItemSimplePistol)
-		{
-			simple_pistol = (ItemSimplePistol) item;
-		}
 	}
 
 	@Override

@@ -20,6 +20,7 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import com.arkcraft.mod.core.blocks.ARKBlock;
+import com.arkcraft.mod.core.blocks.ARKBlockSpikes;
 import com.arkcraft.mod.core.blocks.ARKBush;
 import com.arkcraft.mod.core.blocks.ARKContainerBlock;
 import com.arkcraft.mod.core.blocks.crop_test.BlockInventoryCropPlot;
@@ -48,13 +49,23 @@ import com.arkcraft.mod.core.items.ARKSlingshot;
 import com.arkcraft.mod.core.items.ARKWeapon;
 import com.arkcraft.mod.core.items.ARKWeaponThrowable;
 import com.arkcraft.mod.core.items.weapons.ItemCompoundBow;
+import com.arkcraft.mod.core.items.weapons.ItemCrossbow;
 import com.arkcraft.mod.core.items.weapons.ItemLongneckRifle;
+import com.arkcraft.mod.core.items.weapons.ItemRocketLauncher;
 import com.arkcraft.mod.core.items.weapons.ItemShotgun;
 import com.arkcraft.mod.core.items.weapons.ItemSimplePistol;
 import com.arkcraft.mod.core.items.weapons.ItemSpear;
 import com.arkcraft.mod.core.items.weapons.ItemTranqGun;
 import com.arkcraft.mod.core.items.weapons.bullets.ItemProjectile;
+import com.arkcraft.mod.core.items.weapons.component.RangedCompCrossbow;
+import com.arkcraft.mod.core.items.weapons.component.RangedCompLongneckRifle;
+import com.arkcraft.mod.core.items.weapons.component.RangedCompRocketLauncher;
+import com.arkcraft.mod.core.items.weapons.component.RangedCompShotgun;
+import com.arkcraft.mod.core.items.weapons.component.RangedCompSimplePistol;
+import com.arkcraft.mod.core.items.weapons.component.RangedCompTranqGun;
+import com.arkcraft.mod.core.items.weapons.component.RangedComponent;
 import com.arkcraft.mod.core.items.weapons.projectiles.EntityMetalArrow;
+import com.arkcraft.mod.core.items.weapons.projectiles.EntityRocketPropelledGrenade;
 import com.arkcraft.mod.core.items.weapons.projectiles.EntitySimpleBullet;
 import com.arkcraft.mod.core.items.weapons.projectiles.EntitySimpleRifleAmmo;
 import com.arkcraft.mod.core.items.weapons.projectiles.EntitySimpleShotgunAmmo;
@@ -62,6 +73,7 @@ import com.arkcraft.mod.core.items.weapons.projectiles.EntitySpear;
 import com.arkcraft.mod.core.items.weapons.projectiles.EntityStoneArrow;
 import com.arkcraft.mod.core.items.weapons.projectiles.EntityTranqArrow;
 import com.arkcraft.mod.core.items.weapons.projectiles.EntityTranquilizer;
+import com.arkcraft.mod.core.items.weapons.projectiles.dispense.DispenseRocketPropelledGrenade;
 import com.arkcraft.mod.core.items.weapons.projectiles.dispense.DispenseSimpleBullet;
 import com.arkcraft.mod.core.items.weapons.projectiles.dispense.DispenseSimpleRifleAmmo;
 import com.arkcraft.mod.core.items.weapons.projectiles.dispense.DispenseSimpleShotgunAmmo;
@@ -91,6 +103,7 @@ public class GlobalAdditions {
 	public static Block blockNarcoBrerry;
 	public static Dossier dino_book;
 	public static ARKBlockItem item_crop_plot;
+	public static ARKBlockSpikes wooden_spikes;
 
 	// Weapons
 	public static ARKSlingshot slingshot;
@@ -98,11 +111,13 @@ public class GlobalAdditions {
 	public static ItemSpear	spear;
 	public static ItemTranqGun tranq_gun;
 	public static ItemCompoundBow compound_bow;
+	public static ItemRocketLauncher rocket_launcher;
 	public static ItemProjectile tranquilizer, stone_arrow, tranq_arrow, metal_arrow;
-	public static ItemProjectile simple_bullet, simple_rifle_ammo, simple_shotgun_ammo;
+	public static ItemProjectile simple_bullet, simple_rifle_ammo, simple_shotgun_ammo, rocket_propelled_grenade;
 	public static ItemSimplePistol simple_pistol;
 	public static ItemLongneckRifle longneck_rifle;
 	public static ItemShotgun shotgun;	
+	public static ItemCrossbow crossbow;
 
 	public static ArmorMaterial CLOTH = EnumHelper.addArmorMaterial("CLOTH_MAT", "CLOTH_MAT", 4, new int[] {1,2,1,1}, 15);
 	public static ArmorMaterial CHITIN = EnumHelper.addArmorMaterial("CHITIN_MAT", "CHITIN_MAT", 16, new int[] { 3,7,6,3 } , 10);
@@ -165,6 +180,7 @@ public class GlobalAdditions {
 		oreSurface = addBlock(Material.rock, "oreSurface", 3.0F);
 		//blockNarcoBrerry = addBlock(Material.ground, "narcoBerryBlock", 3.0F);
 		blockNarcoBrerry = getRegisteredBlock("blockNarcoBerry");
+		wooden_spikes = addSpikes(Material.wood, "wooden_spikes", 3.0F);
 
 		// Regular Items
 		fiber = addItem("fiber");
@@ -180,9 +196,9 @@ public class GlobalAdditions {
 		compound_bow = new ItemCompoundBow("compound_bow");
 			
 		//Bullets
-		tranq_arrow = addItemProjectile("tranq_arrow");
-		stone_arrow = addItemProjectile("stone_arrow");
-		metal_arrow = addItemProjectile("metal_arrow");
+	//	tranq_arrow = addItemProjectile("tranq_arrow");
+	//	stone_arrow = addItemProjectile("stone_arrow");
+	//	metal_arrow = addItemProjectile("metal_arrow");
 		
 		spear = addSpearItem("spear", ToolMaterial.STONE);
 		
@@ -217,9 +233,9 @@ public class GlobalAdditions {
 		EntityHandler.registerModEntity(EntityExplosive.class, "Explosive Cobblestone Ball", Main.instance, 64, 10, true);
 		
 		EntityHandler.registerModEntity(EntitySpear.class, "Spear", Main.instance, 64, 10, true);
-		EntityHandler.registerModEntity(EntityTranqArrow.class, "Tranq Arrow", Main.instance, 64, 10, true);
-		EntityHandler.registerModEntity(EntityStoneArrow.class, "Stone Arrow", Main.instance, 64, 10, true);
-		EntityHandler.registerModEntity(EntityMetalArrow.class, "Metal Arrow", Main.instance, 64, 10, true);
+//		EntityHandler.registerModEntity(EntityTranqArrow.class, "Tranq Arrow", Main.instance, 64, 10, true);
+//		EntityHandler.registerModEntity(EntityStoneArrow.class, "Stone Arrow", Main.instance, 64, 10, true);
+//		EntityHandler.registerModEntity(EntityMetalArrow.class, "Metal Arrow", Main.instance, 64, 10, true);
 
 		EntityHandler.registerModEntity(EntityCobble.class, "Cobblestone Ball", Main.instance, 64, 10, true);
 		EntityHandler.registerModEntity(EntityDodoEgg.class, "Dodo Egg", Main.instance, 64, 10, true);
@@ -252,24 +268,42 @@ public class GlobalAdditions {
 		if (BALANCE.WEAPONS.TRANQ_GUN)	{
 			EntityHandler.registerModEntity(EntityTranquilizer.class, "Tranquilizer", Main.instance, 64, 10, true);
 		}
+		if (BALANCE.WEAPONS.ROCKET_LAUNCHER)	{
+			EntityHandler.registerModEntity(EntityRocketPropelledGrenade.class, "Rocket Propelled Grenade", Main.instance, 64, 10, true);
+		}
+		if (BALANCE.WEAPONS.CROSSBOW)	{
+			EntityHandler.registerModEntity(EntityTranqArrow.class, "Tranq Arrow", Main.instance, 64, 10, true);
+			EntityHandler.registerModEntity(EntityStoneArrow.class, "Stone Arrow", Main.instance, 64, 10, true);
+			EntityHandler.registerModEntity(EntityMetalArrow.class, "Metal Arrow", Main.instance, 64, 10, true);
+		}
 	}
 	
 	public static void addGunPowderWeapons(){
 		if (BALANCE.WEAPONS.SIMPLE_PISTOL) {
-			simple_pistol = addSimplePistol("simple_pistol");
+			simple_pistol = addSimplePistol("simple_pistol", new RangedCompSimplePistol());
 			simple_bullet = addItemProjectile("simple_bullet");
 		}
 		if (BALANCE.WEAPONS.LONGNECK_RIFLE) {
-			longneck_rifle = addLongneckRifle("longneck_rifle");
+			longneck_rifle = addLongneckRifle("longneck_rifle", new RangedCompLongneckRifle());
 			simple_rifle_ammo = addItemProjectile("simple_rifle_ammo");
 		}
 		if (BALANCE.WEAPONS.SHOTGUN) {
-			shotgun = addShotgun("shotgun");
+			shotgun = addShotgun("shotgun", new RangedCompShotgun());
 			simple_shotgun_ammo = addItemProjectile("simple_shotgun_ammo");
 		}
 		if (BALANCE.WEAPONS.TRANQ_GUN) {
-			tranq_gun = addTranqGun("tranq_gun");
+			tranq_gun = addTranqGun("tranq_gun", new RangedCompTranqGun());
 			tranquilizer = addItemProjectile("tranquilizer");
+		}
+		if (BALANCE.WEAPONS.ROCKET_LAUNCHER) {
+			rocket_launcher = addRocketLauncher("rocket_launcher", new RangedCompRocketLauncher());
+			rocket_propelled_grenade = addItemProjectile("rocket_propelled_grenade");
+		}
+		if (BALANCE.WEAPONS.CROSSBOW) {
+			crossbow = addCrossbow("crossbow", new RangedCompCrossbow());
+			metal_arrow = addItemProjectile("metal_arrow");
+			tranq_arrow = addItemProjectile("tranq_arrow");
+			stone_arrow = addItemProjectile("stone_arrow");
 		}
 	}	
 	
@@ -286,6 +320,9 @@ public class GlobalAdditions {
 		if (tranquilizer != null) {
 			BlockDispenser.dispenseBehaviorRegistry.putObject(tranquilizer, new DispenseTranquilizer());
 		}
+		if (rocket_propelled_grenade != null) {
+			BlockDispenser.dispenseBehaviorRegistry.putObject(rocket_propelled_grenade, new DispenseRocketPropelledGrenade());
+		}
 	}
 	
 	protected static ItemProjectile addItemProjectile(String name) {
@@ -294,20 +331,32 @@ public class GlobalAdditions {
 		return i;
 	}
 	
-	protected static ItemSimplePistol addSimplePistol(String name) {
-		ItemSimplePistol i = new ItemSimplePistol(name);
+	protected static ItemSimplePistol addSimplePistol(String name, RangedComponent rangedcomponent) {
+		ItemSimplePistol i = new ItemSimplePistol(name, rangedcomponent);
 		allItems.put(name, i);
 		return i;
 	}
 	
-	protected static ItemLongneckRifle addLongneckRifle(String name) {
-		ItemLongneckRifle i = new ItemLongneckRifle(name);
+	protected static ItemLongneckRifle addLongneckRifle(String name, RangedComponent rangedcomponent) {
+		ItemLongneckRifle i = new ItemLongneckRifle(name, rangedcomponent);
 		allItems.put(name, i);
 		return i;
 	}
 	
-	protected static ItemShotgun addShotgun(String name) {
-		ItemShotgun i = new ItemShotgun(name);
+	protected static ItemCrossbow addCrossbow(String name, RangedComponent rangedcomponent) {
+		ItemCrossbow i = new ItemCrossbow(name, rangedcomponent);
+		allItems.put(name, i);
+		return i;
+	}
+	
+	protected static ItemRocketLauncher addRocketLauncher(String name, RangedComponent rangedcomponent) {
+		ItemRocketLauncher i = new ItemRocketLauncher(name, rangedcomponent);
+		allItems.put(name, i);
+		return i;
+	}
+	
+	protected static ItemShotgun addShotgun(String name, RangedComponent rangedcomponent) {
+		ItemShotgun i = new ItemShotgun(name, rangedcomponent);
 		allItems.put(name, i);
 		return i;
 	}
@@ -330,6 +379,11 @@ public class GlobalAdditions {
 	
 	protected static ARKBlock addBlock(Material m, String name, float hardness) {
 		ARKBlock b = new ARKBlock(m, name, hardness);
+		allBlocks.put(name, b);
+		return b;
+	}
+	protected static ARKBlockSpikes addSpikes(Material m, String name, float hardness) {
+		ARKBlockSpikes b = new ARKBlockSpikes(m, name, hardness);
 		allBlocks.put(name, b);
 		return b;
 	}
@@ -432,8 +486,8 @@ public class GlobalAdditions {
 		allItems.put(name, item);
 		return item;
 	}
-	public static ItemTranqGun addTranqGun(String name) {
-		ItemTranqGun item = new ItemTranqGun(name);
+	public static ItemTranqGun addTranqGun(String name, RangedComponent rangedcomponent) {
+		ItemTranqGun item = new ItemTranqGun(name, rangedcomponent);
 		allItems.put(name, item);
 		return item;
 	}

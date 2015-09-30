@@ -4,12 +4,13 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import com.arkcraft.mod.core.GlobalAdditions;
 import com.arkcraft.mod.core.items.weapons.component.ItemShooter;
-import com.arkcraft.mod.core.items.weapons.component.RangedCompShotgun;
+import com.arkcraft.mod.core.items.weapons.component.RangedComponent;
 
 public class ItemShotgun extends ItemShooter{
 
-	public ItemShotgun(String name) {
-		super(name, new RangedCompShotgun());
+	public ItemShotgun(String name, RangedComponent rangedcomponent)
+	{
+		super(name, rangedcomponent);
 		this.setUnlocalizedName(name);
 		this.setCreativeTab(GlobalAdditions.tabARK);
 		GameRegistry.registerItem(this, this.getUnlocalizedName().substring(5));

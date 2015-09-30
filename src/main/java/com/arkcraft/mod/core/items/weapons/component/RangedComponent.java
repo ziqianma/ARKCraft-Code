@@ -302,25 +302,28 @@ public abstract class RangedComponent extends AbstractWeaponComponent
 	
 	public static enum RangedSpecs {
 		SIMPLEPISTOL("arkcraft:simple_bullet", 0,  150, 1),
-		CROSSBOW("arkcraft:stone_arrow", 1, 250, 1),
+		ROCKETLAUNCHER("arkcraft:rocket_propelled_grenade", 1, 250, 1),
 		SHOTGUN("arkcraft:simple_shotgun_ammo", 2, 200, 5),
 		LONGNECKRIFLE("arkcraft:simple_rifle_ammo", 3, 350, 1),
-		TRANQGUN("arkcraft:tranquilizer", 4, 350, 1);
+		TRANQGUN("arkcraft:tranquilizer", 4, 350, 1),
+		CROSSBOW("arkcraft:stone_arrow, metal_arrow, tranq_arrow", 5, 250, 1);
 		
 		private int getReloadTime(int id){
 			switch (id) {
 			case 0:
 				return BALANCE.WEAPONS.SIMPLE_PISTOL_RELOAD;
 			case 1:
-				return 5;  // Not defined yet!
+				return BALANCE.WEAPONS.ROCKET_LAUNCHER_RELOAD;
 			case 2:
 				return BALANCE.WEAPONS.SHOTGUN_RELOAD;
 			case 3:
 				return BALANCE.WEAPONS.LONGNECK_RIFLE_RELOAD;
 			case 4:
 				return BALANCE.WEAPONS.TRANQ_GUN_RELOAD;
+			case 5:
+				return BALANCE.WEAPONS.CROSSBOW_RELOAD;
 			default:
-				return 5;  // just in case					
+				return 6;  // just in case					
 			}
 		}
 			
