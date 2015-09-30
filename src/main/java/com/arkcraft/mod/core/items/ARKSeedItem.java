@@ -1,8 +1,13 @@
 package com.arkcraft.mod.core.items;
 
+import java.util.List;
+
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.arkcraft.mod.core.GlobalAdditions;
 
@@ -17,6 +22,7 @@ public class ARKSeedItem extends Item {
 		this.setUnlocalizedName(name);
 		this.setCreativeTab(GlobalAdditions.tabARK);
 		this.setMaxStackSize(16);
+		this.setMaxDamage(300); // 5 minutes of damage at 1 a second
 		GameRegistry.registerItem(this, this.getUnlocalizedName().substring(5));
 	}
 	
@@ -37,4 +43,16 @@ public class ARKSeedItem extends Item {
 		}
 		return null;
 	}
+	
+    /**
+     * allows items to add custom lines of information to the mouseover description
+     *  
+     * @param tooltip All lines to display in the Item's tooltip. This is a List of Strings.
+     * @param advanced Whether the setting "Advanced tooltips" is enabled
+     */
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	@SideOnly(Side.CLIENT)
+    public void addInformation(ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced) {
+    	tooltip.add("Decomposes in " + stack.getItemDamage() + " seconds");
+    }
 }

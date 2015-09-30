@@ -11,7 +11,7 @@ public class ARKFecesItem extends Item{
 	public ARKFecesItem(String name) {
 		this.setUnlocalizedName(name);
 		this.setCreativeTab(GlobalAdditions.tabARK);
-		this.setMaxStackSize(16);
+		this.setMaxStackSize(1);
 		GameRegistry.registerItem(this, this.getUnlocalizedName().substring(5));
 	
 	}
@@ -21,9 +21,9 @@ public class ARKFecesItem extends Item{
 		if (stack != null) {
 			if (stack.getItem() instanceof ARKFecesItem) {
 				if (stack.getItem() == (Item) GlobalAdditions.dodo_feces)
-					return 500;
+					return 600; // 15 minutes
 				if (stack.getItem() == (Item) GlobalAdditions.player_feces)
-					return 1000;
+					return 600;  // 15 minutes
 			}
 		}
 		return 0;

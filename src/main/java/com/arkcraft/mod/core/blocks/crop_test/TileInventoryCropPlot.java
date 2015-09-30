@@ -44,13 +44,16 @@ public class TileInventoryCropPlot extends TileEntity implements IInventory, IUp
 
 	// Create and initialize the itemStacks variable that will store store the itemStacks
 	private ItemStack[] itemStacks = new ItemStack[TOTAL_SLOTS_COUNT];
-
+	
+	// Other class variables
+	int tick = 20;
+	
 	/** The number of grow ticks remaining for the water  */
-	private int waterTimeRemaining;
+	private short waterTimeRemaining;
 	/** The initial grow ticks value of one bucket of water (in ticks of grow duration) */
-	private int waterTimeInitialValue = 1200; // vanilla value is 1200 = 5 minute
+	private short waterTimeInitialValue = 1080; // vanilla value is 1080 = 18 minutes
 	/** The maximum amount of water allowed in reservoir */
-	private short MAXIMUM_WATER_TIME = 32000; // maximum is 32,767
+	private short MAXIMUM_WATER_TIME = (short) (waterTimeInitialValue * 5); // maximum is 32,767 for a short
 	
 	/** The number of grow ticks remaining on the current piece of fertilizer */
 	private int [] growTimeRemaining = new int[FERTILIZER_SLOTS_COUNT];
@@ -60,7 +63,7 @@ public class TileInventoryCropPlot extends TileEntity implements IInventory, IUp
 	/** The number of ticks the current item has been growing */
 	private short growTime;
 	/** The number of ticks required to grow a berry */
-	private static final short GROW_TIME_FOR_COMPLETION = 1200;  // vanilla value is 1200 = 1 minute
+	private static final short GROW_TIME_FOR_COMPLETION = 45;  // vanilla value is 45 seconds
 
 	private int cachedNumberOfFertilizerSlots = -1;
 
@@ -82,7 +85,7 @@ public class TileInventoryCropPlot extends TileEntity implements IInventory, IUp
 	 */
 	public int secondsOfFertilizerRemaining(int fertilizerSlot)	{
 		if (growTimeRemaining[fertilizerSlot] <= 0 ) return 0;
-		return growTimeRemaining[fertilizerSlot] / 20; // 20 ticks per second
+		return growTimeRemaining[fertilizerSlot]; // seconds
 	}
 
 	/**
@@ -112,6 +115,13 @@ public class TileInventoryCropPlot extends TileEntity implements IInventory, IUp
 	// It runs both on the server and the client.
 	@Override
 	public void update() {
+		if (tick >= 0){
+			tick--;
+			return;			
+		} else {
+			tick = 20;
+		}
+		
 		// If there is nothing to smelt or there is no room in the output, reset cookTime and return
 		if (canHarvest()) {
 			int numberOfFertilizerBurning = burnFertilizer();
@@ -247,13 +257,19 @@ public class TileInventoryCropPlot extends TileEntity implements IInventory, IUp
 			}
 		}
 
+		// Damage seed if present and no water
 		if (firstSuitableInputSlot == null) 
 			return false;
 		else if (itemStacks[WATER_SLOT] != null) {
-			 if (itemStacks[WATER_SLOT].getItem() != Items.water_bucket && waterTimeRemaining <= 0)
-				 return false;
+			 if (itemStacks[WATER_SLOT].getItem() != Items.water_bucket && waterTimeRemaining <= 0){
+				 int damage = itemStacks[firstSuitableInputSlot].getItemDamage();
+				 itemStacks[firstSuitableInputSlot].setItemDamage(damage - 1);
+				 return false;				 
+			 }
 		} else if (waterTimeRemaining <= 0) {
 			waterTimeRemaining = 0;
+			 int damage = itemStacks[firstSuitableInputSlot].getItemDamage();
+			 itemStacks[firstSuitableInputSlot].setItemDamage(damage - 1);
 			return false;
 		}
 		

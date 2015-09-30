@@ -41,8 +41,8 @@ public class GUICropPlot extends GuiContainer {
 	final int WATER_BAR_XPOS = 10;
 	final int WATER_BAR_YPOS = 7;
 	final int WATER_BAR_ICON_U = 176;   // texture position of the water bar
-	final int WATER_BAR_ICON_V = 35;
-	final int WATER_BAR_WIDTH = 11;
+	final int WATER_BAR_ICON_V = 17;
+	final int WATER_BAR_WIDTH = 12;
 	final int WATER_BAR_HEIGHT = 41;
 	
 	final int ARROW_XPOS = 68;
@@ -116,8 +116,10 @@ public class GUICropPlot extends GuiContainer {
 		
 		// get water progress as a double between 0 and 1, and draw it
 		double waterProgress = tileEntity.fractionWaterLevelRemaining();
-		drawTexturedModalRect(guiLeft + WATER_BAR_XPOS, guiTop + WATER_BAR_YPOS, WATER_BAR_ICON_U, WATER_BAR_ICON_V,
-						              WATER_BAR_WIDTH, (int)(waterProgress * WATER_BAR_HEIGHT));
+		int iconHeight = (int)(waterProgress * WATER_BAR_HEIGHT);
+		int iconYOffset = WATER_BAR_HEIGHT - iconHeight;
+		drawTexturedModalRect(guiLeft + WATER_BAR_XPOS,	guiTop + WATER_BAR_YPOS + iconYOffset, 
+				WATER_BAR_ICON_U, WATER_BAR_ICON_V + iconYOffset, WATER_BAR_WIDTH, iconHeight);
 
 		// get grow arrow as a double between 0 and 1, and draw it
 		double growProgress = tileEntity.fractionOfGrowTimeComplete();
