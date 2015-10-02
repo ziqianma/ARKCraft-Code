@@ -52,7 +52,8 @@ public class ARKSeedItem extends Item {
      */
     @SuppressWarnings({ "unchecked", "rawtypes" })
 	@SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced) {
-    	tooltip.add("Decomposes in " + stack.getItemDamage() + " seconds");
+    @Override
+    public void addInformation(ItemStack itemStack, EntityPlayer playerIn, List tooltip, boolean advanced) {
+    	tooltip.add("Decomposes in " + (getMaxDamage() - itemStack.getItemDamage()) + " seconds");
     }
 }

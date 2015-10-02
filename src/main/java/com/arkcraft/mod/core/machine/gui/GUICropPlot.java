@@ -95,12 +95,12 @@ public class GUICropPlot extends GuiContainer {
 //		}
 		
 		// If the mouse is over one of the fertilizer slots add the burn time indicator hovering text
-		for (int i = 0; i < TileInventoryCropPlot.FERTILIZER_SLOTS_COUNT; ++i) {
-			if (isInRect(guiLeft + 44 + 18 * i, guiTop + ContainerInventoryCropPlot.FERTILIZER_SLOT_YPOS, 16, 16, mouseX, mouseY)) {
-				hoveringText.add("Fertilizer Time:");
-				hoveringText.add(tileEntity.secondsOfFertilizerRemaining(i) + "s");
-			}
-		}
+//		for (int i = 0; i < TileInventoryCropPlot.FERTILIZER_SLOTS_COUNT; ++i) {
+//			if (isInRect(guiLeft + 44 + 18 * i, guiTop + ContainerInventoryCropPlot.FERTILIZER_SLOT_YPOS, 16, 16, mouseX, mouseY)) {
+//				hoveringText.add("Fertilizer Time:");
+//				hoveringText.add(tileEntity.secondsOfFertilizerRemaining(i) + "s");
+//			}
+//		}
 
 		// If hoveringText is not empty draw the hovering text
 		if (!hoveringText.isEmpty()){

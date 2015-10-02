@@ -202,10 +202,12 @@ public class GlobalAdditions {
 		
 		spear = addSpearItem("spear", ToolMaterial.STONE);
 		
+		// feces (2nd parameter is the seconds to decompose)
+		dodo_feces = addFecesItem("dodo_feces", 600);
+		player_feces = addFecesItem("player_feces", 600);
+
 		// Other Types of Items
 		dodo_egg = addEggItem("dodo_egg");
-		dodo_feces = addFecesItem("dodo_feces");
-		player_feces = addFecesItem("player_feces");
 		dino_book = addDossier("dossier");
 		narcotics = addItemWithTooltip("narcotics", EnumChatFormatting.RED + "A Knockout of a Drink");
 		saddle_small = addSaddle("saddle_small");
@@ -438,8 +440,9 @@ public class GlobalAdditions {
 		return weapon;
 	}
 	
-	protected static ARKFecesItem addFecesItem(String name) {
+	protected static ARKFecesItem addFecesItem(String name, int maxDamageIn) {
 		ARKFecesItem i = new ARKFecesItem(name);
+		i.setMaxDamage(maxDamageIn);
 		allItems.put(name, i);
 		return i;
 	}	
