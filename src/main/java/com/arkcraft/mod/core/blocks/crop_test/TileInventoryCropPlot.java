@@ -262,6 +262,7 @@ public class TileInventoryCropPlot extends TileEntity implements IInventory, IUp
 //			--growTimeRemaining[i];
 			if (itemStacks[fertilizerSlotNumber] != null) {
 				if (increaseStackDamage(itemStacks[fertilizerSlotNumber])) {
+					itemStacks[fertilizerSlotNumber] = null;
 					inventoryChanged = true;
 				}
 				++burningCount;
@@ -370,7 +371,8 @@ public class TileInventoryCropPlot extends TileEntity implements IInventory, IUp
 		
 		// TODO: Add code to prevent more than one seed being in the seed slot
 		if (!canHarvestBerry) {
-			increaseStackDamage(itemStacks[firstSuitableInputSlot]);
+			if (increaseStackDamage(itemStacks[firstSuitableInputSlot]));
+				itemStacks[firstSuitableInputSlot] = null;
 			return false;			
 		}
 		
@@ -382,10 +384,6 @@ public class TileInventoryCropPlot extends TileEntity implements IInventory, IUp
 		// If true, we harvest berry
 		if (!harvestBerry) return true;
 
-		// alter input slot (seed doesn't burn, so we do nothing)
-//		itemStacks[firstSuitableInputSlot].stackSize--;
-//		if (itemStacks[firstSuitableInputSlot].stackSize <=0) itemStacks[firstSuitableInputSlot] = null;
-		
 		// alter output slot
 		if (itemStacks[firstSuitableOutputSlot] == null) {
 			itemStacks[firstSuitableOutputSlot] = result.copy(); // Use deep .copy() to avoid altering the recipe
@@ -396,7 +394,7 @@ public class TileInventoryCropPlot extends TileEntity implements IInventory, IUp
 		return true;
 	}
 
-	// returns the smelting result for the given stack. Returns null if the given stack can not be smelted
+	// returns the growth result for the given stack. Returns null if the given stack can not be grown
 	public static ItemStack getGrowingResultForItem(ItemStack stack) { return ARKSeedItem.getBerryForSeed(stack); }
 
 	// returns the number of ticks the given item will burn. Returns 0 if the given item is not a valid fuel
@@ -417,7 +415,7 @@ public class TileInventoryCropPlot extends TileEntity implements IInventory, IUp
 		int itemDamage = itemStack.getItemDamage();
 		itemStack.setItemDamage(++itemDamage);
 		if (itemStack.getItemDamage() >= itemStack.getItem().getMaxDamage()) {
-			itemStack = null;
+//			itemStack = null;
 			return true;
 		}		
 		return false;
