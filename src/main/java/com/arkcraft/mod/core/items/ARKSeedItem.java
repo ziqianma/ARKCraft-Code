@@ -10,6 +10,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.arkcraft.mod.core.GlobalAdditions;
+import com.arkcraft.mod.core.lib.BALANCE;
 
 /***
  * 
@@ -22,7 +23,7 @@ public class ARKSeedItem extends Item {
 		this.setUnlocalizedName(name);
 		this.setCreativeTab(GlobalAdditions.tabARK);
 		this.setMaxStackSize(16);
-		this.setMaxDamage(300); // 5 minutes of damage at 1 a second
+		this.setMaxDamage(BALANCE.CROP_PLOT.SECONDS_FOR_SEED_TO_DECOMPOSE); // 5 minutes of damage at 1 a second
 		GameRegistry.registerItem(this, this.getUnlocalizedName().substring(5));
 	}
 	

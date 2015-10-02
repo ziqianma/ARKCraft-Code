@@ -203,8 +203,8 @@ public class GlobalAdditions {
 		spear = addSpearItem("spear", ToolMaterial.STONE);
 		
 		// feces (2nd parameter is the seconds to decompose)
-		dodo_feces = addFecesItem("dodo_feces", 600);
-		player_feces = addFecesItem("player_feces", 600);
+		dodo_feces = addFecesItem("dodo_feces", BALANCE.CROP_PLOT.SECONDS_FOR_SMALL_FECES_TO_DECOMPOSE);
+		player_feces = addFecesItem("player_feces", BALANCE.CROP_PLOT.SECONDS_FOR_PLAYER_FECES_TO_DECOMPOSE);
 
 		// Other Types of Items
 		dodo_egg = addEggItem("dodo_egg");

@@ -125,21 +125,4 @@ public class BlockInventoryCropPlot extends BlockContainer {
         }
         return ret;
     }
-//	@Override
-//  public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand){
-//      super.updateTick(worldIn, pos, state, rand);
-////      if (worldIn.getLightFromNeighbors(pos.up()) >= 9){
-//          int i = ((Integer)state.getValue(AGE)).intValue();
-//
-//          if (i < 5 && i != 0){
-//          	TileInventoryCropPlot cropPlot = (TileInventoryCropPlot)worldIn.getTileEntity(pos);
-//          	if (cropPlot instanceof TileInventoryCropPlot) {
-//	                int growthStage = cropPlot.getGrowthStage();
-//	                worldIn.setBlockState(pos, state.withProperty(AGE, Integer.valueOf(growthStage)), 2);
-//	                if (i != growthStage)
-//	                	LogHelper.info("BlockInventoryCropPlot: Growth stage is now " + growthStage);
-//              }
-//          }
-////      }
-//  }
 }

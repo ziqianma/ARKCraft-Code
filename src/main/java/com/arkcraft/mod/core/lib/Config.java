@@ -42,6 +42,7 @@ public class Config {
 		loadFields(cat_balance, BALANCE.GEN.class);
 		loadFields(cat_balance, BALANCE.PLAYER.class);
 		loadFields(cat_balance, BALANCE.WEAPONS.class);		
+		loadFields(cat_balance, BALANCE.CROP_PLOT.class);		
 		// TODO: Add more classes from BALANCE here when available
 	}
 

@@ -24,16 +24,6 @@ public class ARKFecesItem extends Item{
 	// ticks that this fertilizer will grow a crop
 	public static int getItemGrowTime(ItemStack itemStack) {
 		return itemStack.getMaxDamage() - itemStack.getItemDamage();
-//		return itemStack.getItemDamage();
-//		if (stack != null) {
-//			if (stack.getItem() instanceof ARKFecesItem) {
-//				if (stack.getItem() == (Item) GlobalAdditions.dodo_feces)
-//					return 600; // 15 minutes
-//				if (stack.getItem() == (Item) GlobalAdditions.player_feces)
-//					return 600;  // 15 minutes
-//			}
-//		}
-//		return 0;
 	}
 	
     /**

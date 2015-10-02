@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 import com.arkcraft.mod.core.items.ARKFecesItem;
 import com.arkcraft.mod.core.items.ARKSeedItem;
+import com.arkcraft.mod.core.lib.BALANCE;
 import com.arkcraft.mod.core.lib.LogHelper;
 
 import net.minecraft.block.state.IBlockState;
@@ -53,19 +54,14 @@ public class TileInventoryCropPlot extends TileEntity implements IInventory, IUp
 	/** The number of grow ticks remaining for the water  */
 	private short waterTimeRemaining;
 	/** The initial grow ticks value of one bucket of water (in ticks of grow duration) */
-	private short waterTimeInitialValue = 1080; // vanilla value is 1080 = 18 minutes
+	private short waterTimeInitialValue = (short) BALANCE.CROP_PLOT.SECONDS_OF_WATER_PER_BUCKET; // vanilla value is 1080 = 18 minutes
 	/** The maximum amount of water allowed in reservoir */
 	private short MAXIMUM_WATER_TIME = (short) (waterTimeInitialValue * 5); // maximum is 32,767 for a short
 	
-	/** The number of grow ticks remaining on the current piece of fertilizer */
-//	private int [] growTimeRemaining = new int[FERTILIZER_SLOTS_COUNT];
-	/** The initial grow ticks value of the current piece of fertilizer (in ticks of grow duration) */
-//	private int [] growTimeInitialValue = new int[FERTILIZER_SLOTS_COUNT];
-
 	/** The number of ticks the current item has been growing */
 	private short growTime;
 	/** The number of ticks required to grow a berry */
-	private static final short GROW_TIME_FOR_BERRY = 45;  // vanilla value is 45 seconds
+	private static final short GROW_TIME_FOR_BERRY = (short) BALANCE.CROP_PLOT.GROW_TIME_FOR_BERRY;  // vanilla value is 45 seconds
 	
 	/** The growth stage, 5 is fruitling */
 	private short growthStage = 0;
@@ -81,8 +77,6 @@ public class TileInventoryCropPlot extends TileEntity implements IInventory, IUp
 		if (itemStacks[fertilizerSlot] == null)
 			return 0.0D;
 		double fraction = secondsOfFertilizerRemaining(fertilizerSlot) / itemStacks[fertilizerSlot].getMaxDamage();
-//		if (growTimeInitialValue[fertilizerSlot] <= 0 ) return 0;
-//		double fraction = growTimeRemaining[fertilizerSlot] / (double)growTimeInitialValue[fertilizerSlot];
 		return MathHelper.clamp_double(fraction, 0.0, 1.0);
 	}
 
@@ -96,8 +90,6 @@ public class TileInventoryCropPlot extends TileEntity implements IInventory, IUp
 			return itemStacks[fertilizerSlot].getMaxDamage() - itemStacks[fertilizerSlot].getItemDamage();
 		else
 			return 0;
-//		if (growTimeRemaining[fertilizerSlot] <= 0 ) return 0;
-//		return growTimeRemaining[fertilizerSlot]; // seconds
 	}
 
 	/**
@@ -109,9 +101,6 @@ public class TileInventoryCropPlot extends TileEntity implements IInventory, IUp
 		for (int fertilizerSlot = FIRST_FERTILIZER_SLOT; fertilizerSlot < FIRST_FERTILIZER_SLOT + FERTILIZER_SLOTS_COUNT; fertilizerSlot++) {
 			if (itemStacks[fertilizerSlot] != null) ++burningCount; 
 		}
-//		for (int burnTime : growTimeRemaining) {
-//			if (burnTime > 0) ++burningCount;
-//		}
 		return burningCount;
 	}
 
@@ -168,17 +157,9 @@ public class TileInventoryCropPlot extends TileEntity implements IInventory, IUp
 			setGrowthStage(false);				
 		}
 
-		// when the number of burning slots changes, we need to force the block to re-render, otherwise the change in
-		//   state will not be visible.  Likewise, we need to force a lighting recalculation.
-		// The block update (for renderer) is only required on client side, but the lighting is required on both, since
-		//    the client needs it for rendering and the server needs it for crop growth etc
 		int numberBurning = numberOfBurningFertilizerSlots();
 		if (cachedNumberOfFertilizerSlots != numberBurning) {
 			cachedNumberOfFertilizerSlots = numberBurning;
-//			if (worldObj.isRemote) {
-//				worldObj.markBlockForUpdate(pos);
-//			}
-//			worldObj.checkLightFor(EnumSkyBlock.BLOCK, pos);
 		}
 	}
 
@@ -186,7 +167,6 @@ public class TileInventoryCropPlot extends TileEntity implements IInventory, IUp
 	 * boolean grow - if false, set growthStage back to 0
 	 */
 	private void setGrowthStage(boolean grow) {
-		int debug = 30;
 		short prevGrowthStage = growthStage;
 		if (grow) {
 			switch (growthStage) {
@@ -196,25 +176,25 @@ public class TileInventoryCropPlot extends TileEntity implements IInventory, IUp
 				break;
 			// seeded
 			case 1:
-				if (growTime > 300 / debug) {
+				if (growTime > BALANCE.CROP_PLOT.SECONDS_UNTIL_FRUITLING / 4) {
 					growthStage++;
 				}
 				break;
 			// seedling
 			case 2:
-				if (growTime > 900 / debug) {
+				if (growTime > BALANCE.CROP_PLOT.SECONDS_UNTIL_FRUITLING / 3) {
 					growthStage++;
 				}
 				break;
 			// midling
 			case 3:
-				if (growTime > 1200 / debug) {
+				if (growTime > BALANCE.CROP_PLOT.SECONDS_UNTIL_FRUITLING / 2) {
 					growthStage++;
 				}
 				break;
 			// growthling
 			case 4:
-				if (growTime > 1500 / debug) {
+				if (growTime > BALANCE.CROP_PLOT.SECONDS_UNTIL_FRUITLING) {
 					growthStage++;
 					growTime = 1;
 				}
@@ -227,6 +207,10 @@ public class TileInventoryCropPlot extends TileEntity implements IInventory, IUp
 			growthStage = 0;			
 			growTime = 0;
 		}
+		// when the growth stage changes, we need to force the block to re-render, otherwise the change in
+		//   state will not be visible.  Likewise, we need to force a lighting recalculation.
+		// The block update (for renderer) is only required on client side, but the lighting is required on both, since
+		//    the client needs it for rendering and the server needs it for crop growth etc
 		if (prevGrowthStage != growthStage) {
 			IBlockState state = worldObj.getBlockState(pos);
             worldObj.setBlockState(pos, state.withProperty(BlockInventoryCropPlot.AGE, Integer.valueOf(growthStage)), 2);
@@ -258,8 +242,6 @@ public class TileInventoryCropPlot extends TileEntity implements IInventory, IUp
 		// Iterate over all the fuel slots
 		for (int i = 0; i < FERTILIZER_SLOTS_COUNT; i++) {
 			int fertilizerSlotNumber = i + FIRST_FERTILIZER_SLOT;
-//			if (growTimeRemaining[i] > 0) {
-//			--growTimeRemaining[i];
 			if (itemStacks[fertilizerSlotNumber] != null) {
 				if (increaseStackDamage(itemStacks[fertilizerSlotNumber])) {
 					itemStacks[fertilizerSlotNumber] = null;
@@ -273,23 +255,8 @@ public class TileInventoryCropPlot extends TileEntity implements IInventory, IUp
 				}
 				else if (waterTimeRemaining > 0)
 					waterTimeRemaining--;
+				break; // Just use one fertilizer at a time
 			}
-//			if (growTimeRemaining[i] == 0) {
-//				if (itemStacks[fertilizerSlotNumber] != null && getItemGrowTime(itemStacks[fertilizerSlotNumber]) > 0) {
-//					// If the stack in this slot is not null and is fuel, set burnTimeRemaining & burnTimeInitialValue to the
-//					// item's burn time and decrease the stack size
-//					growTimeRemaining[i] = growTimeInitialValue[i] = getItemGrowTime(itemStacks[fertilizerSlotNumber]);
-//					--itemStacks[fertilizerSlotNumber].stackSize;
-//					++burningCount;
-//					inventoryChanged = true;
-//				// If the stack size now equals 0 set the slot contents to the items container item. This is for fuel
-//				// items such as lava buckets so that the bucket is not consumed. If the item does not have
-//				// a container item getContainerItem returns null which sets the slot contents to null
-//					if (itemStacks[fertilizerSlotNumber].stackSize == 0) {
-//						itemStacks[fertilizerSlotNumber] = itemStacks[fertilizerSlotNumber].getItem().getContainerItem(itemStacks[fertilizerSlotNumber]);
-//					}
-//				}
-//			}
 		}
 		if (inventoryChanged) markDirty();					
 		return burningCount;
@@ -310,7 +277,7 @@ public class TileInventoryCropPlot extends TileEntity implements IInventory, IUp
 	private boolean canHarvest() {return harvestBerry(false);}
 
 	/**
-	 * Smelt an input item into an output slot, if possible
+	 * Harvest a berry from the seed, if possible
 	 */
 	private void harvestBerry() {harvestBerry(true);}
 
@@ -397,7 +364,7 @@ public class TileInventoryCropPlot extends TileEntity implements IInventory, IUp
 	// returns the growth result for the given stack. Returns null if the given stack can not be grown
 	public static ItemStack getGrowingResultForItem(ItemStack stack) { return ARKSeedItem.getBerryForSeed(stack); }
 
-	// returns the number of ticks the given item will burn. Returns 0 if the given item is not a valid fuel
+	// returns the number of ticks the given item will grow. Returns 0 if the given item is not a valid fertilizer
 	public static short getItemGrowTime(ItemStack stack) {
 		int growtime = ARKFecesItem.getItemGrowTime(stack);
 		return (short)MathHelper.clamp_int(growtime, 0, Short.MAX_VALUE);
@@ -415,7 +382,6 @@ public class TileInventoryCropPlot extends TileEntity implements IInventory, IUp
 		int itemDamage = itemStack.getItemDamage();
 		itemStack.setItemDamage(++itemDamage);
 		if (itemStack.getItemDamage() >= itemStack.getItem().getMaxDamage()) {
-//			itemStack = null;
 			return true;
 		}		
 		return false;
@@ -577,8 +543,6 @@ public class TileInventoryCropPlot extends TileEntity implements IInventory, IUp
 		parentNBTTagCompound.setShort("growthStage", (short)growthStage);
 		parentNBTTagCompound.setShort("waterTimeRemaining", (short)waterTimeRemaining);
 		parentNBTTagCompound.setShort("growTime", growTime);
-//		parentNBTTagCompound.setTag("growTimeRemaining", new NBTTagIntArray(growTimeRemaining));
-//		parentNBTTagCompound.setTag("growTimeInitialValue", new NBTTagIntArray(growTimeInitialValue));
 		LogHelper.info("TileInventoryCropPlot: Wrote inventory.");
 	}
 
@@ -603,8 +567,6 @@ public class TileInventoryCropPlot extends TileEntity implements IInventory, IUp
 		growthStage = nbtTagCompound.getShort("growthStage");
 		waterTimeRemaining = nbtTagCompound.getShort("waterTimeRemaining");
 		growTime = nbtTagCompound.getShort("growTime");
-//		growTimeRemaining = Arrays.copyOf(nbtTagCompound.getIntArray("growTimeRemaining"), FERTILIZER_SLOTS_COUNT);
-//		growTimeInitialValue = Arrays.copyOf(nbtTagCompound.getIntArray("growTimeInitialValue"), FERTILIZER_SLOTS_COUNT);
 		cachedNumberOfFertilizerSlots = -1;
 		LogHelper.info("TileInventoryCropPlot: Read inventory.");
 	}
@@ -633,9 +595,6 @@ public class TileInventoryCropPlot extends TileEntity implements IInventory, IUp
 	private static final byte GROWTH_STAGE_FIELD_ID = 0;
 	private static final byte WATER_FIELD_ID = 1;
 	private static final byte GROW_FIELD_ID = 2;
-//	private static final byte FIRST_GROW_TIME_REMAINING_FIELD_ID = 3;
-//	private static final byte FIRST_GROW_TIME_INITIAL_FIELD_ID = FIRST_GROW_TIME_REMAINING_FIELD_ID + (byte)FERTILIZER_SLOTS_COUNT;
-//	private static final byte NUMBER_OF_FIELDS = FIRST_GROW_TIME_INITIAL_FIELD_ID + (byte)FERTILIZER_SLOTS_COUNT;
 	private static final byte NUMBER_OF_FIELDS = 3;
 
 	@Override
@@ -643,12 +602,6 @@ public class TileInventoryCropPlot extends TileEntity implements IInventory, IUp
 		if (id == GROWTH_STAGE_FIELD_ID) return growthStage;
 		if (id == WATER_FIELD_ID) return waterTimeRemaining;
 		if (id == GROW_FIELD_ID) return growTime;
-//		if (id >= FIRST_GROW_TIME_REMAINING_FIELD_ID && id < FIRST_GROW_TIME_REMAINING_FIELD_ID + FERTILIZER_SLOTS_COUNT) {
-//			return growTimeRemaining[id - FIRST_GROW_TIME_REMAINING_FIELD_ID];
-//		}
-//		if (id >= FIRST_GROW_TIME_INITIAL_FIELD_ID && id < FIRST_GROW_TIME_INITIAL_FIELD_ID + FERTILIZER_SLOTS_COUNT) {
-//			return growTimeInitialValue[id - FIRST_GROW_TIME_INITIAL_FIELD_ID];
-//		}
 		System.err.println("Invalid field ID in TileInventoryCropPlot.getField:" + id);
 		return 0;
 	}
@@ -661,10 +614,6 @@ public class TileInventoryCropPlot extends TileEntity implements IInventory, IUp
 			waterTimeRemaining = (short)value;
 		} else if (id == GROW_FIELD_ID) {
 			growTime = (short)value;
-//		} else if (id >= FIRST_GROW_TIME_REMAINING_FIELD_ID && id < FIRST_GROW_TIME_REMAINING_FIELD_ID + FERTILIZER_SLOTS_COUNT) {
-//			growTimeRemaining[id - FIRST_GROW_TIME_REMAINING_FIELD_ID] = value;
-//		} else if (id >= FIRST_GROW_TIME_INITIAL_FIELD_ID && id < FIRST_GROW_TIME_INITIAL_FIELD_ID + FERTILIZER_SLOTS_COUNT) {
-//			growTimeInitialValue[id - FIRST_GROW_TIME_INITIAL_FIELD_ID] = value;
 		} else {
 			System.err.println("Invalid field ID in TileInventoryCropPlot.setField:" + id);
 		}

@@ -73,4 +73,21 @@ public final class BALANCE {
 		@DefaultInt(value = 20, minValue = 5, maxValue = 50, name = "Time to reload crossbow.", comment = "Seconds to reload")
 		public static int CROSSBOW_RELOAD;
 	}
+	
+	public static class CROP_PLOT {
+		//minValue 60 seconds, maxValue 1 hour, default value 10 mins
+		@DefaultInt(value = 600, minValue = 60, maxValue = 3600, name = "Seconds until fruitling.", comment = "Time from seeded to fruitling in crop plot")
+		public static int SECONDS_UNTIL_FRUITLING;
+		@DefaultInt(value = 300, minValue = 60, maxValue = 3600, name = "Seconds to decompose seed.", comment = "Time for seed to decompose in crop plot")
+		public static int SECONDS_FOR_SEED_TO_DECOMPOSE;
+		@DefaultInt(value = 600, minValue = 60, maxValue = 3600, name = "Seconds to decompose player feces.", comment = "Time for feces to decompose in crop plot")
+		public static int SECONDS_FOR_PLAYER_FECES_TO_DECOMPOSE;
+		@DefaultInt(value = 600, minValue = 60, maxValue = 3600, name = "Seconds to decompose small feces.", comment = "Time for feces to decompose in crop plot")
+		public static int SECONDS_FOR_SMALL_FECES_TO_DECOMPOSE;
+		@DefaultInt(value = 1080, minValue = 60, maxValue = 3600, name = "Seconds of watering.", comment = "Time for one bucket to provide water in crop plot")
+		public static int SECONDS_OF_WATER_PER_BUCKET;
+		@DefaultInt(value = 45, minValue = 10, maxValue = 600, name = "Seconds to grow a berry.", comment = "Time for one berry to grow in crop plot")
+		public static int GROW_TIME_FOR_BERRY;
+		
+	}
 }
