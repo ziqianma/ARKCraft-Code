@@ -261,7 +261,8 @@ public class GlobalAdditions {
 		}
 		if (BALANCE.WEAPONS.LONGNECK_RIFLE) {
 			longneck_rifle = addLongneckRifle("longneck_rifle");
-			simple_rifle_ammo = addItemProjectile("simple_rifle_ammo");
+			simple_rifle_ammo = addItemProjectile("si"
+					+ "mple_rifle_ammo");
 		}
 		if (BALANCE.WEAPONS.SHOTGUN) {
 			shotgun = addShotgun("shotgun");
