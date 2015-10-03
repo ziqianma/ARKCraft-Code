@@ -23,6 +23,10 @@ public class ContainerInventoryTaming extends Container {
 	private InventoryTaming invTaming;
 	public InventoryCrafting inputSlots;
 	private final int TAMING_SLOT_COUNT = 2;
+	public static final int NARCO_SLOT_XPOS = 72;
+	public static final int NARCO_SLOT_YPOS = 101;
+	public static final int FOOD_SLOT_XPOS = 144;
+	public static final int FOOD_SLOT_YPOS = 101;
 
 	// These store cache values, used by the server to only update the client side tile entity when values have changed
 	private int [] cachedFields;
@@ -36,8 +40,8 @@ public class ContainerInventoryTaming extends Container {
 		if (TAMING_SLOT_COUNT != invTaming.getSizeInventory()) {
 			LogHelper.error("Mismatched slot count in container(" + TAMING_SLOT_COUNT + ") and InventoryTaming (" + inputSlots.getSizeInventory()+")");
 		}
-		this.addSlotToContainer(new SlotNarco(invTaming, InventoryTaming.NARCO_SLOT, 72, 101)); // Narco input slot
-		this.addSlotToContainer(new SlotFood(invTaming, InventoryTaming.FOOD_SLOT, 144, 101));  // Food input slot
+		this.addSlotToContainer(new SlotNarco(invTaming, InventoryTaming.NARCO_SLOT, NARCO_SLOT_XPOS, NARCO_SLOT_YPOS)); // Narco input slot
+		this.addSlotToContainer(new SlotFood(invTaming, InventoryTaming.FOOD_SLOT, FOOD_SLOT_XPOS, FOOD_SLOT_YPOS));  // Food input slot
 			
 		/* Hotbar inventory */
 		final int PLAYER_INVENTORY_XPOS = 36;

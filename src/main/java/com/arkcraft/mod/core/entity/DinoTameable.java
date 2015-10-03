@@ -35,8 +35,8 @@ public abstract class DinoTameable extends EntityTameable {
 	public InventoryDino invDino;
 	public InventoryTaming invTaming;
 	protected boolean isSaddled = false;
-	protected int torpor = 0;
-	protected int progress = 0;
+//	protected int torpor = 0;
+//	protected int progress = 0;
 
 	// Other non-NBT variables:
 	protected boolean isRideable = false;
@@ -85,7 +85,7 @@ public abstract class DinoTameable extends EntityTameable {
 		super(worldIn);
 		this.getDataWatcher().addObject(DINO_SADDLED_WATCHER, Byte.valueOf((byte) 0));
         this.isTameable = true;
-		this.tamingSeconds = 120; // Set this before the InventoryTaming
+		this.tamingSeconds = 120; // Set this before the InventoryTaming (this is the default if not set)
 		this.invDino = new InventoryDino("Items", true, saddleType.getInventorySize());
 		this.invTaming = new InventoryTaming(this);
 		this.saddleType = saddleType;
@@ -190,8 +190,8 @@ public abstract class DinoTameable extends EntityTameable {
         super.writeEntityToNBT(nbt);
         if (isTameable) {
         	nbt.setBoolean("isSaddled", isSaddled);
-        	nbt.setInteger("torpor", torpor);
-        	nbt.setInteger("progress", progress);
+//        	nbt.setInteger("torpor", torpor);
+//        	nbt.setInteger("progress", progress);
         	this.invTaming.saveInventoryToNBT(nbt);
 //    		if (this.isSaddled()) {
     			this.invDino.saveInventoryToNBT(nbt);
@@ -210,12 +210,12 @@ public abstract class DinoTameable extends EntityTameable {
 	        if (nbt.hasKey("isSaddled")) {
 	        	this.setSaddled(nbt.getBoolean("isSaddled"));
 	        }
-	        if (nbt.hasKey("torpor")) {
-	        	torpor = (nbt.getInteger("torpor"));
-	        }
-	        if (nbt.hasKey("progress")) {
-	        	progress = (nbt.getInteger("progress"));
-	        }
+//	        if (nbt.hasKey("torpor")) {
+//	        	torpor = (nbt.getInteger("torpor"));
+//	        }
+//	        if (nbt.hasKey("progress")) {
+//	        	progress = (nbt.getInteger("progress"));
+//	        }
 	        // Dino taming inventory
 	        this.invTaming.loadInventoryFromNBT(nbt);
 	        // Dino Inventory
@@ -247,37 +247,19 @@ public abstract class DinoTameable extends EntityTameable {
 
 	public boolean isTameable() {
 		return this.isTameable;
-//		return torpor > 0;
 	}
 
-	public void setTorpor(int i) {
-		torpor = i;
-	}
+//	public void setTorpor(int i) {
+//		torpor = i;
+//	}
 	public int getTorpor() {
-		return torpor;
+		if (this.isTameable())
+			return this.invTaming.getTorpor();
+		else
+			return 0;
 	}
-//
-//	public void addTorpor(int i) {
-//		torpor += i;
-//	}
-//
-//	public void removeTorpor(int i) {
-//		torpor -= i;
-//	}
-//
-//	public void setProgress(int i) {
-//		progress = i;
-//	}
-//
-//	public void addProgress(int i) {
-//		progress += i;
-//	}
-//
-//	public void removeProgress(int i) {
-//		progress -= i;
-//	}
-	
-    /**
+
+	/**
      * Called when the entity is attacked. (Needed to attack other mobs)
      */
     @Override
@@ -435,7 +417,10 @@ public abstract class DinoTameable extends EntityTameable {
 	}
 	
 	public void markDirty() {
-		// TODO Auto-generated method stub		
+        if (isTameable) {
+        	invDino.markDirty();;
+        	invTaming.markDirty();
+        }
 	}
 	
 	public int getTamingSeconds() {
@@ -444,7 +429,7 @@ public abstract class DinoTameable extends EntityTameable {
 
     @Override
 	public void onLivingUpdate() {
-    	if (torpor == 0) {
+    	if (getTorpor() == 0) {
     		super.onLivingUpdate();
     	}
     	// Paralyze
@@ -456,7 +441,7 @@ public abstract class DinoTameable extends EntityTameable {
             this.invTaming.update();
     	}
     }
-
+    
     /**
      * The age value may be negative or positive or zero. If it's negative, it get's incremented on each tick, if it's
      * positive, it get's decremented each tick. Don't confuse this with EntityLiving.getAge. With a negative value the

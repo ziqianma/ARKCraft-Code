@@ -72,29 +72,29 @@ public class ARKFood extends ItemFood {
 		return null;
 	}
 
-	// ticks that this food will tame a Dino
+	// Seconds that this food will tame a Dino
 	public static int getItemFeedTime(ItemStack stack) {
 		if (stack != null) {
 			if (stack.getItem() instanceof ARKFood) {
 				if (stack.getItem() == (Item) GlobalAdditions.porkchop_cooked)
-					return 500;
+					return 25;
 				if (stack.getItem() == (Item) GlobalAdditions.porkchop_raw)
-					return 250;
+					return 10;
 				if (stack.getItem() == (Item) GlobalAdditions.primemeat_cooked)
-					return 1000;
+					return 50;
 				if (stack.getItem() == (Item) GlobalAdditions.primemeat_raw)
-					return 500;
+					return 25;
 			}
 		}
 		return 0;
 	}
 	
-	// ticks that this food will keep a dino unconscious
+	// Seconds that this food will keep a dino unconscious
 	public static int getItemTorporTime(ItemStack stack) {
 		if (stack != null) {
 			if (stack.getItem() instanceof ARKFood) {
 				if (stack.getItem() == (Item) GlobalAdditions.narcoBerry)
-					return 500;
+					return 25;
 			}
 		}
 		return 0;

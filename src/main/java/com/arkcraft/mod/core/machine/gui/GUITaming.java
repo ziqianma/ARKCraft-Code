@@ -77,6 +77,14 @@ public class GUITaming extends GuiContainer {
 			hoveringText.add(tamingPercentage + "%");
 		}
 
+		// If the mouse is over one of the food slots add the feeding time indicator hovering text
+		for (int i = 0; i < InventoryTaming.FOOD_SLOTS_COUNT; ++i) {
+			if (isInRect(guiLeft + ContainerInventoryTaming.FOOD_SLOT_XPOS + 18 * i, guiTop + ContainerInventoryTaming.FOOD_SLOT_YPOS, 16, 16, mouseX, mouseY)) {
+				hoveringText.add("Feeding Time:");
+				hoveringText.add(inventoryTaming.secondsOfFeedingTimeLeft() + "s");
+			}
+		}
+
 		// If hoveringText is not empty draw the hovering text
 		if (!hoveringText.isEmpty()){
 			drawHoveringText(hoveringText, mouseX - guiLeft, mouseY - guiTop, fontRendererObj);

@@ -6,6 +6,7 @@ import com.arkcraft.mod.core.GlobalAdditions;
 import com.arkcraft.mod.core.entity.DinoTameable;
 import com.arkcraft.mod.core.items.ARKFood;
 import com.arkcraft.mod.core.items.ARKItem;
+import com.arkcraft.mod.core.lib.LogHelper;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -25,13 +26,17 @@ import net.minecraft.util.MathHelper;
  *
  */
 public class InventoryTaming implements IInventory, IUpdatePlayerListBox {
+	/** The dino whose inventory this is. */
 	DinoTameable entityDino;
-	public EntityPlayer playerTaming;  // The player who starts the taming process (with the GUI)
+	/** The player who started the taming process (with the GUI). */
+	public EntityPlayer playerTaming;
+
+	// Other class variables
+	int tick = 20;
 	
 	public InventoryTaming(DinoTameable entityDino) {
 		this.entityDino = entityDino;
-		TAMING_TIME_FOR_COMPLETION = (short) (entityDino.getTamingSeconds() * 20);
-		torporTime = (short) (entityDino.getTorpor() * 20);
+		TAMING_TIME_FOR_COMPLETION = (short) entityDino.getTamingSeconds();
 	}
 
 	// Create and initialize the itemStacks variable that will store store the itemStacks
@@ -44,6 +49,11 @@ public class InventoryTaming implements IInventory, IUpdatePlayerListBox {
 	public static final int FIRST_INPUT_SLOT = NARCO_SLOT;
 
 	private ItemStack[] itemStacks = new ItemStack[TOTAL_SLOTS_COUNT];
+    /**
+     * Set true whenever the inventory changes. Nothing sets it false so you will have to write your own code to check
+     * it and reset the value.
+     */
+    public boolean inventoryChanged;
 
 	/** The number of feeding ticks remaining on the current piece of food */
 	private int [] feedingTimeRemaining = new int[FOOD_SLOTS_COUNT];
@@ -53,13 +63,13 @@ public class InventoryTaming implements IInventory, IUpdatePlayerListBox {
 	/** The number of ticks the dino has been taming */
 	private short tamingTime;
 	/** The number of ticks required to tame the dino */
-	private short TAMING_TIME_FOR_COMPLETION = 1000;  // vanilla value is 1000 = 50 seconds
+	private short TAMING_TIME_FOR_COMPLETION = 50;  // vanilla value is 50 seconds
 	
-	// Number of ticks dino will remain unconscious
-	private short torporTime;
-	// Torpor time maximum that can be set
-	private static short MAX_TORPOR_TIME = 3000;
-
+	/** Number of ticks dino will remain unconscious */
+	private short torporTime = 0;
+	/** Torpor time maximum that can be set */
+	private static short MAX_TORPOR_TIME = 150;
+	
 	@SuppressWarnings("unused")
 	private int cachedNumberOfFeedingSlots = -1;
 	
@@ -81,7 +91,7 @@ public class InventoryTaming implements IInventory, IUpdatePlayerListBox {
 	 */
 	public int secondsOfFoodRemaining(int foodSlot)	{
 		if (feedingTimeRemaining[foodSlot] <= 0 ) return 0;
-		return feedingTimeRemaining[foodSlot] / 20; // 20 ticks per second
+		return feedingTimeRemaining[foodSlot];
 	}
 
 	/**
@@ -114,6 +124,12 @@ public class InventoryTaming implements IInventory, IUpdatePlayerListBox {
 	// It runs both on the server and the client.
 	@Override
 	public void update() {
+		if (tick >= 0){
+			tick--;
+			return;			
+		} else {
+			tick = 20;
+		}
 		// If there is nothing to feed or not unconscious, reset feedTime and return
 		if (canTame()) {
 			int numberOfFoodFeeding = feedDino();
@@ -125,19 +141,26 @@ public class InventoryTaming implements IInventory, IUpdatePlayerListBox {
 			}	else {
 				tamingTime -= 2;
 			}
-			if (tamingTime < 0) tamingTime = 0;
-
 			torporTime--;
+			
+			// Failed to tame?
+			if (tamingTime <= 0 || torporTime <= 0) {
+				tamingTime = 0;
+				torporTime = 0;
+				this.entityDino.setSitting(false);
+				this.setTorporTime((short) 0);
+				if (this.entityDino.worldObj != null & this.entityDino.worldObj.isRemote)
+					LogHelper.info("InventoryTaming - update: setSitting(false) from client");
+				else
+					LogHelper.info("InventoryTaming - update: setSitting(false) from server");
+			}
 			
 			// If tamingTime has reached maxTamingTime the dino is tamed
 			if (tamingTime >= TAMING_TIME_FOR_COMPLETION) {
 				setToTamed();
 				tamingTime = 0;
-			}
-			
-			if (tamingTime <= 0 || torporTime <= 0) {
 				torporTime = 0;
-			}
+			}			
 		}	else {
 			tamingTime = 0;
 		}
@@ -159,8 +182,8 @@ public class InventoryTaming implements IInventory, IUpdatePlayerListBox {
 			}
 			if (feedingTimeRemaining[i] == 0) {
 				if (itemStacks[foodSlotNumber] != null && getItemFeedTime(itemStacks[foodSlotNumber]) > 0) {
-					// If the stack in this slot is not null and is fuel, set burnTimeRemaining & burnTimeInitialValue to the
-					// item's burn time and decrease the stack size
+					// If the stack in this slot is not null and is fuel, set feedingTimeRemaining & feedingTimeInitialValue to the
+					// item's feed time and decrease the stack size
 					feedingTimeRemaining[i] = feedingTimeInitialValue[i] = getItemFeedTime(itemStacks[foodSlotNumber]);
 					--itemStacks[foodSlotNumber].stackSize;
 					++feedingCount;
@@ -178,6 +201,18 @@ public class InventoryTaming implements IInventory, IUpdatePlayerListBox {
 		return feedingCount;
 	}
 
+	/**
+	 * Returns the seconds of feeding time left.
+	 * @return seconds
+	 */
+	public int secondsOfFeedingTimeLeft(){
+		if (itemStacks[FOOD_SLOT] != null) {
+			return itemStacks[FOOD_SLOT].stackSize * feedingTimeInitialValue[0] + feedingTimeRemaining[0];
+		} else {
+			return feedingTimeRemaining[0];
+		}
+	}
+	
 	// Tranquilize dino with a berry
 	private void tranqDino() {
 		boolean inventoryChanged = false;
@@ -211,7 +246,7 @@ public class InventoryTaming implements IInventory, IUpdatePlayerListBox {
 	 */
 	private void setToTamed() {
 		this.entityDino.setTamed(playerTaming, true);
-		this.entityDino.setTorpor(0);
+		this.setTorporTime((short) 0);
 	}
 
 	// returns the number of ticks the the food will feed. Returns 0 if the item will not feed the dino
@@ -385,7 +420,7 @@ public class InventoryTaming implements IInventory, IUpdatePlayerListBox {
 
 	@Override
 	public void markDirty() {
-		entityDino.markDirty();
+        this.inventoryChanged = true;
 	}
 
 	//------------------------------
@@ -442,6 +477,10 @@ public class InventoryTaming implements IInventory, IUpdatePlayerListBox {
 		torporTime = i;
 	}
 
+	public int getTorpor() {
+		return torporTime;
+	}
+
 	// When the world loads from disk, the server needs to send the TileEntity information to the client
 	//  it uses getDescriptionPacket() and onDataPacket() to do this
 //	@Override
@@ -452,9 +491,8 @@ public class InventoryTaming implements IInventory, IUpdatePlayerListBox {
 //		return new S35PacketUpdateTileEntity(this.pos, METADATA, nbtTagCompound);
 //	}
 //
-//	@Override
 //	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
-//		readFromNBT(pkt.getNbtCompound());
+//		loadInventoryFromNBT(pkt.getNbtCompound());
 //	}
 
 	//------------------------

@@ -31,6 +31,7 @@ import com.arkcraft.mod.core.GlobalAdditions;
 import com.arkcraft.mod.core.Main;
 import com.arkcraft.mod.core.entity.DinoTameable;
 import com.arkcraft.mod.core.entity.SaddleType;
+import com.arkcraft.mod.core.lib.BALANCE;
 import com.arkcraft.mod.core.lib.LogHelper;
 import com.google.common.base.Predicate;
 
@@ -49,7 +50,7 @@ public class EntityRaptor extends DinoTameable {
 	
 	@SuppressWarnings("rawtypes")
 	public EntityRaptor(World world, int raptorType) {
-		super(world, SaddleType.SMALL);
+		super(world, SaddleType.SMALL, true, BALANCE.DINO_PROPERTIES.SECONDS_TO_TAME_RAPTOR);
         this.setSize(0.8F, 1.5F);
 
         ((PathNavigateGround)this.getNavigator()).func_179690_a(true);
