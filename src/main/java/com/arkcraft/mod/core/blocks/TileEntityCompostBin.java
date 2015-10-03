@@ -10,7 +10,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.IChatComponent;
+import net.minecraft.world.World;
 
 public class TileEntityCompostBin extends TileEntity implements IUpdatePlayerListBox, IInventory
 {
@@ -240,9 +242,9 @@ public class TileEntityCompostBin extends TileEntity implements IUpdatePlayerLis
         return true;
     }
     
-    public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn)
+    public Container createContainer(InventoryPlayer invPlayer, World world, BlockPos pos)
     {
-        return new ContainerCompostBin(playerInventory, playerInventory, playerIn);
+        return new ContainerCompostBin(invPlayer, world, pos);
     }
 
 	@Override

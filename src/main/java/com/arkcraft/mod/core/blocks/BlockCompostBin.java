@@ -1,6 +1,6 @@
 package com.arkcraft.mod.core.blocks;
 
-import net.minecraft.block.Block;
+import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,7 +13,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import com.arkcraft.mod.core.GlobalAdditions;
 import com.arkcraft.mod.core.Main;
 
-public class BlockCompostBin extends Block{
+public class BlockCompostBin extends BlockContainer{
 	
 	private int renderType = 3; //default value
 	private boolean isOpaque = false;

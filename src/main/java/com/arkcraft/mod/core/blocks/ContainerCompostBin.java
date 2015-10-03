@@ -1,104 +1,155 @@
 package com.arkcraft.mod.core.blocks;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.InventoryCraftResult;
+import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.inventory.Slot;
+import net.minecraft.inventory.SlotCrafting;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
+import net.minecraft.world.World;
 
-public class ContainerCompostBin extends Container
-{
-    private IInventory lowerChestInventory;
-    private int numRows;
+import com.arkcraft.mod.core.GlobalAdditions;
+import com.arkcraft.mod.core.handlers.SmithyCraftingManager;
 
-    public ContainerCompostBin(IInventory playerInventory, IInventory chestInventory, EntityPlayer player)
-    {
-        this.lowerChestInventory = chestInventory;
-        this.numRows = chestInventory.getSizeInventory() / 9;
-        chestInventory.openInventory(player);
-        int i = (this.numRows - 4) * 18;
-        int j;
-        int k;
+public class ContainerCompostBin extends Container {
 
-        for (j = 0; j < this.numRows; ++j)
-        {
-            for (k = 0; k < 9; ++k)
-            {
-                this.addSlotToContainer(new Slot(chestInventory, k + j * 9, 8 + k * 18, 18 + j * 18));
-            }
-        }
+	public InventoryCrafting craftMatrix;
+	public IInventory craftResult[] = new InventoryCraftResult[24];
+//	public IInventory craftResult;
+	private World world;
+	private BlockPos pos;
+	private boolean oneOutputSlot = false;
 
-        for (j = 0; j < 3; ++j)
-        {
-            for (k = 0; k < 9; ++k)
-            {
-                this.addSlotToContainer(new Slot(playerInventory, k + j * 9 + 9, 8 + k * 18, 103 + j * 18 + i));
-            }
-        }
+	public ContainerCompostBin(InventoryPlayer invPlayer, World world, BlockPos pos) {
+		this.world = world;
+		this.pos = pos;
+		craftMatrix = new InventoryCrafting(this, 4, 6);
+		if (oneOutputSlot)
+			craftResult[0] = new InventoryCraftResult();
+		else {
+			for (int i = 0; i < 24; i++)
+				craftResult[i] = new InventoryCraftResult();
+		}
+		
+		/* Crafting Matrix */
+		final int MATRIX_SLOT_XPOS = 8;
+		final int MATRIX_SLOT_YPOS = 18;
+		for (int row = 0; row < 6; row++) {
+			for (int col = 0; col < 4; col++) {
+				this.addSlotToContainer(new Slot(craftMatrix, col + row * 4, MATRIX_SLOT_XPOS + col * 18, MATRIX_SLOT_YPOS + row * 18));
+			}
+		}
+		
+		/* Output slot */
+		final int OUTPUT_SLOT_XPOS = 98;
+		final int OUTPUT_SLOT_YPOS = 18;
+		if (oneOutputSlot)
+			this.addSlotToContainer(new SlotCrafting(invPlayer.player, craftMatrix,	craftResult[0], 0,	OUTPUT_SLOT_XPOS, OUTPUT_SLOT_YPOS));
+		else {
+			for (int row = 0; row < 6; row++) {
+				for (int col = 0; col < 4; col++) {
+					this.addSlotToContainer(new SlotCrafting(invPlayer.player, craftMatrix,	craftResult[col + row * 4], col + row * 4, 
+							OUTPUT_SLOT_XPOS + col * 18, OUTPUT_SLOT_YPOS + row * 18));
+				}
+			}
+		}
 
-        for (j = 0; j < 9; ++j)
-        {
-            this.addSlotToContainer(new Slot(playerInventory, j, 8 + j * 18, 161 + i));
-        }
-    }
+		/* Player inventory */
+		final int PLAYER_INVENTORY_XPOS = 8;
+		final int PLAYER_INVENTORY_YPOS = 140;
+		for (int row = 0; row < 3; row++) {
+			for (int col = 0; col < 9; col++) {
+				int slotIndex =  col + row * 9 + 9;
+				addSlotToContainer(new Slot(invPlayer, slotIndex, PLAYER_INVENTORY_XPOS + col * 18, PLAYER_INVENTORY_YPOS + row * 18));
+			}
+		}
 
-	public boolean canInteractWith(EntityPlayer playerIn)
-    {
-        return this.lowerChestInventory.isUseableByPlayer(playerIn);
-    }
+		/* Hotbar inventory */
+		final int HOTBAR_YPOS = 198;
+		for(int col = 0; col < 9; col++) {
+			addSlotToContainer(new Slot(invPlayer, col, PLAYER_INVENTORY_XPOS + col * 18, HOTBAR_YPOS));
+		}
 
-    /**
-     * Take a stack from the specified inventory slot.
-     */
-    public ItemStack transferStackInSlot(EntityPlayer playerIn, int index)
-    {
-        ItemStack itemstack = null;
-        Slot slot = (Slot)this.inventorySlots.get(index);
+		this.onCraftMatrixChanged(craftMatrix);
+	}
+	
+	/* GET ITEMS OUT ONCE CLOSED */
+    public void onContainerClosed(EntityPlayer playerIn) {
+        super.onContainerClosed(playerIn);
 
-        if (slot != null && slot.getHasStack())
-        {
-            ItemStack itemstack1 = slot.getStack();
-            itemstack = itemstack1.copy();
+        if (!this.world.isRemote) {
+            for (int i = 0; i < 24; ++i) {
+                ItemStack itemstack = this.craftMatrix.getStackInSlotOnClosing(i);
 
-            if (index < this.numRows * 9)
-            {
-                if (!this.mergeItemStack(itemstack1, this.numRows * 9, this.inventorySlots.size(), true))
-                {
-                    return null;
+                if (itemstack != null) {
+                    playerIn.dropPlayerItemWithRandomChoice(itemstack, false);
                 }
             }
-            else if (!this.mergeItemStack(itemstack1, 0, this.numRows * 9, false))
-            {
-                return null;
-            }
-
-            if (itemstack1.stackSize == 0)
-            {
-                slot.putStack((ItemStack)null);
-            }
-            else
-            {
-                slot.onSlotChanged();
-            }
         }
-
-        return itemstack;
     }
+    
+	public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
+		super.transferStackInSlot(playerIn, index);
+		ItemStack itemstack = null;
+		Slot slot = (Slot) this.inventorySlots.get(index);
 
-    /**
-     * Called when the container is closed.
-     */
-    public void onContainerClosed(EntityPlayer playerIn)
-    {
-        super.onContainerClosed(playerIn);
-        this.lowerChestInventory.closeInventory(playerIn);
-    }
+		if (slot != null && slot.getHasStack()) {
+			ItemStack itemstack1 = slot.getStack();
+			itemstack = itemstack1.copy();
 
-    /**
-     * Return this chest container's lower chest inventory.
-     */
-    public IInventory getLowerChestInventory()
-    {
-        return this.lowerChestInventory;
-    }
+			if (index == 0) {
+				if (!this.mergeItemStack(itemstack1, 10, 46, true)) {
+					return null;
+				}
+
+				slot.onSlotChange(itemstack1, itemstack);
+			} else if (index >= 10 && index < 37) {
+				if (!this.mergeItemStack(itemstack1, 37, 46, false)) {
+					return null;
+				}
+			} else if (index >= 37 && index < 46) {
+				if (!this.mergeItemStack(itemstack1, 10, 37, false)) {
+					return null;
+				}
+			} else if (!this.mergeItemStack(itemstack1, 10, 46, false)) {
+				return null;
+			}
+
+			if (itemstack1.stackSize == 0) {
+				slot.putStack((ItemStack) null);
+			} else {
+				slot.onSlotChanged();
+			}
+
+			if (itemstack1.stackSize == itemstack.stackSize) {
+				return null;
+			}
+
+			slot.onPickupFromSlot(playerIn, itemstack1);
+		}
+
+		return itemstack;
+	}
+
+	@Override
+	public void onCraftMatrixChanged(IInventory inventory) {
+		if (oneOutputSlot)
+			this.craftResult[0].setInventorySlotContents(0, SmithyCraftingManager.getInstance().findMatchingRecipe(craftMatrix, world));
+		else {
+			ItemStack[] itemStacks = SmithyCraftingManager.getInstance().findMatchingRecipes(this.craftMatrix, this.world);
+			for (int i = 0; i < 24 && itemStacks[i] != null; i++)
+				this.craftResult[i].setInventorySlotContents(0, itemStacks[i]);
+		}
+	}
+	
+	@Override
+	public boolean canInteractWith(EntityPlayer playerIn) {
+		if(world.getBlockState(pos).getBlock() != GlobalAdditions.smithy) 
+			return false;
+		return playerIn.getDistanceSq((double)pos.getX() + 0.5D, (double)pos.getY() + 0.5D, (double)pos.getZ() + 0.5D) <= 64.0D;	
+	}
 }
