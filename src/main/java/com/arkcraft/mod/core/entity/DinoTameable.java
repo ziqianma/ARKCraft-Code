@@ -35,6 +35,7 @@ public abstract class DinoTameable extends EntityTameable {
 	public InventoryDino invDino;
 	public InventoryTaming invTaming;
 	protected boolean isSaddled = false;
+	protected boolean isTaming = false;
 //	protected int torpor = 0;
 //	protected int progress = 0;
 
@@ -190,6 +191,7 @@ public abstract class DinoTameable extends EntityTameable {
         super.writeEntityToNBT(nbt);
         if (isTameable) {
         	nbt.setBoolean("isSaddled", isSaddled);
+        	nbt.setBoolean("isTaming", isTaming);
 //        	nbt.setInteger("torpor", torpor);
 //        	nbt.setInteger("progress", progress);
         	this.invTaming.saveInventoryToNBT(nbt);
@@ -209,6 +211,9 @@ public abstract class DinoTameable extends EntityTameable {
         if (isTameable) {
 	        if (nbt.hasKey("isSaddled")) {
 	        	this.setSaddled(nbt.getBoolean("isSaddled"));
+	        }
+	        if (nbt.hasKey("isTaming")) {
+	        	this.setIsTaming(nbt.getBoolean("isTaming"));
 	        }
 //	        if (nbt.hasKey("torpor")) {
 //	        	torpor = (nbt.getInteger("torpor"));
@@ -249,12 +254,29 @@ public abstract class DinoTameable extends EntityTameable {
 		return this.isTameable;
 	}
 
-//	public void setTorpor(int i) {
-//		torpor = i;
-//	}
+	public boolean isTaming() {
+		return this.isTaming;
+	}
+
+	public void setIsTaming(boolean isTaming) {
+		this.isTaming = isTaming;
+	}
+	
+	/** Used only when tranquilizing a Dino */
+	public void increaseTorpor(int i) {
+		if (this.isTameable()) {
+			int currTorpor = this.invTaming.getTorporTime();
+			if (this.invTaming.setTorporTime((short) (currTorpor + i))) {
+				setIsTaming(true);
+				LogHelper.info("DinoTameable: Just set taming to true!");
+			}
+			LogHelper.info("DinoTameable: Set torpor to " + this.invTaming.getTorporTime());
+		}
+	}
+	
 	public int getTorpor() {
 		if (this.isTameable())
-			return this.invTaming.getTorpor();
+			return this.invTaming.getTorporTime();
 		else
 			return 0;
 	}
@@ -385,7 +407,8 @@ public abstract class DinoTameable extends EntityTameable {
             }
             return true;
         }
-        else if (isTameable()) {
+		// Tame the dino with the GUI
+        else if (isTaming()) {
             if (!this.worldObj.isRemote) {
             	player.openGui(Main.instance, GUI.TAMING_GUI.getID(), this.worldObj, 
             			(int) Math.floor(this.posX), (int) this.posY, (int) Math.floor(this.posZ));

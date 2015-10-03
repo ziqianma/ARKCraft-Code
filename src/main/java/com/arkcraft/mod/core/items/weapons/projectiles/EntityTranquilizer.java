@@ -7,7 +7,9 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
+import com.arkcraft.mod.core.entity.DinoTameable;
 import com.arkcraft.mod.core.items.weapons.handlers.WeaponDamageSource;
+import com.arkcraft.mod.core.lib.BALANCE;
 
 public class EntityTranquilizer extends EntityShootable
 {
@@ -69,21 +71,20 @@ public class EntityTranquilizer extends EntityShootable
 	}	
 	
 	@Override
-	public void onEntityHit(Entity entity)
-	{
-		float damage = 7F + extraDamage;
+	public void onEntityHit(Entity entity){
+		float damage = (float) (BALANCE.WEAPONS.TRANQ_AMMO_DAMAGE + extraDamage);
 		DamageSource damagesource = null;
-		if (thrower == null)
-		{
+		if (thrower == null){
 			damagesource = WeaponDamageSource.causeProjectileWeaponDamage(this, this);
-		} else
-		{
+		} else{
 			damagesource = WeaponDamageSource.causeProjectileWeaponDamage(this, thrower);
 		}
-		if (entity.attackEntityFrom(damagesource, damage))
-		{
+		if (entity.attackEntityFrom(damagesource, damage)){
 			playHitSound();
 			setDead();
+		}
+		if (entity instanceof DinoTameable){
+			((DinoTameable)entity).increaseTorpor(BALANCE.WEAPONS.TRANQ_AMMO_TORPOR_TIME);
 		}
 	}
 	

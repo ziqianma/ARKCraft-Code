@@ -141,10 +141,12 @@ public class InventoryTaming implements IInventory, IUpdatePlayerListBox {
 			}	else {
 				tamingTime -= 2;
 			}
+			if (tamingTime < 0)
+				tamingTime = 0;
 			torporTime--;
 			
 			// Failed to tame?
-			if (tamingTime <= 0 || torporTime <= 0) {
+			if (torporTime <= 0) {
 				tamingTime = 0;
 				torporTime = 0;
 				this.entityDino.setSitting(false);
@@ -161,7 +163,7 @@ public class InventoryTaming implements IInventory, IUpdatePlayerListBox {
 				tamingTime = 0;
 				torporTime = 0;
 			}			
-		}	else {
+		} else {
 			tamingTime = 0;
 		}
 	}
@@ -247,6 +249,7 @@ public class InventoryTaming implements IInventory, IUpdatePlayerListBox {
 	private void setToTamed() {
 		this.entityDino.setTamed(playerTaming, true);
 		this.setTorporTime((short) 0);
+		this.entityDino.setIsTaming(false);
 	}
 
 	// returns the number of ticks the the food will feed. Returns 0 if the item will not feed the dino
@@ -473,11 +476,17 @@ public class InventoryTaming implements IInventory, IUpdatePlayerListBox {
 		cachedNumberOfFeedingSlots = -1;
 	}
 
-	public void setTorporTime(short i) {
+	/** Returns true when at max torpor */
+	public boolean setTorporTime(short i) {
 		torporTime = i;
+		if (torporTime > MAX_TORPOR_TIME) {
+			torporTime = MAX_TORPOR_TIME;
+			return true;
+		}
+		return false;
 	}
 
-	public int getTorpor() {
+	public int getTorporTime() {
 		return torporTime;
 	}
 

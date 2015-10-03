@@ -64,7 +64,7 @@ public class GuiHandler implements IGuiHandler {
 			if (entity != null && entity instanceof DinoTameable) {
 				DinoTameable dino = (DinoTameable)entity;
 				dino.setSitting(true);
-				if (dino.invTaming.getTorpor() == 0)
+				if (dino.invTaming.getTorporTime() == 0)
 					dino.invTaming.setTorporTime((short) 60);
 				return new ContainerInventoryTaming(player.inventory, dino.invTaming, player);
 			}
@@ -114,7 +114,7 @@ public class GuiHandler implements IGuiHandler {
 			if (entity != null && entity instanceof DinoTameable) {
 				DinoTameable dino = (DinoTameable)entity;
 				dino.setSitting(true);
-				if (dino.invTaming.getTorpor() == 0)
+				if (dino.invTaming.getTorporTime() == 0)
 					dino.invTaming.setTorporTime((short) 60);
 				return new GUITaming(player.inventory, ((DinoTameable)entity).invTaming, player);
 			}
