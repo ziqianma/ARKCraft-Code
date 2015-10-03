@@ -37,12 +37,12 @@ public class ContainerInventoryCropPlot extends Container {
 		}
 		this.addSlotToContainer(new SlotWater(tileInventoryCropPlot, TileInventoryCropPlot.WATER_SLOT, 8, 53)); // Water input slot
 		this.addSlotToContainer(new SlotSeed(tileInventoryCropPlot, TileInventoryCropPlot.SEED_SLOT, 44, 17));  // Seed input slot
-		for(int col = TileInventoryCropPlot.FIRST_FERTILIZER_SLOT; col < CROP_SLOT_COUNT; col++) {
+		for(int col = TileInventoryCropPlot.FIRST_FERTILIZER_SLOT; col < CROP_SLOT_COUNT - 1; col++) {
 			addSlotToContainer(new SlotFertilizer(tileInventoryCropPlot, col, 8 + col * 18, FERTILIZER_SLOT_YPOS));
 		}
 		
-		// Berry output slot
-		this.addSlotToContainer(new Slot(tileInventoryCropPlot, TileInventoryCropPlot.BERRY_SLOT, 100, 13));
+		// Berry output slot (berry is centered in 24 x 24 box (berry is 16 x 16)
+		this.addSlotToContainer(new Slot(tileInventoryCropPlot, TileInventoryCropPlot.BERRY_SLOT, 104, 17));
 		
 		/* Hotbar inventory */
 		final int HOTBAR_YPOS = 142;
@@ -58,7 +58,6 @@ public class ContainerInventoryCropPlot extends Container {
 				addSlotToContainer(new Slot(invPlayer, slotIndex, 8 + col * 18, PLAYER_INVENTORY_YPOS + row * 18));
 			}
 		}	
-//		this.onCraftMatrixChanged(inputSlots);
 	}
 	
 	/* GET ITEMS OUT ONCE CLOSED ???? */

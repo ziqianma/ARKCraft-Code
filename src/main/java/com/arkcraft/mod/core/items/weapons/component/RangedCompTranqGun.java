@@ -8,27 +8,14 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 import com.arkcraft.mod.core.Main;
-import com.arkcraft.mod.core.items.weapons.ItemTranqGun;
 import com.arkcraft.mod.core.items.weapons.handlers.ReloadHelper;
 import com.arkcraft.mod.core.items.weapons.projectiles.EntityTranquilizer;
 
 public class RangedCompTranqGun extends RangedComponent
 {
-	protected ItemTranqGun	tranq_gun;
-
 	public RangedCompTranqGun()
 	{
 		super(RangedSpecs.TRANQGUN);
-	}
-
-	@Override
-	protected void onSetItem()
-	{
-		super.onSetItem();
-		if (item instanceof ItemTranqGun)
-		{
-			tranq_gun = (ItemTranqGun) item;
-		}
 	}
 
 	@Override

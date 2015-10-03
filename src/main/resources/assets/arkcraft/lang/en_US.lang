@@ -3,6 +3,7 @@ tile.berryBush.name=Berry Bush
 tile.smithy.name=Smithy
 tile.mortar_and_pestle.name=Mortar and Pestle
 tile.crop_plot.name=Crop Plot
+tile.wooden_spikes.name=Wooden Spikes
 
 # Items
 item.narcoBerrySeed.name=Narco Berry Seed
@@ -58,9 +59,12 @@ item.shotgun.name=Shotgun
 item.longneck_rifle.name=Longneck Rifle
 item.stone_arrow.name=Stone Arrow
 item.metal_arrow.name=Metal Arrow
-item.simple_rifle_ammo=Simple Rifle Ammo
-item.simple_shotgun_ammo=Simple Rifle Ammo
-
+item.simple_rifle_ammo.name=Simple Rifle Ammo
+item.simple_shotgun_ammo.name=Simple Rifle Ammo
+item.rocket_launcher.name=Rocket Launcher
+item.rocket_propelled_grenade.name=Rocket Propelled Grenade
+item.compound_bow.name=Compound Bow
+item.crossbow.name= Crossbow
 
 
 # Miscellaneous

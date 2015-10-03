@@ -96,6 +96,9 @@ public class ClientProxy extends CommonProxy {
 	if (BALANCE.WEAPONS.TRANQ_GUN)	{
 	//	RenderingRegistry.registerEntityRenderingHandler(EntityTranquilizer.class, new RenderSimpleBullet());
 	}
+	if (BALANCE.WEAPONS.TRANQ_GUN)	{
+	// RenderingRegistry.registerEntityRenderingHandler(EntityRocketPropelledGrenade.class, new RenderRocketPropelledGrenade());
+	}
 }
 	
 	/* We register the block/item textures and models here */

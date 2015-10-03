@@ -1,14 +1,14 @@
 package com.arkcraft.mod.core.items.weapons.projectiles;
 
-import com.arkcraft.mod.core.items.weapons.component.RangedComponent;
-import com.arkcraft.mod.core.items.weapons.handlers.WeaponDamageSource;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+
+import com.arkcraft.mod.core.items.weapons.component.RangedComponent;
+import com.arkcraft.mod.core.items.weapons.handlers.WeaponDamageSource;
 
 public class EntitySimpleShotgunAmmo extends EntityShootable
 {

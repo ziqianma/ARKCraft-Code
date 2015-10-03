@@ -6,9 +6,9 @@ import com.arkcraft.mod.core.GlobalAdditions;
 import com.arkcraft.mod.core.items.weapons.component.ItemShooter;
 import com.arkcraft.mod.core.items.weapons.component.RangedComponent;
 
-public class ItemLongneckRifle extends ItemShooter{
+public class ItemRocketLauncher extends ItemShooter{
 
-	public ItemLongneckRifle(String name, RangedComponent rangedcomponent)
+	public ItemRocketLauncher(String name, RangedComponent rangedcomponent)
 	{
 		super(name, rangedcomponent);
 		this.setUnlocalizedName(name);
