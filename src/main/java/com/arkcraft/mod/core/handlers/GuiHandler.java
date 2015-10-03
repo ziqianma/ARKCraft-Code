@@ -13,6 +13,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 
 import com.arkcraft.mod.core.GlobalAdditions.GUI;
+import com.arkcraft.mod.core.blocks.ContainerCompostBin;
+import com.arkcraft.mod.core.blocks.TileEntityCompostBin;
 import com.arkcraft.mod.core.blocks.crop_test.ContainerInventoryCropPlot;
 import com.arkcraft.mod.core.blocks.crop_test.TileInventoryCropPlot;
 import com.arkcraft.mod.core.book.BookData;
@@ -43,6 +45,16 @@ public class GuiHandler implements IGuiHandler {
 			return new ContainerSmithy(player.inventory, world, new BlockPos(x, y, z)); 
 		if (ID == GUI.PESTLE_AND_MORTAR.getID()) 
 			return new ContainerMP(player.inventory, world, new BlockPos(x, y, z));
+		
+		if (ID == GUI.COMPOST_BIN.getID()) {
+			BlockPos xyz = new BlockPos(x, y, z);
+			TileEntity tileEntity = world.getTileEntity(xyz);
+			if (tileEntity instanceof TileEntityCompostBin)
+			return new ContainerCompostBin(player.inventory, (TileEntityCompostBin) tileEntity, player);
+			else {
+				LogHelper.info("GuiHandler - getServerGuiElement: TileEntityCompostBin not found!");
+			}
+		}
 		if (ID == GUI.CROP_PLOT.getID()) {
 			BlockPos xyz = new BlockPos(x, y, z);
 			TileEntity tileEntity = world.getTileEntity(xyz);
@@ -91,6 +103,15 @@ public class GuiHandler implements IGuiHandler {
 				return new GUICropPlot(player.inventory, (TileInventoryCropPlot) tileEntity);
 			else {
 				LogHelper.info("GuiHandler - getClientGuiElement: TileEntityCropPlot not found!");				
+			}
+		}
+		if (ID == GUI.COMPOST_BIN.getID()) {
+			BlockPos xyz = new BlockPos(x, y, z);
+			TileEntity tileEntity = world.getTileEntity(xyz);
+			if (tileEntity instanceof TileEntityCompostBin)
+			return new ContainerCompostBin(player.inventory, (TileEntityCompostBin) tileEntity, player);
+			else {
+				LogHelper.info("GuiHandler - getServerGuiElement: TileEntityCompostBin not found!");
 			}
 		}
 

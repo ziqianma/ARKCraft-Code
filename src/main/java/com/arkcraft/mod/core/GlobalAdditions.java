@@ -23,6 +23,8 @@ import com.arkcraft.mod.core.blocks.ARKBlock;
 import com.arkcraft.mod.core.blocks.ARKBlockSpikes;
 import com.arkcraft.mod.core.blocks.ARKBush;
 import com.arkcraft.mod.core.blocks.ARKContainerBlock;
+import com.arkcraft.mod.core.blocks.BlockCompostBin;
+import com.arkcraft.mod.core.blocks.TileEntityCompostBin;
 import com.arkcraft.mod.core.blocks.crop_test.BlockInventoryCropPlot;
 import com.arkcraft.mod.core.blocks.crop_test.TileInventoryCropPlot;
 import com.arkcraft.mod.core.book.Dossier;
@@ -104,6 +106,7 @@ public class GlobalAdditions {
 	public static Dossier dino_book;
 	public static ARKBlockItem item_crop_plot;
 	public static ARKBlockSpikes wooden_spikes;
+	public static BlockCompostBin compost_bin;
 
 	// Weapons
 	public static ARKSlingshot slingshot;
@@ -132,7 +135,7 @@ public class GlobalAdditions {
 
 
 	public enum GUI {
-		SMITHY(0), PESTLE_AND_MORTAR(1), INV_DODO(2), BOOK_GUI(3), CROP_PLOT(4), TAMING_GUI(5);
+		SMITHY(0), PESTLE_AND_MORTAR(1), INV_DODO(2), BOOK_GUI(3), CROP_PLOT(4), TAMING_GUI(5), COMPOST_BIN(6);
 		int id;
 		GUI(int id) {
 			this.id = id;
@@ -175,6 +178,7 @@ public class GlobalAdditions {
 		smithy = addContainer("smithy", 0.4F, Material.wood, GUI.SMITHY.getID(), false, false, 3);
 		pestle = addContainer("mortar_and_pestle", 0.4F, Material.rock, GUI.PESTLE_AND_MORTAR.getID(), false, false, 3);
 		crop_plot = addCropPlotContainer("crop_plot", 0.4F, Material.wood, GUI.CROP_PLOT.getID(), false, false, 3);
+		compost_bin = addCompostBinContainer("compost_bin", 0.4F, Material.wood, GUI.COMPOST_BIN.getID(), false, false, 3);
 		
 		// Blocks
 		oreSurface = addBlock(Material.rock, "oreSurface", 3.0F);
@@ -191,6 +195,7 @@ public class GlobalAdditions {
 		//Block Items
 		item_crop_plot = addBlockItem("item_crop_plot");
 		GameRegistry.registerTileEntity(TileInventoryCropPlot.class, "TileInventoryCropPlot");
+		GameRegistry.registerTileEntity(TileEntityCompostBin.class, "TileEntityCompostBin");
 		
 		//Bows
 		compound_bow = new ItemCompoundBow("compound_bow");
@@ -403,6 +408,15 @@ public class GlobalAdditions {
 //	ARKCropPlotBlock container = new ARKCropPlotBlock(name, hardness, mat, ID);
 	protected static BlockInventoryCropPlot addCropPlotContainer(String name, float hardness, Material mat, int ID, boolean renderAsNormalBlock, boolean isOpaque, int renderType) {
 		BlockInventoryCropPlot container = new BlockInventoryCropPlot(name, hardness, mat, ID);
+		container.setRenderAsNormalBlock(renderAsNormalBlock);
+		container.setOpaque(isOpaque);
+		container.setRenderType(renderType);
+		allBlocks.put(name, container);
+		return container;
+	}
+	
+	protected static BlockCompostBin addCompostBinContainer(String name, float hardness, Material mat, int ID, boolean renderAsNormalBlock, boolean isOpaque, int renderType) {
+		BlockCompostBin container = new BlockCompostBin(name, hardness, mat, ID);
 		container.setRenderAsNormalBlock(renderAsNormalBlock);
 		container.setOpaque(isOpaque);
 		container.setRenderType(renderType);
