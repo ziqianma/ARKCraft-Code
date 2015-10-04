@@ -14,10 +14,7 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
-import com.arkcraft.mod.core.blocks.TileEntityCompostBin;
-import com.arkcraft.mod.core.blocks.TileInventoryCropPlot;
 import com.arkcraft.mod.core.book.Dossier;
 import com.arkcraft.mod.core.creativetabs.ARKTabs;
 import com.arkcraft.mod.core.entity.EntityCobble;
