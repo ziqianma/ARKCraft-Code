@@ -1,4 +1,4 @@
-package com.arkcraft.mod.core.blocks.crop_test;
+package com.arkcraft.mod.core.blocks;
 
 import java.util.Random;
 
@@ -23,6 +23,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.arkcraft.mod.core.GlobalAdditions;
 import com.arkcraft.mod.core.Main;
+import com.arkcraft.mod.core.tileentity.TileInventoryCropPlot;
 
 /***
  * 

@@ -1,4 +1,4 @@
-package com.arkcraft.mod.core.blocks.crop_test;
+package com.arkcraft.mod.core.machine.gui;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -11,6 +11,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.arkcraft.mod.core.lib.LogHelper;
+import com.arkcraft.mod.core.tileentity.TileInventoryCropPlot;
 
 /***
  * 

@@ -1,7 +1,8 @@
-package com.arkcraft.mod.core.blocks.crop_test;
+package com.arkcraft.mod.core.tileentity;
 
 import java.util.Arrays;
 
+import com.arkcraft.mod.core.blocks.BlockInventoryCropPlot;
 import com.arkcraft.mod.core.items.ARKFecesItem;
 import com.arkcraft.mod.core.items.ARKSeedItem;
 import com.arkcraft.mod.core.lib.BALANCE;

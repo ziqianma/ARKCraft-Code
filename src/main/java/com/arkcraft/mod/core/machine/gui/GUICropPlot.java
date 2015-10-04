@@ -7,8 +7,7 @@ import java.util.List;
 import org.lwjgl.opengl.GL11;
 
 import com.arkcraft.mod.core.Main;
-import com.arkcraft.mod.core.blocks.crop_test.ContainerInventoryCropPlot;
-import com.arkcraft.mod.core.blocks.crop_test.TileInventoryCropPlot;
+import com.arkcraft.mod.core.tileentity.TileInventoryCropPlot;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
