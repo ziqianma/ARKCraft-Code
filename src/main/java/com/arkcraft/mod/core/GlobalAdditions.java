@@ -25,8 +25,6 @@ import com.arkcraft.mod.core.blocks.ARKBush;
 import com.arkcraft.mod.core.blocks.ARKContainerBlock;
 import com.arkcraft.mod.core.blocks.BlockCompostBin;
 import com.arkcraft.mod.core.blocks.TileEntityCompostBin;
-import com.arkcraft.mod.core.blocks.crop_test.BlockInventoryCropPlot;
-import com.arkcraft.mod.core.blocks.crop_test.TileInventoryCropPlot;
 import com.arkcraft.mod.core.book.Dossier;
 import com.arkcraft.mod.core.creativetabs.ARKTabs;
 import com.arkcraft.mod.core.entity.EntityCobble;
@@ -132,7 +130,7 @@ public class GlobalAdditions {
 	public static ARKContainerBlock smithy, pestle;
 	
 //	public static ARKCropPlotBlock crop_plot;
-	public static BlockInventoryCropPlot crop_plot;
+	public static com.arkcraft.mod.core.blocks.BlockInventoryCropPlot crop_plot;
 
 
 	public enum GUI {
@@ -407,8 +405,8 @@ public class GlobalAdditions {
 	
 //	protected static ARKCropPlotBlock addCropPlotContainer(String name, float hardness, Material mat, int ID, boolean renderAsNormalBlock, boolean isOpaque, int renderType) {
 //	ARKCropPlotBlock container = new ARKCropPlotBlock(name, hardness, mat, ID);
-	protected static BlockInventoryCropPlot addCropPlotContainer(String name, float hardness, Material mat, int ID, boolean renderAsNormalBlock, boolean isOpaque, int renderType) {
-		BlockInventoryCropPlot container = new BlockInventoryCropPlot(name, hardness, mat, ID);
+	protected static com.arkcraft.mod.core.blocks.BlockInventoryCropPlot addCropPlotContainer(String name, float hardness, Material mat, int ID, boolean renderAsNormalBlock, boolean isOpaque, int renderType) {
+		com.arkcraft.mod.core.blocks.BlockInventoryCropPlot container = new com.arkcraft.mod.core.blocks.BlockInventoryCropPlot(name, hardness, mat, ID);
 		container.setRenderAsNormalBlock(renderAsNormalBlock);
 		container.setOpaque(isOpaque);
 		container.setRenderType(renderType);
