@@ -23,7 +23,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.arkcraft.mod.core.GlobalAdditions;
 import com.arkcraft.mod.core.Main;
-import com.arkcraft.mod.core.tileentity.TileInventoryCropPlot;
 
 /***
  * 
@@ -103,27 +102,23 @@ public class BlockInventoryCropPlot extends BlockContainer {
         return new BlockState(this, new IProperty[] {AGE});
     }
 
+    /**
+     * Returns randomly, about 1/2 of the fertilizer and berries
+     */
     @Override
-    public java.util.List<ItemStack> getDrops(net.minecraft.world.IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
-    {
+    public java.util.List<ItemStack> getDrops(net.minecraft.world.IBlockAccess world, BlockPos pos, IBlockState state, int fortune){
         java.util.List<ItemStack> ret = super.getDrops(world, pos, state, fortune);
-        int age = ((Integer)state.getValue(AGE)).intValue();
         Random rand = world instanceof World ? ((World)world).rand : new Random();
-
-        if (age >= 5)
-        {
-        	@SuppressWarnings("unused")
-            int k = 3 + fortune;
-
-            for (int i = 0; i < 3 + fortune; ++i)
-            {
-            	// TODO: Drop inventory?
-//                if (rand.nextInt(15) <= age)
-//                {
-//                    ret.add(new ItemStack(this.getSeed(), 1, 0));
-//                }
-            }
-        }
+		TileEntity tileEntity = world.getTileEntity(pos);
+		if (tileEntity instanceof TileInventoryCropPlot) {
+			TileInventoryCropPlot tiCropPlot = (TileInventoryCropPlot) tileEntity;
+			for (int i = 0; i < TileInventoryCropPlot.FERTILIZER_SLOTS_COUNT; ++i){
+				if (rand.nextInt(2) == 0)
+					ret.add(tiCropPlot.getStack(TileInventoryCropPlot.FIRST_FERTILIZER_SLOT + i));
+			}
+			if (rand.nextInt(2) == 0)
+				ret.add(tiCropPlot.getStack(TileInventoryCropPlot.BERRY_SLOT));
+		}
         return ret;
     }
 }

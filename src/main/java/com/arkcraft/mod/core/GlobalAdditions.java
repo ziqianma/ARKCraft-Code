@@ -3,9 +3,7 @@ package com.arkcraft.mod.core;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockDispenser;
-import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
@@ -13,18 +11,13 @@ import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-import com.arkcraft.mod.core.blocks.ARKBlock;
-import com.arkcraft.mod.core.blocks.ARKBlockSpikes;
-import com.arkcraft.mod.core.blocks.ARKBush;
-import com.arkcraft.mod.core.blocks.ARKContainerBlock;
-import com.arkcraft.mod.core.blocks.BlockCompostBin;
 import com.arkcraft.mod.core.blocks.TileEntityCompostBin;
+import com.arkcraft.mod.core.blocks.TileInventoryCropPlot;
 import com.arkcraft.mod.core.book.Dossier;
 import com.arkcraft.mod.core.creativetabs.ARKTabs;
 import com.arkcraft.mod.core.entity.EntityCobble;
@@ -34,7 +27,6 @@ import com.arkcraft.mod.core.entity.aggressive.EntityRaptor;
 import com.arkcraft.mod.core.entity.passive.EntityBrontosaurus;
 import com.arkcraft.mod.core.entity.passive.EntityDodo;
 import com.arkcraft.mod.core.handlers.EntityHandler;
-import com.arkcraft.mod.core.handlers.GenerationHandler;
 import com.arkcraft.mod.core.handlers.GuiHandler;
 import com.arkcraft.mod.core.handlers.RecipeHandler;
 import com.arkcraft.mod.core.items.ARKArmorItem;
@@ -80,19 +72,16 @@ import com.arkcraft.mod.core.items.weapons.projectiles.dispense.DispenseSimpleSh
 import com.arkcraft.mod.core.items.weapons.projectiles.dispense.DispenseTranquilizer;
 import com.arkcraft.mod.core.lib.BALANCE;
 import com.arkcraft.mod.core.lib.KeyBindings;
-import com.arkcraft.mod.core.tileentity.TileInventoryCropPlot;
 
 /**
  * @author Vastatio
  */
 public class GlobalAdditions {
 
-	public static Map<String, Block> allBlocks = new HashMap<String, Block>();
 	public static Map<String, Item> allItems = new HashMap<String, Item>();
 
 	public static ARKFood tintoBerry, amarBerry, azulBerry, mejoBerry, narcoBerry, porkchop_raw, porkchop_cooked, primemeat_raw, primemeat_cooked;
 	public static ARKSeedItem tintoBerrySeed, amarBerrySeed, azulBerrySeed, mejoBerrySeed, narcoBerrySeed;
-	public static ARKBush berryBush;
 	public static ARKItem cobble_ball, fiber, chitin, narcotics, explosive_ball, dodo_bag, dodo_feather;
 	public static ARKFecesItem dodo_feces, player_feces;
 	public static ARKEggItem dodo_egg;
@@ -100,12 +89,8 @@ public class GlobalAdditions {
 	public static ARKArmorItem chitinHelm, chitinChest, chitinLegs, chitinBoots;
 	public static ARKArmorItem clothHelm, clothChest, clothLegs, clothBoots;
 	public static ARKArmorItem boneHelm, boneChest, boneLegs, boneBoots;
-	public static ARKBlock oreSurface;
-	public static Block blockNarcoBrerry;
 	public static Dossier dino_book;
 	public static ARKBlockItem item_crop_plot;
-	public static ARKBlockSpikes wooden_spikes;
-	public static BlockCompostBin compost_bin;
 
 	// Weapons
 	public static ARKSlingshot slingshot;
@@ -127,12 +112,6 @@ public class GlobalAdditions {
 	
 	public static CreativeTabs tabARK = new ARKTabs(CreativeTabs.getNextID(), "tabARKCraft");
 	
-	public static ARKContainerBlock smithy, pestle;
-	
-//	public static ARKCropPlotBlock crop_plot;
-	public static com.arkcraft.mod.core.blocks.BlockInventoryCropPlot crop_plot;
-
-
 	public enum GUI {
 		SMITHY(0), PESTLE_AND_MORTAR(1), INV_DODO(2), BOOK_GUI(3), CROP_PLOT(4), TAMING_GUI(5), COMPOST_BIN(6);
 		int id;
@@ -163,7 +142,6 @@ public class GlobalAdditions {
 		narcoBerrySeed = addSeedItem("narcoBerrySeed");
 
 		// world generated
-		berryBush = addBush("berryBush", 0.4F);
 		
 		// Weapons and tools
 		cobble_ball = addItemWithTooltip("cobble_ball", EnumChatFormatting.GOLD + "A Rocky Road to Victory");
@@ -173,18 +151,6 @@ public class GlobalAdditions {
 		ironPike = addWeapon("ironPike", ToolMaterial.IRON);
 		addGunPowderWeapons();
 
-		// Containers
-		smithy = addContainer("smithy", 0.4F, Material.wood, GUI.SMITHY.getID(), false, false, 3);
-		pestle = addContainer("mortar_and_pestle", 0.4F, Material.rock, GUI.PESTLE_AND_MORTAR.getID(), false, false, 3);
-		crop_plot = addCropPlotContainer("crop_plot", 0.4F, Material.wood, GUI.CROP_PLOT.getID(), false, false, 3);
-		compost_bin = addCompostBinContainer("compost_bin", 0.4F, Material.wood, GUI.COMPOST_BIN.getID(), false, false, 3);
-		
-		// Blocks
-		oreSurface = addBlock(Material.rock, "oreSurface", 3.0F);
-		//blockNarcoBrerry = addBlock(Material.ground, "narcoBerryBlock", 3.0F);
-		blockNarcoBrerry = getRegisteredBlock("blockNarcoBerry");
-		wooden_spikes = addSpikes(Material.wood, "wooden_spikes", 3.0F);
-
 		// Regular Items
 		fiber = addItem("fiber");
 		chitin = addItem("chitin");
@@ -193,8 +159,6 @@ public class GlobalAdditions {
 		
 		//Block Items
 		item_crop_plot = addBlockItem("item_crop_plot");
-		GameRegistry.registerTileEntity(TileInventoryCropPlot.class, "TileInventoryCropPlot");
-		GameRegistry.registerTileEntity(TileEntityCompostBin.class, "TileEntityCompostBin");
 		
 		//Bows
 		compound_bow = new ItemCompoundBow("compound_bow");
@@ -255,7 +219,6 @@ public class GlobalAdditions {
 		registerDispenseBehavior();
 
 		KeyBindings.preInit();
-		GenerationHandler.addOreToGen(oreSurface, 0); //Sets to the values in BALENCE.GEN.class
 		
 		// Other Stuff
 		NetworkRegistry.INSTANCE.registerGuiHandler(Main.instance, new GuiHandler());
@@ -367,60 +330,10 @@ public class GlobalAdditions {
 		return i;
 	}
 	
-	protected static Block getRegisteredBlock(String name){
-		return (Block)Block.blockRegistry.getObject(new ResourceLocation(name));
-	}
-	
-	protected static ARKBush addBush(String name, float hardness) {
-		ARKBush b = new ARKBush(name, hardness);
-		allBlocks.put(name, b);
-		return b;
-	}
-	
 	protected static ARKSlingshot addSlingshot(String name) {
 		ARKSlingshot slingshot = new ARKSlingshot(name);
 		allItems.put(name, slingshot);
 		return slingshot;
-	}
-	
-	protected static ARKBlock addBlock(Material m, String name, float hardness) {
-		ARKBlock b = new ARKBlock(m, name, hardness);
-		allBlocks.put(name, b);
-		return b;
-	}
-	protected static ARKBlockSpikes addSpikes(Material m, String name, float hardness) {
-		ARKBlockSpikes b = new ARKBlockSpikes(m, name, hardness);
-		allBlocks.put(name, b);
-		return b;
-	}
-	
-	protected static ARKContainerBlock addContainer(String name, float hardness, Material mat, int ID, boolean renderAsNormalBlock, boolean isOpaque, int renderType) {
-		ARKContainerBlock container = new ARKContainerBlock(name, hardness, mat, ID);
-		container.setRenderAsNormalBlock(renderAsNormalBlock);
-		container.setOpaque(isOpaque);
-		container.setRenderType(renderType);
-		allBlocks.put(name, container);
-		return container;
-	}
-	
-//	protected static ARKCropPlotBlock addCropPlotContainer(String name, float hardness, Material mat, int ID, boolean renderAsNormalBlock, boolean isOpaque, int renderType) {
-//	ARKCropPlotBlock container = new ARKCropPlotBlock(name, hardness, mat, ID);
-	protected static com.arkcraft.mod.core.blocks.BlockInventoryCropPlot addCropPlotContainer(String name, float hardness, Material mat, int ID, boolean renderAsNormalBlock, boolean isOpaque, int renderType) {
-		com.arkcraft.mod.core.blocks.BlockInventoryCropPlot container = new com.arkcraft.mod.core.blocks.BlockInventoryCropPlot(name, hardness, mat, ID);
-		container.setRenderAsNormalBlock(renderAsNormalBlock);
-		container.setOpaque(isOpaque);
-		container.setRenderType(renderType);
-		allBlocks.put(name, container);
-		return container;
-	}
-	
-	protected static BlockCompostBin addCompostBinContainer(String name, float hardness, Material mat, int ID, boolean renderAsNormalBlock, boolean isOpaque, int renderType) {
-		BlockCompostBin container = new BlockCompostBin(name, hardness, mat, ID);
-		container.setRenderAsNormalBlock(renderAsNormalBlock);
-		container.setOpaque(isOpaque);
-		container.setRenderType(renderType);
-		allBlocks.put(name, container);
-		return container;
 	}
 	
 	protected static ARKItem addItem(String name) {
@@ -519,7 +432,6 @@ public class GlobalAdditions {
 	}
 	
 	public static GlobalAdditions getInstance() { return new GlobalAdditions(); }
-	public static Map<String, Block> getAllBlocks() { return allBlocks; }
 	public static Map<String, Item> getAllItems() { return allItems; }
 	
 }

@@ -14,6 +14,7 @@ import net.minecraftforge.fml.common.network.IGuiHandler;
 
 import com.arkcraft.mod.core.GlobalAdditions.GUI;
 import com.arkcraft.mod.core.blocks.ContainerCompostBin;
+import com.arkcraft.mod.core.blocks.TileInventoryCropPlot;
 import com.arkcraft.mod.core.book.BookData;
 import com.arkcraft.mod.core.book.BookDataStore;
 import com.arkcraft.mod.core.book.GuiDossier;
@@ -30,7 +31,6 @@ import com.arkcraft.mod.core.machine.gui.GUITaming;
 import com.arkcraft.mod.core.machine.gui.GuiInventoryDodo;
 import com.arkcraft.mod.core.machine.gui.GuiMP;
 import com.arkcraft.mod.core.machine.gui.GuiSmithy;
-import com.arkcraft.mod.core.tileentity.TileInventoryCropPlot;
 
 public class GuiHandler implements IGuiHandler {
 

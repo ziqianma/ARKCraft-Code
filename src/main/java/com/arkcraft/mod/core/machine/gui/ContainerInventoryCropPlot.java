@@ -10,8 +10,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import com.arkcraft.mod.core.blocks.TileInventoryCropPlot;
 import com.arkcraft.mod.core.lib.LogHelper;
-import com.arkcraft.mod.core.tileentity.TileInventoryCropPlot;
 
 /***
  * 

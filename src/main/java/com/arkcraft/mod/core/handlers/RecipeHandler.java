@@ -6,6 +6,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import com.arkcraft.mod.core.GlobalAdditions;
+import com.arkcraft.mod.core.blocks.ModBlocks;
 
 public class RecipeHandler {
 
@@ -58,7 +59,7 @@ public class RecipeHandler {
 					'C', Items.leather);
 			
 			//Motar and Pestle
-			GameRegistry.addRecipe(new ItemStack(GlobalAdditions.pestle),
+			GameRegistry.addRecipe(new ItemStack(ModBlocks.pestle),
 					"   ", 
 					"ABA", 
 					" A ", 
@@ -66,7 +67,7 @@ public class RecipeHandler {
 					'B', Blocks.cobblestone);
 			
 			//Smithy
-			GameRegistry.addRecipe(new ItemStack(GlobalAdditions.smithy),
+			GameRegistry.addRecipe(new ItemStack(ModBlocks.smithy),
 					"AAA", 
 					"B B", 
 					"B B", 

@@ -19,6 +19,7 @@ import net.minecraftforge.fml.relauncher.Side;
 
 import org.apache.logging.log4j.Logger;
 
+import com.arkcraft.mod.core.blocks.ModBlocks;
 import com.arkcraft.mod.core.handlers.ARKEventHandler;
 import com.arkcraft.mod.core.handlers.ARKPlayerEventHandler;
 import com.arkcraft.mod.core.handlers.FMLCommonEventHandler;
@@ -49,6 +50,7 @@ public class Main {
 		FMLCommonHandler.instance().bus().register(new Config());
 
 		GlobalAdditions.init();
+		ModBlocks.init();
 		setupNetwork();	
 		modLog = event.getModLog();		
 	}

@@ -12,7 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
-import com.arkcraft.mod.core.GlobalAdditions;
+import com.arkcraft.mod.core.blocks.ModBlocks;
 import com.arkcraft.mod.core.handlers.PestleCraftingManager;
 import com.arkcraft.mod.core.lib.LogHelper;
 
@@ -125,7 +125,7 @@ public class ContainerMP extends Container {
 	
 	@Override
 	public boolean canInteractWith(EntityPlayer playerIn) {
-		if (world.getBlockState(pos).getBlock() != GlobalAdditions.pestle) 
+		if (world.getBlockState(pos).getBlock() != ModBlocks.pestle) 
 			return false;
 		else
 			return playerIn.getDistanceSq((double)pos.getX() + 0.5D, (double)pos.getY() + 0.5D, (double)pos.getZ() + 0.5D) <= 64.0D;	

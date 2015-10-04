@@ -12,7 +12,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
-import com.arkcraft.mod.core.GlobalAdditions;
 import com.arkcraft.mod.core.handlers.SmithyCraftingManager;
 
 public class ContainerCompostBin extends Container {
@@ -148,7 +147,7 @@ public class ContainerCompostBin extends Container {
 	
 	@Override
 	public boolean canInteractWith(EntityPlayer playerIn) {
-		if(world.getBlockState(pos).getBlock() != GlobalAdditions.smithy) 
+		if(world.getBlockState(pos).getBlock() != ModBlocks.smithy) 
 			return false;
 		return playerIn.getDistanceSq((double)pos.getX() + 0.5D, (double)pos.getY() + 0.5D, (double)pos.getZ() + 0.5D) <= 64.0D;	
 	}

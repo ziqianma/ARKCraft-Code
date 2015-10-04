@@ -15,6 +15,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 
 import com.arkcraft.mod.core.GlobalAdditions;
 import com.arkcraft.mod.core.Main;
+import com.arkcraft.mod.core.blocks.ModBlocks;
 import com.arkcraft.mod.core.book.proxy.DCommon;
 import com.arkcraft.mod.core.entity.EntityCobble;
 import com.arkcraft.mod.core.entity.EntityDodoEgg;
@@ -104,7 +105,7 @@ public class ClientProxy extends CommonProxy {
 	/* We register the block/item textures and models here */
 	@Override
 	public void registerRenderers() {
-		for(Map.Entry<String, Block> e : GlobalAdditions.allBlocks.entrySet()) {
+		for(Map.Entry<String, Block> e : ModBlocks.allBlocks.entrySet()) {
 			String name = e.getKey();
 			Block b = e.getValue();
 			registerBlockTexture(b, name);

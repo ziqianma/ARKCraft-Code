@@ -1,8 +1,7 @@
-package com.arkcraft.mod.core.tileentity;
+package com.arkcraft.mod.core.blocks;
 
 import java.util.Arrays;
 
-import com.arkcraft.mod.core.blocks.BlockInventoryCropPlot;
 import com.arkcraft.mod.core.items.ARKFecesItem;
 import com.arkcraft.mod.core.items.ARKSeedItem;
 import com.arkcraft.mod.core.lib.BALANCE;
@@ -639,4 +638,8 @@ public class TileInventoryCropPlot extends TileEntity implements IInventory, IUp
     public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newSate){
         return false;
     }
+
+	public ItemStack getStack(int i) {
+		return itemStacks[i];
+	}
 }
