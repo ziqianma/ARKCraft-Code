@@ -8,7 +8,7 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.ResourceLocation;
 
 import com.arkcraft.mod.core.Main;
-import com.arkcraft.mod.core.entity.passive.EntityBrontosaurus;
+import com.arkcraft.mod.core.entity.neutral.EntityBrontosaurus;
 
 public class RenderBrontosaurus extends RenderLiving {
 	

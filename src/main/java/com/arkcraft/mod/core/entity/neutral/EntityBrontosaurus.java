@@ -1,4 +1,4 @@
-package com.arkcraft.mod.core.entity.passive;
+package com.arkcraft.mod.core.entity.neutral;
 
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;

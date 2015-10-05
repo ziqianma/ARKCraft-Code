@@ -9,7 +9,7 @@ import com.arkcraft.mod.core.entity.EntityCobble;
 import com.arkcraft.mod.core.entity.EntityDodoEgg;
 import com.arkcraft.mod.core.entity.EntityExplosive;
 import com.arkcraft.mod.core.entity.aggressive.EntityRaptor;
-import com.arkcraft.mod.core.entity.passive.EntityBrontosaurus;
+import com.arkcraft.mod.core.entity.neutral.EntityBrontosaurus;
 import com.arkcraft.mod.core.entity.passive.EntityDodo;
 import com.arkcraft.mod.core.handlers.EntityHandler;
 import com.arkcraft.mod.core.handlers.GuiHandler;

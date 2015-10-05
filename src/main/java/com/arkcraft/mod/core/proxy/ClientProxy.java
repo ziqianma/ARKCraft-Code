@@ -23,7 +23,7 @@ import com.arkcraft.mod.core.entity.aggressive.EntityRaptor;
 import com.arkcraft.mod.core.entity.model.ModelBrontosaurus;
 import com.arkcraft.mod.core.entity.model.ModelDodo;
 import com.arkcraft.mod.core.entity.model.ModelRaptor;
-import com.arkcraft.mod.core.entity.passive.EntityBrontosaurus;
+import com.arkcraft.mod.core.entity.neutral.EntityBrontosaurus;
 import com.arkcraft.mod.core.entity.passive.EntityDodo;
 import com.arkcraft.mod.core.entity.render.RenderBrontosaurus;
 import com.arkcraft.mod.core.entity.render.RenderDodo;
