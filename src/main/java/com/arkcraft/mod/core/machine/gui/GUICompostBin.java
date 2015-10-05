@@ -20,7 +20,7 @@ import com.arkcraft.mod.core.blocks.ContainerCompostBin;
 public class GUICompostBin extends GuiContainer
 {
 	public static final ResourceLocation texture = new ResourceLocation(Main.MODID, "textures/gui/compost_bin_gui.png");
-	public String name = "Smithy";
+	public String name = "compost_bin";
 	
 	public GUICompostBin(InventoryPlayer invPlayer, World world, BlockPos pos) {
 		super(new ContainerCompostBin(invPlayer, world, pos));
