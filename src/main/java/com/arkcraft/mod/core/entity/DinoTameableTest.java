@@ -21,8 +21,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.arkcraft.mod.core.GlobalAdditions;
 import com.arkcraft.mod.core.entity.ai.EntityDinoAIFollowOwner;
+import com.arkcraft.mod.core.items.ModItems;
 
 /***
  * 
@@ -331,7 +331,7 @@ public class DinoTameableTest extends EntityMob implements IEntityOwnable {
             }
         }
         // Tame the dino with meat
-        else if (itemstack != null && itemstack.getItem() == GlobalAdditions.porkchop_raw) {
+        else if (itemstack != null && itemstack.getItem() == ModItems.porkchop_raw) {
             if (!player.capabilities.isCreativeMode) {
                 --itemstack.stackSize;
             }

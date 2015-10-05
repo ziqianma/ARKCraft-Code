@@ -23,6 +23,7 @@ import com.arkcraft.mod.core.blocks.ModBlocks;
 import com.arkcraft.mod.core.handlers.ARKEventHandler;
 import com.arkcraft.mod.core.handlers.ARKPlayerEventHandler;
 import com.arkcraft.mod.core.handlers.FMLCommonEventHandler;
+import com.arkcraft.mod.core.items.ModItems;
 import com.arkcraft.mod.core.lib.Config;
 import com.arkcraft.mod.core.network.PlayerPoop;
 import com.arkcraft.mod.core.proxy.CommonProxy;
@@ -49,8 +50,10 @@ public class Main {
 		Config.init(event.getSuggestedConfigurationFile());
 		FMLCommonHandler.instance().bus().register(new Config());
 
-		GlobalAdditions.init();
 		ModBlocks.init();
+		ModItems.init();
+		GlobalAdditions.init();
+		
 		setupNetwork();	
 		modLog = event.getModLog();		
 	}

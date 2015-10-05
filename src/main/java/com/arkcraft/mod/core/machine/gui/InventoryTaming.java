@@ -2,10 +2,10 @@ package com.arkcraft.mod.core.machine.gui;
 
 import java.util.Arrays;
 
-import com.arkcraft.mod.core.GlobalAdditions;
 import com.arkcraft.mod.core.entity.DinoTameable;
 import com.arkcraft.mod.core.items.ARKFood;
 import com.arkcraft.mod.core.items.ARKItem;
+import com.arkcraft.mod.core.items.ModItems;
 import com.arkcraft.mod.core.lib.LogHelper;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -372,7 +372,7 @@ public class InventoryTaming implements IInventory, IUpdatePlayerListBox {
 
 	// Return true if stack will tranquilize the dino 
 	public boolean isItemValidForNarcoSlot(ItemStack stack) {
-		if (stack != null && stack.getItem() == GlobalAdditions.narcoBerry || stack.getItem() == GlobalAdditions.narcotics)
+		if (stack != null && stack.getItem() == ModItems.narcoBerry || stack.getItem() == ModItems.narcotics)
 			return true;
 		else
 			return false;

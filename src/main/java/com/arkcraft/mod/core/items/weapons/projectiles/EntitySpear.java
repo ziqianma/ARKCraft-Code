@@ -1,6 +1,6 @@
 package com.arkcraft.mod.core.items.weapons.projectiles;
 
-import com.arkcraft.mod.core.GlobalAdditions;
+import com.arkcraft.mod.core.items.ModItems;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -104,6 +104,6 @@ public class EntitySpear extends EntityProjectile
 	@Override
 	public ItemStack getPickupItem()
 	{
-		return new ItemStack(GlobalAdditions.spear, 1);
+		return new ItemStack(ModItems.spear, 1);
 	}
 }

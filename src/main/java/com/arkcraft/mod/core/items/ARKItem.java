@@ -45,7 +45,7 @@ public class ARKItem extends Item {
 	public static int getItemTorporTime(ItemStack stack) {
 		if (stack != null) {
 			if (stack.getItem() instanceof ARKFood) {
-				if (stack.getItem() == (Item) GlobalAdditions.narcotics)
+				if (stack.getItem() == (Item) ModItems.narcotics)
 					return 1000;
 			}
 		}

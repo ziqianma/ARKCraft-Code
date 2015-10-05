@@ -2,7 +2,7 @@ package com.arkcraft.mod.core.entity;
 
 import net.minecraft.item.Item;
 
-import com.arkcraft.mod.core.GlobalAdditions;
+import com.arkcraft.mod.core.items.ModItems;
 
 public enum SaddleType {
     NONE(0),
@@ -37,11 +37,11 @@ public enum SaddleType {
 	public Item getSaddleType() {
 		switch (id) {
 		case 1:
-			return GlobalAdditions.saddle_small;
+			return ModItems.saddle_small;
 		case 2:
-			return GlobalAdditions.saddle_medium;
+			return ModItems.saddle_medium;
 		case 3:
-			return GlobalAdditions.saddle_large;
+			return ModItems.saddle_large;
 		default:
 			return null;
 		}

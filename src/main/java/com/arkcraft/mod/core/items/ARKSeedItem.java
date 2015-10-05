@@ -30,16 +30,16 @@ public class ARKSeedItem extends Item {
 	public static ItemStack getBerryForSeed(ItemStack stack) {
 		if (stack != null) {
 			if (stack.getItem() instanceof ARKSeedItem) {
-				if (stack.getItem() == (Item) GlobalAdditions.amarBerrySeed)
-					return new ItemStack(GlobalAdditions.amarBerry);
-				if (stack.getItem() == (Item) GlobalAdditions.azulBerrySeed)
-					return new ItemStack(GlobalAdditions.azulBerry);
-				if (stack.getItem() == (Item) GlobalAdditions.mejoBerrySeed)
-					return new ItemStack(GlobalAdditions.mejoBerry);
-				if (stack.getItem() == (Item) GlobalAdditions.narcoBerrySeed)
-					return new ItemStack(GlobalAdditions.narcoBerry);
-				if (stack.getItem() == (Item) GlobalAdditions.tintoBerrySeed)
-					return new ItemStack(GlobalAdditions.tintoBerry);
+				if (stack.getItem() == (Item) ModItems.amarBerrySeed)
+					return new ItemStack(ModItems.amarBerry);
+				if (stack.getItem() == (Item) ModItems.azulBerrySeed)
+					return new ItemStack(ModItems.azulBerry);
+				if (stack.getItem() == (Item) ModItems.mejoBerrySeed)
+					return new ItemStack(ModItems.mejoBerry);
+				if (stack.getItem() == (Item) ModItems.narcoBerrySeed)
+					return new ItemStack(ModItems.narcoBerry);
+				if (stack.getItem() == (Item) ModItems.tintoBerrySeed)
+					return new ItemStack(ModItems.tintoBerry);
 			}
 		}
 		return null;

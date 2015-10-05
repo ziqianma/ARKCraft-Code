@@ -13,7 +13,6 @@ import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.SidedProxy;
 
-import com.arkcraft.mod.core.GlobalAdditions;
 import com.arkcraft.mod.core.Main;
 import com.arkcraft.mod.core.blocks.ModBlocks;
 import com.arkcraft.mod.core.book.proxy.DCommon;
@@ -34,6 +33,7 @@ import com.arkcraft.mod.core.entity.render.RenderSimpleBullet;
 import com.arkcraft.mod.core.entity.render.RenderSpear;
 import com.arkcraft.mod.core.entity.render.RenderStoneArrow;
 import com.arkcraft.mod.core.entity.render.RenderTranqArrow;
+import com.arkcraft.mod.core.items.ModItems;
 import com.arkcraft.mod.core.items.weapons.projectiles.EntityMetalArrow;
 import com.arkcraft.mod.core.items.weapons.projectiles.EntitySimpleBullet;
 import com.arkcraft.mod.core.items.weapons.projectiles.EntitySpear;
@@ -52,20 +52,20 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void init() {
 		if(initDone) return;
-		RenderingRegistry.registerEntityRenderingHandler(EntityCobble.class, new RenderSnowball(Minecraft.getMinecraft().getRenderManager(), GlobalAdditions.cobble_ball, Minecraft.getMinecraft().getRenderItem()));
+		RenderingRegistry.registerEntityRenderingHandler(EntityCobble.class, new RenderSnowball(Minecraft.getMinecraft().getRenderManager(), ModItems.cobble_ball, Minecraft.getMinecraft().getRenderItem()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityTranqArrow.class, new RenderTranqArrow());
 		RenderingRegistry.registerEntityRenderingHandler(EntityStoneArrow.class, new RenderStoneArrow());
 		RenderingRegistry.registerEntityRenderingHandler(EntityMetalArrow.class, new RenderMetalArrow());
 
-		RenderingRegistry.registerEntityRenderingHandler(EntityDodoEgg.class, new RenderSnowball(Minecraft.getMinecraft().getRenderManager(), GlobalAdditions.dodo_egg, Minecraft.getMinecraft().getRenderItem()));
-		RenderingRegistry.registerEntityRenderingHandler(EntityExplosive.class, new RenderSnowball(Minecraft.getMinecraft().getRenderManager(), GlobalAdditions.explosive_ball, Minecraft.getMinecraft().getRenderItem()));
+		RenderingRegistry.registerEntityRenderingHandler(EntityDodoEgg.class, new RenderSnowball(Minecraft.getMinecraft().getRenderManager(), ModItems.dodo_egg, Minecraft.getMinecraft().getRenderItem()));
+		RenderingRegistry.registerEntityRenderingHandler(EntityExplosive.class, new RenderSnowball(Minecraft.getMinecraft().getRenderManager(), ModItems.explosive_ball, Minecraft.getMinecraft().getRenderItem()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityRaptor.class, new RenderRaptor(new ModelRaptor(), 0.5F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityDodo.class, new RenderDodo(new ModelDodo(), 0.3F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityBrontosaurus.class, new RenderBrontosaurus(new ModelBrontosaurus(), 0.5f));
 	//	RenderingRegistry.registerEntityRenderingHandler(EntityTranqAmmo.class, new RenderTranqAmmo());
 	//	RenderingRegistry.registerEntityRenderingHandler(EntitySimpleBullet.class, new RenderSimpleBullet());
 		
-		ModelBakery.addVariantName(GlobalAdditions.slingshot, "arkcraft:slingshot", "arkcraft:slingshot_pulled");
+		ModelBakery.addVariantName(ModItems.slingshot, "arkcraft:slingshot", "arkcraft:slingshot_pulled");
 		dossierProxy.init();
 		LogHelper.info("CommonProxy: Init run finished.");
 		initDone = true;
@@ -111,7 +111,7 @@ public class ClientProxy extends CommonProxy {
 			registerBlockTexture(b, name);
 		}
 		
-		for(Map.Entry<String, Item> e : GlobalAdditions.allItems.entrySet()) {
+		for(Map.Entry<String, Item> e : ModItems.allItems.entrySet()) {
 			String name = e.getKey();
 			Item item = e.getValue();
 			registerItemTexture(item, name);

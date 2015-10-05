@@ -57,16 +57,16 @@ public class ARKFood extends ItemFood {
 	public static ItemStack getSeedForBerry(ItemStack stack) {
 		if (stack != null) {
 			if (stack.getItem() instanceof ARKSeedItem) {
-				if (stack.getItem() == (Item) GlobalAdditions.amarBerrySeed)
-					return new ItemStack(GlobalAdditions.amarBerry);
-				if (stack.getItem() == (Item) GlobalAdditions.azulBerrySeed)
-					return new ItemStack(GlobalAdditions.azulBerry);
-				if (stack.getItem() == (Item) GlobalAdditions.mejoBerrySeed)
-					return new ItemStack(GlobalAdditions.mejoBerry);
-				if (stack.getItem() == (Item) GlobalAdditions.narcoBerrySeed)
-					return new ItemStack(GlobalAdditions.narcoBerry);
-				if (stack.getItem() == (Item) GlobalAdditions.tintoBerrySeed)
-					return new ItemStack(GlobalAdditions.tintoBerry);
+				if (stack.getItem() == (Item) ModItems.amarBerrySeed)
+					return new ItemStack(ModItems.amarBerry);
+				if (stack.getItem() == (Item) ModItems.azulBerrySeed)
+					return new ItemStack(ModItems.azulBerry);
+				if (stack.getItem() == (Item) ModItems.mejoBerrySeed)
+					return new ItemStack(ModItems.mejoBerry);
+				if (stack.getItem() == (Item) ModItems.narcoBerrySeed)
+					return new ItemStack(ModItems.narcoBerry);
+				if (stack.getItem() == (Item) ModItems.tintoBerrySeed)
+					return new ItemStack(ModItems.tintoBerry);
 			}
 		}
 		return null;
@@ -76,13 +76,13 @@ public class ARKFood extends ItemFood {
 	public static int getItemFeedTime(ItemStack stack) {
 		if (stack != null) {
 			if (stack.getItem() instanceof ARKFood) {
-				if (stack.getItem() == (Item) GlobalAdditions.porkchop_cooked)
+				if (stack.getItem() == (Item) ModItems.porkchop_cooked)
 					return 25;
-				if (stack.getItem() == (Item) GlobalAdditions.porkchop_raw)
+				if (stack.getItem() == (Item) ModItems.porkchop_raw)
 					return 10;
-				if (stack.getItem() == (Item) GlobalAdditions.primemeat_cooked)
+				if (stack.getItem() == (Item) ModItems.primemeat_cooked)
 					return 50;
-				if (stack.getItem() == (Item) GlobalAdditions.primemeat_raw)
+				if (stack.getItem() == (Item) ModItems.primemeat_raw)
 					return 25;
 			}
 		}
@@ -93,7 +93,7 @@ public class ARKFood extends ItemFood {
 	public static int getItemTorporTime(ItemStack stack) {
 		if (stack != null) {
 			if (stack.getItem() instanceof ARKFood) {
-				if (stack.getItem() == (Item) GlobalAdditions.narcoBerry)
+				if (stack.getItem() == (Item) ModItems.narcoBerry)
 					return 25;
 			}
 		}

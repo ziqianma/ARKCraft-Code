@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.arkcraft.mod.core.GlobalAdditions;
+import com.arkcraft.mod.core.items.ModItems;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
@@ -30,7 +31,7 @@ public class PestleCraftingManager {
     
 	public PestleCraftingManager() {
 		instance = this; 
-		this.addRecipe(new ItemStack(GlobalAdditions.cobble_ball), "AA ", "AA ", 'A', new ItemStack(Blocks.cobblestone));
+		this.addRecipe(new ItemStack(ModItems.cobble_ball), "AA ", "AA ", 'A', new ItemStack(Blocks.cobblestone));
 		Collections.sort(this.recipes, new Comparator() {
             public int compare(IRecipe p_compare_1_, IRecipe p_compare_2_) {
                 return p_compare_1_ instanceof ShapelessRecipes && p_compare_2_ instanceof ShapedRecipes ? 1 : (p_compare_2_ instanceof ShapelessRecipes && p_compare_1_ instanceof ShapedRecipes ? -1 : (p_compare_2_.getRecipeSize() < p_compare_1_.getRecipeSize() ? -1 : (p_compare_2_.getRecipeSize() > p_compare_1_.getRecipeSize() ? 1 : 0)));

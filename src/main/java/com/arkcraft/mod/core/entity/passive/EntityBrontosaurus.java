@@ -15,7 +15,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.pathfinding.PathNavigateGround;
 import net.minecraft.world.World;
 
-import com.arkcraft.mod.core.GlobalAdditions;
+import com.arkcraft.mod.core.items.ModItems;
 
 /***
  * 
@@ -34,7 +34,7 @@ public class EntityBrontosaurus extends EntityTameable {
 		this.tasks.addTask(++p, new EntityAIWander(this, 1.0D));
     	this.tasks.addTask(++p, new EntityAILookIdle(this));
 		this.tasks.addTask(++p, new EntityAIMate(this, 1.0D));
-		this.tasks.addTask(++p, new EntityAITempt(this, 1.0D,	GlobalAdditions.narcoBerry, false));
+		this.tasks.addTask(++p, new EntityAITempt(this, 1.0D,	ModItems.narcoBerry, false));
 		this.tasks.addTask(++p, new EntityAIFollowParent(this, 1.1D));
 		this.tasks.addTask(++p, new EntityAIWander(this, 1.0D));
         this.tasks.addTask(++p, new EntityAIFollowOwner(this, 1.0D, 8.0F, 5.0F));

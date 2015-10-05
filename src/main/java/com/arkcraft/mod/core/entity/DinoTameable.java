@@ -18,9 +18,9 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
-import com.arkcraft.mod.core.GlobalAdditions;
 import com.arkcraft.mod.core.GlobalAdditions.GUI;
 import com.arkcraft.mod.core.Main;
+import com.arkcraft.mod.core.items.ModItems;
 import com.arkcraft.mod.core.lib.LogHelper;
 import com.arkcraft.mod.core.machine.gui.InventoryDino;
 import com.arkcraft.mod.core.machine.gui.InventoryTaming;
@@ -161,12 +161,12 @@ public abstract class DinoTameable extends EntityTameable {
 			this.dropItem(Items.feather, 1); // TODO: Dodo feather instead
 		}
 		if (this.isBurning()) {
-			this.dropItem(GlobalAdditions.porkchop_cooked, 1);
+			this.dropItem(ModItems.porkchop_cooked, 1);
 		} else {
-			this.dropItem(GlobalAdditions.porkchop_raw, 1);
+			this.dropItem(ModItems.porkchop_raw, 1);
 		}
 		if (this.isSaddled()) {
-			this.dropItem(GlobalAdditions.saddle_large, 1);
+			this.dropItem(ModItems.saddle_large, 1);
 			this.dropItemsInChest(this, this.invDino);
 		}
 	}
@@ -388,7 +388,7 @@ public abstract class DinoTameable extends EntityTameable {
 			}
 		} // end of is tamed
         // Tame the dino with meat
-        else if (isTameable() && itemstack != null && itemstack.getItem() == GlobalAdditions.porkchop_raw) {
+        else if (isTameable() && itemstack != null && itemstack.getItem() == ModItems.porkchop_raw) {
             if (!player.capabilities.isCreativeMode) {
                 --itemstack.stackSize;
             }
@@ -423,9 +423,9 @@ public abstract class DinoTameable extends EntityTameable {
     }
     
 	private boolean itemIsSaddle(ItemStack itemstack) {
-		if (itemstack.getItem() == GlobalAdditions.saddle_small ||
-			itemstack.getItem() == GlobalAdditions.saddle_medium ||
-			itemstack.getItem() == GlobalAdditions.saddle_large)
+		if (itemstack.getItem() == ModItems.saddle_small ||
+			itemstack.getItem() == ModItems.saddle_medium ||
+			itemstack.getItem() == ModItems.saddle_large)
 			return true;
 		else
 			return false;

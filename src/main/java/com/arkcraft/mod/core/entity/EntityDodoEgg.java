@@ -1,7 +1,7 @@
 package com.arkcraft.mod.core.entity;
 
-import com.arkcraft.mod.core.GlobalAdditions;
 import com.arkcraft.mod.core.entity.passive.EntityDodo;
+import com.arkcraft.mod.core.items.ModItems;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityThrowable;
@@ -62,7 +62,7 @@ public class EntityDodoEgg extends EntityThrowable
         for (int j = 0; j < 8; ++j)
         {
 //        	worldObj.spawnParticle(EnumParticleTypes.SNOWBALL, this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D);
-            this.worldObj.spawnParticle(EnumParticleTypes.ITEM_CRACK, this.posX, this.posY, this.posZ, ((double)this.rand.nextFloat() - 0.5D) * 0.08D, ((double)this.rand.nextFloat() - 0.5D) * 0.08D, ((double)this.rand.nextFloat() - 0.5D) * 0.08D, new int[] {Item.getIdFromItem(GlobalAdditions.dodo_egg)});
+            this.worldObj.spawnParticle(EnumParticleTypes.ITEM_CRACK, this.posX, this.posY, this.posZ, ((double)this.rand.nextFloat() - 0.5D) * 0.08D, ((double)this.rand.nextFloat() - 0.5D) * 0.08D, ((double)this.rand.nextFloat() - 0.5D) * 0.08D, new int[] {Item.getIdFromItem(ModItems.dodo_egg)});
         }
        
 

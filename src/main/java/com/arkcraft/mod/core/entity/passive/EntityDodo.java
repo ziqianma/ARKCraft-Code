@@ -23,11 +23,11 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-import com.arkcraft.mod.core.GlobalAdditions;
 import com.arkcraft.mod.core.GlobalAdditions.GUI;
 import com.arkcraft.mod.core.Main;
 import com.arkcraft.mod.core.entity.ai.EntityDodoAILookIdle;
 import com.arkcraft.mod.core.items.ARKFood;
+import com.arkcraft.mod.core.items.ModItems;
 import com.arkcraft.mod.core.lib.LogHelper;
 import com.arkcraft.mod.core.machine.gui.InventoryDino;
 
@@ -87,7 +87,7 @@ public class EntityDodo extends EntityTameable {
         this.tasks.addTask(++p, this.aiSit);
 		this.tasks.addTask(++p, new EntityAIPanic(this, 1.4D));
 		this.tasks.addTask(++p, new EntityAIMate(this, 1.0D));
-		this.tasks.addTask(++p, new EntityAITempt(this, 1.0D,	GlobalAdditions.narcoBerry, false));
+		this.tasks.addTask(++p, new EntityAITempt(this, 1.0D,	ModItems.narcoBerry, false));
 		this.tasks.addTask(++p, new EntityAIFollowParent(this, 1.1D));
 		this.tasks.addTask(++p, new EntityAIWander(this, 1.0D));
         this.tasks.addTask(++p, new EntityAIFollowOwner(this, 1.0D, 8.0F, 5.0F));
@@ -125,13 +125,13 @@ public class EntityDodo extends EntityTameable {
         this.field_70886_e += this.field_70889_i * 2.0F;
         if (!this.worldObj.isRemote && !this.isChild() && --this.timeUntilNextEgg <= 0) {
             this.playSound("mob.chicken.plop", 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
-            this.dropItem(GlobalAdditions.dodo_egg, 1);
+            this.dropItem(ModItems.dodo_egg, 1);
             this.timeUntilNextEgg = this.rand.nextInt(6000) + 6000;
         }
         this.field_70886_e += this.field_70889_i * 2.0F;
         if (!this.worldObj.isRemote && !this.isChild() && --this.timeUntilNextEgg <= 0) {
             this.playSound(Main.MODID + ":" + "dodo_defficating", 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
-            this.dropItem(GlobalAdditions.dodo_feces, 1);
+            this.dropItem(ModItems.dodo_feces, 1);
             this.timeUntilNextEgg = this.rand.nextInt(3000) + 3000;
         }
 	}
@@ -143,7 +143,7 @@ public class EntityDodo extends EntityTameable {
 
 	@Override
 	protected Item getDropItem() {
-		return GlobalAdditions.dodo_feather;
+		return ModItems.dodo_feather;
 	}
 
 	/**
@@ -153,15 +153,15 @@ public class EntityDodo extends EntityTameable {
 	protected void dropFewItems(boolean p_70628_1_, int p_70628_2_) {
 		int j = this.rand.nextInt(3) + this.rand.nextInt(1 + p_70628_2_);
 		for (int k = 0; k < j; ++k) {
-			this.dropItem(GlobalAdditions.dodo_feather, 1);
+			this.dropItem(ModItems.dodo_feather, 1);
 		}
 		if (this.isBurning()) {
-			this.dropItem(GlobalAdditions.porkchop_cooked, 1);
+			this.dropItem(ModItems.porkchop_cooked, 1);
 		} else {
-			this.dropItem(GlobalAdditions.porkchop_raw, 1);
+			this.dropItem(ModItems.porkchop_raw, 1);
 		}
 		if (this.isChested()) {
-			this.dropItem(GlobalAdditions.dodo_bag, 1);
+			this.dropItem(ModItems.dodo_bag, 1);
 			this.dropItemsInChest(this, this.invDodo);
 		}
 	}
@@ -213,7 +213,7 @@ public class EntityDodo extends EntityTameable {
 				} // not sneaking
 				else {
 					if (itemstack != null) {
-						if (itemstack.getItem() == GlobalAdditions.dodo_bag) {
+						if (itemstack.getItem() == ModItems.dodo_bag) {
 							// Put Dodo Bag on Dodo
 							if (!player.capabilities.isCreativeMode) {
 								itemstack.stackSize--;
@@ -243,8 +243,8 @@ public class EntityDodo extends EntityTameable {
             }
 		}
         // Tame the Dodo with meat
-        else if (itemstack != null && (itemstack.getItem() == GlobalAdditions.porkchop_raw 
-        		|| itemstack.getItem() == GlobalAdditions.porkchop_cooked)) {
+        else if (itemstack != null && (itemstack.getItem() == ModItems.porkchop_raw 
+        		|| itemstack.getItem() == ModItems.porkchop_cooked)) {
             if (!player.capabilities.isCreativeMode) {
                 --itemstack.stackSize;
             }
