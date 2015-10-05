@@ -139,7 +139,7 @@ public class TileInventoryCropPlot extends TileEntity implements IInventory, IUp
 				growTime += numberOfFertilizerBurning;
 			}	else {
 				growTime -= 2;
-				increaseStackDamage(itemStacks[0]);
+				increaseStackDamage(itemStacks[SEED_SLOT]);
 			}
 
 			if (growTime < 0) growTime = 0;
@@ -238,6 +238,13 @@ public class TileInventoryCropPlot extends TileEntity implements IInventory, IUp
 				waterTimeRemaining = MAXIMUM_WATER_TIME;
 			inventoryChanged = true;
 		}
+		if (worldObj.isRaining()) {
+			waterTimeRemaining++;
+			if (waterTimeRemaining > MAXIMUM_WATER_TIME)
+				waterTimeRemaining = MAXIMUM_WATER_TIME;
+		}
+		else if (waterTimeRemaining > 0)
+			waterTimeRemaining--;
 		
 		// Iterate over all the fuel slots
 		for (int i = 0; i < FERTILIZER_SLOTS_COUNT; i++) {
@@ -248,13 +255,6 @@ public class TileInventoryCropPlot extends TileEntity implements IInventory, IUp
 					inventoryChanged = true;
 				}
 				++burningCount;
-				if (worldObj.isRaining()) {
-					waterTimeRemaining++;
-					if (waterTimeRemaining > MAXIMUM_WATER_TIME)
-						waterTimeRemaining = MAXIMUM_WATER_TIME;
-				}
-				else if (waterTimeRemaining > 0)
-					waterTimeRemaining--;
 				break; // Just use one fertilizer at a time
 			}
 		}
