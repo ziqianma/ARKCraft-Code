@@ -14,16 +14,7 @@ import com.arkcraft.mod.core.entity.passive.EntityDodo;
 import com.arkcraft.mod.core.handlers.EntityHandler;
 import com.arkcraft.mod.core.handlers.GuiHandler;
 import com.arkcraft.mod.core.handlers.RecipeHandler;
-import com.arkcraft.mod.core.items.weapons.projectiles.EntityMetalArrow;
-import com.arkcraft.mod.core.items.weapons.projectiles.EntityRocketPropelledGrenade;
-import com.arkcraft.mod.core.items.weapons.projectiles.EntitySimpleBullet;
-import com.arkcraft.mod.core.items.weapons.projectiles.EntitySimpleRifleAmmo;
-import com.arkcraft.mod.core.items.weapons.projectiles.EntitySimpleShotgunAmmo;
 import com.arkcraft.mod.core.items.weapons.projectiles.EntitySpear;
-import com.arkcraft.mod.core.items.weapons.projectiles.EntityStoneArrow;
-import com.arkcraft.mod.core.items.weapons.projectiles.EntityTranqArrow;
-import com.arkcraft.mod.core.items.weapons.projectiles.EntityTranquilizer;
-import com.arkcraft.mod.core.lib.BALANCE;
 import com.arkcraft.mod.core.lib.KeyBindings;
 
 /**
@@ -63,36 +54,11 @@ public class GlobalAdditions {
 		EntityHandler.registerEntityEgg(EntityDodo.class, "dodo", BiomeGenBase.beach, BiomeGenBase.desert, BiomeGenBase.forest, BiomeGenBase.birchForest, BiomeGenBase.extremeHills);
 		EntityHandler.registerEntityEgg(EntityBrontosaurus.class, "brontosaurus");
 		//EntityHandler.registerMonster(EntityCoelacanth.class, "coelacanth", BiomeGenBase.deepOcean, BiomeGenBase.ocean, BiomeGenBase.river);
-		
-		registerWeaponEntities();
 
 		KeyBindings.preInit();
 		
 		// Other Stuff
 		NetworkRegistry.INSTANCE.registerGuiHandler(Main.instance, new GuiHandler());
-	}
-	
-	public static void registerWeaponEntities(){
-		if (BALANCE.WEAPONS.SIMPLE_PISTOL){
-			EntityHandler.registerModEntity(EntitySimpleBullet.class, "Simple Bullet", Main.instance, 64, 10, true);
-		}
-		if (BALANCE.WEAPONS.SHOTGUN){
-			EntityHandler.registerModEntity(EntitySimpleShotgunAmmo.class, "Simple Shotgun Ammo", Main.instance, 64, 10, true);		
-		}
-		if (BALANCE.WEAPONS.LONGNECK_RIFLE)	{
-			EntityHandler.registerModEntity(EntitySimpleRifleAmmo.class, "Simple Rifle Ammo", Main.instance, 64, 10, true);
-		}
-		if (BALANCE.WEAPONS.TRANQ_GUN)	{
-			EntityHandler.registerModEntity(EntityTranquilizer.class, "Tranquilizer", Main.instance, 64, 10, true);
-		}
-		if (BALANCE.WEAPONS.ROCKET_LAUNCHER)	{
-			EntityHandler.registerModEntity(EntityRocketPropelledGrenade.class, "Rocket Propelled Grenade", Main.instance, 64, 10, true);
-		}
-		if (BALANCE.WEAPONS.CROSSBOW)	{
-			EntityHandler.registerModEntity(EntityTranqArrow.class, "Tranq Arrow", Main.instance, 64, 10, true);
-			EntityHandler.registerModEntity(EntityStoneArrow.class, "Stone Arrow", Main.instance, 64, 10, true);
-			EntityHandler.registerModEntity(EntityMetalArrow.class, "Metal Arrow", Main.instance, 64, 10, true);
-		}
 	}
 	
 	public static GlobalAdditions getInstance() { return new GlobalAdditions(); }	
