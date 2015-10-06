@@ -62,13 +62,8 @@ public class ContainerInventoryCropPlot extends Container {
 		this.addSlotToContainer(new Slot(tileInventoryCropPlot, TileInventoryCropPlot.BERRY_SLOT, 104, 17));
 	}
 	
-	/* GET ITEMS OUT ONCE CLOSED ???? */
+	/* Nothing to do, this is a furnace type container */
     public void onContainerClosed(EntityPlayer playerIn) {
-		if (playerIn.worldObj.isRemote)
-			LogHelper.info("ARKContainerCropPlot: onContainerClosed called on client.");
-		else
-			LogHelper.info("ARKContainerCropPlot: onContainerClosed called on server.");
-
     	super.onContainerClosed(playerIn);
     }
     

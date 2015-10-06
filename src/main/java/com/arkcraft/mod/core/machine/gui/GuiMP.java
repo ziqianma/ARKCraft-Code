@@ -25,7 +25,7 @@ public class GuiMP extends GuiContainer {
 	public static final ResourceLocation texture = new ResourceLocation(Main.MODID, "textures/gui/mortar_and_pestle.png");
 	
 	public GuiMP(InventoryPlayer invPlayer, World w, BlockPos pos) {
-		super(new ContainerMP(invPlayer, w, pos));
+		super(new ContainerInventoryMP(invPlayer, w, pos));
 		this.xSize = 177;
 		this.ySize = 166;
 	}

@@ -24,7 +24,7 @@ import com.arkcraft.mod.core.lib.LogHelper;
 import com.arkcraft.mod.core.machine.gui.ContainerInventoryCropPlot;
 import com.arkcraft.mod.core.machine.gui.ContainerInventoryDodo;
 import com.arkcraft.mod.core.machine.gui.ContainerInventoryTaming;
-import com.arkcraft.mod.core.machine.gui.ContainerMP;
+import com.arkcraft.mod.core.machine.gui.ContainerInventoryMP;
 import com.arkcraft.mod.core.machine.gui.ContainerSmithy;
 import com.arkcraft.mod.core.machine.gui.GUICropPlot;
 import com.arkcraft.mod.core.machine.gui.GUITaming;
@@ -43,7 +43,7 @@ public class GuiHandler implements IGuiHandler {
 		if (ID == GUI.SMITHY.getID()) 
 			return new ContainerSmithy(player.inventory, world, new BlockPos(x, y, z)); 
 		if (ID == GUI.PESTLE_AND_MORTAR.getID()) 
-			return new ContainerMP(player.inventory, world, new BlockPos(x, y, z));
+			return new ContainerInventoryMP(player.inventory, world, new BlockPos(x, y, z));
 		
 		if (ID == GUI.COMPOST_BIN.getID()) {
 			return new ContainerCompostBin(player.inventory, world, new BlockPos(x, y, z));
