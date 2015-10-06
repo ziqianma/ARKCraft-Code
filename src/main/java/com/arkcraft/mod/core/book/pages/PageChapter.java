@@ -16,20 +16,19 @@ import com.arkcraft.mod.core.book.fonts.SmallFontRenderer;
 public class PageChapter extends Page {
 
 	public String title;
-	public String icon;
+	public LinkObj[] links;
 	
 	@Override
 	public void draw(int guiLeft, int guiTop, int mouseX, int mouseY, SmallFontRenderer renderer, boolean canTranslate, GuiDossier dossier) {
-		if(icon != null) {
-			this.drawIcon(icon, dossier, guiTop, guiLeft);
-		}
 		
 		if(title != null) {
 			if(canTranslate) title = StatCollector.translateToLocal(title);
 			renderer.drawString("\u00a7n" + title, guiLeft + (dossier.guiWidth-renderer.getStringWidth(title)) / 2, guiTop + 5, 0);
 		}
 	
+		if(links != null) {
 
+		}
 	}
 	
 	public String getTitle() { return title; }
@@ -57,4 +56,5 @@ public class PageChapter extends Page {
 		}
 	}
 	
+	public LinkObj[] getLinkObjects() { return links; }
 }

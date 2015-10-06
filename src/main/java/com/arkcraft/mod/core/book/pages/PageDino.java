@@ -18,7 +18,8 @@ public class PageDino extends Page {
 	public EntityLivingBase model;
 	public String temperance;
 	public String diet;
-
+	//public String description;
+	
 	@Override
 	public void draw(int guiLeft, int guiTop, int mouseX, int mouseY, SmallFontRenderer renderer, boolean canTranslate, GuiDossier dossier) {
 		LogHelper.info("DinoPage draw() called!");

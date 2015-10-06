@@ -10,6 +10,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.lwjgl.opengl.GL11;
 
+import com.arkcraft.mod.core.book.button.PageButton;
 import com.arkcraft.mod.core.book.fonts.SmallFontRenderer;
 import com.arkcraft.mod.core.book.pages.Page;
 import com.arkcraft.mod.core.book.proxy.DClient;
@@ -25,8 +26,8 @@ import com.arkcraft.mod.core.lib.LogHelper;
 public class GuiDossier extends GuiScreen {
 
 	private ItemStack dossierItem;
-	public int guiWidth = 128;
-	public int guiHeight = 180;
+	public int guiWidth = 156;
+	public int guiHeight = 220;
 	private int currentPage;
 	private int maxPages;
 	private BookDocument dossier;
@@ -53,7 +54,7 @@ public class GuiDossier extends GuiScreen {
 		bookRight = data.rightImage;
 		this.bData = data;
 	}
-
+	
 	@SuppressWarnings("unchecked")
 	public void initGui() {
 		LogHelper.info("initGui() is called!");
@@ -63,8 +64,8 @@ public class GuiDossier extends GuiScreen {
 		int x = (this.width - guiWidth) / 2;
 		int y = (this.height - guiHeight) / 2;
 		this.buttonList.add(this.nButton = new PageButton(1, x + guiWidth
-				+ 26, y + guiHeight - 20, true));
-		this.buttonList.add(this.prevButton = new PageButton(2, x - 45, y + guiHeight - 20,
+				+ 26, y + guiHeight - 25, true));
+		this.buttonList.add(this.prevButton = new PageButton(2, x - 45, y + guiHeight - 25,
 				false));
 		
 	}
@@ -76,6 +77,7 @@ public class GuiDossier extends GuiScreen {
 				currentPage += 2;
 			if (button.id == 2 && currentPage != 0)
 				currentPage -= 2;
+
 			updateContent();
 		}
 	}

@@ -1,4 +1,4 @@
-package com.arkcraft.mod.core.book;
+package com.arkcraft.mod.core.book.button;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;

@@ -10,6 +10,13 @@
 			"type": "chapter",
 			"title": "Section 1: Dinos",
 			"icon": "dino"
+			"links": [
+				{
+				"linkText": "Carnivores",
+				"linkTo": "3",
+				"linkIcon": "textures/gui/icons/carnivore.png"
+				}
+			]
 		},
 		{
 			"type": "dino",

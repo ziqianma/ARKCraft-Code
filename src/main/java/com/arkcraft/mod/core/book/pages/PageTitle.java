@@ -35,7 +35,7 @@ public class PageTitle extends Page {
 		
 		if(text != null) {
 			if(canTranslate) StatCollector.translateToLocal(text);
-			renderer.drawSplitString(text, guiLeft + (dossier.guiWidth-renderer.getStringWidth(title)) / 2, guiTop + 85, dossier.guiWidth - 20, 0);
+			renderer.drawSplitString(text, guiLeft + (dossier.guiWidth-renderer.getStringWidth(title)) / 2, guiTop + 85, renderer.getStringWidth(title), 0);
 		}
 	}
 	
