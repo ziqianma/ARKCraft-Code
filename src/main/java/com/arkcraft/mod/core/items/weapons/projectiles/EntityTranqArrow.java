@@ -1,5 +1,7 @@
 package com.arkcraft.mod.core.items.weapons.projectiles;
 
+import com.arkcraft.mod.core.lib.BALANCE;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
@@ -11,6 +13,7 @@ public class EntityTranqArrow extends EntityArrow{
 	 public EntityTranqArrow(World worldIn)
 	    {
 	        super(worldIn);
+	        this.setDamage(BALANCE.WEAPONS.TRANQ_AMMO_DAMAGE);
 	        this.renderDistanceWeight = 10.0D;
 	        this.setSize(0.5F, 0.5F);
 	    }
@@ -18,6 +21,7 @@ public class EntityTranqArrow extends EntityArrow{
 	    public EntityTranqArrow(World worldIn, double x, double y, double z)
 	    {
 	        super(worldIn);
+	        this.setDamage(BALANCE.WEAPONS.TRANQ_AMMO_DAMAGE);
 	        this.renderDistanceWeight = 10.0D;
 	        this.setSize(0.5F, 0.5F);
 	        this.setPosition(x, y, z);
@@ -26,6 +30,7 @@ public class EntityTranqArrow extends EntityArrow{
 	    public EntityTranqArrow(World worldIn, EntityLivingBase shooter, EntityLivingBase p_i1755_3_, float p_i1755_4_, float p_i1755_5_)
 	    {
 	        super(worldIn);
+	        this.setDamage(BALANCE.WEAPONS.TRANQ_AMMO_DAMAGE);
 	        this.renderDistanceWeight = 10.0D;
 	        this.shootingEntity = shooter;
 
@@ -55,6 +60,7 @@ public class EntityTranqArrow extends EntityArrow{
 	    public EntityTranqArrow(World worldIn, EntityLivingBase shooter, float p_i1756_3_)
 	    {
 	        super(worldIn);
+	        this.setDamage(BALANCE.WEAPONS.TRANQ_AMMO_DAMAGE);
 	        this.renderDistanceWeight = 10.0D;
 	        this.shootingEntity = shooter;
 

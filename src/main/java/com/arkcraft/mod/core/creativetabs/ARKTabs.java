@@ -3,7 +3,7 @@ package com.arkcraft.mod.core.creativetabs;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
-import com.arkcraft.mod.core.GlobalAdditions;
+import com.arkcraft.mod.core.items.ModItems;
 
 public class ARKTabs extends CreativeTabs {
 
@@ -13,7 +13,7 @@ public class ARKTabs extends CreativeTabs {
 
 	@Override
 	public Item getTabIconItem() {
-		return GlobalAdditions.narcotics;
+		return ModItems.narcotics;
 	}
 
 }

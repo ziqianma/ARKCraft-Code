@@ -1,6 +1,6 @@
 package com.arkcraft.mod.core.network;
 
-import com.arkcraft.mod.core.GlobalAdditions;
+import com.arkcraft.mod.core.items.ModItems;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
@@ -40,7 +40,7 @@ public class PlayerPoop  implements IMessage {
 		public IMessage onMessage(PlayerPoop message, MessageContext ctx) {
 			EntityPlayer player = ctx.getServerHandler().playerEntity;
 			if (player != null) {
-				player.dropItem(GlobalAdditions.player_feces, 1);
+				player.dropItem(ModItems.player_feces, 1);
 			}
 			return null;
 		}

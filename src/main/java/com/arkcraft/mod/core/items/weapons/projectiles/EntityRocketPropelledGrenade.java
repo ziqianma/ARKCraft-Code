@@ -1,14 +1,10 @@
 package com.arkcraft.mod.core.items.weapons.projectiles;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
-
-import com.arkcraft.mod.core.items.weapons.handlers.WeaponDamageSource;
 
 public class EntityRocketPropelledGrenade extends EntityShootable
 {
@@ -68,7 +64,7 @@ public class EntityRocketPropelledGrenade extends EntityShootable
 		        }
 		}
 	}	
-	
+	/*
 	@Override
 	public void onEntityHit(Entity entity)
 	{
@@ -86,7 +82,7 @@ public class EntityRocketPropelledGrenade extends EntityShootable
 			playHitSound();
 			setDead();
 		}
-	}
+	}	*/
 	
 	@Override
 	public void onImpact(MovingObjectPosition movingobjectposition)

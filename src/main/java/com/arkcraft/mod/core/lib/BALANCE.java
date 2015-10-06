@@ -17,7 +17,6 @@ public final class BALANCE {
 		public static int BERRIES_MIN_PER_PICKING;
 		@DefaultInt(value = 5, minValue = 1, maxValue = 10, name = "Max Berries per pick", comment = "Maximum number of berries you get when picking")
 		public static int BERRIES_MAX_PER_PICKING;
-
 	}
 	
 	public static class GEN {
@@ -39,9 +38,15 @@ public final class BALANCE {
 		@DefaultDouble(value = 10D, minValue = 8.0D, maxValue = 20.0D, name = "Spear Damage", 
 				comment = "Spear Damage")
 		public static double SPEAR_DAMAGE;
-		@DefaultDouble(value = 3.5D, minValue = 1.0D, maxValue = 10.0D, name = "Tranq Ammo Damage", 
+		@DefaultDouble(value = 1.0D, minValue = 0.0D, maxValue = 10.0D, name = "Tranq Ammo Damage", 
 				comment = "Tranq Ammo Damage")
+		public static double TRANQ_AMMO_DAMAGE;
+		@DefaultInt(value = 50, minValue = 5, maxValue = 1000, name = "Torpor time for tranq gun ammo.", comment = "Adds seconds of torpor to dino when hit")
+		public static int TRANQ_AMMO_TORPOR_TIME;
+		@DefaultDouble(value = 0.5D, minValue = 0.0D, maxValue = 10.0D, name = "Tranq Arrow Damage", comment = "Tranq Arrow Damage")
 		public static double TRANQ_ARROW_DAMAGE;
+		@DefaultInt(value = 100, minValue = 5, maxValue = 1000, name = "Torpor time for tranq arrow.", comment = "Adds seconds of torpor to dino when hit")
+		public static int TRANQ_ARRO_TORPOR_TIME;
 		
 		@DefaultBoolean(value=true, name = "Include Simple Pistol", comment = "Include Simple Pistol")
 		public static boolean SIMPLE_PISTOL;
@@ -87,7 +92,11 @@ public final class BALANCE {
 		@DefaultInt(value = 1080, minValue = 60, maxValue = 3600, name = "Seconds of watering.", comment = "Time for one bucket to provide water in crop plot")
 		public static int SECONDS_OF_WATER_PER_BUCKET;
 		@DefaultInt(value = 45, minValue = 10, maxValue = 600, name = "Seconds to grow a berry.", comment = "Time for one berry to grow in crop plot")
-		public static int GROW_TIME_FOR_BERRY;
-		
+		public static int GROW_TIME_FOR_BERRY;	
+	}
+	
+	public static class DINO_PROPERTIES {
+		@DefaultInt(value = 120, minValue = 30, maxValue = 3600, name = "Seconds to tame raptor.", comment = "Time need to tame")
+		public static int SECONDS_TO_TAME_RAPTOR;		
 	}
 }

@@ -7,8 +7,7 @@ import java.util.List;
 import org.lwjgl.opengl.GL11;
 
 import com.arkcraft.mod.core.Main;
-import com.arkcraft.mod.core.blocks.crop_test.ContainerInventoryCropPlot;
-import com.arkcraft.mod.core.blocks.crop_test.TileInventoryCropPlot;
+import com.arkcraft.mod.core.blocks.TileInventoryCropPlot;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -72,6 +71,13 @@ public class GUICropPlot extends GuiContainer {
 
 		List<String> hoveringText = new ArrayList<String>();
 
+		// If the mouse is over the display text add the growth stage bar hovering text
+		if (isInRect(guiLeft + LABEL_XPOS, guiTop + LABEL_YPOS, 50, 8, mouseX, mouseY)){
+			hoveringText.add("Growth Stage is: ");
+			int growPercentage =(int)(tileEntity.getGrowthStage());
+			hoveringText.add(growPercentage + ".");
+		}
+		
 		// If the mouse is over the water progress bar add the progress bar hovering text
 		if (isInRect(guiLeft + WATER_BAR_XPOS, guiTop + WATER_BAR_YPOS, WATER_BAR_WIDTH, WATER_BAR_HEIGHT, mouseX, mouseY)){
 			hoveringText.add("Water Time:");

@@ -18,9 +18,9 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
-import com.arkcraft.mod.core.GlobalAdditions;
 import com.arkcraft.mod.core.GlobalAdditions.GUI;
 import com.arkcraft.mod.core.Main;
+import com.arkcraft.mod.core.items.ModItems;
 import com.arkcraft.mod.core.lib.LogHelper;
 import com.arkcraft.mod.core.machine.gui.InventoryDino;
 import com.arkcraft.mod.core.machine.gui.InventoryTaming;
@@ -35,8 +35,9 @@ public abstract class DinoTameable extends EntityTameable {
 	public InventoryDino invDino;
 	public InventoryTaming invTaming;
 	protected boolean isSaddled = false;
-	protected int torpor = 0;
-	protected int progress = 0;
+	protected boolean isTaming = false;
+//	protected int torpor = 0;
+//	protected int progress = 0;
 
 	// Other non-NBT variables:
 	protected boolean isRideable = false;
@@ -85,7 +86,7 @@ public abstract class DinoTameable extends EntityTameable {
 		super(worldIn);
 		this.getDataWatcher().addObject(DINO_SADDLED_WATCHER, Byte.valueOf((byte) 0));
         this.isTameable = true;
-		this.tamingSeconds = 120; // Set this before the InventoryTaming
+		this.tamingSeconds = 120; // Set this before the InventoryTaming (this is the default if not set)
 		this.invDino = new InventoryDino("Items", true, saddleType.getInventorySize());
 		this.invTaming = new InventoryTaming(this);
 		this.saddleType = saddleType;
@@ -160,12 +161,12 @@ public abstract class DinoTameable extends EntityTameable {
 			this.dropItem(Items.feather, 1); // TODO: Dodo feather instead
 		}
 		if (this.isBurning()) {
-			this.dropItem(GlobalAdditions.porkchop_cooked, 1);
+			this.dropItem(ModItems.porkchop_cooked, 1);
 		} else {
-			this.dropItem(GlobalAdditions.porkchop_raw, 1);
+			this.dropItem(ModItems.porkchop_raw, 1);
 		}
 		if (this.isSaddled()) {
-			this.dropItem(GlobalAdditions.saddle_large, 1);
+			this.dropItem(ModItems.saddle_large, 1);
 			this.dropItemsInChest(this, this.invDino);
 		}
 	}
@@ -190,8 +191,9 @@ public abstract class DinoTameable extends EntityTameable {
         super.writeEntityToNBT(nbt);
         if (isTameable) {
         	nbt.setBoolean("isSaddled", isSaddled);
-        	nbt.setInteger("torpor", torpor);
-        	nbt.setInteger("progress", progress);
+        	nbt.setBoolean("isTaming", isTaming);
+//        	nbt.setInteger("torpor", torpor);
+//        	nbt.setInteger("progress", progress);
         	this.invTaming.saveInventoryToNBT(nbt);
 //    		if (this.isSaddled()) {
     			this.invDino.saveInventoryToNBT(nbt);
@@ -210,12 +212,15 @@ public abstract class DinoTameable extends EntityTameable {
 	        if (nbt.hasKey("isSaddled")) {
 	        	this.setSaddled(nbt.getBoolean("isSaddled"));
 	        }
-	        if (nbt.hasKey("torpor")) {
-	        	torpor = (nbt.getInteger("torpor"));
+	        if (nbt.hasKey("isTaming")) {
+	        	this.setIsTaming(nbt.getBoolean("isTaming"));
 	        }
-	        if (nbt.hasKey("progress")) {
-	        	progress = (nbt.getInteger("progress"));
-	        }
+//	        if (nbt.hasKey("torpor")) {
+//	        	torpor = (nbt.getInteger("torpor"));
+//	        }
+//	        if (nbt.hasKey("progress")) {
+//	        	progress = (nbt.getInteger("progress"));
+//	        }
 	        // Dino taming inventory
 	        this.invTaming.loadInventoryFromNBT(nbt);
 	        // Dino Inventory
@@ -247,37 +252,36 @@ public abstract class DinoTameable extends EntityTameable {
 
 	public boolean isTameable() {
 		return this.isTameable;
-//		return torpor > 0;
 	}
 
-	public void setTorpor(int i) {
-		torpor = i;
+	public boolean isTaming() {
+		return this.isTaming;
 	}
-	public int getTorpor() {
-		return torpor;
+
+	public void setIsTaming(boolean isTaming) {
+		this.isTaming = isTaming;
 	}
-//
-//	public void addTorpor(int i) {
-//		torpor += i;
-//	}
-//
-//	public void removeTorpor(int i) {
-//		torpor -= i;
-//	}
-//
-//	public void setProgress(int i) {
-//		progress = i;
-//	}
-//
-//	public void addProgress(int i) {
-//		progress += i;
-//	}
-//
-//	public void removeProgress(int i) {
-//		progress -= i;
-//	}
 	
-    /**
+	/** Used only when tranquilizing a Dino */
+	public void increaseTorpor(int i) {
+		if (this.isTameable()) {
+			int currTorpor = this.invTaming.getTorporTime();
+			if (this.invTaming.setTorporTime((short) (currTorpor + i))) {
+				setIsTaming(true);
+				LogHelper.info("DinoTameable: Just set taming to true!");
+			}
+			LogHelper.info("DinoTameable: Set torpor to " + this.invTaming.getTorporTime());
+		}
+	}
+	
+	public int getTorpor() {
+		if (this.isTameable())
+			return this.invTaming.getTorporTime();
+		else
+			return 0;
+	}
+
+	/**
      * Called when the entity is attacked. (Needed to attack other mobs)
      */
     @Override
@@ -384,7 +388,7 @@ public abstract class DinoTameable extends EntityTameable {
 			}
 		} // end of is tamed
         // Tame the dino with meat
-        else if (isTameable() && itemstack != null && itemstack.getItem() == GlobalAdditions.porkchop_raw) {
+        else if (isTameable() && itemstack != null && itemstack.getItem() == ModItems.porkchop_raw) {
             if (!player.capabilities.isCreativeMode) {
                 --itemstack.stackSize;
             }
@@ -403,7 +407,8 @@ public abstract class DinoTameable extends EntityTameable {
             }
             return true;
         }
-        else if (isTameable()) {
+		// Tame the dino with the GUI
+        else if (isTaming()) {
             if (!this.worldObj.isRemote) {
             	player.openGui(Main.instance, GUI.TAMING_GUI.getID(), this.worldObj, 
             			(int) Math.floor(this.posX), (int) this.posY, (int) Math.floor(this.posZ));
@@ -418,9 +423,9 @@ public abstract class DinoTameable extends EntityTameable {
     }
     
 	private boolean itemIsSaddle(ItemStack itemstack) {
-		if (itemstack.getItem() == GlobalAdditions.saddle_small ||
-			itemstack.getItem() == GlobalAdditions.saddle_medium ||
-			itemstack.getItem() == GlobalAdditions.saddle_large)
+		if (itemstack.getItem() == ModItems.saddle_small ||
+			itemstack.getItem() == ModItems.saddle_medium ||
+			itemstack.getItem() == ModItems.saddle_large)
 			return true;
 		else
 			return false;
@@ -435,7 +440,10 @@ public abstract class DinoTameable extends EntityTameable {
 	}
 	
 	public void markDirty() {
-		// TODO Auto-generated method stub		
+        if (isTameable) {
+        	invDino.markDirty();;
+        	invTaming.markDirty();
+        }
 	}
 	
 	public int getTamingSeconds() {
@@ -444,7 +452,7 @@ public abstract class DinoTameable extends EntityTameable {
 
     @Override
 	public void onLivingUpdate() {
-    	if (torpor == 0) {
+    	if (getTorpor() == 0) {
     		super.onLivingUpdate();
     	}
     	// Paralyze
@@ -456,7 +464,7 @@ public abstract class DinoTameable extends EntityTameable {
             this.invTaming.update();
     	}
     }
-
+    
     /**
      * The age value may be negative or positive or zero. If it's negative, it get's incremented on each tick, if it's
      * positive, it get's decremented each tick. Don't confuse this with EntityLiving.getAge. With a negative value the

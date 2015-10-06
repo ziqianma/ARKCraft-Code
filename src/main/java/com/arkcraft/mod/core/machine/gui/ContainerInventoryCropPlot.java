@@ -1,4 +1,4 @@
-package com.arkcraft.mod.core.blocks.crop_test;
+package com.arkcraft.mod.core.machine.gui;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import com.arkcraft.mod.core.blocks.TileInventoryCropPlot;
 import com.arkcraft.mod.core.lib.LogHelper;
 
 /***
@@ -30,20 +31,6 @@ public class ContainerInventoryCropPlot extends Container {
 		this.tileInventoryCropPlot = tileInventoryCropPlot;
 		LogHelper.info("TileInventoryCropPlot: constructor called.");
 		
-		/* Crop inventory */
-		if (CROP_SLOT_COUNT != tileInventoryCropPlot.getSizeInventory()) {
-			LogHelper.error("Mismatched slot count in container(" + CROP_SLOT_COUNT + ") and CropInventory (" 
-						+ tileInventoryCropPlot.getSizeInventory()+")");
-		}
-		this.addSlotToContainer(new SlotWater(tileInventoryCropPlot, TileInventoryCropPlot.WATER_SLOT, 8, 53)); // Water input slot
-		this.addSlotToContainer(new SlotSeed(tileInventoryCropPlot, TileInventoryCropPlot.SEED_SLOT, 44, 17));  // Seed input slot
-		for(int col = TileInventoryCropPlot.FIRST_FERTILIZER_SLOT; col < CROP_SLOT_COUNT - 1; col++) {
-			addSlotToContainer(new SlotFertilizer(tileInventoryCropPlot, col, 8 + col * 18, FERTILIZER_SLOT_YPOS));
-		}
-		
-		// Berry output slot (berry is centered in 24 x 24 box (berry is 16 x 16)
-		this.addSlotToContainer(new Slot(tileInventoryCropPlot, TileInventoryCropPlot.BERRY_SLOT, 104, 17));
-		
 		/* Hotbar inventory */
 		final int HOTBAR_YPOS = 142;
 		for(int col = 0; col < 9; col++) {
@@ -58,6 +45,21 @@ public class ContainerInventoryCropPlot extends Container {
 				addSlotToContainer(new Slot(invPlayer, slotIndex, 8 + col * 18, PLAYER_INVENTORY_YPOS + row * 18));
 			}
 		}	
+
+		/* Crop inventory */
+		if (CROP_SLOT_COUNT != tileInventoryCropPlot.getSizeInventory()) {
+			LogHelper.error("Mismatched slot count in container(" + CROP_SLOT_COUNT + ") and CropInventory (" 
+						+ tileInventoryCropPlot.getSizeInventory()+")");
+		}
+		// Water and Seed slot are first two
+		this.addSlotToContainer(new SlotWater(tileInventoryCropPlot, TileInventoryCropPlot.WATER_SLOT, 8, 53)); // Water input slot
+		this.addSlotToContainer(new SlotSeed(tileInventoryCropPlot, TileInventoryCropPlot.SEED_SLOT, 44, 17));  // Seed input slot
+		// Fertilizer slots
+		for(int col = TileInventoryCropPlot.FIRST_FERTILIZER_SLOT; col < CROP_SLOT_COUNT - 1; col++) {
+			addSlotToContainer(new SlotFertilizer(tileInventoryCropPlot, col, 8 + col * 18, FERTILIZER_SLOT_YPOS));
+		}
+		// Berry output slot (berry is centered in 24 x 24 box (berry is 16 x 16)
+		this.addSlotToContainer(new Slot(tileInventoryCropPlot, TileInventoryCropPlot.BERRY_SLOT, 104, 17));
 	}
 	
 	/* GET ITEMS OUT ONCE CLOSED ???? */
@@ -81,23 +83,27 @@ public class ContainerInventoryCropPlot extends Container {
 		if(sourceSlotIndex >= 0 && sourceSlotIndex < 36) {
 			if (tileInventoryCropPlot.isItemValidForWaterSlot(sourceStack)) {
 				// This is a vanilla container slot so merge the stack into the crop plot inventory
-				if(!mergeItemStack(sourceStack, 36, 36 + TileInventoryCropPlot.WATER_SLOT, false)) {
+				if(!mergeItemStack(sourceStack, 36, 36 + TileInventoryCropPlot.WATER_SLOT 
+						+ TileInventoryCropPlot.WATER_SLOTS_COUNT, false)) {
 					return null;
 				}
 			}
-			if (tileInventoryCropPlot.isItemValidForSeedSlot(sourceStack)) {
+			else if (tileInventoryCropPlot.isItemValidForSeedSlot(sourceStack)) {
 				// This is a vanilla container slot so merge the stack into the crop plot inventory
-				if(!mergeItemStack(sourceStack, 36, 36 + TileInventoryCropPlot.SEED_SLOT, false)) {
+				if(!mergeItemStack(sourceStack, 36, 36 + TileInventoryCropPlot.SEED_SLOT 
+						+ TileInventoryCropPlot.SEED_SLOTS_COUNT, false)) {
 					return null;
 				}
 			}
-			if (tileInventoryCropPlot.isItemValidForWaterSlot(sourceStack)) {
+			else if (tileInventoryCropPlot.isItemValidForFertilizerSlot(sourceStack)) {
 				// This is a vanilla container slot so merge the stack into the crop plot inventory
 				if(!mergeItemStack(sourceStack, 36, 36 + TileInventoryCropPlot.FIRST_FERTILIZER_SLOT 
 						+ TileInventoryCropPlot.FERTILIZER_SLOTS_COUNT, false)) {
 					return null;
 				}
-			}				
+			}
+			else
+				return null;
 		}
 		// Check if the slot clicked is a crop plot container slot
 		else if (sourceSlotIndex >= 36 && sourceSlotIndex < 36 + CROP_SLOT_COUNT) {

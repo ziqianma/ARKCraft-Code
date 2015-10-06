@@ -7,7 +7,6 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-import com.arkcraft.mod.core.items.weapons.ItemRocketLauncher;
 import com.arkcraft.mod.core.items.weapons.handlers.ReloadHelper;
 import com.arkcraft.mod.core.items.weapons.projectiles.EntityRocketPropelledGrenade;
 

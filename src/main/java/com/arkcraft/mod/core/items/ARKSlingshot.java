@@ -26,14 +26,14 @@ public class ARKSlingshot extends Item {
 	public ItemStack onItemRightClick(ItemStack stack, World w, EntityPlayer p) {
 			if (p.capabilities.isCreativeMode
 					|| p.inventory
-							.consumeInventoryItem(GlobalAdditions.cobble_ball)) {
+							.consumeInventoryItem(ModItems.cobble_ball)) {
 				setLastUseTime(stack, w.getTotalWorldTime());
 				w.playSoundAtEntity(p, "random.bow", 0.5F,
 						0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
 				if (!w.isRemote)
 					w.spawnEntityInWorld(new EntityCobble(w, p));
 			}
-			else if(p.capabilities.isCreativeMode || p.inventory.consumeInventoryItem(GlobalAdditions.explosive_ball)) {
+			else if(p.capabilities.isCreativeMode || p.inventory.consumeInventoryItem(ModItems.explosive_ball)) {
 				setLastUseTime(stack, w.getTotalWorldTime());
 				w.playSoundAtEntity(p, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
 				if(!w.isRemote) w.spawnEntityInWorld(new EntityExplosive(w,p));

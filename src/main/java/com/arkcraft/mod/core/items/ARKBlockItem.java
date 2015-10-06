@@ -11,6 +11,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import com.arkcraft.mod.core.GlobalAdditions;
+import com.arkcraft.mod.core.blocks.ModBlocks;
 
 public class ARKBlockItem extends Item
 {
@@ -44,10 +45,10 @@ public class ARKBlockItem extends Item
     	            {
     	                return false;
     	            }
-    	            else if (GlobalAdditions.crop_plot.canPlaceBlockAt(worldIn, blockpos1))
+    	            else if (ModBlocks.crop_plot.canPlaceBlockAt(worldIn, blockpos1))
     	            {
     	                --stack.stackSize;
-    	                worldIn.setBlockState(blockpos1, GlobalAdditions.crop_plot.getDefaultState());
+    	                worldIn.setBlockState(blockpos1, ModBlocks.crop_plot.getDefaultState());
     	                return true;
     	            }
     	            else

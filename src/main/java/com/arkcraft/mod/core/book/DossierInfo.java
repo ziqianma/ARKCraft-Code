@@ -5,9 +5,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 
-import com.arkcraft.mod.core.GlobalAdditions;
 import com.arkcraft.mod.core.Main;
 import com.arkcraft.mod.core.book.proxy.DClient;
+import com.arkcraft.mod.core.items.ModItems;
 import com.arkcraft.mod.core.lib.LogHelper;
 /***
  * 
@@ -20,7 +20,7 @@ public class DossierInfo {
 	
 	public DossierInfo() {
 		Side side = FMLCommonHandler.instance().getEffectiveSide();
-		data = initManual(data, GlobalAdditions.dino_book.getUnlocalizedName(), "Knowledge is Power" + EnumChatFormatting.GOLD, side == Side.CLIENT ? DClient.dossier : null, "textures/items/dino_book.png");
+		data = initManual(data, ModItems.dino_book.getUnlocalizedName(), "Knowledge is Power" + EnumChatFormatting.GOLD, side == Side.CLIENT ? DClient.dossier : null, "textures/items/dino_book.png");
 	}
 	
 	public BookData initManual(BookData data, String unlocalizedName, String tooltip, BookDocument doc, String itemImage) {

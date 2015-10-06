@@ -2,7 +2,7 @@ package com.arkcraft.mod.core.blocks;
 
 import java.util.Random;
 
-import com.arkcraft.mod.core.GlobalAdditions;
+import com.arkcraft.mod.core.items.ModItems;
 import com.arkcraft.mod.core.lib.BALANCE;
 
 import net.minecraft.block.material.Material;
@@ -29,10 +29,10 @@ public class ARKBush extends ARKBlock {
 	
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-		if(rand.nextInt(10) <= 4) return rand.nextInt(10) <= 5 ? GlobalAdditions.amarBerry : GlobalAdditions.narcoBerry;
-		if(rand.nextInt(10) >= 4 && rand.nextInt(10) <= 8) return rand.nextInt(10) <= 5 ? GlobalAdditions.mejoBerry : GlobalAdditions.tintoBerry;
-		if(rand.nextInt(10) <= 8) return GlobalAdditions.fiber;
-		else { return GlobalAdditions.azulBerry; }
+		if(rand.nextInt(10) <= 4) return rand.nextInt(10) <= 5 ? ModItems.amarBerry : ModItems.narcoBerry;
+		if(rand.nextInt(10) >= 4 && rand.nextInt(10) <= 8) return rand.nextInt(10) <= 5 ? ModItems.mejoBerry : ModItems.tintoBerry;
+		if(rand.nextInt(10) <= 8) return ModItems.fiber;
+		else { return ModItems.azulBerry; }
 	}
 	
 	// Called when bush is right clicked

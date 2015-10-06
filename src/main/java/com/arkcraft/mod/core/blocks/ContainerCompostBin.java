@@ -1,4 +1,4 @@
-package com.arkcraft.mod.core.machine.gui;
+package com.arkcraft.mod.core.blocks;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -12,15 +12,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
-import com.arkcraft.mod.core.blocks.ModBlocks;
 import com.arkcraft.mod.core.handlers.SmithyCraftingManager;
 
-/***
- * 
- * @author Vastatio
- *
- */
-public class ContainerSmithy extends Container {
+public class ContainerCompostBin extends Container {
 
 	public InventoryCrafting craftMatrix;
 	public IInventory craftResult[] = new InventoryCraftResult[24];
@@ -29,7 +23,7 @@ public class ContainerSmithy extends Container {
 	private BlockPos pos;
 	private boolean oneOutputSlot = false;
 
-	public ContainerSmithy(InventoryPlayer invPlayer, World world, BlockPos pos) {
+	public ContainerCompostBin(InventoryPlayer invPlayer, World world, BlockPos pos) {
 		this.world = world;
 		this.pos = pos;
 		craftMatrix = new InventoryCrafting(this, 4, 6);

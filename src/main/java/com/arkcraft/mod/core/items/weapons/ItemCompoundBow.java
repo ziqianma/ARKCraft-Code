@@ -14,6 +14,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.arkcraft.mod.core.GlobalAdditions;
+import com.arkcraft.mod.core.items.ModItems;
 import com.arkcraft.mod.core.items.weapons.projectiles.EntityMetalArrow;
 import com.arkcraft.mod.core.items.weapons.projectiles.EntityStoneArrow;
 import com.arkcraft.mod.core.items.weapons.projectiles.EntityTranqArrow;
@@ -40,7 +41,7 @@ public class ItemCompoundBow extends ItemBow{
 
         boolean flag = playerIn.capabilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantment.infinity.effectId, stack) > 0;
 
-        if (flag || playerIn.inventory.hasItem(GlobalAdditions.tranq_arrow))
+        if (flag || playerIn.inventory.hasItem(ModItems.tranq_arrow))
         {
             float f = (float)j / 20.0F;
             f = (f * f + f * 2.0F) / 3.0F;
@@ -90,9 +91,9 @@ public class ItemCompoundBow extends ItemBow{
             }
             else
             {
-                playerIn.inventory.consumeInventoryItem(GlobalAdditions.tranq_arrow);
-                playerIn.inventory.consumeInventoryItem(GlobalAdditions.stone_arrow);
-                playerIn.inventory.consumeInventoryItem(GlobalAdditions.metal_arrow);
+                playerIn.inventory.consumeInventoryItem(ModItems.tranq_arrow);
+                playerIn.inventory.consumeInventoryItem(ModItems.stone_arrow);
+                playerIn.inventory.consumeInventoryItem(ModItems.metal_arrow);
             }
 
             playerIn.triggerAchievement(StatList.objectUseStats[Item.getIdFromItem(this)]);
@@ -103,7 +104,7 @@ public class ItemCompoundBow extends ItemBow{
             }
         }
        
-        if (flag || playerIn.inventory.hasItem(GlobalAdditions.stone_arrow))
+        if (flag || playerIn.inventory.hasItem(ModItems.stone_arrow))
         {
             float f = (float)j / 20.0F;
             f = (f * f + f * 2.0F) / 3.0F;
@@ -153,7 +154,7 @@ public class ItemCompoundBow extends ItemBow{
             }
             else
             {
-                playerIn.inventory.consumeInventoryItem(GlobalAdditions.stone_arrow);
+                playerIn.inventory.consumeInventoryItem(ModItems.stone_arrow);
             }
 
             playerIn.triggerAchievement(StatList.objectUseStats[Item.getIdFromItem(this)]);
@@ -164,7 +165,7 @@ public class ItemCompoundBow extends ItemBow{
             }
         }    
         
-        if (flag || playerIn.inventory.hasItem(GlobalAdditions.metal_arrow))
+        if (flag || playerIn.inventory.hasItem(ModItems.metal_arrow))
         {
             float f = (float)j / 20.0F;
             f = (f * f + f * 2.0F) / 3.0F;
@@ -214,7 +215,7 @@ public class ItemCompoundBow extends ItemBow{
             }
             else
             {
-                playerIn.inventory.consumeInventoryItem(GlobalAdditions.metal_arrow);
+                playerIn.inventory.consumeInventoryItem(ModItems.metal_arrow);
             }
 
             playerIn.triggerAchievement(StatList.objectUseStats[Item.getIdFromItem(this)]);
@@ -241,15 +242,15 @@ public class ItemCompoundBow extends ItemBow{
 	@Override
 	public ItemStack onItemRightClick(ItemStack stack, World w, EntityPlayer p) {
 	
-			 if (p.capabilities.isCreativeMode || p.inventory.hasItem(GlobalAdditions.tranq_arrow))
+			 if (p.capabilities.isCreativeMode || p.inventory.hasItem(ModItems.tranq_arrow))
 		        {
 		            p.setItemInUse(stack, this.getMaxItemUseDuration(stack));
 		        }
-			 if (p.capabilities.isCreativeMode || p.inventory.hasItem(GlobalAdditions.stone_arrow))
+			 if (p.capabilities.isCreativeMode || p.inventory.hasItem(ModItems.stone_arrow))
 		        {
 		            p.setItemInUse(stack, this.getMaxItemUseDuration(stack));
 		        }
-			 if (p.capabilities.isCreativeMode || p.inventory.hasItem(GlobalAdditions.metal_arrow))
+			 if (p.capabilities.isCreativeMode || p.inventory.hasItem(ModItems.metal_arrow))
 		        {
 		            p.setItemInUse(stack, this.getMaxItemUseDuration(stack));
 		        }

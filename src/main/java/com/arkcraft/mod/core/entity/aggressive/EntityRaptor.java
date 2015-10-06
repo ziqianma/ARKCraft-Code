@@ -27,10 +27,11 @@ import net.minecraft.pathfinding.PathNavigateGround;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
-import com.arkcraft.mod.core.GlobalAdditions;
 import com.arkcraft.mod.core.Main;
 import com.arkcraft.mod.core.entity.DinoTameable;
 import com.arkcraft.mod.core.entity.SaddleType;
+import com.arkcraft.mod.core.items.ModItems;
+import com.arkcraft.mod.core.lib.BALANCE;
 import com.arkcraft.mod.core.lib.LogHelper;
 import com.google.common.base.Predicate;
 
@@ -49,7 +50,7 @@ public class EntityRaptor extends DinoTameable {
 	
 	@SuppressWarnings("rawtypes")
 	public EntityRaptor(World world, int raptorType) {
-		super(world, SaddleType.SMALL);
+		super(world, SaddleType.SMALL, true, BALANCE.DINO_PROPERTIES.SECONDS_TO_TAME_RAPTOR);
         this.setSize(0.8F, 1.5F);
 
         ((PathNavigateGround)this.getNavigator()).func_179690_a(true);
@@ -125,12 +126,12 @@ public class EntityRaptor extends DinoTameable {
 	protected void dropFewItems(boolean p_70628_1_, int p_70628_2_) {
 		int numDrops = this.rand.nextInt(2) + 2;
 		if (this.isBurning()) {
-			this.dropItem(GlobalAdditions.porkchop_cooked, numDrops);
+			this.dropItem(ModItems.porkchop_cooked, numDrops);
 		} else {
-			this.dropItem(GlobalAdditions.porkchop_raw, numDrops);
+			this.dropItem(ModItems.porkchop_raw, numDrops);
 		}
 		if (this.isSaddled()) {
-			this.dropItem(GlobalAdditions.saddle_small, 1);
+			this.dropItem(ModItems.saddle_small, 1);
 		}
 		// Drop 1 - 3 leather
 		numDrops = this.rand.nextInt(3) + 1;
