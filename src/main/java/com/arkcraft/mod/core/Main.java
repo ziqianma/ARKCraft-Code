@@ -60,8 +60,8 @@ public class Main {
 		FMLCommonHandler.instance().bus().register(new FMLCommonEventHandler());
 		proxy.registerRenderers();
 		proxy.registerWeapons();
-		proxy.init();
 		proxy.registerEventHandlers();		
+		proxy.init();
 	}
 	
 	@EventHandler

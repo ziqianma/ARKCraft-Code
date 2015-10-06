@@ -10,8 +10,12 @@ import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 
-
-@SuppressWarnings({ "rawtypes","unchecked" }) //	"rawtypes",
+/***
+ * 
+ * @author Vastatio
+ *
+ */
+@SuppressWarnings({ "rawtypes","unchecked" })
 public class EntityHandler {
 	
 	static int entityID = 300;
@@ -44,7 +48,7 @@ public class EntityHandler {
 	
 	 public static void registerEntityEgg(Class eClass,  String name,  BiomeGenBase... biomes)
 	    {
-	    	int id = getUniqueEntityId();
+	    	int id = EntityRegistry.findGlobalUniqueEntityId();
 	    	Random rand = new Random(name.hashCode());
 			int mainColor = rand.nextInt() * 16777215;
 			int secondColor = rand.nextInt() * 16777215;
@@ -74,14 +78,4 @@ public class EntityHandler {
 		EntityRegistry.registerModEntity(eClass, name, ++entityID, mainClass, trackRange, updateFreq, sVU);
 	}
 
-	private static int getUniqueEntityId() {
-	
-		do
-		{
-			entityID++;
-		}
-		while (EntityList.getStringFromID(entityID) != null);
-		
-		return entityID;
-	}	
 }
