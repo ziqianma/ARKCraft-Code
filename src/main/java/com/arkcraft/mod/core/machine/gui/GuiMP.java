@@ -5,13 +5,12 @@ import java.awt.Color;
 import org.lwjgl.opengl.GL11;
 
 import com.arkcraft.mod.core.Main;
+import com.arkcraft.mod.core.blocks.TileInventoryMP;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
 
 /* Mortar and Pestle */
 /***
@@ -24,8 +23,8 @@ public class GuiMP extends GuiContainer {
 	public String name = "Mortar and Pestle";
 	public static final ResourceLocation texture = new ResourceLocation(Main.MODID, "textures/gui/mortar_and_pestle.png");
 	
-	public GuiMP(InventoryPlayer invPlayer, World w, BlockPos pos) {
-		super(new ContainerInventoryMP(invPlayer, w, pos));
+	public GuiMP(InventoryPlayer invPlayer, TileInventoryMP tileInventoryMP) {
+		super(new ContainerInventoryMP(invPlayer, tileInventoryMP));
 		this.xSize = 177;
 		this.ySize = 166;
 	}

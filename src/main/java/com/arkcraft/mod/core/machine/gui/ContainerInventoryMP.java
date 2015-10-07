@@ -7,31 +7,20 @@ import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
-import net.minecraft.world.World;
 
-import com.arkcraft.mod.core.blocks.ModBlocks;
 import com.arkcraft.mod.core.blocks.TileInventoryMP;
 import com.arkcraft.mod.core.lib.LogHelper;
 
 public class ContainerInventoryMP extends Container {
 
-	public World world;
-	public InventoryPlayer invPlayer;
-	public BlockPos pos;
-//	public InventoryCrafting inputSlots;
 	private TileInventoryMP tileInventoryMP;
 	private final int MP_SLOT_COUNT = 10;
 	// These store cache values, used by the server to only update the client side tile entity when values have changed
 	private int [] cachedFields;
 	public static final int RECIPE_ITEM_SLOT_YPOS = 62;
 
-	public ContainerInventoryMP(InventoryPlayer invPlayer, World world, BlockPos pos) {
+	public ContainerInventoryMP(InventoryPlayer invPlayer, TileInventoryMP tileInventoryMP) {
 		LogHelper.info("ContainerMP: constructor called.");
-		this.world = world;
-		this.invPlayer = invPlayer;
-		this.pos = pos;
-//		inputSlots = new InventoryCrafting(this, 2, 1);
 		
 		/* Hotbar inventory */
 		final int HOTBAR_YPOS = 142;
@@ -108,10 +97,7 @@ public class ContainerInventoryMP extends Container {
 
 	@Override
 	public boolean canInteractWith(EntityPlayer playerIn) {
-		if (world.getBlockState(pos).getBlock() != ModBlocks.pestle) 
-			return false;
-		else
-			return playerIn.getDistanceSq((double)pos.getX() + 0.5D, (double)pos.getY() + 0.5D, (double)pos.getZ() + 0.5D) <= 64.0D;	
+		return tileInventoryMP.isUseableByPlayer(playerIn);
 	}
 
 	// This is where you check if any values have changed and if so send an update to any clients accessing this container
