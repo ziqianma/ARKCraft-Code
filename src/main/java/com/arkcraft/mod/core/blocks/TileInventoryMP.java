@@ -2,8 +2,7 @@ package com.arkcraft.mod.core.blocks;
 
 import java.util.Arrays;
 
-import com.arkcraft.mod.core.items.ARKFecesItem;
-import com.arkcraft.mod.core.items.ARKSeedItem;
+import com.arkcraft.mod.core.handlers.PestleCraftingManager;
 import com.arkcraft.mod.core.lib.LogHelper;
 
 import net.minecraft.block.state.IBlockState;
@@ -30,14 +29,22 @@ import net.minecraft.world.World;
  *
  */
 public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePlayerListBox {
+
 	public static final int BLUEPRINT_SLOTS_COUNT = 1;
-	public static final int INVENTORY_SLOTS_COUNT = 6;
-	public static final int TOTAL_SLOTS_COUNT = BLUEPRINT_SLOTS_COUNT + INVENTORY_SLOTS_COUNT;
+	public static final int INVENTORY_SLOTS_COUNT = 8;
+	public static final int TOTAL_SLOTS_COUNT = INVENTORY_SLOTS_COUNT;
 
 	public static final int BLUEPRINT_SLOT = 0;
-	public static final int FIRST_INVENTORY_SLOT = 2;
+	public static final int FIRST_INVENTORY_SLOT = 0;
+	public static final int LAST_INVENTORY_SLOT = INVENTORY_SLOTS_COUNT - 1; 
 
-	// Create and initialize the itemStacks variable that will store store the itemStacks
+	// Create and initialize the itemStacks variable that will store the blueprints
+	private ItemStack[] blueprintStacks = new ItemStack[BLUEPRINT_SLOTS_COUNT];
+	
+	/** The blueprint in the blueprint slots that is selected */
+	private short blueprintSlotSelected = 0; // Currently just one slot
+	
+	// Create and initialize the itemStacks variable that will store the itemStacks
 	private ItemStack[] itemStacks = new ItemStack[TOTAL_SLOTS_COUNT];
 	
 	// Other class variables
@@ -46,8 +53,13 @@ public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePl
 	/** The number of ticks the current item has been crafting */
 	private short craftingTime;
 	/** The number of ticks required to grow a berry */
-	private static final short CRAFT_TIME_FOR_ITEM = 10;  // vanilla value is 45 seconds
+	private static final short CRAFT_TIME_FOR_ITEM = 10;  // vanilla value is 10 seconds
 
+	/** Time to craft current item being crafted */
+	public int craftingTimeRemainingOnItem() {
+		return (int) craftingTime;
+	}
+	
 	// Maybe change to seconds?
 	// Returns double between 0 and 1 representing % done
 	public double fractionCraftingRemaining() {
@@ -56,8 +68,6 @@ public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePl
 	}
 
 	// This method is called every tick to update the tile entity, i.e.
-	// - see if the fertilizer has run out, and if so turn the crop plot "off" and slowly un-grow the current item (if any)
-	// - see if any of the items have finished growing and ready to harvest
 	// It runs both on the server and the client.
 	@Override
 	public void update() {
@@ -68,21 +78,20 @@ public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePl
 			tick = 20;
 		}
 		
-		// If there is no seed or water, or there is no room in the output, reset growTime and return
+		// If there is no items available for the selected recipe, or there is no room in the output, reset craftingTime and return
 		if (canCraft()) {
-			if (craftingTime < 0) craftingTime = 0;
-			
-			// If growTime has reached maximum, harvest a berry and reset growTime
-			if (craftingTime >= CRAFT_TIME_FOR_ITEM) {
+			craftingTime--;			
+			// If craftingTime has reached 0, craft the item and reset craftingTime
+			if (craftingTime <= 0) {
 				craftItem();
-				craftingTime = 0;
+				craftingTime = CRAFT_TIME_FOR_ITEM;
 			}
 		}
 	}
 
 	/**
-	 * Check if the plot is harvestable and there is sufficient space in the output slots
-	 * @return true if harvesting a berry is possible
+	 * Check if the item is craftable and there is sufficient space in the output slots
+	 * @return true if crafting the item is possible
 	 */
 	private boolean canCraft() {return craftItem(false);}
 
@@ -92,23 +101,57 @@ public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePl
 	private void craftItem() {craftItem(true);}
 
 	/**
-	 * checks that there is an item to be harvested in one of the input slots and that there is room for the result in the output slots
-	 * If desired, performs the berry harvest
-	 * @param harvestBerry  If true, harvest a berry. If false, check whether harvesting is possible, but don't change the inventory
-	 * @return false if no berry can be harvested, true otherwise
+	 * checks that there are enough items to craft the item and that there is room for the result in the output slots
+	 * If desired, crafts the item
+	 * @param harvestBerry  If true, craft the item. If false, check whether crafting is possible, but don't change the inventory
+	 * @return false if no item can be crafted, true otherwise
 	 */
-	private boolean craftItem(boolean craftItem){
+	private boolean craftItem(boolean doCraftItem){
 		Integer firstSuitableOutputSlot = null;
-		ItemStack result = null;
-		boolean canCraftItem = true;
+		ItemStack result = blueprintStacks[blueprintSlotSelected];
+		boolean canCraftItem = false; // set by crafting manager
 
-		if (craftingTime <= 0) {
-			craftingTime = 0;
-			canCraftItem = false;				 
-		}
+		// No recipes?
+		if (result == null)
+			return false;
 		
+		// find the first suitable output slot, 1st check for identical item that has enough space
+		for (int outputSlot = LAST_INVENTORY_SLOT; outputSlot > FIRST_INVENTORY_SLOT; outputSlot--) {
+			ItemStack outputStack = itemStacks[outputSlot];
+			if (outputStack != null && outputStack.getItem() == result.getItem() && 
+					(!outputStack.getHasSubtypes() || outputStack.getMetadata() == outputStack.getMetadata())
+					&& ItemStack.areItemStackTagsEqual(outputStack, result)) {
+				int combinedSize = itemStacks[outputSlot].stackSize + result.stackSize;
+				if (combinedSize <= getInventoryStackLimit() && combinedSize <= itemStacks[outputSlot].getMaxStackSize()) {
+					firstSuitableOutputSlot = outputSlot;
+					break;
+				}
+			}
+		}
+		if (firstSuitableOutputSlot == null) {
+			// 2nd look for for empty slot if no partially filled slots are found
+			for (int outputSlot = LAST_INVENTORY_SLOT; outputSlot > FIRST_INVENTORY_SLOT; outputSlot--) {
+				ItemStack outputStack = itemStacks[outputSlot];
+				if (outputStack == null) {
+					firstSuitableOutputSlot = outputSlot;
+					break;
+				}
+			}
+		}
+		if (firstSuitableOutputSlot == null)
+			return false;
+
+		// finds if there is enough inventory to craft the result
+		canCraftItem = PestleCraftingManager.getInstance().hasMatchingRecipe(result, itemStacks, false);
+
+		if (!canCraftItem)
+			return false;
+
 		// If true, we craft item
-		if (!craftItem) return true;
+		if (!doCraftItem) return true;
+
+		// Craft an item
+		PestleCraftingManager.getInstance().hasMatchingRecipe(result, itemStacks, true);
 
 		// alter output slot
 		if (itemStacks[firstSuitableOutputSlot] == null) {
@@ -120,18 +163,9 @@ public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePl
 		return true;
 	}
 
-	// returns the growth result for the given stack. Returns null if the given stack can not be grown
-	public static ItemStack getGrowingResultForItem(ItemStack stack) { return ARKSeedItem.getBerryForSeed(stack); }
-
-	// returns the number of ticks the given item will grow. Returns 0 if the given item is not a valid fertilizer
-	public static short getItemGrowTime(ItemStack stack) {
-		int growtime = ARKFecesItem.getItemGrowTime(stack);
-		return (short)MathHelper.clamp_int(growtime, 0, Short.MAX_VALUE);
-	}
-
 	@Override
 	public String getName() {
-		return "container.crop_plot.name";
+		return "container.mortar_and_pestle.name";
 	}
 
 	@Override
@@ -226,10 +260,8 @@ public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePl
 	
 	// Return true if stack is a valid fertilizer for the crop plot
 	public boolean isItemValidForRecipeSlot(ItemStack stack) {
-		if (stack != null && stack.getItem() instanceof ARKFecesItem)
-			return true;
-		else
-			return false;
+		// TODO: Check that item is in a recipe
+		return true;
 	}
 
 	//------------------------------
@@ -260,8 +292,8 @@ public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePl
 		parentNBTTagCompound.setTag("Items", dataForAllSlots);
 
 		// Save everything else
-		parentNBTTagCompound.setShort("growTime", craftingTime);
-		LogHelper.info("TileInventoryCropPlot: Wrote inventory.");
+		parentNBTTagCompound.setShort("craftingTime", craftingTime);
+		LogHelper.info("TileInventoryMP: Wrote inventory.");
 	}
 
 	// This is where you load the data that you saved in writeToNBT
@@ -282,8 +314,8 @@ public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePl
 		}
 
 		// Load everything else.  Trim the arrays (or pad with 0) to make sure they have the correct number of elements
-		craftingTime = nbtTagCompound.getShort("growTime");
-		LogHelper.info("TileInventoryCropPlot: Read inventory.");
+		craftingTime = nbtTagCompound.getShort("craftingTime");
+		LogHelper.info("TileInventoryMP: Read inventory.");
 	}
 
 	// When the world loads from disk, the server needs to send the TileEntity information to the client
