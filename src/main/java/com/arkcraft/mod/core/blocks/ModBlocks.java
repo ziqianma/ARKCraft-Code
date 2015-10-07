@@ -54,6 +54,7 @@ public class ModBlocks {
 
 		// Tile Entities
 		GameRegistry.registerTileEntity(TileInventoryCropPlot.class, "TileInventoryCropPlot");
+		GameRegistry.registerTileEntity(TileInventoryMP.class, "TileInventoryMP");
 		GameRegistry.registerTileEntity(TileEntityCompostBin.class, "TileEntityCompostBin");		
 	}
 		

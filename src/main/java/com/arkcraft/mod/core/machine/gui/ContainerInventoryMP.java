@@ -14,12 +14,14 @@ import com.arkcraft.mod.core.lib.LogHelper;
 public class ContainerInventoryMP extends Container {
 
 	private TileInventoryMP tileInventoryMP;
-	private final int MP_SLOT_COUNT = 10;
+//	private TileInventory?? tileInventoryBP;
+	private final int MP_SLOT_COUNT = 9;
 	// These store cache values, used by the server to only update the client side tile entity when values have changed
 	private int [] cachedFields;
 	public static final int RECIPE_ITEM_SLOT_YPOS = 62;
 
 	public ContainerInventoryMP(InventoryPlayer invPlayer, TileInventoryMP tileInventoryMP) {
+		this.tileInventoryMP = tileInventoryMP;
 		LogHelper.info("ContainerMP: constructor called.");
 		
 		/* Hotbar inventory */
@@ -39,7 +41,7 @@ public class ContainerInventoryMP extends Container {
 
 		/* MP inventory */
 		// Recipe blueprint slot
-		this.addSlotToContainer(new Slot(tileInventoryMP, TileInventoryMP.BLUEPRINT_SLOT, 44, 18));
+//		this.addSlotToContainer(new Slot(tileInventoryBP, TileInventoryMP.BLUEPRINT_SLOT, 44, 18));
 		// Fertilizer slots
 		for(int col = TileInventoryMP.FIRST_INVENTORY_SLOT; col < MP_SLOT_COUNT - 1; col++) {
 			addSlotToContainer(new SlotRecipeInventory(tileInventoryMP, col, 8 + col * 18, RECIPE_ITEM_SLOT_YPOS));

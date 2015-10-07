@@ -50,11 +50,20 @@ public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePl
 	// Other class variables
 	int tick = 20;
 	
-	/** The number of ticks the current item has been crafting */
-	private short craftingTime;
-	/** The number of ticks required to grow a berry */
+	/** The number of items that can be crafted */
+	private int numToBeCrafted = 0;
+	public int getNumToBeCrafted() {
+		return numToBeCrafted;
+	}
+	public void setNumToBeCrafted(int numToBeCrafted) {
+		this.numToBeCrafted = numToBeCrafted;
+	}
+
+	/** The number of seconds required to craft an item */
 	private static final short CRAFT_TIME_FOR_ITEM = 10;  // vanilla value is 10 seconds
 
+	/** The number of seconds the current item has been crafting */
+	private short craftingTime;
 	/** Time to craft current item being crafted */
 	public int craftingTimeRemainingOnItem() {
 		return (int) craftingTime;
@@ -82,8 +91,9 @@ public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePl
 		if (canCraft()) {
 			craftingTime--;			
 			// If craftingTime has reached 0, craft the item and reset craftingTime
-			if (craftingTime <= 0) {
+			if (craftingTime <= 0 && numToBeCrafted > 0) {
 				craftItem();
+				numToBeCrafted--;
 				craftingTime = CRAFT_TIME_FOR_ITEM;
 			}
 		}
@@ -269,8 +279,7 @@ public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePl
 	// This is where you save any data that you don't want to lose when the tile entity unloads
 	// In this case, it saves the state of the furnace (burn time etc) and the itemstacks stored in the fuel, input, and output slots
 	@Override
-	public void writeToNBT(NBTTagCompound parentNBTTagCompound)
-	{
+	public void writeToNBT(NBTTagCompound parentNBTTagCompound){
 		super.writeToNBT(parentNBTTagCompound); // The super call is required to save and load the tiles location
 
 		// Save the stored item stacks
@@ -298,8 +307,7 @@ public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePl
 
 	// This is where you load the data that you saved in writeToNBT
 	@Override
-	public void readFromNBT(NBTTagCompound nbtTagCompound)
-	{
+	public void readFromNBT(NBTTagCompound nbtTagCompound){
 		super.readFromNBT(nbtTagCompound); // The super call is required to save and load the tiles location
 		final byte NBT_TYPE_COMPOUND = 10;       // See NBTBase.createNewByType() for a listing
 		NBTTagList dataForAllSlots = nbtTagCompound.getTagList("Items", NBT_TYPE_COMPOUND);
