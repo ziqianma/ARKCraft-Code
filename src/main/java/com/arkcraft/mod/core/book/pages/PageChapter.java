@@ -27,7 +27,6 @@ public class PageChapter extends Page {
 		}
 	
 		if(links != null) {
-
 		}
 	}
 	

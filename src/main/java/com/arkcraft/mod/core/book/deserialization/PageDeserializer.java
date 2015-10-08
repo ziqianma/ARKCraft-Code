@@ -26,6 +26,7 @@ public class PageDeserializer implements JsonDeserializer<Page> {
 			LogHelper.info("Deserializing Objects! PageDeserializer.deserialize() called!");
 			Class<? extends Page> pageClass = PageData.getPageClass(jObject.get("type").getAsString());
 			LogHelper.info("Reached after pageClass.");
+			
 			LogHelper.info(jObject.get("type") == null ? "JObject is null!" : "JObject is not null.");
 			LogHelper.info(pageClass == null ? "Page Class is null!" : "Page class is not null.");
 			return context.deserialize(jObject, pageClass);

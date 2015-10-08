@@ -8,7 +8,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
 
 import com.arkcraft.mod.core.Main;
-import com.arkcraft.mod.core.book.deserialization.BookDeserializer;
 import com.arkcraft.mod.core.book.deserialization.PageDeserializer;
 import com.arkcraft.mod.core.book.pages.IPage;
 import com.arkcraft.mod.core.lib.LogHelper;
@@ -23,7 +22,6 @@ public class DossierParser {
 
 	public static BookDocument parseJSON(GsonBuilder gBuilder, String location) {
 		gBuilder = new GsonBuilder();
-		gBuilder.registerTypeAdapter(BookDocument.class, new BookDeserializer());
 		gBuilder.registerTypeAdapter(IPage.class, new PageDeserializer());
 		Gson gson = gBuilder.create();
 		ResourceLocation rloc = new ResourceLocation(Main.MODID, location);

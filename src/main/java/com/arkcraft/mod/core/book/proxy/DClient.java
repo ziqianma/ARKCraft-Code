@@ -11,7 +11,6 @@ import net.minecraft.util.ResourceLocation;
 import com.arkcraft.mod.core.Main;
 import com.arkcraft.mod.core.book.BookDocument;
 import com.arkcraft.mod.core.book.DossierInfo;
-import com.arkcraft.mod.core.book.deserialization.BookDeserializer;
 import com.arkcraft.mod.core.book.deserialization.EntityLivingBaseDeserializer;
 import com.arkcraft.mod.core.book.deserialization.PageDeserializer;
 import com.arkcraft.mod.core.book.fonts.SmallFontRenderer;
@@ -46,7 +45,6 @@ public class DClient extends DCommon {
 		registerPageClasses();
 		registerModelClasses();
 		GsonBuilder gBuilder = info.data.getGsonBuilder();
-		gBuilder.registerTypeAdapter(BookDocument.class, new BookDeserializer());
 		gBuilder.registerTypeAdapter(Page.class, new PageDeserializer());
 		gBuilder.registerTypeAdapter(EntityLivingBase.class, new EntityLivingBaseDeserializer());
 		String lang = mc.getLanguageManager().getCurrentLanguage().getLanguageCode();
