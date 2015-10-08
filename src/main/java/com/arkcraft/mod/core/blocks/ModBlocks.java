@@ -27,7 +27,8 @@ public class ModBlocks {
 	public static Block blockNarcoBrerry;
 	public static ARKBlockSpikes wooden_spikes;
 	public static BlockCompostBin compost_bin;
-	public static ARKContainerBlock smithy, pestle;	
+	public static ARKContainerBlock smithy;	
+	public static BlockInventoryMP pestle;
 	public static BlockInventoryCropPlot crop_plot;
 
 	public static ModBlocks getInstance() { return new ModBlocks(); }
@@ -48,11 +49,12 @@ public class ModBlocks {
 
 		// Containers
 		smithy = addContainer("smithy", 0.4F, Material.wood, GUI.SMITHY.getID(), false, false, 3);
-		pestle = addContainer("mortar_and_pestle", 0.4F, Material.rock, GUI.PESTLE_AND_MORTAR.getID(), false, false, 3);
+		pestle = addMPContainer("mortar_and_pestle", 0.4F, Material.rock, GUI.PESTLE_AND_MORTAR.getID(), false, false, 3);
 		crop_plot = addCropPlotContainer("crop_plot", 0.4F, Material.wood, GUI.CROP_PLOT.getID(), false, false, 3);
 
 		// Tile Entities
 		GameRegistry.registerTileEntity(TileInventoryCropPlot.class, "TileInventoryCropPlot");
+		GameRegistry.registerTileEntity(TileInventoryMP.class, "TileInventoryMP");
 		GameRegistry.registerTileEntity(TileEntityCompostBin.class, "TileEntityCompostBin");		
 	}
 		
@@ -87,10 +89,17 @@ public class ModBlocks {
 		return container;
 	}
 	
-//	protected static ARKCropPlotBlock addCropPlotContainer(String name, float hardness, Material mat, int ID, boolean renderAsNormalBlock, boolean isOpaque, int renderType) {
-//	ARKCropPlotBlock container = new ARKCropPlotBlock(name, hardness, mat, ID);
-	protected static com.arkcraft.mod.core.blocks.BlockInventoryCropPlot addCropPlotContainer(String name, float hardness, Material mat, int ID, boolean renderAsNormalBlock, boolean isOpaque, int renderType) {
-		com.arkcraft.mod.core.blocks.BlockInventoryCropPlot container = new com.arkcraft.mod.core.blocks.BlockInventoryCropPlot(name, hardness, mat, ID);
+	protected static BlockInventoryMP addMPContainer(String name, float hardness, Material mat, int ID, boolean renderAsNormalBlock, boolean isOpaque, int renderType) {
+		BlockInventoryMP container = new BlockInventoryMP(name, hardness, mat, ID);
+		container.setRenderAsNormalBlock(renderAsNormalBlock);
+		container.setOpaque(isOpaque);
+		container.setRenderType(renderType);
+		allBlocks.put(name, container);
+		return container;
+	}
+	
+	protected static BlockInventoryCropPlot addCropPlotContainer(String name, float hardness, Material mat, int ID, boolean renderAsNormalBlock, boolean isOpaque, int renderType) {
+		BlockInventoryCropPlot container = new BlockInventoryCropPlot(name, hardness, mat, ID);
 		container.setRenderAsNormalBlock(renderAsNormalBlock);
 		container.setOpaque(isOpaque);
 		container.setRenderType(renderType);

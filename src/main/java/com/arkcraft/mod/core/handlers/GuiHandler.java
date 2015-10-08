@@ -15,6 +15,7 @@ import net.minecraftforge.fml.common.network.IGuiHandler;
 import com.arkcraft.mod.core.GlobalAdditions.GUI;
 import com.arkcraft.mod.core.blocks.ContainerCompostBin;
 import com.arkcraft.mod.core.blocks.TileInventoryCropPlot;
+import com.arkcraft.mod.core.blocks.TileInventoryMP;
 import com.arkcraft.mod.core.book.BookData;
 import com.arkcraft.mod.core.book.BookDataStore;
 import com.arkcraft.mod.core.book.GuiDossier;
@@ -24,7 +25,7 @@ import com.arkcraft.mod.core.lib.LogHelper;
 import com.arkcraft.mod.core.machine.gui.ContainerInventoryCropPlot;
 import com.arkcraft.mod.core.machine.gui.ContainerInventoryDodo;
 import com.arkcraft.mod.core.machine.gui.ContainerInventoryTaming;
-import com.arkcraft.mod.core.machine.gui.ContainerMP;
+import com.arkcraft.mod.core.machine.gui.ContainerInventoryMP;
 import com.arkcraft.mod.core.machine.gui.ContainerSmithy;
 import com.arkcraft.mod.core.machine.gui.GUICropPlot;
 import com.arkcraft.mod.core.machine.gui.GUITaming;
@@ -42,13 +43,18 @@ public class GuiHandler implements IGuiHandler {
 			LogHelper.info("GuiHandler: getServerGuiElement called from server");
 		if (ID == GUI.SMITHY.getID()) 
 			return new ContainerSmithy(player.inventory, world, new BlockPos(x, y, z)); 
-		if (ID == GUI.PESTLE_AND_MORTAR.getID()) 
-			return new ContainerMP(player.inventory, world, new BlockPos(x, y, z));
-		
+		if (ID == GUI.PESTLE_AND_MORTAR.getID()) {
+			BlockPos xyz = new BlockPos(x, y, z);
+			TileEntity tileEntity = world.getTileEntity(xyz);
+			if (tileEntity instanceof TileInventoryMP)
+				return new ContainerInventoryMP(player.inventory, (TileInventoryMP) tileEntity);
+			else {
+				LogHelper.info("GuiHandler - getServerGuiElement: TileEntityMP not found!");
+			}
+		}
 		if (ID == GUI.COMPOST_BIN.getID()) {
 			return new ContainerCompostBin(player.inventory, world, new BlockPos(x, y, z));
 		}
-
 		if (ID == GUI.CROP_PLOT.getID()) {
 			BlockPos xyz = new BlockPos(x, y, z);
 			TileEntity tileEntity = world.getTileEntity(xyz);
@@ -88,8 +94,15 @@ public class GuiHandler implements IGuiHandler {
 			LogHelper.info("GuiHandler: getClientGuiElement called from server");
 		if (ID == GUI.SMITHY.getID()) 
 			return new GuiSmithy(player.inventory, world, new BlockPos(x, y, z));
-		if (ID == GUI.PESTLE_AND_MORTAR.getID()) 
-			return new GuiMP(player.inventory, world, new BlockPos(x, y, z));
+		if (ID == GUI.PESTLE_AND_MORTAR.getID()) {
+			BlockPos xyz = new BlockPos(x, y, z);
+			TileEntity tileEntity = world.getTileEntity(xyz);
+			if (tileEntity instanceof TileInventoryMP)			
+				return new GuiMP(player.inventory, (TileInventoryMP) tileEntity);
+			else {
+				LogHelper.info("GuiHandler - getClientGuiElement: TileEntityMP not found!");				
+			}			
+		}
 		if (ID == GUI.CROP_PLOT.getID()) {
 			BlockPos xyz = new BlockPos(x, y, z);
 			TileEntity tileEntity = world.getTileEntity(xyz);
@@ -102,7 +115,6 @@ public class GuiHandler implements IGuiHandler {
 		if (ID == GUI.COMPOST_BIN.getID()) {
 			return new ContainerCompostBin(player.inventory, world, new BlockPos(x, y, z));
 		}
-
 		if(ID == GUI.BOOK_GUI.getID()) {
 			LogHelper.info("GuiHandler - getClientGuiElement(): GuiDossier book trying to open.");
 			ItemStack stack = player.getCurrentEquippedItem();
@@ -110,7 +122,6 @@ public class GuiHandler implements IGuiHandler {
 			if(stack != null && stack.getUnlocalizedName() == null) LogHelper.info("Stack in GuiHandler is null!");
 			return new GuiDossier(stack, GuiHandler.getBookDataFromStack(stack));
 		}
-		
 		if (ID == GUI.INV_DODO.getID()) {
 			Entity entity = getEntityAt(player, x, y, z);
 			if (entity != null && entity instanceof EntityDodo) 
