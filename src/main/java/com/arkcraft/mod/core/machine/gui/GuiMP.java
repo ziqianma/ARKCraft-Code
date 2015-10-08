@@ -7,10 +7,10 @@ import java.util.List;
 import org.lwjgl.opengl.GL11;
 
 import com.arkcraft.mod.core.Main;
-import com.arkcraft.mod.core.blocks.TileInventoryCropPlot;
 import com.arkcraft.mod.core.blocks.TileInventoryMP;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
@@ -26,6 +26,9 @@ public class GuiMP extends GuiContainer {
 	public String name = "Mortar and Pestle";
 	public static final ResourceLocation texture = new ResourceLocation(Main.MODID, "textures/gui/mortar_and_pestle.png");
 	private TileInventoryMP tileEntity;
+    private GuiButton buttonCraftAll;
+    private GuiButton buttonPrevRecipe;
+    private GuiButton buttonNextRecipe;
 
 	public GuiMP(InventoryPlayer invPlayer, TileInventoryMP tileInventoryMP) {
 		super(new ContainerInventoryMP(invPlayer, tileInventoryMP));
@@ -59,8 +62,67 @@ public class GuiMP extends GuiContainer {
 	final int CRAFTING_TEXT_XPOS = 80;
 	final int CRAFTING_TEXT_YPOS = 22;
 
+    /**
+     * Adds the buttons (and other controls) to the screen in question.
+     */
+	@SuppressWarnings("unchecked")
+	@Override
+    public void initGui(){
+        super.initGui();
+        
+        int buttonId = 0;
+        buttonList.clear();
+        buttonPrevRecipe = new GuiButton(buttonId++, guiLeft + LEFT_BUTTON_XPOS, guiTop + LEFT_BUTTON_YPOS, 
+        		LEFT_BUTTON_WIDTH, LEFT_BUTTON_HEIGHT, "Prev");
+        buttonList.add(buttonPrevRecipe);
+        buttonNextRecipe = new GuiButton(buttonId++, guiLeft + RIGHT_BUTTON_XPOS, guiTop + RIGHT_BUTTON_YPOS, 
+        		RIGHT_BUTTON_WIDTH, RIGHT_BUTTON_HEIGHT, "Next");
+        buttonList.add(buttonNextRecipe);
+        buttonCraftAll = new GuiButton(buttonId++, guiLeft + CRAFT_BUTTON_XPOS, guiTop + CRAFT_BUTTON_YPOS, 
+        		CRAFT_BUTTON_WIDTH, CRAFT_BUTTON_HEIGHT, "Craft All");
+        buttonList.add(buttonCraftAll);
+    }
+
+	/** Called when a button is pressed */
+	@Override
+    protected void actionPerformed(GuiButton button) {
+		if (button == buttonPrevRecipe){
+			tileEntity.selectPreveBlueprint();
+		}
+		else if (button == buttonNextRecipe){
+			tileEntity.selectNextBlueprint();
+		}
+		else if (button == buttonCraftAll){
+			tileEntity.setCraftAllPressed(true);;
+		}
+    }
+
+	/**
+     * Called from the main game loop to update the screen.
+     * Can hide a button by setting the visible field
+     */
+	@Override
+    public void updateScreen(){
+        super.updateScreen();
+        
+        int currBlueprint = tileEntity.getBlueprintSelected();
+        buttonPrevRecipe.visible = (currBlueprint > 0);
+        buttonNextRecipe.visible = (currBlueprint < tileEntity.getNumBlueprints() - 1);
+    }
+    
+    /**
+     * Draws the screen and all the components in it. Args : mouseX, mouseY, renderPartialTicks
+     * Can use GL11 to set colors and such (progress of crafting item)
+     */
+	@Override
+    public void drawScreen(int mouseX, int mouseY, float partialTicks){
+    	super.drawScreen(mouseX, mouseY, partialTicks);
+    }
+
+	@Override
 	public void onGuiClosed() { super.onGuiClosed(); }
 	
+	// abstract in super
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
 		super.drawGuiContainerForegroundLayer(mouseX, mouseY);
 
@@ -77,6 +139,7 @@ public class GuiMP extends GuiContainer {
 		}
 	}
 	
+	// abstract in super
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
 		GL11.glColor4f(1F, 1F, 1F, 1F);
 		Minecraft.getMinecraft().getTextureManager().bindTexture(texture);

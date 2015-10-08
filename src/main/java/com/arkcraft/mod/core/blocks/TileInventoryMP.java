@@ -1,9 +1,13 @@
 package com.arkcraft.mod.core.blocks;
 
 import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
 
+import com.arkcraft.mod.core.handlers.IARKRecipe;
 import com.arkcraft.mod.core.handlers.PestleCraftingManager;
 import com.arkcraft.mod.core.lib.LogHelper;
+import com.arkcraft.mod.core.machine.gui.InventoryBlueprints;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -30,25 +34,62 @@ import net.minecraft.world.World;
  */
 public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePlayerListBox {
 
-	public static final int BLUEPRINT_SLOTS_COUNT = 1;
-	public static final int INVENTORY_SLOTS_COUNT = 8;
+	// class variables
+	int tick = 20;
+	
+	// Contants for the inventory
+	public static final int INVENTORY_SLOTS_COUNT = 9;
 	public static final int TOTAL_SLOTS_COUNT = INVENTORY_SLOTS_COUNT;
-
-	public static final int BLUEPRINT_SLOT = 0;
 	public static final int FIRST_INVENTORY_SLOT = 0;
 	public static final int LAST_INVENTORY_SLOT = INVENTORY_SLOTS_COUNT - 1; 
 
-	// Create and initialize the itemStacks variable that will store the blueprints
-	private ItemStack[] blueprintStacks = new ItemStack[BLUEPRINT_SLOTS_COUNT];
+	public static final int BLUEPRINT_SLOTS_COUNT = 1;
+	public static final int BLUEPRINT_SLOT = 0;
+
+	private boolean craftAllPressed = false;
+	/** Set craftAllPressed to cause items to be crafted */
+	public void setCraftAllPressed(boolean craftAllPressed){
+		this.craftAllPressed = craftAllPressed;
+	}
 	
+	/** itemStacks variable that will store the blueprints */
+	private ItemStack[] blueprintStacks;
+	
+	/** The number of blueprints (number of recipes defined) */
+	private int numBlueprints;
+	/** Get blueprint selected (to be displayed) */
+	public int getNumBlueprints(){
+		return numBlueprints;
+	}
+
 	/** The blueprint in the blueprint slots that is selected */
-	private short blueprintSlotSelected = 0; // Currently just one slot
+//	private short blueprintSlotSelected = 0; // Currently just one slot
+	
+	public InventoryBlueprints inventoryBlueprints = new InventoryBlueprints("Blueprints", false, BLUEPRINT_SLOTS_COUNT);
+	
+	/** The currently displayed blueprint */
+	private short blueprintSelected = 0;
+	/** Get blueprint selected (to be displayed) */
+	public int getBlueprintSelected(){
+		return blueprintSelected;
+	}
+	/** Select next blueprint */
+	public void selectNextBlueprint(){
+		blueprintSelected++;
+		if (blueprintSelected >= numBlueprints)
+			blueprintSelected = (short) (numBlueprints - 1);
+        this.inventoryBlueprints.setInventorySlotContents(0, blueprintStacks[blueprintSelected]);        
+	}
+	/** Select next blueprint */
+	public void selectPreveBlueprint(){
+		blueprintSelected--;
+		if (blueprintSelected <= 0)
+			blueprintSelected = 0;
+        this.inventoryBlueprints.setInventorySlotContents(0, blueprintStacks[blueprintSelected]);        
+	}
 	
 	// Create and initialize the itemStacks variable that will store the itemStacks
 	private ItemStack[] itemStacks = new ItemStack[TOTAL_SLOTS_COUNT];
-	
-	// Other class variables
-	int tick = 20;
 	
 	/** The number of items that can be crafted */
 	private int numToBeCrafted = 0;
@@ -76,6 +117,22 @@ public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePl
 		return MathHelper.clamp_double(fraction, 0.0, 1.0);
 	}
 
+	@SuppressWarnings("rawtypes")
+	public TileInventoryMP(){
+		numBlueprints = PestleCraftingManager.getInstance().getNumRecipes();
+		blueprintStacks = new ItemStack[numBlueprints];
+		List recipes = PestleCraftingManager.getInstance().getRecipeList();
+        Iterator iterator = recipes.iterator();
+        IARKRecipe irecipe;
+        int i = 0;
+        while (iterator.hasNext()){
+            irecipe = (IARKRecipe)iterator.next();
+            blueprintStacks[i] = irecipe.getRecipeOutput();
+            i++;
+        }
+        this.inventoryBlueprints.setInventorySlotContents(0, blueprintStacks[0]);        
+	}
+	
 	// This method is called every tick to update the tile entity, i.e.
 	// It runs both on the server and the client.
 	@Override
@@ -88,13 +145,15 @@ public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePl
 		}
 		
 		// If there is no items available for the selected recipe, or there is no room in the output, reset craftingTime and return
-		if (canCraft()) {
+		if (craftAllPressed && canCraft()) {
 			craftingTime--;			
 			// If craftingTime has reached 0, craft the item and reset craftingTime
 			if (craftingTime <= 0 && numToBeCrafted > 0) {
 				craftItem();
 				numToBeCrafted--;
 				craftingTime = CRAFT_TIME_FOR_ITEM;
+				if (numToBeCrafted <= 0)
+					craftAllPressed = false;
 			}
 		}
 	}
@@ -118,7 +177,7 @@ public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePl
 	 */
 	private boolean craftItem(boolean doCraftItem){
 		Integer firstSuitableOutputSlot = null;
-		ItemStack result = blueprintStacks[blueprintSlotSelected];
+		ItemStack result = blueprintStacks[blueprintSelected];
 		boolean canCraftItem = false; // set by crafting manager
 
 		// No recipes?
@@ -302,7 +361,10 @@ public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePl
 
 		// Save everything else
 		parentNBTTagCompound.setShort("craftingTime", craftingTime);
+		parentNBTTagCompound.setShort("blueprintSelected", blueprintSelected);
+		parentNBTTagCompound.setBoolean("craftAllPressed", craftAllPressed);
 		LogHelper.info("TileInventoryMP: Wrote inventory.");
+		
 	}
 
 	// This is where you load the data that you saved in writeToNBT
@@ -323,6 +385,8 @@ public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePl
 
 		// Load everything else.  Trim the arrays (or pad with 0) to make sure they have the correct number of elements
 		craftingTime = nbtTagCompound.getShort("craftingTime");
+		blueprintSelected = nbtTagCompound.getShort("blueprintSelected");
+		craftAllPressed = nbtTagCompound.getBoolean("craftAllPressed");
 		LogHelper.info("TileInventoryMP: Read inventory.");
 	}
 

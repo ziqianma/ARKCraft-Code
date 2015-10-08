@@ -14,14 +14,14 @@ import com.arkcraft.mod.core.lib.LogHelper;
 public class ContainerInventoryMP extends Container {
 
 	private TileInventoryMP tileInventoryMP;
-//	private TileInventory?? tileInventoryBP;
-	private final int MP_SLOT_COUNT = 9;
+	private InventoryBlueprints inventoryBlueprints;
 	// These store cache values, used by the server to only update the client side tile entity when values have changed
 	private int [] cachedFields;
 	public static final int RECIPE_ITEM_SLOT_YPOS = 62;
 
 	public ContainerInventoryMP(InventoryPlayer invPlayer, TileInventoryMP tileInventoryMP) {
 		this.tileInventoryMP = tileInventoryMP;
+		inventoryBlueprints = tileInventoryMP.inventoryBlueprints; 
 		LogHelper.info("ContainerMP: constructor called.");
 		
 		/* Hotbar inventory */
@@ -40,12 +40,12 @@ public class ContainerInventoryMP extends Container {
 		}
 
 		/* MP inventory */
-		// Recipe blueprint slot
-//		this.addSlotToContainer(new Slot(tileInventoryBP, TileInventoryMP.BLUEPRINT_SLOT, 44, 18));
-		// Fertilizer slots
-		for(int col = TileInventoryMP.FIRST_INVENTORY_SLOT; col < MP_SLOT_COUNT - 1; col++) {
+		// Input & Output slots
+		for(int col = TileInventoryMP.FIRST_INVENTORY_SLOT; col < TileInventoryMP.INVENTORY_SLOTS_COUNT - 1; col++) {
 			addSlotToContainer(new SlotRecipeInventory(tileInventoryMP, col, 8 + col * 18, RECIPE_ITEM_SLOT_YPOS));
 		}
+		// Recipe blueprint slot
+		this.addSlotToContainer(new SlotBlueprintInventory(inventoryBlueprints, TileInventoryMP.BLUEPRINT_SLOT, 44, 18));
 	}
 	
 	/* Nothing to do, this is a furnace type container */
@@ -150,5 +150,22 @@ public class ContainerInventoryMP extends Container {
 		public boolean isItemValid(ItemStack stack) {
 			return tileInventoryMP.isItemValidForRecipeSlot(stack);
 		}
+	}
+
+	// SlotBlueprintInventory is a slot for blueprint items
+	public class SlotBlueprintInventory extends Slot {
+		public SlotBlueprintInventory(IInventory inventoryIn, int index, int xPosition, int yPosition) {
+			super(inventoryIn, index, xPosition, yPosition);
+		}
+
+		// if this function returns false, the player won't be able to insert the given item into this slot
+		@Override
+		public boolean isItemValid(ItemStack stack) {
+			return false;
+		}
+	}
+	
+	public void setBlueprintItemStack(ItemStack stack) {
+		this.inventoryBlueprints.setInventorySlotContents(0, stack);
 	}
 }

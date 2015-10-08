@@ -100,7 +100,16 @@ public class RecipeHandler {
 	}
 	
 	public static void registerPestleCraftingRecipes() {
-		PestleCraftingManager.getInstance().addShapelessRecipe(new ItemStack(ModItems.narcotics, 1), new ItemStack(Items.bowl), new ItemStack(ModItems.narcoBerry));
+		PestleCraftingManager.getInstance().addShapelessRecipe(
+				new ItemStack(ModItems.narcotics, 1), 
+				new ItemStack(Items.bowl), 
+				new ItemStack(ModItems.narcoBerry)
+				);
+		PestleCraftingManager.getInstance().addShapelessRecipe(
+				new ItemStack(ModItems.gun_powder, 1), 
+				new ItemStack(Blocks.stone), 
+				new ItemStack(ModItems.narcoBerry)
+				);
 	}
 
 	public static void registerSmithyCraftingRecipes() {

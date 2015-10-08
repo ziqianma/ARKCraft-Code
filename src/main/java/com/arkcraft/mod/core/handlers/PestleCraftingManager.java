@@ -50,7 +50,7 @@ public class PestleCraftingManager {
 	}
 
     /**
-     * Adds a shapeless crafting recipe to the the game.
+     * Adds a shapeless crafting recipe to the game.
      *  
      * @param recipeComponents An array of ItemStack's Item's and Block's that make up the recipe.
      */
@@ -74,7 +74,7 @@ public class PestleCraftingManager {
                 arraylist.add(new ItemStack((Block)object1));
             }
         }
-        this.recipes.add(new ShapelessRecipes(stack, arraylist));
+        this.recipes.add(new ARKShapelessRecipe(stack, arraylist));
     }
 
     /**
@@ -87,7 +87,7 @@ public class PestleCraftingManager {
     }
 
     /**
-     * Returns true, if sufficient inventory exists
+     * Returns true, if sufficient inventory exists, also deducts inventory if craft = true
      */
     public boolean hasMatchingRecipe(ItemStack output, ItemStack[] itemStacksInventory, boolean craft){
         Iterator iterator = this.recipes.iterator();
@@ -110,5 +110,12 @@ public class PestleCraftingManager {
      */
     public List getRecipeList() {
         return this.recipes;
+    }
+    
+    /**
+     * returns number of recipes
+     */
+    public int getNumRecipes() {
+    	return this.recipes.size();
     }
 }

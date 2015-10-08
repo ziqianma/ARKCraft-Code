@@ -61,36 +61,6 @@ public class ARKShapelessRecipe implements IARKRecipe {
     }
 
     /**
-     * Used to check if a recipe matches current crafting inventory
-     */
-//    @SuppressWarnings({ "rawtypes", "unchecked" })
-//    public boolean matches(InventoryCrafting p_77569_1_, World worldIn){
-//		ArrayList arraylist = Lists.newArrayList(this.recipeItems);
-//        for (int i = 0; i < p_77569_1_.getHeight(); ++i){
-//            for (int j = 0; j < p_77569_1_.getWidth(); ++j){
-//                ItemStack itemstack = p_77569_1_.getStackInRowAndColumn(j, i);
-//                if (itemstack != null){
-//                    boolean flag = false;
-//                    Iterator iterator = arraylist.iterator();
-//                    while (iterator.hasNext()){
-//                        ItemStack itemstack1 = (ItemStack)iterator.next();
-//                        if (itemstack.getItem() == itemstack1.getItem() && 
-//                        		(itemstack1.getMetadata() == 32767 || itemstack.getMetadata() == itemstack1.getMetadata())){
-//                            flag = true;
-//                            arraylist.remove(itemstack1);
-//                            break;
-//                        }
-//                    }
-//                    if (!flag){
-//                        return false;
-//                    }
-//                }
-//            }
-//        }
-//        return arraylist.isEmpty();
-//    }
-
-    /**
      * Returns an Item that is the result of this recipe
      */
     public ItemStack getCraftingResult(InventoryCrafting p_77572_1_)  {
