@@ -8,7 +8,6 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -45,7 +44,7 @@ public class BlockInventoryCropPlot extends BlockContainer {
         float f = 0.5F;
         float f1 = 0.015625F;
         this.setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, f1, 0.5F + f);
-        this.setCreativeTab((CreativeTabs)null);
+//        this.setCreativeTab((CreativeTabs)null);
         this.setHardness(0.5F);
 		this.ID = ID;
 		this.setUnlocalizedName(name);
@@ -114,10 +113,10 @@ public class BlockInventoryCropPlot extends BlockContainer {
 			TileInventoryCropPlot tiCropPlot = (TileInventoryCropPlot) tileEntity;
 			for (int i = 0; i < TileInventoryCropPlot.FERTILIZER_SLOTS_COUNT; ++i){
 				if (rand.nextInt(2) == 0)
-					ret.add(tiCropPlot.getStack(TileInventoryCropPlot.FIRST_FERTILIZER_SLOT + i));
+					ret.add(tiCropPlot.getStackInSlot(TileInventoryCropPlot.FIRST_FERTILIZER_SLOT + i));
 			}
 			if (rand.nextInt(2) == 0)
-				ret.add(tiCropPlot.getStack(TileInventoryCropPlot.BERRY_SLOT));
+				ret.add(tiCropPlot.getStackInSlot(TileInventoryCropPlot.BERRY_SLOT));
 		}
         return ret;
     }

@@ -38,26 +38,31 @@ public class GuiMP extends GuiContainer {
 	}
 	
 	// some [x,y] coordinates of graphical elements
-	final int LEFT_BUTTON_XPOS = 30;
-	final int LEFT_BUTTON_YPOS = 22;
+	final int LEFT_BUTTON_XPOS = 9;
+	final int LEFT_BUTTON_YPOS = 20;
 //	final int LEFT_BUTTON_ICON_U = 176;   // texture position of the water bar
 //	final int LEFT_BUTTON_ICON_V = 17;
-	final int LEFT_BUTTON_WIDTH = 10;
-	final int LEFT_BUTTON_HEIGHT = 8;
+	final int LEFT_BUTTON_WIDTH = 20;
+	final int LEFT_BUTTON_HEIGHT = 12;
 
-	final int RIGHT_BUTTON_XPOS = 64;
-	final int RIGHT_BUTTON_YPOS = 22;
+	final int BLUEPRINT_XPOS = 34;
+	final int BLUEPRINT_YPOS = 18;
+	final int BLUEPRINT_WIDTH = 16;
+	final int BLUEPRINT_HEIGHT = 16;
+
+	final int RIGHT_BUTTON_XPOS = 54;
+	final int RIGHT_BUTTON_YPOS = 20;
 //	final int RIGHT_BUTTON_ICON_U = 176;   // texture position of the water bar
 //	final int RIGHT_BUTTON_ICON_V = 17;
-	final int RIGHT_BUTTON_WIDTH = 10;
-	final int RIGHT_BUTTON_HEIGHT = 8;
+	final int RIGHT_BUTTON_WIDTH = 20;
+	final int RIGHT_BUTTON_HEIGHT = 12;
 
-	final int CRAFT_BUTTON_XPOS = 29;
+	final int CRAFT_BUTTON_XPOS = 19;
 	final int CRAFT_BUTTON_YPOS = 41;
 //	final int CRAFT_BUTTON_ICON_U = 176;   // texture position of the water bar
 //	final int CRAFT_BUTTON_ICON_V = 17;
-	final int CRAFT_BUTTON_WIDTH = 45;
-	final int CRAFT_BUTTON_HEIGHT = 11;
+	final int CRAFT_BUTTON_WIDTH = 47;
+	final int CRAFT_BUTTON_HEIGHT = 12;
 
 	final int CRAFTING_TEXT_XPOS = 80;
 	final int CRAFTING_TEXT_YPOS = 22;
@@ -73,10 +78,10 @@ public class GuiMP extends GuiContainer {
         int buttonId = 0;
         buttonList.clear();
         buttonPrevRecipe = new GuiButton(buttonId++, guiLeft + LEFT_BUTTON_XPOS, guiTop + LEFT_BUTTON_YPOS, 
-        		LEFT_BUTTON_WIDTH, LEFT_BUTTON_HEIGHT, "Prev");
+        		LEFT_BUTTON_WIDTH, LEFT_BUTTON_HEIGHT, "<<");
         buttonList.add(buttonPrevRecipe);
         buttonNextRecipe = new GuiButton(buttonId++, guiLeft + RIGHT_BUTTON_XPOS, guiTop + RIGHT_BUTTON_YPOS, 
-        		RIGHT_BUTTON_WIDTH, RIGHT_BUTTON_HEIGHT, "Next");
+        		RIGHT_BUTTON_WIDTH, RIGHT_BUTTON_HEIGHT, ">>");
         buttonList.add(buttonNextRecipe);
         buttonCraftAll = new GuiButton(buttonId++, guiLeft + CRAFT_BUTTON_XPOS, guiTop + CRAFT_BUTTON_YPOS, 
         		CRAFT_BUTTON_WIDTH, CRAFT_BUTTON_HEIGHT, "Craft All");
@@ -87,7 +92,7 @@ public class GuiMP extends GuiContainer {
 	@Override
     protected void actionPerformed(GuiButton button) {
 		if (button == buttonPrevRecipe){
-			tileEntity.selectPreveBlueprint();
+			tileEntity.selectPrevBlueprint();
 		}
 		else if (button == buttonNextRecipe){
 			tileEntity.selectNextBlueprint();
@@ -144,6 +149,13 @@ public class GuiMP extends GuiContainer {
 		GL11.glColor4f(1F, 1F, 1F, 1F);
 		Minecraft.getMinecraft().getTextureManager().bindTexture(texture);
 		this.drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
+		double fraction = tileEntity.fractionCraftingRemaining();
+		if (fraction > 0){
+			int x = guiLeft + BLUEPRINT_XPOS;
+			int y = guiTop + BLUEPRINT_YPOS;
+			int color = 0x60EAA800;
+			drawRect(x, y + (int)(fraction * BLUEPRINT_HEIGHT), x + BLUEPRINT_WIDTH, y + BLUEPRINT_HEIGHT, color);
+		}
 	}
 
 	// Returns true if the given x,y coordinates are within the given rectangle

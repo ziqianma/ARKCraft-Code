@@ -32,8 +32,8 @@ public class PestleCraftingManager {
 		instance = this; 
 		Collections.sort(this.recipes, new Comparator() {
             public int compare(IARKRecipe p_compare_1_, IARKRecipe p_compare_2_) {
-                return p_compare_1_ instanceof ShapelessRecipes && p_compare_2_ instanceof ShapedRecipes ? 1 : 
-                	(p_compare_2_ instanceof ShapelessRecipes && p_compare_1_ instanceof ShapedRecipes ? -1 : 
+                return p_compare_1_ instanceof ARKShapelessRecipe && p_compare_2_ instanceof ShapedRecipes ? 1 : 
+                	(p_compare_2_ instanceof ARKShapelessRecipe && p_compare_1_ instanceof ShapedRecipes ? -1 : 
                 		(p_compare_2_.getRecipeSize() < p_compare_1_.getRecipeSize() ? -1 : 
                 			(p_compare_2_.getRecipeSize() > p_compare_1_.getRecipeSize() ? 1 : 0)));
             }

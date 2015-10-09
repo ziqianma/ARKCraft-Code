@@ -28,8 +28,8 @@ public class ContainerInventoryCropPlot extends Container {
 	private int [] cachedFields;
 
 	public ContainerInventoryCropPlot(InventoryPlayer invPlayer, TileInventoryCropPlot tileInventoryCropPlot) {
-		this.tileInventoryCropPlot = tileInventoryCropPlot;
 		LogHelper.info("TileInventoryCropPlot: constructor called.");
+		this.tileInventoryCropPlot = tileInventoryCropPlot;
 		
 		/* Hotbar inventory */
 		final int HOTBAR_YPOS = 142;
@@ -209,6 +209,5 @@ public class ContainerInventoryCropPlot extends Container {
 		public boolean isItemValid(ItemStack stack) {
 			return tileInventoryCropPlot.isItemValidForSeedSlot(stack);
 		}
-	}
-	
+	}	
 }

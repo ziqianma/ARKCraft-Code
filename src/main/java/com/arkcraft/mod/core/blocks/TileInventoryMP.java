@@ -33,9 +33,9 @@ import net.minecraft.world.World;
  *
  */
 public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePlayerListBox {
-
 	// class variables
 	int tick = 20;
+	EntityPlayer playerOpening;
 	
 	// Contants for the inventory
 	public static final int INVENTORY_SLOTS_COUNT = 9;
@@ -50,6 +50,8 @@ public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePl
 	/** Set craftAllPressed to cause items to be crafted */
 	public void setCraftAllPressed(boolean craftAllPressed){
 		this.craftAllPressed = craftAllPressed;
+		craftingTime = CRAFT_TIME_FOR_ITEM;
+		numToBeCrafted = 1; // TODO Set this value per the inventory available
 	}
 	
 	/** itemStacks variable that will store the blueprints */
@@ -81,7 +83,7 @@ public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePl
         this.inventoryBlueprints.setInventorySlotContents(0, blueprintStacks[blueprintSelected]);        
 	}
 	/** Select next blueprint */
-	public void selectPreveBlueprint(){
+	public void selectPrevBlueprint(){
 		blueprintSelected--;
 		if (blueprintSelected <= 0)
 			blueprintSelected = 0;
@@ -92,16 +94,16 @@ public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePl
 	private ItemStack[] itemStacks = new ItemStack[TOTAL_SLOTS_COUNT];
 	
 	/** The number of items that can be crafted */
-	private int numToBeCrafted = 0;
+	private short numToBeCrafted = 0;
 	public int getNumToBeCrafted() {
 		return numToBeCrafted;
 	}
 	public void setNumToBeCrafted(int numToBeCrafted) {
-		this.numToBeCrafted = numToBeCrafted;
+		this.numToBeCrafted = (short) numToBeCrafted;
 	}
 
 	/** The number of seconds required to craft an item */
-	private static final short CRAFT_TIME_FOR_ITEM = 10;  // vanilla value is 10 seconds
+	private static final short CRAFT_TIME_FOR_ITEM = 5;  // vanilla value is 10 seconds
 
 	/** The number of seconds the current item has been crafting */
 	private short craftingTime;
@@ -113,6 +115,8 @@ public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePl
 	// Maybe change to seconds?
 	// Returns double between 0 and 1 representing % done
 	public double fractionCraftingRemaining() {
+		if (!craftAllPressed)
+			return 0.0D;
 		double fraction = craftingTime / (double)CRAFT_TIME_FOR_ITEM;
 		return MathHelper.clamp_double(fraction, 0.0, 1.0);
 	}
@@ -145,8 +149,8 @@ public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePl
 		}
 		
 		// If there is no items available for the selected recipe, or there is no room in the output, reset craftingTime and return
-		if (craftAllPressed && canCraft()) {
-			craftingTime--;			
+		if (canCraft()) {
+			craftingTime--;	
 			// If craftingTime has reached 0, craft the item and reset craftingTime
 			if (craftingTime <= 0 && numToBeCrafted > 0) {
 				craftItem();
@@ -155,6 +159,11 @@ public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePl
 				if (numToBeCrafted <= 0)
 					craftAllPressed = false;
 			}
+		}
+		else {
+			craftAllPressed = false;
+			numToBeCrafted = 0;
+			craftingTime = CRAFT_TIME_FOR_ITEM;
 		}
 	}
 
@@ -184,6 +193,9 @@ public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePl
 		if (result == null)
 			return false;
 		
+		if (!craftAllPressed)
+			return false;
+		
 		// find the first suitable output slot, 1st check for identical item that has enough space
 		for (int outputSlot = LAST_INVENTORY_SLOT; outputSlot > FIRST_INVENTORY_SLOT; outputSlot--) {
 			ItemStack outputStack = itemStacks[outputSlot];
@@ -207,14 +219,20 @@ public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePl
 				}
 			}
 		}
-		if (firstSuitableOutputSlot == null)
+		if (firstSuitableOutputSlot == null){
+			if (playerOpening != null)
+				playerOpening.addChatMessage(new ChatComponentText("No slots available for recipe output!"));
+			LogHelper.info("TileInvetoryMP: No output slots available.");
 			return false;
+		}
 
 		// finds if there is enough inventory to craft the result
 		canCraftItem = PestleCraftingManager.getInstance().hasMatchingRecipe(result, itemStacks, false);
 
-		if (!canCraftItem)
-			return false;
+		if (!canCraftItem) {
+			LogHelper.info("TileInvetoryMP: Can't craft item from inventory.");
+			return false;			
+		}
 
 		// If true, we craft item
 		if (!doCraftItem) return true;
@@ -223,6 +241,7 @@ public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePl
 		PestleCraftingManager.getInstance().hasMatchingRecipe(result, itemStacks, true);
 
 		// alter output slot
+//		this.setInventorySlotContents(firstSuitableOutputSlot, result);
 		if (itemStacks[firstSuitableOutputSlot] == null) {
 			itemStacks[firstSuitableOutputSlot] = result.copy(); // Use deep .copy() to avoid altering the recipe
 		} else {
@@ -278,7 +297,11 @@ public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePl
 
 	@Override
 	public ItemStack getStackInSlotOnClosing(int index) {
-		// TODO Auto-generated method stub
+		if (itemStacks[index] != null){
+			ItemStack itemstack = itemStacks[index];
+			itemStacks[index] = null;
+			return itemstack;
+		}
 		return null;
 	}
 
@@ -299,6 +322,8 @@ public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePl
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer player) {
 		if (this.worldObj.getTileEntity(this.pos) != this) return false;
+		// FIXME: this might not be the player crafting stuff
+		playerOpening = player;
 		final double X_CENTRE_OFFSET = 0.5;
 		final double Y_CENTRE_OFFSET = 0.5;
 		final double Z_CENTRE_OFFSET = 0.5;
@@ -307,19 +332,14 @@ public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePl
 	}
 
 	@Override
-	public void openInventory(EntityPlayer player) {
-		// TODO Auto-generated method stub
-	}
+	public void openInventory(EntityPlayer player) {}
 
 	@Override
-	public void closeInventory(EntityPlayer player) {
-		// TODO Auto-generated method stub
-	}
+	public void closeInventory(EntityPlayer player) {}
 
 	@Override
 	public boolean isItemValidForSlot(int index, ItemStack stack) {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
@@ -336,7 +356,7 @@ public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePl
 	//------------------------------
 
 	// This is where you save any data that you don't want to lose when the tile entity unloads
-	// In this case, it saves the state of the furnace (burn time etc) and the itemstacks stored in the fuel, input, and output slots
+	// In this case, it saves the state of the mortar and pestle and the itemstacks stored in the inventory
 	@Override
 	public void writeToNBT(NBTTagCompound parentNBTTagCompound){
 		super.writeToNBT(parentNBTTagCompound); // The super call is required to save and load the tiles location
@@ -412,12 +432,16 @@ public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePl
 	// If you need more than this, or shorts are too small, use a custom packet in your container instead.
 
 	private static final byte CRAFT_FIELD_ID = 0;
-	private static final byte NUMBER_OF_FIELDS = 1;
+	private static final byte CRAFT_ALL_FIELD_ID = 1;
+	private static final byte NUM_CRAFT_FIELD_ID = 2;	
+	private static final byte NUMBER_OF_FIELDS = 3;
 
 	@Override
 	public int getField(int id) {
 		if (id == CRAFT_FIELD_ID) return craftingTime;
-		System.err.println("Invalid field ID in TileInventoryCropPlot.getField:" + id);
+		else if (id == CRAFT_ALL_FIELD_ID) return craftAllPressed ? 1 : 0;
+		else if (id == NUM_CRAFT_FIELD_ID) return numToBeCrafted;
+		System.err.println("Invalid field ID in TileInventoryMP.getField:" + id);
 		return 0;
 	}
 
@@ -425,8 +449,12 @@ public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePl
 	public void setField(int id, int value)	{
 		if (id == CRAFT_FIELD_ID) {
 			craftingTime = (short)value;
+		} else if (id == CRAFT_ALL_FIELD_ID) {
+			craftAllPressed = value == 1 ? true : false;
+		} else if (id == NUM_CRAFT_FIELD_ID) {
+			numToBeCrafted = (short)value;
 		} else {
-			System.err.println("Invalid field ID in TileInventoryCropPlot.setField:" + id);
+			System.err.println("Invalid field ID in TileInventoryMP.setField:" + id);
 		}
 	}
 
@@ -449,8 +477,4 @@ public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePl
     public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newSate){
         return false;
     }
-
-	public ItemStack getStack(int i) {
-		return itemStacks[i];
-	}
 }

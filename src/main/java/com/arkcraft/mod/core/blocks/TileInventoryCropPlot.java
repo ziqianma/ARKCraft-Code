@@ -638,8 +638,4 @@ public class TileInventoryCropPlot extends TileEntity implements IInventory, IUp
     public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newSate){
         return false;
     }
-
-	public ItemStack getStack(int i) {
-		return itemStacks[i];
-	}
 }

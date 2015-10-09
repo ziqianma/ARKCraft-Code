@@ -31,9 +31,9 @@ public class BlockInventoryMP extends BlockContainer {
 	private int ID;
 	private boolean render = false;
 
-    public BlockInventoryMP(String name, float hardness, Material mat, int ID)
-    {
+    public BlockInventoryMP(String name, float hardness, Material mat, int ID){
     	super(mat);
+        this.setHardness(0.5F);
 		this.ID = ID;
 		this.setUnlocalizedName(name);
 		this.setCreativeTab(GlobalAdditions.tabARK);
@@ -81,7 +81,7 @@ public class BlockInventoryMP extends BlockContainer {
 			TileInventoryMP tiMP = (TileInventoryMP) tileEntity;
 			for (int i = 0; i < TileInventoryMP.INVENTORY_SLOTS_COUNT; ++i){
 				if (rand.nextInt(2) == 0)
-					ret.add(tiMP.getStack(TileInventoryMP.FIRST_INVENTORY_SLOT + i));
+					ret.add(tiMP.getStackInSlot(TileInventoryMP.FIRST_INVENTORY_SLOT + i));
 			}
 		}
         return ret;

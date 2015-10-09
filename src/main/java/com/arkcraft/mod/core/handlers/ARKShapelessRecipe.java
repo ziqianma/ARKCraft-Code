@@ -29,20 +29,18 @@ public class ARKShapelessRecipe implements IARKRecipe {
     /**
      * Used to check if a recipe matches current crafting inventory
      * Only call with craft = true after ensuring enough inventory with a previous call with it set to false
-     */
+     */  
     @SuppressWarnings({ "unchecked", "rawtypes" })
 	public boolean matches(ItemStack[] itemStacksInventory, boolean craft){
     	ArrayList recipelist = Lists.newArrayList(this.recipeItems);
         for (int i = 0; i < itemStacksInventory.length; ++i){
         	ItemStack itemstack = itemStacksInventory[i];
             if (itemstack != null){
-            	boolean sufficientInventory = false;
                 Iterator recipeIterator = recipelist.iterator();
                 while (recipeIterator.hasNext()){
                 	ItemStack itemstackInRecipe = (ItemStack)recipeIterator.next();
                 	if (itemstack.getItem() == itemstackInRecipe.getItem() && itemstack.stackSize >= itemstackInRecipe.stackSize 
                         && (itemstackInRecipe.getMetadata() == 32767 || itemstack.getMetadata() == itemstackInRecipe.getMetadata())){
-                        sufficientInventory = true;
                         recipelist.remove(itemstackInRecipe);
                         if (craft) {
                         	itemStacksInventory[i].stackSize -= itemstackInRecipe.stackSize;
@@ -52,8 +50,8 @@ public class ARKShapelessRecipe implements IARKRecipe {
                         break;
                     }
                 }
-                if (!sufficientInventory){
-                	return false;
+                if (recipelist.isEmpty()){
+                	return true;
                 }
             }
         }
