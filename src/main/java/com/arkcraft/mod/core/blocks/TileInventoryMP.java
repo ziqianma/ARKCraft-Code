@@ -7,6 +7,7 @@ import java.util.List;
 import com.arkcraft.mod.core.Main;
 import com.arkcraft.mod.core.handlers.IARKRecipe;
 import com.arkcraft.mod.core.handlers.PestleCraftingManager;
+import com.arkcraft.mod.core.lib.BALANCE;
 import com.arkcraft.mod.core.lib.LogHelper;
 import com.arkcraft.mod.core.machine.gui.InventoryBlueprints;
 import com.arkcraft.mod.core.network.UpdateMPToCraftItem;
@@ -150,7 +151,7 @@ public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePl
 	}
 
 	/** The number of seconds required to craft an item */
-	private static final short CRAFT_TIME_FOR_ITEM = 16;  // vanilla value is 10 seconds
+	private static final short CRAFT_TIME_FOR_ITEM = (short) BALANCE.MORTAR_AND_PESTLE.CRAFT_TIME_FOR_ITEM;
 
 	/** The number of seconds the current item has been crafting 
 	 *  Logic:
