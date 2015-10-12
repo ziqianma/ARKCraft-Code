@@ -49,6 +49,7 @@ public class ContainerInventoryMP extends Container {
 				addSlotToContainer(new Slot(invPlayer, slotIndex, 8 + col * 18, PLAYER_INVENTORY_YPOS + row * 18));
 			}
 		}
+		this.tileInventoryMP.setGuiOpen(true, false);
 	}
 	
     @Override
@@ -115,12 +116,12 @@ public class ContainerInventoryMP extends Container {
 	// You don't have to use fields if you don't wish to; just manually match the ID in sendProgressBarUpdate with the value in
 	//   updateProgressBar()
 	// The progress bar values are restricted to shorts.  If you have a larger value (eg int), it's not a good idea to try and split it
-	//   up into two shorts because the progress bar values are sent independently, and unless you add synchronisation logic at the
+	//   up into two shorts because the progress bar values are sent independently, and unless you add synchronization logic at the
 	//   receiving side, your int value will be wrong until the second short arrives.  Use a custom packet instead.
 	@Override
 	public void detectAndSendChanges() {
 		super.detectAndSendChanges();
-
+		
 		boolean allFieldsHaveChanged = false;
 		boolean fieldHasChanged [] = new boolean[tileInventoryMP.getFieldCount()];
 		if (cachedFields == null) {
@@ -151,6 +152,8 @@ public class ContainerInventoryMP extends Container {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void updateProgressBar(int id, int data) {
+//		LogHelper.info("ContainerInventoryMP-updateProgressBar: Called on " + (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT ? "client" : "server"));
+//		LogHelper.info("ContainerInventoryMP-updateProgressBar: id = " + id + ", data = " + data);
 		tileInventoryMP.setField(id, data);
 	}
 
@@ -178,9 +181,19 @@ public class ContainerInventoryMP extends Container {
 		public boolean isItemValid(ItemStack stack) {
 			return false;
 		}
+		
+		@Override
+	    public boolean canTakeStack(EntityPlayer playerIn){
+			return false;
+		}
 	}
 	
 	public void setBlueprintItemStack(ItemStack stack) {
 		this.inventoryBlueprints.setInventorySlotContents(0, stack);
+	}
+
+	// Used by GUI to see if any players have the GUI open
+	public int getNumCrafters() {
+		return this.crafters.size();
 	}
 }

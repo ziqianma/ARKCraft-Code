@@ -26,6 +26,7 @@ public class GuiMP extends GuiContainer {
 	public String name = "Mortar and Pestle";
 	public static final ResourceLocation texture = new ResourceLocation(Main.MODID, "textures/gui/mortar_and_pestle.png");
 	private TileInventoryMP tileEntity;
+    private GuiButton buttonCraftOne;
     private GuiButton buttonCraftAll;
     private GuiButton buttonPrevRecipe;
     private GuiButton buttonNextRecipe;
@@ -86,6 +87,11 @@ public class GuiMP extends GuiContainer {
         buttonCraftAll = new GuiButton(buttonId++, guiLeft + CRAFT_BUTTON_XPOS, guiTop + CRAFT_BUTTON_YPOS, 
         		CRAFT_BUTTON_WIDTH, CRAFT_BUTTON_HEIGHT, "Craft All");
         buttonList.add(buttonCraftAll);
+        buttonCraftOne = new GuiButton(buttonId++, guiLeft + BLUEPRINT_XPOS, guiTop + BLUEPRINT_YPOS, 
+        		BLUEPRINT_WIDTH, BLUEPRINT_HEIGHT, "");
+        buttonList.add(buttonCraftOne);
+        
+		this.tileEntity.setGuiOpen(true, false);
     }
 
 	/** Called when a button is pressed */
@@ -98,7 +104,10 @@ public class GuiMP extends GuiContainer {
 			tileEntity.selectNextBlueprint();
 		}
 		else if (button == buttonCraftAll){
-			tileEntity.setCraftAllPressed(true);;
+			tileEntity.setCraftAllPressed(true, true); // and update server
+		}
+		else if (button == buttonCraftOne){
+			tileEntity.setCraftOnePressed(true, true); // and update server
 		}
     }
 
@@ -111,8 +120,12 @@ public class GuiMP extends GuiContainer {
         super.updateScreen();
         
         int currBlueprint = tileEntity.getBlueprintSelected();
+        boolean crafting = tileEntity.isCrafting();
         buttonPrevRecipe.visible = (currBlueprint > 0);
         buttonNextRecipe.visible = (currBlueprint < tileEntity.getNumBlueprints() - 1);
+        buttonPrevRecipe.enabled = !crafting;
+        buttonNextRecipe.enabled = !crafting;
+        buttonCraftAll.enabled = !crafting;
     }
     
     /**
@@ -125,7 +138,12 @@ public class GuiMP extends GuiContainer {
     }
 
 	@Override
-	public void onGuiClosed() { super.onGuiClosed(); }
+	public void onGuiClosed() { 
+		super.onGuiClosed();
+		// Only set closed if no players have Gui open
+		if (((ContainerInventoryMP)this.inventorySlots).getNumCrafters() == 0)
+			this.tileEntity.setGuiOpen(false, true); // and update server
+	}
 	
 	// abstract in super
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
@@ -133,14 +151,33 @@ public class GuiMP extends GuiContainer {
 
 		this.fontRendererObj.drawString(name, (int)(xSize / 2) - (name.length() * 5 / 2), 5, Color.darkGray.getRGB());
 		// Number being crafted
-		this.fontRendererObj.drawString("Crafting " + tileEntity.getNumToBeCrafted() + " item(s)", 
-				CRAFTING_TEXT_XPOS, CRAFTING_TEXT_YPOS, Color.darkGray.getRGB());
+		if (tileEntity.isCraftingOne())
+			this.fontRendererObj.drawString("Crafting one item", 
+					CRAFTING_TEXT_XPOS, CRAFTING_TEXT_YPOS, Color.darkGray.getRGB());
+		else if (tileEntity.isCraftingAll())
+			this.fontRendererObj.drawString("Crafting " + tileEntity.getNumToBeCrafted() + " item(s)", 
+					CRAFTING_TEXT_XPOS, CRAFTING_TEXT_YPOS, Color.darkGray.getRGB());
 
 		List<String> hoveringText = new ArrayList<String>();
 
 		// Add hovering text if the mouse is over the Craft all button
 		if (isInRect(guiLeft + CRAFT_BUTTON_XPOS, guiTop + CRAFT_BUTTON_YPOS, CRAFT_BUTTON_WIDTH, CRAFT_BUTTON_HEIGHT, mouseX, mouseY)){
-			hoveringText.add("Can craft " + tileEntity.getNumToBeCrafted() + " item.");
+			hoveringText.add("Can craft " + tileEntity.getNumToBeCrafted() + " item(s).");
+		}
+		
+		// If hoveringText is not empty draw the hovering text
+		if (!hoveringText.isEmpty()){
+			drawHoveringText(hoveringText, mouseX - guiLeft, mouseY - guiTop, fontRendererObj);
+		}
+
+		if (tileEntity.isCrafting()){
+			double fraction = tileEntity.fractionCraftingRemainingForItem();
+			if (fraction <= 0.01D)
+				return;
+			int x = BLUEPRINT_XPOS;
+			int y = BLUEPRINT_YPOS;
+			int color = 0x60EAA800;
+			drawRect(x, y + (int)(fraction * BLUEPRINT_HEIGHT), x + BLUEPRINT_WIDTH, y + BLUEPRINT_HEIGHT, color);
 		}
 	}
 	
@@ -149,13 +186,6 @@ public class GuiMP extends GuiContainer {
 		GL11.glColor4f(1F, 1F, 1F, 1F);
 		Minecraft.getMinecraft().getTextureManager().bindTexture(texture);
 		this.drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
-		double fraction = tileEntity.fractionCraftingRemaining();
-		if (fraction > 0){
-			int x = guiLeft + BLUEPRINT_XPOS;
-			int y = guiTop + BLUEPRINT_YPOS;
-			int color = 0x60EAA800;
-			drawRect(x, y + (int)(fraction * BLUEPRINT_HEIGHT), x + BLUEPRINT_WIDTH, y + BLUEPRINT_HEIGHT, color);
-		}
 	}
 
 	// Returns true if the given x,y coordinates are within the given rectangle

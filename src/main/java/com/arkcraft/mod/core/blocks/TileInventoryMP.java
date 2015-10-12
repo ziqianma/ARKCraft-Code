@@ -4,10 +4,12 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
+import com.arkcraft.mod.core.Main;
 import com.arkcraft.mod.core.handlers.IARKRecipe;
 import com.arkcraft.mod.core.handlers.PestleCraftingManager;
 import com.arkcraft.mod.core.lib.LogHelper;
 import com.arkcraft.mod.core.machine.gui.InventoryBlueprints;
+import com.arkcraft.mod.core.network.UpdateMPToCraftItem;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -26,6 +28,9 @@ import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 /***
  * 
@@ -35,23 +40,58 @@ import net.minecraft.world.World;
 public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePlayerListBox {
 	// class variables
 	int tick = 20;
-	EntityPlayer playerOpening;
 	
-	// Contants for the inventory
+	// Constants for the inventory
 	public static final int INVENTORY_SLOTS_COUNT = 9;
 	public static final int TOTAL_SLOTS_COUNT = INVENTORY_SLOTS_COUNT;
 	public static final int FIRST_INVENTORY_SLOT = 0;
 	public static final int LAST_INVENTORY_SLOT = INVENTORY_SLOTS_COUNT - 1; 
-
 	public static final int BLUEPRINT_SLOTS_COUNT = 1;
 	public static final int BLUEPRINT_SLOT = 0;
+	
+	// Variables to sync from client to server
+	private boolean craftAll = false;
+	private boolean craftOne = false;
+	/** The currently displayed blueprint */
+	private short blueprintSelected = 0;
+	private boolean guiOpen = false;
+	
+	private void sendUpdateToServer(){
+		Main.modChannel.sendToServer(new UpdateMPToCraftItem(blueprintSelected, craftOne, craftAll, guiOpen, this.pos));
+	}
+	
+	public void setGuiOpen(boolean guiOpen, boolean andUpdateServer) {
+		this.guiOpen = guiOpen;
+		if (andUpdateServer)
+			sendUpdateToServer();
+	}
 
-	private boolean craftAllPressed = false;
-	/** Set craftAllPressed to cause items to be crafted */
-	public void setCraftAllPressed(boolean craftAllPressed){
-		this.craftAllPressed = craftAllPressed;
-		craftingTime = CRAFT_TIME_FOR_ITEM;
-		numToBeCrafted = 1; // TODO Set this value per the inventory available
+	/** Set true to craft items */
+    @SideOnly(Side.CLIENT)
+	public void setCraftAllPressed(boolean craftAllPressed, boolean andUpdateServer){
+		this.craftAll = craftAllPressed;
+		if (andUpdateServer)
+			sendUpdateToServer();
+	}
+		
+	/** Set true to craft items */
+    @SideOnly(Side.CLIENT)
+	public void setCraftOnePressed(boolean craftOnePressed, boolean andUpdateServer){
+		this.craftOne = craftOnePressed;
+		if (andUpdateServer)
+			sendUpdateToServer();
+	}
+	
+	public boolean isCrafting(){
+		return craftOne || craftAll;
+	}
+	
+	public boolean isCraftingOne(){
+		return craftOne;
+	}
+	
+	public boolean isCraftingAll(){
+		return craftAll;
 	}
 	
 	/** itemStacks variable that will store the blueprints */
@@ -69,53 +109,64 @@ public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePl
 	
 	public InventoryBlueprints inventoryBlueprints = new InventoryBlueprints("Blueprints", false, BLUEPRINT_SLOTS_COUNT);
 	
-	/** The currently displayed blueprint */
-	private short blueprintSelected = 0;
 	/** Get blueprint selected (to be displayed) */
 	public int getBlueprintSelected(){
 		return blueprintSelected;
 	}
+	public void setBlueprintSelected(int blueprintSelected) {
+		this.blueprintSelected = (short) blueprintSelected;
+	}
 	/** Select next blueprint */
+    @SideOnly(Side.CLIENT)
 	public void selectNextBlueprint(){
 		blueprintSelected++;
 		if (blueprintSelected >= numBlueprints)
 			blueprintSelected = (short) (numBlueprints - 1);
         this.inventoryBlueprints.setInventorySlotContents(0, blueprintStacks[blueprintSelected]);        
+		sendUpdateToServer();
 	}
 	/** Select next blueprint */
+    @SideOnly(Side.CLIENT)
 	public void selectPrevBlueprint(){
 		blueprintSelected--;
 		if (blueprintSelected <= 0)
 			blueprintSelected = 0;
         this.inventoryBlueprints.setInventorySlotContents(0, blueprintStacks[blueprintSelected]);        
+		sendUpdateToServer();
 	}
 	
 	// Create and initialize the itemStacks variable that will store the itemStacks
 	private ItemStack[] itemStacks = new ItemStack[TOTAL_SLOTS_COUNT];
 	
 	/** The number of items that can be crafted */
-	private short numToBeCrafted = 0;
+	private short numThatCanBeCrafted = 0;
+
+    @SideOnly(Side.CLIENT)
 	public int getNumToBeCrafted() {
-		return numToBeCrafted;
-	}
-	public void setNumToBeCrafted(int numToBeCrafted) {
-		this.numToBeCrafted = (short) numToBeCrafted;
+		if (tick == 20){
+			canCraft();
+		}
+		return numThatCanBeCrafted;
 	}
 
 	/** The number of seconds required to craft an item */
-	private static final short CRAFT_TIME_FOR_ITEM = 5;  // vanilla value is 10 seconds
+	private static final short CRAFT_TIME_FOR_ITEM = 16;  // vanilla value is 10 seconds
 
-	/** The number of seconds the current item has been crafting */
-	private short craftingTime;
+	/** The number of seconds the current item has been crafting 
+	 *  Logic:
+	 *  -1 when none are being crafted
+	 *   0 when the items is to be crafted
+	 *   n seconds until it will be crafted  
+	 */
+	private short craftingTime = -1;
 	/** Time to craft current item being crafted */
 	public int craftingTimeRemainingOnItem() {
 		return (int) craftingTime;
 	}
 	
-	// Maybe change to seconds?
 	// Returns double between 0 and 1 representing % done
-	public double fractionCraftingRemaining() {
-		if (!craftAllPressed)
+	public double fractionCraftingRemainingForItem() {
+		if (craftingTime < 0)
 			return 0.0D;
 		double fraction = craftingTime / (double)CRAFT_TIME_FOR_ITEM;
 		return MathHelper.clamp_double(fraction, 0.0, 1.0);
@@ -148,22 +199,31 @@ public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePl
 			tick = 20;
 		}
 		
-		// If there is no items available for the selected recipe, or there is no room in the output, reset craftingTime and return
-		if (canCraft()) {
-			craftingTime--;	
-			// If craftingTime has reached 0, craft the item and reset craftingTime
-			if (craftingTime <= 0 && numToBeCrafted > 0) {
-				craftItem();
-				numToBeCrafted--;
-				craftingTime = CRAFT_TIME_FOR_ITEM;
-				if (numToBeCrafted <= 0)
-					craftAllPressed = false;
+		// If not crafting an item, return
+		if (!craftAll && !craftOne)
+			return;
+		// Reset crafting time if it reaches -1 (is true after crafting one of multiple, or after pushing button in GUI)
+		if (craftingTime < 0){
+			craftingTime = CRAFT_TIME_FOR_ITEM;
+			if (this.guiOpen){
+				// See if an item can be crafted
+				if (!craftItem(false)){
+					craftAll = false;
+					craftOne = false;
+					craftingTime = -1;
+				}
 			}
 		}
-		else {
-			craftAllPressed = false;
-			numToBeCrafted = 0;
-			craftingTime = CRAFT_TIME_FOR_ITEM;
+		else
+			craftingTime--;
+		
+		// If craftingTime has reached -1, try and craft the item
+		if (craftingTime < 0) {
+			LogHelper.info("TileInventoryMP: About to craft the item on " + (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT ? "client" : "server"));
+			if (!craftItem())
+				craftAll = false;
+			if (craftOne)
+				craftOne = false;
 		}
 	}
 
@@ -171,12 +231,14 @@ public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePl
 	 * Check if the item is craftable and there is sufficient space in the output slots
 	 * @return true if crafting the item is possible
 	 */
-	private boolean canCraft() {return craftItem(false);}
+	private boolean canCraft() {
+		return craftItem(false);
+	}
 
 	/**
 	 * Craft an item, if possible
 	 */
-	private void craftItem() {craftItem(true);}
+	private boolean craftItem() { return craftItem(true); }
 
 	/**
 	 * checks that there are enough items to craft the item and that there is room for the result in the output slots
@@ -187,15 +249,14 @@ public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePl
 	private boolean craftItem(boolean doCraftItem){
 		Integer firstSuitableOutputSlot = null;
 		ItemStack result = blueprintStacks[blueprintSelected];
-		boolean canCraftItem = false; // set by crafting manager
 
 		// No recipes?
 		if (result == null)
 			return false;
 		
-		if (!craftAllPressed)
-			return false;
-		
+//		LogHelper.info("TileInventoryMP: Update called on " + (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT ? "client" : "server"));
+//		LogHelper.info("TileInventoryMP: craftAll = " + (craftAll == true ? "true" : "false"));
+
 		// find the first suitable output slot, 1st check for identical item that has enough space
 		for (int outputSlot = LAST_INVENTORY_SLOT; outputSlot > FIRST_INVENTORY_SLOT; outputSlot--) {
 			ItemStack outputStack = itemStacks[outputSlot];
@@ -220,28 +281,28 @@ public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePl
 			}
 		}
 		if (firstSuitableOutputSlot == null){
-			if (playerOpening != null)
-				playerOpening.addChatMessage(new ChatComponentText("No slots available for recipe output!"));
 			LogHelper.info("TileInvetoryMP: No output slots available.");
 			return false;
 		}
 
 		// finds if there is enough inventory to craft the result
-		canCraftItem = PestleCraftingManager.getInstance().hasMatchingRecipe(result, itemStacks, false);
-
-		if (!canCraftItem) {
-			LogHelper.info("TileInvetoryMP: Can't craft item from inventory.");
-			return false;			
+		if (!doCraftItem) {
+			numThatCanBeCrafted = (short) PestleCraftingManager.getInstance().hasMatchingRecipe(result, itemStacks, false);
+			if (numThatCanBeCrafted <= 0) {
+				if (this.guiOpen)
+					LogHelper.info("TileInvetoryMP: Can't craft item from inventory.");
+				return false;			
+			}
+			return true;
 		}
 
-		// If true, we craft item
-		if (!doCraftItem) return true;
-
 		// Craft an item
-		PestleCraftingManager.getInstance().hasMatchingRecipe(result, itemStacks, true);
+		int numCrafted = (short) PestleCraftingManager.getInstance().hasMatchingRecipe(result, itemStacks, true);
+		
+		if (numCrafted <= 0)
+			return false;
 
 		// alter output slot
-//		this.setInventorySlotContents(firstSuitableOutputSlot, result);
 		if (itemStacks[firstSuitableOutputSlot] == null) {
 			itemStacks[firstSuitableOutputSlot] = result.copy(); // Use deep .copy() to avoid altering the recipe
 		} else {
@@ -322,8 +383,6 @@ public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePl
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer player) {
 		if (this.worldObj.getTileEntity(this.pos) != this) return false;
-		// FIXME: this might not be the player crafting stuff
-		playerOpening = player;
 		final double X_CENTRE_OFFSET = 0.5;
 		final double Y_CENTRE_OFFSET = 0.5;
 		final double Z_CENTRE_OFFSET = 0.5;
@@ -349,8 +408,7 @@ public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePl
 	
 	// Return true if stack is a valid fertilizer for the crop plot
 	public boolean isItemValidForRecipeSlot(ItemStack stack) {
-		// TODO: Check that item is in a recipe
-		return true;
+		return PestleCraftingManager.getInstance().isItemInRecipe(stack);
 	}
 
 	//------------------------------
@@ -380,9 +438,7 @@ public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePl
 		parentNBTTagCompound.setTag("Items", dataForAllSlots);
 
 		// Save everything else
-		parentNBTTagCompound.setShort("craftingTime", craftingTime);
 		parentNBTTagCompound.setShort("blueprintSelected", blueprintSelected);
-		parentNBTTagCompound.setBoolean("craftAllPressed", craftAllPressed);
 		LogHelper.info("TileInventoryMP: Wrote inventory.");
 		
 	}
@@ -404,9 +460,7 @@ public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePl
 		}
 
 		// Load everything else.  Trim the arrays (or pad with 0) to make sure they have the correct number of elements
-		craftingTime = nbtTagCompound.getShort("craftingTime");
 		blueprintSelected = nbtTagCompound.getShort("blueprintSelected");
-		craftAllPressed = nbtTagCompound.getBoolean("craftAllPressed");
 		LogHelper.info("TileInventoryMP: Read inventory.");
 	}
 
@@ -431,31 +485,24 @@ public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePl
 	//   in the network packets)
 	// If you need more than this, or shorts are too small, use a custom packet in your container instead.
 
-	private static final byte CRAFT_FIELD_ID = 0;
-	private static final byte CRAFT_ALL_FIELD_ID = 1;
-	private static final byte NUM_CRAFT_FIELD_ID = 2;	
-	private static final byte NUMBER_OF_FIELDS = 3;
+//	private static final byte BLUEPRINT_SEL_FIELD_ID = 0;
+	private static final byte NUMBER_OF_FIELDS = 0;
 
 	@Override
 	public int getField(int id) {
-		if (id == CRAFT_FIELD_ID) return craftingTime;
-		else if (id == CRAFT_ALL_FIELD_ID) return craftAllPressed ? 1 : 0;
-		else if (id == NUM_CRAFT_FIELD_ID) return numToBeCrafted;
+//		if (id == BLUEPRINT_SEL_FIELD_ID) return blueprintSelected;
 		System.err.println("Invalid field ID in TileInventoryMP.getField:" + id);
 		return 0;
 	}
 
 	@Override
 	public void setField(int id, int value)	{
-		if (id == CRAFT_FIELD_ID) {
-			craftingTime = (short)value;
-		} else if (id == CRAFT_ALL_FIELD_ID) {
-			craftAllPressed = value == 1 ? true : false;
-		} else if (id == NUM_CRAFT_FIELD_ID) {
-			numToBeCrafted = (short)value;
-		} else {
+//		if (id == BLUEPRINT_SEL_FIELD_ID) {
+//			blueprintSelected = (short)value;
+//		} 
+//		else {
 			System.err.println("Invalid field ID in TileInventoryMP.setField:" + id);
-		}
+//		}
 	}
 
 	@Override

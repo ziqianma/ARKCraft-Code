@@ -87,9 +87,28 @@ public class PestleCraftingManager {
     }
 
     /**
-     * Returns true, if sufficient inventory exists, also deducts inventory if craft = true
+     * Returns number of matches for inventory that exists, also deducts inventory if craft = true
      */
-    public boolean hasMatchingRecipe(ItemStack output, ItemStack[] itemStacksInventory, boolean craft){
+    public int hasMatchingRecipe(ItemStack output, ItemStack[] itemStacksInventory, boolean craft){
+        Iterator iterator = this.recipes.iterator();
+        IARKRecipe irecipe;
+        do{
+            if (!iterator.hasNext()) {
+                return 0;
+            }
+            irecipe = (IARKRecipe)iterator.next();
+        }
+        while (irecipe.getRecipeOutput().getItem() != output.getItem());
+        if (craft)
+        	return irecipe.craftMatches(itemStacksInventory);
+        else
+        	return irecipe.findMatches(itemStacksInventory);
+    }
+    
+    /**
+     * Returns true if ItemStack is in any recipe
+     */
+	public boolean isItemInRecipe(ItemStack itemStack){
         Iterator iterator = this.recipes.iterator();
         IARKRecipe irecipe;
         do{
@@ -98,13 +117,10 @@ public class PestleCraftingManager {
             }
             irecipe = (IARKRecipe)iterator.next();
         }
-        while (irecipe.getRecipeOutput().getItem() != output.getItem());
-        if (irecipe.matches(itemStacksInventory, craft))
-        	return true;
-        else
-        	return false;
-    }
-    
+        while (!irecipe.isItemInRecipe(itemStack));
+		return true;
+	}
+	
     /**
      * returns the List<> of all recipes
      */

@@ -7,8 +7,12 @@ public interface IARKRecipe {
     /**
      * Used to check if a recipe matches current crafting inventory
      */
-//    boolean matches(InventoryCrafting p_77569_1_, World worldIn);
-    boolean matches(ItemStack[] itemStacks, boolean craft);
+    int findMatches(ItemStack[] itemStacks);
+    
+    /**
+     * Used to craft recipe from current crafting inventory
+     */
+    int craftMatches(ItemStack[] itemStacks);
 
     /**
      * Returns an Item that is the result of this recipe
@@ -16,11 +20,17 @@ public interface IARKRecipe {
     ItemStack getCraftingResult(InventoryCrafting p_77572_1_);
 
     /**
+     * Returns true if ItemStack is in any recipe
+     */
+	public boolean isItemInRecipe(ItemStack itemStack);
+
+	/**
      * Returns the size of the recipe area
      */
     int getRecipeSize();
-
+    
+	/**
+     * Returns the itemStack produced when the recipe is crafted
+     */
     ItemStack getRecipeOutput();
-
-//    ItemStack[] getRemainingItems(InventoryCrafting p_179532_1_);
 }
