@@ -5,17 +5,20 @@ tile.mortar_and_pestle.name=Mortar and Pestle
 tile.crop_plot.name=Crop Plot
 tile.wooden_spikes.name=Wooden Spikes
 
+# World Types
+generator.island=ARK: The Island
+
 # Items
-item.narcoBerrySeed.name=Narco Berry Seed
-item.amarBerrySeed.name=Amar Berry Seed
-item.mejoBerrySeed.name=Mejo Berry Seed
-item.azulBerrySeed.name=Azul Berry Seed
-item.tintoBerrySeed.name=Tinto Berry Seed
-item.narco.name=Narco Berry
-item.amar.name=Amar Berry
-item.mejo.name=Mejo Berry
-item.azul.name=Azul Berry
-item.tinto.name=Tinto Berry
+item.narcoBerrySeed.name=Narcoberry Seed
+item.amarBerrySeed.name=Amarberry Seed
+item.mejoBerrySeed.name=Mejoberry Seed
+item.azulBerrySeed.name=Azulberry Seed
+item.tintoBerrySeed.name=Tintoberry Seed
+item.narco.name=Narcoberry
+item.amar.name=Amarberry
+item.mejo.name=Mejoberry
+item.azul.name=Azulberry
+item.tinto.name=Tintoberry
 item.fiber.name=Fiber
 item.chitin.name=Chitin
 item.chitin_helm.name=Chitin Helmet

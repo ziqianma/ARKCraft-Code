@@ -4,12 +4,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.arkcraft.mod.GlobalAdditions;
+import com.arkcraft.mod.common.gen.island.IslandGen;
+import com.arkcraft.mod.common.gen.island.WorldTypeIsland;
 import com.arkcraft.mod.common.handlers.ARKEventHandler;
 import com.arkcraft.mod.common.handlers.ARKPlayerEventHandler;
 import com.arkcraft.mod.common.items.ARKCraftItems;
 import com.arkcraft.mod.common.lib.Config;
 import com.arkcraft.mod.common.network.UpdateMPToCraftItem;
 import net.minecraft.item.Item;
+import net.minecraft.world.WorldType;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
@@ -41,7 +44,9 @@ public class ARKCraft
 	public static ARKCraft instance;
 	public static SimpleNetworkWrapper modChannel;
 	public static Logger	modLog;
-	
+
+	public static final WorldType island = new WorldTypeIsland(0.75);
+
 	public static Map<String, Item> allItems = new HashMap<String, Item>();
 	
 	public ARKCraft() { instance = this; }
@@ -72,7 +77,10 @@ public class ARKCraft
 	}
 	
 	@EventHandler
-	public void postInit(FMLPostInitializationEvent event) {}
+	public void postInit(FMLPostInitializationEvent event) {
+		IslandGen.loadHeightmap();
+		IslandGen.loadBiomemap();
+	}
 
 	public static ARKCraft instance() { return instance; }
 	
