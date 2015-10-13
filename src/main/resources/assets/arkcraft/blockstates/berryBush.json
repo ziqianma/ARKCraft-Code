@@ -1,6 +1,8 @@
 {
 	"variants": {
-		"normal": { "model": "arkcraft:berryBush" }
+		"harvest=0": [{ "model": "arkcraft:berryBush_0", "weight": 1 }, { "model": "arkcraft:berryBush_0", "weight": 1, "y": 90 }, { "model": "arkcraft:berryBush_0", "weight": 1, "y": 180 }, { "model": "arkcraft:berryBush_0", "weight": 1, "y": 270 }],
+		"harvest=1": [{ "model": "arkcraft:berryBush_1", "weight": 1 }, { "model": "arkcraft:berryBush_1", "weight": 1, "y": 90 }, { "model": "arkcraft:berryBush_1", "weight": 1, "y": 180 }, { "model": "arkcraft:berryBush_1", "weight": 1, "y": 270 }],
+		"harvest=2": [{ "model": "arkcraft:berryBush_2", "weight": 1 }, { "model": "arkcraft:berryBush_2", "weight": 1, "y": 90 }, { "model": "arkcraft:berryBush_2", "weight": 1, "y": 180 }, { "model": "arkcraft:berryBush_2", "weight": 1, "y": 270 }],
+		"harvest=3": [{ "model": "arkcraft:berryBush_3", "weight": 1 }, { "model": "arkcraft:berryBush_3", "weight": 1, "y": 90 }, { "model": "arkcraft:berryBush_3", "weight": 1, "y": 180 }, { "model": "arkcraft:berryBush_3", "weight": 1, "y": 270 }]
 	}
-
 }

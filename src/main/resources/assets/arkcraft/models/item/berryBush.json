@@ -1,5 +1,5 @@
 {
-    "parent": "arkcraft:block/berryBush",
+    "parent": "arkcraft:block/berryBush_3",
     "display": {
         "thirdperson": {
             "rotation": [ 10, -45, 170 ],

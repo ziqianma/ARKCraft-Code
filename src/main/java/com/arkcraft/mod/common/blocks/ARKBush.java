@@ -5,7 +5,12 @@ import java.util.Random;
 import com.arkcraft.mod.common.items.ARKCraftItems;
 import com.arkcraft.mod.common.lib.BALANCE;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockCactus;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyInteger;
+import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -23,25 +28,56 @@ import net.minecraft.world.World;
  */
 public class ARKBush extends ARKBlock {
 
+	public static final PropertyInteger HARVEST_COUNT = PropertyInteger.create("harvest", 0, 3);
+
 	public ARKBush(String name, float hardness) {
 		super(Material.leaves, name, hardness);
+		this.setDefaultState(this.blockState.getBaseState().withProperty(HARVEST_COUNT, 3));
+		this.setStepSound(Block.soundTypeGrass);
+		this.setTickRandomly(true);
 	}
-	
-	@Override
-	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-		if(rand.nextInt(10) <= 4) return rand.nextInt(10) <= 5 ? ARKCraftItems.amarBerry : ARKCraftItems.narcoBerry;
-		if(rand.nextInt(10) >= 4 && rand.nextInt(10) <= 8) return rand.nextInt(10) <= 5 ? ARKCraftItems.mejoBerry : ARKCraftItems.tintoBerry;
-		if(rand.nextInt(10) <= 8) return ARKCraftItems.fiber;
-		else { return ARKCraftItems.azulBerry; }
+
+	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
+	{
+		if (rand.nextBoolean())
+		{
+			int harvestCount = getMetaFromState(state);
+
+			if (harvestCount < 3)
+			{
+				worldIn.setBlockState(pos, state.withProperty(HARVEST_COUNT, harvestCount + 1));
+			}
+		}
+	}
+
+	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
+	{
+		worldIn.setBlockState(pos, state.withProperty(HARVEST_COUNT, 3));
+	}
+
+	public Item getHarvestItem(Random rand) {
+		if(rand.nextInt(10) <= 3)
+			return ARKCraftItems.fiber;
+		else if(rand.nextInt(10) <= 4)
+			return rand.nextInt(10) <= 5 ? ARKCraftItems.amarBerry : ARKCraftItems.narcoBerry;
+		else if(rand.nextInt(10) >= 4 && rand.nextInt(10) <= 8)
+			return rand.nextInt(10) <= 5 ? ARKCraftItems.mejoBerry : ARKCraftItems.tintoBerry;
+		else
+			return ARKCraftItems.azulBerry;
 	}
 	
 	// Called when bush is right clicked
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumFacing side, float hitX, float hitY, float hitZ) {
 		if (!worldIn.isRemote) {
-			for (int i = 0; i < BALANCE.PLANTS.BERRIES_MIN_PER_PICKING || i <= worldIn.rand.nextInt(BALANCE.PLANTS.BERRIES_MAX_PER_PICKING); i++) {
-				Item itemPicked = getItemDropped(state, worldIn.rand, 0);
-		        this.entityDropItem(worldIn, pos, playerIn, new ItemStack(itemPicked, 1, 0));
+			int harvestCount = getMetaFromState(state);
+			if (harvestCount > 0) {
+				for (int i = 0; i < BALANCE.PLANTS.BERRIES_MIN_PER_PICKING || i <= worldIn.rand.nextInt(BALANCE.PLANTS.BERRIES_MAX_PER_PICKING); i++) {
+					Item itemPicked = getHarvestItem(worldIn.rand);
+					this.entityDropItem(worldIn, pos, playerIn, new ItemStack(itemPicked, 1, 0));
+				}
+
+				worldIn.setBlockState(pos, state.withProperty(HARVEST_COUNT, harvestCount - 1));
 			}
 		}
 		return true;
@@ -61,7 +97,28 @@ public class ARKBush extends ARKBlock {
                 worldIn.spawnEntityInWorld(entityitem);
         }
     }
-	
+
+	@Override
+	public int damageDropped(IBlockState state)
+	{
+		return 3;
+	}
+
+	public IBlockState getStateFromMeta(int meta)
+	{
+		return this.getDefaultState().withProperty(HARVEST_COUNT, meta);
+	}
+
+	public int getMetaFromState(IBlockState state)
+	{
+		return ((Integer) state.getValue(HARVEST_COUNT)).intValue();
+	}
+
+	protected BlockState createBlockState()
+	{
+		return new BlockState(this, new IProperty[] { HARVEST_COUNT });
+	}
+
 	/*	@Override
 	public void onBlockClicked(World worldIn, BlockPos pos, EntityPlayer playerIn) {}
 

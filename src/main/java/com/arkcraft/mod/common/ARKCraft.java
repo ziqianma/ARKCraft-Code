@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.arkcraft.mod.GlobalAdditions;
+import com.arkcraft.mod.common.gen.WorldGeneratorBushes;
 import com.arkcraft.mod.common.gen.island.IslandGen;
 import com.arkcraft.mod.common.gen.island.WorldTypeIsland;
 import com.arkcraft.mod.common.handlers.ARKEventHandler;
@@ -24,6 +25,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 
 import org.apache.logging.log4j.Logger;
@@ -56,6 +58,8 @@ public class ARKCraft
 		// Create the config first, it is used below
 		Config.init(event.getSuggestedConfigurationFile());
 		FMLCommonHandler.instance().bus().register(new Config());
+
+		GameRegistry.registerWorldGenerator(new WorldGeneratorBushes(), 0);
 
 		ARKCraftBlocks.init();
 		ARKCraftItems.init();
