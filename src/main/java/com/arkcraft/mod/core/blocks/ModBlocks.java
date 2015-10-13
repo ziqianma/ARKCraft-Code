@@ -27,7 +27,7 @@ public class ModBlocks {
 	public static Block blockNarcoBrerry;
 	public static ARKBlockSpikes wooden_spikes;
 	public static BlockCompostBin compost_bin;
-	public static ARKContainerBlock smithy;	
+	public static BlockInventorySmithy smithy;	
 	public static BlockInventoryMP pestle;
 	public static BlockInventoryCropPlot crop_plot;
 
@@ -48,7 +48,7 @@ public class ModBlocks {
 		wooden_spikes = addSpikes(Material.wood, "wooden_spikes", 3.0F);
 
 		// Containers
-		smithy = addContainer("smithy", 0.4F, Material.wood, GUI.SMITHY.getID(), false, false, 3);
+		smithy = addSmithyContainer("smithy", 0.4F, Material.wood, GUI.SMITHY.getID(), false, false, 3);
 		pestle = addMPContainer("mortar_and_pestle", 0.4F, Material.rock, GUI.PESTLE_AND_MORTAR.getID(), false, false, 3);
 		crop_plot = addCropPlotContainer("crop_plot", 0.4F, Material.wood, GUI.CROP_PLOT.getID(), false, false, 3);
 
@@ -56,6 +56,7 @@ public class ModBlocks {
 		GameRegistry.registerTileEntity(TileInventoryCropPlot.class, "TileInventoryCropPlot");
 		GameRegistry.registerTileEntity(TileInventoryMP.class, "TileInventoryMP");
 		GameRegistry.registerTileEntity(TileEntityCompostBin.class, "TileEntityCompostBin");		
+		GameRegistry.registerTileEntity(TileInventorySmithy.class, "TileInventorySmithy");
 	}
 		
 	protected static Block getRegisteredBlock(String name){
@@ -82,6 +83,15 @@ public class ModBlocks {
 	
 	protected static ARKContainerBlock addContainer(String name, float hardness, Material mat, int ID, boolean renderAsNormalBlock, boolean isOpaque, int renderType) {
 		ARKContainerBlock container = new ARKContainerBlock(name, hardness, mat, ID);
+		container.setRenderAsNormalBlock(renderAsNormalBlock);
+		container.setOpaque(isOpaque);
+		container.setRenderType(renderType);
+		allBlocks.put(name, container);
+		return container;
+	}
+	
+	protected static BlockInventorySmithy addSmithyContainer(String name, float hardness, Material mat, int ID, boolean renderAsNormalBlock, boolean isOpaque, int renderType) {
+		BlockInventorySmithy container = new BlockInventorySmithy(name, hardness, mat, ID);
 		container.setRenderAsNormalBlock(renderAsNormalBlock);
 		container.setOpaque(isOpaque);
 		container.setRenderType(renderType);

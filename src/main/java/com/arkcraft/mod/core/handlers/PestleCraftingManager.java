@@ -3,26 +3,22 @@ package com.arkcraft.mod.core.handlers;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-import com.arkcraft.mod.core.GlobalAdditions;
-import com.arkcraft.mod.core.items.ModItems;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 
 import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.ShapedRecipes;
-import net.minecraft.item.crafting.ShapelessRecipes;
-import net.minecraft.world.World;
 
-@SuppressWarnings("all")
+/***
+ * 
+ * @author wildbill22
+ *
+ */
+@SuppressWarnings({ "unchecked", "rawtypes" })
 public class PestleCraftingManager {
 	
 	private static PestleCraftingManager instance = null;

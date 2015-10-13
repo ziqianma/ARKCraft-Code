@@ -10,52 +10,58 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.arkcraft.mod.core.blocks.TileInventoryMP;
+import com.arkcraft.mod.core.blocks.TileInventorySmithy;
 import com.arkcraft.mod.core.lib.LogHelper;
 
-public class ContainerInventoryMP extends Container {
+public class ContainerInventorySmithy extends Container {
 
-	private TileInventoryMP tileInventoryMP;
+	private TileInventorySmithy tileInventorySmithy;
 	private InventoryBlueprints inventoryBlueprints;
 	// These store cache values, used by the server to only update the client side tile entity when values have changed
 	private int [] cachedFields;
-	public static final int RECIPE_ITEM_SLOT_YPOS = 62;
+	public static final int RECIPE_ITEM_SLOT_YPOS = 60;
 
-	public ContainerInventoryMP(InventoryPlayer invPlayer, TileInventoryMP tileInventoryMP) {
+	public ContainerInventorySmithy(InventoryPlayer invPlayer, TileInventorySmithy tileInventorySmithy) {
 		LogHelper.info("ContainerMP: constructor called.");
 
-		this.tileInventoryMP = tileInventoryMP;
-		inventoryBlueprints = tileInventoryMP.inventoryBlueprints; 
+		this.tileInventorySmithy = tileInventorySmithy;
+		inventoryBlueprints = tileInventorySmithy.inventoryBlueprints; 
 		
 		/* MP inventory */
 		// Recipe blueprint slot
-		this.addSlotToContainer(new SlotBlueprintInventory(inventoryBlueprints, TileInventoryMP.BLUEPRINT_SLOT, 34, 18));
+		this.addSlotToContainer(new SlotBlueprintInventory(inventoryBlueprints, TileInventorySmithy.BLUEPRINT_SLOT, 26, 16));
 
 		// Input & Output slots
-		for(int col = TileInventoryMP.FIRST_INVENTORY_SLOT; col < TileInventoryMP.INVENTORY_SLOTS_COUNT; col++) {
-			addSlotToContainer(new SlotRecipeInventory(this.tileInventoryMP, col, 8 + col * 18, RECIPE_ITEM_SLOT_YPOS));
+		for(int row = 0; row < 3; row++) {
+			for(int col = 0; col < 9; col++) {
+				int slotIndex =  col + row * 9;
+				addSlotToContainer(new SlotRecipeInventory(this.tileInventorySmithy, slotIndex, 
+						8 + col * 18, RECIPE_ITEM_SLOT_YPOS + row * 18));
+			}
 		}
+		
 		/* Hotbar inventory */
-		final int HOTBAR_YPOS = 142;
+		final int HOTBAR_YPOS = 186;
 		for(int col = 0; col < 9; col++) {
 			addSlotToContainer(new Slot(invPlayer, col, 8 + col * 18, HOTBAR_YPOS));
 		}
 		
 		/* Player inventory */
-		final int PLAYER_INVENTORY_YPOS = 84;
+		final int PLAYER_INVENTORY_YPOS = 128;
 		for(int row = 0; row < 3; row++) {
 			for(int col = 0; col < 9; col++) {
 				int slotIndex =  col + row * 9 + 9;
 				addSlotToContainer(new Slot(invPlayer, slotIndex, 8 + col * 18, PLAYER_INVENTORY_YPOS + row * 18));
 			}
 		}
-		this.tileInventoryMP.setGuiOpen(true, false);
+		
+		this.tileInventorySmithy.setGuiOpen(true, false);
 	}
 	
     @Override
     public void addCraftingToCrafters(ICrafting listener) {
         super.addCraftingToCrafters(listener);
-        listener.func_175173_a(this, tileInventoryMP);
+        listener.func_175173_a(this, tileInventorySmithy);
     }
 
 	/* Nothing to do, this is a furnace type container */
@@ -65,25 +71,25 @@ public class ContainerInventoryMP extends Container {
     }
     
 	public ItemStack transferStackInSlot(EntityPlayer playerIn, int sourceSlotIndex) {
-		LogHelper.info("ARKContainerMP: transferStackInSlot called.");
+		LogHelper.info("ARKContainerSmithy: transferStackInSlot called.");
 		Slot sourceSlot = (Slot)inventorySlots.get(sourceSlotIndex);
 		if (sourceSlot == null || !sourceSlot.getHasStack()) return null;
 		ItemStack sourceStack = sourceSlot.getStack();
 		ItemStack copyOfSourceStack = sourceStack.copy();
 
 		// Check if the slot clicked is a MP container slot
-		int nonPlayerSlotsCount = TileInventoryMP.BLUEPRINT_SLOTS_COUNT + TileInventoryMP.INVENTORY_SLOTS_COUNT;
-		if (sourceSlotIndex > TileInventoryMP.BLUEPRINT_SLOTS_COUNT - 1 && sourceSlotIndex < nonPlayerSlotsCount) {
-			// This is a MP inventory slot so merge the stack into the players inventory
+		int nonPlayerSlotsCount = TileInventorySmithy.BLUEPRINT_SLOTS_COUNT + TileInventorySmithy.INVENTORY_SLOTS_COUNT;
+		if (sourceSlotIndex > TileInventorySmithy.BLUEPRINT_SLOTS_COUNT - 1 && sourceSlotIndex < nonPlayerSlotsCount) {
+			// This is a Smithy inventory slot so merge the stack into the players inventory
 			if (!mergeItemStack(sourceStack, nonPlayerSlotsCount, 36 + nonPlayerSlotsCount, false)){
 				return null;
 			}
 		}
 		// Check if the slot clicked is one of the vanilla container slots
 		else if(sourceSlotIndex >= nonPlayerSlotsCount && sourceSlotIndex < 36 + nonPlayerSlotsCount) {
-			if (tileInventoryMP.isItemValidForRecipeSlot(sourceStack)) {
-				// This is a vanilla container slot so merge the stack into the MP inventory
-				if(!mergeItemStack(sourceStack, TileInventoryMP.BLUEPRINT_SLOTS_COUNT, nonPlayerSlotsCount, false)) {
+			if (tileInventorySmithy.isItemValidForRecipeSlot(sourceStack)) {
+				// This is a vanilla container slot so merge the stack into the Smithy inventory
+				if(!mergeItemStack(sourceStack, TileInventorySmithy.BLUEPRINT_SLOTS_COUNT, nonPlayerSlotsCount, false)) {
 					return null;
 				}
 			}
@@ -107,7 +113,7 @@ public class ContainerInventoryMP extends Container {
 
 	@Override
 	public boolean canInteractWith(EntityPlayer playerIn) {
-		return tileInventoryMP.isUseableByPlayer(playerIn);
+		return tileInventorySmithy.isUseableByPlayer(playerIn);
 	}
 
 	// This is where you check if any values have changed and if so send an update to any clients accessing this container
@@ -123,14 +129,14 @@ public class ContainerInventoryMP extends Container {
 		super.detectAndSendChanges();
 		
 		boolean allFieldsHaveChanged = false;
-		boolean fieldHasChanged [] = new boolean[tileInventoryMP.getFieldCount()];
+		boolean fieldHasChanged [] = new boolean[tileInventorySmithy.getFieldCount()];
 		if (cachedFields == null) {
-			cachedFields = new int[tileInventoryMP.getFieldCount()];
+			cachedFields = new int[tileInventorySmithy.getFieldCount()];
 			allFieldsHaveChanged = true;
 		}
 		for (int i = 0; i < cachedFields.length; ++i) {
-			if (allFieldsHaveChanged || cachedFields[i] != tileInventoryMP.getField(i)) {
-				cachedFields[i] = tileInventoryMP.getField(i);
+			if (allFieldsHaveChanged || cachedFields[i] != tileInventorySmithy.getField(i)) {
+				cachedFields[i] = tileInventorySmithy.getField(i);
 				fieldHasChanged[i] = true;
 			}
 		}
@@ -138,7 +144,7 @@ public class ContainerInventoryMP extends Container {
 		// go through the list of crafters (players using this container) and update them if necessary
 		for (int i = 0; i < this.crafters.size(); ++i) {
 			ICrafting icrafting = (ICrafting)this.crafters.get(i);
-			for (int fieldID = 0; fieldID < tileInventoryMP.getFieldCount(); ++fieldID) {
+			for (int fieldID = 0; fieldID < tileInventorySmithy.getFieldCount(); ++fieldID) {
 				if (fieldHasChanged[fieldID]) {
 					// Note that although sendProgressBarUpdate takes 2 ints on a server these are truncated to shorts
 					icrafting.sendProgressBarUpdate(this, fieldID, cachedFields[fieldID]);
@@ -152,9 +158,9 @@ public class ContainerInventoryMP extends Container {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void updateProgressBar(int id, int data) {
-//		LogHelper.info("ContainerInventoryMP-updateProgressBar: Called on " + (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT ? "client" : "server"));
-//		LogHelper.info("ContainerInventoryMP-updateProgressBar: id = " + id + ", data = " + data);
-		tileInventoryMP.setField(id, data);
+//		LogHelper.info("ContainerInventorySmithy-updateProgressBar: Called on " + (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT ? "client" : "server"));
+//		LogHelper.info("ContainerInventorySmithy-updateProgressBar: id = " + id + ", data = " + data);
+		tileInventorySmithy.setField(id, data);
 	}
 
 	// SlotRecipeInventory is a slot for recipe items
@@ -166,7 +172,7 @@ public class ContainerInventoryMP extends Container {
 		// if this function returns false, the player won't be able to insert the given item into this slot
 		@Override
 		public boolean isItemValid(ItemStack stack) {
-			return tileInventoryMP.isItemValidForRecipeSlot(stack);
+			return tileInventorySmithy.isItemValidForRecipeSlot(stack);
 		}
 	}
 

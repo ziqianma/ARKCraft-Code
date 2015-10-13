@@ -27,6 +27,7 @@ import com.arkcraft.mod.core.items.ModItems;
 import com.arkcraft.mod.core.lib.Config;
 import com.arkcraft.mod.core.network.UpdateMPToCraftItem;
 import com.arkcraft.mod.core.network.PlayerPoop;
+import com.arkcraft.mod.core.network.UpdateSmithyToCraftItem;
 import com.arkcraft.mod.core.proxy.CommonProxy;
 
 @Mod(modid=Main.MODID, version=Main.VERSION, name=Main.MODID,
@@ -82,5 +83,6 @@ public class Main {
 		// The handler (usually in the packet class), the packet class, unique id, side the packet is received on
 		modChannel.registerMessage(PlayerPoop.Handler.class, PlayerPoop.class, id++, Side.SERVER);
 		modChannel.registerMessage(UpdateMPToCraftItem.Handler.class, UpdateMPToCraftItem.class, id++, Side.SERVER);
+		modChannel.registerMessage(UpdateSmithyToCraftItem.Handler.class, UpdateSmithyToCraftItem.class, id++, Side.SERVER);
 	}		
 }

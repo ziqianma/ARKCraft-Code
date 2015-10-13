@@ -1,6 +1,6 @@
 package com.arkcraft.mod.core.network;
 
-import com.arkcraft.mod.core.blocks.TileInventoryMP;
+import com.arkcraft.mod.core.blocks.TileInventorySmithy;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -11,11 +11,11 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 
 /**
- * Used so server side tileEntity for Mortar and Pestle can craft items
+ * Used so server side tileEntity for Smithy can craft items
  * @author William
  *
  */
-public class UpdateMPToCraftItem implements IMessage {
+public class UpdateSmithyToCraftItem implements IMessage {
 	int blueprintSelected;
 	boolean craftOneItem;
 	boolean craftAllItems;
@@ -25,9 +25,9 @@ public class UpdateMPToCraftItem implements IMessage {
 	/**
 	 * Don't use
 	 */
-	public UpdateMPToCraftItem() {	}
+	public UpdateSmithyToCraftItem() {	}
 
-	public UpdateMPToCraftItem(int blueprintSelected, boolean craftOne, boolean craftAll, boolean guiOpen, BlockPos xyz) {
+	public UpdateSmithyToCraftItem(int blueprintSelected, boolean craftOne, boolean craftAll, boolean guiOpen, BlockPos xyz) {
 		this.blueprintSelected = blueprintSelected;
 		this.craftOneItem = craftOne;
 		this.craftAllItems = craftAll;
@@ -57,11 +57,11 @@ public class UpdateMPToCraftItem implements IMessage {
 		buf.writeInt(this.z);
 	}
 
-	public static class Handler implements IMessageHandler<UpdateMPToCraftItem, IMessage> {
+	public static class Handler implements IMessageHandler<UpdateSmithyToCraftItem, IMessage> {
 		@Override
-		public IMessage onMessage(UpdateMPToCraftItem message, MessageContext ctx) {
+		public IMessage onMessage(UpdateSmithyToCraftItem message, MessageContext ctx) {
 		    if (ctx.side != Side.SERVER) {
-		        System.err.println("UpdateMPToCraftItem received on wrong side:" + ctx.side);
+		        System.err.println("UpdateSmithyToCraftItem received on wrong side:" + ctx.side);
 		        return null;
 		    }
 			EntityPlayerMP player = ctx.getServerHandler().playerEntity;
@@ -74,14 +74,14 @@ public class UpdateMPToCraftItem implements IMessage {
 		}
 	}
 	
-	static void processMessage(UpdateMPToCraftItem message, EntityPlayerMP player){
+	static void processMessage(UpdateSmithyToCraftItem message, EntityPlayerMP player){
 		BlockPos xyz = new BlockPos(message.x, message.y, message.z);
-		TileInventoryMP tileEntityMP = (TileInventoryMP) player.worldObj.getTileEntity(xyz);
-		if (tileEntityMP instanceof TileInventoryMP){
-			tileEntityMP.setBlueprintSelected(message.blueprintSelected);
-			tileEntityMP.setCraftAllPressed(message.craftAllItems, false);
-			tileEntityMP.setCraftOnePressed(message.craftOneItem, false);
-			tileEntityMP.setGuiOpen(message.guiOpen, false);
+		TileInventorySmithy tileEntitySmithy = (TileInventorySmithy) player.worldObj.getTileEntity(xyz);
+		if (tileEntitySmithy instanceof TileInventorySmithy){
+			tileEntitySmithy.setBlueprintSelected(message.blueprintSelected);
+			tileEntitySmithy.setCraftAllPressed(message.craftAllItems, false);
+			tileEntitySmithy.setCraftOnePressed(message.craftOneItem, false);
+			tileEntitySmithy.setGuiOpen(message.guiOpen, false);
 		}
 	}
 }

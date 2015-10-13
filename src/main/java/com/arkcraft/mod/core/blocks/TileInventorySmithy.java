@@ -6,11 +6,11 @@ import java.util.List;
 
 import com.arkcraft.mod.core.Main;
 import com.arkcraft.mod.core.handlers.IARKRecipe;
-import com.arkcraft.mod.core.handlers.PestleCraftingManager;
+import com.arkcraft.mod.core.handlers.SmithyCraftingManager;
 import com.arkcraft.mod.core.lib.BALANCE;
 import com.arkcraft.mod.core.lib.LogHelper;
 import com.arkcraft.mod.core.machine.gui.InventoryBlueprints;
-import com.arkcraft.mod.core.network.UpdateMPToCraftItem;
+import com.arkcraft.mod.core.network.UpdateSmithyToCraftItem;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -38,12 +38,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
  * @author wildbill22
  *
  */
-public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePlayerListBox {
+public class TileInventorySmithy extends TileEntity implements IInventory, IUpdatePlayerListBox {
 	// class variables
 	int tick = 20;
 	
 	// Constants for the inventory
-	public static final int INVENTORY_SLOTS_COUNT = 9;
+	public static final int INVENTORY_SLOTS_COUNT = 27;
 	public static final int TOTAL_SLOTS_COUNT = INVENTORY_SLOTS_COUNT;
 	public static final int FIRST_INVENTORY_SLOT = 0;
 	public static final int LAST_INVENTORY_SLOT = INVENTORY_SLOTS_COUNT - 1; 
@@ -58,7 +58,7 @@ public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePl
 	private boolean guiOpen = false;
 	
 	private void sendUpdateToServer(){
-		Main.modChannel.sendToServer(new UpdateMPToCraftItem(blueprintSelected, craftOne, craftAll, guiOpen, this.pos));
+		Main.modChannel.sendToServer(new UpdateSmithyToCraftItem(blueprintSelected, craftOne, craftAll, guiOpen, this.pos));
 	}
 	
 	public void setGuiOpen(boolean guiOpen, boolean andUpdateServer) {
@@ -174,10 +174,12 @@ public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePl
 	}
 
 	@SuppressWarnings("rawtypes")
-	public TileInventoryMP(){
-		numBlueprints = PestleCraftingManager.getInstance().getNumRecipes();
+	public TileInventorySmithy(){
+		// FIXME - Is there another way to do this? See note in RecipeHandler		
+		numBlueprints = SmithyCraftingManager.getInstance().getNumRecipes();
+//		numBlueprints = RecipeHandler.numSmithyCraftingRecipes;
 		blueprintStacks = new ItemStack[numBlueprints];
-		List recipes = PestleCraftingManager.getInstance().getRecipeList();
+		List recipes = SmithyCraftingManager.getInstance().getRecipeList();
         Iterator iterator = recipes.iterator();
         IARKRecipe irecipe;
         int i = 0;
@@ -220,7 +222,7 @@ public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePl
 		
 		// If craftingTime has reached -1, try and craft the item
 		if (craftingTime < 0) {
-			LogHelper.info("TileInventoryMP: About to craft the item on " + (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT ? "client" : "server"));
+			LogHelper.info("TileInventorySmith: About to craft the item on " + (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT ? "client" : "server"));
 			if (!craftItem())
 				craftAll = false;
 			if (craftOne)
@@ -255,8 +257,8 @@ public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePl
 		if (result == null)
 			return false;
 		
-//		LogHelper.info("TileInventoryMP: Update called on " + (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT ? "client" : "server"));
-//		LogHelper.info("TileInventoryMP: craftAll = " + (craftAll == true ? "true" : "false"));
+//		LogHelper.info("TileInventorySmithy: Update called on " + (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT ? "client" : "server"));
+//		LogHelper.info("TileInventorySmithy: craftAll = " + (craftAll == true ? "true" : "false"));
 
 		// find the first suitable output slot, 1st check for identical item that has enough space
 		for (int outputSlot = LAST_INVENTORY_SLOT; outputSlot > FIRST_INVENTORY_SLOT; outputSlot--) {
@@ -282,28 +284,30 @@ public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePl
 			}
 		}
 		if (firstSuitableOutputSlot == null){
-			LogHelper.info("TileInventoryMP: No output slots available.");
+			LogHelper.info("TileInventorySmithy: No output slots available.");
 			return false;
 		}
 
 		// finds if there is enough inventory to craft the result
 		if (!doCraftItem) {
-			numThatCanBeCrafted = (short) PestleCraftingManager.getInstance().hasMatchingRecipe(result, itemStacks, false);
+			numThatCanBeCrafted = (short) SmithyCraftingManager.getInstance().hasMatchingRecipe(result, itemStacks, false);
 			if (numThatCanBeCrafted <= 0) {
 				if (this.guiOpen)
-					LogHelper.info("TileInvetoryMP: Can't craft item from inventory.");
+					LogHelper.info("TileInventorySmithy: Can't craft item from inventory.");
 				return false;			
 			}
 			return true;
 		}
 
 		// Craft an item
-		int numCrafted = (short) PestleCraftingManager.getInstance().hasMatchingRecipe(result, itemStacks, true);
+		int numCrafted = (short) SmithyCraftingManager.getInstance().hasMatchingRecipe(result, itemStacks, true);
 		
 		if (numCrafted <= 0)
 			return false;
 
 		// alter output slot
+		LogHelper.info("TileInventorySmithy: Update called on " + (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT ? "client" : "server"));
+		LogHelper.info("TileInventorySmithy: Copy craft result to slot: " + firstSuitableOutputSlot);
 		if (itemStacks[firstSuitableOutputSlot] == null) {
 			itemStacks[firstSuitableOutputSlot] = result.copy(); // Use deep .copy() to avoid altering the recipe
 		} else {
@@ -315,7 +319,7 @@ public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePl
 
 	@Override
 	public String getName() {
-		return "container.mortar_and_pestle.name";
+		return "container.smithy.name";
 	}
 
 	@Override
@@ -409,13 +413,13 @@ public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePl
 	
 	// Return true if stack is a valid fertilizer for the crop plot
 	public boolean isItemValidForRecipeSlot(ItemStack stack) {
-		return PestleCraftingManager.getInstance().isItemInRecipe(stack);
+		return SmithyCraftingManager.getInstance().isItemInRecipe(stack);
 	}
 
 	//------------------------------
 
 	// This is where you save any data that you don't want to lose when the tile entity unloads
-	// In this case, it saves the state of the mortar and pestle and the itemstacks stored in the inventory
+	// In this case, it saves the state of the Smithy and the itemstacks stored in the inventory
 	@Override
 	public void writeToNBT(NBTTagCompound parentNBTTagCompound){
 		super.writeToNBT(parentNBTTagCompound); // The super call is required to save and load the tiles location
@@ -440,7 +444,7 @@ public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePl
 
 		// Save everything else
 		parentNBTTagCompound.setShort("blueprintSelected", blueprintSelected);
-		LogHelper.info("TileInventoryMP: Wrote inventory.");
+		LogHelper.info("TileInventorySmithy: Wrote inventory.");
 		
 	}
 
@@ -462,7 +466,7 @@ public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePl
 
 		// Load everything else.  Trim the arrays (or pad with 0) to make sure they have the correct number of elements
 		blueprintSelected = nbtTagCompound.getShort("blueprintSelected");
-		LogHelper.info("TileInventoryMP: Read inventory.");
+		LogHelper.info("TileInventorySmithy: Read inventory.");
 	}
 
 	// When the world loads from disk, the server needs to send the TileEntity information to the client
@@ -492,7 +496,7 @@ public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePl
 	@Override
 	public int getField(int id) {
 //		if (id == BLUEPRINT_SEL_FIELD_ID) return blueprintSelected;
-		System.err.println("Invalid field ID in TileInventoryMP.getField:" + id);
+		System.err.println("Invalid field ID in TileInventorySmithy.getField:" + id);
 		return 0;
 	}
 
@@ -502,7 +506,7 @@ public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePl
 //			blueprintSelected = (short)value;
 //		} 
 //		else {
-			System.err.println("Invalid field ID in TileInventoryMP.setField:" + id);
+			System.err.println("Invalid field ID in TileInventorySmithy.setField:" + id);
 //		}
 	}
 

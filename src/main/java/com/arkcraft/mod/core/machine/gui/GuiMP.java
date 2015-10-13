@@ -39,20 +39,20 @@ public class GuiMP extends GuiContainer {
 	}
 	
 	// some [x,y] coordinates of graphical elements
-	final int LEFT_BUTTON_XPOS = 9;
-	final int LEFT_BUTTON_YPOS = 20;
-//	final int LEFT_BUTTON_ICON_U = 176;   // texture position of the water bar
-//	final int LEFT_BUTTON_ICON_V = 17;
-	final int LEFT_BUTTON_WIDTH = 20;
-	final int LEFT_BUTTON_HEIGHT = 12;
-
 	final int BLUEPRINT_XPOS = 34;
 	final int BLUEPRINT_YPOS = 18;
 	final int BLUEPRINT_WIDTH = 16;
 	final int BLUEPRINT_HEIGHT = 16;
 
+	final int LEFT_BUTTON_XPOS = 9;
+	final int LEFT_BUTTON_YPOS = BLUEPRINT_YPOS + 2;
+//	final int LEFT_BUTTON_ICON_U = 176;   // texture position of the water bar
+//	final int LEFT_BUTTON_ICON_V = 17;
+	final int LEFT_BUTTON_WIDTH = 20;
+	final int LEFT_BUTTON_HEIGHT = 12;
+
 	final int RIGHT_BUTTON_XPOS = 54;
-	final int RIGHT_BUTTON_YPOS = 20;
+	final int RIGHT_BUTTON_YPOS = BLUEPRINT_YPOS + 2;
 //	final int RIGHT_BUTTON_ICON_U = 176;   // texture position of the water bar
 //	final int RIGHT_BUTTON_ICON_V = 17;
 	final int RIGHT_BUTTON_WIDTH = 20;

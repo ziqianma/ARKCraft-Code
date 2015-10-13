@@ -14,7 +14,7 @@ import net.minecraftforge.fml.relauncher.Side;
  * @author William
  *
  */
-public class PlayerPoop  implements IMessage {
+public class PlayerPoop implements IMessage {
 	boolean doIt;  // Not used yet
 	
 	/**
@@ -44,11 +44,12 @@ public class PlayerPoop  implements IMessage {
 		        return null;
 		    }
 			EntityPlayerMP player = ctx.getServerHandler().playerEntity;
+			processMessage(message, player);			
 			player.getServerForPlayer().addScheduledTask(new Runnable(){
 				public void run(){
 					processMessage(message, player);
 				}
-			});	    
+			});
 			return null;			
 		}
 	}
