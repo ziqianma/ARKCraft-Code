@@ -43,6 +43,7 @@ public class Config {
 		loadFields(cat_balance, BALANCE.PLAYER.class);
 		loadFields(cat_balance, BALANCE.WEAPONS.class);		
 		loadFields(cat_balance, BALANCE.CROP_PLOT.class);		
+		loadFields(cat_balance, BALANCE.MORTAR_AND_PESTLE.class);		
 		loadFields(cat_balance, BALANCE.DINO_PROPERTIES.class);		
 		// TODO: Add more classes from BALANCE here when available
 	}

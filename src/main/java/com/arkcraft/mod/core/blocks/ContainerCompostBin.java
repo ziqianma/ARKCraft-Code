@@ -12,8 +12,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
-import com.arkcraft.mod.core.handlers.SmithyCraftingManager;
-
 public class ContainerCompostBin extends Container {
 
 	public InventoryCrafting craftMatrix;
@@ -136,13 +134,14 @@ public class ContainerCompostBin extends Container {
 
 	@Override
 	public void onCraftMatrixChanged(IInventory inventory) {
-		if (oneOutputSlot)
-			this.craftResult[0].setInventorySlotContents(0, SmithyCraftingManager.getInstance().findMatchingRecipe(craftMatrix, world));
-		else {
-			ItemStack[] itemStacks = SmithyCraftingManager.getInstance().findMatchingRecipes(this.craftMatrix, this.world);
-			for (int i = 0; i < 24 && itemStacks[i] != null; i++)
-				this.craftResult[i].setInventorySlotContents(0, itemStacks[i]);
-		}
+		// TODO Create a CraftingManager (if needed) for the compost bin
+//		if (oneOutputSlot)
+//			this.craftResult[0].setInventorySlotContents(0, SmithyCraftingManager.getInstance().findMatchingRecipe(craftMatrix, world));
+//		else {
+//			ItemStack[] itemStacks = SmithyCraftingManager.getInstance().findMatchingRecipes(this.craftMatrix, this.world);
+//			for (int i = 0; i < 24 && itemStacks[i] != null; i++)
+//				this.craftResult[i].setInventorySlotContents(0, itemStacks[i]);
+//		}
 	}
 	
 	@Override

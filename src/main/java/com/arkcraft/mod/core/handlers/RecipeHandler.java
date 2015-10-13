@@ -112,7 +112,7 @@ public class RecipeHandler {
 				);
 	}
 
-	public static void registerSmithyCraftingRecipes() {
+	public static void registerSmithyCraftingRecipes() {		
 		SmithyCraftingManager.getInstance().addShapelessRecipe(
 				new ItemStack(ModItems.saddle_small, 1), 
 				Items.leather, 

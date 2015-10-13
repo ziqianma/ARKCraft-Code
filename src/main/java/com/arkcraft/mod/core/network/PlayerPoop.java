@@ -3,17 +3,18 @@ package com.arkcraft.mod.core.network;
 import com.arkcraft.mod.core.items.ModItems;
 
 import io.netty.buffer.ByteBuf;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+import net.minecraftforge.fml.relauncher.Side;
 
 /**
  * Used so the player can poop
  * @author William
  *
  */
-public class PlayerPoop  implements IMessage {
+public class PlayerPoop implements IMessage {
 	boolean doIt;  // Not used yet
 	
 	/**
@@ -38,11 +39,24 @@ public class PlayerPoop  implements IMessage {
 	public static class Handler implements IMessageHandler<PlayerPoop, IMessage> {
 		@Override
 		public IMessage onMessage(PlayerPoop message, MessageContext ctx) {
-			EntityPlayer player = ctx.getServerHandler().playerEntity;
-			if (player != null) {
-				player.dropItem(ModItems.player_feces, 1);
-			}
-			return null;
+		    if (ctx.side != Side.SERVER) {
+		        System.err.println("MPUpdateDoCraft received on wrong side:" + ctx.side);
+		        return null;
+		    }
+			EntityPlayerMP player = ctx.getServerHandler().playerEntity;
+			processMessage(message, player);			
+			player.getServerForPlayer().addScheduledTask(new Runnable(){
+				public void run(){
+					processMessage(message, player);
+				}
+			});
+			return null;			
+		}
+	}
+	
+	static void processMessage(PlayerPoop message, EntityPlayerMP player){
+		if (player != null) {
+			player.dropItem(ModItems.player_feces, 1);
 		}
 	}
 }

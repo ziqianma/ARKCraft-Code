@@ -150,6 +150,7 @@ public class TileInventoryCropPlot extends TileEntity implements IInventory, IUp
 			
 			// If growTime has reached maximum, harvest a berry and reset growTime
 			if (growthStage == 5 && growTime >= GROW_TIME_FOR_BERRY) {
+//				LogHelper.info("TileInventoryCropPlot: About to harvest a berry on " + (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT ? "client" : "server"));
 				harvestBerry();
 				growTime = 0;
 			}

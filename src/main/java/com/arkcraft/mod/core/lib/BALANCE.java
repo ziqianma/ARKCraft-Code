@@ -94,6 +94,11 @@ public final class BALANCE {
 		@DefaultInt(value = 45, minValue = 10, maxValue = 600, name = "Seconds to grow a berry.", comment = "Time for one berry to grow in crop plot")
 		public static int GROW_TIME_FOR_BERRY;	
 	}
+
+	public static class MORTAR_AND_PESTLE {
+		@DefaultInt(value = 16, minValue = 1, maxValue = 60, name = "Seconds to craft an item.", comment = "Time to craft item in mortar and pestle")
+		public static int CRAFT_TIME_FOR_ITEM;
+	}
 	
 	public static class DINO_PROPERTIES {
 		@DefaultInt(value = 120, minValue = 30, maxValue = 3600, name = "Seconds to tame raptor.", comment = "Time need to tame")

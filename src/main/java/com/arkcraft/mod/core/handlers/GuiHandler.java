@@ -16,6 +16,7 @@ import com.arkcraft.mod.core.GlobalAdditions.GUI;
 import com.arkcraft.mod.core.blocks.ContainerCompostBin;
 import com.arkcraft.mod.core.blocks.TileInventoryCropPlot;
 import com.arkcraft.mod.core.blocks.TileInventoryMP;
+import com.arkcraft.mod.core.blocks.TileInventorySmithy;
 import com.arkcraft.mod.core.book.BookData;
 import com.arkcraft.mod.core.book.BookDataStore;
 import com.arkcraft.mod.core.book.GuiDossier;
@@ -24,9 +25,9 @@ import com.arkcraft.mod.core.entity.passive.EntityDodo;
 import com.arkcraft.mod.core.lib.LogHelper;
 import com.arkcraft.mod.core.machine.gui.ContainerInventoryCropPlot;
 import com.arkcraft.mod.core.machine.gui.ContainerInventoryDodo;
+import com.arkcraft.mod.core.machine.gui.ContainerInventorySmithy;
 import com.arkcraft.mod.core.machine.gui.ContainerInventoryTaming;
 import com.arkcraft.mod.core.machine.gui.ContainerInventoryMP;
-import com.arkcraft.mod.core.machine.gui.ContainerSmithy;
 import com.arkcraft.mod.core.machine.gui.GUICropPlot;
 import com.arkcraft.mod.core.machine.gui.GUITaming;
 import com.arkcraft.mod.core.machine.gui.GuiInventoryDodo;
@@ -41,9 +42,16 @@ public class GuiHandler implements IGuiHandler {
 			LogHelper.info("GuiHandler: getServerGuiElement called from client");
 		else
 			LogHelper.info("GuiHandler: getServerGuiElement called from server");
-		if (ID == GUI.SMITHY.getID()) 
-			return new ContainerSmithy(player.inventory, world, new BlockPos(x, y, z)); 
-		if (ID == GUI.PESTLE_AND_MORTAR.getID()) {
+		if (ID == GUI.SMITHY.getID()) {
+			BlockPos xyz = new BlockPos(x, y, z);
+			TileEntity tileEntity = world.getTileEntity(xyz);
+			if (tileEntity instanceof TileInventorySmithy)
+				return new ContainerInventorySmithy(player.inventory, (TileInventorySmithy) tileEntity);
+			else {
+				LogHelper.info("GuiHandler - getServerGuiElement: TileEntitySmithy not found!");
+			}
+		}
+		else if (ID == GUI.PESTLE_AND_MORTAR.getID()) {
 			BlockPos xyz = new BlockPos(x, y, z);
 			TileEntity tileEntity = world.getTileEntity(xyz);
 			if (tileEntity instanceof TileInventoryMP)
@@ -52,10 +60,10 @@ public class GuiHandler implements IGuiHandler {
 				LogHelper.info("GuiHandler - getServerGuiElement: TileEntityMP not found!");
 			}
 		}
-		if (ID == GUI.COMPOST_BIN.getID()) {
+		else if (ID == GUI.COMPOST_BIN.getID()) {
 			return new ContainerCompostBin(player.inventory, world, new BlockPos(x, y, z));
 		}
-		if (ID == GUI.CROP_PLOT.getID()) {
+		else if (ID == GUI.CROP_PLOT.getID()) {
 			BlockPos xyz = new BlockPos(x, y, z);
 			TileEntity tileEntity = world.getTileEntity(xyz);
 			if (tileEntity instanceof TileInventoryCropPlot)
@@ -64,14 +72,14 @@ public class GuiHandler implements IGuiHandler {
 				LogHelper.info("GuiHandler - getServerGuiElement: TileEntityCropPlot not found!");
 			}
 		}
-		if (ID == GUI.INV_DODO.getID()) {
+		else if (ID == GUI.INV_DODO.getID()) {
 			Entity entity = getEntityAt(player, x, y, z);
 			if (entity != null && entity instanceof EntityDodo) 
 				return new ContainerInventoryDodo(player.inventory, ((EntityDodo)entity).invDodo, (EntityDodo)entity);
 			else
 				LogHelper.error("GuiHandler - getServerGuiElement: Did not find entity with inventory!");
 		}
-		if (ID == GUI.TAMING_GUI.getID()) {
+		else if (ID == GUI.TAMING_GUI.getID()) {
 			Entity entity = getEntityAt(player, x, y, z);
 			if (entity != null && entity instanceof DinoTameable) {
 				DinoTameable dino = (DinoTameable)entity;
@@ -92,8 +100,15 @@ public class GuiHandler implements IGuiHandler {
 			LogHelper.info("GuiHandler: getClientGuiElement called from client");
 		else
 			LogHelper.info("GuiHandler: getClientGuiElement called from server");
-		if (ID == GUI.SMITHY.getID()) 
-			return new GuiSmithy(player.inventory, world, new BlockPos(x, y, z));
+		if (ID == GUI.SMITHY.getID()) {
+			BlockPos xyz = new BlockPos(x, y, z);
+			TileEntity tileEntity = world.getTileEntity(xyz);
+			if (tileEntity instanceof TileInventorySmithy)			
+				return new GuiSmithy(player.inventory, (TileInventorySmithy) tileEntity);
+			else {
+				LogHelper.info("GuiHandler - getClientGuiElement: TileEntitySmithy not found!");				
+			}			
+		}
 		if (ID == GUI.PESTLE_AND_MORTAR.getID()) {
 			BlockPos xyz = new BlockPos(x, y, z);
 			TileEntity tileEntity = world.getTileEntity(xyz);
