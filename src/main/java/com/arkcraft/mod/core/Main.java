@@ -32,7 +32,7 @@ import com.arkcraft.mod.core.proxy.CommonProxy;
 	guiFactory = "com.arkcraft.mod.core.lib.ModGuiFactory")
 public class Main {
 	
-	public static final String MODID = "arkcraft", VERSION = "0.1 Alpha", NAME = "ARKCraft";
+	public static final String MODID = "arkcraft", VERSION = "${version}", NAME = "ARKCraft";
 	@SidedProxy(clientSide="com.arkcraft.mod.core.proxy.ClientProxy", serverSide="com.arkcraft.mod.core.proxy.CommonProxy")
 	public static CommonProxy proxy;
 	@Instance("arkcraft")
@@ -79,5 +79,10 @@ public class Main {
 		
 		int id = 0;
 		modChannel.registerMessage(PlayerPoop.Handler.class, PlayerPoop.class, id++, Side.SERVER);
-	}		
+	}
+	
+	public boolean isDebugger()
+	{
+		return "${version}".equals("${" + "version" + "}");
+	}
 }
