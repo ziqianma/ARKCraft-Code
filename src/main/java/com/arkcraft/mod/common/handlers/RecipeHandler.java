@@ -114,17 +114,55 @@ public class RecipeHandler {
 
 	public static void registerSmithyCraftingRecipes() {		
 		SmithyCraftingManager.getInstance().addShapelessRecipe(
-				new ItemStack(ARKCraftItems.saddle_small, 1),
-				Items.leather, 
-				Items.iron_ingot, 
-				ARKCraftItems.fiber, ARKCraftItems.fiber, ARKCraftItems.fiber, ARKCraftItems.fiber
+				new ItemStack(ModItems.saddle_small, 1), 
+				new ItemStack(Items.leather, 15), 
+				new ItemStack(Items.iron_ingot, 10), 
+				new ItemStack(ModItems.fiber, 15)
 				);
-		SmithyCraftingManager.getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.saddle_medium, 1),
-				Items.leather, Items.leather, 
-				Items.iron_ingot, Items.iron_ingot, 
-				ARKCraftItems.fiber, ARKCraftItems.fiber,
-				Items.diamond
+		SmithyCraftingManager.getInstance().addShapelessRecipe(new ItemStack(ModItems.saddle_medium, 1), 
+				new ItemStack(Items.leather, 48),
+				new ItemStack(Items.iron_ingot, 32), 
+				new ItemStack(ModItems.fiber, 32),
+				new ItemStack(Items.diamond, 1)
 				);
-//		SmithyCraftingManager.getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.saddle_large, 1), new ItemStack(ARKCraftItems.chitin, 32), new ItemStack(Items.diamond, 4), new ItemStack(Items.iron_ingot, 16), new ItemStack(ARKCraftItems.fiber, 15));
+		SmithyCraftingManager.getInstance().addShapelessRecipe(new ItemStack(ModItems.saddle_large, 1), 
+				new ItemStack(ModItems.chitin, 32),
+				new ItemStack(Items.iron_ingot, 16), 
+				new ItemStack(ModItems.fiber, 32),
+				new ItemStack(Items.diamond, 4)
+				);
+//		SmithyCraftingManager.getInstance().addShapelessRecipe(new ItemStack(ModItems.boneHelm, 1),
+//				new ItemStack(ModItems.trex_skull, 1),
+//				new ItemStack(ModItems.bones_large, 5)
+//				);
+//		SmithyCraftingManager.getInstance().addShapelessRecipe(new ItemStack(ModItems.boneChest, 1),
+//				new ItemStack(Items.bone, 16),
+//				new ItemStack(ModItems.bones_large, 8)
+//				);
+//		SmithyCraftingManager.getInstance().addShapelessRecipe(new ItemStack(ModItems.boneLegs, 1),
+//				new ItemStack(Items.bone, 16),
+//				new ItemStack(ModItems.bones_large, 7)
+//				);
+//		SmithyCraftingManager.getInstance().addShapelessRecipe(new ItemStack(ModItems.boneBoots, 1),
+//				new ItemStack(Items.bone, 16),
+//				new ItemStack(ModItems.bones_large, 7)
+//				);
+		SmithyCraftingManager.getInstance().addShapelessRecipe(new ItemStack(ModItems.longneck_rifle, 1),
+				new ItemStack(Items.iron_ingot, 32),
+				new ItemStack(Blocks.glass, 1)
+				);
+		SmithyCraftingManager.getInstance().addShapelessRecipe(new ItemStack(ModItems.shotgun, 1),
+				new ItemStack(Items.iron_ingot, 32),
+				new ItemStack(Blocks.log, 4)
+				);
+		SmithyCraftingManager.getInstance().addShapelessRecipe(new ItemStack(ModItems.rocket_launcher, 1),
+				new ItemStack(Items.iron_ingot, 48),
+				new ItemStack(Items.diamond, 4),
+				new ItemStack(Items.redstone, 16)
+				);
+		SmithyCraftingManager.getInstance().addShapelessRecipe(new ItemStack(ModItems.explosive_ball, 1),
+				new ItemStack(Items.iron_ingot, 3),
+				new ItemStack(Items.gunpowder, 4)
+				);
 	}
 }

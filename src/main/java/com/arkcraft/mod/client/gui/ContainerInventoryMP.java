@@ -49,6 +49,7 @@ public class ContainerInventoryMP extends Container {
 			}
 		}
 		this.tileInventoryMP.setGuiOpen(true, false);
+		this.tileInventoryMP.setBlueprintSelected(this.tileInventoryMP.getBlueprintSelected());
 	}
 	
     @Override

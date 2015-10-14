@@ -116,6 +116,7 @@ public class TileInventorySmithy extends TileEntity implements IInventory, IUpda
 	}
 	public void setBlueprintSelected(int blueprintSelected) {
 		this.blueprintSelected = (short) blueprintSelected;
+        this.inventoryBlueprints.setInventorySlotContents(0, blueprintStacks[blueprintSelected]);        
 	}
 	/** Select next blueprint */
     @SideOnly(Side.CLIENT)
@@ -138,6 +139,24 @@ public class TileInventorySmithy extends TileEntity implements IInventory, IUpda
 	
 	// Create and initialize the itemStacks variable that will store the itemStacks
 	private ItemStack[] itemStacks = new ItemStack[TOTAL_SLOTS_COUNT];
+	
+	@SuppressWarnings("rawtypes")
+	public TileInventorySmithy(){
+		// FIXME - Is there another way to do this? See note in RecipeHandler		
+		numBlueprints = SmithyCraftingManager.getInstance().getNumRecipes();
+//		numBlueprints = RecipeHandler.numSmithyCraftingRecipes;
+		blueprintStacks = new ItemStack[numBlueprints];
+		List recipes = SmithyCraftingManager.getInstance().getRecipeList();
+        Iterator iterator = recipes.iterator();
+        IARKRecipe irecipe;
+        int i = 0;
+        while (iterator.hasNext()){
+            irecipe = (IARKRecipe)iterator.next();
+            blueprintStacks[i] = irecipe.getRecipeOutput();
+            i++;
+        }
+        setBlueprintSelected(0);
+	}
 	
 	/** The number of items that can be crafted */
 	private short numThatCanBeCrafted = 0;
@@ -173,24 +192,6 @@ public class TileInventorySmithy extends TileEntity implements IInventory, IUpda
 		return MathHelper.clamp_double(fraction, 0.0, 1.0);
 	}
 
-	@SuppressWarnings("rawtypes")
-	public TileInventorySmithy(){
-		// FIXME - Is there another way to do this? See note in RecipeHandler		
-		numBlueprints = SmithyCraftingManager.getInstance().getNumRecipes();
-//		numBlueprints = RecipeHandler.numSmithyCraftingRecipes;
-		blueprintStacks = new ItemStack[numBlueprints];
-		List recipes = SmithyCraftingManager.getInstance().getRecipeList();
-        Iterator iterator = recipes.iterator();
-        IARKRecipe irecipe;
-        int i = 0;
-        while (iterator.hasNext()){
-            irecipe = (IARKRecipe)iterator.next();
-            blueprintStacks[i] = irecipe.getRecipeOutput();
-            i++;
-        }
-        this.inventoryBlueprints.setInventorySlotContents(0, blueprintStacks[0]);        
-	}
-	
 	// This method is called every tick to update the tile entity, i.e.
 	// It runs both on the server and the client.
 	@Override

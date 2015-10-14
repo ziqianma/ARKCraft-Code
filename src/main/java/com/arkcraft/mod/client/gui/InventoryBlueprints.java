@@ -19,6 +19,12 @@ public class InventoryBlueprints extends InventoryBasic {
 		super(title, customName, slotCount);
 	}
 
+    public void loadInventoryFromNBT(NBTTagCompound nbt)  {
+		final byte NBT_TYPE_COMPOUND = 10;  
+		NBTTagList dataForAllBlueprints = nbt.getTagList("Blueprints", NBT_TYPE_COMPOUND);
+		loadInventoryFromNBT(dataForAllBlueprints);
+    }
+    
     public void loadInventoryFromNBT(NBTTagList nbt)  {
         int i;
         for (i = 0; i < this.getSizeInventory(); ++i) {
@@ -43,10 +49,10 @@ public class InventoryBlueprints extends InventoryBasic {
                 nbttagcompound.setByte("Slot", (byte)i);
                 itemstack.writeToNBT(nbttagcompound);
                 nbttaglist.appendTag(nbttagcompound);
-                LogHelper.info("DinoInventory: Saved a " + itemstack.getItem() + " to inventory.");
+                LogHelper.info("InventoryBlueprints: Saved a " + itemstack.getItem() + " to inventory.");
             }
         }
-		nbt.setTag("Items", nbttaglist);
+		nbt.setTag("Blueprints", nbttaglist);
     }
 
     /**

@@ -116,6 +116,7 @@ public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePl
 	}
 	public void setBlueprintSelected(int blueprintSelected) {
 		this.blueprintSelected = (short) blueprintSelected;
+        this.inventoryBlueprints.setInventorySlotContents(0, blueprintStacks[blueprintSelected]);        
 	}
 	/** Select next blueprint */
     @SideOnly(Side.CLIENT)
@@ -138,6 +139,23 @@ public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePl
 	
 	// Create and initialize the itemStacks variable that will store the itemStacks
 	private ItemStack[] itemStacks = new ItemStack[TOTAL_SLOTS_COUNT];
+	
+	@SuppressWarnings("rawtypes")
+	public TileInventoryMP(){
+		LogHelper.info("TileInventoryMP: constructor called.");
+		numBlueprints = PestleCraftingManager.getInstance().getNumRecipes();
+		blueprintStacks = new ItemStack[numBlueprints];
+		List recipes = PestleCraftingManager.getInstance().getRecipeList();
+        Iterator iterator = recipes.iterator();
+        IARKRecipe irecipe;
+        int i = 0;
+        while (iterator.hasNext()){
+            irecipe = (IARKRecipe)iterator.next();
+            blueprintStacks[i] = irecipe.getRecipeOutput();
+            i++;
+        }
+        setBlueprintSelected(0);
+	}
 	
 	/** The number of items that can be crafted */
 	private short numThatCanBeCrafted = 0;
@@ -173,22 +191,6 @@ public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePl
 		return MathHelper.clamp_double(fraction, 0.0, 1.0);
 	}
 
-	@SuppressWarnings("rawtypes")
-	public TileInventoryMP(){
-		numBlueprints = PestleCraftingManager.getInstance().getNumRecipes();
-		blueprintStacks = new ItemStack[numBlueprints];
-		List recipes = PestleCraftingManager.getInstance().getRecipeList();
-        Iterator iterator = recipes.iterator();
-        IARKRecipe irecipe;
-        int i = 0;
-        while (iterator.hasNext()){
-            irecipe = (IARKRecipe)iterator.next();
-            blueprintStacks[i] = irecipe.getRecipeOutput();
-            i++;
-        }
-        this.inventoryBlueprints.setInventorySlotContents(0, blueprintStacks[0]);        
-	}
-	
 	// This method is called every tick to update the tile entity, i.e.
 	// It runs both on the server and the client.
 	@Override
@@ -425,7 +427,8 @@ public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePl
 		// to use an analogy with Java, this code generates an array of hashmaps
 		// The itemStack in each slot is converted to an NBTTagCompound, which is effectively a hashmap of key->value pairs such
 		//   as slot=1, id=2353, count=1, etc
-		// Each of these NBTTagCompound are then inserted into NBTTagList, which is similar to an array.
+		// Each of these NBTTagCompound are then inserted into NBTTagList, which is similar to an array.		
+		// Recipe items inventory
 		NBTTagList dataForAllSlots = new NBTTagList();
 		for (int i = 0; i < this.itemStacks.length; ++i) {
 			if (this.itemStacks[i] != null) {
@@ -448,6 +451,8 @@ public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePl
 	@Override
 	public void readFromNBT(NBTTagCompound nbtTagCompound){
 		super.readFromNBT(nbtTagCompound); // The super call is required to save and load the tiles location
+
+		// recipe items inventory
 		final byte NBT_TYPE_COMPOUND = 10;       // See NBTBase.createNewByType() for a listing
 		NBTTagList dataForAllSlots = nbtTagCompound.getTagList("Items", NBT_TYPE_COMPOUND);
 
