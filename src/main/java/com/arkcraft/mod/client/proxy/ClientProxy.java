@@ -1,5 +1,6 @@
 package com.arkcraft.mod.client.proxy;
 
+import com.arkcraft.mod.client.gui.overlay.GuiOverlay;
 import com.arkcraft.mod.client.model.ModelBrontosaurus;
 import com.arkcraft.mod.client.model.ModelDodo;
 import com.arkcraft.mod.client.model.ModelRaptor;
@@ -49,6 +50,9 @@ public class ClientProxy extends CommonProxy
 	@Override
 	public void init() {
 		if(initDone) return;
+
+		MinecraftForge.EVENT_BUS.register(new GuiOverlay());
+
 		RenderingRegistry.registerEntityRenderingHandler(EntityCobble.class, new RenderSnowball(Minecraft.getMinecraft().getRenderManager(), ARKCraftItems.cobble_ball, Minecraft.getMinecraft().getRenderItem()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityTranqArrow.class, new RenderTranqArrow());
 		RenderingRegistry.registerEntityRenderingHandler(EntityStoneArrow.class, new RenderStoneArrow());
