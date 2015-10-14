@@ -1,7 +1,7 @@
 package com.arkcraft.mod.common.entity.aggressive;
 
 import com.arkcraft.mod.common.ARKCraft;
-import com.arkcraft.mod.common.entity.DinoTameable;
+import com.arkcraft.mod.common.entity.EntityTameableDinosaur;
 import com.arkcraft.mod.common.entity.SaddleType;
 import com.arkcraft.mod.common.items.ARKCraftItems;
 import com.arkcraft.mod.common.lib.BALANCE;
@@ -39,7 +39,7 @@ import net.minecraft.world.World;
  * @author Vastatio (color done by Bill)
  *
  */
-public class EntityRaptor extends DinoTameable
+public class EntityRaptor extends EntityTameableDinosaur
 {
 	private static final String RAPTOR_TYPE_PROP = "ark_raptor_type";
 	public int raptorType;

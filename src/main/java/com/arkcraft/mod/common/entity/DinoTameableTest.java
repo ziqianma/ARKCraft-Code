@@ -315,7 +315,7 @@ public class DinoTameableTest extends EntityMob implements IEntityOwnable {
 
         if (this.isTamed()) {
             if (itemstack != null) {
-    			player.addChatMessage(new ChatComponentText("DinoTameable: This dino is tamed."));
+    			player.addChatMessage(new ChatComponentText("EntityTameableDinosaur: This dino is tamed."));
                 if (itemstack.getItem() instanceof ItemFood) {
                     ItemFood itemfood = (ItemFood)itemstack.getItem();
                     if (!player.capabilities.isCreativeMode) {
@@ -341,7 +341,7 @@ public class DinoTameableTest extends EntityMob implements IEntityOwnable {
             if (!this.worldObj.isRemote) {
                 if (this.rand.nextInt(2) == 0) {
                     this.setTamed(true);
-        			player.addChatMessage(new ChatComponentText("DinoTameable: You have tamed the dino!"));
+        			player.addChatMessage(new ChatComponentText("EntityTameableDinosaur: You have tamed the dino!"));
                     this.setAttackTarget((EntityLivingBase)null);
 //                    this.aiSit.setSitting(true);
                     this.setHealth(25.0F);
@@ -350,7 +350,7 @@ public class DinoTameableTest extends EntityMob implements IEntityOwnable {
                     this.worldObj.setEntityState(this, (byte)7);
                 }
                 else {
-        			player.addChatMessage(new ChatComponentText("DinoTameable: Taming the dino failed, try again!"));
+        			player.addChatMessage(new ChatComponentText("EntityTameableDinosaur: Taming the dino failed, try again!"));
                     this.playTameEffect(false);
                     this.worldObj.setEntityState(this, (byte)6);
                 }
@@ -358,7 +358,7 @@ public class DinoTameableTest extends EntityMob implements IEntityOwnable {
             return true;
         }
         else {
-			player.addChatMessage(new ChatComponentText("DinoTameable: Use a Raw Porkchop to tame the dino."));
+			player.addChatMessage(new ChatComponentText("EntityTameableDinosaur: Use a Raw Porkchop to tame the dino."));
         }
         return super.interact(player);
     }

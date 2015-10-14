@@ -1,6 +1,6 @@
 package com.arkcraft.mod.common.handlers;
 
-import com.arkcraft.mod.common.entity.DinoTameable;
+import com.arkcraft.mod.common.entity.EntityTameableDinosaur;
 import com.arkcraft.mod.common.entity.aggressive.EntityRaptor;
 import com.arkcraft.mod.common.items.ARKCraftItems;
 import com.arkcraft.mod.common.items.weapons.projectiles.EntityTranqArrow;
@@ -52,11 +52,11 @@ public class ARKEventHandler {
 	
 	@SubscribeEvent
 	public void onLivingHurtEvent(LivingHurtEvent event) {
-		if (!event.entity.worldObj.isRemote && event.entity instanceof DinoTameable) {
+		if (!event.entity.worldObj.isRemote && event.entity instanceof EntityTameableDinosaur) {
 			if (event.source.isProjectile()) {
 				if (event.source.getEntity() instanceof EntityTranqArrow) {
-					if (event.entity instanceof DinoTameable){
-						((DinoTameable)event.entity).increaseTorpor(BALANCE.WEAPONS.TRANQ_AMMO_TORPOR_TIME);
+					if (event.entity instanceof EntityTameableDinosaur){
+						((EntityTameableDinosaur)event.entity).increaseTorpor(BALANCE.WEAPONS.TRANQ_AMMO_TORPOR_TIME);
 					}					
 				}
 			}

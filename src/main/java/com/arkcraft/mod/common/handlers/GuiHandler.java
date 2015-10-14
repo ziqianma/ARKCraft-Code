@@ -15,7 +15,7 @@ import com.arkcraft.mod.client.gui.book.BookData;
 import com.arkcraft.mod.client.gui.book.BookDataStore;
 import com.arkcraft.mod.client.gui.book.GuiDossier;
 import com.arkcraft.mod.common.container.ContainerCompostBin;
-import com.arkcraft.mod.common.entity.DinoTameable;
+import com.arkcraft.mod.common.entity.EntityTameableDinosaur;
 import com.arkcraft.mod.common.entity.passive.EntityDodo;
 import com.arkcraft.mod.common.lib.LogHelper;
 import com.arkcraft.mod.common.tile.TileInventoryCropPlot;
@@ -80,8 +80,8 @@ public class GuiHandler implements IGuiHandler {
 		}
 		else if (ID == GlobalAdditions.GUI.TAMING_GUI.getID()) {
 			Entity entity = getEntityAt(player, x, y, z);
-			if (entity != null && entity instanceof DinoTameable) {
-				DinoTameable dino = (DinoTameable)entity;
+			if (entity != null && entity instanceof EntityTameableDinosaur) {
+				EntityTameableDinosaur dino = (EntityTameableDinosaur)entity;
 				dino.setSitting(true);
 				if (dino.invTaming.getTorporTime() == 0)
 					dino.invTaming.setTorporTime((short) 60);
@@ -145,12 +145,12 @@ public class GuiHandler implements IGuiHandler {
 		}
 		if (ID == GlobalAdditions.GUI.TAMING_GUI.getID()) {
 			Entity entity = getEntityAt(player, x, y, z);
-			if (entity != null && entity instanceof DinoTameable) {
-				DinoTameable dino = (DinoTameable)entity;
+			if (entity != null && entity instanceof EntityTameableDinosaur) {
+				EntityTameableDinosaur dino = (EntityTameableDinosaur)entity;
 				dino.setSitting(true);
 				if (dino.invTaming.getTorporTime() == 0)
 					dino.invTaming.setTorporTime((short) 60);
-				return new GUITaming(player.inventory, ((DinoTameable)entity).invTaming, player);
+				return new GUITaming(player.inventory, ((EntityTameableDinosaur)entity).invTaming, player);
 			}
 			else
 				LogHelper.error("GuiHandler - getClientGuiElement: Did not find entity to tame!");			
@@ -168,7 +168,7 @@ public class GuiHandler implements IGuiHandler {
 		Iterator iterator = entities.iterator();
         while (iterator.hasNext()) {
             Entity entity = (Entity)iterator.next();
-            if (entity instanceof EntityDodo || entity instanceof DinoTameable) {
+            if (entity instanceof EntityDodo || entity instanceof EntityTameableDinosaur) {
             	LogHelper.info("GuiHandler: Found entity!");
             	return entity;
             }

@@ -15,9 +15,6 @@ import java.lang.reflect.Type;
  *
  */
 public class PageDeserializer implements JsonDeserializer<Page> {
-
-	
-	
 	@Override
 	public Page deserialize(JsonElement json, Type typeOfT,
 			JsonDeserializationContext context) {

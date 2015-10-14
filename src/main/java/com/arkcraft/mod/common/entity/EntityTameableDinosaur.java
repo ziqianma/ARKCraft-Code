@@ -29,7 +29,7 @@ import net.minecraft.world.World;
  * @author wildbill22
  *
  */
-public abstract class DinoTameable extends EntityTameable {
+public abstract class EntityTameableDinosaur extends EntityTameable {
 	// Stuff that needs to be saved to NBT:
 	public InventoryDino invDino;
 	public InventoryTaming invTaming;
@@ -77,11 +77,11 @@ public abstract class DinoTameable extends EntityTameable {
 		}
 	}
 	
-	public DinoTameable(World worldIn) {
+	public EntityTameableDinosaur(World worldIn) {
 		super(worldIn);
 	}
 
-	protected DinoTameable(World worldIn, SaddleType saddleType) {
+	protected EntityTameableDinosaur(World worldIn, SaddleType saddleType) {
 		super(worldIn);
 		this.getDataWatcher().addObject(DINO_SADDLED_WATCHER, Byte.valueOf((byte) 0));
         this.isTameable = true;
@@ -92,7 +92,7 @@ public abstract class DinoTameable extends EntityTameable {
 	}
 	
 	// Use this constructor if you want to create a dino that is not tameable
-	protected DinoTameable(World worldIn, SaddleType saddleType, boolean isTameable, int tamingSeconds) {
+	protected EntityTameableDinosaur(World worldIn, SaddleType saddleType, boolean isTameable, int tamingSeconds) {
 		super(worldIn);
 		this.getDataWatcher().addObject(DINO_SADDLED_WATCHER, Byte.valueOf((byte) 0));
         this.isTameable = isTameable;
@@ -231,7 +231,7 @@ public abstract class DinoTameable extends EntityTameable {
 
 	public void setTamed(EntityPlayer player, boolean tamed) {
 		if (player != null && tamed) {
-			player.addChatMessage(new ChatComponentText("DinoTameable: You have tamed the dino!"));
+			player.addChatMessage(new ChatComponentText("EntityTameableDinosaur: You have tamed the dino!"));
             this.setAttackTarget((EntityLivingBase)null);
 //            this.aiSit.setSitting(true);
             this.setHealth(25.0F);
@@ -267,9 +267,9 @@ public abstract class DinoTameable extends EntityTameable {
 			int currTorpor = this.invTaming.getTorporTime();
 			if (this.invTaming.setTorporTime((short) (currTorpor + i))) {
 				setIsTaming(true);
-				LogHelper.info("DinoTameable: Just set taming to true!");
+				LogHelper.info("EntityTameableDinosaur: Just set taming to true!");
 			}
-			LogHelper.info("DinoTameable: Set torpor to " + this.invTaming.getTorporTime());
+			LogHelper.info("EntityTameableDinosaur: Set torpor to " + this.invTaming.getTorporTime());
 		}
 	}
 	
@@ -331,7 +331,7 @@ public abstract class DinoTameable extends EntityTameable {
 		if (isTamed()) {
             if (this.isOwner(player)) {
             	if (!this.worldObj.isRemote)
-            		player.addChatMessage(new ChatComponentText("DinoTameable: This dino is tamed."));
+            		player.addChatMessage(new ChatComponentText("EntityTameableDinosaur: This dino is tamed."));
             	if (player.isSneaking()) {
     	    		if (isSaddled()) {
     	    			player.openGui(ARKCraft.instance, GUI.INV_DODO.getID(), this.worldObj,
@@ -383,7 +383,7 @@ public abstract class DinoTameable extends EntityTameable {
             		this.setSitting(!this.isSitting());
             	}
 			} else { // end of owner's dino
-            	player.addChatMessage(new ChatComponentText("DinoTameable: This dino is tamed, but not yours."));				
+            	player.addChatMessage(new ChatComponentText("EntityTameableDinosaur: This dino is tamed, but not yours."));
 			}
 		} // end of is tamed
         // Tame the dino with meat
@@ -399,7 +399,7 @@ public abstract class DinoTameable extends EntityTameable {
                     this.setTamed(player, true);
                 }
                 else {
-        			player.addChatMessage(new ChatComponentText("DinoTameable: Taming the dino failed, try again!"));
+        			player.addChatMessage(new ChatComponentText("EntityTameableDinosaur: Taming the dino failed, try again!"));
                     this.playTameEffect(false);
                     this.worldObj.setEntityState(this, (byte)6);
                 }
@@ -411,11 +411,11 @@ public abstract class DinoTameable extends EntityTameable {
             if (!this.worldObj.isRemote) {
             	player.openGui(ARKCraft.instance, GUI.TAMING_GUI.getID(), this.worldObj,
             			(int) Math.floor(this.posX), (int) this.posY, (int) Math.floor(this.posZ));
-            	LogHelper.info("DinoTameable: Opening GUI on Dino at: " + this.posX + "," + this.posY + "," + this.posZ + " (" +
+            	LogHelper.info("EntityTameableDinosaur: Opening GUI on Dino at: " + this.posX + "," + this.posY + "," + this.posZ + " (" +
             			(int) Math.floor(this.posX) + "," + (int) this.posY  + "," + (int) Math.floor(this.posZ) + ")");
                 return true;
             }
-//			player.addChatMessage(new ChatComponentText("DinoTameable: Use a Raw Porkchop to tame the dino."));
+//			player.addChatMessage(new ChatComponentText("EntityTameableDinosaur: Use a Raw Porkchop to tame the dino."));
         }
 		return false;
 //        return super.interact(player);

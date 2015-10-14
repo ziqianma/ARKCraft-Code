@@ -16,6 +16,7 @@ public class ClientEventHandler
 		if (e.entity.isUsingItem() && e.entity.getItemInUse().getItem() instanceof IItemWeapon)
 		{
 			RangedComponent rc = ((IItemWeapon) e.entity.getItemInUse().getItem()).getRangedComponent();
+
 			if (rc != null && RangedComponent.isReadyToFire(e.entity.getItemInUse()))
 			{
 				e.newfov = e.fov * rc.getFOVMultiplier(e.entity.getItemInUseDuration());

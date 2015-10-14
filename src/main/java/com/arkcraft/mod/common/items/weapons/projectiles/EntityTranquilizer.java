@@ -1,6 +1,6 @@
 package com.arkcraft.mod.common.items.weapons.projectiles;
 
-import com.arkcraft.mod.common.entity.DinoTameable;
+import com.arkcraft.mod.common.entity.EntityTameableDinosaur;
 import com.arkcraft.mod.common.items.weapons.handlers.WeaponDamageSource;
 import com.arkcraft.mod.common.lib.BALANCE;
 import net.minecraft.entity.Entity;
@@ -82,8 +82,8 @@ public class EntityTranquilizer extends EntityShootable
 			playHitSound();
 			setDead();
 		}
-		if (entity instanceof DinoTameable){
-			((DinoTameable)entity).increaseTorpor(BALANCE.WEAPONS.TRANQ_AMMO_TORPOR_TIME);
+		if (entity instanceof EntityTameableDinosaur){
+			((EntityTameableDinosaur)entity).increaseTorpor(BALANCE.WEAPONS.TRANQ_AMMO_TORPOR_TIME);
 		}
 	}
 	

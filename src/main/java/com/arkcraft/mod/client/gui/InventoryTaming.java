@@ -1,6 +1,6 @@
 package com.arkcraft.mod.client.gui;
 
-import com.arkcraft.mod.common.entity.DinoTameable;
+import com.arkcraft.mod.common.entity.EntityTameableDinosaur;
 import com.arkcraft.mod.common.items.ARKCraftItems;
 import com.arkcraft.mod.common.items.ARKFood;
 import com.arkcraft.mod.common.items.ARKItem;
@@ -26,14 +26,14 @@ import java.util.Arrays;
  */
 public class InventoryTaming implements IInventory, IUpdatePlayerListBox {
 	/** The dino whose inventory this is. */
-	DinoTameable entityDino;
+	EntityTameableDinosaur entityDino;
 	/** The player who started the taming process (with the GUI). */
 	public EntityPlayer playerTaming;
 
 	// Other class variables
 	int tick = 20;
 	
-	public InventoryTaming(DinoTameable entityDino) {
+	public InventoryTaming(EntityTameableDinosaur entityDino) {
 		this.entityDino = entityDino;
 		TAMING_TIME_FOR_COMPLETION = (short) entityDino.getTamingSeconds();
 	}

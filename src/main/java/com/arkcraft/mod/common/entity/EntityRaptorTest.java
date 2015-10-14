@@ -126,12 +126,12 @@ public class EntityRaptorTest extends DinoTameableTest {
     	this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(45.0D);
     	if (this.isTamed()) {
     		// Double when tamed
-    		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(16.0D); // Double the health for now
+    		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(64.0D); // Double the health for now
         	this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(8D); //5 hearts without armor
     	}
     	else {
     		// weaker when not tamed
-    		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(8.0D); //tested this at 5.0 (too low) setting to 8.
+    		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(32.0D); //tested this at 5.0 (too low) setting to 8.
         	this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(4D); //2.5 hearts without armor
     	}
     	this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.379890125D);

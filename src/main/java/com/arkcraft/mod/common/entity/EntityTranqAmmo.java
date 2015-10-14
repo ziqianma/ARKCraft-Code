@@ -341,6 +341,13 @@ public class EntityTranqAmmo extends Entity implements IProjectile
                         {
                             EntityLivingBase entitylivingbase = (EntityLivingBase)movingobjectposition.entityHit;
 
+                            if (movingobjectposition.entityHit instanceof EntityTameableDinosaur)
+                            {
+                                EntityTameableDinosaur dino = (EntityTameableDinosaur) movingobjectposition.entityHit;
+
+                                dino.increaseTorpor(20);
+                            }
+
                             if (!this.worldObj.isRemote)
                             {
                                 entitylivingbase.setArrowCountInEntity(entitylivingbase.getArrowCountInEntity() + 1);
