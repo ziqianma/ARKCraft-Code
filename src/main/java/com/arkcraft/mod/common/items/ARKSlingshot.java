@@ -1,6 +1,9 @@
 package com.arkcraft.mod.common.items;
 
+import com.arkcraft.mod.GlobalAdditions;
 import com.arkcraft.mod.common.ARKCraft;
+import com.arkcraft.mod.common.entity.EntityCobble;
+import com.arkcraft.mod.common.entity.EntityExplosive;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -8,10 +11,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagLong;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-
-import com.arkcraft.mod.GlobalAdditions;
-import com.arkcraft.mod.common.entity.EntityCobble;
-import com.arkcraft.mod.common.entity.EntityExplosive;
 
 public class ARKSlingshot extends Item {
 

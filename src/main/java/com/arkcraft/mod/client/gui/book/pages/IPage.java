@@ -2,7 +2,6 @@ package com.arkcraft.mod.client.gui.book.pages;
 
 import com.arkcraft.mod.client.gui.book.GuiDossier;
 import com.arkcraft.mod.client.gui.book.fonts.SmallFontRenderer;
-
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 /***

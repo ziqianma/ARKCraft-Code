@@ -1,8 +1,5 @@
 package com.arkcraft.mod.common.blocks;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import com.arkcraft.mod.GlobalAdditions;
 import com.arkcraft.mod.common.handlers.GenerationHandler;
 import com.arkcraft.mod.common.tile.TileEntityCompostBin;
@@ -13,6 +10,9 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author wildbill22

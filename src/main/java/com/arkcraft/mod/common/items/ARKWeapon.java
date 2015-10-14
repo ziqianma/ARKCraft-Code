@@ -1,9 +1,8 @@
 package com.arkcraft.mod.common.items;
 
+import com.arkcraft.mod.GlobalAdditions;
 import net.minecraft.item.ItemSword;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-
-import com.arkcraft.mod.GlobalAdditions;
 /**
  * @author Vastatio
  */

@@ -1,17 +1,19 @@
 package com.arkcraft.mod.common;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import com.arkcraft.mod.GlobalAdditions;
+import com.arkcraft.mod.common.blocks.ARKCraftBlocks;
 import com.arkcraft.mod.common.gen.WorldGeneratorBushes;
 import com.arkcraft.mod.common.gen.island.IslandGen;
 import com.arkcraft.mod.common.gen.island.WorldTypeIsland;
 import com.arkcraft.mod.common.handlers.ARKEventHandler;
 import com.arkcraft.mod.common.handlers.ARKPlayerEventHandler;
+import com.arkcraft.mod.common.handlers.FMLCommonEventHandler;
 import com.arkcraft.mod.common.items.ARKCraftItems;
 import com.arkcraft.mod.common.lib.Config;
+import com.arkcraft.mod.common.network.PlayerPoop;
 import com.arkcraft.mod.common.network.UpdateMPToCraftItem;
+import com.arkcraft.mod.common.network.UpdateSmithyToCraftItem;
+import com.arkcraft.mod.common.proxy.CommonProxy;
 import net.minecraft.item.Item;
 import net.minecraft.world.WorldType;
 import net.minecraftforge.common.MinecraftForge;
@@ -27,14 +29,10 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
-
 import org.apache.logging.log4j.Logger;
 
-import com.arkcraft.mod.common.blocks.ARKCraftBlocks;
-import com.arkcraft.mod.common.handlers.FMLCommonEventHandler;
-import com.arkcraft.mod.common.network.PlayerPoop;
-import com.arkcraft.mod.common.network.UpdateSmithyToCraftItem;
-import com.arkcraft.mod.common.proxy.CommonProxy;
+import java.util.HashMap;
+import java.util.Map;
 
 @Mod(modid= ARKCraft.MODID, version= ARKCraft.VERSION, name= ARKCraft.MODID, guiFactory = "com.arkcraft.mod.common.lib.ModGuiFactory")
 public class ARKCraft

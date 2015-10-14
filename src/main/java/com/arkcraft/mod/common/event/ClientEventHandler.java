@@ -1,12 +1,11 @@
 package com.arkcraft.mod.common.event;
 
 import com.arkcraft.mod.common.items.weapons.component.RangedComponent;
+import com.arkcraft.mod.common.items.weapons.handlers.IItemWeapon;
 import net.minecraftforge.client.event.FOVUpdateEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import com.arkcraft.mod.common.items.weapons.handlers.IItemWeapon;
 
 @SideOnly(Side.CLIENT)
 public class ClientEventHandler

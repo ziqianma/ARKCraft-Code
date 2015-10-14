@@ -1,7 +1,6 @@
 package com.arkcraft.mod.common.blocks;
 
-import java.util.Random;
-
+import com.arkcraft.mod.GlobalAdditions;
 import com.arkcraft.mod.common.ARKCraft;
 import com.arkcraft.mod.common.tile.TileInventoryMP;
 import net.minecraft.block.BlockContainer;
@@ -19,7 +18,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.arkcraft.mod.GlobalAdditions;
+import java.util.Random;
 
 /***
  * 

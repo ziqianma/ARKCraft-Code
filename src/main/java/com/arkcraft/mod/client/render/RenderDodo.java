@@ -2,7 +2,6 @@ package com.arkcraft.mod.client.render;
 
 import com.arkcraft.mod.common.ARKCraft;
 import com.arkcraft.mod.common.entity.passive.EntityDodo;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;

@@ -1,14 +1,13 @@
 package com.arkcraft.mod.common.items;
 
 import com.arkcraft.mod.GlobalAdditions;
+import com.arkcraft.mod.common.entity.EntityDodoEgg;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-
-import com.arkcraft.mod.common.entity.EntityDodoEgg;
 
 /**
  * @author BubbleTrouble

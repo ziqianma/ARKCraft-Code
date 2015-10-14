@@ -1,14 +1,14 @@
 package com.arkcraft.mod.client.gui.book.deserialization;
 
-import java.lang.reflect.Type;
-
-import com.arkcraft.mod.client.gui.book.pages.PageData;
 import com.arkcraft.mod.client.gui.book.pages.Page;
+import com.arkcraft.mod.client.gui.book.pages.PageData;
 import com.arkcraft.mod.common.lib.LogHelper;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+
+import java.lang.reflect.Type;
 /***
  * 
  * @author Vastatio

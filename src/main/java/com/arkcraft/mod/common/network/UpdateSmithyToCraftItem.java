@@ -1,7 +1,6 @@
 package com.arkcraft.mod.common.network;
 
 import com.arkcraft.mod.common.tile.TileInventorySmithy;
-
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.BlockPos;

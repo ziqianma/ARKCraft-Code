@@ -1,5 +1,6 @@
 package com.arkcraft.mod.common.blocks;
 
+import com.arkcraft.mod.GlobalAdditions;
 import com.arkcraft.mod.common.ARKCraft;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -9,8 +10,6 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-
-import com.arkcraft.mod.GlobalAdditions;
 
 public class ARKContainerBlock extends Block {
 

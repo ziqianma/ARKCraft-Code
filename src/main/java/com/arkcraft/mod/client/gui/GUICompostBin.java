@@ -1,8 +1,7 @@
 package com.arkcraft.mod.client.gui;
 
-import java.awt.Color;
-
 import com.arkcraft.mod.common.ARKCraft;
+import com.arkcraft.mod.common.container.ContainerCompostBin;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -11,10 +10,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
 import org.lwjgl.opengl.GL11;
 
-import com.arkcraft.mod.common.container.ContainerCompostBin;
+import java.awt.Color;
 
 @SideOnly(Side.CLIENT)
 public class GUICompostBin extends GuiContainer

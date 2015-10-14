@@ -1,15 +1,28 @@
 package com.arkcraft.mod.common.items;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import com.arkcraft.mod.client.gui.book.Dossier;
+import com.arkcraft.mod.common.items.weapons.ItemCompoundBow;
+import com.arkcraft.mod.common.items.weapons.ItemCrossbow;
+import com.arkcraft.mod.common.items.weapons.ItemLongneckRifle;
+import com.arkcraft.mod.common.items.weapons.ItemRocketLauncher;
 import com.arkcraft.mod.common.items.weapons.ItemShotgun;
+import com.arkcraft.mod.common.items.weapons.ItemSimplePistol;
 import com.arkcraft.mod.common.items.weapons.ItemSpear;
+import com.arkcraft.mod.common.items.weapons.ItemTranqGun;
+import com.arkcraft.mod.common.items.weapons.bullets.ItemProjectile;
+import com.arkcraft.mod.common.items.weapons.component.RangedCompCrossbow;
+import com.arkcraft.mod.common.items.weapons.component.RangedCompLongneckRifle;
+import com.arkcraft.mod.common.items.weapons.component.RangedCompRocketLauncher;
+import com.arkcraft.mod.common.items.weapons.component.RangedCompShotgun;
 import com.arkcraft.mod.common.items.weapons.component.RangedCompSimplePistol;
 import com.arkcraft.mod.common.items.weapons.component.RangedCompTranqGun;
 import com.arkcraft.mod.common.items.weapons.component.RangedComponent;
 import com.arkcraft.mod.common.items.weapons.projectiles.dispense.DispenseRocketPropelledGrenade;
+import com.arkcraft.mod.common.items.weapons.projectiles.dispense.DispenseSimpleBullet;
 import com.arkcraft.mod.common.items.weapons.projectiles.dispense.DispenseSimpleRifleAmmo;
+import com.arkcraft.mod.common.items.weapons.projectiles.dispense.DispenseSimpleShotgunAmmo;
+import com.arkcraft.mod.common.items.weapons.projectiles.dispense.DispenseTranquilizer;
+import com.arkcraft.mod.common.lib.BALANCE;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
@@ -19,22 +32,8 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.common.util.EnumHelper;
 
-import com.arkcraft.mod.client.gui.book.Dossier;
-import com.arkcraft.mod.common.items.weapons.ItemCompoundBow;
-import com.arkcraft.mod.common.items.weapons.ItemCrossbow;
-import com.arkcraft.mod.common.items.weapons.ItemLongneckRifle;
-import com.arkcraft.mod.common.items.weapons.ItemRocketLauncher;
-import com.arkcraft.mod.common.items.weapons.ItemSimplePistol;
-import com.arkcraft.mod.common.items.weapons.ItemTranqGun;
-import com.arkcraft.mod.common.items.weapons.bullets.ItemProjectile;
-import com.arkcraft.mod.common.items.weapons.component.RangedCompCrossbow;
-import com.arkcraft.mod.common.items.weapons.component.RangedCompLongneckRifle;
-import com.arkcraft.mod.common.items.weapons.component.RangedCompRocketLauncher;
-import com.arkcraft.mod.common.items.weapons.component.RangedCompShotgun;
-import com.arkcraft.mod.common.items.weapons.projectiles.dispense.DispenseSimpleBullet;
-import com.arkcraft.mod.common.items.weapons.projectiles.dispense.DispenseSimpleShotgunAmmo;
-import com.arkcraft.mod.common.items.weapons.projectiles.dispense.DispenseTranquilizer;
-import com.arkcraft.mod.common.lib.BALANCE;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author wildbill22

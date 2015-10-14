@@ -1,5 +1,6 @@
 package com.arkcraft.mod.common.items;
 
+import com.arkcraft.mod.GlobalAdditions;
 import com.arkcraft.mod.common.ARKCraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -9,8 +10,6 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import java.util.List;
-
-import com.arkcraft.mod.GlobalAdditions;
 
 public class ARKArmorItem extends ItemArmor {
 

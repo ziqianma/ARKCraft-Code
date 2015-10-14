@@ -1,14 +1,13 @@
 package com.arkcraft.mod.common.items;
 
-import java.util.List;
-
 import com.arkcraft.mod.GlobalAdditions;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemSaddle;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+
+import java.util.List;
 
 @SuppressWarnings("all")
 public class ARKSaddle extends ItemSaddle {

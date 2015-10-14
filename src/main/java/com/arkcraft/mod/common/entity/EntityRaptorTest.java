@@ -1,8 +1,7 @@
 package com.arkcraft.mod.common.entity;
 
-import java.util.Random;
-
 import com.arkcraft.mod.common.ARKCraft;
+import com.arkcraft.mod.common.entity.ai.EntityDinoAIOwnerHurtByTarget;
 import com.arkcraft.mod.common.entity.ai.EntityDinoAIOwnerHurtTarget;
 import com.arkcraft.mod.common.entity.ai.EntityDinoAITargetNonTamed;
 import com.arkcraft.mod.common.lib.LogHelper;
@@ -24,7 +23,7 @@ import net.minecraft.pathfinding.PathNavigateGround;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
-import com.arkcraft.mod.common.entity.ai.EntityDinoAIOwnerHurtByTarget;
+import java.util.Random;
 
 /***
  * 

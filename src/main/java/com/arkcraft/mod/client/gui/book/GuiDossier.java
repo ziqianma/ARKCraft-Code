@@ -1,6 +1,8 @@
 package com.arkcraft.mod.client.gui.book;
 
 import com.arkcraft.mod.client.gui.book.button.PageButton;
+import com.arkcraft.mod.client.gui.book.fonts.SmallFontRenderer;
+import com.arkcraft.mod.client.gui.book.pages.Page;
 import com.arkcraft.mod.client.gui.book.proxy.DClient;
 import com.arkcraft.mod.common.lib.LogHelper;
 import net.minecraft.client.Minecraft;
@@ -10,11 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
 import org.lwjgl.opengl.GL11;
-
-import com.arkcraft.mod.client.gui.book.fonts.SmallFontRenderer;
-import com.arkcraft.mod.client.gui.book.pages.Page;
 
 @SideOnly(Side.CLIENT)
 @SuppressWarnings("unused")

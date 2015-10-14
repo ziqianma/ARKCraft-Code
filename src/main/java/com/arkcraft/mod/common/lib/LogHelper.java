@@ -1,9 +1,8 @@
 package com.arkcraft.mod.common.lib;
 
 import com.arkcraft.mod.common.ARKCraft;
-import org.apache.logging.log4j.Level;
-
 import net.minecraftforge.fml.common.FMLLog;
+import org.apache.logging.log4j.Level;
 
 /***
  * 

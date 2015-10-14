@@ -2,21 +2,20 @@ package com.arkcraft.mod;
 
 import com.arkcraft.mod.common.ARKCraft;
 import com.arkcraft.mod.common.creativetabs.ARKTabs;
-import com.arkcraft.mod.common.entity.passive.EntityDodo;
-import com.arkcraft.mod.common.handlers.EntityHandler;
-import com.arkcraft.mod.common.handlers.RecipeHandler;
-import com.arkcraft.mod.common.items.weapons.projectiles.EntitySpear;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
-
 import com.arkcraft.mod.common.entity.EntityCobble;
 import com.arkcraft.mod.common.entity.EntityDodoEgg;
 import com.arkcraft.mod.common.entity.EntityExplosive;
 import com.arkcraft.mod.common.entity.aggressive.EntityRaptor;
 import com.arkcraft.mod.common.entity.neutral.EntityBrontosaurus;
+import com.arkcraft.mod.common.entity.passive.EntityDodo;
+import com.arkcraft.mod.common.handlers.EntityHandler;
 import com.arkcraft.mod.common.handlers.GuiHandler;
+import com.arkcraft.mod.common.handlers.RecipeHandler;
+import com.arkcraft.mod.common.items.weapons.projectiles.EntitySpear;
 import com.arkcraft.mod.common.lib.KeyBindings;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 /**
  * @author Vastatio

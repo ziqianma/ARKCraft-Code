@@ -1,14 +1,13 @@
 package com.arkcraft.mod.common.lib;
 
-import java.io.File;
-import java.lang.reflect.Field;
-
 import com.arkcraft.mod.common.ARKCraft;
-
 import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+
+import java.io.File;
+import java.lang.reflect.Field;
 
 /***
  * 

@@ -1,14 +1,13 @@
 package com.arkcraft.mod.common.handlers;
 
-import java.util.Random;
-
 import com.arkcraft.mod.common.ARKCraft;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
+
+import java.util.Random;
 
 /***
  * 

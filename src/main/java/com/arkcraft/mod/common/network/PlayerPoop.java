@@ -1,7 +1,6 @@
 package com.arkcraft.mod.common.network;
 
 import com.arkcraft.mod.common.items.ARKCraftItems;
-
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;

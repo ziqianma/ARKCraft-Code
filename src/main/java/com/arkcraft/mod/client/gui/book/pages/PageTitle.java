@@ -1,12 +1,11 @@
 package com.arkcraft.mod.client.gui.book.pages;
 
+import com.arkcraft.mod.client.gui.book.GuiDossier;
+import com.arkcraft.mod.client.gui.book.fonts.SmallFontRenderer;
 import com.arkcraft.mod.common.ARKCraft;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
-
-import com.arkcraft.mod.client.gui.book.GuiDossier;
-import com.arkcraft.mod.client.gui.book.fonts.SmallFontRenderer;
 /***
  * 
  * @author Vastatio

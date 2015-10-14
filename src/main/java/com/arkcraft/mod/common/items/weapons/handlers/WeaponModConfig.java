@@ -1,9 +1,9 @@
 package com.arkcraft.mod.common.items.weapons.handlers;
 
+import net.minecraftforge.common.config.Configuration;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
-
-import net.minecraftforge.common.config.Configuration;
 
 public class WeaponModConfig
 {

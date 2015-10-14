@@ -1,7 +1,7 @@
 package com.arkcraft.mod.client.gui;
 
-import com.arkcraft.mod.common.tile.TileInventoryMP;
 import com.arkcraft.mod.common.lib.LogHelper;
+import com.arkcraft.mod.common.tile.TileInventoryMP;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;

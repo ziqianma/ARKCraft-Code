@@ -1,13 +1,12 @@
 package com.arkcraft.mod.common.handlers;
 
-import java.util.ArrayList;
-
 import com.arkcraft.mod.common.gen.ore.WrappedOreGenerator;
 import com.arkcraft.mod.common.gen.ore.WrappedOreGenerator.Instruction;
 import com.arkcraft.mod.common.lib.BALANCE;
 import com.arkcraft.mod.common.lib.LogHelper;
-
 import net.minecraft.block.Block;
+
+import java.util.ArrayList;
 
 //TODO add structure generation
 public class GenerationHandler {

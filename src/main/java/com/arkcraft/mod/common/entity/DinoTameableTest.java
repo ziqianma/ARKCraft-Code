@@ -1,7 +1,7 @@
 package com.arkcraft.mod.common.entity;
 
-import java.util.UUID;
-
+import com.arkcraft.mod.common.entity.ai.EntityDinoAIFollowOwner;
+import com.arkcraft.mod.common.items.ARKCraftItems;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityOwnable;
@@ -21,8 +21,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.arkcraft.mod.common.entity.ai.EntityDinoAIFollowOwner;
-import com.arkcraft.mod.common.items.ARKCraftItems;
+import java.util.UUID;
 
 /***
  * 

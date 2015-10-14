@@ -1,9 +1,9 @@
 package com.arkcraft.mod.client.render;
 
+import com.arkcraft.mod.client.model.ModelRaptor;
 import com.arkcraft.mod.common.ARKCraft;
 import com.arkcraft.mod.common.entity.aggressive.EntityRaptor;
 import com.arkcraft.mod.common.entity.aggressive.RaptorType;
-import com.arkcraft.mod.client.model.ModelRaptor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;

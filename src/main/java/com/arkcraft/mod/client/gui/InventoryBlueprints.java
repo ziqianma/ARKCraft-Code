@@ -1,7 +1,6 @@
 package com.arkcraft.mod.client.gui;
 
 import com.arkcraft.mod.common.lib.LogHelper;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.item.ItemStack;

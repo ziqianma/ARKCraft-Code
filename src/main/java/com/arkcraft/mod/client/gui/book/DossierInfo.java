@@ -1,7 +1,7 @@
 package com.arkcraft.mod.client.gui.book;
 
-import com.arkcraft.mod.common.ARKCraft;
 import com.arkcraft.mod.client.gui.book.proxy.DClient;
+import com.arkcraft.mod.common.ARKCraft;
 import com.arkcraft.mod.common.items.ARKCraftItems;
 import com.arkcraft.mod.common.lib.LogHelper;
 import net.minecraft.util.EnumChatFormatting;

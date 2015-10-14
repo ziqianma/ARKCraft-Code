@@ -2,9 +2,11 @@ package com.arkcraft.mod.common.entity.aggressive;
 
 import com.arkcraft.mod.common.ARKCraft;
 import com.arkcraft.mod.common.entity.DinoTameable;
+import com.arkcraft.mod.common.entity.SaddleType;
 import com.arkcraft.mod.common.items.ARKCraftItems;
 import com.arkcraft.mod.common.lib.BALANCE;
 import com.arkcraft.mod.common.lib.LogHelper;
+import com.google.common.base.Predicate;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
@@ -31,9 +33,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.pathfinding.PathNavigateGround;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
-
-import com.arkcraft.mod.common.entity.SaddleType;
-import com.google.common.base.Predicate;
 
 /***
  * 

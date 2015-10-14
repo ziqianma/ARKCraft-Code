@@ -1,7 +1,6 @@
 package com.arkcraft.mod.common.blocks;
 
 import com.arkcraft.mod.GlobalAdditions;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

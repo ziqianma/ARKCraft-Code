@@ -1,17 +1,15 @@
 package com.arkcraft.mod.client.gui;
 
-import java.awt.Color;
-
 import com.arkcraft.mod.common.ARKCraft;
-import org.lwjgl.opengl.GL11;
-
+import com.arkcraft.mod.common.entity.passive.EntityDodo;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.util.ResourceLocation;
+import org.lwjgl.opengl.GL11;
 
-import com.arkcraft.mod.common.entity.passive.EntityDodo;
+import java.awt.Color;
 
 public class GuiInventoryDodo extends GuiContainer {
 

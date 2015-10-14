@@ -1,7 +1,11 @@
 package com.arkcraft.mod.common.handlers;
 
 import com.arkcraft.mod.common.entity.DinoTameable;
+import com.arkcraft.mod.common.entity.aggressive.EntityRaptor;
 import com.arkcraft.mod.common.items.ARKCraftItems;
+import com.arkcraft.mod.common.items.weapons.projectiles.EntityTranqArrow;
+import com.arkcraft.mod.common.lib.BALANCE;
+import com.arkcraft.mod.common.lib.LogHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
@@ -9,11 +13,6 @@ import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-
-import com.arkcraft.mod.common.entity.aggressive.EntityRaptor;
-import com.arkcraft.mod.common.items.weapons.projectiles.EntityTranqArrow;
-import com.arkcraft.mod.common.lib.BALANCE;
-import com.arkcraft.mod.common.lib.LogHelper;
 
 /**
  * 

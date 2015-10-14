@@ -1,27 +1,26 @@
 package com.arkcraft.mod.common.handlers;
 
-import java.util.Iterator;
-import java.util.List;
-
 import com.arkcraft.mod.GlobalAdditions;
-import com.arkcraft.mod.common.container.ContainerCompostBin;
-import com.arkcraft.mod.common.tile.TileInventoryMP;
-import com.arkcraft.mod.common.tile.TileInventorySmithy;
-import com.arkcraft.mod.client.gui.book.BookData;
-import com.arkcraft.mod.client.gui.book.BookDataStore;
-import com.arkcraft.mod.client.gui.book.GuiDossier;
-import com.arkcraft.mod.common.entity.DinoTameable;
-import com.arkcraft.mod.common.entity.passive.EntityDodo;
-import com.arkcraft.mod.common.lib.LogHelper;
 import com.arkcraft.mod.client.gui.ContainerInventoryCropPlot;
 import com.arkcraft.mod.client.gui.ContainerInventoryDodo;
 import com.arkcraft.mod.client.gui.ContainerInventoryMP;
 import com.arkcraft.mod.client.gui.ContainerInventorySmithy;
 import com.arkcraft.mod.client.gui.ContainerInventoryTaming;
+import com.arkcraft.mod.client.gui.GUICropPlot;
 import com.arkcraft.mod.client.gui.GUITaming;
 import com.arkcraft.mod.client.gui.GuiInventoryDodo;
 import com.arkcraft.mod.client.gui.GuiMP;
 import com.arkcraft.mod.client.gui.GuiSmithy;
+import com.arkcraft.mod.client.gui.book.BookData;
+import com.arkcraft.mod.client.gui.book.BookDataStore;
+import com.arkcraft.mod.client.gui.book.GuiDossier;
+import com.arkcraft.mod.common.container.ContainerCompostBin;
+import com.arkcraft.mod.common.entity.DinoTameable;
+import com.arkcraft.mod.common.entity.passive.EntityDodo;
+import com.arkcraft.mod.common.lib.LogHelper;
+import com.arkcraft.mod.common.tile.TileInventoryCropPlot;
+import com.arkcraft.mod.common.tile.TileInventoryMP;
+import com.arkcraft.mod.common.tile.TileInventorySmithy;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -31,8 +30,8 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 
-import com.arkcraft.mod.common.tile.TileInventoryCropPlot;
-import com.arkcraft.mod.client.gui.GUICropPlot;
+import java.util.Iterator;
+import java.util.List;
 
 public class GuiHandler implements IGuiHandler {
 

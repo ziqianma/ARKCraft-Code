@@ -1,9 +1,8 @@
 package com.arkcraft.mod.common.creativetabs;
 
+import com.arkcraft.mod.common.items.ARKCraftItems;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
-
-import com.arkcraft.mod.common.items.ARKCraftItems;
 
 public class ARKTabs extends CreativeTabs {
 

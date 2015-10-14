@@ -1,17 +1,16 @@
 package com.arkcraft.mod.client.gui.book.deserialization;
 
-import java.lang.reflect.Type;
-
 import com.arkcraft.mod.client.gui.book.pages.PageData;
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.world.World;
-
 import com.arkcraft.mod.common.lib.LogHelper;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.world.World;
+
+import java.lang.reflect.Type;
 /***
  * 
  * @author Vastatio

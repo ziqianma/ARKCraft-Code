@@ -1,8 +1,8 @@
 package com.arkcraft.mod.common.items.weapons.component;
 
-import java.util.Random;
-import java.util.UUID;
-
+import com.arkcraft.mod.common.items.weapons.handlers.IItemWeapon;
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,9 +13,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.arkcraft.mod.common.items.weapons.handlers.IItemWeapon;
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
+import java.util.Random;
+import java.util.UUID;
 
 public class ItemShooter extends ItemBow implements IItemWeapon
 {

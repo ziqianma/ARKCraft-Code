@@ -1,15 +1,5 @@
 package com.arkcraft.mod.client.gui.book.proxy;
 
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
-
-import com.arkcraft.mod.client.gui.book.pages.PageTitle;
-import com.arkcraft.mod.common.ARKCraft;
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.util.ResourceLocation;
-
 import com.arkcraft.mod.client.gui.book.BookDocument;
 import com.arkcraft.mod.client.gui.book.DossierInfo;
 import com.arkcraft.mod.client.gui.book.deserialization.EntityLivingBaseDeserializer;
@@ -20,12 +10,21 @@ import com.arkcraft.mod.client.gui.book.pages.PageChapter;
 import com.arkcraft.mod.client.gui.book.pages.PageData;
 import com.arkcraft.mod.client.gui.book.pages.PageDino;
 import com.arkcraft.mod.client.gui.book.pages.PageText;
+import com.arkcraft.mod.client.gui.book.pages.PageTitle;
+import com.arkcraft.mod.common.ARKCraft;
 import com.arkcraft.mod.common.entity.aggressive.EntityRaptor;
 import com.arkcraft.mod.common.entity.neutral.EntityBrontosaurus;
 import com.arkcraft.mod.common.entity.passive.EntityDodo;
 import com.arkcraft.mod.common.lib.LogHelper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.util.ResourceLocation;
+
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 /***
  * 
  * @author Vastatio

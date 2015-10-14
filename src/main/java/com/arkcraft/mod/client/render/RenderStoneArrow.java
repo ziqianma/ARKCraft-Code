@@ -1,5 +1,7 @@
 package com.arkcraft.mod.client.render;
 
+import com.arkcraft.mod.common.ARKCraft;
+import com.arkcraft.mod.common.items.weapons.projectiles.EntityStoneArrow;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
@@ -11,11 +13,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
 import org.lwjgl.opengl.GL11;
-
-import com.arkcraft.mod.common.ARKCraft;
-import com.arkcraft.mod.common.items.weapons.projectiles.EntityStoneArrow;
 
 @SideOnly(Side.CLIENT)
 public class RenderStoneArrow extends Render

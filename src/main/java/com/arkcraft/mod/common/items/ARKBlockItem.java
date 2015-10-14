@@ -1,6 +1,7 @@
 package com.arkcraft.mod.common.items;
 
 import com.arkcraft.mod.GlobalAdditions;
+import com.arkcraft.mod.common.blocks.ARKCraftBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,8 +11,6 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-
-import com.arkcraft.mod.common.blocks.ARKCraftBlocks;
 
 public class ARKBlockItem extends Item
 {

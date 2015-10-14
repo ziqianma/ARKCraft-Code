@@ -1,13 +1,10 @@
 package com.arkcraft.mod.client.gui;
 
-import java.util.Arrays;
-
 import com.arkcraft.mod.common.entity.DinoTameable;
 import com.arkcraft.mod.common.items.ARKCraftItems;
 import com.arkcraft.mod.common.items.ARKFood;
 import com.arkcraft.mod.common.items.ARKItem;
 import com.arkcraft.mod.common.lib.LogHelper;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -19,6 +16,8 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.util.MathHelper;
+
+import java.util.Arrays;
 
 /***
  * 

@@ -1,14 +1,13 @@
 package com.arkcraft.mod.client.render;
 
+import com.arkcraft.mod.client.model.TranquilizerModel;
+import com.arkcraft.mod.common.ARKCraft;
+import com.arkcraft.mod.common.entity.EntityTranqAmmo;
 import com.arkcraft.mod.common.items.weapons.projectiles.EntitySpear;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
-
-import com.arkcraft.mod.common.ARKCraft;
-import com.arkcraft.mod.common.entity.EntityTranqAmmo;
-import com.arkcraft.mod.client.model.TranquilizerModel;
 
 public class RenderTranquilizer extends Render
 {

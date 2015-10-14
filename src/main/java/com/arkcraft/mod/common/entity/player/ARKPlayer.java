@@ -3,7 +3,6 @@ package com.arkcraft.mod.common.entity.player;
 import com.arkcraft.mod.common.ARKCraft;
 import com.arkcraft.mod.common.lib.LogHelper;
 import com.arkcraft.mod.common.network.PlayerPoop;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;

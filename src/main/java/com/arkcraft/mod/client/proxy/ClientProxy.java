@@ -1,11 +1,33 @@
 package com.arkcraft.mod.client.proxy;
 
-import java.util.Map;
-
-import com.arkcraft.mod.client.gui.book.proxy.DCommon;
+import com.arkcraft.mod.client.model.ModelBrontosaurus;
+import com.arkcraft.mod.client.model.ModelDodo;
+import com.arkcraft.mod.client.model.ModelRaptor;
+import com.arkcraft.mod.client.render.RenderBrontosaurus;
+import com.arkcraft.mod.client.render.RenderDodo;
+import com.arkcraft.mod.client.render.RenderMetalArrow;
+import com.arkcraft.mod.client.render.RenderRaptor;
+import com.arkcraft.mod.client.render.RenderSimpleBullet;
+import com.arkcraft.mod.client.render.RenderSpear;
+import com.arkcraft.mod.client.render.RenderStoneArrow;
+import com.arkcraft.mod.client.render.RenderTranqArrow;
 import com.arkcraft.mod.common.ARKCraft;
+import com.arkcraft.mod.common.blocks.ARKCraftBlocks;
+import com.arkcraft.mod.common.entity.EntityCobble;
+import com.arkcraft.mod.common.entity.EntityDodoEgg;
+import com.arkcraft.mod.common.entity.EntityExplosive;
+import com.arkcraft.mod.common.entity.aggressive.EntityRaptor;
+import com.arkcraft.mod.common.entity.neutral.EntityBrontosaurus;
+import com.arkcraft.mod.common.entity.passive.EntityDodo;
 import com.arkcraft.mod.common.event.ClientEventHandler;
 import com.arkcraft.mod.common.items.ARKCraftItems;
+import com.arkcraft.mod.common.items.weapons.projectiles.EntityMetalArrow;
+import com.arkcraft.mod.common.items.weapons.projectiles.EntitySimpleBullet;
+import com.arkcraft.mod.common.items.weapons.projectiles.EntitySpear;
+import com.arkcraft.mod.common.items.weapons.projectiles.EntityStoneArrow;
+import com.arkcraft.mod.common.items.weapons.projectiles.EntityTranqArrow;
+import com.arkcraft.mod.common.lib.BALANCE;
+import com.arkcraft.mod.common.lib.LogHelper;
 import com.arkcraft.mod.common.proxy.CommonProxy;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -16,33 +38,8 @@ import net.minecraft.item.Item;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.common.SidedProxy;
 
-import com.arkcraft.mod.common.blocks.ARKCraftBlocks;
-import com.arkcraft.mod.common.entity.EntityCobble;
-import com.arkcraft.mod.common.entity.EntityDodoEgg;
-import com.arkcraft.mod.common.entity.EntityExplosive;
-import com.arkcraft.mod.common.entity.aggressive.EntityRaptor;
-import com.arkcraft.mod.client.model.ModelBrontosaurus;
-import com.arkcraft.mod.client.model.ModelDodo;
-import com.arkcraft.mod.client.model.ModelRaptor;
-import com.arkcraft.mod.common.entity.neutral.EntityBrontosaurus;
-import com.arkcraft.mod.common.entity.passive.EntityDodo;
-import com.arkcraft.mod.client.render.RenderBrontosaurus;
-import com.arkcraft.mod.client.render.RenderDodo;
-import com.arkcraft.mod.client.render.RenderMetalArrow;
-import com.arkcraft.mod.client.render.RenderRaptor;
-import com.arkcraft.mod.client.render.RenderSimpleBullet;
-import com.arkcraft.mod.client.render.RenderSpear;
-import com.arkcraft.mod.client.render.RenderStoneArrow;
-import com.arkcraft.mod.client.render.RenderTranqArrow;
-import com.arkcraft.mod.common.items.weapons.projectiles.EntityMetalArrow;
-import com.arkcraft.mod.common.items.weapons.projectiles.EntitySimpleBullet;
-import com.arkcraft.mod.common.items.weapons.projectiles.EntitySpear;
-import com.arkcraft.mod.common.items.weapons.projectiles.EntityStoneArrow;
-import com.arkcraft.mod.common.items.weapons.projectiles.EntityTranqArrow;
-import com.arkcraft.mod.common.lib.BALANCE;
-import com.arkcraft.mod.common.lib.LogHelper;
+import java.util.Map;
 
 public class ClientProxy extends CommonProxy
 {

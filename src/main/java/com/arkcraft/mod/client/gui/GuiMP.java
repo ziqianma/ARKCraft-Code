@@ -1,19 +1,17 @@
 package com.arkcraft.mod.client.gui;
 
-import java.awt.Color;
-import java.util.ArrayList;
-import java.util.List;
-
-import com.arkcraft.mod.common.tile.TileInventoryMP;
-import org.lwjgl.opengl.GL11;
-
 import com.arkcraft.mod.common.ARKCraft;
-
+import com.arkcraft.mod.common.tile.TileInventoryMP;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
+import org.lwjgl.opengl.GL11;
+
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
 
 /* Mortar and Pestle */
 /***

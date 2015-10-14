@@ -1,8 +1,8 @@
 package com.arkcraft.mod.client.gui.book.pages;
 
-import java.util.HashMap;
-
 import net.minecraft.entity.EntityLivingBase;
+
+import java.util.HashMap;
 /***
  * 
  * @author Vastatio

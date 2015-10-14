@@ -1,7 +1,12 @@
 package com.arkcraft.mod.common.entity;
 
 
+import com.arkcraft.mod.GlobalAdditions.GUI;
+import com.arkcraft.mod.client.gui.InventoryDino;
+import com.arkcraft.mod.client.gui.InventoryTaming;
+import com.arkcraft.mod.common.ARKCraft;
 import com.arkcraft.mod.common.items.ARKCraftItems;
+import com.arkcraft.mod.common.lib.LogHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -18,12 +23,6 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
-
-import com.arkcraft.mod.GlobalAdditions.GUI;
-import com.arkcraft.mod.common.ARKCraft;
-import com.arkcraft.mod.common.lib.LogHelper;
-import com.arkcraft.mod.client.gui.InventoryDino;
-import com.arkcraft.mod.client.gui.InventoryTaming;
 
 /***
  * 

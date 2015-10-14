@@ -1,13 +1,12 @@
 package com.arkcraft.mod.common.handlers;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
+import com.google.common.collect.Lists;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 
-import com.google.common.collect.Lists;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 public class ARKShapelessRecipe implements IARKRecipe {
     /** Is the ItemStack that you get when craft the recipe. */

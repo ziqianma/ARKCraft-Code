@@ -1,41 +1,40 @@
 package com.arkcraft.mod.common.items.weapons;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import com.arkcraft.mod.common.ARKCraft;
+import com.arkcraft.mod.common.handlers.EntityHandler;
+import com.arkcraft.mod.common.items.ARKItem;
+import com.arkcraft.mod.common.items.ARKSlingshot;
 import com.arkcraft.mod.common.items.ARKWeapon;
+import com.arkcraft.mod.common.items.weapons.bullets.ItemProjectile;
+import com.arkcraft.mod.common.items.weapons.component.RangedCompCrossbow;
+import com.arkcraft.mod.common.items.weapons.component.RangedCompLongneckRifle;
+import com.arkcraft.mod.common.items.weapons.component.RangedCompRocketLauncher;
+import com.arkcraft.mod.common.items.weapons.component.RangedCompShotgun;
 import com.arkcraft.mod.common.items.weapons.component.RangedCompSimplePistol;
 import com.arkcraft.mod.common.items.weapons.component.RangedCompTranqGun;
 import com.arkcraft.mod.common.items.weapons.component.RangedComponent;
 import com.arkcraft.mod.common.items.weapons.projectiles.EntityMetalArrow;
 import com.arkcraft.mod.common.items.weapons.projectiles.EntityRocketPropelledGrenade;
+import com.arkcraft.mod.common.items.weapons.projectiles.EntitySimpleBullet;
 import com.arkcraft.mod.common.items.weapons.projectiles.EntitySimpleRifleAmmo;
 import com.arkcraft.mod.common.items.weapons.projectiles.EntitySimpleShotgunAmmo;
+import com.arkcraft.mod.common.items.weapons.projectiles.EntityStoneArrow;
 import com.arkcraft.mod.common.items.weapons.projectiles.EntityTranqArrow;
+import com.arkcraft.mod.common.items.weapons.projectiles.EntityTranquilizer;
 import com.arkcraft.mod.common.items.weapons.projectiles.dispense.DispenseRocketPropelledGrenade;
+import com.arkcraft.mod.common.items.weapons.projectiles.dispense.DispenseSimpleBullet;
 import com.arkcraft.mod.common.items.weapons.projectiles.dispense.DispenseSimpleRifleAmmo;
 import com.arkcraft.mod.common.items.weapons.projectiles.dispense.DispenseSimpleShotgunAmmo;
+import com.arkcraft.mod.common.items.weapons.projectiles.dispense.DispenseTranquilizer;
+import com.arkcraft.mod.common.lib.BALANCE;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.util.EnumChatFormatting;
 
-import com.arkcraft.mod.common.handlers.EntityHandler;
-import com.arkcraft.mod.common.items.ARKItem;
-import com.arkcraft.mod.common.items.ARKSlingshot;
-import com.arkcraft.mod.common.items.weapons.bullets.ItemProjectile;
-import com.arkcraft.mod.common.items.weapons.component.RangedCompCrossbow;
-import com.arkcraft.mod.common.items.weapons.component.RangedCompLongneckRifle;
-import com.arkcraft.mod.common.items.weapons.component.RangedCompRocketLauncher;
-import com.arkcraft.mod.common.items.weapons.component.RangedCompShotgun;
-import com.arkcraft.mod.common.items.weapons.projectiles.EntitySimpleBullet;
-import com.arkcraft.mod.common.items.weapons.projectiles.EntityStoneArrow;
-import com.arkcraft.mod.common.items.weapons.projectiles.EntityTranquilizer;
-import com.arkcraft.mod.common.items.weapons.projectiles.dispense.DispenseSimpleBullet;
-import com.arkcraft.mod.common.items.weapons.projectiles.dispense.DispenseTranquilizer;
-import com.arkcraft.mod.common.lib.BALANCE;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ModWeapons {
 	

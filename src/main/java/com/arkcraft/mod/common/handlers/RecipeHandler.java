@@ -1,12 +1,11 @@
 package com.arkcraft.mod.common.handlers;
 
+import com.arkcraft.mod.common.blocks.ARKCraftBlocks;
 import com.arkcraft.mod.common.items.ARKCraftItems;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-
-import com.arkcraft.mod.common.blocks.ARKCraftBlocks;
 
 public class RecipeHandler {
 
