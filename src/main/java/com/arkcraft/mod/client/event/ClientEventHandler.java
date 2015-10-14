@@ -1,4 +1,4 @@
-package com.arkcraft.mod.common.event;
+package com.arkcraft.mod.client.event;
 
 import com.arkcraft.mod.common.items.weapons.component.RangedComponent;
 import com.arkcraft.mod.common.items.weapons.handlers.IItemWeapon;
