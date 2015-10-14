@@ -1,6 +1,11 @@
 package com.arkcraft.mod.common.items.weapons.component;
 
 import com.arkcraft.mod.common.ARKCraft;
+import com.arkcraft.mod.common.items.weapons.handlers.ReloadHelper;
+import com.arkcraft.mod.common.items.weapons.handlers.WeaponModAttributes;
+import com.arkcraft.mod.common.items.weapons.projectiles.EntityShootable;
+import com.arkcraft.mod.common.lib.BALANCE;
+import com.google.common.collect.Multimap;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -14,12 +19,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import com.arkcraft.mod.common.items.weapons.handlers.ReloadHelper;
-import com.arkcraft.mod.common.items.weapons.handlers.WeaponModAttributes;
-import com.arkcraft.mod.common.items.weapons.projectiles.EntityShootable;
-import com.arkcraft.mod.common.lib.BALANCE;
-import com.google.common.collect.Multimap;
 
 public abstract class RangedComponent extends AbstractWeaponComponent
 {

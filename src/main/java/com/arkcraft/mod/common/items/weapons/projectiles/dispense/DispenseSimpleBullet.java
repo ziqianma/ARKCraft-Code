@@ -1,7 +1,6 @@
 package com.arkcraft.mod.common.items.weapons.projectiles.dispense;
 
 import com.arkcraft.mod.common.items.weapons.projectiles.EntitySimpleBullet;
-
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.dispenser.IBlockSource;
 import net.minecraft.dispenser.IPosition;

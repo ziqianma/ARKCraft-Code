@@ -1,5 +1,7 @@
 package com.arkcraft.mod.common.items.weapons.component;
 
+import com.arkcraft.mod.common.items.weapons.handlers.IItemWeapon;
+import com.google.common.collect.Multimap;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -11,9 +13,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import com.arkcraft.mod.common.items.weapons.handlers.IItemWeapon;
-import com.google.common.collect.Multimap;
 
 public abstract class AbstractWeaponComponent
 {

@@ -1,7 +1,6 @@
 package com.arkcraft.mod.common.items.weapons.projectiles;
 
 import com.arkcraft.mod.common.items.ARKCraftItems;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;

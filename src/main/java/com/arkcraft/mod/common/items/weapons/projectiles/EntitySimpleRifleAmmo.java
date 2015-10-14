@@ -1,13 +1,12 @@
 package com.arkcraft.mod.common.items.weapons.projectiles;
 
+import com.arkcraft.mod.common.items.weapons.handlers.WeaponDamageSource;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-
-import com.arkcraft.mod.common.items.weapons.handlers.WeaponDamageSource;
 
 public class EntitySimpleRifleAmmo extends EntityShootable
 {

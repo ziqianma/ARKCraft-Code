@@ -1,5 +1,6 @@
 package com.arkcraft.mod.common.items.weapons.projectiles.dispense;
 
+import com.arkcraft.mod.common.items.weapons.projectiles.EntitySimpleRifleAmmo;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.dispenser.IBlockSource;
 import net.minecraft.dispenser.IPosition;
@@ -7,8 +8,6 @@ import net.minecraft.entity.IProjectile;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
-
-import com.arkcraft.mod.common.items.weapons.projectiles.EntitySimpleRifleAmmo;
 
 public class DispenseSimpleRifleAmmo extends DispenseWeaponProjectile
 {

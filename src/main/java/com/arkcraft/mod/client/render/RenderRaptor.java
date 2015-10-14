@@ -1,6 +1,6 @@
 package com.arkcraft.mod.client.render;
 
-import com.arkcraft.mod.client.model.ModelRaptor;
+import com.arkcraft.mod.client.model.ModelRaptorNew;
 import com.arkcraft.mod.common.ARKCraft;
 import com.arkcraft.mod.common.entity.aggressive.EntityRaptor;
 import com.arkcraft.mod.common.entity.aggressive.RaptorType;
@@ -18,11 +18,11 @@ import net.minecraft.util.ResourceLocation;
  */
 public class RenderRaptor extends RenderLiving {
 	private static ResourceLocation[] texture;
-	protected ModelRaptor modelEntity;
+	protected ModelRaptorNew modelEntity;
 
 	public RenderRaptor(ModelBase base, float par2) {
 		super(Minecraft.getMinecraft().getRenderManager(), base, par2);
-		modelEntity = ((ModelRaptor) mainModel);
+		modelEntity = ((ModelRaptorNew) mainModel);
 		texture = new ResourceLocation[RaptorType.numRaptors];
 		texture[0] = new ResourceLocation(ARKCraft.MODID + ":textures/model/raptor_albino.png");
 		texture[1] = new ResourceLocation(ARKCraft.MODID + ":textures/model/raptor_breen_white.png");
@@ -51,6 +51,6 @@ public class RenderRaptor extends RenderLiving {
 
 	@Override
 	protected ResourceLocation getEntityTexture(Entity e) {
-		return texture[((EntityRaptor)e).raptorType];
+		return new ResourceLocation("");//texture[((EntityRaptor)e).raptorType];
 	}
 }

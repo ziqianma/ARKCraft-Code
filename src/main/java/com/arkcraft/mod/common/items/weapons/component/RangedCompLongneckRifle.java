@@ -1,5 +1,6 @@
 package com.arkcraft.mod.common.items.weapons.component;
 
+import com.arkcraft.mod.common.items.weapons.handlers.ReloadHelper;
 import com.arkcraft.mod.common.items.weapons.projectiles.EntitySimpleRifleAmmo;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -7,8 +8,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-
-import com.arkcraft.mod.common.items.weapons.handlers.ReloadHelper;
 
 public class RangedCompLongneckRifle extends RangedComponent
 {

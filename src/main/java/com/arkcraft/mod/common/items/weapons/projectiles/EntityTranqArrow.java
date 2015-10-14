@@ -1,7 +1,6 @@
 package com.arkcraft.mod.common.items.weapons.projectiles;
 
 import com.arkcraft.mod.common.lib.BALANCE;
-
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
