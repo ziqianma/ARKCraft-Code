@@ -38,12 +38,12 @@ public final class BALANCE {
 		@DefaultDouble(value = 10D, minValue = 8.0D, maxValue = 20.0D, name = "Spear Damage", 
 				comment = "Spear Damage")
 		public static double SPEAR_DAMAGE;
-		@DefaultDouble(value = 1.0D, minValue = 0.0D, maxValue = 10.0D, name = "Tranq Ammo Damage", 
+		@DefaultDouble(value = 0.2D, minValue = 0.0D, maxValue = 10.0D, name = "Tranq Ammo Damage", 
 				comment = "Tranq Ammo Damage")
 		public static double TRANQ_AMMO_DAMAGE;
 		@DefaultInt(value = 50, minValue = 5, maxValue = 1000, name = "Torpor time for tranq gun ammo.", comment = "Adds seconds of torpor to dino when hit")
 		public static int TRANQ_AMMO_TORPOR_TIME;
-		@DefaultDouble(value = 0.5D, minValue = 0.0D, maxValue = 10.0D, name = "Tranq Arrow Damage", comment = "Tranq Arrow Damage")
+		@DefaultDouble(value = 0.2D, minValue = 0.0D, maxValue = 10.0D, name = "Tranq Arrow Damage", comment = "Tranq Arrow Damage")
 		public static double TRANQ_ARROW_DAMAGE;
 		@DefaultInt(value = 100, minValue = 5, maxValue = 1000, name = "Torpor time for tranq arrow.", comment = "Adds seconds of torpor to dino when hit")
 		public static int TRANQ_ARRO_TORPOR_TIME;
