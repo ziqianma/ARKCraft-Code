@@ -6,7 +6,7 @@
     "1": "blocks/farmland_wet",
     "3": "blocks/log_oak_top",
     "2": "blocks/log_oak",
-    "berry_leaves": " arkcraft:blocks/berry_leaves"
+    "berry_leaves": "arkcraft:items/berry_leaves"
 },
 "elements": [ 
 {
