@@ -1,6 +1,6 @@
 {
-    "parent": "block/cube_all",
+    "parent": "block/tallgrass",
     "textures": {
-        "all": "arkcraft:blocks/berryBush_1"
+        "cross": "arkcraft:blocks/berryBush_1"
     }
 }

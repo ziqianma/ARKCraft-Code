@@ -13,7 +13,7 @@ public class KeyBindings {
 	public static KeyBinding playerPooping;
 	
 	public static void preInit() {
-		playerPooping = new KeyBinding("key.playerPoop", Keyboard.KEY_Z, "key.categories.gameplay");
+		playerPooping = new KeyBinding("key.playerPoop", Keyboard.KEY_Z, "ARKCraft");
 		
 		ClientRegistry.registerKeyBinding(playerPooping);
 	}
