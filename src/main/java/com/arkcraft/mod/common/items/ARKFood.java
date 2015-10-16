@@ -16,6 +16,7 @@ public class ARKFood extends ItemFood {
 	
 	private PotionEffect[] effects;
 	private boolean alwaysEdible;
+	public static int globalHealAmount; //Used For Adding XP On Register
 	
 	public ARKFood(String name, int healAmount, float sat, boolean fav, boolean alwaysEdible, PotionEffect... effects) {
 		super(healAmount, sat, fav);
@@ -24,6 +25,7 @@ public class ARKFood extends ItemFood {
 		GameRegistry.registerItem(this, name);
 		this.effects = effects;
 		this.alwaysEdible = alwaysEdible;
+		this.globalHealAmount = healAmount;
 		
 	}
 
@@ -98,5 +100,9 @@ public class ARKFood extends ItemFood {
 			}
 		}
 		return 0;
+	}
+	
+	public static int getXPFromSmelting() {
+		return globalHealAmount / 2;
 	}
 }
