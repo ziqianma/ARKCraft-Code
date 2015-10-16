@@ -2,7 +2,7 @@ package com.arkcraft.mod.common.blocks;
 
 import com.arkcraft.mod.GlobalAdditions;
 import com.arkcraft.mod.common.ARKCraft;
-import com.arkcraft.mod.common.tile.TileEntityCompostBin;
+import com.arkcraft.mod.common.tile.TileInventoryCompostBin;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -13,14 +13,14 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-public class BlockCompostBin extends BlockContainer{
+public class BlockInventoryCompostBin extends BlockContainer{
 	
 	private int renderType = 3; //default value
 	private boolean isOpaque = false;
 	private int ID;
 	private boolean render = false;
 	
-	public BlockCompostBin(String name, float hardness, Material mat, int ID) {
+	public BlockInventoryCompostBin(String name, float hardness, Material mat, int ID) {
 		super(mat);
 		this.ID = ID;
 		this.setUnlocalizedName(name);
@@ -42,7 +42,7 @@ public class BlockCompostBin extends BlockContainer{
 	}
 	
 	public TileEntity createNewTileEntity(World worldIn, int meta) {
-	     return new TileEntityCompostBin();
+	     return new TileInventoryCompostBin();
 	}	
 	
 	public void setRenderType(int renderType) { this.renderType = renderType; }

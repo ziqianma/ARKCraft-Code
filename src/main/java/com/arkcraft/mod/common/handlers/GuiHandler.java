@@ -1,26 +1,8 @@
 package com.arkcraft.mod.common.handlers;
 
-import com.arkcraft.mod.GlobalAdditions;
-import com.arkcraft.mod.client.gui.ContainerInventoryCropPlot;
-import com.arkcraft.mod.client.gui.ContainerInventoryDodo;
-import com.arkcraft.mod.client.gui.ContainerInventoryMP;
-import com.arkcraft.mod.client.gui.ContainerInventorySmithy;
-import com.arkcraft.mod.client.gui.ContainerInventoryTaming;
-import com.arkcraft.mod.client.gui.GUICropPlot;
-import com.arkcraft.mod.client.gui.GUITaming;
-import com.arkcraft.mod.client.gui.GuiInventoryDodo;
-import com.arkcraft.mod.client.gui.GuiMP;
-import com.arkcraft.mod.client.gui.GuiSmithy;
-import com.arkcraft.mod.client.gui.book.BookData;
-import com.arkcraft.mod.client.gui.book.BookDataStore;
-import com.arkcraft.mod.client.gui.book.GuiDossier;
-import com.arkcraft.mod.common.container.ContainerCompostBin;
-import com.arkcraft.mod.common.entity.EntityTameableDinosaur;
-import com.arkcraft.mod.common.entity.passive.EntityDodo;
-import com.arkcraft.mod.common.lib.LogHelper;
-import com.arkcraft.mod.common.tile.TileInventoryCropPlot;
-import com.arkcraft.mod.common.tile.TileInventoryMP;
-import com.arkcraft.mod.common.tile.TileInventorySmithy;
+import java.util.Iterator;
+import java.util.List;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -30,8 +12,28 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 
-import java.util.Iterator;
-import java.util.List;
+import com.arkcraft.mod.GlobalAdditions;
+import com.arkcraft.mod.client.gui.ContainerInventoryCropPlot;
+import com.arkcraft.mod.client.gui.ContainerInventoryDodo;
+import com.arkcraft.mod.client.gui.ContainerInventoryMP;
+import com.arkcraft.mod.client.gui.ContainerInventorySmithy;
+import com.arkcraft.mod.client.gui.ContainerInventoryTaming;
+import com.arkcraft.mod.client.gui.GUICompostBin;
+import com.arkcraft.mod.client.gui.GUICropPlot;
+import com.arkcraft.mod.client.gui.GUITaming;
+import com.arkcraft.mod.client.gui.GuiInventoryDodo;
+import com.arkcraft.mod.client.gui.GuiMP;
+import com.arkcraft.mod.client.gui.GuiSmithy;
+import com.arkcraft.mod.client.gui.book.BookData;
+import com.arkcraft.mod.client.gui.book.BookDataStore;
+import com.arkcraft.mod.client.gui.book.GuiDossier;
+import com.arkcraft.mod.common.entity.EntityTameableDinosaur;
+import com.arkcraft.mod.common.entity.passive.EntityDodo;
+import com.arkcraft.mod.common.lib.LogHelper;
+import com.arkcraft.mod.common.tile.TileInventoryCompostBin;
+import com.arkcraft.mod.common.tile.TileInventoryCropPlot;
+import com.arkcraft.mod.common.tile.TileInventoryMP;
+import com.arkcraft.mod.common.tile.TileInventorySmithy;
 
 public class GuiHandler implements IGuiHandler {
 
@@ -60,7 +62,13 @@ public class GuiHandler implements IGuiHandler {
 			}
 		}
 		else if (ID == GlobalAdditions.GUI.COMPOST_BIN.getID()) {
-			return new ContainerCompostBin(player.inventory, world, new BlockPos(x, y, z));
+			BlockPos xyz = new BlockPos(x, y, z);
+			TileEntity tileEntity = world.getTileEntity(xyz);
+			if (tileEntity instanceof TileInventoryCompostBin)			
+				return new GUICompostBin(player.inventory, (TileInventoryCompostBin) tileEntity);
+			else {
+				LogHelper.info("GuiHandler - getClientGuiElement: TileEntityCompostBin not found!");				
+			}
 		}
 		else if (ID == GlobalAdditions.GUI.CROP_PLOT.getID()) {
 			BlockPos xyz = new BlockPos(x, y, z);
@@ -127,7 +135,13 @@ public class GuiHandler implements IGuiHandler {
 			}
 		}
 		if (ID == GlobalAdditions.GUI.COMPOST_BIN.getID()) {
-			return new ContainerCompostBin(player.inventory, world, new BlockPos(x, y, z));
+			BlockPos xyz = new BlockPos(x, y, z);
+			TileEntity tileEntity = world.getTileEntity(xyz);
+			if (tileEntity instanceof TileInventoryCompostBin)			
+				return new GUICompostBin(player.inventory, (TileInventoryCompostBin) tileEntity);
+			else {
+				LogHelper.info("GuiHandler - getClientGuiElement: TileEntityCompostBin not found!");				
+			}
 		}
 		if(ID == GlobalAdditions.GUI.BOOK_GUI.getID()) {
 			LogHelper.info("GuiHandler - getClientGuiElement(): GuiDossier book trying to open.");

@@ -2,7 +2,7 @@ package com.arkcraft.mod.common.blocks;
 
 import com.arkcraft.mod.GlobalAdditions;
 import com.arkcraft.mod.common.handlers.GenerationHandler;
-import com.arkcraft.mod.common.tile.TileEntityCompostBin;
+import com.arkcraft.mod.common.tile.TileInventoryCompostBin;
 import com.arkcraft.mod.common.tile.TileInventoryCropPlot;
 import com.arkcraft.mod.common.tile.TileInventoryMP;
 import com.arkcraft.mod.common.tile.TileInventorySmithy;
@@ -23,7 +23,7 @@ public class ARKCraftBlocks
 	public static ARKBlock oreSurface;
 	public static Block blockNarcoBrerry;
 	public static ARKBlockSpikes wooden_spikes;
-	public static BlockCompostBin compost_bin;
+	public static BlockInventoryCompostBin compost_bin;
 	public static BlockInventorySmithy smithy;	
 	public static BlockInventoryMP pestle;
 	public static BlockInventoryCropPlot crop_plot;
@@ -48,11 +48,12 @@ public class ARKCraftBlocks
 		smithy = addSmithyContainer("smithy", 0.4F, Material.wood, GlobalAdditions.GUI.SMITHY.getID(), false, false, 3);
 		pestle = addMPContainer("mortar_and_pestle", 0.4F, Material.rock, GlobalAdditions.GUI.PESTLE_AND_MORTAR.getID(), false, false, 3);
 		crop_plot = addCropPlotContainer("crop_plot", 0.4F, Material.wood, GlobalAdditions.GUI.CROP_PLOT.getID(), false, false, 3);
+		compost_bin = addCompostBinContainer("compost_bin", 0.4F, Material.wood, GlobalAdditions.GUI.COMPOST_BIN.getID(), false, false, 3);
 
 		// Tile Entities
 		GameRegistry.registerTileEntity(TileInventoryCropPlot.class, "TileInventoryCropPlot");
 		GameRegistry.registerTileEntity(TileInventoryMP.class, "TileInventoryMP");
-		GameRegistry.registerTileEntity(TileEntityCompostBin.class, "TileEntityCompostBin");
+		GameRegistry.registerTileEntity(TileInventoryCompostBin.class, "TileEntityCompostBin");
 		GameRegistry.registerTileEntity(TileInventorySmithy.class, "TileInventorySmithy");
 	}
 		
@@ -114,8 +115,8 @@ public class ARKCraftBlocks
 		return container;
 	}
 	
-	protected static BlockCompostBin addCompostBinContainer(String name, float hardness, Material mat, int ID, boolean renderAsNormalBlock, boolean isOpaque, int renderType) {
-		BlockCompostBin container = new BlockCompostBin(name, hardness, mat, ID);
+	protected static BlockInventoryCompostBin addCompostBinContainer(String name, float hardness, Material mat, int ID, boolean renderAsNormalBlock, boolean isOpaque, int renderType) {
+		BlockInventoryCompostBin container = new BlockInventoryCompostBin(name, hardness, mat, ID);
 		container.setRenderAsNormalBlock(renderAsNormalBlock);
 		container.setOpaque(isOpaque);
 		container.setRenderType(renderType);
