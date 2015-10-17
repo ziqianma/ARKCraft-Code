@@ -1,6 +1,7 @@
 package com.arkcraft.mod.common.items;
 
 import com.arkcraft.mod.GlobalAdditions;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
@@ -25,8 +26,21 @@ public class ARKFood extends ItemFood {
 		GameRegistry.registerItem(this, name);
 		this.effects = effects;
 		this.alwaysEdible = alwaysEdible;
+		/** FIXME: Please do not check in code with warnings
+		 *  A few things to note about this:
+		 *  1) The warning here, should not be ignored. I don't know why this isn't an error, because accessing a class variable (static)
+		 *     with "this." implies that it is an instance variable, and it is not. In other words, all food created with this class will be 
+		 *     sharing this amount. So yes, in that sense it is a "global".
+		 *  2) I think what you wanted was for each type of food to have its own healAmount value, but using a static will not do this.
+		 *  
+		 *  So maybe just a mistake? Then remove the static. If not talk to me about Java coding or read a tutorial on how static works.
+		 *  3) We can discuss this in our next group coding meeting, but the intent of the @author on a file is that you don't edit the file
+		 *     without asking the author. Probably doesn't apply to this file, so maybe we shouldn't put our name on all files we check-in.
+		 *  4) Don't check in any files with warnings if you can avoid it. There are only a few types of warnings you should leave in a file,
+		 *     probably just these two: "@SuppressWarnings({"unchecked", "rawtypes"})". Others if you leave them are because you plan to fix
+		 *     them eventually. (Like this one below.)
+		 */
 		this.globalHealAmount = healAmount;
-		
 	}
 
 	@Override

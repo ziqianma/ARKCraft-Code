@@ -2,7 +2,6 @@ package com.arkcraft.mod.client.gui;
 
 import com.arkcraft.mod.common.ARKCraft;
 import com.arkcraft.mod.common.tile.TileInventoryCompostBin;
-import com.arkcraft.mod.common.tile.TileInventoryCropPlot;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;

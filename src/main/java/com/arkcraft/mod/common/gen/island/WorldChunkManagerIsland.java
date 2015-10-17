@@ -1,6 +1,7 @@
 package com.arkcraft.mod.common.gen.island;
 
 import com.google.common.collect.Lists;
+
 import net.minecraft.crash.CrashReport;
 import net.minecraft.crash.CrashReportCategory;
 import net.minecraft.util.BlockPos;
@@ -23,13 +24,14 @@ import java.util.Random;
 /**
  * @author gegy1000
  */
+@SuppressWarnings({"unchecked", "rawtypes"})
 public class WorldChunkManagerIsland extends WorldChunkManager
 {
     /** The biome list. */
     private BiomeCache biomeCache;
     /** A list of biomes that the player can spawn in. */
-    private List biomesToSpawnIn;
-    private String field_180301_f;
+	private List biomesToSpawnIn;
+	private String field_180301_f;
     private double scale;
     private long seed;
 
