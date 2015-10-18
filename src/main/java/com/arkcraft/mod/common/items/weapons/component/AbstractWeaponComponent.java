@@ -62,6 +62,8 @@ public abstract class AbstractWeaponComponent
 	
 	public abstract boolean onLeftClickEntity(ItemStack itemstack, EntityPlayer player, Entity entity);
 	
+	public abstract boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack);
+
 	public abstract ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entityplayer);
 	
 	public abstract void onUsingTick(ItemStack itemstack, EntityPlayer entityplayer, int count);
@@ -72,4 +74,7 @@ public abstract class AbstractWeaponComponent
 	
 	@SideOnly(Side.CLIENT)
 	public abstract boolean shouldRotateAroundWhenRendering();
+	
+    @SideOnly(Side.CLIENT)
+    public abstract void renderHelmetOverlay(ItemStack stack, EntityPlayer player, net.minecraft.client.gui.ScaledResolution resolution, float partialTicks);
 }

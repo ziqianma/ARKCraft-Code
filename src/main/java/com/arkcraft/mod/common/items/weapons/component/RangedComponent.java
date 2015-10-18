@@ -124,6 +124,15 @@ public abstract class RangedComponent extends AbstractWeaponComponent
 	}
 	
 	@Override
+	public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack)
+    {
+		return false;
+    }
+	
+    @SideOnly(Side.CLIENT)
+    public void renderHelmetOverlay(ItemStack stack, EntityPlayer player, net.minecraft.client.gui.ScaledResolution resolution, float partialTicks){}
+	
+	@Override
 	public EnumAction getItemUseAction(ItemStack itemstack)
 	{
 		int state = ReloadHelper.getReloadState(itemstack);

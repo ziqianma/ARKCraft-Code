@@ -3,7 +3,9 @@ package com.arkcraft.mod.common.items.weapons.component;
 import com.arkcraft.mod.common.items.weapons.handlers.IItemWeapon;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
+
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
@@ -45,8 +47,6 @@ public class ItemShooter extends ItemBow implements IItemWeapon
 		return rangedComponent.onLeftClickEntity(itemstack, player, entity);
 	}
 	
-	///////
-	
 	@Override
 	public EnumAction getItemUseAction(ItemStack itemstack)
 	{
@@ -76,6 +76,12 @@ public class ItemShooter extends ItemBow implements IItemWeapon
 	{
 		rangedComponent.onPlayerStoppedUsing(itemstack, world, entityplayer, i);
 	}
+	
+	@Override
+	public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack)
+    {
+		return rangedComponent.onEntitySwing( entityLiving, stack);
+    }
 	
 	@Override
 	public void onUpdate(ItemStack itemstack, World world, Entity entity, int i, boolean flag)
