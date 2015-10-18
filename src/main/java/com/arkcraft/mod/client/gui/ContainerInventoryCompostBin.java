@@ -12,7 +12,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.arkcraft.mod.common.lib.LogHelper;
 import com.arkcraft.mod.common.tile.TileInventoryCompostBin;
-import com.arkcraft.mod.common.tile.TileInventoryCropPlot;
 
 /***
  * 
@@ -20,24 +19,30 @@ import com.arkcraft.mod.common.tile.TileInventoryCropPlot;
  *
  */
 public class ContainerInventoryCompostBin extends Container {
-
 	private TileInventoryCompostBin tileInventoryCompostBin;
-	private final int CROP_SLOT_COUNT = 9;
-	public static final int FERTILIZER_SLOT_YPOS = 53;
+	private final int COMPOST_SLOT_COUNT = 8;
+	public static final int COMPOST_SLOT_YPOS = 26;
+	public static final int COMPOST_SLOT_XPOS = 53;
 
 	// These store cache values, used by the server to only update the client side tile entity when values have changed
 	private int [] cachedFields;
 
 	public ContainerInventoryCompostBin(InventoryPlayer invPlayer, TileInventoryCompostBin tileInventoryCompostBin) {
-		LogHelper.info("TileInventoryCropPlot: constructor called.");
+		LogHelper.info("ContainerInventoryCompostBin: constructor called.");
 		this.tileInventoryCompostBin = tileInventoryCompostBin;
 		
-		/* Hotbar inventory */
-		final int HOTBAR_YPOS = 142;
-		for(int col = 0; col < 9; col++) {
-			addSlotToContainer(new Slot(invPlayer, col, 8 + col * 18, HOTBAR_YPOS));
+		/* Compost bin inventory */
+		if (COMPOST_SLOT_COUNT != tileInventoryCompostBin.getSizeInventory()) {
+			LogHelper.error("Mismatched slot count in container(" + COMPOST_SLOT_COUNT + ") and CompostBinInventory (" 
+						+ tileInventoryCompostBin.getSizeInventory()+")");
 		}
-		
+		for(int row = 0; row < 2; row++) {
+			for(int col = 0; col < 4; col++) {
+				int slotIndex =  col + row * 4;
+				addSlotToContainer(new SlotCompost(tileInventoryCompostBin, slotIndex, COMPOST_SLOT_XPOS + col * 18, COMPOST_SLOT_YPOS + row * 18));
+			}
+		}
+
 		/* Player inventory */
 		final int PLAYER_INVENTORY_YPOS = 84;
 		for(int row = 0; row < 3; row++) {
@@ -45,22 +50,13 @@ public class ContainerInventoryCompostBin extends Container {
 				int slotIndex =  col + row * 9 + 9;
 				addSlotToContainer(new Slot(invPlayer, slotIndex, 8 + col * 18, PLAYER_INVENTORY_YPOS + row * 18));
 			}
-		}	
-
-		/* Crop inventory */
-		if (CROP_SLOT_COUNT != tileInventoryCompostBin.getSizeInventory()) {
-			LogHelper.error("Mismatched slot count in container(" + CROP_SLOT_COUNT + ") and CropInventory (" 
-						+ tileInventoryCompostBin.getSizeInventory()+")");
 		}
-		// Water and Seed slot are first two
-		this.addSlotToContainer(new SlotWater(tileInventoryCompostBin, TileInventoryCropPlot.WATER_SLOT, 8, 53)); // Water input slot
-		this.addSlotToContainer(new SlotSeed(tileInventoryCompostBin, TileInventoryCropPlot.SEED_SLOT, 44, 17));  // Seed input slot
-		// Fertilizer slots
-		for(int col = TileInventoryCropPlot.FIRST_FERTILIZER_SLOT; col < CROP_SLOT_COUNT - 1; col++) {
-			addSlotToContainer(new SlotFertilizer(tileInventoryCompostBin, col, 8 + col * 18, FERTILIZER_SLOT_YPOS));
-		}
-		// Berry output slot (berry is centered in 24 x 24 box (berry is 16 x 16)
-		this.addSlotToContainer(new Slot(tileInventoryCompostBin, TileInventoryCropPlot.BERRY_SLOT, 104, 17));
+		
+		/* Hotbar inventory */
+		final int HOTBAR_YPOS = 142;
+		for(int col = 0; col < 9; col++) {
+			addSlotToContainer(new Slot(invPlayer, col, 8 + col * 18, HOTBAR_YPOS));
+		}		
 	}
 	
 	/* Nothing to do, this is a furnace type container */
@@ -69,42 +65,27 @@ public class ContainerInventoryCompostBin extends Container {
     }
     
 	public ItemStack transferStackInSlot(EntityPlayer playerIn, int sourceSlotIndex) {
-		LogHelper.info("ARKContainerCropPlot: transferStackInSlot called.");
+		LogHelper.info("ContainerInventoryCompostBin: transferStackInSlot called.");
 		Slot sourceSlot = (Slot)inventorySlots.get(sourceSlotIndex);
 		if (sourceSlot == null || !sourceSlot.getHasStack()) return null;
 		ItemStack sourceStack = sourceSlot.getStack();
 		ItemStack copyOfSourceStack = sourceStack.copy();
 
 		// Check if the slot clicked is one of the vanilla container slots
-		if(sourceSlotIndex >= 0 && sourceSlotIndex < 36) {
-			if (tileInventoryCompostBin.isItemValidForWaterSlot(sourceStack)) {
-				// This is a vanilla container slot so merge the stack into the crop plot inventory
-				if(!mergeItemStack(sourceStack, 36, 36 + TileInventoryCropPlot.WATER_SLOT 
-						+ TileInventoryCropPlot.WATER_SLOTS_COUNT, false)) {
-					return null;
-				}
-			}
-			else if (tileInventoryCompostBin.isItemValidForSeedSlot(sourceStack)) {
-				// This is a vanilla container slot so merge the stack into the crop plot inventory
-				if(!mergeItemStack(sourceStack, 36, 36 + TileInventoryCropPlot.SEED_SLOT 
-						+ TileInventoryCropPlot.SEED_SLOTS_COUNT, false)) {
-					return null;
-				}
-			}
-			else if (tileInventoryCompostBin.isItemValidForFertilizerSlot(sourceStack)) {
-				// This is a vanilla container slot so merge the stack into the crop plot inventory
-				if(!mergeItemStack(sourceStack, 36, 36 + TileInventoryCropPlot.FIRST_FERTILIZER_SLOT 
-						+ TileInventoryCropPlot.FERTILIZER_SLOTS_COUNT, false)) {
+		if(sourceSlotIndex >= COMPOST_SLOT_COUNT && sourceSlotIndex < 36 + COMPOST_SLOT_COUNT) {
+			if (tileInventoryCompostBin.isItemValidForSlot(sourceStack)) {
+				// This is a vanilla container slot so merge the stack into the composting bin inventory
+				if(!mergeItemStack(sourceStack, 0, COMPOST_SLOT_COUNT, false)) {
 					return null;
 				}
 			}
 			else
 				return null;
 		}
-		// Check if the slot clicked is a crop plot container slot
-		else if (sourceSlotIndex >= 36 && sourceSlotIndex < 36 + CROP_SLOT_COUNT) {
-			// This is a crop plot slot so merge the stack into the players inventory
-			if (!mergeItemStack(sourceStack, 0, 36, false)){
+		// Check if the slot clicked is a compost bin container slot
+		else if (sourceSlotIndex >= 0 && sourceSlotIndex < COMPOST_SLOT_COUNT) {
+			// This is a compost bin slot so merge the stack into the players inventory
+			if (!mergeItemStack(sourceStack, COMPOST_SLOT_COUNT, 36 + COMPOST_SLOT_COUNT, false)){
 				return null;
 			}
 		} else {
@@ -174,41 +155,15 @@ public class ContainerInventoryCompostBin extends Container {
 	}
 
 	// SlotFertilizer is a slot for fertilizer items
-	public class SlotFertilizer extends Slot {
-		public SlotFertilizer(IInventory inventoryIn, int index, int xPosition, int yPosition) {
+	public class SlotCompost extends Slot {
+		public SlotCompost(IInventory inventoryIn, int index, int xPosition, int yPosition) {
 			super(inventoryIn, index, xPosition, yPosition);
 		}
 
 		// if this function returns false, the player won't be able to insert the given item into this slot
 		@Override
 		public boolean isItemValid(ItemStack stack) {
-			return tileInventoryCompostBin.isItemValidForFertilizerSlot(stack);
-		}
-	}
-	
-	// SlotWater is a slot for water
-	public class SlotWater extends Slot {
-		public SlotWater(IInventory inventoryIn, int index, int xPosition, int yPosition) {
-			super(inventoryIn, index, xPosition, yPosition);
-		}
-
-		// if this function returns false, the player won't be able to insert the given item into this slot
-		@Override
-		public boolean isItemValid(ItemStack stack) {
-			return tileInventoryCompostBin.isItemValidForWaterSlot(stack);
-		}
-	}
-	
-	// SlotSeed is a slot for seeds
-	public class SlotSeed extends Slot {
-		public SlotSeed(IInventory inventoryIn, int index, int xPosition, int yPosition) {
-			super(inventoryIn, index, xPosition, yPosition);
-		}
-
-		// if this function returns false, the player won't be able to insert the given item into this slot
-		@Override
-		public boolean isItemValid(ItemStack stack) {
-			return tileInventoryCompostBin.isItemValidForSeedSlot(stack);
+			return tileInventoryCompostBin.isItemValidForSlot(stack);
 		}
 	}	
 }

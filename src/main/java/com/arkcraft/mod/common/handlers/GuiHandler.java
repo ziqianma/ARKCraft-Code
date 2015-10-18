@@ -13,6 +13,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 
 import com.arkcraft.mod.GlobalAdditions;
+import com.arkcraft.mod.client.gui.ContainerInventoryCompostBin;
 import com.arkcraft.mod.client.gui.ContainerInventoryCropPlot;
 import com.arkcraft.mod.client.gui.ContainerInventoryDodo;
 import com.arkcraft.mod.client.gui.ContainerInventoryMP;
@@ -65,7 +66,7 @@ public class GuiHandler implements IGuiHandler {
 			BlockPos xyz = new BlockPos(x, y, z);
 			TileEntity tileEntity = world.getTileEntity(xyz);
 			if (tileEntity instanceof TileInventoryCompostBin)			
-				return new GUICompostBin(player.inventory, (TileInventoryCompostBin) tileEntity);
+				return new ContainerInventoryCompostBin(player.inventory, (TileInventoryCompostBin) tileEntity);
 			else {
 				LogHelper.info("GuiHandler - getClientGuiElement: TileEntityCompostBin not found!");				
 			}

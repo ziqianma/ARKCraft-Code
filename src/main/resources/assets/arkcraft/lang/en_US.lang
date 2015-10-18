@@ -4,6 +4,7 @@ tile.smithy.name=Smithy
 tile.mortar_and_pestle.name=Mortar and Pestle
 tile.crop_plot.name=Crop Plot
 tile.wooden_spikes.name=Wooden Spikes
+tile.compost_bin.name=Compost Bin
 
 # World Types
 generator.island=ARK: The Island

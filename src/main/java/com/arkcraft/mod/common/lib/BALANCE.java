@@ -100,6 +100,13 @@ public final class BALANCE {
 		public static int CRAFT_TIME_FOR_ITEM;
 	}
 	
+	public static class COMPOST_BIN {
+		@DefaultInt(value = 30, minValue = 15, maxValue = 600, name = "Thatch composting time.", comment = "Seconds of composting provided")
+		public static int COMPOST_TIME_FOR_THATCH;
+		@DefaultInt(value = 60, minValue = 15, maxValue = 600, name = "Feces composting time.", comment = "Seconds to compost feces into fertilizer")		
+		public static int COMPOST_TIME_FOR_FECES;
+	}
+	
 	public static class DINO_PROPERTIES {
 		@DefaultInt(value = 120, minValue = 30, maxValue = 3600, name = "Seconds to tame raptor.", comment = "Time need to tame")
 		public static int SECONDS_TO_TAME_RAPTOR;		
