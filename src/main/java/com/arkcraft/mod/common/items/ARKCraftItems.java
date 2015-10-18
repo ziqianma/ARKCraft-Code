@@ -43,7 +43,7 @@ public class ARKCraftItems
 
 	public static ARKFood tintoBerry, amarBerry, azulBerry, mejoBerry, narcoBerry, porkchop_raw, porkchop_cooked, primemeat_raw, primemeat_cooked;
 	public static ARKSeedItem tintoBerrySeed, amarBerrySeed, azulBerrySeed, mejoBerrySeed, narcoBerrySeed;
-	public static ARKItem cobble_ball, fiber, chitin, narcotics, explosive_ball, dodo_bag, dodo_feather, gun_powder;
+	public static ARKItem cobble_ball, fiber, chitin, narcotics, explosive_ball, dodo_bag, dodo_feather, gun_powder, thatch;
 	public static ARKFecesItem dodo_feces, player_feces;
 	public static ARKEggItem dodo_egg;
 	public static ARKSaddle saddle_small, saddle_medium, saddle_large;
@@ -107,6 +107,7 @@ public class ARKCraftItems
 
 		// Regular Items
 		fiber = addItem("fiber");
+		thatch = addItem("thatch");
 		chitin = addItem("chitin");
 		dodo_feather = addItem("dodo_feather");
 		dodo_bag = addItemWithTooltip("dodo_bag", "Backpack for the Dodo");
