@@ -2,6 +2,7 @@ package com.arkcraft.mod.common.blocks;
 
 import com.arkcraft.mod.common.items.ARKCraftItems;
 import com.arkcraft.mod.common.lib.BALANCE;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -16,8 +17,12 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumWorldBlockLayer;
+import net.minecraft.world.ColorizerGrass;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeColorHelper;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Random;
 
@@ -29,7 +34,7 @@ public class ARKBush extends ARKBlock {
 	public static final PropertyInteger HARVEST_COUNT = PropertyInteger.create("harvest", 0, 3);
 
 	public ARKBush(String name, float hardness) {
-		super(Material.leaves, name, hardness);
+		super(Material.grass, name, hardness);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(HARVEST_COUNT, 3));
 		this.setStepSound(Block.soundTypeGrass);
 		this.setTickRandomly(true);
@@ -142,5 +147,17 @@ public class ARKBush extends ARKBlock {
 	 
 	@Override
 	public boolean isFullCube() { return false; }
-	  	
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public int getBlockColor() { return ColorizerGrass.getGrassColor(0.5D, 1.0D); }
+	    
+	@Override
+	@SideOnly(Side.CLIENT)
+	public int getRenderColor(IBlockState state) { return this.getBlockColor(); }
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	    public int colorMultiplier(IBlockAccess worldIn, BlockPos pos, int renderPass) { return BiomeColorHelper.getGrassColorAtPos(worldIn, pos); }
+	    
 }
