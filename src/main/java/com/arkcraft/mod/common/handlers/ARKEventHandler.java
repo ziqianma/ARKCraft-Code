@@ -93,13 +93,15 @@ public class ARKEventHandler {
 		int k = r.nextInt(5)+1;
 		System.out.println(j);
 		if (event.state.getBlock() == Blocks.log) {
-			if(event.harvester.getHeldItem().getItem() instanceof ItemPickaxe){
-			for (int i = 0; i < k; i++) {
-				event.drops.add(new ItemStack(ARKCraftItems.thatch));
-			}
-			}else if(event.harvester.getHeldItem().getItem() instanceof ItemAxe){
-				for (int i = 0; i < j; i++){
-					event.drops.add(new ItemStack(ARKCraftItems.thatch));
+			if(event.harvester != null && event.harvester.getHeldItem() != null) {
+				if (event.harvester.getHeldItem().getItem() instanceof ItemPickaxe) {
+					for (int i = 0; i < k; i++) {
+						event.drops.add(new ItemStack(ARKCraftItems.thatch));
+					}
+				} else if (event.harvester.getHeldItem().getItem() instanceof ItemAxe) {
+					for (int i = 0; i < j; i++) {
+						event.drops.add(new ItemStack(ARKCraftItems.thatch));
+					}
 				}
 			}
 		}
