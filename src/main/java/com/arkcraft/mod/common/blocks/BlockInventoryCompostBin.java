@@ -17,6 +17,11 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
+/***
+ * 
+ * @author wildbill22
+ *
+ */
 public class BlockInventoryCompostBin extends BlockContainer{
 	
 	private int renderType = 3; //default value
@@ -32,7 +37,6 @@ public class BlockInventoryCompostBin extends BlockContainer{
 		GameRegistry.registerBlock(this, name);
 	}
 	
-
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos blockPos, IBlockState state, EntityPlayer playerIn, EnumFacing side,	
 			float hitX, float hitY, float hitZ) {

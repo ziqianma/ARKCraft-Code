@@ -6,6 +6,7 @@ import com.arkcraft.mod.common.tile.TileInventoryCompostBin;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -65,8 +66,12 @@ public class GUICompostBin extends GuiContainer {
 					int x = guiLeft + ContainerInventoryCompostBin.COMPOST_SLOT_XPOS;
 					int y = guiTop + ContainerInventoryCompostBin.COMPOST_SLOT_YPOS;
 					if (isInRect(x + 18 * col, y + 18 * row, 16, 16, mouseX, mouseY)) {
-						hoveringText.add("Composting Time Remaining:");
-						hoveringText.add(tileEntity.secondsOfThatchRemaining(index) + "s");
+						ItemStack stack = tileEntity.getStackInSlot(index);
+						if (stack != null){
+							String thatchName = stack.getItem().getItemStackDisplayName(stack);
+							hoveringText.add(thatchName + " - composting Time Remaining:");
+							hoveringText.add(tileEntity.secondsOfThatchRemaining(index) + "s");
+						}
 					}
 				}
 			}

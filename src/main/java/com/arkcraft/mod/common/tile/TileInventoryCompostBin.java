@@ -1,5 +1,6 @@
 package com.arkcraft.mod.common.tile;
 
+import com.arkcraft.mod.common.items.ARKCraftItems;
 import com.arkcraft.mod.common.items.ARKFecesItem;
 import com.arkcraft.mod.common.lib.BALANCE;
 import com.arkcraft.mod.common.lib.LogHelper;
@@ -47,7 +48,7 @@ public class TileInventoryCompostBin extends TileEntity implements IInventory, I
 	/** The number of composting seconds remaining on the current piece of thatch */
 	private int [] compostTimeRemaining = new int[COMPOST_SLOTS_COUNT];
 	/** The initial composting value of the currently burning thatch (in seconds of composting duration) */
-	private int compostTimeInitialValue = BALANCE.COMPOST_BIN.COMPOST_TIME_FOR_THATCH;
+	private static int compostTimeInitialValue = BALANCE.COMPOST_BIN.COMPOST_TIME_FOR_THATCH;
 	/** Seconds of thatch burn time remaining for the item in a slot */
 	public int secondsOfThatchRemaining(int i) {
 		if (itemStacks[i] != null && getItemCompostTime(itemStacks[i]) > 0) {
@@ -254,9 +255,8 @@ public class TileInventoryCompostBin extends TileEntity implements IInventory, I
 	public static short getItemCompostTime(ItemStack stack) {
 		int compostTime = 0;		
 		if (stack != null){
-			// TODO: Put the ARKCraftItem.thatch here!
-			if (stack.getItem() == Items.coal)
-				compostTime = 30;
+			if (stack.getItem() == ARKCraftItems.thatch)
+				compostTime = compostTimeInitialValue;
 		}		
 		return (short)MathHelper.clamp_int(compostTime, 0, Short.MAX_VALUE);
 	}
@@ -368,9 +368,11 @@ public class TileInventoryCompostBin extends TileEntity implements IInventory, I
 	// Return true if stack is a valid item for the compost bin
 	public boolean isItemValidForSlot(ItemStack stack) {
 		if (stack != null){
-			if (stack.getItem() instanceof ARKFecesItem)
+			// Feces?
+			if (getItemDecompostTime(stack) > 0)
 				return true;
-			if (stack.getItem() == Items.coal)
+			// Thatch?
+			if (getItemCompostTime(stack) > 0)
 				return true;
 		}
 		return false;

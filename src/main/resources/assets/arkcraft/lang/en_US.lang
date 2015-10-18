@@ -69,7 +69,7 @@ item.rocket_launcher.name=Rocket Launcher
 item.rocket_propelled_grenade.name=Rocket Propelled Grenade
 item.compound_bow.name=Compound Bow
 item.crossbow.name= Crossbow
-
+item.thatch.name= Thatch
 
 # Miscellaneous
 itemGroup.tabARKCraft=ARKCraft: Survival Evolved

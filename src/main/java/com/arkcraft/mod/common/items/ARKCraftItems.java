@@ -54,7 +54,8 @@ public class ARKCraftItems
 
 	public static ARKFood tintoBerry, amarBerry, azulBerry, mejoBerry, narcoBerry, porkchop_raw, porkchop_cooked, primemeat_raw, primemeat_cooked;
 	public static ARKSeedItem tintoBerrySeed, amarBerrySeed, azulBerrySeed, mejoBerrySeed, narcoBerrySeed;
-	public static ARKItem cobble_ball, fiber, chitin, narcotics, explosive_ball, dodo_bag, dodo_feather, gun_powder, thatch;
+	public static ARKItem cobble_ball, fiber, chitin, narcotics, explosive_ball, dodo_bag, dodo_feather, gun_powder;
+	public static ARKThatchItem thatch;
 	public static ARKFecesItem dodo_feces, player_feces;
 	public static ARKEggItem dodo_egg;
 	public static ARKSaddle saddle_small, saddle_medium, saddle_large;
@@ -119,7 +120,6 @@ public class ARKCraftItems
 
 		// Regular Items
 		fiber = addItem("fiber");
-		thatch = addItem("thatch");
 		chitin = addItem("chitin");
 		dodo_feather = addItem("dodo_feather");
 		dodo_bag = addItemWithTooltip("dodo_bag", "Backpack for the Dodo");
@@ -143,6 +143,7 @@ public class ARKCraftItems
 		player_feces = addFecesItem("player_feces", BALANCE.CROP_PLOT.SECONDS_FOR_PLAYER_FECES_TO_DECOMPOSE);
 
 		// Other Types of Items
+		thatch = addThatchItem("thatch");
 		dodo_egg = addEggItem("dodo_egg");
 		dino_book = addDossier("dossier");
 		narcotics = addItemWithTooltip("narcotics", EnumChatFormatting.RED + "A Knockout of a Drink");
@@ -314,6 +315,12 @@ public class ARKCraftItems
 		i.setMaxDamage(maxDamageIn);
 		allItems.put(name, i);
 		return i;
+	}	
+	
+	protected static ARKThatchItem addThatchItem(String name) {
+		ARKThatchItem t = new ARKThatchItem(name);
+		allItems.put(name, t);
+		return t;
 	}	
 	
 	protected static ARKFood addFood(String name, int heal, float sat, boolean fav, boolean alwaysEdible) {
