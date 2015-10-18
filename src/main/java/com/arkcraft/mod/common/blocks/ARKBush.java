@@ -1,7 +1,6 @@
 package com.arkcraft.mod.common.blocks;
 
-import com.arkcraft.mod.common.items.ARKCraftItems;
-import com.arkcraft.mod.common.lib.BALANCE;
+import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -21,25 +20,31 @@ import net.minecraft.world.ColorizerGrass;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeColorHelper;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.Random;
+import com.arkcraft.mod.common.items.ARKCraftItems;
+import com.arkcraft.mod.common.lib.BALANCE;
 
 /**
  * @author Vastatio
  */
-public class ARKBush extends ARKBlock {
+public class ARKBush extends Block {
 
 	public static final PropertyInteger HARVEST_COUNT = PropertyInteger.create("harvest", 0, 3);
 
-	public ARKBush(String name, float hardness) {
-		super(Material.grass, name, hardness);
+	public ARKBush(String name, float hardness, Material material) {
+		super(material);
+		this.setHardness(hardness);
+		this.setUnlocalizedName(name);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(HARVEST_COUNT, 3));
 		this.setStepSound(Block.soundTypeGrass);
 		this.setTickRandomly(true);
+		GameRegistry.registerBlock(this, this.getUnlocalizedName().substring(5));
 	}
 
+	@Override
 	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
 	{
 		if (rand.nextBoolean())
@@ -52,12 +57,13 @@ public class ARKBush extends ARKBlock {
 			}
 		}
 	}
-
+	
+	@Override
 	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
 	{
 		worldIn.setBlockState(pos, state.withProperty(HARVEST_COUNT, 3));
 	}
-
+	
 	public Item getHarvestItem(Random rand) {
 		if(rand.nextInt(10) <= 3)
 			return ARKCraftItems.fiber;
@@ -107,16 +113,19 @@ public class ARKBush extends ARKBlock {
 		return 3;
 	}
 
+	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
 		return this.getDefaultState().withProperty(HARVEST_COUNT, meta);
 	}
 
+	@Override
 	public int getMetaFromState(IBlockState state)
 	{
 		return ((Integer) state.getValue(HARVEST_COUNT)).intValue();
 	}
 
+	@Override
 	protected BlockState createBlockState()
 	{
 		return new BlockState(this, new IProperty[] { HARVEST_COUNT });
@@ -137,7 +146,7 @@ public class ARKBush extends ARKBlock {
 	public EnumWorldBlockLayer getBlockLayer() { return EnumWorldBlockLayer.CUTOUT; }
 	
 	@Override
-    public int quantityDropped(Random random) { return random.nextInt(10) <= 5 ? 1 : 2; }
+    public int quantityDropped(Random random) { return 0;}
 		
 	@Override
 	public boolean isPassable(IBlockAccess worldIn, BlockPos pos) { return this.blockMaterial != Material.air; }
@@ -159,5 +168,5 @@ public class ARKBush extends ARKBlock {
 	@Override
 	@SideOnly(Side.CLIENT)
 	    public int colorMultiplier(IBlockAccess worldIn, BlockPos pos, int renderPass) { return BiomeColorHelper.getGrassColorAtPos(worldIn, pos); }
-	    
+
 }

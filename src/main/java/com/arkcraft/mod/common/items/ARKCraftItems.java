@@ -62,7 +62,7 @@ public class ARKCraftItems
 	public static ARKArmorItem clothHelm, clothChest, clothLegs, clothBoots;
 	public static ARKArmorItem boneHelm, boneChest, boneLegs, boneBoots;
 	public static Dossier dino_book;
-	public static ARKBlockItem item_crop_plot;
+	public static ARKBushItem item_berry_bush;
 
 	// Weapons
 	public static ARKSlingshot slingshot;
@@ -126,7 +126,7 @@ public class ARKCraftItems
 		gun_powder = addItemWithTooltip("gun_powder", "Recipe for destruction");
 		
 		//Block Items
-		item_crop_plot = addBlockItem("item_crop_plot");
+		item_berry_bush = addBushItem("item_berry_bush");
 		
 		//Bows
 		compound_bow = new ItemCompoundBow("compound_bow");
@@ -297,8 +297,8 @@ public class ARKCraftItems
 		return i;
 	}
 	
-	protected static ARKBlockItem addBlockItem(String name) {
-		ARKBlockItem i = new ARKBlockItem(name);
+	protected static ARKBushItem addBushItem(String name) {
+		ARKBushItem i = new ARKBushItem(name);
 		allItems.put(name, i);
 		return i;
 	}

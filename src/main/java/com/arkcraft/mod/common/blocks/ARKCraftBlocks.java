@@ -19,7 +19,7 @@ import java.util.Map;
  */
 public class ARKCraftBlocks
 {
-	public static ARKBush berryBush;
+	public static ARKBush berry_bush;
 	public static ARKBlock oreSurface;
 	public static Block blockNarcoBrerry;
 	public static ARKBlockSpikes wooden_spikes;
@@ -34,14 +34,14 @@ public class ARKCraftBlocks
 
 	public static void init() {
 		// world generated
-		berryBush = addBush("berryBush", 0.4F);
+		berry_bush = addBush("berryBush", 0.4F, Material.grass);
 		GenerationHandler.addOreToGen(oreSurface, 0); //Sets to the values in BALENCE.GEN.class
 		
 		// Blocks
 		oreSurface = addBlock(Material.rock, "oreSurface", 3.0F);
 		
-		//blockNarcoBrerry = addBlock(Material.ground, "narcoBerryBlock", 3.0F);
-		blockNarcoBrerry = getRegisteredBlock("blockNarcoBerry");
+	//	blockNarcoBrerry = addBlock(Material.ground, "narcoBerryBlock", 3.0F);
+	//	blockNarcoBrerry = getRegisteredBlock("blockNarcoBerry");
 		wooden_spikes = addSpikes(Material.wood, "wooden_spikes", 3.0F);
 
 		// Containers
@@ -61,8 +61,8 @@ public class ARKCraftBlocks
 		return (Block)Block.blockRegistry.getObject(new ResourceLocation(name));
 	}
 	
-	protected static ARKBush addBush(String name, float hardness) {
-		ARKBush b = new ARKBush(name, hardness);
+	protected static ARKBush addBush(String name, float hardness, Material material) {
+		ARKBush b = new ARKBush(name, hardness, material);
 		allBlocks.put(name, b);
 		return b;
 	}

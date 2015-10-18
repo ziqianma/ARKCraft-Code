@@ -28,7 +28,7 @@ public class WorldGeneratorBushes implements IWorldGenerator
 
                 if (world.getBlockState(pos.down()).getBlock() instanceof BlockGrass)
                 {
-                    world.setBlockState(pos, ARKCraftBlocks.berryBush.getDefaultState());
+                    world.setBlockState(pos, ARKCraftBlocks.berry_bush.getDefaultState());
                 }
             }
         }
