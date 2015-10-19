@@ -12,10 +12,9 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-public class ARKBlockItem extends Item
+public class ARKBushItem extends Item
 {
-
-    public ARKBlockItem(String name)
+    public ARKBushItem(String name)
     {
     	super();
     	this.setUnlocalizedName(name);
@@ -27,10 +26,10 @@ public class ARKBlockItem extends Item
     /**
      * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
      */
-    	 public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
-    	    {
-    	        boolean flag = worldIn.getBlockState(pos).getBlock().isReplaceable(worldIn, pos);
-    	        BlockPos blockpos1 = flag ? pos : pos.offset(side);
+    public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
+    	{
+    		boolean flag = worldIn.getBlockState(pos).getBlock().isReplaceable(worldIn, pos);
+    	    BlockPos blockpos1 = flag ? pos : pos.offset(side);
 
     	        if (!playerIn.canPlayerEdit(blockpos1, side, stack))
     	        {
@@ -44,10 +43,10 @@ public class ARKBlockItem extends Item
     	            {
     	                return false;
     	            }
-    	            else if (ARKCraftBlocks.crop_plot.canPlaceBlockAt(worldIn, blockpos1))
+    	            else if (ARKCraftBlocks.berry_bush.canPlaceBlockAt(worldIn, blockpos1))
     	            {
     	                --stack.stackSize;
-    	                worldIn.setBlockState(blockpos1, ARKCraftBlocks.crop_plot.getDefaultState());
+    	                worldIn.setBlockState(blockpos1, ARKCraftBlocks.berry_bush.getDefaultState());
     	                return true;
     	            }
     	            else
