@@ -86,6 +86,13 @@ public class GuiHandler implements IGuiHandler {
 			else
 				LogHelper.error("GuiHandler - getServerGuiElement: Did not find entity with inventory!");
 		}
+//		else if (ID == GlobalAdditions.GUI.SCOPE_GUI.getID()) {
+//			Entity entity = getEntityAt(player, x, y, z);
+//			if (entity != null && entity instanceof EntityDodo)
+//				return null;
+//			else
+//				LogHelper.error("GuiHandler - getServerGuiElement: Did not find entity with inventory!");
+//		}
 		else if (ID == GlobalAdditions.GUI.TAMING_GUI.getID()) {
 			Entity entity = getEntityAt(player, x, y, z);
 			if (entity != null && entity instanceof EntityTameableDinosaur) {
@@ -157,6 +164,13 @@ public class GuiHandler implements IGuiHandler {
 			else
 				LogHelper.error("GuiHandler - getClientGuiElement: Did not find entity with inventory!");
 		}
+//		if (ID == GlobalAdditions.GUI.SCOPE_GUI.getID()) {
+//			Entity entity = getEntityAt(player, x, y, z);
+//			if (entity != null && entity instanceof EntityDodo)
+//				return null;
+//			else
+//				LogHelper.error("GuiHandler - getServerGuiElement: Did not find entity with inventory!");
+//		}
 		if (ID == GlobalAdditions.GUI.TAMING_GUI.getID()) {
 			Entity entity = getEntityAt(player, x, y, z);
 			if (entity != null && entity instanceof EntityTameableDinosaur) {

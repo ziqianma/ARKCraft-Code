@@ -1,9 +1,14 @@
 package com.arkcraft.mod.common.handlers;
 
+import com.arkcraft.mod.common.ARKCraft;
 import com.arkcraft.mod.common.entity.player.ARKPlayer;
+import com.arkcraft.mod.common.items.weapons.ItemLongneckRifle;
+import com.arkcraft.mod.common.items.weapons.component.RangedCompLongneckRifle;
 import com.arkcraft.mod.common.lib.KeyBindings;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
 
@@ -24,4 +29,16 @@ public class FMLCommonEventHandler {
 			}
 		}
 	}	
+	
+	@SubscribeEvent
+	public void onPlayerScoping(InputEvent.KeyInputEvent event) {
+		if (KeyBindings.playerScoping.isPressed()) {
+			EntityPlayer entityplayer = Minecraft.getMinecraft().thePlayer;
+			
+			if (entityplayer instanceof EntityPlayer)
+			{
+				RangedCompLongneckRifle.get(entityplayer).setIsScoping(false);	}
+			}
+		}
 }
+			

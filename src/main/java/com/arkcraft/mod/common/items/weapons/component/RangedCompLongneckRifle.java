@@ -1,19 +1,25 @@
 package com.arkcraft.mod.common.items.weapons.component;
 
-import com.arkcraft.mod.common.items.weapons.handlers.ReloadHelper;
-import com.arkcraft.mod.common.items.weapons.projectiles.EntitySimpleRifleAmmo;
-import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
+import com.arkcraft.mod.common.items.weapons.handlers.ReloadHelper;
+import com.arkcraft.mod.common.items.weapons.projectiles.EntitySimpleRifleAmmo;
+
 public class RangedCompLongneckRifle extends RangedComponent
 {
-	public RangedCompLongneckRifle()
+	private int ID;
+	boolean playerScoping;
+	
+	public RangedCompLongneckRifle(int ID)
 	{
 		super(RangedSpecs.LONGNECKRIFLE);
+		this.ID = ID;
+		this.playerScoping = true;
 	}
 
 	@Override
@@ -24,11 +30,28 @@ public class RangedCompLongneckRifle extends RangedComponent
 	}
 	
 	@Override
-	public void onUpdate(ItemStack itemstack, World world, Entity entity, int i, boolean flag)
-	{	
-		
-	}
+	public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack)
+    {
+		return false;
+    }
 	
+//	public boolean playerScoping()
+//	{
+//		return playerScoping;
+//	}
+//	
+//	@Override
+//	public static void onUpdate(ItemStack itemstack, World world, Entity entity, int par4, boolean par5)
+//	{
+//	EntityPlayer player = (EntityPlayer)entity;
+//
+//	if (playerScoping() && player.getHeldItem() != null
+//	&& player.getHeldItem().getItem() instanceof ItemLongneckRifle && !world.isRemote)
+//	{
+//	player.openGui(ARKCraft.instance(), ID, world, (int)player.posX, (int)player.posY, (int)player.posZ);
+//	}
+//	}
+//	
 	@Override
 	public void fire(ItemStack itemstack, World world, EntityPlayer entityplayer, int i)
 	{
@@ -80,5 +103,15 @@ public class RangedCompLongneckRifle extends RangedComponent
 	public float getMaxZoom()
 	{
 		return 0.50f;
+	}
+	
+	public void setIsScoping(boolean b) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public static RangedCompLongneckRifle get(EntityPlayer entityplayer) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

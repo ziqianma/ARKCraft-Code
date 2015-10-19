@@ -1,41 +1,40 @@
 package com.arkcraft.mod.client.gui.overlay;
 
+import java.util.EnumSet;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.event.RenderGameOverlayEvent;
-import net.minecraftforge.fml.common.eventhandler.EventPriority;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+
+import org.lwjgl.opengl.GL11;
 
 public class GuiScope extends Gui{
-
-	private Minecraft mc;
-	private int height;
-	private int width;
-//	public static final ResourceLocation texture = new ResourceLocation(AdvGuns.modid + ":textures/gui/6x Zoom Scope Overlay.png");
-	public static final ResourceLocation texture = new ResourceLocation("textures/misc/pumpkinblur.png");
 	
-	public GuiScope(Minecraft minecraft) {
-		super();
-		this.mc = minecraft;
-	}
-
-	@SubscribeEvent(priority = EventPriority.NORMAL)
-	public void onRenderExperienceBar(RenderGameOverlayEvent event){
-		
-			
-	}
-	
-	public static void drawDrawFullscreenImage(int width, int height) {
-	Tessellator tessellator = Tessellator.getInstance();
-	WorldRenderer worldrenderer = tessellator.getWorldRenderer();
-	worldrenderer.startDrawingQuads();
-	worldrenderer.addVertexWithUV(0.0D, (double)height, -90.0D, 0.0D, 1.0D);
-	worldrenderer.addVertexWithUV((double)width, (double)height, -90.0D, 1.0D, 1.0D);
-	worldrenderer.addVertexWithUV((double)width, 0.0D, -90.0D, 1.0D, 0.0D);
-    tessellator.draw();
-	    }
-
+	@SuppressWarnings("unused")
+	private void renderOverlayWithTexture(ScaledResolution scres, ResourceLocation rl)
+	 {
+	 int p = scres.getScaledWidth();
+	 int q = scres.getScaledHeight();
+	 GL11.glDisable(GL11.GL_DEPTH_TEST);
+	 GL11.glDepthMask(false);
+	 GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+	 GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+	 GL11.glDisable(GL11.GL_ALPHA_TEST);
+	 Minecraft.getMinecraft().getTextureManager().bindTexture(rl);
+	 Tessellator tessellator = Tessellator.getInstance();
+	 WorldRenderer worldrenderer = tessellator.getWorldRenderer();
+	 worldrenderer.startDrawingQuads();
+	 worldrenderer.addVertexWithUV(0.0D, (double)q, -90.0D, 0.0D, 1.0D);
+	 worldrenderer.addVertexWithUV((double)p, (double)q, -90.0D, 1.0D, 1.0D);
+	 worldrenderer.addVertexWithUV((double)p, 0.0D, -90.0D, 1.0D, 0.0D);
+	 worldrenderer.addVertexWithUV(0.0D, 0.0D, -90.0D, 0.0D, 0.0D);
+	 tessellator.draw();
+	 GL11.glDepthMask(true);
+	 GL11.glEnable(GL11.GL_DEPTH_TEST);
+	 GL11.glEnable(GL11.GL_ALPHA_TEST);
+	 GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+	 }
 }
