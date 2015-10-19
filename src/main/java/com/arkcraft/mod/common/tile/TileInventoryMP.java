@@ -24,7 +24,6 @@ import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -141,7 +140,7 @@ public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePl
 	
 	@SuppressWarnings("rawtypes")
 	public TileInventoryMP(){
-		LogHelper.info("TileInventoryMP: constructor called.");
+//		LogHelper.info("TileInventoryMP: constructor called.");
 		numBlueprints = PestleCraftingManager.getInstance().getNumRecipes();
 		blueprintStacks = new ItemStack[numBlueprints];
 		List recipes = PestleCraftingManager.getInstance().getRecipeList();
@@ -221,7 +220,7 @@ public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePl
 		
 		// If craftingTime has reached -1, try and craft the item
 		if (craftingTime < 0) {
-			LogHelper.info("TileInventoryMP: About to craft the item on " + (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT ? "client" : "server"));
+//			LogHelper.info("TileInventoryMP: About to craft the item on " + (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT ? "client" : "server"));
 			if (!craftItem())
 				craftAll = false;
 			if (craftOne)
@@ -442,8 +441,8 @@ public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePl
 
 		// Save everything else
 		parentNBTTagCompound.setShort("blueprintSelected", blueprintSelected);
-		LogHelper.info("TileInventoryMP: Wrote inventory.");
-		
+		parentNBTTagCompound.setBoolean("craftAll", craftAll);
+//		LogHelper.info("TileInventoryMP: Wrote inventory.");		
 	}
 
 	// This is where you load the data that you saved in writeToNBT
@@ -466,7 +465,8 @@ public class TileInventoryMP extends TileEntity implements IInventory, IUpdatePl
 
 		// Load everything else.  Trim the arrays (or pad with 0) to make sure they have the correct number of elements
 		blueprintSelected = nbtTagCompound.getShort("blueprintSelected");
-		LogHelper.info("TileInventoryMP: Read inventory.");
+		craftAll = nbtTagCompound.getBoolean("craftAll");
+//		LogHelper.info("TileInventoryMP: Read inventory.");
 	}
 
 	// When the world loads from disk, the server needs to send the TileEntity information to the client

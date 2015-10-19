@@ -24,6 +24,8 @@ public final class BALANCE {
 		public static int MAX_DEFAULT_ORE_VEIN_SPAWN_PER_CHUNK;
 		@DefaultInt(value = 7, minValue = 2, maxValue = 10, name = "Ore blocks that spawn per vein", comment = "Default max ore blocks that can spawn per vein loaded")
 		public static int MAX_DEFAULT_ORE_BLOCKS_SPAWN_PER_VEIN;
+		@DefaultBoolean(value=true, name = "Include Minecraft hostile mobs", comment = "No skeleton, zombie, or creeper")
+		public static boolean mcHostileMobs;
 	}
 	
 	public static class PLAYER {

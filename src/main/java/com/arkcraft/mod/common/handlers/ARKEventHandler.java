@@ -26,6 +26,7 @@ import com.arkcraft.mod.common.lib.LogHelper;
  * @author wildbill22
  *
  */
+// All events in this class are type MinecraftForge.EVENT_BUS
 public class ARKEventHandler {
 
 	/**
@@ -48,7 +49,7 @@ public class ARKEventHandler {
 		 * @author Vastatio this is so we can give the player the dino dossier,
 		 *         when the player joins.
 		 */
-		if (event.entity instanceof EntityPlayer) {
+		else if (event.entity instanceof EntityPlayer) {
 			EntityPlayer entity = (EntityPlayer) event.entity;
 			if (!event.entity.worldObj.isRemote
 					&& event.world.getTotalWorldTime() < 100) {

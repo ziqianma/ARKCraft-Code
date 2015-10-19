@@ -163,5 +163,15 @@ public class RecipeHandler {
 				new ItemStack(Items.iron_ingot, 3),
 				new ItemStack(Items.gunpowder, 4)
 				);
+		SmithyCraftingManager.getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.tranq_gun, 1),
+				new ItemStack(Items.iron_ingot, 7),
+				new ItemStack(Blocks.planks, 10, 0), // Oak planks
+				new ItemStack(ARKCraftItems.fiber, 35)
+				);
+		SmithyCraftingManager.getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.crossbow, 1),
+				new ItemStack(Items.iron_ingot, 7),
+				new ItemStack(Blocks.planks, 10, 0), // Oak planks
+				new ItemStack(ARKCraftItems.fiber, 35)
+				);
 	}
 }
