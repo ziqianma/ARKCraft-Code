@@ -8,7 +8,10 @@ import com.arkcraft.mod.common.lib.KeyBindings;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
 
@@ -37,8 +40,9 @@ public class FMLCommonEventHandler {
 			
 			if (entityplayer instanceof EntityPlayer)
 			{
-				RangedCompLongneckRifle.get(entityplayer).setIsScoping(false);	}
+				RangedCompLongneckRifle.get(entityplayer).onUpdate(null, null, entityplayer, 0, true);
 			}
 		}
+	}
 }
 			
