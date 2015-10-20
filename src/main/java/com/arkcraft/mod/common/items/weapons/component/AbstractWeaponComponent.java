@@ -72,4 +72,9 @@ public abstract class AbstractWeaponComponent
 	
 	@SideOnly(Side.CLIENT)
 	public abstract boolean shouldRotateAroundWhenRendering();
+
+	public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

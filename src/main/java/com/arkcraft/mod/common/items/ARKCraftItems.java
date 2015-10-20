@@ -52,7 +52,7 @@ public class ARKCraftItems
 	public static ARKArmorItem clothHelm, clothChest, clothLegs, clothBoots;
 	public static ARKArmorItem boneHelm, boneChest, boneLegs, boneBoots;
 	public static Dossier dino_book;
-	public static ARKBlockItem item_crop_plot;
+	public static ARKBushItem item_crop_plot;
 
 	// Weapons
 	public static ARKSlingshot slingshot;
@@ -108,14 +108,14 @@ public class ARKCraftItems
 
 		// Regular Items
 		fiber = addItem("fiber");
-		thatch = addItem("thatch");
+		thatch = addThatchItem("thatch");
 		chitin = addItem("chitin");
 		dodo_feather = addItem("dodo_feather");
 		dodo_bag = addItemWithTooltip("dodo_bag", "Backpack for the Dodo");
 		gun_powder = addItemWithTooltip("gun_powder", "Recipe for destruction");
 		
 		//Block Items
-		item_crop_plot = addBlockItem("item_crop_plot");
+		item_crop_plot = addBushItem("item_crop_plot");
 		
 		//Bows
 		compound_bow = new ItemCompoundBow("compound_bow");
@@ -254,6 +254,12 @@ public class ARKCraftItems
 		return i;
 	}
 	
+	protected static ARKThatchItem addThatchItem(String name) {
+		ARKThatchItem t = new ARKThatchItem(name);
+		allItems.put(name, t);
+		return t;
+	}
+	
 	protected static ARKSeedItem addSeedItem(String name) {
 		ARKSeedItem i = new ARKSeedItem(name);
 		allItems.put(name, i);
@@ -266,8 +272,8 @@ public class ARKCraftItems
 		return i;
 	}
 	
-	protected static ARKBlockItem addBlockItem(String name) {
-		ARKBlockItem i = new ARKBlockItem(name);
+	protected static ARKBushItem addBushItem(String name) {
+		ARKBushItem i = new ARKBushItem(name);
 		allItems.put(name, i);
 		return i;
 	}
