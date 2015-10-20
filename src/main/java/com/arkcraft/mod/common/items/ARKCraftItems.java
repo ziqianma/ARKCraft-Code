@@ -1,5 +1,6 @@
 package com.arkcraft.mod.common.items;
 
+import com.arkcraft.mod.GlobalAdditions;
 import com.arkcraft.mod.client.gui.book.Dossier;
 import com.arkcraft.mod.common.items.weapons.ItemCompoundBow;
 import com.arkcraft.mod.common.items.weapons.ItemCrossbow;
@@ -23,6 +24,7 @@ import com.arkcraft.mod.common.items.weapons.projectiles.dispense.DispenseSimple
 import com.arkcraft.mod.common.items.weapons.projectiles.dispense.DispenseSimpleShotgunAmmo;
 import com.arkcraft.mod.common.items.weapons.projectiles.dispense.DispenseTranquilizer;
 import com.arkcraft.mod.common.lib.BALANCE;
+
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
@@ -165,7 +167,7 @@ public class ARKCraftItems
 			simple_bullet = addItemProjectile("simple_bullet");
 		}
 		if (BALANCE.WEAPONS.LONGNECK_RIFLE) {
-			longneck_rifle = addLongneckRifle("longneck_rifle", new RangedCompLongneckRifle(7));
+			longneck_rifle = addLongneckRifle("longneck_rifle", new RangedCompLongneckRifle(GlobalAdditions.GUI.SCOPE.getID()));
 			simple_rifle_ammo = addItemProjectile("simple_rifle_ammo");
 		}
 		if (BALANCE.WEAPONS.SHOTGUN) {
