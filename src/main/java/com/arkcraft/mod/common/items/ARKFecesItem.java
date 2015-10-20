@@ -20,7 +20,7 @@ public class ARKFecesItem extends Item{
 	
 	}
 
-	// ticks that this fertilizer will grow a crop
+	// seconds that this fertilizer will grow a crop
 	public static int getItemGrowTime(ItemStack itemStack) {
 		return itemStack.getMaxDamage() - itemStack.getItemDamage();
 	}

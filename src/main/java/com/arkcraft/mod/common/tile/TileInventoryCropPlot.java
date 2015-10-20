@@ -5,6 +5,7 @@ import com.arkcraft.mod.common.items.ARKFecesItem;
 import com.arkcraft.mod.common.items.ARKSeedItem;
 import com.arkcraft.mod.common.lib.BALANCE;
 import com.arkcraft.mod.common.lib.LogHelper;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -363,7 +364,14 @@ public class TileInventoryCropPlot extends TileEntity implements IInventory, IUp
 	}
 
 	// returns the growth result for the given stack. Returns null if the given stack can not be grown
-	public static ItemStack getGrowingResultForItem(ItemStack stack) { return ARKSeedItem.getBerryForSeed(stack); }
+	public static ItemStack getGrowingResultForItem(ItemStack stack) {
+		// TODO: Can't return a seed with only one output slot. Will have to wait for a new design with more output slots.
+//		Random rand = new Random();
+//		if (rand.nextInt(100) == 0)
+//			return stack;
+//		else
+			return ARKSeedItem.getBerryForSeed(stack); 
+	}
 
 	// returns the number of ticks the given item will grow. Returns 0 if the given item is not a valid fertilizer
 	public static short getItemGrowTime(ItemStack stack) {
