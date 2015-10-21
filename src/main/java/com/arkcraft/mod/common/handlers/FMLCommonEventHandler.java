@@ -21,6 +21,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent.RenderTickEvent;
 
 import com.arkcraft.mod.common.ARKCraft;
 import com.arkcraft.mod.common.entity.player.ARKPlayer;
+import com.arkcraft.mod.common.items.weapons.ItemSpyGlass;
 import com.arkcraft.mod.common.items.weapons.ItemLongneckRifle;
 import com.arkcraft.mod.common.items.weapons.component.RangedCompLongneckRifle;
 import com.arkcraft.mod.common.lib.KeyBindings;
@@ -121,10 +122,17 @@ public class FMLCommonEventHandler {
     }
     
     private static boolean isScoping(EntityPlayer player, boolean keybind) {
+    	
         ItemStack stack = player.getItemInUse();
+        
         if (stack != null && stack.getItem() instanceof ItemLongneckRifle) {
             return true;
-        } else if (keybind && KeyBindings.playerScoping.isPressed()) {
+        }
+        else if (stack != null && stack.getItem() instanceof ItemSpyGlass) {
+            return true;
+    }
+        
+    else if (keybind && KeyBindings.playerScoping.isPressed()) {
             for (ItemStack invStack : player.inventory.mainInventory) {
                 if (invStack != null && invStack.getItem() instanceof ItemLongneckRifle) {
                     return true;

@@ -14,7 +14,7 @@ public class KeyBindings {
 	
 	public static void preInit() {
 		playerPooping = new KeyBinding("key.playerPoop", Keyboard.KEY_Z, "ARKCraft");
-		playerScoping = new KeyBinding("key.playerScope", Keyboard.KEY_SCROLL, "ARKCraft");
+		playerScoping = new KeyBinding("key.playerScope", Keyboard.KEY_X, "ARKCraft");
 		
 		ClientRegistry.registerKeyBinding(playerPooping);
 		ClientRegistry.registerKeyBinding(playerScoping);

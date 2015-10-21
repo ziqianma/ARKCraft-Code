@@ -2,6 +2,7 @@ package com.arkcraft.mod.common.items;
 
 import com.arkcraft.mod.GlobalAdditions;
 import com.arkcraft.mod.client.gui.book.Dossier;
+import com.arkcraft.mod.common.items.weapons.ItemSpyGlass;
 import com.arkcraft.mod.common.items.weapons.ItemCompoundBow;
 import com.arkcraft.mod.common.items.weapons.ItemCrossbow;
 import com.arkcraft.mod.common.items.weapons.ItemLongneckRifle;
@@ -16,6 +17,7 @@ import com.arkcraft.mod.common.items.weapons.component.RangedCompLongneckRifle;
 import com.arkcraft.mod.common.items.weapons.component.RangedCompRocketLauncher;
 import com.arkcraft.mod.common.items.weapons.component.RangedCompShotgun;
 import com.arkcraft.mod.common.items.weapons.component.RangedCompSimplePistol;
+import com.arkcraft.mod.common.items.weapons.component.RangedCompSpyGlass;
 import com.arkcraft.mod.common.items.weapons.component.RangedCompTranqGun;
 import com.arkcraft.mod.common.items.weapons.component.RangedComponent;
 import com.arkcraft.mod.common.items.weapons.projectiles.dispense.DispenseRocketPropelledGrenade;
@@ -55,6 +57,7 @@ public class ARKCraftItems
 	public static ARKArmorItem boneHelm, boneChest, boneLegs, boneBoots;
 	public static Dossier dino_book;
 	public static ARKBushItem item_berry_bush;
+	public static ItemSpyGlass spy_glass;
 
 	// Weapons
 	public static ARKSlingshot slingshot;
@@ -115,6 +118,7 @@ public class ARKCraftItems
 		dodo_feather = addItem("dodo_feather");
 		dodo_bag = addItemWithTooltip("dodo_bag", "Backpack for the Dodo");
 		gun_powder = addItemWithTooltip("gun_powder", "Recipe for destruction");
+		spy_glass = addSpyGlass("spy_glass", new RangedCompSpyGlass());
 		
 		//Block Items
 		item_berry_bush = addBushItem("item_berry_bush");
@@ -276,6 +280,12 @@ public class ARKCraftItems
 	
 	protected static ARKBushItem addBushItem(String name) {
 		ARKBushItem i = new ARKBushItem(name);
+		allItems.put(name, i);
+		return i;
+	}
+	
+	protected static ItemSpyGlass addSpyGlass(String name, RangedComponent rangedcomponent) {
+		ItemSpyGlass i = new ItemSpyGlass(name, rangedcomponent);
 		allItems.put(name, i);
 		return i;
 	}

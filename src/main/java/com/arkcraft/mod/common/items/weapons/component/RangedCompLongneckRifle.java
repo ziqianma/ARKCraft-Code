@@ -7,6 +7,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.MathHelper;
@@ -20,6 +21,7 @@ import org.lwjgl.input.Keyboard;
 import com.arkcraft.mod.common.items.weapons.handlers.ReloadHelper;
 import com.arkcraft.mod.common.items.weapons.projectiles.EntitySimpleRifleAmmo;
 import com.arkcraft.mod.common.lib.KeyBindings;
+import com.arkcraft.mod.common.lib.LogHelper;
 
 public class RangedCompLongneckRifle extends RangedComponent
 {
@@ -93,7 +95,7 @@ public class RangedCompLongneckRifle extends RangedComponent
             list.add(StatCollector.translateToLocalFormatted("item.zoom.binoculars.desc.2", EnumChatFormatting.AQUA + Keyboard.getKeyName(KeyBindings.playerScoping.getKeyCode()) + EnumChatFormatting.GRAY));
         }
     }
-	    
+
 	@Override
 	public void fire(ItemStack itemstack, World world, EntityPlayer entityplayer, int i)
 	{
