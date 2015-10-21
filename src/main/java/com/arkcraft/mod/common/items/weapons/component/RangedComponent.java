@@ -6,6 +6,7 @@ import com.arkcraft.mod.common.items.weapons.handlers.WeaponModAttributes;
 import com.arkcraft.mod.common.items.weapons.projectiles.EntityShootable;
 import com.arkcraft.mod.common.lib.BALANCE;
 import com.google.common.collect.Multimap;
+
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -140,6 +141,12 @@ public abstract class RangedComponent extends AbstractWeaponComponent
 	public int getMaxItemUseDuration(ItemStack itemstack)
 	{
 		return MAX_DELAY;
+	}
+
+	@Override
+	public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack)
+	{
+		return false;
 	}
 	
 	@Override

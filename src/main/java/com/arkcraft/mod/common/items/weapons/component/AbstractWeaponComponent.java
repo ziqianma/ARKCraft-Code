@@ -1,7 +1,10 @@
 package com.arkcraft.mod.common.items.weapons.component;
 
+import java.util.List;
+
 import com.arkcraft.mod.common.items.weapons.handlers.IItemWeapon;
 import com.google.common.collect.Multimap;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -76,5 +79,11 @@ public abstract class AbstractWeaponComponent
 	public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	public void addInformation(ItemStack itemStack, EntityPlayer player,
+			List list, boolean bool) {
+		// TODO Auto-generated method stub
+		
 	}
 }

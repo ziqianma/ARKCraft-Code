@@ -1,28 +1,32 @@
 package com.arkcraft.mod.common.items.weapons.component;
 
+import java.util.List;
+
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.arkcraft.mod.common.ARKCraft;
-import com.arkcraft.mod.common.items.weapons.ItemLongneckRifle;
+import org.lwjgl.input.Keyboard;
+
 import com.arkcraft.mod.common.items.weapons.handlers.ReloadHelper;
 import com.arkcraft.mod.common.items.weapons.projectiles.EntitySimpleRifleAmmo;
+import com.arkcraft.mod.common.lib.KeyBindings;
 
 public class RangedCompLongneckRifle extends RangedComponent
 {
-	private int ID;
-	private static boolean playerscoping;
-	
-	public RangedCompLongneckRifle(int ID)
+	public RangedCompLongneckRifle(EntityPlayer player, int ID)
 	{
 		super(RangedSpecs.LONGNECKRIFLE);
-		this.ID = ID;
-		this.setCanScope(false);
+
 	}
 
 	@Override
@@ -31,23 +35,8 @@ public class RangedCompLongneckRifle extends RangedComponent
 		entityplayer.swingItem();
 		world.playSoundAtEntity(entityplayer, "random.door_close", 1.2F, 1.0F / (weapon.getItemRand().nextFloat() * 0.2F + 0.0F));
 	}
-	
-	@Override
-	public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack)
-    {
-		return false;
-    }
-	
-	public static boolean playerScoping()
-	{
-		return playerscoping;	
-	}
-	
-	public void setCanScope(boolean playerscoping) {
-		RangedCompLongneckRifle.playerscoping = playerscoping;
-	}
 
-	
+/*	
 	@Override
 	public void onUpdate(ItemStack itemstack, World world, Entity entity, int i, boolean flag)
 	{
@@ -62,8 +51,49 @@ public class RangedCompLongneckRifle extends RangedComponent
 		{
 			setCanScope(false);
 		}
-	}
+	}	*/
 	
+	/*
+	@Override
+	public void onUpdate(ItemStack itemstack, World world, Entity entity, int i, boolean flag)
+	{
+	EntityPlayer player = (EntityPlayer)entity;
+
+	 if (KeyBindings.playerScoping.getKeyCode() && player.getHeldItem() != null
+		&& player.getHeldItem().getItem() instanceof ItemLongneckRifle && !world.isRemote)
+		{
+			player.openGui(ARKCraft.instance(), ID, world, (int)player.posX, (int)player.posY, (int)player.posZ);
+		}
+	else 
+		{
+			setCanScope(false);
+		}
+	}	*/
+	
+	
+    @Override
+    public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player) {
+        player.setItemInUse(itemStack, this.getMaxItemUseDuration(itemStack));
+        return itemStack;
+    }
+    
+	@Override
+	public int getMaxItemUseDuration(ItemStack itemStack) 
+	{
+		return Integer.MAX_VALUE;
+	}
+		
+	
+	@SuppressWarnings("unchecked")
+	@Override
+    @SideOnly(Side.CLIENT)
+    public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean bool) {
+        list.add(StatCollector.translateToLocal("item.zoom.binoculars.desc.1"));
+        if (KeyBindings.playerScoping.getKeyCode() != 0) {
+            list.add(StatCollector.translateToLocalFormatted("item.zoom.binoculars.desc.2", EnumChatFormatting.AQUA + Keyboard.getKeyName(KeyBindings.playerScoping.getKeyCode()) + EnumChatFormatting.GRAY));
+        }
+    }
+	    
 	@Override
 	public void fire(ItemStack itemstack, World world, EntityPlayer entityplayer, int i)
 	{
@@ -116,9 +146,5 @@ public class RangedCompLongneckRifle extends RangedComponent
 	{
 		return 0.50f;
 	}
-	
-	public static RangedCompLongneckRifle get(EntityPlayer entityplayer) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 }
