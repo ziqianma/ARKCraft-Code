@@ -1,8 +1,11 @@
 package com.arkcraft.mod.common.entity.player;
 
+import com.arkcraft.mod.client.gui.InventoryBlueprints;
+import com.arkcraft.mod.client.gui.InventoryPlayerCrafting;
 import com.arkcraft.mod.common.ARKCraft;
 import com.arkcraft.mod.common.lib.LogHelper;
 import com.arkcraft.mod.common.network.PlayerPoop;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -18,6 +21,8 @@ import net.minecraftforge.common.IExtendedEntityProperties;
 public class ARKPlayer implements IExtendedEntityProperties {
 	public static final String EXT_PROP_NAME = "ARKPlayer";
 	private final EntityPlayer player;
+	private InventoryBlueprints inventoryBlueprints;
+	private InventoryPlayerCrafting inventoryPlayerCrafting;
 	
 	// The extended player properties (anything below should be initialized in constructor and in NBT):
 	private boolean canPoop;         // True if player can poop (timer sets this)
@@ -106,5 +111,21 @@ public class ARKPlayer implements IExtendedEntityProperties {
 		else {
 			player.addChatMessage(new ChatComponentTranslation("chat.canNotPoop"));	
 		}		
+	}
+
+	public InventoryBlueprints getInventoryBlueprints() {
+		return inventoryBlueprints;
+	}
+
+	public void setInventoryBlueprints(InventoryBlueprints inventoryBlueprints) {
+		this.inventoryBlueprints = inventoryBlueprints;
+	}
+
+	public InventoryPlayerCrafting getInventoryPlayer() {
+		return inventoryPlayerCrafting;
+	}
+
+	public void setInventoryPlayer(InventoryPlayerCrafting inventoryPlayer) {
+		this.inventoryPlayerCrafting = inventoryPlayer;
 	}
 }

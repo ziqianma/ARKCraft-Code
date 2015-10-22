@@ -1,7 +1,6 @@
 package com.arkcraft.mod.client.gui;
 
 import com.arkcraft.mod.common.lib.LogHelper;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.item.ItemStack;
@@ -13,18 +12,12 @@ import net.minecraft.nbt.NBTTagList;
  * @author wildbill22
  *
  */
-public class InventoryBlueprints extends InventoryBasic {
+public class InventoryPlayerCrafting extends InventoryBasic {
 	
-	public InventoryBlueprints(String title, boolean customName, int slotCount) {
+	public InventoryPlayerCrafting(String title, boolean customName, int slotCount) {
 		super(title, customName, slotCount);
 	}
 
-    public void loadInventoryFromNBT(NBTTagCompound nbt)  {
-		final byte NBT_TYPE_COMPOUND = 10;  
-		NBTTagList dataForAllBlueprints = nbt.getTagList("Blueprints", NBT_TYPE_COMPOUND);
-		loadInventoryFromNBT(dataForAllBlueprints);
-    }
-    
     public void loadInventoryFromNBT(NBTTagList nbt)  {
         int i;
         for (i = 0; i < this.getSizeInventory(); ++i) {
@@ -49,17 +42,17 @@ public class InventoryBlueprints extends InventoryBasic {
                 nbttagcompound.setByte("Slot", (byte)i);
                 itemstack.writeToNBT(nbttagcompound);
                 nbttaglist.appendTag(nbttagcompound);
-                LogHelper.info("InventoryBlueprints: Saved a " + itemstack.getItem() + " to inventory.");
+                LogHelper.info("DinoInventory: Saved a " + itemstack.getItem() + " to inventory.");
             }
         }
-		nbt.setTag("Blueprints", nbttaglist);
+		nbt.setTag("Items", nbttaglist);
     }
 
     /**
      * Do not give this method the name canInteractWith because it clashes with Container
      */
     public boolean isUseableByPlayer(EntityPlayer player) {
-        return false;
+        return super.isUseableByPlayer(player);
     }
 
     public void openInventory(EntityPlayer player)  {
@@ -68,60 +61,5 @@ public class InventoryBlueprints extends InventoryBasic {
 
     public void closeInventory(EntityPlayer player) {
         super.closeInventory(player);
-    }
-
-	public int getBlueprintSelected() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public boolean isCrafting() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public int getNumBlueprints() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public boolean isCraftingOne() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public boolean isCraftingAll() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public String getNumToBeCrafted() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public double fractionCraftingRemainingForItem() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public void selectPrevBlueprint() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void selectNextBlueprint() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void setCraftAllPressed(boolean b, boolean c) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void setCraftOnePressed(boolean b, boolean c) {
-		// TODO Auto-generated method stub
-		
-	}    
+    }    
 }

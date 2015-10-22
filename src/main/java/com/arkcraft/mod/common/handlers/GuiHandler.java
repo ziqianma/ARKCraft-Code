@@ -16,6 +16,7 @@ import com.arkcraft.mod.GlobalAdditions;
 import com.arkcraft.mod.client.gui.ContainerInventoryCropPlot;
 import com.arkcraft.mod.client.gui.ContainerInventoryDodo;
 import com.arkcraft.mod.client.gui.ContainerInventoryMP;
+import com.arkcraft.mod.client.gui.ContainerInventoryPlayerCrafting;
 import com.arkcraft.mod.client.gui.ContainerInventorySmithy;
 import com.arkcraft.mod.client.gui.ContainerInventoryTaming;
 import com.arkcraft.mod.client.gui.GUICompostBin;
@@ -23,6 +24,7 @@ import com.arkcraft.mod.client.gui.GUICropPlot;
 import com.arkcraft.mod.client.gui.GUITaming;
 import com.arkcraft.mod.client.gui.GuiInventoryDodo;
 import com.arkcraft.mod.client.gui.GuiMP;
+import com.arkcraft.mod.client.gui.GuiPlayerCrafting;
 import com.arkcraft.mod.client.gui.GuiSmithy;
 import com.arkcraft.mod.client.gui.book.BookData;
 import com.arkcraft.mod.client.gui.book.BookDataStore;
@@ -105,6 +107,9 @@ public class GuiHandler implements IGuiHandler {
 			else
 				LogHelper.error("GuiHandler - getServerGuiElement: Did not find entity to tame!");			
 		}
+		else if (ID == GlobalAdditions.GUI.PLAYER.getID()) {
+			return new ContainerInventoryPlayerCrafting(player.inventory, player);
+		}
 		return null;
 	}
 
@@ -123,7 +128,7 @@ public class GuiHandler implements IGuiHandler {
 				LogHelper.info("GuiHandler - getClientGuiElement: TileEntitySmithy not found!");				
 			}			
 		}
-		if (ID == GlobalAdditions.GUI.PESTLE_AND_MORTAR.getID()) {
+		else if (ID == GlobalAdditions.GUI.PESTLE_AND_MORTAR.getID()) {
 			BlockPos xyz = new BlockPos(x, y, z);
 			TileEntity tileEntity = world.getTileEntity(xyz);
 			if (tileEntity instanceof TileInventoryMP)			
@@ -132,7 +137,7 @@ public class GuiHandler implements IGuiHandler {
 				LogHelper.info("GuiHandler - getClientGuiElement: TileEntityMP not found!");				
 			}			
 		}
-		if (ID == GlobalAdditions.GUI.CROP_PLOT.getID()) {
+		else if (ID == GlobalAdditions.GUI.CROP_PLOT.getID()) {
 			BlockPos xyz = new BlockPos(x, y, z);
 			TileEntity tileEntity = world.getTileEntity(xyz);
 			if (tileEntity instanceof TileInventoryCropPlot)			
@@ -141,7 +146,7 @@ public class GuiHandler implements IGuiHandler {
 				LogHelper.info("GuiHandler - getClientGuiElement: TileEntityCropPlot not found!");				
 			}
 		}
-		if (ID == GlobalAdditions.GUI.COMPOST_BIN.getID()) {
+		else if (ID == GlobalAdditions.GUI.COMPOST_BIN.getID()) {
 			BlockPos xyz = new BlockPos(x, y, z);
 			TileEntity tileEntity = world.getTileEntity(xyz);
 			if (tileEntity instanceof TileInventoryCompostBin)			
@@ -150,28 +155,28 @@ public class GuiHandler implements IGuiHandler {
 				LogHelper.info("GuiHandler - getClientGuiElement: TileEntityCompostBin not found!");				
 			}
 		}
-		if(ID == GlobalAdditions.GUI.BOOK_GUI.getID()) {
+		else if(ID == GlobalAdditions.GUI.BOOK_GUI.getID()) {
 			LogHelper.info("GuiHandler - getClientGuiElement(): GuiDossier book trying to open.");
 			ItemStack stack = player.getCurrentEquippedItem();
 			if(stack == null) LogHelper.info("Stack in GuiHandler is null!");
 			if(stack != null && stack.getUnlocalizedName() == null) LogHelper.info("Stack in GuiHandler is null!");
 			return new GuiDossier(stack, GuiHandler.getBookDataFromStack(stack));
 		}
-		if (ID == GlobalAdditions.GUI.INV_DODO.getID()) {
+		else if (ID == GlobalAdditions.GUI.INV_DODO.getID()) {
 			Entity entity = getEntityAt(player, x, y, z);
 			if (entity != null && entity instanceof EntityDodo) 
 				return new GuiInventoryDodo(player.inventory, ((EntityDodo)entity).invDodo, (EntityDodo)entity);
 			else
 				LogHelper.error("GuiHandler - getClientGuiElement: Did not find entity with inventory!");
 		}
-//		if (ID == GlobalAdditions.GUI.SCOPE_GUI.getID()) {
+//		else if (ID == GlobalAdditions.GUI.SCOPE_GUI.getID()) {
 //			Entity entity = getEntityAt(player, x, y, z);
 //			if (entity != null && entity instanceof EntityDodo)
 //				return null;
 //			else
 //				LogHelper.error("GuiHandler - getServerGuiElement: Did not find entity with inventory!");
 //		}
-		if (ID == GlobalAdditions.GUI.TAMING_GUI.getID()) {
+		else if (ID == GlobalAdditions.GUI.TAMING_GUI.getID()) {
 			Entity entity = getEntityAt(player, x, y, z);
 			if (entity != null && entity instanceof EntityTameableDinosaur) {
 				EntityTameableDinosaur dino = (EntityTameableDinosaur)entity;
@@ -183,7 +188,9 @@ public class GuiHandler implements IGuiHandler {
 			else
 				LogHelper.error("GuiHandler - getClientGuiElement: Did not find entity to tame!");			
 		}
-		
+		else if (ID == GlobalAdditions.GUI.PLAYER.getID()) {
+			return new GuiPlayerCrafting(player.inventory, player);			
+		}
 		
 		return null;
 	}
