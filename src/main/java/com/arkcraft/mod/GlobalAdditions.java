@@ -37,7 +37,8 @@ public class GlobalAdditions {
 	public static CreativeTabs tabARK = new ARKTabs(CreativeTabs.getNextID(), "tabARKCraft");
 	
 	public enum GUI {
-		SMITHY(0), PESTLE_AND_MORTAR(1), INV_DODO(2), BOOK_GUI(3), CROP_PLOT(4), TAMING_GUI(5), COMPOST_BIN(6), SCOPE(7);
+		SMITHY(0), PESTLE_AND_MORTAR(1), INV_DODO(2), BOOK_GUI(3), CROP_PLOT(4), TAMING_GUI(5), COMPOST_BIN(6), 
+		SCOPE(7), PLAYER(8);
 		int id;
 		GUI(int id) {
 			this.id = id;
