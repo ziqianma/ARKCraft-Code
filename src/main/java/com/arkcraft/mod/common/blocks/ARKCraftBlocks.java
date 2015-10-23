@@ -108,7 +108,6 @@ public class ARKCraftBlocks
 	
 	protected static BlockInventoryCropPlot addCropPlotContainer(String name, float hardness, Material mat, int ID, boolean renderAsNormalBlock, boolean isOpaque, int renderType) {
 		BlockInventoryCropPlot container = new BlockInventoryCropPlot(name, hardness, mat, ID);
-	//	container.setRenderAsNormalBlock(renderAsNormalBlock);
 		container.setOpaque(isOpaque);
 		container.setRenderType(renderType);
 		allBlocks.put(name, container);

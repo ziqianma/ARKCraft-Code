@@ -36,7 +36,6 @@ public class BlockInventoryCropPlot extends BlockContainer {
     private int renderType = 3; //default value
 	private boolean isOpaque = false;
 	private int ID;
-//	private boolean render = false;
 
     public BlockInventoryCropPlot(String name, float hardness, Material mat, int ID)
     {
@@ -76,9 +75,6 @@ public class BlockInventoryCropPlot extends BlockContainer {
 	public void setOpaque(boolean opaque) { opaque = isOpaque; }
 	public boolean isOpaqueCube() { return isOpaque; }
 	public boolean isFullCube() { return false; }
-
-//	public void setRenderAsNormalBlock(boolean b) { render = b; }
-//	public boolean renderAsNormalBlock() { return render; }
 
 	@SideOnly(Side.CLIENT)
     public Item getItem(World worldIn, BlockPos pos){
