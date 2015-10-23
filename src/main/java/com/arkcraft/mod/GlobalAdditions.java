@@ -53,6 +53,7 @@ public class GlobalAdditions {
 		RecipeHandler.registerVanillaCraftingRecipes();
 		RecipeHandler.registerPestleCraftingRecipes();
 		RecipeHandler.registerSmithyCraftingRecipes();
+		RecipeHandler.registerPlayerCraftingRecipes();
 		EntityHandler.registerModEntity(EntityExplosive.class, "Explosive Cobblestone Ball", ARKCraft.instance, 64, 10, true);
 		
 		EntityHandler.registerModEntity(EntitySpear.class, "Spear", ARKCraft.instance, 64, 10, true);

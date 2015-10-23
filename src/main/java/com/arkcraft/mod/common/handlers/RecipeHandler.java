@@ -174,4 +174,19 @@ public class RecipeHandler {
 				new ItemStack(ARKCraftItems.fiber, 35)
 				);
 	}
+	
+	public static void registerPlayerCraftingRecipes() {
+		PlayerCraftingManager.getInstance().addShapelessRecipe(
+				new ItemStack(ARKCraftItems.slingshot, 1),
+				new ItemStack(Items.leather, 1), 
+				new ItemStack(Blocks.log, 1, 0), // Oak Wood
+				new ItemStack(ARKCraftItems.fiber, 35)
+				);
+		PlayerCraftingManager.getInstance().addShapelessRecipe(
+				new ItemStack(ARKCraftItems.spear, 1),
+				new ItemStack(Items.flint, 2), 
+				new ItemStack(Blocks.log, 1, 0), // Oak Wood 
+				new ItemStack(ARKCraftItems.fiber, 12)
+				);
+	}
 }
