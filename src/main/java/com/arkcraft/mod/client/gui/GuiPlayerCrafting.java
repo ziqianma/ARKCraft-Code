@@ -59,6 +59,7 @@ public class GuiPlayerCrafting extends GuiContainer {
         
         int buttonId = 0;
         buttonList.clear();
+        buttonCraftOne = new GuiButton[ContainerInventoryPlayerCrafting.BP_SLOT_COUNT];
 		for(int row = 0; row < ContainerInventoryPlayerCrafting.NUM_ROWS_BP; row++) {
 			for(int col = 0; col < ContainerInventoryPlayerCrafting.NUM_COLUMNS_BP; col++) {
 				int i =  col + row * ContainerInventoryPlayerCrafting.NUM_COLUMNS_BP;

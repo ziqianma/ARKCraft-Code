@@ -19,11 +19,11 @@ import net.minecraftforge.fml.common.gameevent.InputEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 import net.minecraftforge.fml.common.gameevent.TickEvent.RenderTickEvent;
 
+import com.arkcraft.mod.GlobalAdditions;
 import com.arkcraft.mod.common.ARKCraft;
 import com.arkcraft.mod.common.entity.player.ARKPlayer;
 import com.arkcraft.mod.common.items.weapons.ItemSpyGlass;
 import com.arkcraft.mod.common.items.weapons.ItemLongneckRifle;
-import com.arkcraft.mod.common.items.weapons.component.RangedCompLongneckRifle;
 import com.arkcraft.mod.common.lib.KeyBindings;
 
 /**
@@ -49,6 +49,12 @@ public class FMLCommonEventHandler {
 			if (player instanceof EntityPlayerSP) {
 				ARKPlayer.get(player).Poop();
 			}
+		}
+		else if (KeyBindings.playerCrafting.isPressed()) {
+			EntityPlayerSP player = Minecraft.getMinecraft().thePlayer;
+			if (player instanceof EntityPlayerSP) {
+				player.openGui(ARKCraft.instance(), GlobalAdditions.GUI.PLAYER.getID(),	player.worldObj, 0, 0, 0);
+			}			
 		}
 	}	
 	

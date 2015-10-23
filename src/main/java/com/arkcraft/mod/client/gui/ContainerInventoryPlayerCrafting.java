@@ -26,6 +26,7 @@ public class ContainerInventoryPlayerCrafting extends Container {
 	public static final int PLAYER_CRAFTING_YPOS = 99;
 	public static final int NUM_COLUMNS_BP = 5;
 	public static final int NUM_ROWS_BP = 4;
+	public static final int BP_SLOT_COUNT = NUM_COLUMNS_BP * NUM_ROWS_BP; 
 
 	public ContainerInventoryPlayerCrafting(InventoryPlayer invPlayer, EntityPlayer player) {
 		LogHelper.info("ContainerMP: constructor called.");
@@ -34,7 +35,6 @@ public class ContainerInventoryPlayerCrafting extends Container {
 		inventoryPlayerCrafting = ARKPlayer.get(player).getInventoryPlayer();
 		
 		// Recipe blueprint slots
-		final int BP_SLOT_COUNT = NUM_COLUMNS_BP * NUM_ROWS_BP; 
 		if (BP_SLOT_COUNT != inventoryBlueprints.getSizeInventory()) {
 			LogHelper.error("Mismatched slot count in container(" + BP_SLOT_COUNT + ") and InventoryBlueprints (" 
 						+ inventoryBlueprints.getSizeInventory()+")");

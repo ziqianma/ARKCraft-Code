@@ -23,7 +23,7 @@ public class ARKPlayer implements IExtendedEntityProperties {
 	public static final String EXT_PROP_NAME = "ARKPlayer";
 	private final EntityPlayer player;
 	private InventoryBlueprints inventoryBlueprints = new InventoryBlueprints("Blueprints", false, BLUEPRINT_SLOTS_COUNT);
-	private InventoryPlayerCrafting inventoryPlayerCrafting;
+	private InventoryPlayerCrafting inventoryPlayerCrafting = new InventoryPlayerCrafting("Crafting", false, INVENTORY_SLOTS_COUNT);
 	
 	// The extended player properties (anything below should be initialized in constructor and in NBT):
 	private boolean canPoop;         // True if player can poop (timer sets this)

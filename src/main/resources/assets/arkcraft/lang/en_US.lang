@@ -86,6 +86,8 @@ entity.brontosaurus.name=Brontosaurus
 
 # Key Bindings
 key.playerPoop=Player Pooping Function
+key.playerScope=Player Scoping Function
+key.playerCraft=Open Player Crafting 
 
 # Chat Messages
 chat.canNotPoop=Can't poop right now
@@ -95,4 +97,3 @@ ark.book.utahraptor.description=Utahraptor Prime is an incredibly aggressive sub
 
 # Containers
 container.crop_plot.name=Crop Plot 
-
