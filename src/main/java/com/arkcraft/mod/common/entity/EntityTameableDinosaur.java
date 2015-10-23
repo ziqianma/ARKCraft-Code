@@ -7,6 +7,7 @@ import com.arkcraft.mod.client.gui.InventoryTaming;
 import com.arkcraft.mod.common.ARKCraft;
 import com.arkcraft.mod.common.items.ARKCraftItems;
 import com.arkcraft.mod.common.lib.LogHelper;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -128,6 +129,14 @@ public abstract class EntityTameableDinosaur extends EntityTameable {
             this.setAngry(true);
         }
     }
+
+    //////////////////////////////////////
+    // Properties that all dinos must have
+    
+    //* This must check that the item is an instanceof ItemFood */
+    public abstract boolean isFavoriteFood(ItemStack itemstack);
+    
+    //////////////////////////////
 
     /**
      * Determines whether this wolf is angry or not.
@@ -361,8 +370,8 @@ public abstract class EntityTameableDinosaur extends EntityTameable {
 							player.addChatMessage(new ChatComponentText("This dino can only be saddled with a: " + this.saddleType + " saddle."));
 						}
 					}
-			        // Heal the Dino with meat
-					else if (itemstack != null && itemstack.getItem() instanceof ItemFood) {
+			        // Heal the Dino with its favorite food
+					else if (itemstack != null && isFavoriteFood(itemstack)) {
 	                    ItemFood itemfood = (ItemFood)itemstack.getItem();
 	                    if (!player.capabilities.isCreativeMode) {
 	                         --itemstack.stackSize;
@@ -371,7 +380,8 @@ public abstract class EntityTameableDinosaur extends EntityTameable {
 	                    if (itemstack.stackSize <= 0) {
 	                        player.inventory.setInventorySlotContents(player.inventory.currentItem, (ItemStack)null);
 	                    }
-						player.addChatMessage(new ChatComponentText("This dino's health is: " + this.getHealth() + " Max is: " 
+	                	if (!this.worldObj.isRemote)
+	                    	player.addChatMessage(new ChatComponentText("This dino's health is: " + this.getHealth() + " Max is: " 
 								+ this.getEntityAttribute(SharedMonsterAttributes.maxHealth).getBaseValue()));					
 	                    return true;
 		            }
@@ -386,8 +396,8 @@ public abstract class EntityTameableDinosaur extends EntityTameable {
             	player.addChatMessage(new ChatComponentText("EntityTameableDinosaur: This dino is tamed, but not yours."));
 			}
 		} // end of is tamed
-        // Tame the dino with meat
-        else if (isTameable() && itemstack != null && itemstack.getItem() == ARKCraftItems.porkchop_raw) {
+        // Tame the dino with its favorite food
+        else if (isTameable() && itemstack != null && isFavoriteFood(itemstack)) {
             if (!player.capabilities.isCreativeMode) {
                 --itemstack.stackSize;
             }

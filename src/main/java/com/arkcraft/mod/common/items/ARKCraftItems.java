@@ -1,6 +1,8 @@
 package com.arkcraft.mod.common.items;
 
+import com.arkcraft.mod.GlobalAdditions;
 import com.arkcraft.mod.client.gui.book.Dossier;
+import com.arkcraft.mod.common.items.weapons.ItemSpyGlass;
 import com.arkcraft.mod.common.items.weapons.ItemCompoundBow;
 import com.arkcraft.mod.common.items.weapons.ItemCrossbow;
 import com.arkcraft.mod.common.items.weapons.ItemLongneckRifle;
@@ -15,6 +17,7 @@ import com.arkcraft.mod.common.items.weapons.component.RangedCompLongneckRifle;
 import com.arkcraft.mod.common.items.weapons.component.RangedCompRocketLauncher;
 import com.arkcraft.mod.common.items.weapons.component.RangedCompShotgun;
 import com.arkcraft.mod.common.items.weapons.component.RangedCompSimplePistol;
+import com.arkcraft.mod.common.items.weapons.component.RangedCompSpyGlass;
 import com.arkcraft.mod.common.items.weapons.component.RangedCompTranqGun;
 import com.arkcraft.mod.common.items.weapons.component.RangedComponent;
 import com.arkcraft.mod.common.items.weapons.projectiles.dispense.DispenseRocketPropelledGrenade;
@@ -23,6 +26,7 @@ import com.arkcraft.mod.common.items.weapons.projectiles.dispense.DispenseSimple
 import com.arkcraft.mod.common.items.weapons.projectiles.dispense.DispenseSimpleShotgunAmmo;
 import com.arkcraft.mod.common.items.weapons.projectiles.dispense.DispenseTranquilizer;
 import com.arkcraft.mod.common.lib.BALANCE;
+
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
@@ -43,15 +47,17 @@ public class ARKCraftItems
 
 	public static ARKFood tintoBerry, amarBerry, azulBerry, mejoBerry, narcoBerry, porkchop_raw, porkchop_cooked, primemeat_raw, primemeat_cooked;
 	public static ARKSeedItem tintoBerrySeed, amarBerrySeed, azulBerrySeed, mejoBerrySeed, narcoBerrySeed;
-	public static ARKItem cobble_ball, fiber, chitin, narcotics, explosive_ball, dodo_bag, dodo_feather, gun_powder, thatch;
-	public static ARKFecesItem dodo_feces, player_feces;
+	public static ARKItem cobble_ball, fiber, chitin, narcotics, explosive_ball, dodo_bag, dodo_feather, gun_powder;
+	public static ARKThatchItem thatch;
+	public static ARKFecesItem dodo_feces, player_feces, fertilizer;
 	public static ARKEggItem dodo_egg;
 	public static ARKSaddle saddle_small, saddle_medium, saddle_large;
 	public static ARKArmorItem chitinHelm, chitinChest, chitinLegs, chitinBoots;
 	public static ARKArmorItem clothHelm, clothChest, clothLegs, clothBoots;
 	public static ARKArmorItem boneHelm, boneChest, boneLegs, boneBoots;
 	public static Dossier dino_book;
-	public static ARKBlockItem item_crop_plot;
+	public static ARKBushItem item_berry_bush;
+	public static ItemSpyGlass spy_glass;
 
 	// Weapons
 	public static ARKSlingshot slingshot;
@@ -107,14 +113,15 @@ public class ARKCraftItems
 
 		// Regular Items
 		fiber = addItem("fiber");
-		thatch = addItem("thatch");
+		thatch = addThatchItem("thatch");
 		chitin = addItem("chitin");
 		dodo_feather = addItem("dodo_feather");
 		dodo_bag = addItemWithTooltip("dodo_bag", "Backpack for the Dodo");
 		gun_powder = addItemWithTooltip("gun_powder", "Recipe for destruction");
+		spy_glass = addSpyGlass("spy_glass", new RangedCompSpyGlass());
 		
 		//Block Items
-		item_crop_plot = addBlockItem("item_crop_plot");
+		item_berry_bush = addBushItem("item_berry_bush");
 		
 		//Bows
 		compound_bow = new ItemCompoundBow("compound_bow");
@@ -129,6 +136,9 @@ public class ARKCraftItems
 		// feces (2nd parameter is the seconds to decompose)
 		dodo_feces = addFecesItem("dodo_feces", BALANCE.CROP_PLOT.SECONDS_FOR_SMALL_FECES_TO_DECOMPOSE);
 		player_feces = addFecesItem("player_feces", BALANCE.CROP_PLOT.SECONDS_FOR_PLAYER_FECES_TO_DECOMPOSE);
+		
+		// Technically not feces, but used in all situations the same (currently)
+		fertilizer = addFecesItem("fertilizer", BALANCE.CROP_PLOT.SECONDS_FOR_FERTILIZER_TO_DECOMPOSE);
 
 		// Other Types of Items
 		dodo_egg = addEggItem("dodo_egg");
@@ -161,7 +171,7 @@ public class ARKCraftItems
 			simple_bullet = addItemProjectile("simple_bullet");
 		}
 		if (BALANCE.WEAPONS.LONGNECK_RIFLE) {
-			longneck_rifle = addLongneckRifle("longneck_rifle", new RangedCompLongneckRifle(7));
+			longneck_rifle = addLongneckRifle("longneck_rifle", new RangedCompLongneckRifle(null, GlobalAdditions.GUI.SCOPE.getID()));
 			simple_rifle_ammo = addItemProjectile("simple_rifle_ammo");
 		}
 		if (BALANCE.WEAPONS.SHOTGUN) {
@@ -250,6 +260,12 @@ public class ARKCraftItems
 		return i;
 	}
 	
+	protected static ARKThatchItem addThatchItem(String name) {
+		ARKThatchItem t = new ARKThatchItem(name);
+		allItems.put(name, t);
+		return t;
+	}
+	
 	protected static ARKSeedItem addSeedItem(String name) {
 		ARKSeedItem i = new ARKSeedItem(name);
 		allItems.put(name, i);
@@ -262,8 +278,14 @@ public class ARKCraftItems
 		return i;
 	}
 	
-	protected static ARKBlockItem addBlockItem(String name) {
-		ARKBlockItem i = new ARKBlockItem(name);
+	protected static ARKBushItem addBushItem(String name) {
+		ARKBushItem i = new ARKBushItem(name);
+		allItems.put(name, i);
+		return i;
+	}
+	
+	protected static ItemSpyGlass addSpyGlass(String name, RangedComponent rangedcomponent) {
+		ItemSpyGlass i = new ItemSpyGlass(name, rangedcomponent);
 		allItems.put(name, i);
 		return i;
 	}

@@ -43,10 +43,10 @@ public class ARKBushItem extends Item
     	            {
     	                return false;
     	            }
-    	            else if (ARKCraftBlocks.berry_bush.canPlaceBlockAt(worldIn, blockpos1))
+    	            else if (ARKCraftBlocks.berryBush.canPlaceBlockAt(worldIn, blockpos1))
     	            {
     	                --stack.stackSize;
-    	                worldIn.setBlockState(blockpos1, ARKCraftBlocks.berry_bush.getDefaultState());
+    	                worldIn.setBlockState(blockpos1, ARKCraftBlocks.berryBush.getDefaultState());
     	                return true;
     	            }
     	            else

@@ -24,6 +24,8 @@ public final class BALANCE {
 		public static int MAX_DEFAULT_ORE_VEIN_SPAWN_PER_CHUNK;
 		@DefaultInt(value = 7, minValue = 2, maxValue = 10, name = "Ore blocks that spawn per vein", comment = "Default max ore blocks that can spawn per vein loaded")
 		public static int MAX_DEFAULT_ORE_BLOCKS_SPAWN_PER_VEIN;
+		@DefaultBoolean(value=true, name = "Include Minecraft hostile mobs", comment = "No skeleton, zombie, or creeper")
+		public static boolean mcHostileMobs;
 	}
 	
 	public static class PLAYER {
@@ -89,6 +91,8 @@ public final class BALANCE {
 		public static int SECONDS_FOR_PLAYER_FECES_TO_DECOMPOSE;
 		@DefaultInt(value = 600, minValue = 60, maxValue = 3600, name = "Seconds to decompose small feces.", comment = "Time for feces to decompose in crop plot")
 		public static int SECONDS_FOR_SMALL_FECES_TO_DECOMPOSE;
+		@DefaultInt(value = 4800, minValue = 60, maxValue = 28800, name = "Seconds to decompose fertilizer.", comment = "Time for fertilizer to decompose in crop plot")
+		public static int SECONDS_FOR_FERTILIZER_TO_DECOMPOSE;
 		@DefaultInt(value = 1080, minValue = 60, maxValue = 3600, name = "Seconds of watering.", comment = "Time for one bucket to provide water in crop plot")
 		public static int SECONDS_OF_WATER_PER_BUCKET;
 		@DefaultInt(value = 45, minValue = 10, maxValue = 600, name = "Seconds to grow a berry.", comment = "Time for one berry to grow in crop plot")
@@ -98,6 +102,13 @@ public final class BALANCE {
 	public static class MORTAR_AND_PESTLE {
 		@DefaultInt(value = 16, minValue = 1, maxValue = 60, name = "Seconds to craft an item.", comment = "Time to craft item in mortar and pestle")
 		public static int CRAFT_TIME_FOR_ITEM;
+	}
+	
+	public static class COMPOST_BIN {
+		@DefaultInt(value = 30, minValue = 15, maxValue = 600, name = "Thatch composting time.", comment = "Seconds of composting provided")
+		public static int COMPOST_TIME_FOR_THATCH;
+		@DefaultInt(value = 60, minValue = 15, maxValue = 600, name = "Feces composting time.", comment = "Seconds to compost feces into fertilizer")		
+		public static int COMPOST_TIME_FOR_FECES;
 	}
 	
 	public static class DINO_PROPERTIES {

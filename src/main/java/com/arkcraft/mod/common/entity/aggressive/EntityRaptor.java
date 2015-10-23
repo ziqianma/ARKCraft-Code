@@ -4,9 +4,11 @@ import com.arkcraft.mod.common.ARKCraft;
 import com.arkcraft.mod.common.entity.EntityTameableDinosaur;
 import com.arkcraft.mod.common.entity.SaddleType;
 import com.arkcraft.mod.common.items.ARKCraftItems;
+import com.arkcraft.mod.common.items.ARKFood;
 import com.arkcraft.mod.common.lib.BALANCE;
 import com.arkcraft.mod.common.lib.LogHelper;
 import com.google.common.base.Predicate;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
@@ -29,6 +31,7 @@ import net.minecraft.entity.passive.EntityRabbit;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.pathfinding.PathNavigateGround;
 import net.minecraft.util.BlockPos;
@@ -101,8 +104,6 @@ public class EntityRaptor extends EntityTameableDinosaur
         	this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(4.0D); //2.5 hearts without armor
     	}
     }
-    
-    
     
 	@Override
 	public void setTamed(boolean tamed) {
@@ -204,5 +205,15 @@ public class EntityRaptor extends EntityTameableDinosaur
 	@Override
 	public EntityAgeable createChild(EntityAgeable ageable) {
 		return new EntityRaptor(this.worldObj);
+	}
+
+	@Override
+	public boolean isFavoriteFood(ItemStack itemstack) {
+		if (itemstack.getItem() instanceof ARKFood && 
+				(itemstack.getItem() == ARKCraftItems.porkchop_raw || itemstack.getItem() == ARKCraftItems.porkchop_cooked
+				|| itemstack.getItem() == ARKCraftItems.primemeat_raw || itemstack.getItem() == ARKCraftItems.primemeat_cooked)){
+			return true;
+		}
+		return false;
 	}
 }

@@ -42,6 +42,11 @@ public class ARKPlayerEventHandler {
 			// Enable pooping once every (the value in the config) ticks
 			if (player.ticksExisted % BALANCE.PLAYER.TICKS_BETWEEN_PLAYER_POOP == 0)
 				ARKPlayer.get(player).setCanPoop(true);
+			
+			// Update CraftingInventory
+			if (ARKPlayer.get(player).getInventoryBlueprints().isCrafting()){
+				ARKPlayer.get(player).getInventoryBlueprints().update();
+			}
 		}
 	}
 }

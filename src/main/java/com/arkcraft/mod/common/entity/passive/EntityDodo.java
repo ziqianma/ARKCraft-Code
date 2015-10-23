@@ -7,6 +7,7 @@ import com.arkcraft.mod.common.entity.ai.EntityDodoAILookIdle;
 import com.arkcraft.mod.common.items.ARKCraftItems;
 import com.arkcraft.mod.common.items.ARKFood;
 import com.arkcraft.mod.common.lib.LogHelper;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
@@ -242,8 +243,7 @@ public class EntityDodo extends EntityTameable {
             }
 		}
         // Tame the Dodo with meat
-        else if (itemstack != null && (itemstack.getItem() == ARKCraftItems.porkchop_raw
-        		|| itemstack.getItem() == ARKCraftItems.porkchop_cooked)) {
+		else if (itemstack != null && isFavoriteFood(itemstack)) {
             if (!player.capabilities.isCreativeMode) {
                 --itemstack.stackSize;
             }
@@ -352,4 +352,13 @@ public class EntityDodo extends EntityTameable {
     	else
     		return this.field_175504_a;
     }
+
+	public boolean isFavoriteFood(ItemStack itemstack) {
+		if (itemstack.getItem() instanceof ARKFood && 
+				(itemstack.getItem() == ARKCraftItems.amarBerry || itemstack.getItem() == ARKCraftItems.azulBerry
+				|| itemstack.getItem() == ARKCraftItems.mejoBerry || itemstack.getItem() == ARKCraftItems.tintoBerry)){
+			return true;
+		}
+		return false;
+	}
 }

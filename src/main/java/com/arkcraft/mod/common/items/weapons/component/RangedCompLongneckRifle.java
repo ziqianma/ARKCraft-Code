@@ -1,25 +1,34 @@
 package com.arkcraft.mod.common.items.weapons.component;
 
+import java.util.List;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+import org.lwjgl.input.Keyboard;
 
 import com.arkcraft.mod.common.items.weapons.handlers.ReloadHelper;
 import com.arkcraft.mod.common.items.weapons.projectiles.EntitySimpleRifleAmmo;
+import com.arkcraft.mod.common.lib.KeyBindings;
+import com.arkcraft.mod.common.lib.LogHelper;
 
 public class RangedCompLongneckRifle extends RangedComponent
 {
-	private int ID;
-	boolean playerScoping;
-	
-	public RangedCompLongneckRifle(int ID)
+	public RangedCompLongneckRifle(EntityPlayer player, int ID)
 	{
 		super(RangedSpecs.LONGNECKRIFLE);
-		this.ID = ID;
-		this.playerScoping = true;
+
 	}
 
 	@Override
@@ -28,30 +37,65 @@ public class RangedCompLongneckRifle extends RangedComponent
 		entityplayer.swingItem();
 		world.playSoundAtEntity(entityplayer, "random.door_close", 1.2F, 1.0F / (weapon.getItemRand().nextFloat() * 0.2F + 0.0F));
 	}
-	
+
+/*	
 	@Override
-	public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack)
-    {
-		return false;
-    }
+	public void onUpdate(ItemStack itemstack, World world, Entity entity, int i, boolean flag)
+	{
+	EntityPlayer player = (EntityPlayer)entity;
+
+	if (playerScoping() && player.getHeldItem() != null
+		&& player.getHeldItem().getItem() instanceof ItemLongneckRifle && !world.isRemote)
+		{
+			player.openGui(ARKCraft.instance(), ID, world, (int)player.posX, (int)player.posY, (int)player.posZ);
+		}
+	else 
+		{
+			setCanScope(false);
+		}
+	}	*/
 	
-//	public boolean playerScoping()
-//	{
-//		return playerScoping;
-//	}
-//	
-//	@Override
-//	public static void onUpdate(ItemStack itemstack, World world, Entity entity, int par4, boolean par5)
-//	{
-//	EntityPlayer player = (EntityPlayer)entity;
-//
-//	if (playerScoping() && player.getHeldItem() != null
-//	&& player.getHeldItem().getItem() instanceof ItemLongneckRifle && !world.isRemote)
-//	{
-//	player.openGui(ARKCraft.instance(), ID, world, (int)player.posX, (int)player.posY, (int)player.posZ);
-//	}
-//	}
-//	
+	/*
+	@Override
+	public void onUpdate(ItemStack itemstack, World world, Entity entity, int i, boolean flag)
+	{
+	EntityPlayer player = (EntityPlayer)entity;
+
+	 if (KeyBindings.playerScoping.getKeyCode() && player.getHeldItem() != null
+		&& player.getHeldItem().getItem() instanceof ItemLongneckRifle && !world.isRemote)
+		{
+			player.openGui(ARKCraft.instance(), ID, world, (int)player.posX, (int)player.posY, (int)player.posZ);
+		}
+	else 
+		{
+			setCanScope(false);
+		}
+	}	*/
+	
+	
+    @Override
+    public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player) {
+        player.setItemInUse(itemStack, this.getMaxItemUseDuration(itemStack));
+        return itemStack;
+    }
+    
+	@Override
+	public int getMaxItemUseDuration(ItemStack itemStack) 
+	{
+		return Integer.MAX_VALUE;
+	}
+		
+	
+	@SuppressWarnings("unchecked")
+	@Override
+    @SideOnly(Side.CLIENT)
+    public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean bool) {
+        list.add(StatCollector.translateToLocal("item.zoom.binoculars.desc.1"));
+        if (KeyBindings.playerScoping.getKeyCode() != 0) {
+            list.add(StatCollector.translateToLocalFormatted("item.zoom.binoculars.desc.2", EnumChatFormatting.AQUA + Keyboard.getKeyName(KeyBindings.playerScoping.getKeyCode()) + EnumChatFormatting.GRAY));
+        }
+    }
+
 	@Override
 	public void fire(ItemStack itemstack, World world, EntityPlayer entityplayer, int i)
 	{
@@ -104,14 +148,5 @@ public class RangedCompLongneckRifle extends RangedComponent
 	{
 		return 0.50f;
 	}
-	
-	public void setIsScoping(boolean b) {
-		// TODO Auto-generated method stub
-		
-	}
 
-	public static RangedCompLongneckRifle get(EntityPlayer entityplayer) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

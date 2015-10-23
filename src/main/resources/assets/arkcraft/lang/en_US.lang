@@ -4,6 +4,7 @@ tile.smithy.name=Smithy
 tile.mortar_and_pestle.name=Mortar and Pestle
 tile.crop_plot.name=Crop Plot
 tile.wooden_spikes.name=Wooden Spikes
+tile.compost_bin.name=Compost Bin
 
 # World Types
 generator.island=ARK: The Island
@@ -54,6 +55,7 @@ item.dodo_egg.name=Dodo Egg
 item.dossier.name=Dino Dossier
 item.dodo_feces.name=Dodo Feces
 item.player_feces.name=Player Feces
+item.fertilizer.name=Fertilizer
 item.tranq_gun.name=Tranquilizer Gun
 item.simple_pistol.name=Simple Pistol
 item.tranquilizer.name=Tranquilizer
@@ -68,7 +70,7 @@ item.rocket_launcher.name=Rocket Launcher
 item.rocket_propelled_grenade.name=Rocket Propelled Grenade
 item.compound_bow.name=Compound Bow
 item.crossbow.name= Crossbow
-
+item.thatch.name= Thatch
 
 # Miscellaneous
 itemGroup.tabARKCraft=ARKCraft: Survival Evolved
@@ -84,6 +86,8 @@ entity.brontosaurus.name=Brontosaurus
 
 # Key Bindings
 key.playerPoop=Player Pooping Function
+key.playerScope=Player Scoping Function
+key.playerCraft=Open Player Crafting 
 
 # Chat Messages
 chat.canNotPoop=Can't poop right now
@@ -93,4 +97,3 @@ ark.book.utahraptor.description=Utahraptor Prime is an incredibly aggressive sub
 
 # Containers
 container.crop_plot.name=Crop Plot 
-

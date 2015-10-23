@@ -3,6 +3,7 @@ package com.arkcraft.mod.common.blocks;
 import com.arkcraft.mod.GlobalAdditions;
 import com.arkcraft.mod.common.ARKCraft;
 import com.arkcraft.mod.common.tile.TileInventoryCropPlot;
+
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -16,6 +17,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumWorldBlockLayer;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
@@ -34,7 +36,7 @@ public class BlockInventoryCropPlot extends BlockContainer {
     private int renderType = 3; //default value
 	private boolean isOpaque = false;
 	private int ID;
-	private boolean render = false;
+//	private boolean render = false;
 
     public BlockInventoryCropPlot(String name, float hardness, Material mat, int ID)
     {
@@ -73,15 +75,18 @@ public class BlockInventoryCropPlot extends BlockContainer {
 		
 	public void setOpaque(boolean opaque) { opaque = isOpaque; }
 	public boolean isOpaqueCube() { return isOpaque; }
-	
+	public boolean isFullCube() { return false; }
 
-	public void setRenderAsNormalBlock(boolean b) { render = b; }
-	public boolean renderAsNormalBlock() { return render; }
+//	public void setRenderAsNormalBlock(boolean b) { render = b; }
+//	public boolean renderAsNormalBlock() { return render; }
 
 	@SideOnly(Side.CLIENT)
     public Item getItem(World worldIn, BlockPos pos){
 		return Items.redstone;
 	}
+	
+	@SideOnly(Side.CLIENT)
+	public EnumWorldBlockLayer getBlockLayer() {   return EnumWorldBlockLayer.CUTOUT; }
 
     /**
      * Convert the given metadata into a BlockState for this Block

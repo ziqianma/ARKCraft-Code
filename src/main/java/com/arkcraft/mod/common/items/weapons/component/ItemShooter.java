@@ -45,8 +45,6 @@ public class ItemShooter extends ItemBow implements IItemWeapon
 		return rangedComponent.onLeftClickEntity(itemstack, player, entity);
 	}
 	
-	///////
-	
 	@Override
 	public EnumAction getItemUseAction(ItemStack itemstack)
 	{
