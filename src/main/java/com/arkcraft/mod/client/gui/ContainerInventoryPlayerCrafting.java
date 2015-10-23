@@ -7,7 +7,6 @@ import com.arkcraft.mod.common.tile.TileInventorySmithy;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
-import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -20,8 +19,13 @@ public class ContainerInventoryPlayerCrafting extends Container {
 	private InventoryPlayerCrafting inventoryPlayerCrafting;
 	// These store cache values, used by the server to only update the client side tile entity when values have changed
 //	private int [] cachedFields;
-	public static final int BLUEPRINT_YPOS = 60;
-	public static final int PLAYER_CRAFTING_YPOS = 60;
+	
+	// some [x,y] coordinates of graphical elements (also used elsewhere)
+    public static final int BLUEPRINT_XPOS = 26;
+	public static final int BLUEPRINT_YPOS = 27;
+	public static final int PLAYER_CRAFTING_YPOS = 99;
+	public static final int NUM_COLUMNS_BP = 5;
+	public static final int NUM_ROWS_BP = 4;
 
 	public ContainerInventoryPlayerCrafting(InventoryPlayer invPlayer, EntityPlayer player) {
 		LogHelper.info("ContainerMP: constructor called.");
@@ -30,9 +34,13 @@ public class ContainerInventoryPlayerCrafting extends Container {
 		inventoryPlayerCrafting = ARKPlayer.get(player).getInventoryPlayer();
 		
 		// Recipe blueprint slots
-		final int NUM_COLUMNS_BP = 5;
-		final int BLUEPRINT_XPOS = 0;
-		for(int row = 0; row < 3; row++) {
+		final int BP_SLOT_COUNT = NUM_COLUMNS_BP * NUM_ROWS_BP; 
+		if (BP_SLOT_COUNT != inventoryBlueprints.getSizeInventory()) {
+			LogHelper.error("Mismatched slot count in container(" + BP_SLOT_COUNT + ") and InventoryBlueprints (" 
+						+ inventoryBlueprints.getSizeInventory()+")");
+			return;
+		}
+		for(int row = 0; row < NUM_ROWS_BP; row++) {
 			for(int col = 0; col < NUM_COLUMNS_BP; col++) {
 				int slotIndex =  col + row * NUM_COLUMNS_BP;
 				this.addSlotToContainer(new SlotBlueprintInventory(inventoryBlueprints, slotIndex,
@@ -42,12 +50,28 @@ public class ContainerInventoryPlayerCrafting extends Container {
 		
 		// Player Crafting slots
 		final int NUM_COLUMNS_PC = 5;
-		final int PC_XPOS = 0;
-		for(int row = 0; row < 3; row++) {
+		final int NUM_ROWS_PC = 2;
+		final int PC_XPOS = 26;
+		final int PC_SLOT_COUNT = NUM_COLUMNS_BP * NUM_ROWS_BP; 
+		if (PC_SLOT_COUNT != inventoryPlayerCrafting.getSizeInventory()) {
+			LogHelper.error("Mismatched slot count in container(" + PC_SLOT_COUNT + ") and InventoryPlayerCrafting (" 
+						+ inventoryPlayerCrafting.getSizeInventory()+")");
+			return;
+		}
+		for(int row = 0; row < NUM_ROWS_PC; row++) {
 			for(int col = 0; col < NUM_COLUMNS_PC; col++) {
 				int slotIndex =  col + row * NUM_COLUMNS_PC;
-				this.addSlotToContainer(new SlotBlueprintInventory(inventoryPlayerCrafting, slotIndex,
+				this.addSlotToContainer(new SlotPlayerCraftingInventory(inventoryPlayerCrafting, slotIndex,
 						PC_XPOS + col * 18, PLAYER_CRAFTING_YPOS + row * 18));
+			}
+		}
+		
+		/* Player inventory */
+		final int PLAYER_INVENTORY_YPOS = 161;
+		for(int row = 0; row < 3; row++) {
+			for(int col = 0; col < 9; col++) {
+				int slotIndex =  col + row * 9 + 9;
+				addSlotToContainer(new Slot(invPlayer, slotIndex, 8 + col * 18, PLAYER_INVENTORY_YPOS + row * 18));
 			}
 		}
 		
@@ -55,16 +79,7 @@ public class ContainerInventoryPlayerCrafting extends Container {
 		final int HOTBAR_YPOS = 186;
 		for(int col = 0; col < 9; col++) {
 			addSlotToContainer(new Slot(invPlayer, col, 8 + col * 18, HOTBAR_YPOS));
-		}
-		
-		/* Player inventory */
-		final int PLAYER_INVENTORY_YPOS = 128;
-		for(int row = 0; row < 3; row++) {
-			for(int col = 0; col < 9; col++) {
-				int slotIndex =  col + row * 9 + 9;
-				addSlotToContainer(new Slot(invPlayer, slotIndex, 8 + col * 18, PLAYER_INVENTORY_YPOS + row * 18));
-			}
-		}
+		}		
 	}
 	
 	/* Nothing to do, this is a furnace type container */
@@ -166,9 +181,9 @@ public class ContainerInventoryPlayerCrafting extends Container {
 //		tileInventorySmithy.setField(id, data);
 	}
 
-	// SlotRecipeInventory is a slot for recipe items
-	public class SlotRecipeInventory extends Slot {
-		public SlotRecipeInventory(IInventory inventoryIn, int index, int xPosition, int yPosition) {
+	// SlotPlayerCraftingInventory is a slot for recipe items and the output of recipes
+	public class SlotPlayerCraftingInventory extends Slot {
+		public SlotPlayerCraftingInventory(IInventory inventoryIn, int index, int xPosition, int yPosition) {
 			super(inventoryIn, index, xPosition, yPosition);
 		}
 
@@ -203,7 +218,7 @@ public class ContainerInventoryPlayerCrafting extends Container {
 	}
 
 	// Used by GUI to see if any players have the GUI open
-	public int getNumCrafters() {
-		return this.crafters.size();
-	}
+//	public int getNumCrafters() {
+//		return this.crafters.size();
+//	}
 }

@@ -3,6 +3,7 @@ package com.arkcraft.mod.common.entity.player;
 import com.arkcraft.mod.client.gui.InventoryBlueprints;
 import com.arkcraft.mod.client.gui.InventoryPlayerCrafting;
 import com.arkcraft.mod.common.ARKCraft;
+import com.arkcraft.mod.common.handlers.PlayerCraftingManager;
 import com.arkcraft.mod.common.lib.LogHelper;
 import com.arkcraft.mod.common.network.PlayerPoop;
 
@@ -21,7 +22,7 @@ import net.minecraftforge.common.IExtendedEntityProperties;
 public class ARKPlayer implements IExtendedEntityProperties {
 	public static final String EXT_PROP_NAME = "ARKPlayer";
 	private final EntityPlayer player;
-	private InventoryBlueprints inventoryBlueprints;
+	private InventoryBlueprints inventoryBlueprints = new InventoryBlueprints("Blueprints", false, BLUEPRINT_SLOTS_COUNT);
 	private InventoryPlayerCrafting inventoryPlayerCrafting;
 	
 	// The extended player properties (anything below should be initialized in constructor and in NBT):
@@ -31,10 +32,11 @@ public class ARKPlayer implements IExtendedEntityProperties {
 		// Initialize some stuff
 		this.player = player;
 		this.setCanPoop(false);
+		inventoryBlueprints.setNumBlueprints(PlayerCraftingManager.getInstance().getNumRecipes());
 	}
 
 	/**
-	 * Registers Dragon properties to player
+	 * Registers properties to player
 	 * 
 	 * @param player
 	 */
@@ -45,7 +47,7 @@ public class ARKPlayer implements IExtendedEntityProperties {
 	/**
 	 * 
 	 * @param player
-	 * @return DragonPlayer property of player
+	 * @return properties of player
 	 */
 	public static final ARKPlayer get(EntityPlayer player) {
 		return (ARKPlayer) player.getExtendedProperties(EXT_PROP_NAME);
@@ -113,6 +115,16 @@ public class ARKPlayer implements IExtendedEntityProperties {
 		}		
 	}
 
+	//----------------- End of Properties stuff, rest is for crafting -----------------
+	
+	// Constants for the inventory
+	public static final int INVENTORY_SLOTS_COUNT = 10;
+	public static final int TOTAL_SLOTS_COUNT = INVENTORY_SLOTS_COUNT;
+	public static final int FIRST_INVENTORY_SLOT = 0;
+	public static final int LAST_INVENTORY_SLOT = INVENTORY_SLOTS_COUNT - 1; 
+	public static final int BLUEPRINT_SLOTS_COUNT = 20;
+	public static final int FIRST_BLUEPRINT_SLOT = 10;
+	
 	public InventoryBlueprints getInventoryBlueprints() {
 		return inventoryBlueprints;
 	}
