@@ -45,6 +45,10 @@ dependencies {
 
 }
 
+task wrapper(type: Wrapper) {
+	gradleVersion = '2.7'
+}
+
 processResources
 {
     // this will ensure that this task is redone when the versions change.
@@ -63,8 +67,4 @@ processResources
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
-	
-	task wrapper(type: Wrapper) {
-		gradleVersion = '2.7'
-	}
 }
