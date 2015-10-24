@@ -10,7 +10,10 @@ import com.arkcraft.mod.common.entity.neutral.EntityBrontosaurus;
 import com.arkcraft.mod.common.entity.passive.EntityDodo;
 import com.arkcraft.mod.common.handlers.EntityHandler;
 import com.arkcraft.mod.common.handlers.GuiHandler;
+import com.arkcraft.mod.common.handlers.PestleCraftingManager;
+import com.arkcraft.mod.common.handlers.PlayerCraftingManager;
 import com.arkcraft.mod.common.handlers.RecipeHandler;
+import com.arkcraft.mod.common.handlers.SmithyCraftingManager;
 import com.arkcraft.mod.common.items.weapons.projectiles.EntitySpear;
 import com.arkcraft.mod.common.lib.BALANCE;
 import com.arkcraft.mod.common.lib.KeyBindings;
@@ -51,9 +54,9 @@ public class GlobalAdditions {
 
 		// Handlers
 		RecipeHandler.registerVanillaCraftingRecipes();
-		RecipeHandler.registerPestleCraftingRecipes();
-		RecipeHandler.registerSmithyCraftingRecipes();
-		RecipeHandler.registerPlayerCraftingRecipes();
+		PestleCraftingManager.registerPestleCraftingRecipes();
+		SmithyCraftingManager.registerSmithyCraftingRecipes();
+		PlayerCraftingManager.registerPlayerCraftingRecipes();
 		EntityHandler.registerModEntity(EntityExplosive.class, "Explosive Cobblestone Ball", ARKCraft.instance, 64, 10, true);
 		
 		EntityHandler.registerModEntity(EntitySpear.class, "Spear", ARKCraft.instance, 64, 10, true);

@@ -16,6 +16,7 @@ import net.minecraftforge.client.event.MouseEvent;
 import net.minecraftforge.client.event.RenderHandEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 import net.minecraftforge.fml.common.gameevent.TickEvent.RenderTickEvent;
 
@@ -25,6 +26,7 @@ import com.arkcraft.mod.common.entity.player.ARKPlayer;
 import com.arkcraft.mod.common.items.weapons.ItemSpyGlass;
 import com.arkcraft.mod.common.items.weapons.ItemLongneckRifle;
 import com.arkcraft.mod.common.lib.KeyBindings;
+import com.arkcraft.mod.common.network.OpenPlayerCrafting;
 
 /**
  * 
@@ -43,7 +45,7 @@ public class FMLCommonEventHandler {
     private static float currentZoom = 1 / 6.0F;
 	
 	@SubscribeEvent
-	public void onPlayerPooping(InputEvent.KeyInputEvent event) {
+	public void onPlayerKeypressed(InputEvent.KeyInputEvent event) {
 		if (KeyBindings.playerPooping.isPressed()) {
 			EntityPlayerSP player = Minecraft.getMinecraft().thePlayer;
 			if (player instanceof EntityPlayerSP) {
@@ -54,9 +56,18 @@ public class FMLCommonEventHandler {
 			EntityPlayerSP player = Minecraft.getMinecraft().thePlayer;
 			if (player instanceof EntityPlayerSP) {
 				player.openGui(ARKCraft.instance(), GlobalAdditions.GUI.PLAYER.getID(),	player.worldObj, 0, 0, 0);
+				ARKCraft.modChannel.sendToServer(new OpenPlayerCrafting(true));
 			}			
 		}
-	}	
+	}
+	
+	@SubscribeEvent
+	public void onPlayerTickEvent(TickEvent.PlayerTickEvent event) {
+		// Update CraftingInventory
+		if (ARKPlayer.get(event.player).getInventoryBlueprints().isCrafting()){
+			ARKPlayer.get(event.player).getInventoryBlueprints().update();
+		}
+	}
 	
 	/*
 	@SubscribeEvent

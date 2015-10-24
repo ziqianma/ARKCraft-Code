@@ -104,6 +104,11 @@ public final class BALANCE {
 		public static int CRAFT_TIME_FOR_ITEM;
 	}
 	
+	public static class PLAYER_CRAFTING {
+		@DefaultInt(value = 8, minValue = 1, maxValue = 60, name = "Seconds to craft an item.", comment = "Time to craft item in player built-in crafting")
+		public static int CRAFT_TIME_FOR_ITEM;
+	}
+	
 	public static class COMPOST_BIN {
 		@DefaultInt(value = 30, minValue = 15, maxValue = 600, name = "Thatch composting time.", comment = "Seconds of composting provided")
 		public static int COMPOST_TIME_FOR_THATCH;

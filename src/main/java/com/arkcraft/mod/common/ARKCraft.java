@@ -10,10 +10,13 @@ import com.arkcraft.mod.common.handlers.ARKPlayerEventHandler;
 import com.arkcraft.mod.common.handlers.FMLCommonEventHandler;
 import com.arkcraft.mod.common.items.ARKCraftItems;
 import com.arkcraft.mod.common.lib.Config;
+import com.arkcraft.mod.common.network.OpenPlayerCrafting;
 import com.arkcraft.mod.common.network.PlayerPoop;
 import com.arkcraft.mod.common.network.UpdateMPToCraftItem;
+import com.arkcraft.mod.common.network.UpdatePlayerCrafting;
 import com.arkcraft.mod.common.network.UpdateSmithyToCraftItem;
 import com.arkcraft.mod.common.proxy.CommonProxy;
+
 import net.minecraft.item.Item;
 import net.minecraft.world.WorldType;
 import net.minecraftforge.common.MinecraftForge;
@@ -29,6 +32,7 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
+
 import org.apache.logging.log4j.Logger;
 
 import java.util.HashMap;
@@ -91,10 +95,11 @@ public class ARKCraft
 		
 		int id = 0;
 		// The handler (usually in the packet class), the packet class, unique id, side the packet is received on
-		modChannel.registerMessage(PlayerPoop.Handler.class, PlayerPoop.class, id++, Side.SERVER);
-		
+		modChannel.registerMessage(PlayerPoop.Handler.class, PlayerPoop.class, id++, Side.SERVER);		
 		modChannel.registerMessage(UpdateMPToCraftItem.Handler.class, UpdateMPToCraftItem.class, id++, Side.SERVER);
 		modChannel.registerMessage(UpdateSmithyToCraftItem.Handler.class, UpdateSmithyToCraftItem.class, id++, Side.SERVER);
+		modChannel.registerMessage(OpenPlayerCrafting.Handler.class, OpenPlayerCrafting.class, id++, Side.SERVER);
+		modChannel.registerMessage(UpdatePlayerCrafting.Handler.class, UpdatePlayerCrafting.class, id++, Side.SERVER);
 	}
 	
 	public boolean isDebugger()

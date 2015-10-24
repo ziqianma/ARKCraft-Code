@@ -42,7 +42,7 @@ public class InventoryDino extends InventoryBasic {
                 nbttagcompound.setByte("Slot", (byte)i);
                 itemstack.writeToNBT(nbttagcompound);
                 nbttaglist.appendTag(nbttagcompound);
-                LogHelper.info("DinoInventory: Saved a " + itemstack.getItem() + " to inventory.");
+//                LogHelper.info("DinoInventory: Saved a " + itemstack.getItem() + " to inventory.");
             }
         }
 		nbt.setTag("Items", nbttaglist);

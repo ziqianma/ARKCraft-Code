@@ -18,6 +18,12 @@ public class InventoryPlayerCrafting extends InventoryBasic {
 		super(title, customName, slotCount);
 	}
 
+    public void loadInventoryFromNBT(NBTTagCompound nbt)  {
+		final byte NBT_TYPE_COMPOUND = 10;  
+		NBTTagList dataForAllItems = nbt.getTagList("Items", NBT_TYPE_COMPOUND);
+		loadInventoryFromNBT(dataForAllItems);
+    }
+    
     public void loadInventoryFromNBT(NBTTagList nbt)  {
         int i;
         for (i = 0; i < this.getSizeInventory(); ++i) {
@@ -62,4 +68,11 @@ public class InventoryPlayerCrafting extends InventoryBasic {
     public void closeInventory(EntityPlayer player) {
         super.closeInventory(player);
     }    
+    
+	public ItemStack[] getItemStacks() {
+		ItemStack[] blueprintStacks = new ItemStack[getSizeInventory()];
+		for (int i = 0; i < getSizeInventory(); i++)
+            blueprintStacks[i] = getStackInSlot(i);
+		return blueprintStacks;
+	}
 }

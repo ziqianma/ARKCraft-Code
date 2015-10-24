@@ -1,13 +1,17 @@
 package com.arkcraft.mod.client.gui;
 
+import java.util.Iterator;
+import java.util.List;
+
 import com.arkcraft.mod.common.ARKCraft;
 import com.arkcraft.mod.common.entity.player.ARKPlayer;
-import com.arkcraft.mod.common.handlers.PlayerCraftingManager;
-import com.arkcraft.mod.common.lib.BALANCE;
+import com.arkcraft.mod.common.handlers.ARKCraftingManager;
+import com.arkcraft.mod.common.handlers.IARKRecipe;
 import com.arkcraft.mod.common.lib.LogHelper;
 import com.arkcraft.mod.common.network.UpdatePlayerCrafting;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -23,9 +27,21 @@ import net.minecraftforge.fml.relauncher.SideOnly;
  *
  */
 public class InventoryBlueprints extends InventoryBasic {
+	ARKCraftingManager craftingManager;
+	IInventory invCrafting;
 	
 	public InventoryBlueprints(String title, boolean customName, int slotCount) {
 		super(title, customName, slotCount);
+	}
+
+	public InventoryBlueprints(String title, boolean customName, int slotCount, ARKCraftingManager craftingManager,
+			IInventory invCrafting, short craftTimeForItem) {
+		super(title, customName, slotCount);
+		this.craftingManager = craftingManager; 
+		setNumBlueprints(craftingManager.getNumRecipes());
+		fillInventoryWithRecipes();
+		this.invCrafting = invCrafting;
+		CRAFT_TIME_FOR_ITEM = craftTimeForItem;
 	}
 
     public void loadInventoryFromNBT(NBTTagCompound nbt)  {
@@ -90,8 +106,10 @@ public class InventoryBlueprints extends InventoryBasic {
 		ARKCraft.modChannel.sendToServer(new UpdatePlayerCrafting(craftOne, blueprintPressed));
 	}
 	
-	public void setCraftOnePressed(int i, boolean craftOnePressed, boolean andUpdateServer) {
+	public void setCraftOnePressed(boolean craftOnePressed, int i, boolean andUpdateServer) {
+//		LogHelper.info("InventoryBlueprints: Set craftOne to " + craftOnePressed + " on " + FMLCommonHandler.instance().getEffectiveSide());
 		this.craftOne = craftOnePressed;
+		blueprintPressed = (short) i;
 		if (andUpdateServer)
 			sendUpdateToServer();
 	}
@@ -129,7 +147,7 @@ public class InventoryBlueprints extends InventoryBasic {
 	}
 
 	/** The number of seconds required to craft an item */
-	private static final short CRAFT_TIME_FOR_ITEM = (short) BALANCE.MORTAR_AND_PESTLE.CRAFT_TIME_FOR_ITEM;
+	private static short CRAFT_TIME_FOR_ITEM;
 
 	/** The number of seconds the current item has been crafting 
 	 *  Logic:
@@ -145,7 +163,7 @@ public class InventoryBlueprints extends InventoryBasic {
 
 	int tick = 20;
 	
-	// This method is called every tick to update the tile entity, i.e.
+	// This method is called every tick to update the tile entity (called from LivingUpdateEvent)
 	// It runs both on the server and the client.
 	public void update() {
 		if (tick >= 0){
@@ -154,6 +172,8 @@ public class InventoryBlueprints extends InventoryBasic {
 		} else {
 			tick = 20;
 		}
+
+//		LogHelper.info("InventoryBlueprints: Update called on " + FMLCommonHandler.instance().getEffectiveSide());
 		
 		// If not crafting an item, return
 		if (!craftOne)
@@ -165,6 +185,7 @@ public class InventoryBlueprints extends InventoryBasic {
 			if (!craftItem(false)){
 				craftOne = false;
 				craftingTime = -1;
+				return;
 			}
 		}
 		else
@@ -172,7 +193,7 @@ public class InventoryBlueprints extends InventoryBasic {
 		
 		// If craftingTime has reached -1, try and craft the item
 		if (craftingTime < 0) {
-			LogHelper.info("TileInventorySmith: About to craft the item on " + (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT ? "client" : "server"));
+			LogHelper.info("InventoryBlueprints: About to craft the item on " + FMLCommonHandler.instance().getEffectiveSide());
 			craftItem();
 			craftOne = false;
 		}
@@ -205,26 +226,24 @@ public class InventoryBlueprints extends InventoryBasic {
 		if (result == null)
 			return false;
 		
-//		LogHelper.info("TileInventorySmithy: Update called on " + (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT ? "client" : "server"));
-//		LogHelper.info("TileInventorySmithy: craftAll = " + (craftAll == true ? "true" : "false"));
-
 		// find the first suitable output slot, 1st check for identical item that has enough space
 		for (int outputSlot = ARKPlayer.LAST_INVENTORY_SLOT; outputSlot > ARKPlayer.FIRST_INVENTORY_SLOT; outputSlot--) {
-			ItemStack outputStack = getStackInSlot(outputSlot);
+			ItemStack outputStack = invCrafting.getStackInSlot(outputSlot);
 			if (outputStack != null && outputStack.getItem() == result.getItem() && 
 					(!outputStack.getHasSubtypes() || outputStack.getMetadata() == outputStack.getMetadata())
 					&& ItemStack.areItemStackTagsEqual(outputStack, result)) {
-				int combinedSize = getStackInSlot(outputSlot).stackSize + result.stackSize;
-				if (combinedSize <= getInventoryStackLimit() && combinedSize <= getStackInSlot(outputSlot).getMaxStackSize()) {
+				int combinedSize = invCrafting.getStackInSlot(outputSlot).stackSize + result.stackSize;
+				if (combinedSize <= invCrafting.getInventoryStackLimit() && combinedSize 
+						<= invCrafting.getStackInSlot(outputSlot).getMaxStackSize()) {
 					firstSuitableOutputSlot = outputSlot;
 					break;
 				}
 			}
 		}
 		if (firstSuitableOutputSlot == null) {
-			// 2nd look for for empty slot if no partially filled slots are found
+			// 2nd look for empty slot if no partially filled slots are found
 			for (int outputSlot = ARKPlayer.LAST_INVENTORY_SLOT; outputSlot > ARKPlayer.FIRST_INVENTORY_SLOT; outputSlot--) {
-				ItemStack outputStack = getStackInSlot(outputSlot);
+				ItemStack outputStack = invCrafting.getStackInSlot(outputSlot);
 				if (outputStack == null) {
 					firstSuitableOutputSlot = outputSlot;
 					break;
@@ -238,40 +257,52 @@ public class InventoryBlueprints extends InventoryBasic {
 
 		// finds if there is enough inventory to craft the result
 		if (!doCraftItem) {
-//			numThatCanBeCrafted = (short) SmithyCraftingManager.getInstance().hasMatchingRecipe(result, itemStacks, false);
-			numThatCanBeCrafted = (short) PlayerCraftingManager.getInstance().hasMatchingRecipe(result, this.getItemStacks(), false);
+			// FIXME: Search crafting inventory!
+			numThatCanBeCrafted = (short) craftingManager.hasMatchingRecipe(result, getItemStacks(invCrafting), false);
 			if (numThatCanBeCrafted <= 0) {
-				LogHelper.info("TileInventorySmithy: Can't craft item from inventory.");
+				LogHelper.info("InventoryBlueprints: Can't craft item from inventory.");
 				return false;			
 			}
 			return true;
 		}
 
 		// Craft an item
-		int numCrafted = (short) PlayerCraftingManager.getInstance().hasMatchingRecipe(result, this.getItemStacks(), true);
+		int numCrafted = (short) craftingManager.hasMatchingRecipe(result, getItemStacks(invCrafting), true);
 		
 		if (numCrafted <= 0)
 			return false;
 
 		// alter output slot
-		LogHelper.info("TileInventorySmithy: Update called on " + (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT ? "client" : "server"));
-		LogHelper.info("TileInventorySmithy: Copy craft result to slot: " + firstSuitableOutputSlot);
-		if (getStackInSlot(firstSuitableOutputSlot) == null) {
-			this.setInventorySlotContents(firstSuitableOutputSlot, result.copy()); // Use deep .copy() to avoid altering the recipe
+		LogHelper.info("InventoryBlueprints: Copy craft result to slot: " + firstSuitableOutputSlot);
+		if (invCrafting.getStackInSlot(firstSuitableOutputSlot) == null) {
+			invCrafting.setInventorySlotContents(firstSuitableOutputSlot, result.copy()); // Use deep .copy() to avoid altering the recipe
 		} else {
-			getStackInSlot(firstSuitableOutputSlot).stackSize += result.stackSize;
+			invCrafting.getStackInSlot(firstSuitableOutputSlot).stackSize += result.stackSize;
 		}
 		markDirty();
 		return true;
 	}
 
-	private ItemStack[] getItemStacks() {
-		ItemStack[] blueprintStacks = new ItemStack[getSizeInventory()];
-		for (int i = 0; i < getSizeInventory(); i++)
-            blueprintStacks[i] = getStackInSlot(i);
-		return blueprintStacks;
+	private ItemStack[] getItemStacks(IInventory inv) {
+		ItemStack[] itemStacks = new ItemStack[inv.getSizeInventory()];
+		for (int i = 0; i < inv.getSizeInventory(); i++)
+			itemStacks[i] = inv.getStackInSlot(i);
+		return itemStacks;
 	}
 
+	@SuppressWarnings("rawtypes")
+	public void fillInventoryWithRecipes(){
+		List recipes = craftingManager.getRecipeList();
+        Iterator iterator = recipes.iterator();
+        IARKRecipe irecipe;
+        int i = 0;
+        while (iterator.hasNext() && i < getSizeInventory()){
+            irecipe = (IARKRecipe)iterator.next();
+            setInventorySlotContents(i, irecipe.getRecipeOutput());
+            i++;
+        }	
+	}
+	
 //	public int getBlueprintSelected() {
 //	// TODO Auto-generated method stub
 //	return 0;

@@ -1,11 +1,8 @@
 package com.arkcraft.mod.common.handlers;
 
-import com.arkcraft.mod.common.items.ARKCraftItems;
 import com.google.common.collect.Lists;
 
 import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.ShapedRecipes;
@@ -22,13 +19,11 @@ import java.util.List;
  *
  */
 @SuppressWarnings({ "unchecked", "rawtypes" })
-public class PestleCraftingManager {
+public class ARKCraftingManager {
 	
-	private static PestleCraftingManager instance = null;
-    private final List recipes = Lists.newArrayList();
-    
-	public PestleCraftingManager() {
-		instance = this; 
+	private final List recipes = Lists.newArrayList();
+
+	public ARKCraftingManager() {
 		Collections.sort(this.recipes, new Comparator() {
             public int compare(IARKRecipe p_compare_1_, IARKRecipe p_compare_2_) {
                 return p_compare_1_ instanceof ARKShapelessRecipe && p_compare_2_ instanceof ShapedRecipes ? 1 : 
@@ -42,18 +37,12 @@ public class PestleCraftingManager {
         });
 	}
 	
-	public static PestleCraftingManager getInstance() {
-		if (instance == null)
-			instance = new PestleCraftingManager();
-		return instance; 
-	}
-
     /**
      * Adds a shapeless crafting recipe to the game.
      *  
      * @param recipeComponents An array of ItemStack's Item's and Block's that make up the recipe.
      */
-    public void addShapelessRecipe(ItemStack stack, Object ... recipeComponents){
+	public void addShapelessRecipe(ItemStack stack, Object ... recipeComponents){
         ArrayList arraylist = Lists.newArrayList();
         Object[] aobject = recipeComponents;
         int i = recipeComponents.length;
@@ -133,17 +122,4 @@ public class PestleCraftingManager {
     public int getNumRecipes() {
     	return this.recipes.size();
     }
-    
-	public static void registerPestleCraftingRecipes() {
-		PestleCraftingManager.getInstance().addShapelessRecipe(
-				new ItemStack(ARKCraftItems.narcotics, 1),
-				new ItemStack(Items.bowl), 
-				new ItemStack(ARKCraftItems.narcoBerry)
-				);
-		PestleCraftingManager.getInstance().addShapelessRecipe(
-				new ItemStack(ARKCraftItems.gun_powder, 1),
-				new ItemStack(Blocks.stone), 
-				new ItemStack(ARKCraftItems.narcoBerry)
-				);
-	}
 }
