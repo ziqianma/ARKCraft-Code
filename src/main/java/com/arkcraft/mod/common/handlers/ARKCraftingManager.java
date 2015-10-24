@@ -1,5 +1,6 @@
 package com.arkcraft.mod.common.handlers;
 
+import com.arkcraft.mod.client.gui.InventoryPlayerCrafting;
 import com.google.common.collect.Lists;
 
 import net.minecraft.block.Block;
@@ -74,6 +75,11 @@ public class ARKCraftingManager {
         this.recipes.add(recipe);
     }
 
+    // Added so we can use InventoryPlayerCrafting
+    public int hasMatchingRecipe(ItemStack output, InventoryPlayerCrafting inventory, boolean craft){
+    	return hasMatchingRecipe(output, inventory.getItemStacks(), craft);
+    }
+    
     /**
      * Returns number of matches for inventory that exists, also deducts inventory if craft = true
      */

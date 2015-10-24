@@ -11,7 +11,6 @@ import com.arkcraft.mod.common.lib.LogHelper;
 import com.arkcraft.mod.common.network.UpdatePlayerCrafting;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -28,14 +27,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
  */
 public class InventoryBlueprints extends InventoryBasic {
 	ARKCraftingManager craftingManager;
-	IInventory invCrafting;
+	InventoryPlayerCrafting invCrafting;
 	
 	public InventoryBlueprints(String title, boolean customName, int slotCount) {
 		super(title, customName, slotCount);
 	}
 
 	public InventoryBlueprints(String title, boolean customName, int slotCount, ARKCraftingManager craftingManager,
-			IInventory invCrafting, short craftTimeForItem) {
+			InventoryPlayerCrafting invCrafting, short craftTimeForItem) {
 		super(title, customName, slotCount);
 		this.craftingManager = craftingManager; 
 		setNumBlueprints(craftingManager.getNumRecipes());
@@ -98,7 +97,6 @@ public class InventoryBlueprints extends InventoryBasic {
 	//----------------- End of normal inventory function, rest for crafting -----------------
 
     // Variables to sync from client to server
-//	private boolean craftAll = false;
 	private boolean craftOne = false;
 	private short blueprintPressed = 0; // Button pressed
 	
@@ -138,9 +136,16 @@ public class InventoryBlueprints extends InventoryBasic {
 	/** The number of items that can be crafted */
 	private short numThatCanBeCrafted = 0;
 
+	private final int craftTickRefreshRate = 5;
+	private int canCraftTick = craftTickRefreshRate;
     @SideOnly(Side.CLIENT)
 	public int getNumToBeCrafted() {
-		if (tick == 20){
+		if (canCraftTick >= 0){
+			canCraftTick--;
+		} else {
+			canCraftTick = craftTickRefreshRate;
+		}
+		if (canCraftTick == craftTickRefreshRate){
 			canCraft();
 		}
 		return numThatCanBeCrafted;
@@ -161,9 +166,9 @@ public class InventoryBlueprints extends InventoryBasic {
 		return (int) craftingTime;
 	}
 
-	int tick = 20;
+	private int tick = 20;
 	
-	// This method is called every tick to update the tile entity (called from LivingUpdateEvent)
+	// This method is called every tick to update the tile entity (called from PlayerTickEvent)
 	// It runs both on the server and the client.
 	public void update() {
 		if (tick >= 0){
@@ -178,6 +183,7 @@ public class InventoryBlueprints extends InventoryBasic {
 		// If not crafting an item, return
 		if (!craftOne)
 			return;
+		
 		// Reset crafting time if it reaches -1 (is true after crafting one of multiple, or after pushing button in GUI)
 		if (craftingTime < 0){
 			craftingTime = CRAFT_TIME_FOR_ITEM;
@@ -256,19 +262,18 @@ public class InventoryBlueprints extends InventoryBasic {
 		}
 
 		// finds if there is enough inventory to craft the result
-		if (!doCraftItem) {
-			// FIXME: Search crafting inventory!
-			numThatCanBeCrafted = (short) craftingManager.hasMatchingRecipe(result, getItemStacks(invCrafting), false);
-			if (numThatCanBeCrafted <= 0) {
-				LogHelper.info("InventoryBlueprints: Can't craft item from inventory.");
-				return false;			
-			}
-			return true;
+		numThatCanBeCrafted = (short) craftingManager.hasMatchingRecipe(result, invCrafting, false);
+		if (numThatCanBeCrafted <= 0) {
+			LogHelper.info("InventoryBlueprints: Can't craft item from inventory.");
+			return false;			
 		}
+		else if (!doCraftItem)
+			return true;
 
-		// Craft an item
-		int numCrafted = (short) craftingManager.hasMatchingRecipe(result, getItemStacks(invCrafting), true);
+		// Craft an item (after testing that there is enough inventory above)
+		int numCrafted = (short) craftingManager.hasMatchingRecipe(result, invCrafting, true);
 		
+		// This should never be true!
 		if (numCrafted <= 0)
 			return false;
 
@@ -279,15 +284,8 @@ public class InventoryBlueprints extends InventoryBasic {
 		} else {
 			invCrafting.getStackInSlot(firstSuitableOutputSlot).stackSize += result.stackSize;
 		}
-		markDirty();
+		invCrafting.markDirty();
 		return true;
-	}
-
-	private ItemStack[] getItemStacks(IInventory inv) {
-		ItemStack[] itemStacks = new ItemStack[inv.getSizeInventory()];
-		for (int i = 0; i < inv.getSizeInventory(); i++)
-			itemStacks[i] = inv.getStackInSlot(i);
-		return itemStacks;
 	}
 
 	@SuppressWarnings("rawtypes")
@@ -301,25 +299,5 @@ public class InventoryBlueprints extends InventoryBasic {
             setInventorySlotContents(i, irecipe.getRecipeOutput());
             i++;
         }	
-	}
-	
-//	public int getBlueprintSelected() {
-//	// TODO Auto-generated method stub
-//	return 0;
-//}
-
-//	public void setCraftAllPressed(boolean b, boolean c) {
-//		// TODO Auto-generated method stub
-//		
-//	}
-
-//	public boolean isCraftingAll() {
-//	// TODO Auto-generated method stub
-//	return false;
-//}
-
-//	public String getNumToBeCrafted() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
+	}	
 }

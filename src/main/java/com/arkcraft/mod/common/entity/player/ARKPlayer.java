@@ -129,7 +129,6 @@ public class ARKPlayer implements IExtendedEntityProperties {
 	public static final int BLUEPRINT_SLOTS_COUNT = 20;
 	public static final int FIRST_BLUEPRINT_SLOT = 0;
 	public static final int INVENTORY_SLOTS_COUNT = 10;
-//	public static final int TOTAL_SLOTS_COUNT = INVENTORY_SLOTS_COUNT;
 	public static final int FIRST_INVENTORY_SLOT = 0;
 	public static final int LAST_INVENTORY_SLOT = INVENTORY_SLOTS_COUNT - 1; 
 	

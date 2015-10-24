@@ -133,6 +133,7 @@ public class GuiPlayerCrafting extends GuiContainer {
 				if (isInRect(x, y, CRAFT_BUTTON_WIDTH, CRAFT_BUTTON_HEIGHT, mouseX, mouseY)){
 					ItemStack stack = inventoryBlueprints.getStackInSlot(i);
 					String itemName = stack.getItem().getItemStackDisplayName(stack);
+					// TODO: Disable buttons if the item can't be crafted!
 					hoveringText.add(itemName + " - Can craft " + inventoryBlueprints.getNumToBeCrafted());
 				}
 			}
