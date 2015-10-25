@@ -11,23 +11,20 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.event.FOVUpdateEvent;
-import net.minecraftforge.client.event.MouseEvent;
-import net.minecraftforge.client.event.RenderHandEvent;
-import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 import net.minecraftforge.fml.common.gameevent.TickEvent.RenderTickEvent;
 
 import com.arkcraft.mod.GlobalAdditions;
 import com.arkcraft.mod.common.ARKCraft;
 import com.arkcraft.mod.common.entity.player.ARKPlayer;
-import com.arkcraft.mod.common.items.weapons.ItemLongneckRifle;
 import com.arkcraft.mod.common.lib.KeyBindings;
+
 import com.arkcraft.mod.common.lib.LogHelper;
+import com.arkcraft.mod.common.network.OpenPlayerCrafting;
 
 /**
  * 
@@ -40,9 +37,10 @@ public class FMLCommonEventHandler {
 	
 	private static final Minecraft mc = Minecraft.getMinecraft();
 	private static final ResourceLocation OVERLAY_TEXTURE = new ResourceLocation(ARKCraft.MODID, "textures/gui/scope.png");
+	public boolean ShowScopeOverlap = false;
 	
 	@SubscribeEvent
-	public void onPlayerPooping(InputEvent.KeyInputEvent event) {
+	public void onPlayerKeypressed(InputEvent.KeyInputEvent event) {
 		if (KeyBindings.playerPooping.isPressed()) {
 			EntityPlayerSP player = Minecraft.getMinecraft().thePlayer;
 			if (player instanceof EntityPlayerSP) {
@@ -53,12 +51,20 @@ public class FMLCommonEventHandler {
 			EntityPlayerSP player = Minecraft.getMinecraft().thePlayer;
 			if (player instanceof EntityPlayerSP) {
 				player.openGui(ARKCraft.instance(), GlobalAdditions.GUI.PLAYER.getID(),	player.worldObj, 0, 0, 0);
+				ARKCraft.modChannel.sendToServer(new OpenPlayerCrafting(true));
 			}			
 		}
+		
 	}	
-    
-	public boolean ShowScopeOverlap = false;
-	
+
+	@SubscribeEvent
+	public void onPlayerTickEvent(TickEvent.PlayerTickEvent event) {
+		// Update CraftingInventory
+		if (ARKPlayer.get(event.player).getInventoryBlueprints().isCrafting()){
+			ARKPlayer.get(event.player).getInventoryBlueprints().update();
+		}
+	}
+
     @SubscribeEvent
     public void onRenderTick(RenderTickEvent evt) {
     	
@@ -76,8 +82,6 @@ public class FMLCommonEventHandler {
 	        IExtendedReach ieri;
 	     	if (stack != null)
         	{
-	        //    	LogHelper.info("ItemStack != null");
-	        //      if (stack.getItem() instanceof ItemLongneckRifle)
 	     		 if (stack.getItem() instanceof IExtendedReach)
 	             {
 	                 ieri = (IExtendedReach) stack.getItem();
@@ -87,9 +91,8 @@ public class FMLCommonEventHandler {
 	             }
 	     	     if (ieri != null)
 	             {
-	                	ShowScopeOverlap = true;//bla();
+	                	ShowScopeOverlap = true;
 	             }
-	       //      ShowScopeOverlap = true;
         	}
         }
     	else ShowScopeOverlap = false;
@@ -127,35 +130,4 @@ public class FMLCommonEventHandler {
         
         GL11.glPopMatrix();
     }
-	
-	@SubscribeEvent
-	public void onMouseEvent(MouseEvent event)
-	{ 
-		LogHelper.info("On Mouse Event"); 
-	    if (event.button == 0 && event.buttonstate)
-	    {
-	        Minecraft mc = Minecraft.getMinecraft();
-	        EntityPlayer thePlayer = mc.thePlayer;
-	        if (thePlayer != null)
-	        {
-	            ItemStack itemstack = thePlayer.getCurrentEquippedItem();
-	            IExtendedReach ieri;
-	            if (itemstack != null)
-	            {
-	                if (itemstack.getItem() instanceof IExtendedReach)
-	                {
-	                    ieri = (IExtendedReach) itemstack.getItem();
-	                } else
-	                {
-	                    ieri = null;
-	                }
-	   
-	                if (ieri != null)
-	                {
-	                	ShowScopeOverlap = true;//bla();
-	                }
-	            }
-	        }
-	    }
-	}     
 }	
