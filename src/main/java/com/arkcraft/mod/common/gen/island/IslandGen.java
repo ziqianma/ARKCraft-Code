@@ -48,7 +48,7 @@ public class IslandGen
                     }
                     else
                     {
-                        heightmap[x][y] = (short) ((height / ((2.0F - getScaled(height, 255, 2)) + 1.0F)) + 20);
+                        heightmap[x][y] = (short) ((height / ((2.0F - getScaled(height, 255, 2)) + 1.25F)) + 15);
                     }
                 }
             }

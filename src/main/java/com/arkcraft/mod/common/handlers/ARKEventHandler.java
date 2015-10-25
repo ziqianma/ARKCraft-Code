@@ -91,7 +91,7 @@ public class ARKEventHandler {
 		Random r = new Random();
 		int j = r.nextInt(3);
 		int k = r.nextInt(5)+1;
-		System.out.println(j);
+//		System.out.println(j);
 		if (event.harvester != null && event.harvester.getHeldItem() != null && event.state.getBlock() == Blocks.log || event.state.getBlock() == Blocks.log2) {
 			if(event.harvester.getHeldItem().getItem() instanceof ItemPickaxe){
 			for (int i = 0; i < k; i++) {
