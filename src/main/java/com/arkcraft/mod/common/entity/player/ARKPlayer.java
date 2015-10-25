@@ -4,6 +4,7 @@ import com.arkcraft.mod.client.gui.InventoryBlueprints;
 import com.arkcraft.mod.client.gui.InventoryPlayerCrafting;
 import com.arkcraft.mod.common.ARKCraft;
 import com.arkcraft.mod.common.handlers.PlayerCraftingManager;
+import com.arkcraft.mod.common.lib.BALANCE;
 import com.arkcraft.mod.common.lib.LogHelper;
 import com.arkcraft.mod.common.network.PlayerPoop;
 
@@ -22,8 +23,6 @@ import net.minecraftforge.common.IExtendedEntityProperties;
 public class ARKPlayer implements IExtendedEntityProperties {
 	public static final String EXT_PROP_NAME = "ARKPlayer";
 	private final EntityPlayer player;
-	private InventoryBlueprints inventoryBlueprints = new InventoryBlueprints("Blueprints", false, BLUEPRINT_SLOTS_COUNT);
-	private InventoryPlayerCrafting inventoryPlayerCrafting = new InventoryPlayerCrafting("Crafting", false, INVENTORY_SLOTS_COUNT);
 	
 	// The extended player properties (anything below should be initialized in constructor and in NBT):
 	private boolean canPoop;         // True if player can poop (timer sets this)
@@ -32,7 +31,6 @@ public class ARKPlayer implements IExtendedEntityProperties {
 		// Initialize some stuff
 		this.player = player;
 		this.setCanPoop(false);
-		inventoryBlueprints.setNumBlueprints(PlayerCraftingManager.getInstance().getNumRecipes());
 	}
 
 	/**
@@ -58,8 +56,9 @@ public class ARKPlayer implements IExtendedEntityProperties {
 		NBTTagCompound properties = new NBTTagCompound();
 		// ARK player properties
 		properties.setBoolean("canPoop", canPoop());
-		LogHelper.info("ARKPlayer saveNBTData: Player can " + (canPoop ? "" : "not") + " poop.");
+//		LogHelper.info("ARKPlayer saveNBTData: Player can " + (canPoop ? "" : "not") + " poop.");
 		compound.setTag(EXT_PROP_NAME, properties);
+		inventoryPlayerCrafting.saveInventoryToNBT(compound);
 	}
 
 	@Override
@@ -69,7 +68,8 @@ public class ARKPlayer implements IExtendedEntityProperties {
 			return;
 		// ARK player properties 
 		this.setCanPoop(properties.getBoolean("canPoop"));
-		LogHelper.info("ARKPlayer loadNBTData: Player can " + (canPoop ? "" : "not") + " poop.");
+//		LogHelper.info("ARKPlayer loadNBTData: Player can " + (canPoop ? "" : "not") + " poop.");
+		inventoryPlayerCrafting.loadInventoryFromNBT(compound);
 	}
 
 	/**
@@ -93,6 +93,7 @@ public class ARKPlayer implements IExtendedEntityProperties {
 		return player;
 	}
 
+	//---------Pooping -----------------
 	public boolean canPoop() {
 		return canPoop;
 	}
@@ -117,13 +118,19 @@ public class ARKPlayer implements IExtendedEntityProperties {
 
 	//----------------- End of Properties stuff, rest is for crafting -----------------
 	
+	// Inventory for Crafting
+	private InventoryPlayerCrafting inventoryPlayerCrafting = new InventoryPlayerCrafting("Crafting", false, 
+			INVENTORY_SLOTS_COUNT);
+	private InventoryBlueprints inventoryBlueprints = new InventoryBlueprints("Blueprints", false, 
+			BLUEPRINT_SLOTS_COUNT, PlayerCraftingManager.getInstance(), inventoryPlayerCrafting,
+			(short) BALANCE.PLAYER_CRAFTING.CRAFT_TIME_FOR_ITEM);
+	
 	// Constants for the inventory
+	public static final int BLUEPRINT_SLOTS_COUNT = 20;
+	public static final int FIRST_BLUEPRINT_SLOT = 0;
 	public static final int INVENTORY_SLOTS_COUNT = 10;
-	public static final int TOTAL_SLOTS_COUNT = INVENTORY_SLOTS_COUNT;
 	public static final int FIRST_INVENTORY_SLOT = 0;
 	public static final int LAST_INVENTORY_SLOT = INVENTORY_SLOTS_COUNT - 1; 
-	public static final int BLUEPRINT_SLOTS_COUNT = 20;
-	public static final int FIRST_BLUEPRINT_SLOT = 10;
 	
 	public InventoryBlueprints getInventoryBlueprints() {
 		return inventoryBlueprints;

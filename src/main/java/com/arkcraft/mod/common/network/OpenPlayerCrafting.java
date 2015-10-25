@@ -1,6 +1,8 @@
 package com.arkcraft.mod.common.network;
 
-import com.arkcraft.mod.common.items.ARKCraftItems;
+import com.arkcraft.mod.GlobalAdditions;
+import com.arkcraft.mod.common.ARKCraft;
+
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -9,19 +11,19 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 
 /**
- * Used so the player can poop
+ * Used so the player can open the Crafting GUI
  * @author William
  *
  */
-public class PlayerPoop implements IMessage {
+public class OpenPlayerCrafting implements IMessage {
 	boolean doIt;  // Not used yet
 	
 	/**
 	 * Don't use
 	 */
-	public PlayerPoop() {	}
+	public OpenPlayerCrafting() {	}
 
-	public PlayerPoop(boolean doIt) {
+	public OpenPlayerCrafting(boolean doIt) {
 		this.doIt = doIt;
 	}
 
@@ -35,9 +37,9 @@ public class PlayerPoop implements IMessage {
 		buf.writeBoolean(this.doIt);
 	}
 
-	public static class Handler implements IMessageHandler<PlayerPoop, IMessage> {
+	public static class Handler implements IMessageHandler<OpenPlayerCrafting, IMessage> {
 		@Override
-		public IMessage onMessage(final PlayerPoop message, MessageContext ctx) {
+		public IMessage onMessage(final OpenPlayerCrafting message, MessageContext ctx) {
 		    if (ctx.side != Side.SERVER) {
 		        System.err.println("MPUpdateDoCraft received on wrong side:" + ctx.side);
 		        return null;
@@ -51,10 +53,11 @@ public class PlayerPoop implements IMessage {
 			return null;			
 		}
 	}
-	
-	static void processMessage(PlayerPoop message, EntityPlayerMP player){
+
+	// On Server
+	static void processMessage(OpenPlayerCrafting message, EntityPlayerMP player){
 		if (player != null) {
-			player.dropItem(ARKCraftItems.player_feces, 1);
+			player.openGui(ARKCraft.instance(), GlobalAdditions.GUI.PLAYER.getID(),	player.worldObj, 0, 0, 0);
 		}
 	}
 }

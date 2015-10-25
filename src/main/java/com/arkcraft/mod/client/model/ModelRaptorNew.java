@@ -1,7 +1,7 @@
 package com.arkcraft.mod.client.model;
 
-import com.arkcraft.mod.client.model.tools.MowzieModelBase;
-import com.arkcraft.mod.client.model.tools.MowzieModelRenderer;
+import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelBase;
+import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelRenderer;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
