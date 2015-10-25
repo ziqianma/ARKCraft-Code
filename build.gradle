@@ -21,6 +21,18 @@ minecraft {
     // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
 }
 
+repositories {
+	mavenCentral()
+	maven {
+		name = "ilexiconn"
+		url = "http://maven.ilexiconn.net"
+	}
+}
+
+dependencies {
+	compile 'net.ilexiconn:llibrary:0.4.3-1.8:dev'
+}
+
 dependencies {
     // you may put jars on which you depend on in ./libs
     // or you may define them like so..
