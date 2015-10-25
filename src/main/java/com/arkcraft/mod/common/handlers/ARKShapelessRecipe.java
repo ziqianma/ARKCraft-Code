@@ -14,7 +14,7 @@ public class ARKShapelessRecipe implements IARKRecipe {
     /** Is a List of ItemStack that composes the recipe. */
     @SuppressWarnings("rawtypes")
 	public final List recipeItems;
-//	public final static int ANY = 32767 - 1;
+	public final static int ANY = 32767; // Normally 32767
 
     @SuppressWarnings("rawtypes")
 	public ARKShapelessRecipe(ItemStack output, List inputList) {
@@ -40,29 +40,13 @@ public class ARKShapelessRecipe implements IARKRecipe {
                 while (recipeIterator.hasNext()){
                 	ItemStack itemstackInRecipe = (ItemStack)recipeIterator.next();
                 	if (itemstack.getItem() == itemstackInRecipe.getItem() && itemstack.stackSize >= itemstackInRecipe.stackSize 
-                        && (itemstackInRecipe.getMetadata() == 32767 || itemstack.getMetadata() == itemstackInRecipe.getMetadata())){
+                        && (itemstackInRecipe.getMetadata() == ANY || itemstack.getMetadata() == itemstackInRecipe.getMetadata())){
                         recipelist.remove(itemstackInRecipe);
                     	itemStacksInventory[i].stackSize -= itemstackInRecipe.stackSize;
                     	if (itemStacksInventory[i].stackSize <= 0)
                     		itemStacksInventory[i] = null;
                         break;
                     }
-//                	if (itemstack.getItem() == itemstackInRecipe.getItem() && itemstack.stackSize >= itemstackInRecipe.stackSize){
-//                		if (itemstackInRecipe.getMetadata() == ANY){
-//                            recipelist.remove(itemstackInRecipe);
-//                        	itemStacksInventory[i].stackSize -= itemstackInRecipe.stackSize;
-//                        	if (itemStacksInventory[i].stackSize <= 0)
-//                        		itemStacksInventory[i] = null;
-//                            break;
-//                		}
-//                		else if (itemstack.getMetadata() == itemstackInRecipe.getMetadata()){
-//                            recipelist.remove(itemstackInRecipe);
-//                        	itemStacksInventory[i].stackSize -= itemstackInRecipe.stackSize;
-//                        	if (itemStacksInventory[i].stackSize <= 0)
-//                        		itemStacksInventory[i] = null;
-//                            break;
-//                		}
-//                	}
                 }
                 if (recipelist.isEmpty()){
                 	return 1;
@@ -97,16 +81,9 @@ public class ARKShapelessRecipe implements IARKRecipe {
         	ItemStack itemstack = itemStacksInventory[i];
             if (itemstack != null){
             	if (itemstack.getItem() == itemstackInRecipe.getItem()
-                        && (itemstackInRecipe.getMetadata() == 32767 || itemstack.getMetadata() == itemstackInRecipe.getMetadata())){
+                        && (itemstackInRecipe.getMetadata() == ANY || itemstack.getMetadata() == itemstackInRecipe.getMetadata())){
             		numInStack += itemstack.stackSize;
             	}
-//            	if (itemstack.getItem() == itemstackInRecipe.getItem()) {
-//                    if (itemstackInRecipe.getMetadata() == ANY)
-//                    	numInStack += itemstack.stackSize;
-//                    else if (itemstack.getMetadata() == itemstackInRecipe.getMetadata()){
-//                    	numInStack += itemstack.stackSize;
-//                    }
-//            	}
             }
         }
 		return numInStack / itemstackInRecipe.stackSize;

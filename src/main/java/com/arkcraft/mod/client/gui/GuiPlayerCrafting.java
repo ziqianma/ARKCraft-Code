@@ -47,10 +47,10 @@ public class GuiPlayerCrafting extends GuiContainer {
 	final int BLUEPRINT_WIDTH = 16;
 	final int BLUEPRINT_HEIGHT = 16;
 
-	final int CRAFT_BUTTON_XPOS = 19;
-	final int CRAFT_BUTTON_YPOS = 41;
-	final int CRAFT_BUTTON_WIDTH = 47;
-	final int CRAFT_BUTTON_HEIGHT = 12;
+//	final int CRAFT_BUTTON_XPOS = 19;
+//	final int CRAFT_BUTTON_YPOS = 41;
+//	final int CRAFT_BUTTON_WIDTH = 47;
+//	final int CRAFT_BUTTON_HEIGHT = 12;
 
     /**
      * Adds the buttons (and other controls) to the screen in question.
@@ -123,18 +123,23 @@ public class GuiPlayerCrafting extends GuiContainer {
 		List<String> hoveringText = new ArrayList<String>();
 
 		// Add hovering text if the mouse is over a button
-		for(int row = 0; row < ContainerInventoryPlayerCrafting.NUM_ROWS_BP; row++) {
-			for(int col = 0; col < ContainerInventoryPlayerCrafting.NUM_COLUMNS_BP; col++) {
-				int i = col + row * ContainerInventoryPlayerCrafting.NUM_COLUMNS_BP;
-				if (i >= inventoryBlueprints.getNumBlueprints() - 1)
-					break;
+		for(int i = 0, row = 0; row < ContainerInventoryPlayerCrafting.NUM_ROWS_BP; row++) {
+			for(int col = 0; col < ContainerInventoryPlayerCrafting.NUM_COLUMNS_BP; col++, i++) {
+				if (i >= inventoryBlueprints.getNumBlueprints()){
+					// Exit loops
+					row = ContainerInventoryPlayerCrafting.NUM_ROWS_BP;
+					break;					
+				}
 				int x = guiLeft + ContainerInventoryPlayerCrafting.BLUEPRINT_XPOS + col * 18;
 				int y = guiTop + ContainerInventoryPlayerCrafting.BLUEPRINT_YPOS + row * 18;
-				if (isInRect(x, y, CRAFT_BUTTON_WIDTH, CRAFT_BUTTON_HEIGHT, mouseX, mouseY)){
+				if (isInRect(x, y, BLUEPRINT_WIDTH, BLUEPRINT_HEIGHT, mouseX, mouseY)){
 					ItemStack stack = inventoryBlueprints.getStackInSlot(i);
 					String itemName = stack.getItem().getItemStackDisplayName(stack);
 					// TODO: Disable buttons if the item can't be crafted!
-					hoveringText.add(itemName + " - Can craft " + inventoryBlueprints.getNumToBeCrafted());
+					hoveringText.add(itemName + " - Can craft " + inventoryBlueprints.getNumToBeCrafted(i));
+					// Exit loops
+					row = ContainerInventoryPlayerCrafting.NUM_ROWS_BP;
+					break;
 				}
 			}
 		}

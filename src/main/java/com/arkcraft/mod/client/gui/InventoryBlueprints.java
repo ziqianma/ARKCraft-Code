@@ -44,39 +44,39 @@ public class InventoryBlueprints extends InventoryBasic {
 	}
 
     public void loadInventoryFromNBT(NBTTagCompound nbt)  {
-		final byte NBT_TYPE_COMPOUND = 10;  
-		NBTTagList dataForAllBlueprints = nbt.getTagList("Blueprints", NBT_TYPE_COMPOUND);
-		loadInventoryFromNBT(dataForAllBlueprints);
+//		final byte NBT_TYPE_COMPOUND = 10;  
+//		NBTTagList dataForAllBlueprints = nbt.getTagList("Blueprints", NBT_TYPE_COMPOUND);
+//		loadInventoryFromNBT(dataForAllBlueprints);
     }
     
     public void loadInventoryFromNBT(NBTTagList nbt)  {
-        int i;
-        for (i = 0; i < this.getSizeInventory(); ++i) {
-            this.setInventorySlotContents(i, (ItemStack)null);
-        }
-        for (i = 0; i < nbt.tagCount(); ++i) {
-            NBTTagCompound nbttagcompound = nbt.getCompoundTagAt(i);
-            int j = nbttagcompound.getByte("Slot") & 255;
-
-            if (j >= 0 && j < this.getSizeInventory()) {
-                this.setInventorySlotContents(j, ItemStack.loadItemStackFromNBT(nbttagcompound));
-            }
-        }
+//        int i;
+//        for (i = 0; i < this.getSizeInventory(); ++i) {
+//            this.setInventorySlotContents(i, (ItemStack)null);
+//        }
+//        for (i = 0; i < nbt.tagCount(); ++i) {
+//            NBTTagCompound nbttagcompound = nbt.getCompoundTagAt(i);
+//            int j = nbttagcompound.getByte("Slot") & 255;
+//
+//            if (j >= 0 && j < this.getSizeInventory()) {
+//                this.setInventorySlotContents(j, ItemStack.loadItemStackFromNBT(nbttagcompound));
+//            }
+//        }
     }
 
     public void saveInventoryToNBT(NBTTagCompound nbt) {
-        NBTTagList nbttaglist = new NBTTagList();
-        for (int i = 0; i < this.getSizeInventory(); ++i) {
-            ItemStack itemstack = this.getStackInSlot(i);
-            if (itemstack != null) {
-                NBTTagCompound nbttagcompound = new NBTTagCompound();
-                nbttagcompound.setByte("Slot", (byte)i);
-                itemstack.writeToNBT(nbttagcompound);
-                nbttaglist.appendTag(nbttagcompound);
-                LogHelper.info("InventoryBlueprints: Saved a " + itemstack.getItem() + " to inventory.");
-            }
-        }
-		nbt.setTag("Blueprints", nbttaglist);
+//        NBTTagList nbttaglist = new NBTTagList();
+//        for (int i = 0; i < this.getSizeInventory(); ++i) {
+//            ItemStack itemstack = this.getStackInSlot(i);
+//            if (itemstack != null) {
+//                NBTTagCompound nbttagcompound = new NBTTagCompound();
+//                nbttagcompound.setByte("Slot", (byte)i);
+//                itemstack.writeToNBT(nbttagcompound);
+//                nbttaglist.appendTag(nbttagcompound);
+//                LogHelper.info("InventoryBlueprints: Saved a " + itemstack.getItem() + " to inventory.");
+//            }
+//        }
+//		nbt.setTag("Blueprints", nbttaglist);
     }
 
     /**
@@ -138,14 +138,16 @@ public class InventoryBlueprints extends InventoryBasic {
 
 	private final int craftTickRefreshRate = 5;
 	private int canCraftTick = craftTickRefreshRate;
+	// Warning: numThatCanBeCrafted is only set on client when this is called, but crafting logic takes this into account
     @SideOnly(Side.CLIENT)
-	public int getNumToBeCrafted() {
+	public int getNumToBeCrafted(int i) {
 		if (canCraftTick >= 0){
 			canCraftTick--;
 		} else {
 			canCraftTick = craftTickRefreshRate;
 		}
 		if (canCraftTick == craftTickRefreshRate){
+			blueprintPressed = (short) i;
 			canCraft();
 		}
 		return numThatCanBeCrafted;
@@ -236,11 +238,11 @@ public class InventoryBlueprints extends InventoryBasic {
 		for (int outputSlot = ARKPlayer.LAST_INVENTORY_SLOT; outputSlot > ARKPlayer.FIRST_INVENTORY_SLOT; outputSlot--) {
 			ItemStack outputStack = invCrafting.getStackInSlot(outputSlot);
 			if (outputStack != null && outputStack.getItem() == result.getItem() && 
-					(!outputStack.getHasSubtypes() || outputStack.getMetadata() == outputStack.getMetadata())
+					(!result.getHasSubtypes() || outputStack.getMetadata() == result.getMetadata())
 					&& ItemStack.areItemStackTagsEqual(outputStack, result)) {
 				int combinedSize = invCrafting.getStackInSlot(outputSlot).stackSize + result.stackSize;
-				if (combinedSize <= invCrafting.getInventoryStackLimit() && combinedSize 
-						<= invCrafting.getStackInSlot(outputSlot).getMaxStackSize()) {
+				if (combinedSize <= invCrafting.getInventoryStackLimit() 
+						&& combinedSize	<= invCrafting.getStackInSlot(outputSlot).getMaxStackSize()) {
 					firstSuitableOutputSlot = outputSlot;
 					break;
 				}
