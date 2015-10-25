@@ -301,5 +301,15 @@ public class InventoryBlueprints extends InventoryBasic {
             setInventorySlotContents(i, irecipe.getRecipeOutput());
             i++;
         }	
-	}	
+	}
+	
+	// ----- For the progess indicator in the GUI: -----
+	/** x position in GUI of the button pressed */
+	private int xButtonPressed;
+	public int getxButtonPressed() { return xButtonPressed;	}
+	public void setxButtonPressed(int xButtonPressed) {	this.xButtonPressed = xButtonPressed;}
+	/** y position in GUI of the button pressed */
+	private int yButtonPressed;
+	public int getyButtonPressed() { return yButtonPressed;	}
+	public void setyButtonPressed(int yButtonPressed) {	this.yButtonPressed = yButtonPressed; }
 }

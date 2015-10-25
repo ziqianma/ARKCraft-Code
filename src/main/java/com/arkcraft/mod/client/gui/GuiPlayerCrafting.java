@@ -31,8 +31,6 @@ public class GuiPlayerCrafting extends GuiContainer {
 	public static final ResourceLocation texture = new ResourceLocation(ARKCraft.MODID, "textures/gui/player_inventory_gui.png");
 	private InventoryBlueprints inventoryBlueprints;
 	private GuiButton [] buttonCraftOne;
-	private int xButtonPressed;
-	private int yButtonPressed;
 
 	public GuiPlayerCrafting(InventoryPlayer invPlayer, EntityPlayer player) {
 		super(new ContainerInventoryPlayerCrafting(invPlayer, player));
@@ -83,8 +81,8 @@ public class GuiPlayerCrafting extends GuiContainer {
 				int i =  col + row * ContainerInventoryPlayerCrafting.NUM_COLUMNS_BP;
 				if (button == buttonCraftOne[i]){
 					inventoryBlueprints.setCraftOnePressed(true, i, true); // and update server
-					xButtonPressed = ContainerInventoryPlayerCrafting.BLUEPRINT_XPOS + col * 18;
-					yButtonPressed = ContainerInventoryPlayerCrafting.BLUEPRINT_YPOS + row * 18;
+					inventoryBlueprints.setxButtonPressed(ContainerInventoryPlayerCrafting.BLUEPRINT_XPOS + col * 18);
+					inventoryBlueprints.setyButtonPressed(ContainerInventoryPlayerCrafting.BLUEPRINT_YPOS + row * 18);
 				}
 			}
 		}
@@ -155,8 +153,9 @@ public class GuiPlayerCrafting extends GuiContainer {
 			if (fraction <= 0.01D)
 				return;
 			int color = 0x60EAA800;
-			drawRect(xButtonPressed, yButtonPressed + (int)(fraction * BLUEPRINT_HEIGHT), 
-					xButtonPressed + BLUEPRINT_WIDTH, yButtonPressed + BLUEPRINT_HEIGHT, color);
+			int x = inventoryBlueprints.getxButtonPressed();
+			int y = inventoryBlueprints.getyButtonPressed();
+			drawRect(x, y + (int)(fraction * BLUEPRINT_HEIGHT),	x + BLUEPRINT_WIDTH, y + BLUEPRINT_HEIGHT, color);
 		}
 	}
 	
