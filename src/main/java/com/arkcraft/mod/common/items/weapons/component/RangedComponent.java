@@ -124,6 +124,11 @@ public abstract class RangedComponent extends AbstractWeaponComponent
 		return false;
 	}
 	
+	public void onItemLeftClickTick(EntityPlayer entityplayer, World world1, int i)
+	{
+	
+	}
+	
 	@Override
 	public EnumAction getItemUseAction(ItemStack itemstack)
 	{

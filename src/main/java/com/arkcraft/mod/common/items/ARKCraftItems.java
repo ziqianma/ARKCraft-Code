@@ -45,8 +45,8 @@ import java.util.Map;
 public class ARKCraftItems
 {
 
-	public static ARKFood tintoBerry, amarBerry, azulBerry, mejoBerry, narcoBerry, porkchop_raw, porkchop_cooked, primemeat_raw, primemeat_cooked;
-	public static ARKSeedItem tintoBerrySeed, amarBerrySeed, azulBerrySeed, mejoBerrySeed, narcoBerrySeed;
+	public static ARKFood tintoBerry, amarBerry, azulBerry, mejoBerry, narcoBerry, stimeBerry, porkchop_raw, porkchop_cooked, primemeat_raw, primemeat_cooked;
+	public static ARKSeedItem tintoBerrySeed, amarBerrySeed, azulBerrySeed, mejoBerrySeed, narcoBerrySeed, stimBerrySeed;
 	public static ARKItem cobble_ball, fiber, chitin, narcotics, explosive_ball, dodo_bag, dodo_feather, gun_powder;
 	public static ARKThatchItem thatch;
 	public static ARKFecesItem dodo_feces, player_feces, fertilizer;
@@ -171,7 +171,7 @@ public class ARKCraftItems
 			simple_bullet = addItemProjectile("simple_bullet");
 		}
 		if (BALANCE.WEAPONS.LONGNECK_RIFLE) {
-			longneck_rifle = addLongneckRifle("longneck_rifle", new RangedCompLongneckRifle(null, GlobalAdditions.GUI.SCOPE.getID()));
+			longneck_rifle = addLongneckRifle("longneck_rifle", new RangedCompLongneckRifle(GlobalAdditions.GUI.SCOPE.getID()));
 			simple_rifle_ammo = addItemProjectile("simple_rifle_ammo");
 		}
 		if (BALANCE.WEAPONS.SHOTGUN) {
