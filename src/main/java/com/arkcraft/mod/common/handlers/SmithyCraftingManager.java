@@ -67,6 +67,30 @@ public class SmithyCraftingManager extends ARKCraftingManager{
 //				new ItemStack(Items.bone, 16),
 //				new ItemStack(ModItems.bones_large, 7)
 //				);
+		
+		// Chitin Armor
+		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.chitinChest, 1),
+				new ItemStack(ARKCraftItems.fiber, 4),
+				new ItemStack(Items.leather, 10), 
+				new ItemStack(ARKCraftItems.chitin, 20)
+		);
+		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.chitinLegs, 1),
+				new ItemStack(ARKCraftItems.fiber, 5),
+				new ItemStack(Items.leather, 12), 
+				new ItemStack(ARKCraftItems.chitin, 25)
+		);
+		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.chitinHelm, 1),
+				new ItemStack(ARKCraftItems.fiber, 3),
+				new ItemStack(Items.leather, 7), 
+				new ItemStack(ARKCraftItems.chitin, 15)
+		);
+		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.chitinBoots, 1),
+				new ItemStack(ARKCraftItems.fiber, 4),
+				new ItemStack(Items.leather, 6), 
+				new ItemStack(ARKCraftItems.chitin, 12)
+		);
+
+		// Weapons
 		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.longneck_rifle, 1),
 				new ItemStack(Items.iron_ingot, 32),
 				new ItemStack(Blocks.glass, 1)

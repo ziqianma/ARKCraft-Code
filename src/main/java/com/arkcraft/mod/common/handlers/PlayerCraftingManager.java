@@ -75,5 +75,53 @@ public class PlayerCraftingManager extends ARKCraftingManager{
 				new ItemStack(ARKCraftItems.stone_arrow, 1),
 				new ItemStack(ARKCraftItems.narcotics, 1)
 				);
+		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.clothChest, 1),
+				new ItemStack(ARKCraftItems.fiber, 40)
+				);
+		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.clothLegs, 1),
+				new ItemStack(ARKCraftItems.fiber, 50)
+				);
+		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.clothHelm, 1),
+				new ItemStack(ARKCraftItems.fiber, 10),
+				new ItemStack(Items.leather, 4)
+				);
+		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.clothBoots, 1),
+				new ItemStack(ARKCraftItems.fiber, 25),
+				new ItemStack(Items.leather, 6)
+				);
+//		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.hideChest, 1),
+//				new ItemStack(ARKCraftItems.fiber, 8),
+//				new ItemStack(Items.leather, 20)
+//				);
+//		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.hideLegs, 1),
+//				new ItemStack(ARKCraftItems.fiber, 10),
+//				new ItemStack(Items.leather, 25)
+//				);
+//		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.hideHelm, 1),
+//				new ItemStack(ARKCraftItems.fiber, 6),
+//				new ItemStack(Items.leather, 15)
+//				);
+//		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.hideBoots, 1),
+//				new ItemStack(ARKCraftItems.fiber, 5),
+//				new ItemStack(Items.leather, 10)
+//				);
+		
+		// TODO: Might want to move these to the Smithy!
+		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.boneChest, 1),
+				new ItemStack(Items.bone, 16),
+				new ItemStack(ARKCraftItems.chitin, 8) // Should be large bone
+				);
+		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.boneLegs, 1),
+				new ItemStack(Items.bone, 16),
+				new ItemStack(ARKCraftItems.chitin, 7) // Should be large bone
+				);
+		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.boneHelm, 1),
+				new ItemStack(Items.bone, 5), // Should be T-Rex Skull
+				new ItemStack(ARKCraftItems.chitin, 5) // Should be large bone
+				);
+		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.boneBoots, 1),
+				new ItemStack(Items.bone, 16),
+				new ItemStack(ARKCraftItems.chitin, 7) // Should be large bone
+				);
 	}
 }
