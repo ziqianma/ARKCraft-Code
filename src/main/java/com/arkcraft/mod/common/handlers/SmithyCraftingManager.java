@@ -73,7 +73,7 @@ public class SmithyCraftingManager extends ARKCraftingManager{
 				);
 		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.shotgun, 1),
 				new ItemStack(Items.iron_ingot, 32),
-				new ItemStack(Blocks.planks, 4, ARKShapelessRecipe.ANY) // Any Wood
+				new ItemStack(Blocks.log, 4, ARKShapelessRecipe.ANY) // Any Wood
 				);
 		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.rocket_launcher, 1),
 				new ItemStack(Items.iron_ingot, 48),
@@ -86,12 +86,12 @@ public class SmithyCraftingManager extends ARKCraftingManager{
 				);
 		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.tranq_gun, 1),
 				new ItemStack(Items.iron_ingot, 7),
-				new ItemStack(Blocks.planks, 10, ARKShapelessRecipe.ANY), // Any Wood
+				new ItemStack(Blocks.log, 10, ARKShapelessRecipe.ANY), // Any Wood
 				new ItemStack(ARKCraftItems.fiber, 35)
 				);
 		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.crossbow, 1),
 				new ItemStack(Items.iron_ingot, 7),
-				new ItemStack(Blocks.planks, 10, ARKShapelessRecipe.ANY), // Any Wood
+				new ItemStack(Blocks.log, 10, ARKShapelessRecipe.ANY), // Any Wood
 				new ItemStack(ARKCraftItems.fiber, 35)
 				);
 	}	
