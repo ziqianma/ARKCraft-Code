@@ -4,9 +4,11 @@ import java.util.Random;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.client.model.ModelPlayer;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemAxe;
@@ -15,6 +17,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.MouseEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import net.minecraftforge.client.event.RenderHandEvent;
+import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.world.BlockEvent;
@@ -155,7 +159,57 @@ public class ARKEventHandler {
 			ShowScope(); 
 		}
 	}
-   
+	
+	@SubscribeEvent
+    public void Holding(RenderLivingEvent.Pre event)
+    {
+		
+    	Minecraft mc = Minecraft.getMinecraft();
+	    EntityPlayer thePlayer = mc.thePlayer;
+        if(!event.isCanceled() & event.entity instanceof EntityPlayer) 
+        {
+        	ItemStack stack = thePlayer.getCurrentEquippedItem();
+        	if (stack != null)
+        	{
+		        IExtendedReach ieri;
+		        if (stack.getItem() instanceof IExtendedReach)
+	            {
+	            ieri = (IExtendedReach) stack.getItem();
+	            }
+		        else
+	            {
+	                 ieri = null;
+	            }
+		        if (ieri != null)
+	            {
+		        	
+		        ModelPlayer model = (ModelPlayer)event.renderer.getMainModel();
+		    	model.heldItemLeft = 1;
+				model.heldItemRight = 2;
+				
+				/*
+				if (model.heldItemLeft != 0)
+				{
+					model.bipedLeftArm.rotateAngleX = model.bipedLeftArm.rotateAngleX * 0.5F - ((float)Math.PI / 10F) * (float)model.heldItemLeft;
+				}
+				switch (model.heldItemRight)
+				{
+				    case 0:
+				    case 2:
+				    default:
+				        break;
+				    case 1:
+				    	model.bipedRightArm.rotateAngleX = model.bipedRightArm.rotateAngleX * 0.5F - ((float)Math.PI / 10F) * (float)model.heldItemRight;
+				        break;
+				    case 3:
+				    	model.bipedRightArm.rotateAngleX = model.bipedRightArm.rotateAngleX * 0.5F - ((float)Math.PI / 10F) * (float)model.heldItemRight;
+				    	model.bipedRightArm.rotateAngleY = -0.5235988F;
+				}	*/
+			    }	
+        	}
+        }	        
+    }
+	
     public void ShowScope() 
     {
     	LogHelper.info("In ShowScope");
