@@ -10,6 +10,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class ClientEventHandler
 {	
+	/*
 	@SubscribeEvent
 	public void onFOVUpdateEvent(FOVUpdateEvent e)
 	{
@@ -22,5 +23,5 @@ public class ClientEventHandler
 				e.newfov = e.fov * rc.getFOVMultiplier(e.entity.getItemInUseDuration());
 			}
 		}
-	}
+	}	*/
 }

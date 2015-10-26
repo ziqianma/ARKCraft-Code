@@ -15,13 +15,18 @@ import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.event.FOVUpdateEvent;
 import net.minecraftforge.client.event.MouseEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderHandEvent;
 import net.minecraftforge.client.event.RenderLivingEvent;
+import net.minecraftforge.client.event.RenderPlayerEvent;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -113,6 +118,11 @@ public class ARKEventHandler {
 			}
 		}
 	}
+	public static void init() {
+	        ARKEventHandler handler = new ARKEventHandler();
+	        FMLCommonHandler.instance().bus().register(handler);
+	        MinecraftForge.EVENT_BUS.register(handler);
+	}
 	
 	private static final Minecraft mc = Minecraft.getMinecraft();
 	private static final ResourceLocation OVERLAY_TEXTURE = new ResourceLocation(ARKCraft.MODID, "textures/gui/scope.png");
@@ -143,12 +153,26 @@ public class ARKEventHandler {
 	             {
 	     	    	if (evt.buttonstate)
 	     	    		ShowScopeOverlap = true;
+	     	    		
 	                	
 	     	    	else
 	     	    		ShowScopeOverlap = false;
 	                evt.setCanceled(true);
 	             }
         	}
+        }
+    }
+    @SubscribeEvent
+    public void onFOVUpdate(FOVUpdateEvent evt) {
+        if (mc.gameSettings.thirdPersonView == 0 && ShowScopeOverlap) {
+            evt.newfov = 1 / 6.0F;
+        }
+    }
+    
+    @SubscribeEvent
+    public void onRenderHand(RenderHandEvent evt) {
+        if (ShowScopeOverlap) {
+            evt.setCanceled(true);
         }
     }
     
@@ -164,9 +188,10 @@ public class ARKEventHandler {
     public void Holding(RenderLivingEvent.Pre event)
     {
 		
+		//!event.isCanceled() & 
     	Minecraft mc = Minecraft.getMinecraft();
 	    EntityPlayer thePlayer = mc.thePlayer;
-        if(!event.isCanceled() & event.entity instanceof EntityPlayer) 
+        if(!event.isCanceled() & event.entity instanceof EntityPlayer && ShowScopeOverlap) 
         {
         	ItemStack stack = thePlayer.getCurrentEquippedItem();
         	if (stack != null)
@@ -184,8 +209,16 @@ public class ARKEventHandler {
 	            {
 		        	
 		        ModelPlayer model = (ModelPlayer)event.renderer.getMainModel();
-		    	model.heldItemLeft = 1;
-				model.heldItemRight = 2;
+		        
+		        model.bipedLeftArm.rotateAngleX 
+		        = model.bipedRightArm.rotateAngleX;
+				model.bipedBody.showModel = true;
+		        }
+
+		        /*	
+		        ModelPlayer model = (ModelPlayer)event.renderer.getMainModel();
+				model.bipedLeftArm.rotateAngleX = model.bipedLeftArm.rotateAngleX * 0.5F - ((float)Math.PI / 10F) * (float)model.heldItemLeft;
+				model.heldItemRight = 0;
 				
 				/*
 				if (model.heldItemLeft != 0)
@@ -205,7 +238,7 @@ public class ARKEventHandler {
 				    	model.bipedRightArm.rotateAngleX = model.bipedRightArm.rotateAngleX * 0.5F - ((float)Math.PI / 10F) * (float)model.heldItemRight;
 				    	model.bipedRightArm.rotateAngleY = -0.5235988F;
 				}	*/
-			    }	
+			    	
         	}
         }	        
     }
