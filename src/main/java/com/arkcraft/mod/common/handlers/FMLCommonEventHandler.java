@@ -77,7 +77,7 @@ public class FMLCommonEventHandler {
         }
         if (thePlayer != null && Mouse.isButtonDown(0)) 
         {
-        	LogHelper.info("mouse down");
+//        	LogHelper.info("mouse down");
 	     	ItemStack stack = thePlayer.getCurrentEquippedItem();
 	        IExtendedReach ieri;
 	     	if (stack != null)

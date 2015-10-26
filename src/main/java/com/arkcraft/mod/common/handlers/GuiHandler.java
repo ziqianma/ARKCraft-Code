@@ -5,7 +5,6 @@ import java.util.List;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
@@ -16,6 +15,7 @@ import net.minecraftforge.fml.common.network.IGuiHandler;
 import com.arkcraft.mod.GlobalAdditions;
 import com.arkcraft.mod.client.gui.ContainerInventoryCompostBin;
 import com.arkcraft.mod.client.gui.ContainerInventoryCropPlot;
+import com.arkcraft.mod.client.gui.ContainerInventoryDino;
 import com.arkcraft.mod.client.gui.ContainerInventoryDodo;
 import com.arkcraft.mod.client.gui.ContainerInventoryMP;
 import com.arkcraft.mod.client.gui.ContainerInventoryPlayerCrafting;
@@ -24,6 +24,7 @@ import com.arkcraft.mod.client.gui.ContainerInventoryTaming;
 import com.arkcraft.mod.client.gui.GUICompostBin;
 import com.arkcraft.mod.client.gui.GUICropPlot;
 import com.arkcraft.mod.client.gui.GUITaming;
+import com.arkcraft.mod.client.gui.GuiInventoryDino;
 import com.arkcraft.mod.client.gui.GuiInventoryDodo;
 import com.arkcraft.mod.client.gui.GuiMP;
 import com.arkcraft.mod.client.gui.GuiPlayerCrafting;
@@ -112,6 +113,15 @@ public class GuiHandler implements IGuiHandler {
 		else if (ID == GlobalAdditions.GUI.PLAYER.getID()) {
 			return new ContainerInventoryPlayerCrafting(player.inventory, player);
 		}
+		else if (ID == GlobalAdditions.GUI.TAMED_DINO.getID()) {
+			Entity entity = getEntityAt(player, x, y, z);
+			if (entity != null && entity instanceof EntityTameableDinosaur) {
+				EntityTameableDinosaur dino = (EntityTameableDinosaur)entity;
+				return new ContainerInventoryDino(player.inventory, dino.invTamedDino, dino);
+			}
+			else
+				LogHelper.error("GuiHandler - getServerGuiElement: Did not find tamed dino!");			
+		}
 		return null;
 	}
 
@@ -192,6 +202,15 @@ public class GuiHandler implements IGuiHandler {
 		}
 		else if (ID == GlobalAdditions.GUI.PLAYER.getID()) {
 			return new GuiPlayerCrafting(player.inventory, player);			
+		}
+		else if (ID == GlobalAdditions.GUI.TAMED_DINO.getID()) {
+			Entity entity = getEntityAt(player, x, y, z);
+			if (entity != null && entity instanceof EntityTameableDinosaur) {
+				EntityTameableDinosaur dino = (EntityTameableDinosaur)entity;
+				return new GuiInventoryDino(player.inventory, ((EntityTameableDinosaur)entity).invTamedDino, dino);
+			}
+			else
+				LogHelper.error("GuiHandler - getClientGuiElement: Did not find tamed dino!");			
 		}
 		
 		return null;

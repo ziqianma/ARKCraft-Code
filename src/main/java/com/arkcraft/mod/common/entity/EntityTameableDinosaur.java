@@ -3,6 +3,7 @@ package com.arkcraft.mod.common.entity;
 
 import com.arkcraft.mod.GlobalAdditions.GUI;
 import com.arkcraft.mod.client.gui.InventoryDino;
+import com.arkcraft.mod.client.gui.InventorySaddle;
 import com.arkcraft.mod.client.gui.InventoryTaming;
 import com.arkcraft.mod.common.ARKCraft;
 import com.arkcraft.mod.common.items.ARKCraftItems;
@@ -32,19 +33,18 @@ import net.minecraft.world.World;
  */
 public abstract class EntityTameableDinosaur extends EntityTameable {
 	// Stuff that needs to be saved to NBT:
-	public InventoryDino invDino;
+	public InventoryDino invTamedDino;
 	public InventoryTaming invTaming;
+	public InventorySaddle invSaddle;
 	protected boolean isSaddled = false;
 	protected boolean isTaming = false;
-//	protected int torpor = 0;
-//	protected int progress = 0;
 
 	// Other non-NBT variables:
 	protected boolean isRideable = false;
 	protected boolean isTameable = false;
 	protected int tamingSeconds = 0;
 	protected EntityAIBase attackPlayerTarget;
-	SaddleType saddleType;
+	public SaddleType saddleType;
 	
 	private int DINO_SADDLED_WATCHER = 22;
 	public boolean isSaddled() {
@@ -59,7 +59,7 @@ public abstract class EntityTameableDinosaur extends EntityTameable {
 		}
 	}
 	public Item getSaddleType() {
-		return this.saddleType.getSaddleType();
+		return this.saddleType.getSaddleItem();
 	}
 	public void setSaddleType(int type) {
 		switch (type) {
@@ -87,9 +87,10 @@ public abstract class EntityTameableDinosaur extends EntityTameable {
 		this.getDataWatcher().addObject(DINO_SADDLED_WATCHER, Byte.valueOf((byte) 0));
         this.isTameable = true;
 		this.tamingSeconds = 120; // Set this before the InventoryTaming (this is the default if not set)
-		this.invDino = new InventoryDino("Items", true, saddleType.getInventorySize());
+		this.invTamedDino = new InventoryDino("Items", true, saddleType.getInventorySize());
 		this.invTaming = new InventoryTaming(this);
 		this.saddleType = saddleType;
+		this.invSaddle = new InventorySaddle(this);
 	}
 	
 	// Use this constructor if you want to create a dino that is not tameable
@@ -97,12 +98,13 @@ public abstract class EntityTameableDinosaur extends EntityTameable {
 		super(worldIn);
 		this.getDataWatcher().addObject(DINO_SADDLED_WATCHER, Byte.valueOf((byte) 0));
         this.isTameable = isTameable;
+        this.saddleType = saddleType;
         if (isTameable) {
         	this.tamingSeconds = tamingSeconds; // This must be before the InventoryTaming
-        	this.invDino = new InventoryDino("Items", true, saddleType.getInventorySize());
+        	this.invTamedDino = new InventoryDino("Items", true, saddleType.getInventorySize());
         	this.invTaming = new InventoryTaming(this);
+    		this.invSaddle = new InventorySaddle(this);
         }
-        this.saddleType = saddleType;
         
         // Stuff for when tamed
         this.tasks.addTask(1, this.aiSit);
@@ -175,7 +177,9 @@ public abstract class EntityTameableDinosaur extends EntityTameable {
 		}
 		if (this.isSaddled()) {
 			this.dropItem(ARKCraftItems.saddle_large, 1);
-			this.dropItemsInChest(this, this.invDino);
+		}
+		if (this.isTamed()){
+			this.dropItemsInChest(this, this.invTamedDino);			
 		}
 	}
 	
@@ -200,13 +204,11 @@ public abstract class EntityTameableDinosaur extends EntityTameable {
         if (isTameable) {
         	nbt.setBoolean("isSaddled", isSaddled);
         	nbt.setBoolean("isTaming", isTaming);
-//        	nbt.setInteger("torpor", torpor);
-//        	nbt.setInteger("progress", progress);
-        	this.invTaming.saveInventoryToNBT(nbt);
-//    		if (this.isSaddled()) {
-    			this.invDino.saveInventoryToNBT(nbt);
-//    			LogHelper.info("EntityDodo - writeEntityToNBT: Saved chest inventory.");
-//    		}
+        }
+        if (this.isTamed()){
+   			this.invTamedDino.saveInventoryToNBT(nbt);        	
+        } else {
+        	this.invTaming.saveInventoryToNBT(nbt);        	
         }
     }
 
@@ -223,18 +225,13 @@ public abstract class EntityTameableDinosaur extends EntityTameable {
 	        if (nbt.hasKey("isTaming")) {
 	        	this.setIsTaming(nbt.getBoolean("isTaming"));
 	        }
-//	        if (nbt.hasKey("torpor")) {
-//	        	torpor = (nbt.getInteger("torpor"));
-//	        }
-//	        if (nbt.hasKey("progress")) {
-//	        	progress = (nbt.getInteger("progress"));
-//	        }
-	        // Dino taming inventory
-	        this.invTaming.loadInventoryFromNBT(nbt);
-	        // Dino Inventory
-			final byte NBT_TYPE_COMPOUND = 10;
-			NBTTagList dataForAllSlots = nbt.getTagList("Items", NBT_TYPE_COMPOUND);
-	        this.invDino.loadInventoryFromNBT(dataForAllSlots);
+	        if (this.isTamed()){
+				final byte NBT_TYPE_COMPOUND = 10;
+				NBTTagList dataForAllSlots = nbt.getTagList("Items", NBT_TYPE_COMPOUND);
+		        this.invTamedDino.loadInventoryFromNBT(dataForAllSlots);
+	        } else {
+	        	this.invTaming.loadInventoryFromNBT(nbt);
+	        }
         }
     }
 
@@ -339,11 +336,16 @@ public abstract class EntityTameableDinosaur extends EntityTameable {
 
 		if (isTamed()) {
             if (this.isOwner(player)) {
-            	if (!this.worldObj.isRemote)
-            		player.addChatMessage(new ChatComponentText("EntityTameableDinosaur: This dino is tamed."));
+            	if (!this.worldObj.isRemote){
+            		player.addChatMessage(new ChatComponentText("This dino is tamed."));
+            		if (isSaddled())
+		            	LogHelper.info("Dino is saddled.");
+            		else
+		            	LogHelper.info("Dino is not saddled.");
+            	}
             	if (player.isSneaking()) {
-    	    		if (isSaddled()) {
-    	    			player.openGui(ARKCraft.instance, GUI.INV_DODO.getID(), this.worldObj,
+    	    		if (isTamed()) {
+    	    			player.openGui(ARKCraft.instance, GUI.TAMED_DINO.getID(), this.worldObj,
 		            			(int) Math.floor(this.posX), (int) this.posY, (int) Math.floor(this.posZ));
 		                this.aiSit.setSitting(this.isSitting());
 		            	LogHelper.info("Dino is sitting");
@@ -353,25 +355,25 @@ public abstract class EntityTameableDinosaur extends EntityTameable {
     	    		}
             	} // not sneaking     	
 	    		else if (itemstack != null) {
-					if (itemIsSaddle(itemstack)) {
-						if (this.isSaddled) {
-			            	LogHelper.info("Dino is saddled.");							
-						} else if (itemstack.getItem() == this.getSaddleType()) {
-							if (!player.capabilities.isCreativeMode) {
-								itemstack.stackSize--;
-								if (itemstack.stackSize == 0)
-				                    player.inventory.mainInventory[player.inventory.currentItem] = null;
-							}
-							setSaddled(true);
-			            	LogHelper.info("Dino is saddled.");
-							return true;
-						}
-						else {
-							player.addChatMessage(new ChatComponentText("This dino can only be saddled with a: " + this.saddleType + " saddle."));
-						}
-					}
+//					if (itemIsSaddle(itemstack)) {
+//						if (this.isSaddled) {
+//			            	LogHelper.info("Dino is saddled.");					
+//						} else if (itemstack.getItem() == this.getSaddleType()) {
+//							if (!player.capabilities.isCreativeMode) {
+//								itemstack.stackSize--;
+//								if (itemstack.stackSize == 0)
+//				                    player.inventory.mainInventory[player.inventory.currentItem] = null;
+//							}
+//							setSaddled(true);
+//			            	LogHelper.info("Dino is saddled.");
+//							return true;
+//						}
+//						else {
+//							player.addChatMessage(new ChatComponentText("This dino can only be saddled with a: " + this.saddleType + " saddle."));
+//						}
+//					}
 			        // Heal the Dino with its favorite food
-					else if (itemstack != null && isFavoriteFood(itemstack)) {
+					if (itemstack != null && isFavoriteFood(itemstack)) {
 	                    ItemFood itemfood = (ItemFood)itemstack.getItem();
 	                    if (!player.capabilities.isCreativeMode) {
 	                         --itemstack.stackSize;
@@ -431,14 +433,14 @@ public abstract class EntityTameableDinosaur extends EntityTameable {
 //        return super.interact(player);
     }
     
-	private boolean itemIsSaddle(ItemStack itemstack) {
-		if (itemstack.getItem() == ARKCraftItems.saddle_small ||
-			itemstack.getItem() == ARKCraftItems.saddle_medium ||
-			itemstack.getItem() == ARKCraftItems.saddle_large)
-			return true;
-		else
-			return false;
-	}
+//	private boolean itemIsSaddle(ItemStack itemstack) {
+//		if (itemstack.getItem() == ARKCraftItems.saddle_small ||
+//			itemstack.getItem() == ARKCraftItems.saddle_medium ||
+//			itemstack.getItem() == ARKCraftItems.saddle_large)
+//			return true;
+//		else
+//			return false;
+//	}
 	
 	public boolean isUseableByPlayer(EntityPlayer player) {
 		final double X_CENTRE_OFFSET = 0.5;
@@ -450,7 +452,7 @@ public abstract class EntityTameableDinosaur extends EntityTameable {
 	
 	public void markDirty() {
         if (isTameable) {
-        	invDino.markDirty();;
+        	invTamedDino.markDirty();;
         	invTaming.markDirty();
         }
 	}

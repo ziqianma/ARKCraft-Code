@@ -249,6 +249,10 @@ public class InventoryTaming implements IInventory, IUpdatePlayerListBox {
 		this.entityDino.setTamed(playerTaming, true);
 		this.setTorporTime((short) 0);
 		this.entityDino.setIsTaming(false);
+		// Copy the taming inventory to the new tamed inventory
+		for (int i = 0; i < entityDino.invTaming.getSizeInventory() && i < entityDino.invTamedDino.getSizeInventory(); i++){
+			entityDino.invTamedDino.setInventorySlotContents(i, entityDino.invTaming.getStackInSlot(i)); 
+		}
 	}
 
 	// returns the number of ticks the the food will feed. Returns 0 if the item will not feed the dino

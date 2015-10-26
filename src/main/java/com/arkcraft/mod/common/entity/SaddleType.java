@@ -20,20 +20,21 @@ public enum SaddleType {
 		return id;
 	}
 	
+	// TODO: For now, there is just one size of dino inventory
 	public int getInventorySize() {
 		switch (id) {
 			case 1:
-				return 9;
+				return 25;
 			case 2:
-				return 18;
+				return 25;
 			case 3:
-				return 27;
+				return 25;
 			default:
 				return 0;
 		}
 	}
 	
-	public Item getSaddleType() {
+	public Item getSaddleItem() {
 		switch (id) {
 		case 1:
 			return ARKCraftItems.saddle_small;
