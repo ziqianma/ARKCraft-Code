@@ -17,6 +17,7 @@ import com.arkcraft.mod.common.network.UpdatePlayerCrafting;
 import com.arkcraft.mod.common.network.UpdateSmithyToCraftItem;
 import com.arkcraft.mod.common.proxy.CommonProxy;
 
+import net.ilexiconn.llibrary.LLibrary;
 import net.minecraft.item.Item;
 import net.minecraft.world.WorldType;
 import net.minecraftforge.common.MinecraftForge;
@@ -38,7 +39,7 @@ import org.apache.logging.log4j.Logger;
 import java.util.HashMap;
 import java.util.Map;
 
-@Mod(modid= ARKCraft.MODID, version= ARKCraft.VERSION, name= ARKCraft.MODID, guiFactory = "com.arkcraft.mod.common.lib.ModGuiFactory")
+@Mod(modid= ARKCraft.MODID, version= ARKCraft.VERSION, name= ARKCraft.MODID, guiFactory = "com.arkcraft.mod.common.lib.ModGuiFactory", dependencies = "required-after:llibrary@[0.4.3]")
 public class ARKCraft
 {
 	public static final String MODID = "arkcraft", VERSION = "${version}", NAME = "ARKCraft";
@@ -60,7 +61,6 @@ public class ARKCraft
 		// Create the config first, it is used below
 		Config.init(event.getSuggestedConfigurationFile());
 		FMLCommonHandler.instance().bus().register(new Config());
-
 		GameRegistry.registerWorldGenerator(new WorldGeneratorBushes(), 0);
 
 		ARKCraftBlocks.init();
