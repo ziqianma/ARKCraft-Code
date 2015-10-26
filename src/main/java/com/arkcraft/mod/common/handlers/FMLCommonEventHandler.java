@@ -35,10 +35,6 @@ import com.arkcraft.mod.common.network.OpenPlayerCrafting;
 
 public class FMLCommonEventHandler {
 	
-	private static final Minecraft mc = Minecraft.getMinecraft();
-	private static final ResourceLocation OVERLAY_TEXTURE = new ResourceLocation(ARKCraft.MODID, "textures/gui/scope.png");
-	public boolean ShowScopeOverlap = false;
-	
 	@SubscribeEvent
 	public void onPlayerKeypressed(InputEvent.KeyInputEvent event) {
 		if (KeyBindings.playerPooping.isPressed()) {
@@ -63,71 +59,5 @@ public class FMLCommonEventHandler {
 		if (ARKPlayer.get(event.player).getInventoryBlueprints().isCrafting()){
 			ARKPlayer.get(event.player).getInventoryBlueprints().update();
 		}
-	}
-
-    @SubscribeEvent
-    public void onRenderTick(RenderTickEvent evt) {
-    	
-    	 Minecraft mc = Minecraft.getMinecraft();
-	     EntityPlayer thePlayer = mc.thePlayer;
-
-	     
-        if (evt.phase != Phase.END) {
-            return;
-        }
-        if (thePlayer != null && Mouse.isButtonDown(0)) 
-        {
-        	LogHelper.info("mouse down");
-	     	ItemStack stack = thePlayer.getCurrentEquippedItem();
-	        IExtendedReach ieri;
-	     	if (stack != null)
-        	{
-	     		 if (stack.getItem() instanceof IExtendedReach)
-	             {
-	                 ieri = (IExtendedReach) stack.getItem();
-	             } else
-	             {
-	                 ieri = null;
-	             }
-	     	     if (ieri != null)
-	             {
-	                	ShowScopeOverlap = true;
-	             }
-        	}
-        }
-    	else ShowScopeOverlap = false;
-        if (mc.gameSettings.thirdPersonView == 0 && ShowScopeOverlap) {
-        	LogHelper.info("ShowScrope");
-        	ShowScrope();
-        }
-        
-    }
-  
-    public void ShowScrope() 
-    {
-        GL11.glPushMatrix();
-        mc.entityRenderer.setupOverlayRendering();
-        GL11.glEnable(GL11.GL_BLEND);
-        OpenGlHelper.glBlendFunc(770, 771, 1, 0);
-        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        GL11.glDisable(GL11.GL_ALPHA_TEST);
-        
-        mc.renderEngine.bindTexture(OVERLAY_TEXTURE);
-        
-        ScaledResolution res = new ScaledResolution(mc, mc.displayWidth, mc.displayHeight);
-        double width = res.getScaledWidth_double();
-        double height = res.getScaledHeight_double();
-        
-        Tessellator tessellator = Tessellator.getInstance();
-        WorldRenderer worldrenderer = tessellator.getWorldRenderer();
-        
-        worldrenderer.startDrawingQuads();
-        worldrenderer.addVertexWithUV(0.0D, height, -90.0D, 0.0D, 1.0D);
-        worldrenderer.addVertexWithUV(width, height, -90.0D, 1.0D, 1.0D);
-        worldrenderer.addVertexWithUV(width, 0.0D, -90.0D, 1.0D, 0.0D);
-        worldrenderer.addVertexWithUV(0.0D, 0.0D, -90.0D, 0.0D, 0.0D);
-        tessellator.draw();
-        
-        GL11.glPopMatrix();
-    }
+	} 
 }	
