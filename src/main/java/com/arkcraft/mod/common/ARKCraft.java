@@ -50,7 +50,7 @@ public class ARKCraft
 	public static SimpleNetworkWrapper modChannel;
 	public static Logger	modLog;
 
-	public static final WorldType island = new WorldTypeIsland(0.75);
+	public static final WorldType island = new WorldTypeIsland(1);
 
 	public static Map<String, Item> allItems = new HashMap<String, Item>();
 	

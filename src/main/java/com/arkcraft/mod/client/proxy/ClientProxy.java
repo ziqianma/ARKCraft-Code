@@ -4,6 +4,7 @@ import com.arkcraft.mod.client.gui.overlay.GuiOverlay;
 import com.arkcraft.mod.client.model.ModelBrontosaurus;
 import com.arkcraft.mod.client.model.ModelDodo;
 import com.arkcraft.mod.client.model.ModelRaptorNew;
+import com.arkcraft.mod.client.model.override.PlayerModelOverride;
 import com.arkcraft.mod.client.render.RenderBrontosaurus;
 import com.arkcraft.mod.client.render.RenderDodo;
 import com.arkcraft.mod.client.render.RenderMetalArrow;
@@ -31,6 +32,7 @@ import com.arkcraft.mod.common.items.weapons.projectiles.EntityTranqArrow;
 import com.arkcraft.mod.common.lib.BALANCE;
 import com.arkcraft.mod.common.lib.LogHelper;
 import com.arkcraft.mod.common.proxy.CommonProxy;
+import net.ilexiconn.llibrary.client.render.RenderHelper;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderSnowball;
@@ -72,6 +74,9 @@ public class ClientProxy extends CommonProxy
 		GameRegistry.addSmelting(ARKCraftItems.primemeat_raw, new ItemStack(ARKCraftItems.primemeat_cooked, 1), (int) Math.floor(ARKFood.globalHealAmount/2));
 		
 		ModelBakery.addVariantName(ARKCraftItems.slingshot, "arkcraft:slingshot", "arkcraft:slingshot_pulled");
+
+		RenderHelper.registerModelExtension(new PlayerModelOverride());
+
 		dossierProxy.init();
 		LogHelper.info("CommonProxy: Init run finished.");
 		initDone = true;

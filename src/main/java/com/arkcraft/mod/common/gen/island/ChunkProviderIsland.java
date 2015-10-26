@@ -118,7 +118,7 @@ public class ChunkProviderIsland implements IChunkProvider
             {
                 int height = (IslandGen.getHeightForCoords(x + (chunkX * 16), z + (chunkZ * 16), scale));
 
-                for (int y = 0; y < Math.max(64, height); y++)
+                for (int y = 0; y < Math.max(54, height); y++)
                 {
                     if(y < height)
                     {
