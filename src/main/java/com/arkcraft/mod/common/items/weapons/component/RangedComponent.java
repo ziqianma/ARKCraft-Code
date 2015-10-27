@@ -135,7 +135,8 @@ public abstract class RangedComponent extends AbstractWeaponComponent
 		int state = ReloadHelper.getReloadState(itemstack);
 		if (state == ReloadHelper.STATE_NONE)
 		{
-			return EnumAction.BLOCK;
+//			return EnumAction.BLOCK;
+			return EnumAction.NONE; // No swing animation
 		} else if (state == ReloadHelper.STATE_READY)
 		{
 		}
@@ -184,10 +185,9 @@ public abstract class RangedComponent extends AbstractWeaponComponent
 	}
 	
 	@Override
-	public void onUsingTick(ItemStack itemstack, EntityPlayer entityplayer, int count)
-	{
-		if (ReloadHelper.getReloadState(itemstack) == ReloadHelper.STATE_NONE && getMaxItemUseDuration(itemstack) - count >= getReloadDuration(itemstack))
-		{
+	public void onUsingTick(ItemStack itemstack, EntityPlayer entityplayer, int count)	{
+		if (ReloadHelper.getReloadState(itemstack) == ReloadHelper.STATE_NONE 
+				&& getMaxItemUseDuration(itemstack) - count >= getReloadDuration(itemstack)){
 			effectReloadDone(itemstack, entityplayer.worldObj, entityplayer);
 			entityplayer.clearItemInUse();
 			setReloadState(itemstack, ReloadHelper.STATE_RELOADED);
@@ -322,17 +322,17 @@ public abstract class RangedComponent extends AbstractWeaponComponent
 		private int getReloadTime(int id){
 			switch (id) {
 			case 0:
-				return BALANCE.WEAPONS.SIMPLE_PISTOL_RELOAD;
+				return (int)(BALANCE.WEAPONS.SIMPLE_PISTOL_RELOAD * 20.0);
 			case 1:
-				return BALANCE.WEAPONS.ROCKET_LAUNCHER_RELOAD;
+				return (int)(BALANCE.WEAPONS.ROCKET_LAUNCHER_RELOAD * 20.0);
 			case 2:
-				return BALANCE.WEAPONS.SHOTGUN_RELOAD;
+				return (int)(BALANCE.WEAPONS.SHOTGUN_RELOAD * 20.0);
 			case 3:
-				return BALANCE.WEAPONS.LONGNECK_RIFLE_RELOAD;
+				return (int)(BALANCE.WEAPONS.LONGNECK_RIFLE_RELOAD * 20.0);
 			case 4:
-				return BALANCE.WEAPONS.TRANQ_GUN_RELOAD;
+				return (int)(BALANCE.WEAPONS.TRANQ_GUN_RELOAD * 20.0);
 			case 5:
-				return BALANCE.WEAPONS.CROSSBOW_RELOAD;
+				return (int)(BALANCE.WEAPONS.CROSSBOW_RELOAD * 20.0);
 			default:
 				return 6;  // just in case					
 			}
