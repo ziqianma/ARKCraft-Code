@@ -1,5 +1,6 @@
 package com.arkcraft.mod.client.proxy;
 
+import com.arkcraft.mod.client.gui.GuiMainMenuOverride;
 import com.arkcraft.mod.client.gui.overlay.GuiOverlay;
 import com.arkcraft.mod.client.model.ModelBrontosaurus;
 import com.arkcraft.mod.client.model.ModelDodo;
@@ -32,9 +33,11 @@ import com.arkcraft.mod.common.items.weapons.projectiles.EntityTranqArrow;
 import com.arkcraft.mod.common.lib.BALANCE;
 import com.arkcraft.mod.common.lib.LogHelper;
 import com.arkcraft.mod.common.proxy.CommonProxy;
+import net.ilexiconn.llibrary.client.gui.GuiHelper;
 import net.ilexiconn.llibrary.client.render.RenderHelper;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiMainMenu;
 import net.minecraft.client.renderer.entity.RenderSnowball;
 import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.client.resources.model.ModelResourceLocation;
