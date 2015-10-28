@@ -8,6 +8,7 @@ import net.minecraft.client.model.ModelPlayer;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.client.renderer.block.model.ItemCameraTransforms.TransformType;
 import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -209,10 +210,8 @@ public class ARKEventHandler {
 	            {
 		        	
 		        ModelPlayer model = (ModelPlayer)event.renderer.getMainModel();
-		        
-		        model.bipedLeftArm.rotateAngleX 
-		        = model.bipedRightArm.rotateAngleX;
-				model.bipedBody.showModel = true;
+
+		        model.aimedBow = true;
 		        }
 
 		        /*	
