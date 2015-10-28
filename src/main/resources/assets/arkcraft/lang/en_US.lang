@@ -97,3 +97,6 @@ ark.book.utahraptor.description=Utahraptor Prime is an incredibly aggressive sub
 
 # Containers
 container.crop_plot.name=Crop Plot 
+
+#Chat Messages
+chat.ammo= ammo

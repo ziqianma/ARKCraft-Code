@@ -17,6 +17,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -156,31 +158,28 @@ public abstract class RangedComponent extends AbstractWeaponComponent
 	}
 	
 	@Override
-	public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entityplayer)
-	{
+	public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entityplayer){
 		if (itemstack.stackSize <= 0 || entityplayer.isUsingItem()) return itemstack;	
 		
-		if (hasAmmo(itemstack, world, entityplayer)) //Check can reload
-		{
-				if (isReadyToFire(itemstack))
-				{
+		 //Check can reload
+		if (hasAmmo(itemstack, world, entityplayer)){
+				if (isReadyToFire(itemstack)){
 					//Start aiming weapon to fire
 					soundCharge(itemstack, world, entityplayer);
 					entityplayer.setItemInUse(itemstack, getMaxItemUseDuration(itemstack));
 	
-				} else
-				{
+				} else {
 					//Begin reloading
-					entityplayer.setItemInUse(itemstack, getMaxItemUseDuration(itemstack));		
+					entityplayer.setItemInUse(itemstack, getMaxItemUseDuration(itemstack));	
+					if (world.isRemote)
+						// i.e. "20 ammo"
+						entityplayer.addChatMessage(new ChatComponentText(getAmmoQuantity(entityplayer) + StatCollector.translateToLocal("chat.ammo")));
 				}
-				
-		} else
-		{
+		} else	{
 			//Can't reload; no ammo
 			soundEmpty(itemstack, world, entityplayer);
 			setReloadState(itemstack, ReloadHelper.STATE_NONE);
 		}
-				
 		return itemstack;
 	}
 	
@@ -286,6 +285,20 @@ public abstract class RangedComponent extends AbstractWeaponComponent
 		return entityplayer.capabilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantment.infinity.effectId, itemstack) > 0 || entityplayer.inventory.hasItem(getAmmoItem());
 	}
 	
+    private int getAmmoQuantity(EntityPlayer entityplayer) {
+    	int numInStack = 0;
+    	Item ammoItem = getAmmoItem();
+        for (int i = 0; i < entityplayer.inventory.getSizeInventory(); ++i){
+        	ItemStack itemstack = entityplayer.inventory.getStackInSlot(i);
+            if (itemstack != null){
+            	if (itemstack.getItem() == ammoItem){
+            		numInStack += itemstack.stackSize;
+            	}
+            }
+        }
+		return numInStack;
+	}
+
 	public float getFOVMultiplier(int ticksinuse)
 	{
 		float f1 = ticksinuse / getMaxAimTimeTicks();

@@ -93,7 +93,7 @@ public class ARKPlayer implements IExtendedEntityProperties {
 		return player;
 	}
 
-	//---------Pooping -----------------
+	//--------- Pooping -----------------
 	public boolean canPoop() {
 		return canPoop;
 	}
@@ -115,7 +115,7 @@ public class ARKPlayer implements IExtendedEntityProperties {
 			player.addChatMessage(new ChatComponentTranslation("chat.canNotPoop"));	
 		}		
 	}
-
+	
 	//----------------- End of Properties stuff, rest is for crafting -----------------
 	
 	// Inventory for Crafting
