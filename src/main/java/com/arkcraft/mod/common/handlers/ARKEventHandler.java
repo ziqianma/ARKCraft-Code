@@ -37,6 +37,7 @@ import com.arkcraft.mod.common.ARKCraft;
 import com.arkcraft.mod.common.entity.EntityTameableDinosaur;
 import com.arkcraft.mod.common.entity.aggressive.EntityRaptor;
 import com.arkcraft.mod.common.items.ARKCraftItems;
+import com.arkcraft.mod.common.items.weapons.handlers.IItemWeapon;
 import com.arkcraft.mod.common.items.weapons.projectiles.EntityTranqArrow;
 import com.arkcraft.mod.common.lib.BALANCE;
 import com.arkcraft.mod.common.lib.LogHelper;
@@ -141,16 +142,16 @@ public class ARKEventHandler {
 	     	ItemStack stack = thePlayer.getCurrentEquippedItem();
 	     	if (stack != null)
         	{
-		        IExtendedReach ieri;
-		        if (stack.getItem() instanceof IExtendedReach)
+		        IItemWeapon i_item_weapon;
+		        if (stack.getItem() instanceof IItemWeapon)
 	            {
-	                 ieri = (IExtendedReach) stack.getItem();
+		        	i_item_weapon = (IItemWeapon) stack.getItem();
 	            } 
 		        else
 	            {
-	                 ieri = null;
+		        	i_item_weapon = null;
 	            }
-	     	     if (ieri != null)
+	     	     if (i_item_weapon != null)
 	             {
 	     	    	if (evt.buttonstate)
 	     	    		ShowScopeOverlap = true;
@@ -197,16 +198,16 @@ public class ARKEventHandler {
         	ItemStack stack = thePlayer.getCurrentEquippedItem();
         	if (stack != null)
         	{
-		        IExtendedReach ieri;
-		        if (stack.getItem() instanceof IExtendedReach)
-	            {
-	            ieri = (IExtendedReach) stack.getItem();
-	            }
-		        else
-	            {
-	                 ieri = null;
-	            }
-		        if (ieri != null)
+        		 IItemWeapon i_item_weapon;
+ 		        if (stack.getItem() instanceof IItemWeapon)
+ 	            {
+ 		        	i_item_weapon = (IItemWeapon) stack.getItem();
+ 	            } 
+ 		        else
+ 	            {
+ 		        	i_item_weapon = null;
+ 	            }
+		        if (i_item_weapon != null)
 	            {
 		        	
 		        ModelPlayer model = (ModelPlayer)event.renderer.getMainModel();

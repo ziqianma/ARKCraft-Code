@@ -74,10 +74,4 @@ public class RangedCompTranqGun extends RangedComponent
 		}
 		world.spawnParticle(EnumParticleTypes.FLAME, x + particleX, y + particleY, z + particleZ, 0.0D, 0.0D, 0.0D);
 	}
-	
-	@Override
-	public float getMaxZoom()
-	{
-		return 0.50f;
-	}
 }

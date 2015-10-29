@@ -117,7 +117,7 @@ public abstract class RangedComponent extends AbstractWeaponComponent
 	@Override
 	public void addItemAttributeModifiers(Multimap<String, AttributeModifier> multimap)
 	{
-		multimap.put(WeaponModAttributes.RELOAD_TIME.getAttributeUnlocalizedName(), new AttributeModifier(weapon.getUUID(), "Weapon reloadtime modifier", rangedSpecs.getReloadTime(), 0));
+		multimap.put(WeaponModAttributes.RELOAD_TIME.getAttributeUnlocalizedName(), new AttributeModifier("Weapon reloadtime modifier", rangedSpecs.getReloadTime(), 0));
 	}
 	
 	@Override
@@ -298,30 +298,11 @@ public abstract class RangedComponent extends AbstractWeaponComponent
         }
 		return numInStack;
 	}
+    
+	@Override
+	public boolean getReach() {
 
-	public float getFOVMultiplier(int ticksinuse)
-	{
-		float f1 = ticksinuse / getMaxAimTimeTicks();
-		
-		if (f1 > 1.0F)
-		{
-			f1 = 1.0F;
-		} else
-		{
-			f1 *= f1;
-		}
-		
-		return 1.0F - f1 * getMaxZoom();
-	}
-	
-	protected float getMaxAimTimeTicks()
-	{
-		return 20.0f;
-	}
-	
-	protected float getMaxZoom()
-	{
-		return 0.15f;
+	return false;
 	}
 	
 	public static enum RangedSpecs {

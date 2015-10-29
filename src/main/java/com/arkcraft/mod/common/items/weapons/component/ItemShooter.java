@@ -1,8 +1,7 @@
 package com.arkcraft.mod.common.items.weapons.component;
 
-import com.arkcraft.mod.common.items.weapons.handlers.IItemWeapon;
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
+import java.util.Random;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,8 +12,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.Random;
-import java.util.UUID;
+import com.arkcraft.mod.common.items.weapons.handlers.IItemWeapon;
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
 
 public class ItemShooter extends ItemBow implements IItemWeapon
 {
@@ -88,12 +88,6 @@ public class ItemShooter extends ItemBow implements IItemWeapon
 	}
 	
 	@Override
-	public final UUID getUUID()
-	{
-		return itemModifierUUID;
-	}
-	
-	@Override
 	public final Random getItemRand()
 	{
 		return itemRand;
@@ -105,17 +99,16 @@ public class ItemShooter extends ItemBow implements IItemWeapon
 		return rangedComponent;
 	}
 	
-//	@Override
-//	@SideOnly(Side.CLIENT)
-//	public void registerIcons(IIconRegister iconregister)
-//	{
-//		itemIcon = iconregister.registerIcon(getIconString());
-//	}
-	
 	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean isFull3D()
 	{
 		return true;
+	}
+
+	@Override
+	public boolean getReach() 
+	{
+		return rangedComponent.getReach();
 	}
 }

@@ -34,12 +34,6 @@ public class RangedCompSpyGlass extends RangedComponent
 		return Integer.MAX_VALUE;
 	}
 	
-	@Override
-	public float getMaxZoom()
-	{
-		return 0.50f;
-	}	
-	
 	@SuppressWarnings("unchecked")
 	@Override
     @SideOnly(Side.CLIENT)

@@ -32,6 +32,7 @@ public class ClientEventHandler
 		}
 	}
 
+	/*
 	@SubscribeEvent
 	public void onFOVUpdateEvent(FOVUpdateEvent e)
 	{
@@ -44,7 +45,7 @@ public class ClientEventHandler
 				e.newfov = e.fov * rc.getFOVMultiplier(e.entity.getItemInUseDuration());
 			}
 		}
-	}
+	}	*/
 
 	@SubscribeEvent
 	public void guiOpen(GuiOpenEvent event)
