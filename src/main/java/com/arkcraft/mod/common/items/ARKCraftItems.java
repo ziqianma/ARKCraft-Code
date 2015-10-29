@@ -2,6 +2,8 @@ package com.arkcraft.mod.common.items;
 
 import com.arkcraft.mod.GlobalAdditions;
 import com.arkcraft.mod.client.gui.book.Dossier;
+import com.arkcraft.mod.common.ARKCraft;
+import com.arkcraft.mod.common.handlers.EntityHandler;
 import com.arkcraft.mod.common.items.weapons.ItemSpyGlass;
 import com.arkcraft.mod.common.items.weapons.ItemCompoundBow;
 import com.arkcraft.mod.common.items.weapons.ItemCrossbow;
@@ -20,6 +22,14 @@ import com.arkcraft.mod.common.items.weapons.component.RangedCompSimplePistol;
 import com.arkcraft.mod.common.items.weapons.component.RangedCompSpyGlass;
 import com.arkcraft.mod.common.items.weapons.component.RangedCompTranqGun;
 import com.arkcraft.mod.common.items.weapons.component.RangedComponent;
+import com.arkcraft.mod.common.items.weapons.projectiles.EntityMetalArrow;
+import com.arkcraft.mod.common.items.weapons.projectiles.EntityRocketPropelledGrenade;
+import com.arkcraft.mod.common.items.weapons.projectiles.EntitySimpleBullet;
+import com.arkcraft.mod.common.items.weapons.projectiles.EntitySimpleRifleAmmo;
+import com.arkcraft.mod.common.items.weapons.projectiles.EntitySimpleShotgunAmmo;
+import com.arkcraft.mod.common.items.weapons.projectiles.EntityStoneArrow;
+import com.arkcraft.mod.common.items.weapons.projectiles.EntityTranqArrow;
+import com.arkcraft.mod.common.items.weapons.projectiles.EntityTranquilizer;
 import com.arkcraft.mod.common.items.weapons.projectiles.dispense.DispenseRocketPropelledGrenade;
 import com.arkcraft.mod.common.items.weapons.projectiles.dispense.DispenseSimpleBullet;
 import com.arkcraft.mod.common.items.weapons.projectiles.dispense.DispenseSimpleRifleAmmo;
@@ -109,7 +119,6 @@ public class ARKCraftItems
 		slingshot = addSlingshot("slingshot");
 		//stoneSpear = addWeaponThrowable("stoneSpear", ToolMaterial.STONE);
 		ironPike = addWeapon("ironPike", ToolMaterial.IRON);
-		addGunPowderWeapons();
 
 		// Regular Items
 		fiber = addItem("fiber");
@@ -163,6 +172,31 @@ public class ARKCraftItems
 		boneBoots = addArmorItem("bone_boots", BONE, "boneArmor", 3, true, EnumChatFormatting.DARK_RED + "Armor of the Ancients");
 		
 		registerDispenseBehavior();
+		registerWeaponEntities();
+		addGunPowderWeapons();
+	}
+	
+	public static void registerWeaponEntities(){
+		if (BALANCE.WEAPONS.SIMPLE_PISTOL){
+			EntityHandler.registerModEntity(EntitySimpleBullet.class, "Simple Bullet", ARKCraft.instance, 64, 10, true);
+		}
+		if (BALANCE.WEAPONS.SHOTGUN){
+			EntityHandler.registerModEntity(EntitySimpleShotgunAmmo.class, "Simple Shotgun Ammo", ARKCraft.instance, 64, 10, true);		
+		}
+		if (BALANCE.WEAPONS.LONGNECK_RIFLE)	{
+			EntityHandler.registerModEntity(EntitySimpleRifleAmmo.class, "Simple Rifle Ammo", ARKCraft.instance, 64, 10, true);
+		}
+		if (BALANCE.WEAPONS.TRANQ_GUN)	{
+			EntityHandler.registerModEntity(EntityTranquilizer.class, "Tranquilizer", ARKCraft.instance, 64, 10, true);
+		}
+		if (BALANCE.WEAPONS.ROCKET_LAUNCHER)	{
+			EntityHandler.registerModEntity(EntityRocketPropelledGrenade.class, "Rocket Propelled Grenade", ARKCraft.instance, 64, 10, true);
+		}
+		if (BALANCE.WEAPONS.CROSSBOW)	{
+			EntityHandler.registerModEntity(EntityTranqArrow.class, "Tranq Arrow", ARKCraft.instance, 64, 10, true);
+			EntityHandler.registerModEntity(EntityStoneArrow.class, "Stone Arrow", ARKCraft.instance, 64, 10, true);
+			EntityHandler.registerModEntity(EntityMetalArrow.class, "Metal Arrow", ARKCraft.instance, 64, 10, true);
+		}
 	}
 	
 	public static void addGunPowderWeapons(){
