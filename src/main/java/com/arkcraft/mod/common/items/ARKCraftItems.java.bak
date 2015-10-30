@@ -67,7 +67,6 @@ public class ARKCraftItems
 	public static ARKArmorItem boneHelm, boneChest, boneLegs, boneBoots;
 	public static Dossier dino_book;
 	public static ARKBushItem item_berry_bush;
-	public static ARKCompostBinItem item_compost_bin;
 	public static ItemSpyGlass spy_glass;
 
 	// Weapons
@@ -132,7 +131,6 @@ public class ARKCraftItems
 		
 		//Block Items
 		item_berry_bush = addBushItem("item_berry_bush");
-		item_compost_bin = addCompostBinItem("item_compost_bin");
 		
 		//Bows
 		compound_bow = new ItemCompoundBow("compound_bow");
@@ -158,7 +156,7 @@ public class ARKCraftItems
 		saddle_small = addSaddle("saddle_small");
 		saddle_medium = addSaddle("saddle_medium");
 		saddle_large = addSaddle("saddle_large");
-				
+		
 		// Armor
 		chitinHelm = addArmorItem("chitin_helm", CHITIN, "chitinArmor", 0);
 		chitinChest = addArmorItem("chitin_chest", CHITIN, "chitinArmor", 1);
@@ -316,12 +314,6 @@ public class ARKCraftItems
 	
 	protected static ARKBushItem addBushItem(String name) {
 		ARKBushItem i = new ARKBushItem(name);
-		allItems.put(name, i);
-		return i;
-	}
-	
-	protected static ARKCompostBinItem addCompostBinItem(String name) {
-		ARKCompostBinItem i = new ARKCompostBinItem(name);
 		allItems.put(name, i);
 		return i;
 	}
