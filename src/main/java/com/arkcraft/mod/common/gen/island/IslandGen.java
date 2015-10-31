@@ -40,7 +40,12 @@ public class IslandGen
             {
                 for (int x = 0; x < width; x++)
                 {
-                    short height = (short) (image.getRGB(x, y) & 0x0000FF);
+                    int height = (int) ((image.getRGB(x, y) & 0x0000FF) * 1.5F);
+
+                    if (height + 5 > 255)
+                    {
+                        height = 250;
+                    }
 
                     if (height <= 1)
                     {
@@ -48,7 +53,7 @@ public class IslandGen
                     }
                     else
                     {
-                        heightmap[x][y] = (short) ((height * 0.85F) + 5);
+                        heightmap[x][y] = (short) ((height) + 5);
                     }
                 }
             }
