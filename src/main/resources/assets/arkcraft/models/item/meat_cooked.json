@@ -1,7 +1,7 @@
 {
     "parent":"builtin/generated",
     "textures": {
-        "layer0":"arkcraft:items/porkchop_raw"
+        "layer0":"arkcraft:items/meat_cooked"
     },
     "display": {
         "thirdperson": {

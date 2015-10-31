@@ -55,7 +55,7 @@ import java.util.Map;
 public class ARKCraftItems
 {
 
-	public static ARKFood tintoBerry, amarBerry, azulBerry, mejoBerry, narcoBerry, stimeBerry, porkchop_raw, porkchop_cooked, primemeat_raw, primemeat_cooked;
+	public static ARKFood tintoBerry, amarBerry, azulBerry, mejoBerry, narcoBerry, stimBerry, meat_raw, meat_cooked, primemeat_raw, primemeat_cooked;
 	public static ARKSeedItem tintoBerrySeed, amarBerrySeed, azulBerrySeed, mejoBerrySeed, narcoBerrySeed, stimBerrySeed;
 	public static ARKItem cobble_ball, fiber, chitin, narcotics, explosive_ball, dodo_bag, dodo_feather, gun_powder;
 	public static ARKThatchItem thatch;
@@ -100,8 +100,9 @@ public class ARKCraftItems
 		azulBerry = addFood("azul", 4, 0.3F, false, true, new PotionEffect(Potion.jump.id, 60, 1));
 		mejoBerry = addFood("mejo", 4, 0.3F, false, true, new PotionEffect(Potion.resistance.id, 100, 1));
 		narcoBerry = addFood("narco", 4, 0.3F, true, true, new PotionEffect(Potion.moveSpeed.id, 160, 1));
-		porkchop_raw = addFood("porkchop_raw", 3, 0.3F, false, false);
-		porkchop_cooked = addFood("porkchop_cooked", 6, 0.9F, false, false);
+		stimBerry = addFood("stim", 4, 0.3F, true, true, new PotionEffect(Potion.heal.id, 60, 1));
+		meat_raw = addFood("meat_raw", 3, 0.3F, false, false);
+		meat_cooked = addFood("meat_cooked", 6, 0.9F, false, false);
 		primemeat_raw = addFood("primemeat_raw", 3, 0.3F, false, false);
 		primemeat_cooked = addFood("primemeat_cooked", 8, 1.2F, false, false);
 
@@ -111,6 +112,7 @@ public class ARKCraftItems
 		azulBerrySeed = addSeedItem("azulBerrySeed");
 		mejoBerrySeed = addSeedItem("mejoBerrySeed");
 		narcoBerrySeed = addSeedItem("narcoBerrySeed");
+		stimBerrySeed = addSeedItem("stimBerrySeed");
 
 		// world generated
 		

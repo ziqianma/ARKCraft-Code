@@ -330,7 +330,7 @@ public class DinoTameableTest extends EntityMob implements IEntityOwnable {
             }
         }
         // Tame the dino with meat
-        else if (itemstack != null && itemstack.getItem() == ARKCraftItems.porkchop_raw) {
+        else if (itemstack != null && itemstack.getItem() == ARKCraftItems.meat_raw) {
             if (!player.capabilities.isCreativeMode) {
                 --itemstack.stackSize;
             }

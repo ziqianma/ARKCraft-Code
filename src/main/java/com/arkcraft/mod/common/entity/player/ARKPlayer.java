@@ -8,8 +8,10 @@ import com.arkcraft.mod.common.lib.BALANCE;
 import com.arkcraft.mod.common.lib.LogHelper;
 import com.arkcraft.mod.common.network.PlayerPoop;
 
+import com.arkcraft.mod.common.network.SyncPlayerData;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.world.World;
@@ -26,11 +28,17 @@ public class ARKPlayer implements IExtendedEntityProperties {
 	
 	// The extended player properties (anything below should be initialized in constructor and in NBT):
 	private boolean canPoop;         // True if player can poop (timer sets this)
+	private int water;
+	private int torpor;
+	private int stamina;
 
 	public ARKPlayer(EntityPlayer player, World world) {
 		// Initialize some stuff
 		this.player = player;
 		this.setCanPoop(false);
+		this.water = 20;
+		this.torpor = 0;
+		this.stamina = 20;
 	}
 
 	/**
@@ -56,6 +64,9 @@ public class ARKPlayer implements IExtendedEntityProperties {
 		NBTTagCompound properties = new NBTTagCompound();
 		// ARK player properties
 		properties.setBoolean("canPoop", canPoop());
+		properties.setInteger("water", water);
+		properties.setInteger("torpor", torpor);
+		properties.setInteger("stamina", stamina);
 //		LogHelper.info("ARKPlayer saveNBTData: Player can " + (canPoop ? "" : "not") + " poop.");
 		compound.setTag(EXT_PROP_NAME, properties);
 		inventoryPlayerCrafting.saveInventoryToNBT(compound);
@@ -68,6 +79,9 @@ public class ARKPlayer implements IExtendedEntityProperties {
 			return;
 		// ARK player properties 
 		this.setCanPoop(properties.getBoolean("canPoop"));
+		water = properties.getInteger("water");
+		torpor = properties.getInteger("torpor");
+		stamina = properties.getInteger("stamina");
 //		LogHelper.info("ARKPlayer loadNBTData: Player can " + (canPoop ? "" : "not") + " poop.");
 		inventoryPlayerCrafting.loadInventoryFromNBT(compound);
 	}
@@ -78,14 +92,17 @@ public class ARKPlayer implements IExtendedEntityProperties {
 	 */
 	public void copy(ARKPlayer props) {
 		this.canPoop = props.canPoop;
+		this.torpor = props.torpor;
+		this.water = props.water;
+		this.stamina = props.stamina;
 	}
 	
 	@Override
 	public void init(Entity entity, World world) {
 	}
 
-	public void syncClient(boolean all) {
-		// Add network stuff here to sync client to server
+	public void syncClient(EntityPlayerMP player, boolean all) {
+		ARKCraft.modChannel.sendTo(new SyncPlayerData(all, this), player);
 	}
 
 	@SuppressWarnings("unused")

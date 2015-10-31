@@ -63,6 +63,8 @@ public class ARKBush extends ARKBlock {
 			return ARKCraftItems.fiber;
 		else if(rand.nextInt(10) <= 4)
 			return rand.nextInt(10) <= 5 ? ARKCraftItems.amarBerry : ARKCraftItems.narcoBerry;
+		else if(rand.nextInt(15) <= 4)
+			return ARKCraftItems.stimBerry;
 		else if(rand.nextInt(10) >= 4 && rand.nextInt(10) <= 8)
 			return rand.nextInt(10) <= 5 ? ARKCraftItems.mejoBerry : ARKCraftItems.tintoBerry;
 		else

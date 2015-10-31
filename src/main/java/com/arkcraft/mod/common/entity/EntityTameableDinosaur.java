@@ -172,9 +172,9 @@ public abstract class EntityTameableDinosaur extends EntityTameable {
 			this.dropItem(Items.feather, 1); // TODO: Dodo feather instead
 		}
 		if (this.isBurning()) {
-			this.dropItem(ARKCraftItems.porkchop_cooked, 1);
+			this.dropItem(ARKCraftItems.meat_cooked, 1);
 		} else {
-			this.dropItem(ARKCraftItems.porkchop_raw, 1);
+			this.dropItem(ARKCraftItems.meat_raw, 1);
 		}
 		if (this.isSaddled()) {
 			this.dropItem(ARKCraftItems.saddle_large, 1);

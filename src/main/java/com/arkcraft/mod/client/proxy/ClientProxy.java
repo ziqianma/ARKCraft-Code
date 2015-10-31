@@ -40,6 +40,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderSnowball;
 import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
@@ -73,7 +74,7 @@ public class ClientProxy extends CommonProxy
 	//	RenderingRegistry.registerEntityRenderingHandler(EntityTranqAmmo.class, new RenderTranqAmmo());
 	//	RenderingRegistry.registerEntityRenderingHandler(EntitySimpleBullet.class, new RenderSimpleBullet());
 		
-		GameRegistry.addSmelting(ARKCraftItems.porkchop_raw, new ItemStack(ARKCraftItems.porkchop_cooked, 1), (int) Math.floor(ARKFood.globalHealAmount/2));
+		GameRegistry.addSmelting(ARKCraftItems.meat_raw, new ItemStack(ARKCraftItems.meat_cooked, 1), (int) Math.floor(ARKFood.globalHealAmount/2));
 		GameRegistry.addSmelting(ARKCraftItems.primemeat_raw, new ItemStack(ARKCraftItems.primemeat_cooked, 1), (int) Math.floor(ARKFood.globalHealAmount/2));
 		
 		ModelBakery.addVariantName(ARKCraftItems.slingshot, "arkcraft:slingshot", "arkcraft:slingshot_pulled");
@@ -147,6 +148,11 @@ public class ClientProxy extends CommonProxy
 	public void registerItemTexture(final Item item, int meta, final String name) {
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, meta, new ModelResourceLocation(ARKCraft.MODID + ":" + name, "inventory"));
         ModelBakery.addVariantName(item, ARKCraft.MODID + ":" + name);
+	}
+
+	public EntityPlayer getPlayer()
+	{
+		return Minecraft.getMinecraft().thePlayer;
 	}
 	//public void registerSound() {
 	//	MinecraftForge.EVENT_BUS.register(new SoundHandler());
