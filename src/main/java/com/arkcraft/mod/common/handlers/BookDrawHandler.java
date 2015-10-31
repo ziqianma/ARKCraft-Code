@@ -1,6 +1,6 @@
 package com.arkcraft.mod.common.handlers;
 
-import com.arkcraft.mod.client.gui.GuiDosierScreen.CATEGORY;
+import com.arkcraft.mod.client.gui.GuiDossierScreen.CATEGORY;
 import com.arkcraft.mod.common.ARKCraft;
 import com.arkcraft.mod.common.entity.aggressive.EntityRaptor;
 import com.arkcraft.mod.common.entity.passive.EntityDodo;

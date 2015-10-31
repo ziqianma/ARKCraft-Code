@@ -15,7 +15,7 @@ import org.lwjgl.opengl.GL11;
  */
 
 @SuppressWarnings({"unchecked", "unused"})
-public class GuiDosierScreen extends GuiScreen {
+public class GuiDossierScreen extends GuiScreen {
 
     private static final ResourceLocation texture = new ResourceLocation(ARKCraft.MODID, "textures/gui/dino_book_gui.png");
 

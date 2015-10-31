@@ -1,3 +1,19 @@
+/*
+// For those who want the bleeding edge
+buildscript {
+    repositories {
+        jcenter()
+        maven {
+            name = "forge"
+            url = "http://files.minecraftforge.net/maven"
+        }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.0-SNAPSHOT'
+    }
+}
+apply plugin: 'net.minecraftforge.gradle.forge'
+*/
 
 // for people who want stable
 plugins {
@@ -11,7 +27,7 @@ archivesBaseName = "ARKCraft"
 minecraft {
     version = "1.8-11.14.3.1514"
     runDir = "run"
-    replace '${version}', project.version
+    
     // the mappings can be changed at any time, and must be in the following format.
     // snapshot_YYYYMMDD   snapshot are built nightly.
     // stable_#            stables are built at the discretion of the MCP team.
@@ -19,6 +35,18 @@ minecraft {
     // simply re-run your setup task after changing the mappings to update your workspace.
     mappings = "snapshot_20141130"
     // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
+}
+
+repositories {
+	mavenCentral()
+	maven {
+		name = "ilexiconn"
+		url = "http://maven.ilexiconn.net"
+	}
+}
+
+dependencies {
+	compile 'net.ilexiconn:llibrary:0.4.3-1.8:dev'
 }
 
 dependencies {
@@ -43,10 +71,6 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 
-}
-
-task wrapper(type: Wrapper) {
-	gradleVersion = '2.9'
 }
 
 processResources

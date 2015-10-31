@@ -2,6 +2,8 @@ package com.arkcraft.mod.common.items;
 
 import com.arkcraft.mod.GlobalAdditions;
 import com.arkcraft.mod.client.gui.book.Dossier;
+import com.arkcraft.mod.common.ARKCraft;
+import com.arkcraft.mod.common.handlers.EntityHandler;
 import com.arkcraft.mod.common.items.weapons.ItemSpyGlass;
 import com.arkcraft.mod.common.items.weapons.ItemCompoundBow;
 import com.arkcraft.mod.common.items.weapons.ItemCrossbow;
@@ -20,6 +22,14 @@ import com.arkcraft.mod.common.items.weapons.component.RangedCompSimplePistol;
 import com.arkcraft.mod.common.items.weapons.component.RangedCompSpyGlass;
 import com.arkcraft.mod.common.items.weapons.component.RangedCompTranqGun;
 import com.arkcraft.mod.common.items.weapons.component.RangedComponent;
+import com.arkcraft.mod.common.items.weapons.projectiles.EntityMetalArrow;
+import com.arkcraft.mod.common.items.weapons.projectiles.EntityRocketPropelledGrenade;
+import com.arkcraft.mod.common.items.weapons.projectiles.EntitySimpleBullet;
+import com.arkcraft.mod.common.items.weapons.projectiles.EntitySimpleRifleAmmo;
+import com.arkcraft.mod.common.items.weapons.projectiles.EntitySimpleShotgunAmmo;
+import com.arkcraft.mod.common.items.weapons.projectiles.EntityStoneArrow;
+import com.arkcraft.mod.common.items.weapons.projectiles.EntityTranqArrow;
+import com.arkcraft.mod.common.items.weapons.projectiles.EntityTranquilizer;
 import com.arkcraft.mod.common.items.weapons.projectiles.dispense.DispenseRocketPropelledGrenade;
 import com.arkcraft.mod.common.items.weapons.projectiles.dispense.DispenseSimpleBullet;
 import com.arkcraft.mod.common.items.weapons.projectiles.dispense.DispenseSimpleRifleAmmo;
@@ -45,8 +55,8 @@ import java.util.Map;
 public class ARKCraftItems
 {
 
-	public static ARKFood tintoBerry, amarBerry, azulBerry, mejoBerry, narcoBerry, porkchop_raw, porkchop_cooked, primemeat_raw, primemeat_cooked;
-	public static ARKSeedItem tintoBerrySeed, amarBerrySeed, azulBerrySeed, mejoBerrySeed, narcoBerrySeed;
+	public static ARKFood tintoBerry, amarBerry, azulBerry, mejoBerry, narcoBerry, stimBerry, meat_raw, meat_cooked, primemeat_raw, primemeat_cooked;
+	public static ARKSeedItem tintoBerrySeed, amarBerrySeed, azulBerrySeed, mejoBerrySeed, narcoBerrySeed, stimBerrySeed;
 	public static ARKItem cobble_ball, fiber, chitin, narcotics, explosive_ball, dodo_bag, dodo_feather, gun_powder;
 	public static ARKThatchItem thatch;
 	public static ARKFecesItem dodo_feces, player_feces, fertilizer;
@@ -57,6 +67,7 @@ public class ARKCraftItems
 	public static ARKArmorItem boneHelm, boneChest, boneLegs, boneBoots;
 	public static Dossier dino_book;
 	public static ARKBushItem item_berry_bush;
+	public static ARKCompostBinItem item_compost_bin;
 	public static ItemSpyGlass spy_glass;
 
 	// Weapons
@@ -89,8 +100,9 @@ public class ARKCraftItems
 		azulBerry = addFood("azul", 4, 0.3F, false, true, new PotionEffect(Potion.jump.id, 60, 1));
 		mejoBerry = addFood("mejo", 4, 0.3F, false, true, new PotionEffect(Potion.resistance.id, 100, 1));
 		narcoBerry = addFood("narco", 4, 0.3F, true, true, new PotionEffect(Potion.moveSpeed.id, 160, 1));
-		porkchop_raw = addFood("porkchop_raw", 3, 0.3F, false, false);
-		porkchop_cooked = addFood("porkchop_cooked", 6, 0.9F, false, false);
+		stimBerry = addFood("stim", 4, 0.3F, true, true, new PotionEffect(Potion.heal.id, 60, 1));
+		meat_raw = addFood("meat_raw", 3, 0.3F, false, false);
+		meat_cooked = addFood("meat_cooked", 6, 0.9F, false, false);
 		primemeat_raw = addFood("primemeat_raw", 3, 0.3F, false, false);
 		primemeat_cooked = addFood("primemeat_cooked", 8, 1.2F, false, false);
 
@@ -100,6 +112,7 @@ public class ARKCraftItems
 		azulBerrySeed = addSeedItem("azulBerrySeed");
 		mejoBerrySeed = addSeedItem("mejoBerrySeed");
 		narcoBerrySeed = addSeedItem("narcoBerrySeed");
+		stimBerrySeed = addSeedItem("stimBerrySeed");
 
 		// world generated
 		
@@ -109,7 +122,6 @@ public class ARKCraftItems
 		slingshot = addSlingshot("slingshot");
 		//stoneSpear = addWeaponThrowable("stoneSpear", ToolMaterial.STONE);
 		ironPike = addWeapon("ironPike", ToolMaterial.IRON);
-		addGunPowderWeapons();
 
 		// Regular Items
 		fiber = addItem("fiber");
@@ -122,6 +134,7 @@ public class ARKCraftItems
 		
 		//Block Items
 		item_berry_bush = addBushItem("item_berry_bush");
+		item_compost_bin = addCompostBinItem("item_compost_bin");
 		
 		//Bows
 		compound_bow = new ItemCompoundBow("compound_bow");
@@ -147,7 +160,7 @@ public class ARKCraftItems
 		saddle_small = addSaddle("saddle_small");
 		saddle_medium = addSaddle("saddle_medium");
 		saddle_large = addSaddle("saddle_large");
-		
+				
 		// Armor
 		chitinHelm = addArmorItem("chitin_helm", CHITIN, "chitinArmor", 0);
 		chitinChest = addArmorItem("chitin_chest", CHITIN, "chitinArmor", 1);
@@ -163,6 +176,31 @@ public class ARKCraftItems
 		boneBoots = addArmorItem("bone_boots", BONE, "boneArmor", 3, true, EnumChatFormatting.DARK_RED + "Armor of the Ancients");
 		
 		registerDispenseBehavior();
+		registerWeaponEntities();
+		addGunPowderWeapons();
+	}
+	
+	public static void registerWeaponEntities(){
+		if (BALANCE.WEAPONS.SIMPLE_PISTOL){
+			EntityHandler.registerModEntity(EntitySimpleBullet.class, "Simple Bullet", ARKCraft.instance, 64, 10, true);
+		}
+		if (BALANCE.WEAPONS.SHOTGUN){
+			EntityHandler.registerModEntity(EntitySimpleShotgunAmmo.class, "Simple Shotgun Ammo", ARKCraft.instance, 64, 10, true);		
+		}
+		if (BALANCE.WEAPONS.LONGNECK_RIFLE)	{
+			EntityHandler.registerModEntity(EntitySimpleRifleAmmo.class, "Simple Rifle Ammo", ARKCraft.instance, 64, 10, true);
+		}
+		if (BALANCE.WEAPONS.TRANQ_GUN)	{
+			EntityHandler.registerModEntity(EntityTranquilizer.class, "Tranquilizer", ARKCraft.instance, 64, 10, true);
+		}
+		if (BALANCE.WEAPONS.ROCKET_LAUNCHER)	{
+			EntityHandler.registerModEntity(EntityRocketPropelledGrenade.class, "Rocket Propelled Grenade", ARKCraft.instance, 64, 10, true);
+		}
+		if (BALANCE.WEAPONS.CROSSBOW)	{
+			EntityHandler.registerModEntity(EntityTranqArrow.class, "Tranq Arrow", ARKCraft.instance, 64, 10, true);
+			EntityHandler.registerModEntity(EntityStoneArrow.class, "Stone Arrow", ARKCraft.instance, 64, 10, true);
+			EntityHandler.registerModEntity(EntityMetalArrow.class, "Metal Arrow", ARKCraft.instance, 64, 10, true);
+		}
 	}
 	
 	public static void addGunPowderWeapons(){
@@ -171,7 +209,7 @@ public class ARKCraftItems
 			simple_bullet = addItemProjectile("simple_bullet");
 		}
 		if (BALANCE.WEAPONS.LONGNECK_RIFLE) {
-			longneck_rifle = addLongneckRifle("longneck_rifle", new RangedCompLongneckRifle(null, GlobalAdditions.GUI.SCOPE.getID()));
+			longneck_rifle = addLongneckRifle("longneck_rifle", new RangedCompLongneckRifle(GlobalAdditions.GUI.SCOPE.getID()));
 			simple_rifle_ammo = addItemProjectile("simple_rifle_ammo");
 		}
 		if (BALANCE.WEAPONS.SHOTGUN) {
@@ -280,6 +318,12 @@ public class ARKCraftItems
 	
 	protected static ARKBushItem addBushItem(String name) {
 		ARKBushItem i = new ARKBushItem(name);
+		allItems.put(name, i);
+		return i;
+	}
+	
+	protected static ARKCompostBinItem addCompostBinItem(String name) {
+		ARKCompostBinItem i = new ARKCompostBinItem(name);
 		allItems.put(name, i);
 		return i;
 	}

@@ -92,9 +92,9 @@ public class ARKFood extends ItemFood {
 	public static int getItemFeedTime(ItemStack stack) {
 		if (stack != null) {
 			if (stack.getItem() instanceof ARKFood) {
-				if (stack.getItem() == (Item) ARKCraftItems.porkchop_cooked)
+				if (stack.getItem() == (Item) ARKCraftItems.meat_cooked)
 					return 25;
-				if (stack.getItem() == (Item) ARKCraftItems.porkchop_raw)
+				if (stack.getItem() == (Item) ARKCraftItems.meat_raw)
 					return 10;
 				if (stack.getItem() == (Item) ARKCraftItems.primemeat_cooked)
 					return 50;

@@ -37,12 +37,13 @@ public class GuiSmithy extends GuiContainer {
 	}
 	
 	// some [x,y] coordinates of graphical elements
-	final int BLUEPRINT_XPOS = 26;
+//	final int BLUEPRINT_XPOS = 26;
+	final int BLUEPRINT_XPOS = 33;
 	final int BLUEPRINT_YPOS = 16;
 	final int BLUEPRINT_WIDTH = 16;
 	final int BLUEPRINT_HEIGHT = 16;
 
-	final int LEFT_BUTTON_XPOS = 9;
+	final int LEFT_BUTTON_XPOS = 8;
 	final int LEFT_BUTTON_YPOS = BLUEPRINT_YPOS + 2;
 	final int LEFT_BUTTON_WIDTH = 20;
 	final int LEFT_BUTTON_HEIGHT = 12;

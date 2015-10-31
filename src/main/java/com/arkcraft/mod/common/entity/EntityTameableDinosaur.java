@@ -3,6 +3,7 @@ package com.arkcraft.mod.common.entity;
 
 import com.arkcraft.mod.GlobalAdditions.GUI;
 import com.arkcraft.mod.client.gui.InventoryDino;
+import com.arkcraft.mod.client.gui.InventorySaddle;
 import com.arkcraft.mod.client.gui.InventoryTaming;
 import com.arkcraft.mod.common.ARKCraft;
 import com.arkcraft.mod.common.items.ARKCraftItems;
@@ -23,6 +24,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 /***
@@ -32,19 +34,18 @@ import net.minecraft.world.World;
  */
 public abstract class EntityTameableDinosaur extends EntityTameable {
 	// Stuff that needs to be saved to NBT:
-	public InventoryDino invDino;
+	public InventoryDino invTamedDino;
 	public InventoryTaming invTaming;
+	public InventorySaddle invSaddle;
 	protected boolean isSaddled = false;
 	protected boolean isTaming = false;
-//	protected int torpor = 0;
-//	protected int progress = 0;
 
 	// Other non-NBT variables:
 	protected boolean isRideable = false;
 	protected boolean isTameable = false;
 	protected int tamingSeconds = 0;
 	protected EntityAIBase attackPlayerTarget;
-	SaddleType saddleType;
+	public SaddleType saddleType;
 	
 	private int DINO_SADDLED_WATCHER = 22;
 	public boolean isSaddled() {
@@ -59,7 +60,7 @@ public abstract class EntityTameableDinosaur extends EntityTameable {
 		}
 	}
 	public Item getSaddleType() {
-		return this.saddleType.getSaddleType();
+		return this.saddleType.getSaddleItem();
 	}
 	public void setSaddleType(int type) {
 		switch (type) {
@@ -87,9 +88,10 @@ public abstract class EntityTameableDinosaur extends EntityTameable {
 		this.getDataWatcher().addObject(DINO_SADDLED_WATCHER, Byte.valueOf((byte) 0));
         this.isTameable = true;
 		this.tamingSeconds = 120; // Set this before the InventoryTaming (this is the default if not set)
-		this.invDino = new InventoryDino("Items", true, saddleType.getInventorySize());
+		this.invTamedDino = new InventoryDino("Items", true, saddleType.getInventorySize());
 		this.invTaming = new InventoryTaming(this);
 		this.saddleType = saddleType;
+		this.invSaddle = new InventorySaddle(this);
 	}
 	
 	// Use this constructor if you want to create a dino that is not tameable
@@ -97,12 +99,13 @@ public abstract class EntityTameableDinosaur extends EntityTameable {
 		super(worldIn);
 		this.getDataWatcher().addObject(DINO_SADDLED_WATCHER, Byte.valueOf((byte) 0));
         this.isTameable = isTameable;
+        this.saddleType = saddleType;
         if (isTameable) {
         	this.tamingSeconds = tamingSeconds; // This must be before the InventoryTaming
-        	this.invDino = new InventoryDino("Items", true, saddleType.getInventorySize());
+        	this.invTamedDino = new InventoryDino("Items", true, saddleType.getInventorySize());
         	this.invTaming = new InventoryTaming(this);
+    		this.invSaddle = new InventorySaddle(this);
         }
-        this.saddleType = saddleType;
         
         // Stuff for when tamed
         this.tasks.addTask(1, this.aiSit);
@@ -169,13 +172,15 @@ public abstract class EntityTameableDinosaur extends EntityTameable {
 			this.dropItem(Items.feather, 1); // TODO: Dodo feather instead
 		}
 		if (this.isBurning()) {
-			this.dropItem(ARKCraftItems.porkchop_cooked, 1);
+			this.dropItem(ARKCraftItems.meat_cooked, 1);
 		} else {
-			this.dropItem(ARKCraftItems.porkchop_raw, 1);
+			this.dropItem(ARKCraftItems.meat_raw, 1);
 		}
 		if (this.isSaddled()) {
 			this.dropItem(ARKCraftItems.saddle_large, 1);
-			this.dropItemsInChest(this, this.invDino);
+		}
+		if (this.isTamed()){
+			this.dropItemsInChest(this, this.invTamedDino);			
 		}
 	}
 	
@@ -200,13 +205,11 @@ public abstract class EntityTameableDinosaur extends EntityTameable {
         if (isTameable) {
         	nbt.setBoolean("isSaddled", isSaddled);
         	nbt.setBoolean("isTaming", isTaming);
-//        	nbt.setInteger("torpor", torpor);
-//        	nbt.setInteger("progress", progress);
-        	this.invTaming.saveInventoryToNBT(nbt);
-//    		if (this.isSaddled()) {
-    			this.invDino.saveInventoryToNBT(nbt);
-//    			LogHelper.info("EntityDodo - writeEntityToNBT: Saved chest inventory.");
-//    		}
+        }
+        if (this.isTamed()){
+   			this.invTamedDino.saveInventoryToNBT(nbt);        	
+        } else {
+        	this.invTaming.saveInventoryToNBT(nbt);        	
         }
     }
 
@@ -223,18 +226,13 @@ public abstract class EntityTameableDinosaur extends EntityTameable {
 	        if (nbt.hasKey("isTaming")) {
 	        	this.setIsTaming(nbt.getBoolean("isTaming"));
 	        }
-//	        if (nbt.hasKey("torpor")) {
-//	        	torpor = (nbt.getInteger("torpor"));
-//	        }
-//	        if (nbt.hasKey("progress")) {
-//	        	progress = (nbt.getInteger("progress"));
-//	        }
-	        // Dino taming inventory
-	        this.invTaming.loadInventoryFromNBT(nbt);
-	        // Dino Inventory
-			final byte NBT_TYPE_COMPOUND = 10;
-			NBTTagList dataForAllSlots = nbt.getTagList("Items", NBT_TYPE_COMPOUND);
-	        this.invDino.loadInventoryFromNBT(dataForAllSlots);
+	        if (this.isTamed()){
+				final byte NBT_TYPE_COMPOUND = 10;
+				NBTTagList dataForAllSlots = nbt.getTagList("Items", NBT_TYPE_COMPOUND);
+		        this.invTamedDino.loadInventoryFromNBT(dataForAllSlots);
+	        } else {
+	        	this.invTaming.loadInventoryFromNBT(nbt);
+	        }
         }
     }
 
@@ -283,7 +281,7 @@ public abstract class EntityTameableDinosaur extends EntityTameable {
 	}
 	
 	public int getTorpor() {
-		if (this.isTameable())
+		if (!this.isTamed() && this.isTameable())
 			return this.invTaming.getTorporTime();
 		else
 			return 0;
@@ -339,11 +337,12 @@ public abstract class EntityTameableDinosaur extends EntityTameable {
 
 		if (isTamed()) {
             if (this.isOwner(player)) {
-            	if (!this.worldObj.isRemote)
-            		player.addChatMessage(new ChatComponentText("EntityTameableDinosaur: This dino is tamed."));
+            	if (!this.worldObj.isRemote){
+            		player.addChatMessage(new ChatComponentText("This dino is tamed."));
+            	}
             	if (player.isSneaking()) {
-    	    		if (isSaddled()) {
-    	    			player.openGui(ARKCraft.instance, GUI.INV_DODO.getID(), this.worldObj,
+    	    		if (isTamed()) {
+    	    			player.openGui(ARKCraft.instance, GUI.TAMED_DINO.getID(), this.worldObj,
 		            			(int) Math.floor(this.posX), (int) this.posY, (int) Math.floor(this.posZ));
 		                this.aiSit.setSitting(this.isSitting());
 		            	LogHelper.info("Dino is sitting");
@@ -353,25 +352,8 @@ public abstract class EntityTameableDinosaur extends EntityTameable {
     	    		}
             	} // not sneaking     	
 	    		else if (itemstack != null) {
-					if (itemIsSaddle(itemstack)) {
-						if (this.isSaddled) {
-			            	LogHelper.info("Dino is saddled.");							
-						} else if (itemstack.getItem() == this.getSaddleType()) {
-							if (!player.capabilities.isCreativeMode) {
-								itemstack.stackSize--;
-								if (itemstack.stackSize == 0)
-				                    player.inventory.mainInventory[player.inventory.currentItem] = null;
-							}
-							setSaddled(true);
-			            	LogHelper.info("Dino is saddled.");
-							return true;
-						}
-						else {
-							player.addChatMessage(new ChatComponentText("This dino can only be saddled with a: " + this.saddleType + " saddle."));
-						}
-					}
 			        // Heal the Dino with its favorite food
-					else if (itemstack != null && isFavoriteFood(itemstack)) {
+					if (itemstack != null && isFavoriteFood(itemstack)) {
 	                    ItemFood itemfood = (ItemFood)itemstack.getItem();
 	                    if (!player.capabilities.isCreativeMode) {
 	                         --itemstack.stackSize;
@@ -390,7 +372,16 @@ public abstract class EntityTameableDinosaur extends EntityTameable {
 					}
 				}
             	else {
-            		this.setSitting(!this.isSitting());
+            		if (isSaddled()){
+		            	LogHelper.info("Dino is saddled.");
+		            	this.setSitting(false);
+		            	if (!this.worldObj.isRemote) 
+		            		player.mountEntity(this);
+		            	return true;
+            		}
+            		else
+		            	LogHelper.info("Dino is not saddled.");
+//            		this.setSitting(!this.isSitting());
             	}
 			} else { // end of owner's dino
             	player.addChatMessage(new ChatComponentText("EntityTameableDinosaur: This dino is tamed, but not yours."));
@@ -431,14 +422,14 @@ public abstract class EntityTameableDinosaur extends EntityTameable {
 //        return super.interact(player);
     }
     
-	private boolean itemIsSaddle(ItemStack itemstack) {
-		if (itemstack.getItem() == ARKCraftItems.saddle_small ||
-			itemstack.getItem() == ARKCraftItems.saddle_medium ||
-			itemstack.getItem() == ARKCraftItems.saddle_large)
-			return true;
-		else
-			return false;
-	}
+//	private boolean itemIsSaddle(ItemStack itemstack) {
+//		if (itemstack.getItem() == ARKCraftItems.saddle_small ||
+//			itemstack.getItem() == ARKCraftItems.saddle_medium ||
+//			itemstack.getItem() == ARKCraftItems.saddle_large)
+//			return true;
+//		else
+//			return false;
+//	}
 	
 	public boolean isUseableByPlayer(EntityPlayer player) {
 		final double X_CENTRE_OFFSET = 0.5;
@@ -450,7 +441,7 @@ public abstract class EntityTameableDinosaur extends EntityTameable {
 	
 	public void markDirty() {
         if (isTameable) {
-        	invDino.markDirty();;
+        	invTamedDino.markDirty();;
         	invTaming.markDirty();
         }
 	}
@@ -486,5 +477,115 @@ public abstract class EntityTameableDinosaur extends EntityTameable {
     		return this.worldObj.isRemote ? this.dataWatcher.getWatchableObjectByte(12) : this.field_175504_a;
     	else
     		return this.field_175504_a;
+    }
+    
+    ////////////////////////////// Stuff so you can ride the dino /////////////////////////////////////////
+    /**
+     * Returns the Y offset from the entity's position for any entity riding this one.
+     * Override this as needed.
+     */
+    @Override
+    public double getMountedYOffset() {
+        return (double)this.height * 0.75D;
+    }
+
+    /**
+     * Dead and sleeping entities cannot move
+     * This keeps dino from moving on its own when you ride it (I think)
+     */
+    protected boolean isMovementBlocked(){
+        return (this.riddenByEntity != null && this.isSaddled()) || (this.getHealth() <= 0.0F);
+    }
+    
+    /** Handle any special cases, such as rearing */
+    public void updateRiderPosition(){
+        super.updateRiderPosition();
+    }
+    
+    /**
+     * Moves the entity based on the specified heading.  Args: strafe, forward
+     * This is needed for rider to move dino!
+     * TODO: Add ability to jump if desired
+     */
+    public void moveEntityWithHeading(float strafe, float forward) {
+        if (this.riddenByEntity != null && this.riddenByEntity instanceof EntityPlayer && this.isSaddled()) {
+            this.prevRotationYaw = this.rotationYaw = this.riddenByEntity.rotationYaw;
+            this.rotationPitch = this.riddenByEntity.rotationPitch * 0.5F;
+            this.setRotation(this.rotationYaw, this.rotationPitch);
+            this.rotationYawHead = this.renderYawOffset = this.rotationYaw;
+            strafe = ((EntityLivingBase)this.riddenByEntity).moveStrafing * 0.5F;
+            forward = ((EntityLivingBase)this.riddenByEntity).moveForward;
+
+            if (forward <= 0.0F)
+            {
+                forward *= 0.25F;
+//                this.gallopTime = 0;
+            }
+
+//            if (this.onGround && this.jumpPower == 0.0F && this.isRearing() && !this.field_110294_bI)
+//            {
+//                strafe = 0.0F;
+//                forward = 0.0F;
+//            }
+
+//            if (this.jumpPower > 0.0F && !this.isHorseJumping() && this.onGround)
+//            {
+//                this.motionY = this.getHorseJumpStrength() * (double)this.jumpPower;
+//
+//                if (this.isPotionActive(Potion.jump))
+//                {
+//                    this.motionY += (double)((float)(this.getActivePotionEffect(Potion.jump).getAmplifier() + 1) * 0.1F);
+//                }
+//
+//                this.setHorseJumping(true);
+//                this.isAirBorne = true;
+//
+//                if (forward > 0.0F)
+//                {
+//                    float f2 = MathHelper.sin(this.rotationYaw * (float)Math.PI / 180.0F);
+//                    float f3 = MathHelper.cos(this.rotationYaw * (float)Math.PI / 180.0F);
+//                    this.motionX += (double)(-0.4F * f2 * this.jumpPower);
+//                    this.motionZ += (double)(0.4F * f3 * this.jumpPower);
+//                    this.playSound("mob.horse.jump", 0.4F, 1.0F);
+//                }
+//
+//                this.jumpPower = 0.0F;
+//                net.minecraftforge.common.ForgeHooks.onLivingJump(this);
+//            }
+
+            this.stepHeight = 1.0F;
+            this.jumpMovementFactor = this.getAIMoveSpeed() * 0.1F;
+
+            if (!this.worldObj.isRemote)
+            {
+                this.setAIMoveSpeed((float)this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).getAttributeValue());
+                super.moveEntityWithHeading(strafe, forward);
+            }
+
+//            if (this.onGround)
+//            {
+//                this.jumpPower = 0.0F;
+//                this.setHorseJumping(false);
+//            }
+
+            this.prevLimbSwingAmount = this.limbSwingAmount;
+            double d1 = this.posX - this.prevPosX;
+            double d0 = this.posZ - this.prevPosZ;
+            float f4 = MathHelper.sqrt_double(d1 * d1 + d0 * d0) * 4.0F;
+
+            if (f4 > 1.0F)
+            {
+                f4 = 1.0F;
+            }
+
+            this.limbSwingAmount += (f4 - this.limbSwingAmount) * 0.4F;
+            this.limbSwing += this.limbSwingAmount;
+        }
+        else
+        {
+            this.stepHeight = 0.5F;
+            this.jumpMovementFactor = 0.02F;
+            super.moveEntityWithHeading(strafe, forward);
+        }
     }
 }

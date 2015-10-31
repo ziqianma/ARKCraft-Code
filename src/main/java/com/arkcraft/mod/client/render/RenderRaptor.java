@@ -29,7 +29,7 @@ public class RenderRaptor extends RenderLiving {
 		texture[2] = new ResourceLocation(ARKCraft.MODID + ":textures/model/raptor_cyan_lgreen.png");
 		texture[3] = new ResourceLocation(ARKCraft.MODID + ":textures/model/raptor_gay_gay.png");
 		texture[4] = new ResourceLocation(ARKCraft.MODID + ":textures/model/raptor_green_grey.png");
-		texture[5] = new ResourceLocation(ARKCraft.MODID + ":textures/model;raptor_green_tan.png");
+		texture[5] = new ResourceLocation(ARKCraft.MODID + ":textures/model/raptor_green_tan.png");
 		texture[6] = new ResourceLocation(ARKCraft.MODID + ":textures/model/raptor_green_white.png");
 		texture[7] = new ResourceLocation(ARKCraft.MODID + ":textures/model/raptor_grey_grey.png");
 		texture[8] = new ResourceLocation(ARKCraft.MODID + ":textures/model/raptor_lbrown_tan.png");

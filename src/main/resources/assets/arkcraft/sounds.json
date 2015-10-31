@@ -187,5 +187,14 @@
                 "stream": false
             }
         ]
+    },
+	"ark_theme": {
+        "category": "music",
+        "sounds": [
+            {
+                "name": "ark_theme",
+                "stream": false
+            }
+        ]
     }
 }

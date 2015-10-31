@@ -1,6 +1,12 @@
 {
 	"variants": {
-		"normal": { "model": "arkcraft:compost_bin" }
+		"facing=south,part=left": { "model": "arkcraft:blank" },
+		"facing=west,part=left": { "model": "arkcraft:blank", "y": 90 },
+		"facing=north,part=left": { "model": "arkcraft:blank", "y": 180 },
+		"facing=east,part=left": { "model": "arkcraft:blank" , "y": 270 },
+		"facing=south,part=right": { "model": "arkcraft:compost_bin" },
+		"facing=west,part=right": { "model": "arkcraft:compost_bin", "y": 90 },
+		"facing=north,part=right": { "model": "arkcraft:compost_bin", "y": 180 },
+		"facing=east,part=right": { "model": "arkcraft:compost_bin", "y": 270  }
 	}
-
 }

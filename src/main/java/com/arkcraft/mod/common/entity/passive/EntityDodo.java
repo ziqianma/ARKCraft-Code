@@ -156,9 +156,9 @@ public class EntityDodo extends EntityTameable {
 			this.dropItem(ARKCraftItems.dodo_feather, 1);
 		}
 		if (this.isBurning()) {
-			this.dropItem(ARKCraftItems.porkchop_cooked, 1);
+			this.dropItem(ARKCraftItems.meat_cooked, 1);
 		} else {
-			this.dropItem(ARKCraftItems.porkchop_raw, 1);
+			this.dropItem(ARKCraftItems.meat_raw, 1);
 		}
 		if (this.isChested()) {
 			this.dropItem(ARKCraftItems.dodo_bag, 1);

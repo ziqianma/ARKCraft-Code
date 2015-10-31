@@ -7,6 +7,7 @@ import com.arkcraft.mod.common.handlers.SmithyCraftingManager;
 import com.arkcraft.mod.common.lib.BALANCE;
 import com.arkcraft.mod.common.lib.LogHelper;
 import com.arkcraft.mod.common.network.UpdateSmithyToCraftItem;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -107,6 +108,8 @@ public class TileInventorySmithy extends TileEntity implements IInventory, IUpda
 	/** The blueprint in the blueprint slots that is selected */
 //	private short blueprintSlotSelected = 0; // Currently just one slot
 	
+//	public InventoryBlueprints inventoryBlueprints = new InventoryBlueprints("Blueprints", false, 
+//			BLUEPRINT_SLOTS_COUNT, SmithyCraftingManager.getInstance());
 	public InventoryBlueprints inventoryBlueprints = new InventoryBlueprints("Blueprints", false, BLUEPRINT_SLOTS_COUNT);
 	
 	/** Get blueprint selected (to be displayed) */

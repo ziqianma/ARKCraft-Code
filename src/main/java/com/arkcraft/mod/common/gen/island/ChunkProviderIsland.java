@@ -57,18 +57,7 @@ public class ChunkProviderIsland implements IChunkProvider
     private final float[] parabolicField;
     private ChunkProviderSettings settings;
     private Block liquid;
-    private double[] stoneNoise;
-//    private MapGenBase caveGenerator;
-//    /** Holds Stronghold Generator */
-//    private MapGenStronghold strongholdGenerator;
-//    /** Holds Village Generator */
-//    private MapGenVillage villageGenerator;
-//    /** Holds Mineshaft Generator */
-//    private MapGenMineshaft mineshaftGenerator;
     private MapGenScatteredFeature scatteredFeatureGenerator;
-    /** Holds ravine generator */
-//    private MapGenBase ravineGenerator;
-//    private StructureOceanMonument oceanMonumentGenerator;
     /** The biomes that are used to generate the chunk */
     private BiomeGenBase[] biomesForGeneration;
 
@@ -78,23 +67,8 @@ public class ChunkProviderIsland implements IChunkProvider
     {
         this.scale = scale;
         this.liquid = Blocks.water;
-        this.stoneNoise = new double[256];
-//        this.caveGenerator = new MapGenCaves();
-//        this.strongholdGenerator = new MapGenStronghold();
-//        this.villageGenerator = new MapGenVillage();
-//        this.mineshaftGenerator = new MapGenMineshaft();
         this.scatteredFeatureGenerator = new MapGenScatteredFeature();
-//        this.ravineGenerator = new MapGenRavine();
-//        this.oceanMonumentGenerator = new StructureOceanMonument();
-//        {
-//            caveGenerator = TerrainGen.getModdedMapGen(caveGenerator, CAVE);
-//            strongholdGenerator = (MapGenStronghold)TerrainGen.getModdedMapGen(strongholdGenerator, STRONGHOLD);
-//            villageGenerator = (MapGenVillage)TerrainGen.getModdedMapGen(villageGenerator, VILLAGE);
-//            mineshaftGenerator = (MapGenMineshaft)TerrainGen.getModdedMapGen(mineshaftGenerator, MINESHAFT);
             scatteredFeatureGenerator = (MapGenScatteredFeature)TerrainGen.getModdedMapGen(scatteredFeatureGenerator, SCATTERED_FEATURE);
-//            ravineGenerator = TerrainGen.getModdedMapGen(ravineGenerator, RAVINE);
-//            oceanMonumentGenerator = (StructureOceanMonument)TerrainGen.getModdedMapGen(oceanMonumentGenerator, OCEAN_MONUMENT);
-//        }
         this.worldObj = world;
         this.mapFeaturesEnabled = mapFeaturesEnabled;
         this.field_177475_o = world.getWorldInfo().getTerrainType();
@@ -144,7 +118,7 @@ public class ChunkProviderIsland implements IChunkProvider
             {
                 int height = (IslandGen.getHeightForCoords(x + (chunkX * 16), z + (chunkZ * 16), scale));
 
-                for (int y = 0; y < Math.max(64, height); y++)
+                for (int y = 0; y < Math.max(169, height); y++)
                 {
                     if(y < height)
                     {
@@ -166,14 +140,13 @@ public class ChunkProviderIsland implements IChunkProvider
         if (event.getResult() == Result.DENY) return;
 
         double d0 = 0.03125D;
-        this.stoneNoise = this.noiseGen4.func_151599_a(this.stoneNoise, (double)(chunkX * 16), (double)(chunkZ * 16), 16, 16, d0 * 2.0D, d0 * 2.0D, 1.0D);
 
         for (int k = 0; k < 16; ++k)
         {
             for (int l = 0; l < 16; ++l)
             {
                 BiomeGenBase biome = biomes[l + k * 16];
-                biome.genTerrainBlocks(this.worldObj, this.rand, chunkPrimer, chunkX * 16 + k, chunkZ * 16 + l, this.stoneNoise[l + k * 16]);
+                biome.genTerrainBlocks(this.worldObj, this.rand, chunkPrimer, chunkX * 16 + k, chunkZ * 16 + l, 0);
             }
         }
     }
@@ -189,41 +162,6 @@ public class ChunkProviderIsland implements IChunkProvider
         this.setBlocksInChunk(x, z, chunkprimer);
         this.biomesForGeneration = this.worldObj.getWorldChunkManager().loadBlockGeneratorData(this.biomesForGeneration, x * 16, z * 16, 16, 16);
         this.func_180517_a(x, z, chunkprimer, this.biomesForGeneration);
-
-//        if (this.settings.useCaves)
-//        {
-//            this.caveGenerator.func_175792_a(this, this.worldObj, x, z, chunkprimer);
-//        }
-//
-//        if (this.settings.useRavines)
-//        {
-//            this.ravineGenerator.func_175792_a(this, this.worldObj, x, z, chunkprimer);
-//        }
-//
-//        if (this.settings.useMineShafts && this.mapFeaturesEnabled)
-//        {
-//            this.mineshaftGenerator.func_175792_a(this, this.worldObj, x, z, chunkprimer);
-//        }
-//
-//        if (this.settings.useVillages && this.mapFeaturesEnabled)
-//        {
-//            this.villageGenerator.func_175792_a(this, this.worldObj, x, z, chunkprimer);
-//        }
-
-//        if (this.settings.useStrongholds && this.mapFeaturesEnabled)
-//        {
-//            this.strongholdGenerator.func_175792_a(this, this.worldObj, x, z, chunkprimer);
-//        }
-
-//        if (this.settings.useTemples && this.mapFeaturesEnabled)
-//        {
-//            this.scatteredFeatureGenerator.func_175792_a(this, this.worldObj, x, z, chunkprimer);
-//        }
-
-//        if (this.settings.useMonuments && this.mapFeaturesEnabled)
-//        {
-//            this.oceanMonumentGenerator.func_175792_a(this, this.worldObj, x, z, chunkprimer);
-//        }
 
         Chunk chunk = new Chunk(this.worldObj, chunkprimer, x, z);
 
@@ -261,71 +199,12 @@ public class ChunkProviderIsland implements IChunkProvider
         long j1 = this.rand.nextLong() / 2L * 2L + 1L;
         this.rand.setSeed((long)p_73153_2_ * i1 + (long)p_73153_3_ * j1 ^ this.worldObj.getSeed());
         boolean flag = false;
-        ChunkCoordIntPair chunkcoordintpair = new ChunkCoordIntPair(p_73153_2_, p_73153_3_);
 
         MinecraftForge.EVENT_BUS.post(new PopulateChunkEvent.Pre(provider, worldObj, rand, p_73153_2_, p_73153_3_, flag));
-
-//        if (this.settings.useMineShafts && this.mapFeaturesEnabled)
-//        {
-//            this.mineshaftGenerator.func_175794_a(this.worldObj, this.rand, chunkcoordintpair);
-//        }
-//
-//        if (this.settings.useVillages && this.mapFeaturesEnabled)
-//        {
-//            flag = this.villageGenerator.func_175794_a(this.worldObj, this.rand, chunkcoordintpair);
-//        }
-//
-//        if (this.settings.useStrongholds && this.mapFeaturesEnabled)
-//        {
-//            this.strongholdGenerator.func_175794_a(this.worldObj, this.rand, chunkcoordintpair);
-//        }
-
-//        if (this.settings.useTemples && this.mapFeaturesEnabled)
-//        {
-//            this.scatteredFeatureGenerator.func_175794_a(this.worldObj, this.rand, chunkcoordintpair);
-//        }
-
-//        if (this.settings.useMonuments && this.mapFeaturesEnabled)
-//        {
-//            this.oceanMonumentGenerator.func_175794_a(this.worldObj, this.rand, chunkcoordintpair);
-//        }
 
         int k1;
         int l1;
         int i2;
-
-//        if (biomegenbase != BiomeGenBase.desert && biomegenbase != BiomeGenBase.desertHills && this.settings.useWaterLakes && !flag && this.rand.nextInt(this.settings.waterLakeChance) == 0
-//                && TerrainGen.populate(provider, worldObj, rand, p_73153_2_, p_73153_3_, flag, LAKE))
-//        {
-//            k1 = this.rand.nextInt(16) + 8;
-//            l1 = this.rand.nextInt(256);
-//            i2 = this.rand.nextInt(16) + 8;
-//            (new WorldGenLakes(Blocks.water)).generate(this.worldObj, this.rand, blockpos.add(k1, l1, i2));
-//        }
-
-//        if (TerrainGen.populate(provider, worldObj, rand, p_73153_2_, p_73153_3_, flag, LAVA) && !flag && this.rand.nextInt(this.settings.lavaLakeChance / 10) == 0 && this.settings.useLavaLakes)
-//        {
-//            k1 = this.rand.nextInt(16) + 8;
-//            l1 = this.rand.nextInt(this.rand.nextInt(248) + 8);
-//            i2 = this.rand.nextInt(16) + 8;
-//
-//            if (l1 < 63 || this.rand.nextInt(this.settings.lavaLakeChance / 8) == 0)
-//            {
-//                (new WorldGenLakes(Blocks.lava)).generate(this.worldObj, this.rand, blockpos.add(k1, l1, i2));
-//            }
-//        }
-
-//        if (this.settings.useDungeons)
-//        {
-//            boolean doGen = TerrainGen.populate(provider, worldObj, rand, p_73153_2_, p_73153_3_, flag, DUNGEON);
-//            for (k1 = 0; doGen && k1 < this.settings.dungeonChance; ++k1)
-//            {
-//                l1 = this.rand.nextInt(16) + 8;
-//                i2 = this.rand.nextInt(256);
-//                int j2 = this.rand.nextInt(16) + 8;
-//                (new WorldGenDungeons()).generate(this.worldObj, this.rand, blockpos.add(l1, i2, j2));
-//            }
-//        }
 
         biomegenbase.decorate(this.worldObj, this.rand, new BlockPos(k, 0, l));
         if (TerrainGen.populate(provider, worldObj, rand, p_73153_2_, p_73153_3_, flag, ANIMALS))
@@ -361,14 +240,7 @@ public class ChunkProviderIsland implements IChunkProvider
 
     public boolean func_177460_a(IChunkProvider provider, Chunk chunk, int x, int y)
     {
-        boolean flag = false;
-
-//        if (this.settings.useMonuments && this.mapFeaturesEnabled && chunk.getInhabitedTime() < 3600L)
-//        {
-//            flag |= this.oceanMonumentGenerator.func_175794_a(this.worldObj, this.rand, new ChunkCoordIntPair(x, y));
-//        }
-
-        return flag;
+        return false;
     }
 
     /**
@@ -420,11 +292,6 @@ public class ChunkProviderIsland implements IChunkProvider
             {
                 return this.scatteredFeatureGenerator.getScatteredFeatureSpawnList();
             }
-
-//            if (creatureType == EnumCreatureType.MONSTER && this.settings.useMonuments && this.oceanMonumentGenerator.func_175796_a(this.worldObj, pos))
-//            {
-//                return this.oceanMonumentGenerator.func_175799_b();
-//            }
         }
 
         return biomegenbase.getSpawnableList(creatureType);
@@ -433,7 +300,6 @@ public class ChunkProviderIsland implements IChunkProvider
     public BlockPos getStrongholdGen(World world, String gen, BlockPos pos)
     {
         return pos;
-//        return "Stronghold".equals(gen) && this.strongholdGenerator != null ? this.strongholdGenerator.getClosestStrongholdPos(world, pos) : null;
     }
 
     public int getLoadedChunkCount()
@@ -443,30 +309,6 @@ public class ChunkProviderIsland implements IChunkProvider
 
     public void recreateStructures(Chunk chunk, int x, int z)
     {
-//        if (this.settings.useMineShafts && this.mapFeaturesEnabled)
-//        {
-//            this.mineshaftGenerator.func_175792_a(this, this.worldObj, x, z, (ChunkPrimer)null);
-//        }
-//
-//        if (this.settings.useVillages && this.mapFeaturesEnabled)
-//        {
-//            this.villageGenerator.func_175792_a(this, this.worldObj, x, z, (ChunkPrimer)null);
-//        }
-//
-//        if (this.settings.useStrongholds && this.mapFeaturesEnabled)
-//        {
-//            this.strongholdGenerator.func_175792_a(this, this.worldObj, x, z, (ChunkPrimer)null);
-//        }
-//
-//        if (this.settings.useTemples && this.mapFeaturesEnabled)
-//        {
-//            this.scatteredFeatureGenerator.func_175792_a(this, this.worldObj, x, z, (ChunkPrimer)null);
-//        }
-//
-//        if (this.settings.useMonuments && this.mapFeaturesEnabled)
-//        {
-//            this.oceanMonumentGenerator.func_175792_a(this, this.worldObj, x, z, (ChunkPrimer)null);
-//        }
     }
 
     public Chunk provideChunk(BlockPos pos)

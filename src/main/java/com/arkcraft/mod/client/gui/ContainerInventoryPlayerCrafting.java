@@ -2,7 +2,6 @@ package com.arkcraft.mod.client.gui;
 
 import com.arkcraft.mod.common.entity.player.ARKPlayer;
 import com.arkcraft.mod.common.lib.LogHelper;
-import com.arkcraft.mod.common.tile.TileInventorySmithy;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -10,6 +9,7 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -29,7 +29,7 @@ public class ContainerInventoryPlayerCrafting extends Container {
 	public static final int BP_SLOT_COUNT = NUM_COLUMNS_BP * NUM_ROWS_BP; 
 
 	public ContainerInventoryPlayerCrafting(InventoryPlayer invPlayer, EntityPlayer player) {
-		LogHelper.info("ContainerMP: constructor called.");
+		LogHelper.info("ContainerInventoryPlayerCrafting: Constructor called on " + FMLCommonHandler.instance().getEffectiveSide());
 
 		inventoryBlueprints = ARKPlayer.get(player).getInventoryBlueprints();
 		inventoryPlayerCrafting = ARKPlayer.get(player).getInventoryPlayer();
@@ -38,7 +38,6 @@ public class ContainerInventoryPlayerCrafting extends Container {
 		if (BP_SLOT_COUNT != inventoryBlueprints.getSizeInventory()) {
 			LogHelper.error("Mismatched slot count in container(" + BP_SLOT_COUNT + ") and InventoryBlueprints (" 
 						+ inventoryBlueprints.getSizeInventory()+")");
-			return;
 		}
 		for(int row = 0; row < NUM_ROWS_BP; row++) {
 			for(int col = 0; col < NUM_COLUMNS_BP; col++) {
@@ -48,11 +47,11 @@ public class ContainerInventoryPlayerCrafting extends Container {
 			}
 		}
 		
-		// Player Crafting slots
+		// Player Crafting Inventory slots
 		final int NUM_COLUMNS_PC = 5;
 		final int NUM_ROWS_PC = 2;
 		final int PC_XPOS = 26;
-		final int PC_SLOT_COUNT = NUM_COLUMNS_BP * NUM_ROWS_BP; 
+		final int PC_SLOT_COUNT = NUM_COLUMNS_PC * NUM_ROWS_PC; 
 		if (PC_SLOT_COUNT != inventoryPlayerCrafting.getSizeInventory()) {
 			LogHelper.error("Mismatched slot count in container(" + PC_SLOT_COUNT + ") and InventoryPlayerCrafting (" 
 						+ inventoryPlayerCrafting.getSizeInventory()+")");
@@ -61,6 +60,7 @@ public class ContainerInventoryPlayerCrafting extends Container {
 		for(int row = 0; row < NUM_ROWS_PC; row++) {
 			for(int col = 0; col < NUM_COLUMNS_PC; col++) {
 				int slotIndex =  col + row * NUM_COLUMNS_PC;
+				
 				this.addSlotToContainer(new SlotPlayerCraftingInventory(inventoryPlayerCrafting, slotIndex,
 						PC_XPOS + col * 18, PLAYER_CRAFTING_YPOS + row * 18));
 			}
@@ -76,7 +76,7 @@ public class ContainerInventoryPlayerCrafting extends Container {
 		}
 		
 		/* Hotbar inventory */
-		final int HOTBAR_YPOS = 186;
+		final int HOTBAR_YPOS = 219;
 		for(int col = 0; col < 9; col++) {
 			addSlotToContainer(new Slot(invPlayer, col, 8 + col * 18, HOTBAR_YPOS));
 		}		
@@ -98,7 +98,7 @@ public class ContainerInventoryPlayerCrafting extends Container {
 		// Check if the slot clicked is the crafting inventory container slot
 		int nonPlayerSlotsCount = inventoryPlayerCrafting.getSizeInventory() + inventoryBlueprints.getSizeInventory();
 		if (sourceSlotIndex > inventoryBlueprints.getSizeInventory() - 1 && sourceSlotIndex < nonPlayerSlotsCount) {
-			// This is a Smithy inventory slot so merge the stack into the players inventory
+			// This is a player crafting inventory slot so merge the stack into the players inventory
 			if (!mergeItemStack(sourceStack, nonPlayerSlotsCount, 36 + nonPlayerSlotsCount, false)){
 				return null;
 			}
@@ -107,7 +107,7 @@ public class ContainerInventoryPlayerCrafting extends Container {
 		else if(sourceSlotIndex >= nonPlayerSlotsCount && sourceSlotIndex < 36 + nonPlayerSlotsCount) {
 			if (inventoryPlayerCrafting.isItemValidForSlot(sourceSlotIndex, sourceStack)) {
 				// This is a vanilla container slot so merge the stack into the Smithy inventory
-				if(!mergeItemStack(sourceStack, TileInventorySmithy.BLUEPRINT_SLOTS_COUNT, nonPlayerSlotsCount, false)) {
+				if(!mergeItemStack(sourceStack, inventoryBlueprints.getSizeInventory(), nonPlayerSlotsCount, false)) {
 					return null;
 				}
 			}
@@ -213,9 +213,9 @@ public class ContainerInventoryPlayerCrafting extends Container {
 		}
 	}
 	
-	public void setBlueprintItemStack(ItemStack stack) {
-		this.inventoryBlueprints.setInventorySlotContents(0, stack);
-	}
+//	public void setBlueprintItemStack(ItemStack stack) {
+//		this.inventoryBlueprints.setInventorySlotContents(0, stack);
+//	}
 
 	// Used by GUI to see if any players have the GUI open
 //	public int getNumCrafters() {

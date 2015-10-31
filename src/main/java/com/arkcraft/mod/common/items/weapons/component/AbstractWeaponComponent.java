@@ -73,6 +73,10 @@ public abstract class AbstractWeaponComponent
 	
 	public abstract void onUpdate(ItemStack itemstack, World world, Entity entity, int i, boolean flag);
 	
+	public abstract void onItemLeftClickTick(EntityPlayer entityplayer, World world1, int i);
+	
+	public abstract boolean  getReach();
+
 	@SideOnly(Side.CLIENT)
 	public abstract boolean shouldRotateAroundWhenRendering();
 

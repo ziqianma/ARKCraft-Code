@@ -1,9 +1,11 @@
 package com.arkcraft.mod.client.proxy;
 
 import com.arkcraft.mod.client.gui.overlay.GuiOverlay;
+import com.arkcraft.mod.client.gui.overlay.GuiOverlayReloading;
 import com.arkcraft.mod.client.model.ModelBrontosaurus;
 import com.arkcraft.mod.client.model.ModelDodo;
 import com.arkcraft.mod.client.model.ModelRaptorNew;
+import com.arkcraft.mod.client.model.override.PlayerModelOverride;
 import com.arkcraft.mod.client.render.RenderBrontosaurus;
 import com.arkcraft.mod.client.render.RenderDodo;
 import com.arkcraft.mod.client.render.RenderMetalArrow;
@@ -31,11 +33,14 @@ import com.arkcraft.mod.common.items.weapons.projectiles.EntityTranqArrow;
 import com.arkcraft.mod.common.lib.BALANCE;
 import com.arkcraft.mod.common.lib.LogHelper;
 import com.arkcraft.mod.common.proxy.CommonProxy;
+
+import net.ilexiconn.llibrary.client.render.RenderHelper;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderSnowball;
 import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
@@ -54,6 +59,7 @@ public class ClientProxy extends CommonProxy
 		if(initDone) return;
 
 		MinecraftForge.EVENT_BUS.register(new GuiOverlay());
+		MinecraftForge.EVENT_BUS.register(new GuiOverlayReloading());
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityCobble.class, new RenderSnowball(Minecraft.getMinecraft().getRenderManager(), ARKCraftItems.cobble_ball, Minecraft.getMinecraft().getRenderItem()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityTranqArrow.class, new RenderTranqArrow());
@@ -68,10 +74,13 @@ public class ClientProxy extends CommonProxy
 	//	RenderingRegistry.registerEntityRenderingHandler(EntityTranqAmmo.class, new RenderTranqAmmo());
 	//	RenderingRegistry.registerEntityRenderingHandler(EntitySimpleBullet.class, new RenderSimpleBullet());
 		
-		GameRegistry.addSmelting(ARKCraftItems.porkchop_raw, new ItemStack(ARKCraftItems.porkchop_cooked, 1), (int) Math.floor(ARKFood.globalHealAmount/2));
+		GameRegistry.addSmelting(ARKCraftItems.meat_raw, new ItemStack(ARKCraftItems.meat_cooked, 1), (int) Math.floor(ARKFood.globalHealAmount/2));
 		GameRegistry.addSmelting(ARKCraftItems.primemeat_raw, new ItemStack(ARKCraftItems.primemeat_cooked, 1), (int) Math.floor(ARKFood.globalHealAmount/2));
 		
 		ModelBakery.addVariantName(ARKCraftItems.slingshot, "arkcraft:slingshot", "arkcraft:slingshot_pulled");
+
+		RenderHelper.registerModelExtension(new PlayerModelOverride());
+
 		dossierProxy.init();
 		LogHelper.info("CommonProxy: Init run finished.");
 		initDone = true;
@@ -139,6 +148,11 @@ public class ClientProxy extends CommonProxy
 	public void registerItemTexture(final Item item, int meta, final String name) {
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, meta, new ModelResourceLocation(ARKCraft.MODID + ":" + name, "inventory"));
         ModelBakery.addVariantName(item, ARKCraft.MODID + ":" + name);
+	}
+
+	public EntityPlayer getPlayer()
+	{
+		return Minecraft.getMinecraft().thePlayer;
 	}
 	//public void registerSound() {
 	//	MinecraftForge.EVENT_BUS.register(new SoundHandler());

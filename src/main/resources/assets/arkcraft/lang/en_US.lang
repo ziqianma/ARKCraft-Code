@@ -5,6 +5,7 @@ tile.mortar_and_pestle.name=Mortar and Pestle
 tile.crop_plot.name=Crop Plot
 tile.wooden_spikes.name=Wooden Spikes
 tile.compost_bin.name=Compost Bin
+tile.oreSurface.name=Ore Surface
 
 # World Types
 generator.island=ARK: The Island
@@ -15,11 +16,13 @@ item.amarBerrySeed.name=Amarberry Seed
 item.mejoBerrySeed.name=Mejoberry Seed
 item.azulBerrySeed.name=Azulberry Seed
 item.tintoBerrySeed.name=Tintoberry Seed
+item.stimBerrySeed.name=Stimberry Seed
 item.narco.name=Narcoberry
 item.amar.name=Amarberry
 item.mejo.name=Mejoberry
 item.azul.name=Azulberry
 item.tinto.name=Tintoberry
+item.stim.name=Stimberry
 item.fiber.name=Fiber
 item.chitin.name=Chitin
 item.chitin_helm.name=Chitin Helmet
@@ -27,10 +30,10 @@ item.chitin_chest.name=Chitin Chestplate
 item.chitin_legs.name=Chitin Leggings
 item.chitin_boots.name=Chitin Boots
 item.narcotics.name=Narcotics
-item.cloth_helm.name=Fiber Hat
-item.cloth_chest.name=Fiber Shirt
-item.cloth_legs.name=Fiber Pants
-item.cloth_boots.name=Fiber Shoes
+item.cloth_helm.name=Cloth Hat
+item.cloth_chest.name=Cloth Shirt
+item.cloth_legs.name=Cloth Pants
+item.cloth_boots.name=Cloth Shoes
 item.bone_helm.name=Dino Bone Helmet
 item.bone_chest.name=Dino Bone Chestplate
 item.bone_legs.name=Dino Bone Leggings
@@ -45,8 +48,8 @@ item.saddle_large.name=Large Saddle
 item.cobble_ball.name=Cobblestone Ball
 item.explosive_ball.name=Explosive Cobblestone Ball
 item.mortar_and_pestle.name=Mortar and Pestle
-item.porkchop_cooked.name=Cooked Porkchop
-item.porkchop_raw.name=Raw Porkchop
+item.meat_cooked.name=Cooked Meat
+item.meat_raw.name=Raw Meat
 item.primemeat_cooked.name=Cooked Prime Meat
 item.primemeat_raw.name=Raw Prime Meat
 item.dodo_bag.name=Dodo Bag
@@ -69,8 +72,12 @@ item.simple_shotgun_ammo.name=Simple Rifle Ammo
 item.rocket_launcher.name=Rocket Launcher
 item.rocket_propelled_grenade.name=Rocket Propelled Grenade
 item.compound_bow.name=Compound Bow
-item.crossbow.name= Crossbow
-item.thatch.name= Thatch
+item.crossbow.name=Crossbow
+item.thatch.name=Thatch
+item.gun_powder.name=Gunpowder
+item.spy_glass.name=Spy Glass
+item.item_berry_bush.name=Berry Bush
+item.item_compost_bin.name=Compost Bin
 
 # Miscellaneous
 itemGroup.tabARKCraft=ARKCraft: Survival Evolved
@@ -97,3 +104,9 @@ ark.book.utahraptor.description=Utahraptor Prime is an incredibly aggressive sub
 
 # Containers
 container.crop_plot.name=Crop Plot 
+
+#Chat Messages
+chat.ammo= ammo
+
+# Attributes
+attribute.name.arkcraft.reloadTime=Reload Time

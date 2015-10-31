@@ -12,6 +12,7 @@ public class ARKWeapon extends ItemSword {
 		super(m);
 		this.setUnlocalizedName(name);
 		this.setCreativeTab(GlobalAdditions.tabARK);
+		this.setFull3D();
 		GameRegistry.registerItem(this, name);
 	}
 	

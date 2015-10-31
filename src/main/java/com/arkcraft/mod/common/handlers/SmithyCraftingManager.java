@@ -1,41 +1,29 @@
 package com.arkcraft.mod.common.handlers;
 
-import com.google.common.collect.Lists;
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.ShapedRecipes;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.List;
+import com.arkcraft.mod.common.items.ARKCraftItems;
 
-/***
+/**
  * 
  * @author wildbill22
- *
- */
-@SuppressWarnings({ "unchecked", "rawtypes" })
-public class SmithyCraftingManager {
+ * Notes about adding recipes:
+ * 1) If a block has meta data:
+ *    a) If not enter in ItemStack as 3rd param, it is set to 0
+ *    b) If entered, then just a stack with that meta will match
+ *    c) If ARKShapelessRecipe.ANY (32767) is used, all the different meta types for the block will match
+ * 2) Do not have two recipes for the same ItemStack, only the first will be used
+ * 
+*/
+public class SmithyCraftingManager extends ARKCraftingManager{
 	
 	private static SmithyCraftingManager instance = null;
-	private final List recipes = Lists.newArrayList();
     
 	public SmithyCraftingManager() {
+		super();
 		instance = this; 
-		Collections.sort(this.recipes, new Comparator() {
-            public int compare(IARKRecipe p_compare_1_, IARKRecipe p_compare_2_) {
-                return p_compare_1_ instanceof ARKShapelessRecipe && p_compare_2_ instanceof ShapedRecipes ? 1 : 
-                	(p_compare_2_ instanceof ARKShapelessRecipe && p_compare_1_ instanceof ShapedRecipes ? -1 : 
-                		(p_compare_2_.getRecipeSize() < p_compare_1_.getRecipeSize() ? -1 : 
-                			(p_compare_2_.getRecipeSize() > p_compare_1_.getRecipeSize() ? 1 : 0)));
-            }
-            public int compare(Object p_compare_1_, Object p_compare_2_) {
-                return this.compare((IARKRecipe)p_compare_1_, (IARKRecipe)p_compare_2_);
-            }
-        });
 	}
 	
 	public static SmithyCraftingManager getInstance() {
@@ -43,90 +31,92 @@ public class SmithyCraftingManager {
 			instance = new SmithyCraftingManager();
 		return instance; 
 	}
-
-    /**
-     * Adds a shapeless crafting recipe to the game.
-     *  
-     * @param recipeComponents An array of ItemStack's Item's and Block's that make up the recipe.
-     */
-	public void addShapelessRecipe(ItemStack stack, Object ... recipeComponents){
-        ArrayList arraylist = Lists.newArrayList();
-        Object[] aobject = recipeComponents;
-        int i = recipeComponents.length;
-
-        for (int j = 0; j < i; ++j) {
-            Object object1 = aobject[j];
-            if (object1 instanceof ItemStack) {
-                arraylist.add(((ItemStack)object1).copy());
-            }
-            else if (object1 instanceof Item) {
-                arraylist.add(new ItemStack((Item)object1));
-            }
-            else {
-                if (!(object1 instanceof Block)) {
-                    throw new IllegalArgumentException("Invalid shapeless recipe: unknown type " + object1.getClass().getName() + "!");
-                }
-                arraylist.add(new ItemStack((Block)object1));
-            }
-        }
-        this.recipes.add(new ARKShapelessRecipe(stack, arraylist));
-    }
-
-    /**
-     * Adds an IARKRecipe to the list of crafting recipes.
-     *  
-     * @param recipe A recipe that will be added to the recipe list.
-     */
-    public void addRecipe(IARKRecipe recipe){
-        this.recipes.add(recipe);
-    }
-
-    /**
-     * Returns number of matches for inventory that exists, also deducts inventory if craft = true
-     */
-    public int hasMatchingRecipe(ItemStack output, ItemStack[] itemStacksInventory, boolean craft){
-        Iterator iterator = this.recipes.iterator();
-        IARKRecipe irecipe;
-        do{
-            if (!iterator.hasNext()) {
-                return 0;
-            }
-            irecipe = (IARKRecipe)iterator.next();
-        }
-        while (irecipe.getRecipeOutput().getItem() != output.getItem());
-        if (craft)
-        	return irecipe.craftMatches(itemStacksInventory);
-        else
-        	return irecipe.findMatches(itemStacksInventory);
-    }
-    
-    /**
-     * Returns true if ItemStack is in any recipe
-     */
-	public boolean isItemInRecipe(ItemStack itemStack){
-        Iterator iterator = this.recipes.iterator();
-        IARKRecipe irecipe;
-        do{
-            if (!iterator.hasNext()) {
-                return false;
-            }
-            irecipe = (IARKRecipe)iterator.next();
-        }
-        while (!irecipe.isItemInRecipe(itemStack));
-		return true;
-	}
 	
-    /**
-     * returns the List<> of all recipes
-     */
-    public List getRecipeList() {
-        return this.recipes;
-    }
-    
-    /**
-     * returns number of recipes
-     */
-    public int getNumRecipes() {
-    	return this.recipes.size();
-    }
+	public static void registerSmithyCraftingRecipes() {		
+		getInstance().addShapelessRecipe(
+				new ItemStack(ARKCraftItems.saddle_small, 1), 
+				new ItemStack(Items.leather, 15), 
+				new ItemStack(Items.iron_ingot, 10), 
+				new ItemStack(ARKCraftItems.fiber, 15)
+				);
+		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.saddle_medium, 1), 
+				new ItemStack(Items.leather, 48),
+				new ItemStack(Items.iron_ingot, 32), 
+				new ItemStack(ARKCraftItems.fiber, 32),
+				new ItemStack(Items.diamond, 1)
+				);
+		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.saddle_large, 1), 
+				new ItemStack(ARKCraftItems.chitin, 32),
+				new ItemStack(Items.iron_ingot, 16), 
+				new ItemStack(ARKCraftItems.fiber, 32),
+				new ItemStack(Items.diamond, 4)
+				);
+//		getInstance().addShapelessRecipe(new ItemStack(ModItems.boneHelm, 1),
+//				new ItemStack(ModItems.trex_skull, 1),
+//				new ItemStack(ModItems.bones_large, 5)
+//				);
+//		getInstance().addShapelessRecipe(new ItemStack(ModItems.boneChest, 1),
+//				new ItemStack(Items.bone, 16),
+//				new ItemStack(ModItems.bones_large, 8)
+//				);
+//		getInstance().addShapelessRecipe(new ItemStack(ModItems.boneLegs, 1),
+//				new ItemStack(Items.bone, 16),
+//				new ItemStack(ModItems.bones_large, 7)
+//				);
+//		getInstance().addShapelessRecipe(new ItemStack(ModItems.boneBoots, 1),
+//				new ItemStack(Items.bone, 16),
+//				new ItemStack(ModItems.bones_large, 7)
+//				);
+		
+		// Chitin Armor
+		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.chitinChest, 1),
+				new ItemStack(ARKCraftItems.fiber, 4),
+				new ItemStack(Items.leather, 10), 
+				new ItemStack(ARKCraftItems.chitin, 20)
+		);
+		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.chitinLegs, 1),
+				new ItemStack(ARKCraftItems.fiber, 5),
+				new ItemStack(Items.leather, 12), 
+				new ItemStack(ARKCraftItems.chitin, 25)
+		);
+		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.chitinHelm, 1),
+				new ItemStack(ARKCraftItems.fiber, 3),
+				new ItemStack(Items.leather, 7), 
+				new ItemStack(ARKCraftItems.chitin, 15)
+		);
+		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.chitinBoots, 1),
+				new ItemStack(ARKCraftItems.fiber, 4),
+				new ItemStack(Items.leather, 6), 
+				new ItemStack(ARKCraftItems.chitin, 12)
+		);
+
+		// Weapons
+		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.longneck_rifle, 1),
+				new ItemStack(Items.iron_ingot, 32),
+				new ItemStack(Blocks.glass, 1)
+				);
+		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.shotgun, 1),
+				new ItemStack(Items.iron_ingot, 32),
+				new ItemStack(Blocks.log, 4, ARKShapelessRecipe.ANY) // Any Wood
+				);
+		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.rocket_launcher, 1),
+				new ItemStack(Items.iron_ingot, 48),
+				new ItemStack(Items.diamond, 4),
+				new ItemStack(Items.redstone, 16)
+				);
+		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.explosive_ball, 1),
+				new ItemStack(Items.iron_ingot, 3),
+				new ItemStack(Items.gunpowder, 4)
+				);
+		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.tranq_gun, 1),
+				new ItemStack(Items.iron_ingot, 7),
+				new ItemStack(Blocks.log, 10, ARKShapelessRecipe.ANY), // Any Wood
+				new ItemStack(ARKCraftItems.fiber, 35)
+				);
+		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.crossbow, 1),
+				new ItemStack(Items.iron_ingot, 7),
+				new ItemStack(Blocks.log, 10, ARKShapelessRecipe.ANY), // Any Wood
+				new ItemStack(ARKCraftItems.fiber, 35)
+				);
+	}	
 }

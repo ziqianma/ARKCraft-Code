@@ -39,6 +39,8 @@ public class ARKSeedItem extends Item {
 					return new ItemStack(ARKCraftItems.narcoBerry);
 				if (stack.getItem() == (Item) ARKCraftItems.tintoBerrySeed)
 					return new ItemStack(ARKCraftItems.tintoBerry);
+				if (stack.getItem() == (Item) ARKCraftItems.stimBerrySeed)
+					return new ItemStack(ARKCraftItems.stimBerrySeed);
 			}
 		}
 		return null;

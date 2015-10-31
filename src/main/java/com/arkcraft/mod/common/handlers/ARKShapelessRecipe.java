@@ -14,6 +14,7 @@ public class ARKShapelessRecipe implements IARKRecipe {
     /** Is a List of ItemStack that composes the recipe. */
     @SuppressWarnings("rawtypes")
 	public final List recipeItems;
+	public final static int ANY = 32767; // Normally 32767
 
     @SuppressWarnings("rawtypes")
 	public ARKShapelessRecipe(ItemStack output, List inputList) {
@@ -39,7 +40,7 @@ public class ARKShapelessRecipe implements IARKRecipe {
                 while (recipeIterator.hasNext()){
                 	ItemStack itemstackInRecipe = (ItemStack)recipeIterator.next();
                 	if (itemstack.getItem() == itemstackInRecipe.getItem() && itemstack.stackSize >= itemstackInRecipe.stackSize 
-                        && (itemstackInRecipe.getMetadata() == 32767 || itemstack.getMetadata() == itemstackInRecipe.getMetadata())){
+                        && (itemstackInRecipe.getMetadata() == ANY || itemstack.getMetadata() == itemstackInRecipe.getMetadata())){
                         recipelist.remove(itemstackInRecipe);
                     	itemStacksInventory[i].stackSize -= itemstackInRecipe.stackSize;
                     	if (itemStacksInventory[i].stackSize <= 0)
@@ -67,25 +68,25 @@ public class ARKShapelessRecipe implements IARKRecipe {
         Iterator recipeIterator = recipelist.iterator();
         while (recipeIterator.hasNext()){
         	ItemStack itemstackInRecipe = (ItemStack)recipeIterator.next();
-        	int numInStack = findNumInStack(itemStacksInventory, itemstackInRecipe);
-        	if (numInStack < numThatCanBeCrafted)
-        		numThatCanBeCrafted = numInStack; 
+        	int numInStackThatCanBeCrafted = findNumThatCanBeCrafted(itemStacksInventory, itemstackInRecipe);
+        	if (numInStackThatCanBeCrafted < numThatCanBeCrafted)
+        		numThatCanBeCrafted = numInStackThatCanBeCrafted; 
         }
         return numThatCanBeCrafted;
     }
 
-    private int findNumInStack(ItemStack[] itemStacksInventory,	ItemStack itemstackInRecipe) {
+    private int findNumThatCanBeCrafted(ItemStack[] itemStacksInventory, ItemStack itemstackInRecipe) {
     	int numInStack = 0;
         for (int i = 0; i < itemStacksInventory.length; ++i){
         	ItemStack itemstack = itemStacksInventory[i];
             if (itemstack != null){
             	if (itemstack.getItem() == itemstackInRecipe.getItem()
-                        && (itemstackInRecipe.getMetadata() == 32767 || itemstack.getMetadata() == itemstackInRecipe.getMetadata())){
+                        && (itemstackInRecipe.getMetadata() == ANY || itemstack.getMetadata() == itemstackInRecipe.getMetadata())){
             		numInStack += itemstack.stackSize;
             	}
             }
         }
-		return numInStack;
+		return numInStack / itemstackInRecipe.stackSize;
 	}
 
     /**

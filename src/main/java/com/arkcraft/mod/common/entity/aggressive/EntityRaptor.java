@@ -127,9 +127,9 @@ public class EntityRaptor extends EntityTameableDinosaur
 	protected void dropFewItems(boolean p_70628_1_, int p_70628_2_) {
 		int numDrops = this.rand.nextInt(2) + 2;
 		if (this.isBurning()) {
-			this.dropItem(ARKCraftItems.porkchop_cooked, numDrops);
+			this.dropItem(ARKCraftItems.meat_cooked, numDrops);
 		} else {
-			this.dropItem(ARKCraftItems.porkchop_raw, numDrops);
+			this.dropItem(ARKCraftItems.meat_raw, numDrops);
 		}
 		if (this.isSaddled()) {
 			this.dropItem(ARKCraftItems.saddle_small, 1);
@@ -210,7 +210,7 @@ public class EntityRaptor extends EntityTameableDinosaur
 	@Override
 	public boolean isFavoriteFood(ItemStack itemstack) {
 		if (itemstack.getItem() instanceof ARKFood && 
-				(itemstack.getItem() == ARKCraftItems.porkchop_raw || itemstack.getItem() == ARKCraftItems.porkchop_cooked
+				(itemstack.getItem() == ARKCraftItems.meat_raw || itemstack.getItem() == ARKCraftItems.meat_cooked
 				|| itemstack.getItem() == ARKCraftItems.primemeat_raw || itemstack.getItem() == ARKCraftItems.primemeat_cooked)){
 			return true;
 		}

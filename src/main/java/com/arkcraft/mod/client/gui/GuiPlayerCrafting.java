@@ -2,13 +2,16 @@ package com.arkcraft.mod.client.gui;
 
 import com.arkcraft.mod.common.ARKCraft;
 import com.arkcraft.mod.common.entity.player.ARKPlayer;
+import com.arkcraft.mod.common.lib.LogHelper;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 
 import org.lwjgl.opengl.GL11;
 
@@ -16,7 +19,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
-/* Smithy */
+/* Player Crafting */
 /***
  * 
  * @author wildbill22
@@ -28,13 +31,11 @@ public class GuiPlayerCrafting extends GuiContainer {
 	public static final ResourceLocation texture = new ResourceLocation(ARKCraft.MODID, "textures/gui/player_inventory_gui.png");
 	private InventoryBlueprints inventoryBlueprints;
 	private GuiButton [] buttonCraftOne;
-//    private GuiButton buttonCraftAll;
-	private int xButtonPressed;
-	private int yButtonPressed;
 
 	public GuiPlayerCrafting(InventoryPlayer invPlayer, EntityPlayer player) {
 		super(new ContainerInventoryPlayerCrafting(invPlayer, player));
 		inventoryBlueprints = ARKPlayer.get(player).getInventoryBlueprints();
+		LogHelper.info("GuiPlayerCrafting: Constructor called on " + FMLCommonHandler.instance().getEffectiveSide());
 
 		this.xSize = 175;
 		this.ySize = 242;
@@ -44,10 +45,10 @@ public class GuiPlayerCrafting extends GuiContainer {
 	final int BLUEPRINT_WIDTH = 16;
 	final int BLUEPRINT_HEIGHT = 16;
 
-	final int CRAFT_BUTTON_XPOS = 19;
-	final int CRAFT_BUTTON_YPOS = 41;
-	final int CRAFT_BUTTON_WIDTH = 47;
-	final int CRAFT_BUTTON_HEIGHT = 12;
+//	final int CRAFT_BUTTON_XPOS = 19;
+//	final int CRAFT_BUTTON_YPOS = 41;
+//	final int CRAFT_BUTTON_WIDTH = 47;
+//	final int CRAFT_BUTTON_HEIGHT = 12;
 
     /**
      * Adds the buttons (and other controls) to the screen in question.
@@ -57,6 +58,7 @@ public class GuiPlayerCrafting extends GuiContainer {
     public void initGui(){
         super.initGui();
         
+        // Add all the buttons that allow you to craft from blueprints
         int buttonId = 0;
         buttonList.clear();
         buttonCraftOne = new GuiButton[ContainerInventoryPlayerCrafting.BP_SLOT_COUNT];
@@ -68,11 +70,7 @@ public class GuiPlayerCrafting extends GuiContainer {
 	            buttonCraftOne[i] = new GuiButton(buttonId++, guiLeft + x, guiTop + y, BLUEPRINT_WIDTH, BLUEPRINT_HEIGHT, "");
 	            buttonList.add(buttonCraftOne[i]);
 			}
-        }
-        
-//      buttonCraftAll = new GuiButton(buttonId++, guiLeft + CRAFT_BUTTON_XPOS, guiTop + CRAFT_BUTTON_YPOS, 
-//		CRAFT_BUTTON_WIDTH, CRAFT_BUTTON_HEIGHT, "Craft All");
-//		buttonList.add(buttonCraftAll);
+        }        
     }
 
 	/** Called when a button is pressed */
@@ -82,9 +80,9 @@ public class GuiPlayerCrafting extends GuiContainer {
 			for(int col = 0; col < ContainerInventoryPlayerCrafting.NUM_COLUMNS_BP; col++) {
 				int i =  col + row * ContainerInventoryPlayerCrafting.NUM_COLUMNS_BP;
 				if (button == buttonCraftOne[i]){
-					inventoryBlueprints.setCraftOnePressed(i, true, true); // and update server
-					xButtonPressed = ContainerInventoryPlayerCrafting.BLUEPRINT_XPOS + col * 18;
-					yButtonPressed = ContainerInventoryPlayerCrafting.BLUEPRINT_YPOS + row * 18;
+					inventoryBlueprints.setCraftOnePressed(true, i, true); // and update server
+					inventoryBlueprints.setxButtonPressed(ContainerInventoryPlayerCrafting.BLUEPRINT_XPOS + col * 18);
+					inventoryBlueprints.setyButtonPressed(ContainerInventoryPlayerCrafting.BLUEPRINT_YPOS + row * 18);
 				}
 			}
 		}
@@ -120,25 +118,34 @@ public class GuiPlayerCrafting extends GuiContainer {
 		// Name of GUI at top
 		this.fontRendererObj.drawString(name, (int)(xSize / 2) - (name.length() * 5 / 2), 5, Color.darkGray.getRGB());
 
-		// Number being crafted
-//		if (inventoryBlueprints.isCraftingOne())
-//			this.fontRendererObj.drawString("Crafting one item", 
-//					CRAFTING_TEXT_XPOS, CRAFTING_TEXT_YPOS, Color.darkGray.getRGB());
-//		else if (inventoryBlueprints.isCraftingAll())
-//			this.fontRendererObj.drawString("Crafting " + inventoryBlueprints.getNumToBeCrafted() + " item(s)", 
-//					CRAFTING_TEXT_XPOS, CRAFTING_TEXT_YPOS, Color.darkGray.getRGB());
+		List<String> hoveringText = new ArrayList<String>();
 
-//		List<String> hoveringText = new ArrayList<String>();
-
-		// Add hovering text if the mouse is over the Craft all button
-//		if (isInRect(guiLeft + CRAFT_BUTTON_XPOS, guiTop + CRAFT_BUTTON_YPOS, CRAFT_BUTTON_WIDTH, CRAFT_BUTTON_HEIGHT, mouseX, mouseY)){
-//			hoveringText.add("Can craft " + inventoryBlueprints.getNumToBeCrafted() + " item(s).");
-//		}
+		// Add hovering text if the mouse is over a button
+		for(int i = 0, row = 0; row < ContainerInventoryPlayerCrafting.NUM_ROWS_BP; row++) {
+			for(int col = 0; col < ContainerInventoryPlayerCrafting.NUM_COLUMNS_BP; col++, i++) {
+				if (i >= inventoryBlueprints.getNumBlueprints()){
+					// Exit loops
+					row = ContainerInventoryPlayerCrafting.NUM_ROWS_BP;
+					break;					
+				}
+				int x = guiLeft + ContainerInventoryPlayerCrafting.BLUEPRINT_XPOS + col * 18;
+				int y = guiTop + ContainerInventoryPlayerCrafting.BLUEPRINT_YPOS + row * 18;
+				if (isInRect(x, y, BLUEPRINT_WIDTH, BLUEPRINT_HEIGHT, mouseX, mouseY)){
+					ItemStack stack = inventoryBlueprints.getStackInSlot(i);
+					String itemName = stack.getItem().getItemStackDisplayName(stack);
+					// TODO: Disable buttons if the item can't be crafted!
+					hoveringText.add(itemName + " - Can craft " + inventoryBlueprints.getNumToBeCrafted(i));
+					// Exit loops
+					row = ContainerInventoryPlayerCrafting.NUM_ROWS_BP;
+					break;
+				}
+			}
+		}
 		
 		// If hoveringText is not empty draw the hovering text
-//		if (!hoveringText.isEmpty()){
-//			drawHoveringText(hoveringText, mouseX - guiLeft, mouseY - guiTop, fontRendererObj);
-//		}
+		if (!hoveringText.isEmpty()){
+			drawHoveringText(hoveringText, mouseX - guiLeft, mouseY - guiTop, fontRendererObj);
+		}
 
 		// Draw the animation to show that the item is being crafted
 		if (inventoryBlueprints.isCrafting()){
@@ -146,8 +153,9 @@ public class GuiPlayerCrafting extends GuiContainer {
 			if (fraction <= 0.01D)
 				return;
 			int color = 0x60EAA800;
-			drawRect(xButtonPressed, yButtonPressed + (int)(fraction * BLUEPRINT_HEIGHT), 
-					xButtonPressed + BLUEPRINT_WIDTH, yButtonPressed + BLUEPRINT_HEIGHT, color);
+			int x = inventoryBlueprints.getxButtonPressed();
+			int y = inventoryBlueprints.getyButtonPressed();
+			drawRect(x, y + (int)(fraction * BLUEPRINT_HEIGHT),	x + BLUEPRINT_WIDTH, y + BLUEPRINT_HEIGHT, color);
 		}
 	}
 	
