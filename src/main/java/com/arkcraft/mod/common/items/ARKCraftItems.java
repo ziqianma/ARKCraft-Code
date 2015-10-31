@@ -68,6 +68,7 @@ public class ARKCraftItems
 	public static Dossier dino_book;
 	public static ARKBushItem item_berry_bush;
 	public static ARKCompostBinItem item_compost_bin;
+	public static ARKSmithyItem item_smithy;
 	public static ItemSpyGlass spy_glass;
 
 	// Weapons
@@ -135,6 +136,7 @@ public class ARKCraftItems
 		//Block Items
 		item_berry_bush = addBushItem("item_berry_bush");
 		item_compost_bin = addCompostBinItem("item_compost_bin");
+		item_smithy = addSmithyItem("item_smithy");
 		
 		//Bows
 		compound_bow = new ItemCompoundBow("compound_bow");
@@ -324,6 +326,12 @@ public class ARKCraftItems
 	
 	protected static ARKCompostBinItem addCompostBinItem(String name) {
 		ARKCompostBinItem i = new ARKCompostBinItem(name);
+		allItems.put(name, i);
+		return i;
+	}
+	
+	protected static ARKSmithyItem addSmithyItem(String name) {
+		ARKSmithyItem i = new ARKSmithyItem(name);
 		allItems.put(name, i);
 		return i;
 	}

@@ -78,6 +78,7 @@ item.gun_powder.name=Gunpowder
 item.spy_glass.name=Spy Glass
 item.item_berry_bush.name=Berry Bush
 item.item_compost_bin.name=Compost Bin
+item.item_smithy.name=Smithy
 
 # Miscellaneous
 itemGroup.tabARKCraft=ARKCraft: Survival Evolved

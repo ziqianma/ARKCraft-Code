@@ -46,7 +46,7 @@ public class BlockInventoryCompostBin extends BlockContainer{
 		super(mat);
 		this.ID = ID;
 		this.setUnlocalizedName(name);
-//		this.setCreativeTab(GlobalAdditions.tabARK);
+//		this.setCreativeTab(GlobalAdditions.tabARK); // There is now an item for this
 		GameRegistry.registerBlock(this, name);
 		this.setCompostBinBounds();
         this.setDefaultState(this.blockState.getBaseState().withProperty(PART, BlockInventoryCompostBin.EnumPartType.LEFT));
@@ -114,6 +114,24 @@ public class BlockInventoryCompostBin extends BlockContainer{
         return ret;
     }
     
+    // ---------------- Stuff for multiblock ------------------------
+    
+    @SideOnly(Side.CLIENT)
+	@Override
+    public Item getItem(World worldIn, BlockPos pos) {
+        return ARKCraftItems.item_compost_bin;
+    }
+
+	@Override
+    public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player) {
+        if (player.capabilities.isCreativeMode && state.getValue(PART) == BlockInventoryCompostBin.EnumPartType.LEFT) {
+            BlockPos blockpos1 = pos.offset(((EnumFacing)state.getValue(FACING)).getOpposite());
+            if (worldIn.getBlockState(blockpos1).getBlock() == this){
+                worldIn.setBlockToAir(blockpos1);
+            }
+        }
+    }
+
 	@Override
     public void setBlockBoundsBasedOnState(IBlockAccess worldIn, BlockPos pos) {
         this.setCompostBinBounds();
@@ -172,22 +190,6 @@ public class BlockInventoryCompostBin extends BlockContainer{
 	@Override
     public EnumWorldBlockLayer getBlockLayer() {
         return EnumWorldBlockLayer.SOLID;
-    }
-
-    @SideOnly(Side.CLIENT)
-	@Override
-    public Item getItem(World worldIn, BlockPos pos) {
-        return ARKCraftItems.item_compost_bin;
-    }
-
-	@Override
-    public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player) {
-        if (player.capabilities.isCreativeMode && state.getValue(PART) == BlockInventoryCompostBin.EnumPartType.LEFT) {
-            BlockPos blockpos1 = pos.offset(((EnumFacing)state.getValue(FACING)).getOpposite());
-            if (worldIn.getBlockState(blockpos1).getBlock() == this){
-                worldIn.setBlockToAir(blockpos1);
-            }
-        }
     }
 
     /**

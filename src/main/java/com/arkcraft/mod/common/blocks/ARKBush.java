@@ -21,6 +21,7 @@ import net.minecraft.world.ColorizerGrass;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeColorHelper;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -29,15 +30,21 @@ import java.util.Random;
 /**
  * @author Vastatio
  */
-public class ARKBush extends ARKBlock {
+public class ARKBush extends Block {
 
 	public static final PropertyInteger HARVEST_COUNT = PropertyInteger.create("harvest", 0, 3);
 
 	public ARKBush(String name, float hardness) {
-		super(Material.grass, name, hardness);
+		super(Material.grass);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(HARVEST_COUNT, 3));
 		this.setStepSound(Block.soundTypeGrass);
 		this.setTickRandomly(true);
+		this.setHardness(hardness);
+//		this.setCreativeTab(GlobalAdditions.tabARK); // There is now an item for this
+		this.setUnlocalizedName(name);
+		/* Registers with the name, not the unlocalized tile. name. (substring(5)) */
+		/* Automatically registers the block with the GameRegistry */
+		GameRegistry.registerBlock(this, this.getUnlocalizedName().substring(5));
 	}
 
 	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
