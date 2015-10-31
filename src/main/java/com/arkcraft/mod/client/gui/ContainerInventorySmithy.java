@@ -28,7 +28,7 @@ public class ContainerInventorySmithy extends Container {
 		
 		/* MP inventory */
 		// Recipe blueprint slot
-		this.addSlotToContainer(new SlotBlueprintInventory(inventoryBlueprints, TileInventorySmithy.BLUEPRINT_SLOT, 26, 16));
+		this.addSlotToContainer(new SlotBlueprintInventory(inventoryBlueprints, TileInventorySmithy.BLUEPRINT_SLOT, 33, 16));
 
 		// Input & Output slots
 		for(int row = 0; row < 3; row++) {
