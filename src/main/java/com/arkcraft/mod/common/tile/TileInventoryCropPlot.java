@@ -110,12 +110,12 @@ public class TileInventoryCropPlot extends TileEntity implements IInventory, IUp
 	 * @return fraction remaining, between 0 - 1
 	 */
 	public double fractionOfGrowTimeComplete()	{
-		if (growthStage < 5) {
-			return 0.0D;
-		} else {
+//		if (growthStage < 5) {
+//			return 0.0D;
+//		} else {
 			double fraction = growTime / (double)GROW_TIME_FOR_BERRY;
 			return MathHelper.clamp_double(fraction, 0.0, 1.0);
-		}
+//		}
 	}
 	
 	// This method is called every tick to update the tile entity, i.e.

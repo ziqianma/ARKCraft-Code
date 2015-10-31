@@ -21,6 +21,7 @@ public class ItemSpear extends ItemSword
 		this.setUnlocalizedName(name);
 		this.setCreativeTab(GlobalAdditions.tabARK);
 		this.setMaxStackSize(1);
+		this.setFull3D();
 		GameRegistry.registerItem(this, this.getUnlocalizedName().substring(5));
 	}
 	
@@ -76,12 +77,5 @@ public class ItemSpear extends ItemSword
 			entityplayer.setItemInUse(itemstack, getMaxItemUseDuration(itemstack));
 		}
 		return itemstack;
-	}
-	
-	@Override
-	@SideOnly(Side.CLIENT)
-	public boolean isFull3D()
-	{
-		return true;
 	}
 }
