@@ -171,7 +171,7 @@ public abstract class RangedComponent extends AbstractWeaponComponent
 				} else {
 					//Begin reloading
 					entityplayer.setItemInUse(itemstack, getMaxItemUseDuration(itemstack));	
-					if (world.isRemote)
+					if (world.isRemote && !entityplayer.capabilities.isCreativeMode)
 						// i.e. "20 ammo"
 						entityplayer.addChatMessage(new ChatComponentText(getAmmoQuantity(entityplayer) + StatCollector.translateToLocal("chat.ammo")));
 				}

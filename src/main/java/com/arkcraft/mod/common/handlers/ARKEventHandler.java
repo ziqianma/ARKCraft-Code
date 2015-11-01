@@ -180,9 +180,12 @@ public class ARKEventHandler {
     
 	@SubscribeEvent(priority = EventPriority.NORMAL)
 	public void onRender(RenderGameOverlayEvent evt) {
-		if (mc.gameSettings.thirdPersonView == 0 && ShowScopeOverlap) {
-			LogHelper.info("onRender ShowScopeOverlap = true");
-			ShowScope(); 
+        if (evt.type == RenderGameOverlayEvent.ElementType.CROSSHAIRS){
+			if (mc.gameSettings.thirdPersonView == 0 && ShowScopeOverlap) {
+	            evt.setCanceled(true); // Removes the normal crosshairs and uses just the overlay crosshairs 
+				LogHelper.info("onRender ShowScopeOverlap = true");
+				ShowScope();
+			}
 		}
 	}
 	
