@@ -8,7 +8,6 @@ import com.arkcraft.mod.client.gui.InventoryTaming;
 import com.arkcraft.mod.common.ARKCraft;
 import com.arkcraft.mod.common.items.ARKCraftItems;
 import com.arkcraft.mod.common.lib.LogHelper;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;

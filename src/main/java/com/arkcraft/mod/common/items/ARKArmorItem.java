@@ -1,13 +1,11 @@
 package com.arkcraft.mod.common.items;
 
-import com.arkcraft.mod.GlobalAdditions;
 import com.arkcraft.mod.common.ARKCraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import java.util.List;
 
@@ -17,14 +15,11 @@ public class ARKArmorItem extends ItemArmor {
 	public boolean golden;
 	public String[] tooltips;
 	
-	public ARKArmorItem(String name, ArmorMaterial mat, String texName, int type, boolean golden, String... tooltips) {
+	public ARKArmorItem(ArmorMaterial mat, String texName, int type, boolean golden, String... tooltips) {
 		super(mat, 0, type);
 		this.golden = golden;
 		this.tooltips = tooltips;
-		this.setUnlocalizedName(name);
 		this.texName = texName;
-		this.setCreativeTab(GlobalAdditions.tabARK);
-		GameRegistry.registerItem(this, name);
 	}
 
 	@Override

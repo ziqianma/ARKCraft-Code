@@ -1,10 +1,8 @@
 package com.arkcraft.mod.common.items;
 
-import com.arkcraft.mod.GlobalAdditions;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -12,12 +10,8 @@ import java.util.List;
 
 public class ARKFecesItem extends Item{
 	
-	public ARKFecesItem(String name) {
-		this.setUnlocalizedName(name);
-		this.setCreativeTab(GlobalAdditions.tabARK);
+	public ARKFecesItem() {
 		this.setMaxStackSize(1);
-		GameRegistry.registerItem(this, this.getUnlocalizedName().substring(5));
-	
 	}
 
 	// seconds that this fertilizer will grow a crop

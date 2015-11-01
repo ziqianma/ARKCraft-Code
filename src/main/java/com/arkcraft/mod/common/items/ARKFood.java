@@ -1,14 +1,11 @@
 package com.arkcraft.mod.common.items;
 
-import com.arkcraft.mod.GlobalAdditions;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 /**
  * @author Vastatio
@@ -19,11 +16,8 @@ public class ARKFood extends ItemFood {
 	private boolean alwaysEdible;
 	public static int globalHealAmount; //Used For Adding XP On Register
 	
-	public ARKFood(String name, int healAmount, float sat, boolean fav, boolean alwaysEdible, PotionEffect... effects) {
+	public ARKFood(int healAmount, float sat, boolean fav, boolean alwaysEdible, PotionEffect... effects) {
 		super(healAmount, sat, fav);
-		this.setUnlocalizedName(name);
-		this.setCreativeTab(GlobalAdditions.tabARK);
-		GameRegistry.registerItem(this, name);
 		this.effects = effects;
 		this.alwaysEdible = alwaysEdible;
 		/** FIXME: Please do not check in code with warnings

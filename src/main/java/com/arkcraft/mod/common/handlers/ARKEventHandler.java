@@ -1,15 +1,19 @@
 package com.arkcraft.mod.common.handlers;
 
-import java.util.Random;
-
+import com.arkcraft.mod.common.ARKCraft;
+import com.arkcraft.mod.common.entity.EntityTameableDinosaur;
+import com.arkcraft.mod.common.entity.aggressive.EntityRaptor;
+import com.arkcraft.mod.common.items.ARKCraftItems;
+import com.arkcraft.mod.common.items.weapons.handlers.IItemWeapon;
+import com.arkcraft.mod.common.items.weapons.projectiles.EntityTranqArrow;
+import com.arkcraft.mod.common.lib.BALANCE;
+import com.arkcraft.mod.common.lib.LogHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.model.ModelPlayer;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
-import net.minecraft.client.renderer.block.model.ItemCameraTransforms.TransformType;
-import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemAxe;
@@ -21,26 +25,16 @@ import net.minecraftforge.client.event.MouseEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderHandEvent;
 import net.minecraftforge.client.event.RenderLivingEvent;
-import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-
 import org.lwjgl.opengl.GL11;
 
-import com.arkcraft.mod.common.ARKCraft;
-import com.arkcraft.mod.common.entity.EntityTameableDinosaur;
-import com.arkcraft.mod.common.entity.aggressive.EntityRaptor;
-import com.arkcraft.mod.common.items.ARKCraftItems;
-import com.arkcraft.mod.common.items.weapons.handlers.IItemWeapon;
-import com.arkcraft.mod.common.items.weapons.projectiles.EntityTranqArrow;
-import com.arkcraft.mod.common.lib.BALANCE;
-import com.arkcraft.mod.common.lib.LogHelper;
+import java.util.Random;
 
 /**
  * 

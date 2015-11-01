@@ -17,7 +17,6 @@ import com.arkcraft.mod.common.handlers.SmithyCraftingManager;
 import com.arkcraft.mod.common.items.weapons.projectiles.EntitySpear;
 import com.arkcraft.mod.common.lib.BALANCE;
 import com.arkcraft.mod.common.lib.KeyBindings;
-
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.monster.EntityCaveSpider;

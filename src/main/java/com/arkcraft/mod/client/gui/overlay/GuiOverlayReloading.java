@@ -1,10 +1,7 @@
 package com.arkcraft.mod.client.gui.overlay;
 
-import org.lwjgl.opengl.GL11;
-
 import com.arkcraft.mod.common.items.weapons.component.RangedComponent;
 import com.arkcraft.mod.common.items.weapons.handlers.IItemWeapon;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,6 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import org.lwjgl.opengl.GL11;
 
 public class GuiOverlayReloading extends Gui {
     private static final Minecraft mc = Minecraft.getMinecraft();

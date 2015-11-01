@@ -1,9 +1,7 @@
 package com.arkcraft.mod.common.items;
 
-import com.arkcraft.mod.GlobalAdditions;
 import com.arkcraft.mod.common.blocks.ARKCraftBlocks;
 import com.arkcraft.mod.common.blocks.BlockInventorySmithy;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,16 +11,12 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ARKSmithyItem extends Item
 {
-    public ARKSmithyItem(String name) {
+    public ARKSmithyItem() {
     	super();
-    	this.setUnlocalizedName(name);
-		this.setCreativeTab(GlobalAdditions.tabARK);
 		this.setMaxStackSize(1);
-		GameRegistry.registerItem(this, this.getUnlocalizedName().substring(5));
     }
 
     /**

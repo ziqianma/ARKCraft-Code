@@ -1,33 +1,25 @@
 package com.arkcraft.mod.common.items;
 
-import com.arkcraft.mod.GlobalAdditions;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import java.util.List;
 
 /**
  * @author Vastatio
  */
-/* For some reason, minecraft doesnt put args inside its list. */
+/* For some reason, minecraft doesnt put args inside its list. //GEGY: This is just decompilation*/
 @SuppressWarnings("all")
 public class ARKItem extends Item {
 
 	public String[] tooltips;
 
-	public ARKItem(String name) {
-		this.setUnlocalizedName(name);
-		this.setCreativeTab(GlobalAdditions.tabARK);
-		GameRegistry.registerItem(this, this.getUnlocalizedName().substring(5));
+	public ARKItem() {
 	}
 
-	public ARKItem(String name, String... tooltips) {
-		this.setUnlocalizedName(name);
-		this.setCreativeTab(GlobalAdditions.tabARK);
-		GameRegistry.registerItem(this, name);
+	public ARKItem(String... tooltips) {
 		this.tooltips = tooltips;
 	}
 

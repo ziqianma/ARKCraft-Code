@@ -1,11 +1,9 @@
 package com.arkcraft.mod.common.items;
 
-import com.arkcraft.mod.GlobalAdditions;
 import com.arkcraft.mod.common.lib.BALANCE;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -18,12 +16,9 @@ import java.util.List;
  */
 public class ARKSeedItem extends Item {
 	
-	public ARKSeedItem(String name) {
-		this.setUnlocalizedName(name);
-		this.setCreativeTab(GlobalAdditions.tabARK);
+	public ARKSeedItem() {
 		this.setMaxStackSize(16);
 		this.setMaxDamage(BALANCE.CROP_PLOT.SECONDS_FOR_SEED_TO_DECOMPOSE); // 5 minutes of damage at 1 a second
-		GameRegistry.registerItem(this, this.getUnlocalizedName().substring(5));
 	}
 	
 	public static ItemStack getBerryForSeed(ItemStack stack) {

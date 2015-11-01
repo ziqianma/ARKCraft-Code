@@ -4,16 +4,11 @@ import com.arkcraft.mod.GlobalAdditions;
 import com.arkcraft.mod.client.gui.book.Dossier;
 import com.arkcraft.mod.common.ARKCraft;
 import com.arkcraft.mod.common.handlers.EntityHandler;
-import com.arkcraft.mod.common.items.weapons.ItemSpyGlass;
 import com.arkcraft.mod.common.items.weapons.ItemCompoundBow;
-import com.arkcraft.mod.common.items.weapons.ItemCrossbow;
-import com.arkcraft.mod.common.items.weapons.ItemLongneckRifle;
-import com.arkcraft.mod.common.items.weapons.ItemRocketLauncher;
-import com.arkcraft.mod.common.items.weapons.ItemShotgun;
-import com.arkcraft.mod.common.items.weapons.ItemSimplePistol;
 import com.arkcraft.mod.common.items.weapons.ItemSpear;
-import com.arkcraft.mod.common.items.weapons.ItemTranqGun;
+import com.arkcraft.mod.common.items.weapons.ItemSpyGlass;
 import com.arkcraft.mod.common.items.weapons.bullets.ItemProjectile;
+import com.arkcraft.mod.common.items.weapons.component.ItemShooter;
 import com.arkcraft.mod.common.items.weapons.component.RangedCompCrossbow;
 import com.arkcraft.mod.common.items.weapons.component.RangedCompLongneckRifle;
 import com.arkcraft.mod.common.items.weapons.component.RangedCompRocketLauncher;
@@ -36,7 +31,6 @@ import com.arkcraft.mod.common.items.weapons.projectiles.dispense.DispenseSimple
 import com.arkcraft.mod.common.items.weapons.projectiles.dispense.DispenseSimpleShotgunAmmo;
 import com.arkcraft.mod.common.items.weapons.projectiles.dispense.DispenseTranquilizer;
 import com.arkcraft.mod.common.lib.BALANCE;
-
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
@@ -45,6 +39,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.common.util.EnumHelper;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -54,11 +49,11 @@ import java.util.Map;
  */
 public class ARKCraftItems
 {
-
 	public static ARKFood tintoBerry, amarBerry, azulBerry, mejoBerry, narcoBerry, stimBerry, meat_raw, meat_cooked, primemeat_raw, primemeat_cooked;
 	public static ARKSeedItem tintoBerrySeed, amarBerrySeed, azulBerrySeed, mejoBerrySeed, narcoBerrySeed, stimBerrySeed;
-	public static ARKItem cobble_ball, fiber, chitin, narcotics, explosive_ball, dodo_bag, dodo_feather, gun_powder, spark_powder;
+	public static ARKItem rock, fiber, chitin, narcotics, explosive_ball, dodo_bag, dodo_feather, gun_powder, spark_powder;
 	public static ARKThatchItem thatch;
+	public static ARKItem wood, metal, metal_ingot;
 	public static ARKFecesItem dodo_feces, player_feces, fertilizer;
 	public static ARKEggItem dodo_egg;
 	public static ARKSaddle saddle_small, saddle_medium, saddle_large;
@@ -75,15 +70,15 @@ public class ARKCraftItems
 	public static ARKSlingshot slingshot;
 	public static ARKWeapon ironPike;
 	public static ItemSpear spear;
-	public static ItemTranqGun tranq_gun;
+	public static ItemShooter tranq_gun;
 	public static ItemCompoundBow compound_bow;
-	public static ItemRocketLauncher rocket_launcher;
+	public static ItemShooter rocket_launcher;
 	public static ItemProjectile tranquilizer, stone_arrow, tranq_arrow, metal_arrow;
 	public static ItemProjectile simple_bullet, simple_rifle_ammo, simple_shotgun_ammo, rocket_propelled_grenade;
-	public static ItemSimplePistol simple_pistol;
-	public static ItemLongneckRifle longneck_rifle;
-	public static ItemShotgun shotgun;
-	public static ItemCrossbow crossbow;
+	public static ItemShooter simple_pistol;
+	public static ItemShooter longneck_rifle;
+	public static ItemShooter shotgun;
+	public static ItemShooter crossbow;
 
 	public static ArmorMaterial CLOTH = EnumHelper.addArmorMaterial("CLOTH_MAT", "CLOTH_MAT", 4, new int[] {1,2,1,1}, 15);
 	public static ArmorMaterial CHITIN = EnumHelper.addArmorMaterial("CHITIN_MAT", "CHITIN_MAT", 16, new int[] { 3,7,6,3 } , 10);
@@ -118,7 +113,7 @@ public class ARKCraftItems
 		// world generated
 		
 		// Weapons and tools
-		cobble_ball = addItemWithTooltip("cobble_ball", EnumChatFormatting.GOLD + "A Rocky Road to Victory");
+		rock = addItemWithTooltip("rock", EnumChatFormatting.GOLD + "A Rocky Road to Victory");
 		explosive_ball = addItemWithTooltip("explosive_ball", EnumChatFormatting.RED + "A Rocky Road to Destruction");
 		slingshot = addSlingshot("slingshot");
 		//stoneSpear = addWeaponThrowable("stoneSpear", ToolMaterial.STONE);
@@ -127,6 +122,9 @@ public class ARKCraftItems
 		// Regular Items
 		fiber = addItem("fiber");
 		thatch = addThatchItem("thatch");
+		wood = addItem("wood");
+		metal = addItem("metal");
+		metal_ingot = addItem("metal_ingot");
 		chitin = addItem("chitin");
 		dodo_feather = addItem("dodo_feather");
 		dodo_bag = addItemWithTooltip("dodo_bag", "Backpack for the Dodo");
@@ -140,7 +138,8 @@ public class ARKCraftItems
 		item_smithy = addSmithyItem("item_smithy");
 		
 		//Bows
-		compound_bow = new ItemCompoundBow("compound_bow");
+		compound_bow = new ItemCompoundBow();
+		registerItem("compound_bow", compound_bow);
 			
 		//Bullets
 	//	tranq_arrow = addItemProjectile("tranq_arrow");
@@ -208,33 +207,33 @@ public class ARKCraftItems
 	
 	public static void addGunPowderWeapons(){
 		if (BALANCE.WEAPONS.SIMPLE_PISTOL) {
-			simple_pistol = addSimplePistol("simple_pistol", new RangedCompSimplePistol());
+			simple_pistol = addShooter("simple_pistol", new RangedCompSimplePistol());
 			simple_bullet = addItemProjectile("simple_bullet");
 		}
 		if (BALANCE.WEAPONS.LONGNECK_RIFLE) {
-			longneck_rifle = addLongneckRifle("longneck_rifle", new RangedCompLongneckRifle(GlobalAdditions.GUI.SCOPE.getID()));
+			longneck_rifle = addShooter("longneck_rifle", new RangedCompLongneckRifle(GlobalAdditions.GUI.SCOPE.getID()));
 			simple_rifle_ammo = addItemProjectile("simple_rifle_ammo");
 		}
 		if (BALANCE.WEAPONS.SHOTGUN) {
-			shotgun = addShotgun("shotgun", new RangedCompShotgun());
+			shotgun = addShooter("shotgun", new RangedCompShotgun());
 			simple_shotgun_ammo = addItemProjectile("simple_shotgun_ammo");
 		}
 		if (BALANCE.WEAPONS.TRANQ_GUN) {
-			tranq_gun = addTranqGun("tranq_gun", new RangedCompTranqGun());
+			tranq_gun = addShooter("tranq_gun", new RangedCompTranqGun());
 			tranquilizer = addItemProjectile("tranquilizer");
 		}
 		if (BALANCE.WEAPONS.ROCKET_LAUNCHER) {
-			rocket_launcher = addRocketLauncher("rocket_launcher", new RangedCompRocketLauncher());
+			rocket_launcher = addShooter("rocket_launcher", new RangedCompRocketLauncher());
 			rocket_propelled_grenade = addItemProjectile("rocket_propelled_grenade");
 		}
 		if (BALANCE.WEAPONS.CROSSBOW) {
-			crossbow = addCrossbow("crossbow", new RangedCompCrossbow());
+			crossbow = addShooter("crossbow", new RangedCompCrossbow());
 			metal_arrow = addItemProjectile("metal_arrow");
 			tranq_arrow = addItemProjectile("tranq_arrow");
 			stone_arrow = addItemProjectile("stone_arrow");
 		}
-	}	
-	
+	}
+
 	public static void registerDispenseBehavior(){
 		if (simple_bullet != null) {
 			BlockDispenser.dispenseBehaviorRegistry.putObject(simple_bullet, new DispenseSimpleBullet());
@@ -254,129 +253,105 @@ public class ARKCraftItems
 	}
 	
 	protected static ItemProjectile addItemProjectile(String name) {
-		ItemProjectile i = new ItemProjectile(name);
-		allItems.put(name, i);
+		ItemProjectile i = new ItemProjectile();
+		registerItem(name, i);
 		return i;
 	}
-	
-	protected static ItemSimplePistol addSimplePistol(String name, RangedComponent rangedcomponent) {
-		ItemSimplePistol i = new ItemSimplePistol(name, rangedcomponent);
-		allItems.put(name, i);
+
+	protected static ItemShooter addShooter(String name, RangedComponent rangedcomponent) {
+		ItemShooter i = new ItemShooter(rangedcomponent);
+		registerItem(name, i);
 		return i;
 	}
-	
-	protected static ItemLongneckRifle addLongneckRifle(String name, RangedComponent rangedcomponent) {
-		ItemLongneckRifle i = new ItemLongneckRifle(name, rangedcomponent);
-		allItems.put(name, i);
-		return i;
-	}
-	
-	protected static ItemCrossbow addCrossbow(String name, RangedComponent rangedcomponent) {
-		ItemCrossbow i = new ItemCrossbow(name, rangedcomponent);
-		allItems.put(name, i);
-		return i;
-	}
-	
-	protected static ItemRocketLauncher addRocketLauncher(String name, RangedComponent rangedcomponent) {
-		ItemRocketLauncher i = new ItemRocketLauncher(name, rangedcomponent);
-		allItems.put(name, i);
-		return i;
-	}
-	
-	protected static ItemShotgun addShotgun(String name, RangedComponent rangedcomponent) {
-		ItemShotgun i = new ItemShotgun(name, rangedcomponent);
-		allItems.put(name, i);
-		return i;
-	}
-	
+
 	protected static ARKSlingshot addSlingshot(String name) {
-		ARKSlingshot slingshot = new ARKSlingshot(name);
-		allItems.put(name, slingshot);
+		ARKSlingshot slingshot = new ARKSlingshot();
+		registerItem(name, slingshot);
 		return slingshot;
 	}
 	
 	protected static ARKItem addItem(String name) {
-		ARKItem i = new ARKItem(name);
-		allItems.put(name, i);
+		ARKItem i = new ARKItem();
+		registerItem(name, i);
 		return i;
 	}
 	
 	protected static ARKThatchItem addThatchItem(String name) {
-		ARKThatchItem t = new ARKThatchItem(name);
-		allItems.put(name, t);
+		ARKThatchItem t = new ARKThatchItem();
+		registerItem(name, t);
 		return t;
 	}
 	
 	protected static ARKSeedItem addSeedItem(String name) {
-		ARKSeedItem i = new ARKSeedItem(name);
-		allItems.put(name, i);
+		ARKSeedItem i = new ARKSeedItem();
+		registerItem(name, i);
 		return i;
 	}
 	
 	protected static ARKEggItem addEggItem(String name) {
-		ARKEggItem i = new ARKEggItem(name);
-		allItems.put(name, i);
+		ARKEggItem i = new ARKEggItem();
+		registerItem(name, i);
 		return i;
 	}
 	
 	protected static ARKBushItem addBushItem(String name) {
-		ARKBushItem i = new ARKBushItem(name);
-		allItems.put(name, i);
+		ARKBushItem i = new ARKBushItem();
+		registerItem(name, i);
 		return i;
 	}
 	
 	protected static ARKCompostBinItem addCompostBinItem(String name) {
-		ARKCompostBinItem i = new ARKCompostBinItem(name);
-		allItems.put(name, i);
+		ARKCompostBinItem i = new ARKCompostBinItem();
+		registerItem(name, i);
 		return i;
 	}
 	
 	protected static ARKSmithyItem addSmithyItem(String name) {
-		ARKSmithyItem i = new ARKSmithyItem(name);
-		allItems.put(name, i);
+		ARKSmithyItem i = new ARKSmithyItem();
+		registerItem(name, i);
 		return i;
 	}
 	
 	protected static ItemSpyGlass addSpyGlass(String name, RangedComponent rangedcomponent) {
-		ItemSpyGlass i = new ItemSpyGlass(name, rangedcomponent);
-		allItems.put(name, i);
+		ItemSpyGlass i = new ItemSpyGlass(rangedcomponent);
+		registerItem(name, i);
 		return i;
 	}
 	
 	public static ItemSpear addSpearItem(String name, ToolMaterial mat) {
-		ItemSpear weapon = new ItemSpear(name, mat);
-		allItems.put(name, weapon);
+		ItemSpear weapon = new ItemSpear(mat);
+		registerItem(name, weapon);
 		return weapon;
 	}
 	
 	protected static ARKFecesItem addFecesItem(String name, int maxDamageIn) {
-		ARKFecesItem i = new ARKFecesItem(name);
+		ARKFecesItem i = new ARKFecesItem();
 		i.setMaxDamage(maxDamageIn);
-		allItems.put(name, i);
+		registerItem(name, i);
 		return i;
 	}	
 	
 	protected static ARKFood addFood(String name, int heal, float sat, boolean fav, boolean alwaysEdible) {
-		ARKFood f = new ARKFood(name, heal, sat, fav, alwaysEdible);
-		allItems.put(name, f);
+		ARKFood f = new ARKFood(heal, sat, fav, alwaysEdible);
+		registerItem(name, f);
 		return f;
 	}
 	
 	protected static Dossier addDossier(String name) {
 		Dossier dossier = new Dossier(name);
-		allItems.put(name, dossier);
+		registerItem(name, dossier);
 		return dossier;
 	}
 	
 	public static ARKItem addItemWithTooltip(String name, String... tooltips) {
-		ARKItem item = new ARKItem(name, tooltips);
-		allItems.put(name, item);
+		ARKItem item = new ARKItem(tooltips);
+		registerItem(name, item);
 		return item;
 	}
 	
 	public static ARKFood addFood(String name, int heal, float sat, boolean fav, boolean alwaysEdible, PotionEffect... effect) {
-		ARKFood f = new ARKFood(name, heal, sat, fav, alwaysEdible, effect);
-		allItems.put(name, f);
+		ARKFood f = new ARKFood(heal, sat, fav, alwaysEdible, effect);
+		registerItem(name, f);
 		return f;			
 	}
 	
@@ -389,28 +364,32 @@ public class ARKCraftItems
 	}
 	
 	public static ARKArmorItem addArmorItem(String name, ArmorMaterial mat, String armorTexName, int type, boolean golden, String... tooltips) {
-		ARKArmorItem item = new ARKArmorItem(name, mat, armorTexName, type, golden, tooltips);
-		allItems.put(name, item);
+		ARKArmorItem item = new ARKArmorItem(mat, armorTexName, type, golden, tooltips);
+		registerItem(name, item);
 		return item;
 	}
 	public static ARKSaddle addSaddle(String name) {
-		ARKSaddle item = new ARKSaddle(name);
-		allItems.put(name, item);
-		return item;
-	}
-	public static ItemTranqGun addTranqGun(String name, RangedComponent rangedcomponent) {
-		ItemTranqGun item = new ItemTranqGun(name, rangedcomponent);
-		allItems.put(name, item);
+		ARKSaddle item = new ARKSaddle();
+		registerItem(name, item);
 		return item;
 	}
 	public static ARKWeapon addWeapon(String name, ToolMaterial mat) {
-		ARKWeapon weapon = new ARKWeapon(name, mat);
-		allItems.put(name, weapon);
+		ARKWeapon weapon = new ARKWeapon(mat);
+		registerItem(name, weapon);
 		return weapon;
 	}
-	public static ARKWeaponThrowable addWeaponThrowable(String name, ToolMaterial mat) {
-		ARKWeaponThrowable weapon = new ARKWeaponThrowable(name, mat);
-		allItems.put(name, weapon);
+	public static ARKWeaponThrowable addWeaponThrowable(String name, ToolMaterial mat)
+	{
+		ARKWeaponThrowable weapon = new ARKWeaponThrowable(mat);
+		registerItem(name, weapon);
 		return weapon;
-	}	
+	}
+
+	public static void registerItem(String name, Item item)
+	{
+		allItems.put(name, item);
+		item.setUnlocalizedName(name);
+		item.setCreativeTab(GlobalAdditions.tabARK);
+		GameRegistry.registerItem(item, name);
+	}
 }

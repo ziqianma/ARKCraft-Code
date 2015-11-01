@@ -1,23 +1,18 @@
 package com.arkcraft.mod.common.items;
 
-import com.arkcraft.mod.GlobalAdditions;
 import com.arkcraft.mod.common.items.weapons.projectiles.EntitySpear;
 import com.arkcraft.mod.common.lib.BALANCE;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ARKWeaponThrowable extends ItemSword {
 	
 	public static double spearDamage = BALANCE.WEAPONS.SPEAR_DAMAGE;
 
-	public ARKWeaponThrowable(String name, ToolMaterial m) {
+	public ARKWeaponThrowable(ToolMaterial m) {
 		super(m);
-		this.setUnlocalizedName(name);
-		this.setCreativeTab(GlobalAdditions.tabARK);
-		GameRegistry.registerItem(this, name);
 	}
 	
 	@Override

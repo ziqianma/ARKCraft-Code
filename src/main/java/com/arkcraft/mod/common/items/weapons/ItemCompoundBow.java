@@ -1,11 +1,9 @@
 package com.arkcraft.mod.common.items.weapons;
 
-import com.arkcraft.mod.GlobalAdditions;
 import com.arkcraft.mod.common.items.ARKCraftItems;
 import com.arkcraft.mod.common.items.weapons.projectiles.EntityMetalArrow;
 import com.arkcraft.mod.common.items.weapons.projectiles.EntityStoneArrow;
 import com.arkcraft.mod.common.items.weapons.projectiles.EntityTranqArrow;
-
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,7 +14,6 @@ import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -24,12 +21,9 @@ public class ItemCompoundBow extends ItemBow{
 	
 	public static final String[] bowPullIconNameArray = new String[] {"pulling_0", "pulling_1", "pulling_2"};
 
-	public ItemCompoundBow(String name) {
+	public ItemCompoundBow() {
 		super();
-		this.setUnlocalizedName(name);
-		this.setCreativeTab(GlobalAdditions.tabARK);
 		this.setMaxStackSize(1);
-		GameRegistry.registerItem(this, this.getUnlocalizedName().substring(5));
 	}
 	
 	@Override

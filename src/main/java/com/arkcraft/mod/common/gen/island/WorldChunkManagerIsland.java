@@ -1,7 +1,6 @@
 package com.arkcraft.mod.common.gen.island;
 
 import com.google.common.collect.Lists;
-
 import net.minecraft.crash.CrashReport;
 import net.minecraft.crash.CrashReportCategory;
 import net.minecraft.util.BlockPos;

@@ -7,7 +7,6 @@ import com.arkcraft.mod.common.handlers.PlayerCraftingManager;
 import com.arkcraft.mod.common.lib.BALANCE;
 import com.arkcraft.mod.common.lib.LogHelper;
 import com.arkcraft.mod.common.network.PlayerPoop;
-
 import com.arkcraft.mod.common.network.SyncPlayerData;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -86,6 +85,39 @@ public class ARKPlayer implements IExtendedEntityProperties {
 		inventoryPlayerCrafting.loadInventoryFromNBT(compound);
 	}
 
+	public void setWater(int water)
+	{
+		this.water = water;
+		syncClient(player, false);
+	}
+
+	public void setTorpor(int torpor)
+	{
+		this.torpor = torpor;
+		syncClient(player, false);
+	}
+
+	public void setStamina(int stamina)
+	{
+		this.stamina = stamina;
+		syncClient(player, false);
+	}
+
+	public int getWater()
+	{
+		return water;
+	}
+
+	public int getTorpor()
+	{
+		return torpor;
+	}
+
+	public int getStamina()
+	{
+		return stamina;
+	}
+
 	/**
 	 * Copies additional player data from the given ExtendedPlayer instance
 	 * Avoids NBT disk I/O overhead when cloning a player after respawn
@@ -101,8 +133,12 @@ public class ARKPlayer implements IExtendedEntityProperties {
 	public void init(Entity entity, World world) {
 	}
 
-	public void syncClient(EntityPlayerMP player, boolean all) {
-		ARKCraft.modChannel.sendTo(new SyncPlayerData(all, this), player);
+	public void syncClient(EntityPlayer player, boolean all)
+	{
+		if (player instanceof EntityPlayerMP)
+		{
+			ARKCraft.modChannel.sendTo(new SyncPlayerData(all, this), (EntityPlayerMP) player);
+		}
 	}
 
 	@SuppressWarnings("unused")

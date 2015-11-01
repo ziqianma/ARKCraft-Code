@@ -1,15 +1,11 @@
 package com.arkcraft.mod.client.gui;
 
-import java.util.Iterator;
-import java.util.List;
-
 import com.arkcraft.mod.common.ARKCraft;
 import com.arkcraft.mod.common.entity.player.ARKPlayer;
 import com.arkcraft.mod.common.handlers.ARKCraftingManager;
 import com.arkcraft.mod.common.handlers.IARKRecipe;
 import com.arkcraft.mod.common.lib.LogHelper;
 import com.arkcraft.mod.common.network.UpdatePlayerCrafting;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.item.ItemStack;
@@ -19,6 +15,9 @@ import net.minecraft.util.MathHelper;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.Iterator;
+import java.util.List;
 
 /***
  * 

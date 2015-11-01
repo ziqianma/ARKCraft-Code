@@ -1,22 +1,17 @@
 package com.arkcraft.mod.common.items;
 
-import com.arkcraft.mod.GlobalAdditions;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemSaddle;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import java.util.List;
 
 @SuppressWarnings("all")
 public class ARKSaddle extends ItemSaddle {
 	
-	public ARKSaddle(String name) {
+	public ARKSaddle() {
 		super();
-		this.setUnlocalizedName(name);
-		this.setCreativeTab(GlobalAdditions.tabARK);
-		GameRegistry.registerItem(this, name);
 	}
 
 	@Override
@@ -25,7 +20,4 @@ public class ARKSaddle extends ItemSaddle {
 		super.addInformation(stack, playerIn, tooltip, advanced);
 		tooltip.add(EnumChatFormatting.ITALIC + "A Dino Rider's Dream");
 	}
-	
-	
-	
 }

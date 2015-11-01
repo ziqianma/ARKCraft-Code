@@ -5,7 +5,6 @@ import com.arkcraft.mod.common.items.ARKFecesItem;
 import com.arkcraft.mod.common.items.ARKSeedItem;
 import com.arkcraft.mod.common.lib.BALANCE;
 import com.arkcraft.mod.common.lib.LogHelper;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;

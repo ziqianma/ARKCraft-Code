@@ -45,7 +45,7 @@ item.spear.name=Stone Spear
 item.saddle_small.name=Small Saddle
 item.saddle_medium.name=Medium Saddle
 item.saddle_large.name=Large Saddle
-item.cobble_ball.name=Cobblestone Ball
+item.rock.name=Rock
 item.explosive_ball.name=Explosive Cobblestone Ball
 item.mortar_and_pestle.name=Mortar and Pestle
 item.meat_cooked.name=Cooked Meat
@@ -80,6 +80,9 @@ item.spy_glass.name=Spy Glass
 item.item_berry_bush.name=Berry Bush
 item.item_compost_bin.name=Compost Bin
 item.item_smithy.name=Smithy
+item.wood.name=Wood
+item.metal.name=Metal
+item.metal_ingot.name=Metal Ingot
 
 # Miscellaneous
 itemGroup.tabARKCraft=ARKCraft: Survival Evolved

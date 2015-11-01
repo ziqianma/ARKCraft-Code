@@ -1,6 +1,5 @@
 package com.arkcraft.mod.common.items.weapons;
 
-import com.arkcraft.mod.GlobalAdditions;
 import com.arkcraft.mod.common.items.weapons.projectiles.EntitySpear;
 import com.arkcraft.mod.common.lib.BALANCE;
 import net.minecraft.entity.player.EntityPlayer;
@@ -8,21 +7,15 @@ import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemSpear extends ItemSword
 {
 	public static double spearDamage = BALANCE.WEAPONS.SPEAR_DAMAGE;
 	
-	public ItemSpear(String name, ToolMaterial m) {
+	public ItemSpear(ToolMaterial m) {
 		super(m);
-		this.setUnlocalizedName(name);
-		this.setCreativeTab(GlobalAdditions.tabARK);
 		this.setMaxStackSize(1);
 		this.setFull3D();
-		GameRegistry.registerItem(this, this.getUnlocalizedName().substring(5));
 	}
 	
 	@Override

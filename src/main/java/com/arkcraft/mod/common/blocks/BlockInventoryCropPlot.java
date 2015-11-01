@@ -3,7 +3,6 @@ package com.arkcraft.mod.common.blocks;
 import com.arkcraft.mod.GlobalAdditions;
 import com.arkcraft.mod.common.ARKCraft;
 import com.arkcraft.mod.common.tile.TileInventoryCropPlot;
-
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;

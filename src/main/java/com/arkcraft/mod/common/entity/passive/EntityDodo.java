@@ -7,7 +7,6 @@ import com.arkcraft.mod.common.entity.ai.EntityDodoAILookIdle;
 import com.arkcraft.mod.common.items.ARKCraftItems;
 import com.arkcraft.mod.common.items.ARKFood;
 import com.arkcraft.mod.common.lib.LogHelper;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;

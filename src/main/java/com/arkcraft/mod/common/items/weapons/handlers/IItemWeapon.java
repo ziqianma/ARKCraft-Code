@@ -1,12 +1,11 @@
 package com.arkcraft.mod.common.items.weapons.handlers;
 
-import java.util.Random;
-
+import com.arkcraft.mod.common.items.weapons.component.RangedComponent;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
-import com.arkcraft.mod.common.items.weapons.component.RangedComponent;
+import java.util.Random;
 
 public interface IItemWeapon
 {

@@ -7,7 +7,6 @@ import com.arkcraft.mod.common.handlers.SmithyCraftingManager;
 import com.arkcraft.mod.common.lib.BALANCE;
 import com.arkcraft.mod.common.lib.LogHelper;
 import com.arkcraft.mod.common.network.UpdateSmithyToCraftItem;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;

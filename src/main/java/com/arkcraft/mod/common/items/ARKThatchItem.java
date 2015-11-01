@@ -1,9 +1,6 @@
 package com.arkcraft.mod.common.items;
 
-import com.arkcraft.mod.GlobalAdditions;
-
 import net.minecraft.item.Item;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 /***
  * 
@@ -13,10 +10,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
  */
 public class ARKThatchItem extends Item{
 	
-	public ARKThatchItem(String name) {
-		this.setUnlocalizedName(name);
-		this.setCreativeTab(GlobalAdditions.tabARK);
+	public ARKThatchItem() {
 		this.setMaxStackSize(64);
-		GameRegistry.registerItem(this, this.getUnlocalizedName().substring(5));
 	}
 }

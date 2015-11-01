@@ -1,7 +1,7 @@
 {
     "parent":"builtin/generated",
     "textures": {
-        "layer0":"arkcraft:items/cobble_ball"
+        "layer0":"arkcraft:items/metal_ingot"
     },
     "display": {
         "thirdperson": {

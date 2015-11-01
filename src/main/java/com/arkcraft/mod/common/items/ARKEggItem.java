@@ -1,13 +1,11 @@
 package com.arkcraft.mod.common.items;
 
-import com.arkcraft.mod.GlobalAdditions;
 import com.arkcraft.mod.common.entity.EntityDodoEgg;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 /**
  * @author BubbleTrouble
@@ -15,11 +13,8 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ARKEggItem extends Item {
 	
-	public ARKEggItem(String name) {
-		this.setUnlocalizedName(name);
-		this.setCreativeTab(GlobalAdditions.tabARK);
+	public ARKEggItem() {
 		this.setMaxStackSize(16);
-		GameRegistry.registerItem(this, this.getUnlocalizedName().substring(5));
 	}
 	
 	@Override

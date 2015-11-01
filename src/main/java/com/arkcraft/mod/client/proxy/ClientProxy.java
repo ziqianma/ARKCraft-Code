@@ -1,5 +1,6 @@
 package com.arkcraft.mod.client.proxy;
 
+import com.arkcraft.mod.client.event.ClientEventHandler;
 import com.arkcraft.mod.client.gui.overlay.GuiOverlay;
 import com.arkcraft.mod.client.gui.overlay.GuiOverlayReloading;
 import com.arkcraft.mod.client.model.ModelBrontosaurus;
@@ -22,7 +23,6 @@ import com.arkcraft.mod.common.entity.EntityExplosive;
 import com.arkcraft.mod.common.entity.aggressive.EntityRaptor;
 import com.arkcraft.mod.common.entity.neutral.EntityBrontosaurus;
 import com.arkcraft.mod.common.entity.passive.EntityDodo;
-import com.arkcraft.mod.client.event.ClientEventHandler;
 import com.arkcraft.mod.common.items.ARKCraftItems;
 import com.arkcraft.mod.common.items.ARKFood;
 import com.arkcraft.mod.common.items.weapons.projectiles.EntityMetalArrow;
@@ -33,7 +33,6 @@ import com.arkcraft.mod.common.items.weapons.projectiles.EntityTranqArrow;
 import com.arkcraft.mod.common.lib.BALANCE;
 import com.arkcraft.mod.common.lib.LogHelper;
 import com.arkcraft.mod.common.proxy.CommonProxy;
-
 import net.ilexiconn.llibrary.client.render.RenderHelper;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -61,7 +60,7 @@ public class ClientProxy extends CommonProxy
 		MinecraftForge.EVENT_BUS.register(new GuiOverlay());
 		MinecraftForge.EVENT_BUS.register(new GuiOverlayReloading());
 
-		RenderingRegistry.registerEntityRenderingHandler(EntityCobble.class, new RenderSnowball(Minecraft.getMinecraft().getRenderManager(), ARKCraftItems.cobble_ball, Minecraft.getMinecraft().getRenderItem()));
+		RenderingRegistry.registerEntityRenderingHandler(EntityCobble.class, new RenderSnowball(Minecraft.getMinecraft().getRenderManager(), ARKCraftItems.rock, Minecraft.getMinecraft().getRenderItem()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityTranqArrow.class, new RenderTranqArrow());
 		RenderingRegistry.registerEntityRenderingHandler(EntityStoneArrow.class, new RenderStoneArrow());
 		RenderingRegistry.registerEntityRenderingHandler(EntityMetalArrow.class, new RenderMetalArrow());

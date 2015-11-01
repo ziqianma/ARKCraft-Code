@@ -1,6 +1,5 @@
 package com.arkcraft.mod.common.items;
 
-import com.arkcraft.mod.GlobalAdditions;
 import com.arkcraft.mod.common.ARKCraft;
 import com.arkcraft.mod.common.entity.EntityCobble;
 import com.arkcraft.mod.common.entity.EntityExplosive;
@@ -10,22 +9,18 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagLong;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ARKSlingshot extends Item {
 
-	public ARKSlingshot(String name) {
+	public ARKSlingshot() {
 		super();
-		this.setCreativeTab(GlobalAdditions.tabARK);
-		this.setUnlocalizedName(name);
-		GameRegistry.registerItem(this, name);
 	}
 
 	@Override
 	public ItemStack onItemRightClick(ItemStack stack, World w, EntityPlayer p) {
 			if (p.capabilities.isCreativeMode
 					|| p.inventory
-							.consumeInventoryItem(ARKCraftItems.cobble_ball)) {
+							.consumeInventoryItem(ARKCraftItems.rock)) {
 				setLastUseTime(stack, w.getTotalWorldTime());
 				w.playSoundAtEntity(p, "random.bow", 0.5F,
 						0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));

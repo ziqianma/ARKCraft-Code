@@ -2,7 +2,6 @@ package com.arkcraft.mod.client.gui;
 
 import com.arkcraft.mod.common.entity.player.ARKPlayer;
 import com.arkcraft.mod.common.lib.LogHelper;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;

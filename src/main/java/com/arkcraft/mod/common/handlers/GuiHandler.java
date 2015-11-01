@@ -1,17 +1,5 @@
 package com.arkcraft.mod.common.handlers;
 
-import java.util.Iterator;
-import java.util.List;
-
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.BlockPos;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.common.network.IGuiHandler;
-
 import com.arkcraft.mod.GlobalAdditions;
 import com.arkcraft.mod.client.gui.ContainerInventoryCompostBin;
 import com.arkcraft.mod.client.gui.ContainerInventoryCropPlot;
@@ -39,6 +27,17 @@ import com.arkcraft.mod.common.tile.TileInventoryCompostBin;
 import com.arkcraft.mod.common.tile.TileInventoryCropPlot;
 import com.arkcraft.mod.common.tile.TileInventoryMP;
 import com.arkcraft.mod.common.tile.TileInventorySmithy;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.BlockPos;
+import net.minecraft.world.World;
+import net.minecraftforge.fml.common.network.IGuiHandler;
+
+import java.util.Iterator;
+import java.util.List;
 
 public class GuiHandler implements IGuiHandler {
 

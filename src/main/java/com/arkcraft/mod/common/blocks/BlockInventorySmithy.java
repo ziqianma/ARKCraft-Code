@@ -1,10 +1,8 @@
 package com.arkcraft.mod.common.blocks;
 
-import com.arkcraft.mod.GlobalAdditions;
 import com.arkcraft.mod.common.ARKCraft;
 import com.arkcraft.mod.common.items.ARKCraftItems;
 import com.arkcraft.mod.common.tile.TileInventorySmithy;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
