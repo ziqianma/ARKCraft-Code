@@ -57,7 +57,7 @@ public class ARKCraftItems
 
 	public static ARKFood tintoBerry, amarBerry, azulBerry, mejoBerry, narcoBerry, stimBerry, meat_raw, meat_cooked, primemeat_raw, primemeat_cooked;
 	public static ARKSeedItem tintoBerrySeed, amarBerrySeed, azulBerrySeed, mejoBerrySeed, narcoBerrySeed, stimBerrySeed;
-	public static ARKItem cobble_ball, fiber, chitin, narcotics, explosive_ball, dodo_bag, dodo_feather, gun_powder;
+	public static ARKItem cobble_ball, fiber, chitin, narcotics, explosive_ball, dodo_bag, dodo_feather, gun_powder, spark_powder;
 	public static ARKThatchItem thatch;
 	public static ARKFecesItem dodo_feces, player_feces, fertilizer;
 	public static ARKEggItem dodo_egg;
@@ -131,6 +131,7 @@ public class ARKCraftItems
 		dodo_feather = addItem("dodo_feather");
 		dodo_bag = addItemWithTooltip("dodo_bag", "Backpack for the Dodo");
 		gun_powder = addItemWithTooltip("gun_powder", "Recipe for destruction");
+		spark_powder = addItem("spark_powder");
 		spy_glass = addSpyGlass("spy_glass", new RangedCompSpyGlass());
 		
 		//Block Items

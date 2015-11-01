@@ -75,6 +75,7 @@ item.compound_bow.name=Compound Bow
 item.crossbow.name=Crossbow
 item.thatch.name=Thatch
 item.gun_powder.name=Gunpowder
+item.spark_powder.name=Spark Powder
 item.spy_glass.name=Spy Glass
 item.item_berry_bush.name=Berry Bush
 item.item_compost_bin.name=Compost Bin
