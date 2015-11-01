@@ -115,3 +115,33 @@ chat.ammo= ammo
 
 # Attributes
 attribute.name.arkcraft.reloadTime=Reload Time
+
+# Tooltips
+item.narcotics.tooltip=%12A Knockout of a Drink
+item.rock.tooltip=%6A Rocky Road to Victory
+item.explosive_ball.tooltip=%12A Rocky Road to Destruction
+item.dodo_bag.tooltip=Backpack for the Dodo
+item.gun_powder.tooltip=Recipe for Destruction
+
+item.fiber.tooltip=%6Material of the Ages
+item.chitin.tooltip=%6Material of the Ages
+item.dodo_feather.tooltip=%6Material of the Ages
+item.spark_powder.tooltip=%6Material of the Ages
+item.wood.tooltip=%6Material of the Ages
+item.metal.tooltip=%6Material of the Ages
+item.metal_ingot.tooltip=%6Material of the Ages
+
+item.bone_helm.tooltip=%4Armor of the Ancients
+item.bone_chest.tooltip=%4Armor of the Ancients
+item.bone_legs.tooltip=%4Armor of the Ancients
+item.bone_boots.tooltip=%4Armor of the Ancients
+
+item.chitin_helm.tooltip=%oArmor, Made to Fit
+item.chitin_chest.tooltip=%oArmor, Made to Fit
+item.chitin_legs.tooltip=%oArmor, Made to Fit
+item.chitin_boots.tooltip=%oArmor, Made to Fit
+
+item.cloth_helm.tooltip=%oArmor, Made to Fit
+item.cloth_chest.tooltip=%oArmor, Made to Fit
+item.cloth_legs.tooltip=%oArmor, Made to Fit
+item.cloth_boots.tooltip=%oArmor, Made to Fit

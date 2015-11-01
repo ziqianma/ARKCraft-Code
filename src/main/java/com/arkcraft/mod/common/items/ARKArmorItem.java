@@ -13,12 +13,10 @@ public class ARKArmorItem extends ItemArmor {
 
 	public String texName;
 	public boolean golden;
-	public String[] tooltips;
-	
-	public ARKArmorItem(ArmorMaterial mat, String texName, int type, boolean golden, String... tooltips) {
+
+	public ARKArmorItem(ArmorMaterial mat, String texName, int type, boolean golden) {
 		super(mat, 0, type);
 		this.golden = golden;
-		this.tooltips = tooltips;
 		this.texName = texName;
 	}
 
@@ -32,15 +30,4 @@ public class ARKArmorItem extends ItemArmor {
 		if(golden) return EnumChatFormatting.GOLD + super.getItemStackDisplayName(stack);
 		return super.getItemStackDisplayName(stack);
 	}
-
-	@Override
-	@SuppressWarnings({"rawtypes", "unchecked"})
-	public void addInformation(ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced) {
-		super.addInformation(stack, playerIn, tooltip, advanced);
-		for(String e : tooltips) tooltip.add(e);
-	}
-	
-	
-	
-	
 }

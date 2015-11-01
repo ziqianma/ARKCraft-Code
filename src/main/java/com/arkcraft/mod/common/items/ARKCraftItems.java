@@ -113,8 +113,8 @@ public class ARKCraftItems
 		// world generated
 		
 		// Weapons and tools
-		rock = addItemWithTooltip("rock", EnumChatFormatting.GOLD + "A Rocky Road to Victory");
-		explosive_ball = addItemWithTooltip("explosive_ball", EnumChatFormatting.RED + "A Rocky Road to Destruction");
+		rock = addItem("rock");
+		explosive_ball = addItem("explosive_ball");
 		slingshot = addSlingshot("slingshot");
 		//stoneSpear = addWeaponThrowable("stoneSpear", ToolMaterial.STONE);
 		ironPike = addWeapon("ironPike", ToolMaterial.IRON);
@@ -127,8 +127,8 @@ public class ARKCraftItems
 		metal_ingot = addItem("metal_ingot");
 		chitin = addItem("chitin");
 		dodo_feather = addItem("dodo_feather");
-		dodo_bag = addItemWithTooltip("dodo_bag", "Backpack for the Dodo");
-		gun_powder = addItemWithTooltip("gun_powder", "Recipe for destruction");
+		dodo_bag = addItem("dodo_bag");
+		gun_powder = addItem("gun_powder");
 		spark_powder = addItem("spark_powder");
 		spy_glass = addSpyGlass("spy_glass", new RangedCompSpyGlass());
 		
@@ -158,24 +158,24 @@ public class ARKCraftItems
 		// Other Types of Items
 		dodo_egg = addEggItem("dodo_egg");
 		dino_book = addDossier("dossier");
-		narcotics = addItemWithTooltip("narcotics", EnumChatFormatting.RED + "A Knockout of a Drink");
+		narcotics = addItem("narcotics");
 		saddle_small = addSaddle("saddle_small");
 		saddle_medium = addSaddle("saddle_medium");
 		saddle_large = addSaddle("saddle_large");
 				
 		// Armor
-		chitinHelm = addArmorItem("chitin_helm", CHITIN, "chitinArmor", 0);
-		chitinChest = addArmorItem("chitin_chest", CHITIN, "chitinArmor", 1);
-		chitinLegs = addArmorItem("chitin_legs", CHITIN, "chitinArmor", 2);
-		chitinBoots = addArmorItem("chitin_boots", CHITIN, "chitinArmor", 3);
-		clothHelm = addArmorItem("cloth_helm", CLOTH, "clothArmor", 0);
-		clothChest = addArmorItem("cloth_chest", CLOTH, "clothArmor", 1);
-		clothLegs = addArmorItem("cloth_legs", CLOTH, "clothArmor", 2);
-		clothBoots = addArmorItem("cloth_boots", CLOTH, "clothArmor", 3);
-		boneHelm = addArmorItem("bone_helm", BONE, "boneArmor", 0, true, EnumChatFormatting.DARK_RED + "Armor of the Ancients");
-		boneChest = addArmorItem("bone_chest", BONE, "boneArmor", 1, true, EnumChatFormatting.DARK_RED + "Armor of the Ancients");
-		boneLegs = addArmorItem("bone_legs", BONE, "boneArmor", 2, true, EnumChatFormatting.DARK_RED + "Armor of the Ancients");
-		boneBoots = addArmorItem("bone_boots", BONE, "boneArmor", 3, true, EnumChatFormatting.DARK_RED + "Armor of the Ancients");
+		chitinHelm = addArmorItem("chitin_helm", CHITIN, "chitinArmor", 0, false);
+		chitinChest = addArmorItem("chitin_chest", CHITIN, "chitinArmor", 1, false);
+		chitinLegs = addArmorItem("chitin_legs", CHITIN, "chitinArmor", 2, false);
+		chitinBoots = addArmorItem("chitin_boots", CHITIN, "chitinArmor", 3, false);
+		clothHelm = addArmorItem("cloth_helm", CLOTH, "clothArmor", 0, false);
+		clothChest = addArmorItem("cloth_chest", CLOTH, "clothArmor", 1, false);
+		clothLegs = addArmorItem("cloth_legs", CLOTH, "clothArmor", 2, false);
+		clothBoots = addArmorItem("cloth_boots", CLOTH, "clothArmor", 3, false);
+		boneHelm = addArmorItem("bone_helm", BONE, "boneArmor", 0, true);
+		boneChest = addArmorItem("bone_chest", BONE, "boneArmor", 1, true);
+		boneLegs = addArmorItem("bone_legs", BONE, "boneArmor", 2, true);
+		boneBoots = addArmorItem("bone_boots", BONE, "boneArmor", 3, true);
 		
 		registerDispenseBehavior();
 		registerWeaponEntities();
@@ -343,36 +343,24 @@ public class ARKCraftItems
 		return dossier;
 	}
 	
-	public static ARKItem addItemWithTooltip(String name, String... tooltips) {
-		ARKItem item = new ARKItem(tooltips);
-		registerItem(name, item);
-		return item;
-	}
-	
 	public static ARKFood addFood(String name, int heal, float sat, boolean fav, boolean alwaysEdible, PotionEffect... effect) {
 		ARKFood f = new ARKFood(heal, sat, fav, alwaysEdible, effect);
 		registerItem(name, f);
 		return f;			
 	}
-	
-	public static ARKArmorItem addArmorItem(String name, ArmorMaterial mat, String armorTexName, int type) {
-		return addArmorItem(name, mat, armorTexName, type, false);
-	}
-	
+
 	public static ARKArmorItem addArmorItem(String name, ArmorMaterial mat, String armorTexName, int type, boolean golden) {
-		return addArmorItem(name, mat, armorTexName, type, false, EnumChatFormatting.ITALIC + "Armor, Made to Fit");
-	}
-	
-	public static ARKArmorItem addArmorItem(String name, ArmorMaterial mat, String armorTexName, int type, boolean golden, String... tooltips) {
-		ARKArmorItem item = new ARKArmorItem(mat, armorTexName, type, golden, tooltips);
+		ARKArmorItem item = new ARKArmorItem(mat, armorTexName, type, golden);
 		registerItem(name, item);
 		return item;
 	}
+
 	public static ARKSaddle addSaddle(String name) {
 		ARKSaddle item = new ARKSaddle();
 		registerItem(name, item);
 		return item;
 	}
+
 	public static ARKWeapon addWeapon(String name, ToolMaterial mat) {
 		ARKWeapon weapon = new ARKWeapon(mat);
 		registerItem(name, weapon);
