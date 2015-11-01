@@ -60,7 +60,7 @@ public class ContainerInventorySmithy extends Container {
     @Override
     public void addCraftingToCrafters(ICrafting listener) {
         super.addCraftingToCrafters(listener);
-        listener.func_175173_a(this, tileInventorySmithy);
+		listener.func_175173_a(this, tileInventorySmithy);
     }
 
 	/* Nothing to do, this is a furnace type container */

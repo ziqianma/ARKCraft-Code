@@ -14,6 +14,7 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraft.world.gen.ChunkProviderGenerate;
 import net.minecraft.world.gen.ChunkProviderSettings;
 import net.minecraft.world.gen.NoiseGenerator;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
@@ -117,7 +118,7 @@ public class ChunkProviderIsland implements IChunkProvider
             {
                 int height = (IslandGen.getHeightForCoords(x + (chunkX * 16), z + (chunkZ * 16), scale));
 
-                for (int y = 0; y < Math.max(169, height); y++)
+                for (int y = 0; y < Math.max(225, height); y++)
                 {
                     if(y < height)
                     {
@@ -231,7 +232,6 @@ public class ChunkProviderIsland implements IChunkProvider
                 }
             }
         }
-
         MinecraftForge.EVENT_BUS.post(new PopulateChunkEvent.Post(provider, worldObj, rand, p_73153_2_, p_73153_3_, flag));
 
         BlockFalling.fallInstantly = false;

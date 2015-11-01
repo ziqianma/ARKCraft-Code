@@ -62,7 +62,7 @@ public class ContainerInventoryDodo extends Container {
     public void addCraftingToCrafters(ICrafting listener)  {
 //		LogHelper.info("ContainerInventoryDodo: addCraftingToCrafters called.");
         super.addCraftingToCrafters(listener);
-        listener.func_175173_a(this, invDodo);
+		listener.func_175173_a(this, invDodo);
     }
 
     /**

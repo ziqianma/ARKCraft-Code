@@ -373,8 +373,8 @@ public abstract class EntityShootable extends Entity implements IProjectile
 			}
 			if (thrower instanceof EntityLivingBase)
 			{
-				EnchantmentHelper.func_151384_a(entityliving, this.thrower);
-				EnchantmentHelper.func_151385_b((EntityLivingBase) this.thrower, entityliving);
+                EnchantmentHelper.func_151384_a(entityliving, this.thrower);
+                EnchantmentHelper.func_151385_b((EntityLivingBase) this.thrower, entityliving);
 			}
 			if (thrower instanceof EntityPlayerMP && thrower != entity && entity instanceof EntityPlayer)
 			{

@@ -311,7 +311,7 @@ public abstract class EntityProjectile extends EntityArrow implements IThrowable
                             if (this.shootingEntity instanceof EntityLivingBase)
                             {
                                 EnchantmentHelper.func_151384_a(entitylivingbase, this.shootingEntity);
-                                EnchantmentHelper.func_151385_b((EntityLivingBase)this.shootingEntity, entitylivingbase);
+                                EnchantmentHelper.func_151385_b((EntityLivingBase) this.shootingEntity, entitylivingbase);
                             }
 
                             if (this.shootingEntity != null && movingobjectposition.entityHit != this.shootingEntity && movingobjectposition.entityHit instanceof EntityPlayer && this.shootingEntity instanceof EntityPlayerMP)
@@ -453,8 +453,8 @@ public abstract class EntityProjectile extends EntityArrow implements IThrowable
 			}
 			if (shootingEntity instanceof EntityLivingBase)
 			{
-				EnchantmentHelper.func_151384_a(entityliving, this.shootingEntity);
-				EnchantmentHelper.func_151385_b((EntityLivingBase) this.shootingEntity, entityliving);
+                EnchantmentHelper.func_151384_a(entityliving, this.shootingEntity);
+                EnchantmentHelper.func_151385_b((EntityLivingBase) this.shootingEntity, entityliving);
 			}
 			if (shootingEntity instanceof EntityPlayerMP && shootingEntity != entity && entity instanceof EntityPlayer)
 			{
