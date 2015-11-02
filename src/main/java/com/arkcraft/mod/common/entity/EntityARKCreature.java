@@ -2,8 +2,10 @@ package com.arkcraft.mod.common.entity;
 
 import com.arkcraft.mod.common.creature.Creature;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 
@@ -25,6 +27,8 @@ public class EntityARKCreature extends EntityCreature implements IEntityAddition
 
     private Creature creature;
 
+    private float xp;
+
     public EntityARKCreature(World world)
     {
         super(world);
@@ -37,6 +41,53 @@ public class EntityARKCreature extends EntityCreature implements IEntityAddition
         super.entityInit();
 
         creature = ARKEntityRegistry.getCreature(this);
+
+        this.dataWatcher.addObject(25, new Integer(0)); // Creature Age
+        this.dataWatcher.addObject(26, new Integer(0)); // Torpor
+        this.dataWatcher.addObject(27, new Integer(0)); // Stamina
+        this.dataWatcher.addObject(28, new Integer(0)); // Hunger
+        this.dataWatcher.addObject(29, new Integer(0)); // Level
+        this.dataWatcher.addObject(30, new Byte((byte) 0)); // Unconscious?
+        this.dataWatcher.addObject(31, new Integer(0)); // Tame Time
+        this.dataWatcher.addObject(32, new Float(0.0F)); // XP
+    }
+
+    @Override
+    public void onDeath(DamageSource cause)
+    {
+        super.onDeath(cause);
+
+        Entity killedBy = cause.getSourceOfDamage();
+
+        //TODO projectiles and players
+
+        if (killedBy instanceof EntityARKCreature)
+        {
+            ((EntityARKCreature) killedBy).addXP(creature.getKillXP());
+        }
+    }
+
+    public void addXP(float xp)
+    {
+        this.xp += xp;
+
+        int levels = (int) Math.floor(xp / 10);
+        levelUp(levels);
+    }
+
+    public void levelUp(int levels)
+    {
+        level += levels;
+    }
+
+    public int getMaxLevel()
+    {
+        return baseLevel + 54;
+    }
+
+    private float getScaled(float value, float maxValue, float scale)
+    {
+        return maxValue != 0 && value != 0 ? value * scale / maxValue : 0;
     }
 
     public void increaseTorpor(int amount)
@@ -64,6 +115,7 @@ public class EntityARKCreature extends EntityCreature implements IEntityAddition
             this.dataWatcher.updateObject(29, level);
             this.dataWatcher.updateObject(30, (byte) (unconscious ? 1 : 0));
             this.dataWatcher.updateObject(31, tameTime);
+            this.dataWatcher.updateObject(32, xp);
 
             if (creatureAge < creature.getGrowthTime())
             {
@@ -88,6 +140,8 @@ public class EntityARKCreature extends EntityCreature implements IEntityAddition
             hunger = dataWatcher.getWatchableObjectInt(28);
             level = dataWatcher.getWatchableObjectInt(29);
             unconscious = dataWatcher.getWatchableObjectByte(30) == 1;
+            tameTime = dataWatcher.getWatchableObjectInt(31);
+            xp = dataWatcher.getWatchableObjectFloat(32);
         }
     }
 
@@ -112,14 +166,6 @@ public class EntityARKCreature extends EntityCreature implements IEntityAddition
     public void applyEntityAttributes()
     {
         super.applyEntityAttributes();
-
-        this.dataWatcher.addObject(25, new Integer(0)); // Creature Age
-        this.dataWatcher.addObject(26, new Integer(0)); // Torpor
-        this.dataWatcher.addObject(27, new Integer(0)); // Stamina
-        this.dataWatcher.addObject(28, new Integer(0)); // Hunger
-        this.dataWatcher.addObject(29, new Integer(0)); // Level
-        this.dataWatcher.addObject(30, new Byte((byte) 0)); // Unconscious?
-        this.dataWatcher.addObject(31, new Integer(0)); // Tame Time
     }
 
     @Override

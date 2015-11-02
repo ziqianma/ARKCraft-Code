@@ -34,6 +34,8 @@ public abstract class Creature
     public abstract int getWaterBase();
     public abstract int getOxygenBase();
 
+    public abstract float getKillXP();
+
     protected int fromDays(int days)
     {
         return days * 24000;
