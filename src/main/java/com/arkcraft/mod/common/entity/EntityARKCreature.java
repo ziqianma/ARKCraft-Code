@@ -94,7 +94,7 @@ public class EntityARKCreature extends EntityCreature implements IEntityAddition
     {
         torpor += amount;
 
-        if (torpor >= creature.getTorporKnockout())
+        if (torpor >= creature.getTorporKnockout()) //TODO higher level dinos take more to knock out
         {
             this.unconscious = true;
             this.tameTime = 0;
