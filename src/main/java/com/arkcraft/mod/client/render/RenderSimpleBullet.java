@@ -1,7 +1,7 @@
 package com.arkcraft.mod.client.render;
 
 import com.arkcraft.mod.common.ARKCraft;
-import com.arkcraft.mod.common.items.weapons.projectiles.EntitySimpleBullet;
+import com.arkcraft.mod.common.entity.item.projectiles.EntitySimpleBullet;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;

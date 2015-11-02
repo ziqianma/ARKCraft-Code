@@ -1,6 +1,8 @@
 package com.arkcraft.mod.client.gui;
 
 import com.arkcraft.mod.common.ARKCraft;
+import com.arkcraft.mod.common.container.ContainerInventoryPlayerCrafting;
+import com.arkcraft.mod.common.container.inventory.InventoryBlueprints;
 import com.arkcraft.mod.common.entity.player.ARKPlayer;
 import com.arkcraft.mod.common.lib.LogHelper;
 import net.minecraft.client.Minecraft;

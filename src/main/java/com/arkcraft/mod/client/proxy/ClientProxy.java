@@ -24,12 +24,12 @@ import com.arkcraft.mod.common.entity.aggressive.EntityRaptor;
 import com.arkcraft.mod.common.entity.neutral.EntityBrontosaurus;
 import com.arkcraft.mod.common.entity.passive.EntityDodo;
 import com.arkcraft.mod.common.items.ARKCraftItems;
-import com.arkcraft.mod.common.items.ARKFood;
-import com.arkcraft.mod.common.items.weapons.projectiles.EntityMetalArrow;
-import com.arkcraft.mod.common.items.weapons.projectiles.EntitySimpleBullet;
-import com.arkcraft.mod.common.items.weapons.projectiles.EntitySpear;
-import com.arkcraft.mod.common.items.weapons.projectiles.EntityStoneArrow;
-import com.arkcraft.mod.common.items.weapons.projectiles.EntityTranqArrow;
+import com.arkcraft.mod.common.items.ItemARKFood;
+import com.arkcraft.mod.common.entity.item.projectiles.EntityMetalArrow;
+import com.arkcraft.mod.common.entity.item.projectiles.EntitySimpleBullet;
+import com.arkcraft.mod.common.entity.item.projectiles.EntitySpear;
+import com.arkcraft.mod.common.entity.item.projectiles.EntityStoneArrow;
+import com.arkcraft.mod.common.entity.item.projectiles.EntityTranqArrow;
 import com.arkcraft.mod.common.lib.BALANCE;
 import com.arkcraft.mod.common.lib.LogHelper;
 import com.arkcraft.mod.common.proxy.CommonProxy;
@@ -73,8 +73,8 @@ public class ClientProxy extends CommonProxy
 	//	RenderingRegistry.registerEntityRenderingHandler(EntityTranqAmmo.class, new RenderTranqAmmo());
 	//	RenderingRegistry.registerEntityRenderingHandler(EntitySimpleBullet.class, new RenderSimpleBullet());
 		
-		GameRegistry.addSmelting(ARKCraftItems.meat_raw, new ItemStack(ARKCraftItems.meat_cooked, 1), (int) Math.floor(ARKFood.globalHealAmount/2));
-		GameRegistry.addSmelting(ARKCraftItems.primemeat_raw, new ItemStack(ARKCraftItems.primemeat_cooked, 1), (int) Math.floor(ARKFood.globalHealAmount/2));
+		GameRegistry.addSmelting(ARKCraftItems.meat_raw, new ItemStack(ARKCraftItems.meat_cooked, 1), (int) Math.floor(ItemARKFood.globalHealAmount/2));
+		GameRegistry.addSmelting(ARKCraftItems.primemeat_raw, new ItemStack(ARKCraftItems.primemeat_cooked, 1), (int) Math.floor(ItemARKFood.globalHealAmount/2));
 		
 		ModelBakery.addVariantName(ARKCraftItems.slingshot, "arkcraft:slingshot", "arkcraft:slingshot_pulled");
 

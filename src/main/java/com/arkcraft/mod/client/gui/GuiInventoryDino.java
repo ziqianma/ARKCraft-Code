@@ -1,6 +1,8 @@
 package com.arkcraft.mod.client.gui;
 
 import com.arkcraft.mod.common.ARKCraft;
+import com.arkcraft.mod.common.container.ContainerInventoryDino;
+import com.arkcraft.mod.common.container.inventory.InventoryDino;
 import com.arkcraft.mod.common.entity.EntityTameableDinosaur;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;

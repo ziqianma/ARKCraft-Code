@@ -1,7 +1,7 @@
 package com.arkcraft.mod.common.entity.player;
 
-import com.arkcraft.mod.client.gui.InventoryBlueprints;
-import com.arkcraft.mod.client.gui.InventoryPlayerCrafting;
+import com.arkcraft.mod.common.container.inventory.InventoryBlueprints;
+import com.arkcraft.mod.common.container.inventory.InventoryPlayerCrafting;
 import com.arkcraft.mod.common.ARKCraft;
 import com.arkcraft.mod.common.handlers.PlayerCraftingManager;
 import com.arkcraft.mod.common.lib.BALANCE;

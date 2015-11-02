@@ -1,9 +1,9 @@
 package com.arkcraft.mod.client.render;
 
-import com.arkcraft.mod.client.model.TranquilizerModel;
+import com.arkcraft.mod.client.model.ModelTranquilizer;
 import com.arkcraft.mod.common.ARKCraft;
 import com.arkcraft.mod.common.entity.EntityTranqAmmo;
-import com.arkcraft.mod.common.items.weapons.projectiles.EntitySpear;
+import com.arkcraft.mod.common.entity.item.projectiles.EntitySpear;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
@@ -13,15 +13,15 @@ public class RenderTranquilizer extends Render
 {
 	private static final ResourceLocation texture = new ResourceLocation(ARKCraft.MODID, "textures/entity/tranqAmmo.png");
 	@SuppressWarnings("unused")
-	private final TranquilizerModel model;
+	private final ModelTranquilizer model;
      
-	//protected TranquilizerModel tranquilizerModel;
+	//protected ModelTranquilizer tranquilizerModel;
 	
 	public RenderTranquilizer() 
 	{
 		super(Minecraft.getMinecraft().getRenderManager());
-		model = new TranquilizerModel();
-	//	tranquilizerModel = new TranquilizerModel();
+		model = new ModelTranquilizer();
+	//	tranquilizerModel = new ModelTranquilizer();
 	}
 	
 	public void doRender(EntitySpear entityarrow, double d, double d1, double d2, float f, float f1)

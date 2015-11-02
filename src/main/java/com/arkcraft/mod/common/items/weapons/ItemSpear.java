@@ -1,6 +1,6 @@
 package com.arkcraft.mod.common.items.weapons;
 
-import com.arkcraft.mod.common.items.weapons.projectiles.EntitySpear;
+import com.arkcraft.mod.common.entity.item.projectiles.EntitySpear;
 import com.arkcraft.mod.common.lib.BALANCE;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;

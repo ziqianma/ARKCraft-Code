@@ -8,7 +8,7 @@ import com.arkcraft.mod.common.items.weapons.ItemCompoundBow;
 import com.arkcraft.mod.common.items.weapons.ItemSpear;
 import com.arkcraft.mod.common.items.weapons.ItemSpyGlass;
 import com.arkcraft.mod.common.items.weapons.bullets.ItemProjectile;
-import com.arkcraft.mod.common.items.weapons.component.ItemShooter;
+import com.arkcraft.mod.common.items.weapons.ItemRangedWeapon;
 import com.arkcraft.mod.common.items.weapons.component.RangedCompCrossbow;
 import com.arkcraft.mod.common.items.weapons.component.RangedCompLongneckRifle;
 import com.arkcraft.mod.common.items.weapons.component.RangedCompRocketLauncher;
@@ -17,19 +17,19 @@ import com.arkcraft.mod.common.items.weapons.component.RangedCompSimplePistol;
 import com.arkcraft.mod.common.items.weapons.component.RangedCompSpyGlass;
 import com.arkcraft.mod.common.items.weapons.component.RangedCompTranqGun;
 import com.arkcraft.mod.common.items.weapons.component.RangedComponent;
-import com.arkcraft.mod.common.items.weapons.projectiles.EntityMetalArrow;
-import com.arkcraft.mod.common.items.weapons.projectiles.EntityRocketPropelledGrenade;
-import com.arkcraft.mod.common.items.weapons.projectiles.EntitySimpleBullet;
-import com.arkcraft.mod.common.items.weapons.projectiles.EntitySimpleRifleAmmo;
-import com.arkcraft.mod.common.items.weapons.projectiles.EntitySimpleShotgunAmmo;
-import com.arkcraft.mod.common.items.weapons.projectiles.EntityStoneArrow;
-import com.arkcraft.mod.common.items.weapons.projectiles.EntityTranqArrow;
-import com.arkcraft.mod.common.items.weapons.projectiles.EntityTranquilizer;
-import com.arkcraft.mod.common.items.weapons.projectiles.dispense.DispenseRocketPropelledGrenade;
-import com.arkcraft.mod.common.items.weapons.projectiles.dispense.DispenseSimpleBullet;
-import com.arkcraft.mod.common.items.weapons.projectiles.dispense.DispenseSimpleRifleAmmo;
-import com.arkcraft.mod.common.items.weapons.projectiles.dispense.DispenseSimpleShotgunAmmo;
-import com.arkcraft.mod.common.items.weapons.projectiles.dispense.DispenseTranquilizer;
+import com.arkcraft.mod.common.entity.item.projectiles.EntityMetalArrow;
+import com.arkcraft.mod.common.entity.item.projectiles.EntityRocketPropelledGrenade;
+import com.arkcraft.mod.common.entity.item.projectiles.EntitySimpleBullet;
+import com.arkcraft.mod.common.entity.item.projectiles.EntitySimpleRifleAmmo;
+import com.arkcraft.mod.common.entity.item.projectiles.EntitySimpleShotgunAmmo;
+import com.arkcraft.mod.common.entity.item.projectiles.EntityStoneArrow;
+import com.arkcraft.mod.common.entity.item.projectiles.EntityTranqArrow;
+import com.arkcraft.mod.common.entity.item.projectiles.EntityTranquilizer;
+import com.arkcraft.mod.common.entity.item.projectiles.dispense.DispenseRocketPropelledGrenade;
+import com.arkcraft.mod.common.entity.item.projectiles.dispense.DispenseSimpleBullet;
+import com.arkcraft.mod.common.entity.item.projectiles.dispense.DispenseSimpleRifleAmmo;
+import com.arkcraft.mod.common.entity.item.projectiles.dispense.DispenseSimpleShotgunAmmo;
+import com.arkcraft.mod.common.entity.item.projectiles.dispense.DispenseTranquilizer;
 import com.arkcraft.mod.common.lib.BALANCE;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.item.Item;
@@ -37,7 +37,6 @@ import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
@@ -49,36 +48,36 @@ import java.util.Map;
  */
 public class ARKCraftItems
 {
-	public static ARKFood tintoBerry, amarBerry, azulBerry, mejoBerry, narcoBerry, stimBerry, meat_raw, meat_cooked, primemeat_raw, primemeat_cooked;
-	public static ARKSeedItem tintoBerrySeed, amarBerrySeed, azulBerrySeed, mejoBerrySeed, narcoBerrySeed, stimBerrySeed;
-	public static ARKItem rock, fiber, chitin, narcotics, explosive_ball, dodo_bag, dodo_feather, gun_powder, spark_powder;
-	public static ARKThatchItem thatch;
-	public static ARKItem wood, metal, metal_ingot;
-	public static ARKFecesItem dodo_feces, player_feces, fertilizer;
-	public static ARKEggItem dodo_egg;
-	public static ARKSaddle saddle_small, saddle_medium, saddle_large;
-	public static ARKArmorItem chitinHelm, chitinChest, chitinLegs, chitinBoots;
-	public static ARKArmorItem clothHelm, clothChest, clothLegs, clothBoots;
-	public static ARKArmorItem boneHelm, boneChest, boneLegs, boneBoots;
+	public static ItemARKFood tintoBerry, amarBerry, azulBerry, mejoBerry, narcoBerry, stimBerry, meat_raw, meat_cooked, primemeat_raw, primemeat_cooked;
+	public static ItemARKSeed tintoBerrySeed, amarBerrySeed, azulBerrySeed, mejoBerrySeed, narcoBerrySeed, stimBerrySeed;
+	public static ItemARKBase rock, fiber, chitin, narcotics, explosive_ball, dodo_bag, dodo_feather, gun_powder, spark_powder;
+	public static ItemThatch thatch;
+	public static ItemARKBase wood, metal, metal_ingot;
+	public static ItemFeces dodo_feces, player_feces, fertilizer;
+	public static ItemDinosaurEgg dodo_egg;
+	public static ItemDinosaurSaddle saddle_small, saddle_medium, saddle_large;
+	public static ItemARKArmor chitinHelm, chitinChest, chitinLegs, chitinBoots;
+	public static ItemARKArmor clothHelm, clothChest, clothLegs, clothBoots;
+	public static ItemARKArmor boneHelm, boneChest, boneLegs, boneBoots;
 	public static Dossier dino_book;
-	public static ARKBushItem item_berry_bush;
-	public static ARKCompostBinItem item_compost_bin;
-	public static ARKSmithyItem item_smithy;
+	public static ItemBerryBush item_berry_bush;
+	public static ItemCompostBin item_compost_bin;
+	public static ItemSmithy item_smithy;
 	public static ItemSpyGlass spy_glass;
 
 	// Weapons
-	public static ARKSlingshot slingshot;
-	public static ARKWeapon ironPike;
+	public static ItemSlingshot slingshot;
+	public static ItemARKWeaponBase ironPike;
 	public static ItemSpear spear;
-	public static ItemShooter tranq_gun;
+	public static ItemRangedWeapon tranq_gun;
 	public static ItemCompoundBow compound_bow;
-	public static ItemShooter rocket_launcher;
+	public static ItemRangedWeapon rocket_launcher;
 	public static ItemProjectile tranquilizer, stone_arrow, tranq_arrow, metal_arrow;
 	public static ItemProjectile simple_bullet, simple_rifle_ammo, simple_shotgun_ammo, rocket_propelled_grenade;
-	public static ItemShooter simple_pistol;
-	public static ItemShooter longneck_rifle;
-	public static ItemShooter shotgun;
-	public static ItemShooter crossbow;
+	public static ItemRangedWeapon simple_pistol;
+	public static ItemRangedWeapon longneck_rifle;
+	public static ItemRangedWeapon shotgun;
+	public static ItemRangedWeapon crossbow;
 
 	public static ArmorMaterial CLOTH = EnumHelper.addArmorMaterial("CLOTH_MAT", "CLOTH_MAT", 4, new int[] {1,2,1,1}, 15);
 	public static ArmorMaterial CHITIN = EnumHelper.addArmorMaterial("CHITIN_MAT", "CHITIN_MAT", 16, new int[] { 3,7,6,3 } , 10);
@@ -258,56 +257,56 @@ public class ARKCraftItems
 		return i;
 	}
 
-	protected static ItemShooter addShooter(String name, RangedComponent rangedcomponent) {
-		ItemShooter i = new ItemShooter(rangedcomponent);
+	protected static ItemRangedWeapon addShooter(String name, RangedComponent rangedcomponent) {
+		ItemRangedWeapon i = new ItemRangedWeapon(rangedcomponent);
 		registerItem(name, i);
 		return i;
 	}
 
-	protected static ARKSlingshot addSlingshot(String name) {
-		ARKSlingshot slingshot = new ARKSlingshot();
+	protected static ItemSlingshot addSlingshot(String name) {
+		ItemSlingshot slingshot = new ItemSlingshot();
 		registerItem(name, slingshot);
 		return slingshot;
 	}
 	
-	protected static ARKItem addItem(String name) {
-		ARKItem i = new ARKItem();
+	protected static ItemARKBase addItem(String name) {
+		ItemARKBase i = new ItemARKBase();
 		registerItem(name, i);
 		return i;
 	}
 	
-	protected static ARKThatchItem addThatchItem(String name) {
-		ARKThatchItem t = new ARKThatchItem();
+	protected static ItemThatch addThatchItem(String name) {
+		ItemThatch t = new ItemThatch();
 		registerItem(name, t);
 		return t;
 	}
 	
-	protected static ARKSeedItem addSeedItem(String name) {
-		ARKSeedItem i = new ARKSeedItem();
+	protected static ItemARKSeed addSeedItem(String name) {
+		ItemARKSeed i = new ItemARKSeed();
 		registerItem(name, i);
 		return i;
 	}
 	
-	protected static ARKEggItem addEggItem(String name) {
-		ARKEggItem i = new ARKEggItem();
+	protected static ItemDinosaurEgg addEggItem(String name) {
+		ItemDinosaurEgg i = new ItemDinosaurEgg();
 		registerItem(name, i);
 		return i;
 	}
 	
-	protected static ARKBushItem addBushItem(String name) {
-		ARKBushItem i = new ARKBushItem();
+	protected static ItemBerryBush addBushItem(String name) {
+		ItemBerryBush i = new ItemBerryBush();
 		registerItem(name, i);
 		return i;
 	}
 	
-	protected static ARKCompostBinItem addCompostBinItem(String name) {
-		ARKCompostBinItem i = new ARKCompostBinItem();
+	protected static ItemCompostBin addCompostBinItem(String name) {
+		ItemCompostBin i = new ItemCompostBin();
 		registerItem(name, i);
 		return i;
 	}
 	
-	protected static ARKSmithyItem addSmithyItem(String name) {
-		ARKSmithyItem i = new ARKSmithyItem();
+	protected static ItemSmithy addSmithyItem(String name) {
+		ItemSmithy i = new ItemSmithy();
 		registerItem(name, i);
 		return i;
 	}
@@ -324,15 +323,15 @@ public class ARKCraftItems
 		return weapon;
 	}
 	
-	protected static ARKFecesItem addFecesItem(String name, int maxDamageIn) {
-		ARKFecesItem i = new ARKFecesItem();
+	protected static ItemFeces addFecesItem(String name, int maxDamageIn) {
+		ItemFeces i = new ItemFeces();
 		i.setMaxDamage(maxDamageIn);
 		registerItem(name, i);
 		return i;
 	}	
 	
-	protected static ARKFood addFood(String name, int heal, float sat, boolean fav, boolean alwaysEdible) {
-		ARKFood f = new ARKFood(heal, sat, fav, alwaysEdible);
+	protected static ItemARKFood addFood(String name, int heal, float sat, boolean fav, boolean alwaysEdible) {
+		ItemARKFood f = new ItemARKFood(heal, sat, fav, alwaysEdible);
 		registerItem(name, f);
 		return f;
 	}
@@ -343,32 +342,32 @@ public class ARKCraftItems
 		return dossier;
 	}
 	
-	public static ARKFood addFood(String name, int heal, float sat, boolean fav, boolean alwaysEdible, PotionEffect... effect) {
-		ARKFood f = new ARKFood(heal, sat, fav, alwaysEdible, effect);
+	public static ItemARKFood addFood(String name, int heal, float sat, boolean fav, boolean alwaysEdible, PotionEffect... effect) {
+		ItemARKFood f = new ItemARKFood(heal, sat, fav, alwaysEdible, effect);
 		registerItem(name, f);
 		return f;			
 	}
 
-	public static ARKArmorItem addArmorItem(String name, ArmorMaterial mat, String armorTexName, int type, boolean golden) {
-		ARKArmorItem item = new ARKArmorItem(mat, armorTexName, type, golden);
+	public static ItemARKArmor addArmorItem(String name, ArmorMaterial mat, String armorTexName, int type, boolean golden) {
+		ItemARKArmor item = new ItemARKArmor(mat, armorTexName, type, golden);
 		registerItem(name, item);
 		return item;
 	}
 
-	public static ARKSaddle addSaddle(String name) {
-		ARKSaddle item = new ARKSaddle();
+	public static ItemDinosaurSaddle addSaddle(String name) {
+		ItemDinosaurSaddle item = new ItemDinosaurSaddle();
 		registerItem(name, item);
 		return item;
 	}
 
-	public static ARKWeapon addWeapon(String name, ToolMaterial mat) {
-		ARKWeapon weapon = new ARKWeapon(mat);
+	public static ItemARKWeaponBase addWeapon(String name, ToolMaterial mat) {
+		ItemARKWeaponBase weapon = new ItemARKWeaponBase(mat);
 		registerItem(name, weapon);
 		return weapon;
 	}
-	public static ARKWeaponThrowable addWeaponThrowable(String name, ToolMaterial mat)
+	public static ItemARKThrowableWeaponBase addWeaponThrowable(String name, ToolMaterial mat)
 	{
-		ARKWeaponThrowable weapon = new ARKWeaponThrowable(mat);
+		ItemARKThrowableWeaponBase weapon = new ItemARKThrowableWeaponBase(mat);
 		registerItem(name, weapon);
 		return weapon;
 	}

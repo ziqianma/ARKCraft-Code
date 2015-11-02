@@ -1,7 +1,7 @@
 package com.arkcraft.mod.client.render;
 
 import com.arkcraft.mod.common.ARKCraft;
-import com.arkcraft.mod.common.items.weapons.projectiles.EntityTranqArrow;
+import com.arkcraft.mod.common.entity.item.projectiles.EntityTranqArrow;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;

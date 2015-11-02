@@ -1,7 +1,7 @@
 package com.arkcraft.mod.common.tile;
 
 import com.arkcraft.mod.common.items.ARKCraftItems;
-import com.arkcraft.mod.common.items.ARKFecesItem;
+import com.arkcraft.mod.common.items.ItemFeces;
 import com.arkcraft.mod.common.lib.BALANCE;
 import com.arkcraft.mod.common.lib.LogHelper;
 import net.minecraft.block.state.IBlockState;
@@ -237,8 +237,8 @@ public class TileInventoryCompostBin extends TileEntity implements IInventory, I
 	public static short getItemDecompostTime(ItemStack stack) {
 		int growtime = 0;		
 		if (stack != null){
-			if (stack.getItem() instanceof ARKFecesItem)
-				growtime = ARKFecesItem.getItemGrowTime(stack);
+			if (stack.getItem() instanceof ItemFeces)
+				growtime = ItemFeces.getItemGrowTime(stack);
 		}		
 		return (short)MathHelper.clamp_int(growtime, 0, Short.MAX_VALUE);
 	}

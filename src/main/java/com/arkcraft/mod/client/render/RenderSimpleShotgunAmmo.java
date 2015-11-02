@@ -1,7 +1,7 @@
 package com.arkcraft.mod.client.render;
 
 import com.arkcraft.mod.common.ARKCraft;
-import com.arkcraft.mod.common.items.weapons.projectiles.EntitySimpleShotgunAmmo;
+import com.arkcraft.mod.common.entity.item.projectiles.EntitySimpleShotgunAmmo;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;

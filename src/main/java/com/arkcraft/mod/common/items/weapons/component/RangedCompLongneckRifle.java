@@ -1,7 +1,7 @@
 package com.arkcraft.mod.common.items.weapons.component;
 
 import com.arkcraft.mod.common.items.weapons.handlers.ReloadHelper;
-import com.arkcraft.mod.common.items.weapons.projectiles.EntitySimpleRifleAmmo;
+import com.arkcraft.mod.common.entity.item.projectiles.EntitySimpleRifleAmmo;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

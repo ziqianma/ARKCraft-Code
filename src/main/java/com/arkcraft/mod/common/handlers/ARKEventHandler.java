@@ -5,7 +5,7 @@ import com.arkcraft.mod.common.entity.EntityTameableDinosaur;
 import com.arkcraft.mod.common.entity.aggressive.EntityRaptor;
 import com.arkcraft.mod.common.items.ARKCraftItems;
 import com.arkcraft.mod.common.items.weapons.handlers.IItemWeapon;
-import com.arkcraft.mod.common.items.weapons.projectiles.EntityTranqArrow;
+import com.arkcraft.mod.common.entity.item.projectiles.EntityTranqArrow;
 import com.arkcraft.mod.common.lib.BALANCE;
 import com.arkcraft.mod.common.lib.LogHelper;
 import net.minecraft.client.Minecraft;

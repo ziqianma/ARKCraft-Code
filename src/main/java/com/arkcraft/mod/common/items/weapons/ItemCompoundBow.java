@@ -1,9 +1,9 @@
 package com.arkcraft.mod.common.items.weapons;
 
 import com.arkcraft.mod.common.items.ARKCraftItems;
-import com.arkcraft.mod.common.items.weapons.projectiles.EntityMetalArrow;
-import com.arkcraft.mod.common.items.weapons.projectiles.EntityStoneArrow;
-import com.arkcraft.mod.common.items.weapons.projectiles.EntityTranqArrow;
+import com.arkcraft.mod.common.entity.item.projectiles.EntityMetalArrow;
+import com.arkcraft.mod.common.entity.item.projectiles.EntityStoneArrow;
+import com.arkcraft.mod.common.entity.item.projectiles.EntityTranqArrow;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;

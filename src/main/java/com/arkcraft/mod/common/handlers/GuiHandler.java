@@ -1,14 +1,14 @@
 package com.arkcraft.mod.common.handlers;
 
 import com.arkcraft.mod.GlobalAdditions;
-import com.arkcraft.mod.client.gui.ContainerInventoryCompostBin;
-import com.arkcraft.mod.client.gui.ContainerInventoryCropPlot;
-import com.arkcraft.mod.client.gui.ContainerInventoryDino;
-import com.arkcraft.mod.client.gui.ContainerInventoryDodo;
-import com.arkcraft.mod.client.gui.ContainerInventoryMP;
-import com.arkcraft.mod.client.gui.ContainerInventoryPlayerCrafting;
-import com.arkcraft.mod.client.gui.ContainerInventorySmithy;
-import com.arkcraft.mod.client.gui.ContainerInventoryTaming;
+import com.arkcraft.mod.common.container.ContainerInventoryCompostBin;
+import com.arkcraft.mod.common.container.ContainerInventoryCropPlot;
+import com.arkcraft.mod.common.container.ContainerInventoryDino;
+import com.arkcraft.mod.common.container.ContainerInventoryDodo;
+import com.arkcraft.mod.common.container.ContainerInventoryMP;
+import com.arkcraft.mod.common.container.ContainerInventoryPlayerCrafting;
+import com.arkcraft.mod.common.container.ContainerInventorySmithy;
+import com.arkcraft.mod.common.container.ContainerInventoryTaming;
 import com.arkcraft.mod.client.gui.GUICompostBin;
 import com.arkcraft.mod.client.gui.GUICropPlot;
 import com.arkcraft.mod.client.gui.GUITaming;

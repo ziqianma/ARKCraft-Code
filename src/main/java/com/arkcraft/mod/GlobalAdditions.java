@@ -14,7 +14,7 @@ import com.arkcraft.mod.common.handlers.PestleCraftingManager;
 import com.arkcraft.mod.common.handlers.PlayerCraftingManager;
 import com.arkcraft.mod.common.handlers.RecipeHandler;
 import com.arkcraft.mod.common.handlers.SmithyCraftingManager;
-import com.arkcraft.mod.common.items.weapons.projectiles.EntitySpear;
+import com.arkcraft.mod.common.entity.item.projectiles.EntitySpear;
 import com.arkcraft.mod.common.lib.BALANCE;
 import com.arkcraft.mod.common.lib.KeyBindings;
 import net.minecraft.creativetab.CreativeTabs;

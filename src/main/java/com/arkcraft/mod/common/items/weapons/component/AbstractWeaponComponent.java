@@ -27,7 +27,7 @@ public abstract class AbstractWeaponComponent
 		weapon = null;
 	}
 	
-	final void setItem(IItemWeapon itemweapon)
+	public final void setItem(IItemWeapon itemweapon)
 	{
 		item = (Item) itemweapon;
 		weapon = itemweapon;

@@ -2,9 +2,9 @@ package com.arkcraft.mod.common.entity;
 
 
 import com.arkcraft.mod.GlobalAdditions.GUI;
-import com.arkcraft.mod.client.gui.InventoryDino;
-import com.arkcraft.mod.client.gui.InventorySaddle;
-import com.arkcraft.mod.client.gui.InventoryTaming;
+import com.arkcraft.mod.common.container.inventory.InventoryDino;
+import com.arkcraft.mod.common.container.inventory.InventorySaddle;
+import com.arkcraft.mod.common.container.inventory.InventoryTaming;
 import com.arkcraft.mod.common.ARKCraft;
 import com.arkcraft.mod.common.items.ARKCraftItems;
 import com.arkcraft.mod.common.lib.LogHelper;
