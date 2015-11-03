@@ -1,10 +1,15 @@
 package com.arkcraft.mod.common.entity;
 
+import com.arkcraft.mod.common.container.inventory.InventorySaddle;
 import com.arkcraft.mod.common.creature.Creature;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
@@ -12,7 +17,7 @@ import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 /**
  * @author gegy1000
  */
-public class EntityARKCreature extends EntityCreature implements IEntityAdditionalSpawnData
+public class EntityARKCreature extends EntityCreature implements IEntityAdditionalSpawnData, IInventory
 {
     private int torpor;
     private int stamina;
@@ -29,10 +34,16 @@ public class EntityARKCreature extends EntityCreature implements IEntityAddition
 
     private float xp;
 
+    private ItemStack[] inventory;
+    private InventorySaddle saddle;
+    private boolean isSaddled;
+
     public EntityARKCreature(World world)
     {
         super(world);
         updateHitbox();
+        inventory = new ItemStack[creature.getInventorySize()];
+        saddle = new InventorySaddle();
     }
 
     @Override
@@ -50,6 +61,7 @@ public class EntityARKCreature extends EntityCreature implements IEntityAddition
         this.dataWatcher.addObject(30, new Byte((byte) 0)); // Unconscious?
         this.dataWatcher.addObject(31, new Integer(0)); // Tame Time
         this.dataWatcher.addObject(32, new Float(0.0F)); // XP
+        this.dataWatcher.addObject(33, new Byte((byte) 0)); // Saddled?
     }
 
     @Override
@@ -116,6 +128,7 @@ public class EntityARKCreature extends EntityCreature implements IEntityAddition
             this.dataWatcher.updateObject(30, (byte) (unconscious ? 1 : 0));
             this.dataWatcher.updateObject(31, tameTime);
             this.dataWatcher.updateObject(32, xp);
+            this.dataWatcher.updateObject(33, (byte) (isSaddled() ? 1 : 0));
 
             if (creatureAge < creature.getGrowthTime())
             {
@@ -142,7 +155,13 @@ public class EntityARKCreature extends EntityCreature implements IEntityAddition
             unconscious = dataWatcher.getWatchableObjectByte(30) == 1;
             tameTime = dataWatcher.getWatchableObjectInt(31);
             xp = dataWatcher.getWatchableObjectFloat(32);
+            isSaddled = dataWatcher.getWatchableObjectByte(33) == 1;
         }
+    }
+
+    public boolean isSaddled()
+    {
+        return worldObj.isRemote ? isSaddled : saddle.getStackInSlot(0) != null;
     }
 
     public void updateHitbox()
@@ -207,6 +226,20 @@ public class EntityARKCreature extends EntityCreature implements IEntityAddition
         this.baseLevel = nbt.getInteger("BaseLevel");
         this.unconscious = nbt.getBoolean("Unconscious");
         this.tameTime = nbt.getInteger("TameTime");
+
+        NBTTagList itemsTag = nbt.getTagList("Items", 10);
+        inventory = new ItemStack[getSizeInventory()];
+
+        for (int i = 0; i < itemsTag.tagCount(); ++i)
+        {
+            NBTTagCompound slotTag = itemsTag.getCompoundTagAt(i);
+            int j = slotTag.getByte("Slot") & 255;
+
+            if (j >= 0 && j < inventory.length)
+            {
+                setInventorySlotContents(j, ItemStack.loadItemStackFromNBT(slotTag));
+            }
+        }
     }
 
     @Override
@@ -222,5 +255,146 @@ public class EntityARKCreature extends EntityCreature implements IEntityAddition
         nbt.setInteger("BaseLevel", baseLevel);
         nbt.setBoolean("Unconscous", unconscious);
         nbt.setInteger("TameTime", tameTime);
+
+        NBTTagList items = new NBTTagList();
+
+        for (int i = 0; i < inventory.length; ++i)
+        {
+            if (inventory[i] != null)
+            {
+                NBTTagCompound slotTag = new NBTTagCompound();
+                slotTag.setByte("Slot", (byte) i);
+                inventory[i].writeToNBT(slotTag);
+                items.appendTag(slotTag);
+            }
+        }
+
+        nbt.setTag("Items", items);
+    }
+
+    @Override
+    public int getSizeInventory()
+    {
+        return inventory.length;
+    }
+
+    @Override
+    public ItemStack getStackInSlot(int index)
+    {
+        return inventory[index];
+    }
+
+    @Override
+    public ItemStack decrStackSize(int index, int count)
+    {
+        if (inventory[index] != null)
+        {
+            ItemStack itemstack;
+
+            if (inventory[index].stackSize <= count)
+            {
+                itemstack = inventory[index];
+                setInventorySlotContents(index, null);
+                return itemstack;
+            }
+            else
+            {
+                itemstack = inventory[index].splitStack(count);
+
+                if (inventory[index].stackSize == 0)
+                {
+                    setInventorySlotContents(index, null);
+                }
+
+                return itemstack;
+            }
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    @Override
+    public ItemStack getStackInSlotOnClosing(int index)
+    {
+        if (inventory[index] != null)
+        {
+            ItemStack itemstack = inventory[index];
+            setInventorySlotContents(index, null);
+            return itemstack;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    @Override
+    public void setInventorySlotContents(int index, ItemStack stack)
+    {
+        inventory[index] = stack;
+
+        if (stack != null && stack.stackSize > getInventoryStackLimit())
+        {
+            stack.stackSize = getInventoryStackLimit();
+        }
+    }
+
+    @Override
+    public int getInventoryStackLimit()
+    {
+        return 64;
+    }
+
+    @Override
+    public void markDirty()
+    {}
+
+    @Override
+    public boolean isUseableByPlayer(EntityPlayer player)
+    {
+        return isDead ? false : player.getDistanceSqToEntity(this) <= 64.0D;
+    }
+
+    @Override
+    public void openInventory(EntityPlayer player)
+    {}
+
+    @Override
+    public void closeInventory(EntityPlayer player)
+    {}
+
+    @Override
+    public boolean isItemValidForSlot(int index, ItemStack stack)
+    {
+        return true;
+    }
+
+    @Override
+    public int getField(int id)
+    {
+        return 0;
+    }
+
+    @Override
+    public void setField(int id, int value)
+    {
+
+    }
+
+    @Override
+    public int getFieldCount()
+    {
+        return 0;
+    }
+
+    @Override
+    public void clear()
+    {
+        for (int i = 0; i < getSizeInventory(); i++)
+        {
+            setInventorySlotContents(i, null);
+        }
     }
 }

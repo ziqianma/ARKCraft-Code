@@ -40,4 +40,6 @@ public abstract class Creature
     {
         return days * 24000;
     }
+
+    public abstract int getInventorySize();
 }

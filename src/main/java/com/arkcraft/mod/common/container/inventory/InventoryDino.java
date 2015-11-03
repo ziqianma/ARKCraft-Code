@@ -1,6 +1,5 @@
 package com.arkcraft.mod.common.container.inventory;
 
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -17,10 +16,10 @@ public class InventoryDino extends InventoryBasic {
 		super(title, customName, slotCount);
 	}
 
-    public void loadInventoryFromNBT(NBTTagList nbt)  {
+    public void loadInventoryFromNBT(NBTTagList nbt) {
         int i;
         for (i = 0; i < this.getSizeInventory(); ++i) {
-            this.setInventorySlotContents(i, (ItemStack)null);
+            this.setInventorySlotContents(i, null);
         }
         for (i = 0; i < nbt.tagCount(); ++i) {
             NBTTagCompound nbttagcompound = nbt.getCompoundTagAt(i);
@@ -41,24 +40,8 @@ public class InventoryDino extends InventoryBasic {
                 nbttagcompound.setByte("Slot", (byte)i);
                 itemstack.writeToNBT(nbttagcompound);
                 nbttaglist.appendTag(nbttagcompound);
-//                LogHelper.info("DinoInventory: Saved a " + itemstack.getItem() + " to inventory.");
             }
         }
 		nbt.setTag("Items", nbttaglist);
     }
-
-    /**
-     * Do not give this method the name canInteractWith because it clashes with Container
-     */
-    public boolean isUseableByPlayer(EntityPlayer player) {
-        return super.isUseableByPlayer(player);
-    }
-
-    public void openInventory(EntityPlayer player)  {
-        super.openInventory(player);
-    }
-
-    public void closeInventory(EntityPlayer player) {
-        super.closeInventory(player);
-    }    
 }
