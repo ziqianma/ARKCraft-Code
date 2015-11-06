@@ -63,6 +63,8 @@ public class ARKCraftItems
 	public static ItemBerryBush item_berry_bush;
 	public static ItemCompostBin item_compost_bin;
 	public static ItemSmithy item_smithy;
+	public static ItemCropPlot item_crop_plot;
+	public static ItemMortarAndPestle item_mortar_and_pestle;
 	public static ItemSpyGlass spy_glass;
 
 	// Weapons
@@ -135,6 +137,8 @@ public class ARKCraftItems
 		item_berry_bush = addBushItem("item_berry_bush");
 		item_compost_bin = addCompostBinItem("item_compost_bin");
 		item_smithy = addSmithyItem("item_smithy");
+		item_crop_plot = addCropPlot("item_crop_plot");
+		item_mortar_and_pestle = addMortarAndPestle("item_mortar_and_pestle");
 		
 		//Bows
 		compound_bow = new ItemCompoundBow();
@@ -307,6 +311,18 @@ public class ARKCraftItems
 	
 	protected static ItemSmithy addSmithyItem(String name) {
 		ItemSmithy i = new ItemSmithy();
+		registerItem(name, i);
+		return i;
+	}
+	
+	protected static ItemCropPlot addCropPlot(String name) {
+		ItemCropPlot i = new ItemCropPlot();
+		registerItem(name, i);
+		return i;
+	}
+	
+	protected static ItemMortarAndPestle addMortarAndPestle(String name) {
+		ItemMortarAndPestle i = new ItemMortarAndPestle();
 		registerItem(name, i);
 		return i;
 	}

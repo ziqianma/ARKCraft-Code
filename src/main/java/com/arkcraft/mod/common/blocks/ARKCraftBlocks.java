@@ -90,6 +90,7 @@ public class ARKCraftBlocks
 		container.setRenderAsNormalBlock(renderAsNormalBlock);
 		container.setOpaque(isOpaque);
 		container.setRenderType(renderType);
+		allBlocks.put(name, container);
 		registerBlockNoTab(container, name);
 		return container;
 	}
@@ -100,7 +101,7 @@ public class ARKCraftBlocks
 		container.setOpaque(isOpaque);
 		container.setRenderType(renderType);
 		allBlocks.put(name, container);
-		registerBlock(container, name);
+		registerBlockNoTab(container, name);
 		return container;
 	}
 	
@@ -109,7 +110,7 @@ public class ARKCraftBlocks
 		container.setOpaque(isOpaque);
 		container.setRenderType(renderType);
 		allBlocks.put(name, container);
-		registerBlock(container, name);
+		registerBlockNoTab(container, name);
 		return container;
 	}
 	

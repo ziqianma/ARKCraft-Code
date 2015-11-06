@@ -1,7 +1,9 @@
 package com.arkcraft.mod.common.blocks;
 
 import com.arkcraft.mod.common.ARKCraft;
+import com.arkcraft.mod.common.items.ARKCraftItems;
 import com.arkcraft.mod.common.tile.TileInventoryMP;
+
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -59,10 +61,11 @@ public class BlockMortarAndPestle extends BlockContainer {
 	public void setRenderAsNormalBlock(boolean b) { render = b; }
 	public boolean renderAsNormalBlock() { return render; }
 
+	
 	@SideOnly(Side.CLIENT)
     public Item getItem(World worldIn, BlockPos pos){
-		return Items.redstone;
-	}
+		return ARKCraftItems.item_mortar_and_pestle;
+	}	
 
     /**
      * Returns randomly, about 1/2 of the recipe items

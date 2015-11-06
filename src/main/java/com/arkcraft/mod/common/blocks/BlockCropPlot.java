@@ -1,7 +1,9 @@
 package com.arkcraft.mod.common.blocks;
 
 import com.arkcraft.mod.common.ARKCraft;
+import com.arkcraft.mod.common.items.ARKCraftItems;
 import com.arkcraft.mod.common.tile.TileInventoryCropPlot;
+
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -71,7 +73,7 @@ public class BlockCropPlot extends BlockContainer {
 
 	@SideOnly(Side.CLIENT)
     public Item getItem(World worldIn, BlockPos pos){
-		return Items.redstone;
+		return ARKCraftItems.item_crop_plot;
 	}
 	
 	@SideOnly(Side.CLIENT)
