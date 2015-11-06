@@ -1,7 +1,7 @@
 {
     "parent":"builtin/generated",
     "textures": {
-        "layer0":"arkcraft:items/bone_chest"
+        "layer0":"arkcraft:items/hide"
     },
     "display": {
         "thirdperson": {

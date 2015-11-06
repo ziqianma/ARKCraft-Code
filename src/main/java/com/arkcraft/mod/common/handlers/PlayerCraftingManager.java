@@ -106,21 +106,17 @@ public class PlayerCraftingManager extends ARKCraftingManager{
 //				);
 		
 		// TODO: Might want to move these to the Smithy!
-		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.boneChest, 1),
-				new ItemStack(Items.bone, 16),
-				new ItemStack(ARKCraftItems.chitin, 8) // Should be large bone
+		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.leatherBoots, 1),
+				new ItemStack(ARKCraftItems.hide, 8) 
 				);
-		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.boneLegs, 1),
-				new ItemStack(Items.bone, 16),
-				new ItemStack(ARKCraftItems.chitin, 7) // Should be large bone
+		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.leatherLegs, 1),
+				new ItemStack(ARKCraftItems.hide, 7) 
 				);
-		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.boneHelm, 1),
-				new ItemStack(Items.bone, 5), // Should be T-Rex Skull
-				new ItemStack(ARKCraftItems.chitin, 5) // Should be large bone
+		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.leatherChest, 1),
+				new ItemStack(ARKCraftItems.hide, 5) 
 				);
-		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.boneBoots, 1),
-				new ItemStack(Items.bone, 16),
-				new ItemStack(ARKCraftItems.chitin, 7) // Should be large bone
+		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.leatherChest, 1),
+				new ItemStack(ARKCraftItems.hide, 7) 
 				);
 	}
 }

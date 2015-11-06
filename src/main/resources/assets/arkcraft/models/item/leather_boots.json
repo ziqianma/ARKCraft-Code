@@ -1,7 +1,7 @@
 {
     "parent":"builtin/generated",
     "textures": {
-        "layer0":"arkcraft:items/bone_helm"
+        "layer0":"arkcraft:items/leather_boots"
     },
     "display": {
         "thirdperson": {

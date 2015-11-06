@@ -7,6 +7,7 @@ import com.arkcraft.mod.common.handlers.EntityHandler;
 import com.arkcraft.mod.common.items.weapons.ItemCompoundBow;
 import com.arkcraft.mod.common.items.weapons.ItemSpear;
 import com.arkcraft.mod.common.items.weapons.ItemSpyGlass;
+import com.arkcraft.mod.common.items.weapons.ItemWoodenClub;
 import com.arkcraft.mod.common.items.weapons.bullets.ItemProjectile;
 import com.arkcraft.mod.common.items.weapons.ItemRangedWeapon;
 import com.arkcraft.mod.common.items.weapons.component.RangedCompCrossbow;
@@ -31,6 +32,7 @@ import com.arkcraft.mod.common.entity.item.projectiles.dispense.DispenseSimpleRi
 import com.arkcraft.mod.common.entity.item.projectiles.dispense.DispenseSimpleShotgunAmmo;
 import com.arkcraft.mod.common.entity.item.projectiles.dispense.DispenseTranquilizer;
 import com.arkcraft.mod.common.lib.BALANCE;
+
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
@@ -50,7 +52,7 @@ public class ARKCraftItems
 {
 	public static ItemARKFood tintoBerry, amarBerry, azulBerry, mejoBerry, narcoBerry, stimBerry, meat_raw, meat_cooked, primemeat_raw, primemeat_cooked;
 	public static ItemARKSeed tintoBerrySeed, amarBerrySeed, azulBerrySeed, mejoBerrySeed, narcoBerrySeed, stimBerrySeed;
-	public static ItemARKBase rock, fiber, chitin, narcotics, explosive_ball, dodo_bag, dodo_feather, gun_powder, spark_powder;
+	public static ItemARKBase rock, fiber, chitin, narcotics, explosive_ball, dodo_bag, dodo_feather, gun_powder, spark_powder, hide;
 	public static ItemThatch thatch;
 	public static ItemARKBase wood, metal, metal_ingot;
 	public static ItemFeces dodo_feces, player_feces, fertilizer;
@@ -58,7 +60,7 @@ public class ARKCraftItems
 	public static ItemDinosaurSaddle saddle_small, saddle_medium, saddle_large;
 	public static ItemARKArmor chitinHelm, chitinChest, chitinLegs, chitinBoots;
 	public static ItemARKArmor clothHelm, clothChest, clothLegs, clothBoots;
-	public static ItemARKArmor boneHelm, boneChest, boneLegs, boneBoots;
+	public static ItemARKArmor leatherHelm, leatherChest, leatherLegs, leatherBoots;
 	public static Dossier dino_book;
 	public static ItemBerryBush item_berry_bush;
 	public static ItemCompostBin item_compost_bin;
@@ -71,6 +73,7 @@ public class ARKCraftItems
 	public static ItemSlingshot slingshot;
 	public static ItemARKWeaponBase ironPike;
 	public static ItemSpear spear;
+	public static ItemWoodenClub wooden_club;
 	public static ItemRangedWeapon tranq_gun;
 	public static ItemCompoundBow compound_bow;
 	public static ItemRangedWeapon rocket_launcher;
@@ -131,6 +134,7 @@ public class ARKCraftItems
 		dodo_bag = addItem("dodo_bag");
 		gun_powder = addItem("gun_powder");
 		spark_powder = addItem("spark_powder");
+		hide = addItem("hide");
 		spy_glass = addSpyGlass("spy_glass", new RangedCompSpyGlass());
 		
 		//Block Items
@@ -149,7 +153,8 @@ public class ARKCraftItems
 	//	stone_arrow = addItemProjectile("stone_arrow");
 	//	metal_arrow = addItemProjectile("metal_arrow");
 		
-		spear = addSpearItem("spear", ToolMaterial.STONE);
+		spear = addSpearItem("spear", ToolMaterial.WOOD);
+		wooden_club = addWoodenClub("wooden_club", ToolMaterial.WOOD);
 		
 		// feces (2nd parameter is the seconds to decompose)
 		dodo_feces = addFecesItem("dodo_feces", BALANCE.CROP_PLOT.SECONDS_FOR_SMALL_FECES_TO_DECOMPOSE);
@@ -175,10 +180,10 @@ public class ARKCraftItems
 		clothChest = addArmorItem("cloth_chest", CLOTH, "clothArmor", 1, false);
 		clothLegs = addArmorItem("cloth_legs", CLOTH, "clothArmor", 2, false);
 		clothBoots = addArmorItem("cloth_boots", CLOTH, "clothArmor", 3, false);
-		boneHelm = addArmorItem("bone_helm", BONE, "boneArmor", 0, true);
-		boneChest = addArmorItem("bone_chest", BONE, "boneArmor", 1, true);
-		boneLegs = addArmorItem("bone_legs", BONE, "boneArmor", 2, true);
-		boneBoots = addArmorItem("bone_boots", BONE, "boneArmor", 3, true);
+		leatherHelm = addArmorItem("leather_helm", BONE, "leatherArmor", 0, true);
+		leatherChest = addArmorItem("leather_chest", BONE, "leatherArmor", 1, true);
+		leatherLegs = addArmorItem("leather_legs", BONE, "leatherArmor", 2, true);
+		leatherBoots = addArmorItem("leather_boots", BONE, "leatherArmor", 3, true);
 		
 		registerDispenseBehavior();
 		registerWeaponEntities();
@@ -335,6 +340,12 @@ public class ARKCraftItems
 	
 	public static ItemSpear addSpearItem(String name, ToolMaterial mat) {
 		ItemSpear weapon = new ItemSpear(mat);
+		registerItem(name, weapon);
+		return weapon;
+	}
+	
+	public static ItemWoodenClub addWoodenClub(String name, ToolMaterial mat) {
+		ItemWoodenClub weapon = new ItemWoodenClub(mat);
 		registerItem(name, weapon);
 		return weapon;
 	}

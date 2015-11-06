@@ -34,10 +34,10 @@ item.cloth_helm.name=Cloth Hat
 item.cloth_chest.name=Cloth Shirt
 item.cloth_legs.name=Cloth Pants
 item.cloth_boots.name=Cloth Shoes
-item.bone_helm.name=Dino Bone Helmet
-item.bone_chest.name=Dino Bone Chestplate
-item.bone_legs.name=Dino Bone Leggings
-item.bone_boots.name=Dino Bone Boots
+item.leather_helm.name=Dino Bone Helmet
+item.leather_chest.name=Dino Bone Chestplate
+item.leather_legs.name=Dino Bone Leggings
+item.leather_boots.name=Dino Bone Boots
 item.tranq_arrow.name=Tranquilizer Arrow
 item.slingshot.name=Slingshot
 item.ironPike.name=Iron Pike
@@ -84,7 +84,10 @@ item.item_mortar_and_pestle.name=Mortar and Pestle
 item.item_smithy.name=Smithy
 item.wood.name=Wood
 item.metal.name=Metal
+item.hide.name=Hide
 item.metal_ingot.name=Metal Ingot
+item.wooden_club.name=Wooden Club
+
 
 # Miscellaneous
 itemGroup.tabARKCraft=ARKCraft: Survival Evolved
@@ -133,10 +136,10 @@ item.wood.tooltip=%6Material of the Ages
 item.metal.tooltip=%6Material of the Ages
 item.metal_ingot.tooltip=%6Material of the Ages
 
-item.bone_helm.tooltip=%4Armor of the Ancients
-item.bone_chest.tooltip=%4Armor of the Ancients
-item.bone_legs.tooltip=%4Armor of the Ancients
-item.bone_boots.tooltip=%4Armor of the Ancients
+item.leather_helm.tooltip=%4Armor of the Ancients
+item.leather_chest.tooltip=%4Armor of the Ancients
+item.leather_legs.tooltip=%4Armor of the Ancients
+item.leather_boots.tooltip=%4Armor of the Ancients
 
 item.chitin_helm.tooltip=%oArmor, Made to Fit
 item.chitin_chest.tooltip=%oArmor, Made to Fit

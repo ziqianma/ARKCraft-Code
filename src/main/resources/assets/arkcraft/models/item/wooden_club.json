@@ -1,7 +1,7 @@
 {
     "parent":"builtin/generated",
     "textures": {
-        "layer0":"arkcraft:items/spear"
+        "layer0":"arkcraft:items/wooden_club"
     },
     "display": {
         "thirdperson": {
