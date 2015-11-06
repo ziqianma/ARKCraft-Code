@@ -155,7 +155,7 @@ public class ContainerInventoryDino extends Container {
 		@Override
 		public boolean isItemValid(ItemStack stack) {
 			if (stack != null){
-				if (stack.getItem() == ((InventorySaddle)inventory).entityDino.saddleType.getSaddleItem())
+//				if (stack.getItem() == ((InventorySaddle)inventory).entityDino.saddleType.getSaddleItem()) TODO
 					return true;
 			}
 			return false;

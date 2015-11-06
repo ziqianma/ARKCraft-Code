@@ -90,7 +90,7 @@ public abstract class EntityTameableDinosaur extends EntityTameable {
 		this.invTamedDino = new InventoryDino("Items", true, saddleType.getInventorySize());
 		this.invTaming = new InventoryTaming(this);
 		this.saddleType = saddleType;
-		this.invSaddle = new InventorySaddle(this);
+		this.invSaddle = new InventorySaddle();
 	}
 	
 	// Use this constructor if you want to create a dino that is not tameable
@@ -103,7 +103,7 @@ public abstract class EntityTameableDinosaur extends EntityTameable {
         	this.tamingSeconds = tamingSeconds; // This must be before the InventoryTaming
         	this.invTamedDino = new InventoryDino("Items", true, saddleType.getInventorySize());
         	this.invTaming = new InventoryTaming(this);
-    		this.invSaddle = new InventorySaddle(this);
+    		this.invSaddle = new InventorySaddle();
         }
         
         // Stuff for when tamed
