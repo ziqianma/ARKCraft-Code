@@ -14,9 +14,11 @@ import com.arkcraft.mod.common.handlers.PestleCraftingManager;
 import com.arkcraft.mod.common.handlers.PlayerCraftingManager;
 import com.arkcraft.mod.common.handlers.RecipeHandler;
 import com.arkcraft.mod.common.handlers.SmithyCraftingManager;
+import com.arkcraft.mod.common.entity.item.projectiles.EntityGrenade;
 import com.arkcraft.mod.common.entity.item.projectiles.EntitySpear;
 import com.arkcraft.mod.common.lib.BALANCE;
 import com.arkcraft.mod.common.lib.KeyBindings;
+
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.monster.EntityCaveSpider;
@@ -65,6 +67,7 @@ public class GlobalAdditions {
 
 		EntityHandler.registerModEntity(EntityCobble.class, "Cobblestone Ball", ARKCraft.instance, 64, 10, true);
 		EntityHandler.registerModEntity(EntityDodoEgg.class, "Dodo Egg", ARKCraft.instance, 64, 10, true);
+		EntityHandler.registerModEntity(EntityGrenade.class, "Grenade", ARKCraft.instance, 64, 10, true);
 		
 		EntityHandler.registerEntityEgg(EntityRaptor.class, "raptor", BiomeGenBase.icePlains);
 		EntityHandler.registerEntityEgg(EntityDodo.class, "dodo", BiomeGenBase.beach, BiomeGenBase.desert, BiomeGenBase.forest, BiomeGenBase.birchForest, BiomeGenBase.extremeHills);
