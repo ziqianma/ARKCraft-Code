@@ -87,6 +87,7 @@ item.metal.name=Metal
 item.hide.name=Hide
 item.metal_ingot.name=Metal Ingot
 item.wooden_club.name=Wooden Club
+item.grenade.name=Grenade
 
 
 # Miscellaneous

@@ -68,6 +68,7 @@ public class ARKCraftItems
 	public static ItemCropPlot item_crop_plot;
 	public static ItemMortarAndPestle item_mortar_and_pestle;
 	public static ItemSpyGlass spy_glass;
+	public static ItemGrenade grenade;
 
 	// Weapons
 	public static ItemSlingshot slingshot;
@@ -120,6 +121,7 @@ public class ARKCraftItems
 		rock = addItem("rock");
 		explosive_ball = addItem("explosive_ball");
 		slingshot = addSlingshot("slingshot");
+		grenade = addGrenade("grenade");
 		//stoneSpear = addWeaponThrowable("stoneSpear", ToolMaterial.STONE);
 		ironPike = addWeapon("ironPike", ToolMaterial.IRON);
 
@@ -274,6 +276,12 @@ public class ARKCraftItems
 
 	protected static ItemSlingshot addSlingshot(String name) {
 		ItemSlingshot slingshot = new ItemSlingshot();
+		registerItem(name, slingshot);
+		return slingshot;
+	}
+	
+	protected static ItemGrenade addGrenade(String name) {
+		ItemGrenade slingshot = new ItemGrenade();
 		registerItem(name, slingshot);
 		return slingshot;
 	}
