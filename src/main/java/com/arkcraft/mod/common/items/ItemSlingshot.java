@@ -1,14 +1,14 @@
 package com.arkcraft.mod.common.items;
 
-import com.arkcraft.mod.common.ARKCraft;
-import com.arkcraft.mod.common.entity.EntityCobble;
-import com.arkcraft.mod.common.entity.EntityExplosive;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagLong;
 import net.minecraft.world.World;
+
+import com.arkcraft.mod.common.ARKCraft;
+import com.arkcraft.mod.common.entity.EntityCobble;
 
 public class ItemSlingshot extends Item {
 
@@ -27,11 +27,12 @@ public class ItemSlingshot extends Item {
 				if (!w.isRemote)
 					w.spawnEntityInWorld(new EntityCobble(w, p));
 			}
-			else if(p.capabilities.isCreativeMode || p.inventory.consumeInventoryItem(ARKCraftItems.explosive_ball)) {
+		/*	else if(p.capabilities.isCreativeMode || p.inventory.consumeInventoryItem(ARKCraftItems.explosive_ball)) {
 				setLastUseTime(stack, w.getTotalWorldTime());
 				w.playSoundAtEntity(p, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
-				if(!w.isRemote) w.spawnEntityInWorld(new EntityExplosive(w,p));
-			}
+				if(!w.isRemote) w.spawnEntityInWorld(new EntityExplosive(w,p));	
+				}	*/
+			
 		return super.onItemRightClick(stack, w, p);
 	}
 

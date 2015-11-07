@@ -1,24 +1,5 @@
 package com.arkcraft.mod;
 
-import com.arkcraft.mod.common.ARKCraft;
-import com.arkcraft.mod.common.creativetabs.ARKTabs;
-import com.arkcraft.mod.common.entity.EntityCobble;
-import com.arkcraft.mod.common.entity.EntityDodoEgg;
-import com.arkcraft.mod.common.entity.EntityExplosive;
-import com.arkcraft.mod.common.entity.aggressive.EntityRaptor;
-import com.arkcraft.mod.common.entity.neutral.EntityBrontosaurus;
-import com.arkcraft.mod.common.entity.passive.EntityDodo;
-import com.arkcraft.mod.common.handlers.EntityHandler;
-import com.arkcraft.mod.common.handlers.GuiHandler;
-import com.arkcraft.mod.common.handlers.PestleCraftingManager;
-import com.arkcraft.mod.common.handlers.PlayerCraftingManager;
-import com.arkcraft.mod.common.handlers.RecipeHandler;
-import com.arkcraft.mod.common.handlers.SmithyCraftingManager;
-import com.arkcraft.mod.common.entity.item.projectiles.EntityGrenade;
-import com.arkcraft.mod.common.entity.item.projectiles.EntitySpear;
-import com.arkcraft.mod.common.lib.BALANCE;
-import com.arkcraft.mod.common.lib.KeyBindings;
-
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.monster.EntityCaveSpider;
@@ -32,6 +13,24 @@ import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
+
+import com.arkcraft.mod.common.ARKCraft;
+import com.arkcraft.mod.common.creativetabs.ARKTabs;
+import com.arkcraft.mod.common.entity.EntityCobble;
+import com.arkcraft.mod.common.entity.EntityDodoEgg;
+import com.arkcraft.mod.common.entity.aggressive.EntityRaptor;
+import com.arkcraft.mod.common.entity.item.projectiles.EntityGrenade;
+import com.arkcraft.mod.common.entity.item.projectiles.EntitySpear;
+import com.arkcraft.mod.common.entity.neutral.EntityBrontosaurus;
+import com.arkcraft.mod.common.entity.passive.EntityDodo;
+import com.arkcraft.mod.common.handlers.EntityHandler;
+import com.arkcraft.mod.common.handlers.GuiHandler;
+import com.arkcraft.mod.common.handlers.PestleCraftingManager;
+import com.arkcraft.mod.common.handlers.PlayerCraftingManager;
+import com.arkcraft.mod.common.handlers.RecipeHandler;
+import com.arkcraft.mod.common.handlers.SmithyCraftingManager;
+import com.arkcraft.mod.common.lib.BALANCE;
+import com.arkcraft.mod.common.lib.KeyBindings;
 
 /**
  * @author Vastatio
@@ -58,7 +57,6 @@ public class GlobalAdditions {
 		PestleCraftingManager.registerPestleCraftingRecipes();
 		SmithyCraftingManager.registerSmithyCraftingRecipes();
 		PlayerCraftingManager.registerPlayerCraftingRecipes();
-		EntityHandler.registerModEntity(EntityExplosive.class, "Explosive Cobblestone Ball", ARKCraft.instance, 64, 10, true);
 		
 		EntityHandler.registerModEntity(EntitySpear.class, "Spear", ARKCraft.instance, 64, 10, true);
 //		EntityHandler.registerModEntity(EntityTranqArrow.class, "Tranq Arrow", ARKCraft.instance, 64, 10, true);

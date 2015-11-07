@@ -52,7 +52,7 @@ public class ARKCraftItems
 {
 	public static ItemARKFood tintoBerry, amarBerry, azulBerry, mejoBerry, narcoBerry, stimBerry, meat_raw, meat_cooked, primemeat_raw, primemeat_cooked;
 	public static ItemARKSeed tintoBerrySeed, amarBerrySeed, azulBerrySeed, mejoBerrySeed, narcoBerrySeed, stimBerrySeed;
-	public static ItemARKBase rock, fiber, chitin, narcotics, explosive_ball, dodo_bag, dodo_feather, gun_powder, spark_powder, hide;
+	public static ItemARKBase rock,cementing_pastes, fiber, chitin, narcotics, dodo_bag, dodo_feather, gun_powder, spark_powder, hide;
 	public static ItemThatch thatch;
 	public static ItemARKBase wood, metal, metal_ingot;
 	public static ItemFeces dodo_feces, player_feces, fertilizer;
@@ -119,7 +119,7 @@ public class ARKCraftItems
 		
 		// Weapons and tools
 		rock = addItem("rock");
-		explosive_ball = addItem("explosive_ball");
+		cementing_pastes = addItem("cementing_paste");
 		slingshot = addSlingshot("slingshot");
 		grenade = addGrenade("grenade");
 		//stoneSpear = addWeaponThrowable("stoneSpear", ToolMaterial.STONE);

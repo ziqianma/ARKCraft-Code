@@ -103,10 +103,6 @@ public class SmithyCraftingManager extends ARKCraftingManager{
 				new ItemStack(Items.diamond, 4),
 				new ItemStack(Items.redstone, 16)
 				);
-		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.explosive_ball, 1),
-				new ItemStack(Items.iron_ingot, 3),
-				new ItemStack(Items.gunpowder, 4)
-				);
 		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.tranq_gun, 1),
 				new ItemStack(Items.iron_ingot, 7),
 				new ItemStack(Blocks.log, 10, ARKShapelessRecipe.ANY), // Any Wood
