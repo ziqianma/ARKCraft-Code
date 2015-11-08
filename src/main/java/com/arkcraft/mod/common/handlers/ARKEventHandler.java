@@ -126,38 +126,32 @@ public class ARKEventHandler {
 	
     @SubscribeEvent
     public void onMouseEvent(MouseEvent evt) {
-    	
     	 Minecraft mc = Minecraft.getMinecraft();
 	     EntityPlayer thePlayer = mc.thePlayer;
 	     
-        if (thePlayer != null && evt.button == 0) 
-        {
+        if (thePlayer != null && evt.button == 0) {
         	LogHelper.info("mouse down");
 	     	ItemStack stack = thePlayer.getCurrentEquippedItem();
-	     	if (stack != null)
-        	{
+	     	if (stack != null){
 		        IItemWeapon i_item_weapon;
-		        if (stack.getItem() instanceof IItemWeapon)
-	            {
+		        if (stack.getItem() instanceof IItemWeapon){
 		        	i_item_weapon = (IItemWeapon) stack.getItem();
 	            } 
-		        else
-	            {
+		        else{
 		        	i_item_weapon = null;
 	            }
-	     	     if (i_item_weapon != null)
-	             {
+		        // Weapon with scope?
+	     	    if (i_item_weapon != null && i_item_weapon.getReach()){
 	     	    	if (evt.buttonstate)
 	     	    		ShowScopeOverlap = true;
-	     	    		
-	                	
 	     	    	else
 	     	    		ShowScopeOverlap = false;
 	                evt.setCanceled(true);
-	             }
+	            }
         	}
         }
     }
+    
     @SubscribeEvent
     public void onFOVUpdate(FOVUpdateEvent evt) {
         if (mc.gameSettings.thirdPersonView == 0 && ShowScopeOverlap) {
@@ -184,9 +178,7 @@ public class ARKEventHandler {
 	}
 	
 	@SubscribeEvent
-    public void Holding(RenderLivingEvent.Pre event)
-    {
-		
+    public void Holding(RenderLivingEvent.Pre event){
 		//!event.isCanceled() & 
     	Minecraft mc = Minecraft.getMinecraft();
 	    EntityPlayer thePlayer = mc.thePlayer;
@@ -195,7 +187,7 @@ public class ARKEventHandler {
         	ItemStack stack = thePlayer.getCurrentEquippedItem();
         	if (stack != null)
         	{
-        		 IItemWeapon i_item_weapon;
+        		IItemWeapon i_item_weapon;
  		        if (stack.getItem() instanceof IItemWeapon)
  	            {
  		        	i_item_weapon = (IItemWeapon) stack.getItem();

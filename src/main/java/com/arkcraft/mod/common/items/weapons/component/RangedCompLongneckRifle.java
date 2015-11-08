@@ -11,8 +11,7 @@ import net.minecraft.world.World;
 
 public class RangedCompLongneckRifle extends RangedComponent
 {
-
-	public RangedCompLongneckRifle(int ID)
+	public RangedCompLongneckRifle()
 	{
 		super(RangedSpecs.LONGNECKRIFLE);
 	}
@@ -33,22 +32,21 @@ public class RangedCompLongneckRifle extends RangedComponent
 	@Override
 	public void fire(ItemStack itemstack, World world, EntityPlayer entityplayer, int i)
 	{
-		
 		if (!world.isRemote)
 		{
 			EntitySimpleRifleAmmo entityprojectile = new EntitySimpleRifleAmmo(world, entityplayer, 1F);
 			applyProjectileEnchantments(entityprojectile, itemstack);
 			world.spawnEntityInWorld(entityprojectile);
 		}
-			int damage = 1;
-			if (itemstack.getItemDamage() + damage <= itemstack.getMaxDamage())
-			{
-				setReloadState(itemstack, ReloadHelper.STATE_NONE);
-			}
-
-			itemstack.damageItem(damage, entityplayer);
-			postShootingEffects(itemstack, entityplayer, world);
+		int damage = 1;
+		if (itemstack.getItemDamage() + damage <= itemstack.getMaxDamage())
+		{
+			setReloadState(itemstack, ReloadHelper.STATE_NONE);
 		}
+
+		itemstack.damageItem(damage, entityplayer);
+		postShootingEffects(itemstack, entityplayer, world);
+	}
 
 	@Override
 	public void effectPlayer(ItemStack itemstack, EntityPlayer entityplayer, World world)
@@ -79,8 +77,6 @@ public class RangedCompLongneckRifle extends RangedComponent
 	
 	@Override
 	public boolean getReach() {
-
-	return true;
+		return false;
 	}
-
 }

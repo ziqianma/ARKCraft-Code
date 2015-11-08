@@ -12,9 +12,11 @@ import com.arkcraft.mod.common.items.weapons.bullets.ItemProjectile;
 import com.arkcraft.mod.common.items.weapons.ItemRangedWeapon;
 import com.arkcraft.mod.common.items.weapons.component.RangedCompCrossbow;
 import com.arkcraft.mod.common.items.weapons.component.RangedCompLongneckRifle;
+import com.arkcraft.mod.common.items.weapons.component.RangedCompLongneckRifleScoped;
 import com.arkcraft.mod.common.items.weapons.component.RangedCompRocketLauncher;
 import com.arkcraft.mod.common.items.weapons.component.RangedCompShotgun;
 import com.arkcraft.mod.common.items.weapons.component.RangedCompSimplePistol;
+import com.arkcraft.mod.common.items.weapons.component.RangedCompSimplePistolScoped;
 import com.arkcraft.mod.common.items.weapons.component.RangedCompSpyGlass;
 import com.arkcraft.mod.common.items.weapons.component.RangedCompTranqGun;
 import com.arkcraft.mod.common.items.weapons.component.RangedComponent;
@@ -80,8 +82,8 @@ public class ARKCraftItems
 	public static ItemRangedWeapon rocket_launcher;
 	public static ItemProjectile tranquilizer, stone_arrow, tranq_arrow, metal_arrow;
 	public static ItemProjectile simple_bullet, simple_rifle_ammo, simple_shotgun_ammo, rocket_propelled_grenade;
-	public static ItemRangedWeapon simple_pistol;
-	public static ItemRangedWeapon longneck_rifle;
+	public static ItemRangedWeapon simple_pistol, simple_pistol_scoped;
+	public static ItemRangedWeapon longneck_rifle, longneck_rifle_scoped;
 	public static ItemRangedWeapon shotgun;
 	public static ItemRangedWeapon crossbow;
 
@@ -218,10 +220,12 @@ public class ARKCraftItems
 	public static void addGunPowderWeapons(){
 		if (BALANCE.WEAPONS.SIMPLE_PISTOL) {
 			simple_pistol = addShooter("simple_pistol", new RangedCompSimplePistol());
+			simple_pistol_scoped = addShooter("simple_pistol_scoped", new RangedCompSimplePistolScoped());
 			simple_bullet = addItemProjectile("simple_bullet");
 		}
 		if (BALANCE.WEAPONS.LONGNECK_RIFLE) {
-			longneck_rifle = addShooter("longneck_rifle", new RangedCompLongneckRifle(GlobalAdditions.GUI.SCOPE.getID()));
+			longneck_rifle = addShooter("longneck_rifle", new RangedCompLongneckRifle());
+			longneck_rifle_scoped = addShooter("longneck_rifle_scoped", new RangedCompLongneckRifleScoped(GlobalAdditions.GUI.SCOPE.getID()));
 			simple_rifle_ammo = addItemProjectile("simple_rifle_ammo");
 		}
 		if (BALANCE.WEAPONS.SHOTGUN) {

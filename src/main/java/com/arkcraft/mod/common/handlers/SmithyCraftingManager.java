@@ -90,6 +90,24 @@ public class SmithyCraftingManager extends ARKCraftingManager{
 		);
 
 		// Weapons
+		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.simple_pistol, 1),
+				new ItemStack(Items.iron_ingot, 20),
+				new ItemStack(Blocks.log, 2, ARKShapelessRecipe.ANY), // Any Wood
+				new ItemStack(ARKCraftItems.hide, 5)
+				);
+		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.simple_pistol_scoped, 1),
+				new ItemStack(ARKCraftItems.simple_pistol, 1),
+				new ItemStack(ARKCraftItems.spy_glass, 1)
+				);
+		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.longneck_rifle, 1),
+				new ItemStack(Items.iron_ingot, 32),
+				new ItemStack(Blocks.log, 7, ARKShapelessRecipe.ANY), // Any Wood
+				new ItemStack(ARKCraftItems.hide, 8)
+				);
+		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.longneck_rifle_scoped, 1),
+				new ItemStack(ARKCraftItems.longneck_rifle, 1),
+				new ItemStack(ARKCraftItems.spy_glass, 1)
+				);
 		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.longneck_rifle, 1),
 				new ItemStack(Items.iron_ingot, 32),
 				new ItemStack(Blocks.glass, 1)
