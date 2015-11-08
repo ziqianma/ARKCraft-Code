@@ -71,6 +71,10 @@ public class ARKCraftItems
 	public static ItemMortarAndPestle item_mortar_and_pestle;
 	public static ItemSpyGlass spy_glass;
 	public static ItemGrenade grenade;
+	public static ItemStonePick stone_pick;
+	public static ItemStoneHatchet stone_hatchet;
+	public static ItemMetalPick	metal_pick;
+	public static ItemMetalHatchet metal_hatchet;
 
 	// Weapons
 	public static ItemSlingshot slingshot;
@@ -90,6 +94,10 @@ public class ARKCraftItems
 	public static ArmorMaterial CLOTH = EnumHelper.addArmorMaterial("CLOTH_MAT", "CLOTH_MAT", 4, new int[] {1,2,1,1}, 15);
 	public static ArmorMaterial CHITIN = EnumHelper.addArmorMaterial("CHITIN_MAT", "CHITIN_MAT", 16, new int[] { 3,7,6,3 } , 10);
 	public static ArmorMaterial BONE = EnumHelper.addArmorMaterial("BONE_MAT", "BONE_MAT", 40, new int[] { 3, 8, 6, 3 }, 30);
+	
+	public static ToolMaterial METAL = EnumHelper.addToolMaterial("METAL_MAT", 3, 1500, 6.0F, 0.8F, 8);
+	public static ToolMaterial STONE = EnumHelper.addToolMaterial("STONE_MAT", 2, 500, 3.5F, 0.4F, 13);
+
 	
 	public static ARKCraftItems getInstance() { return new ARKCraftItems(); }
 	
@@ -126,6 +134,11 @@ public class ARKCraftItems
 		grenade = addGrenade("grenade");
 		//stoneSpear = addWeaponThrowable("stoneSpear", ToolMaterial.STONE);
 		ironPike = addWeapon("ironPike", ToolMaterial.IRON);
+		
+		metal_pick = addMetalPick("metal_pick", METAL);
+		metal_hatchet = addMetalHatchet("metal_hatchet", METAL);
+		stone_hatchet = addStoneHatchet("stone_hatchet", STONE);
+		stone_pick = addStonePick("stone_pick", STONE);
 
 		// Regular Items
 		fiber = addItem("fiber");
@@ -300,6 +313,30 @@ public class ARKCraftItems
 		ItemThatch t = new ItemThatch();
 		registerItem(name, t);
 		return t;
+	}
+	
+	protected static ItemMetalPick addMetalPick(String name, ToolMaterial m) {
+		ItemMetalPick i = new ItemMetalPick(m);
+		registerItem(name, i);
+		return i;
+	}
+	
+	protected static ItemStonePick addStonePick(String name, ToolMaterial m) {
+		ItemStonePick i = new ItemStonePick(m);
+		registerItem(name, i);
+		return i;
+	}
+	
+	protected static ItemStoneHatchet addStoneHatchet(String name, ToolMaterial m) {
+		ItemStoneHatchet i = new ItemStoneHatchet(m);
+		registerItem(name, i);
+		return i;
+	}
+	
+	protected static ItemMetalHatchet addMetalHatchet(String name, ToolMaterial m) {
+		ItemMetalHatchet i = new ItemMetalHatchet(m);
+		registerItem(name, i);
+		return i;
 	}
 	
 	protected static ItemARKSeed addSeedItem(String name) {

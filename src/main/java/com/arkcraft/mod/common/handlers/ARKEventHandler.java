@@ -1,13 +1,8 @@
 package com.arkcraft.mod.common.handlers;
 
-import com.arkcraft.mod.common.ARKCraft;
-import com.arkcraft.mod.common.entity.EntityTameableDinosaur;
-import com.arkcraft.mod.common.entity.aggressive.EntityRaptor;
-import com.arkcraft.mod.common.items.ARKCraftItems;
-import com.arkcraft.mod.common.items.weapons.handlers.IItemWeapon;
-import com.arkcraft.mod.common.entity.item.projectiles.EntityTranqArrow;
-import com.arkcraft.mod.common.lib.BALANCE;
-import com.arkcraft.mod.common.lib.LogHelper;
+import java.util.Random;
+
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.model.ModelPlayer;
@@ -16,8 +11,7 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemAxe;
-import net.minecraft.item.ItemPickaxe;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.FOVUpdateEvent;
@@ -32,9 +26,21 @@ import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+
 import org.lwjgl.opengl.GL11;
 
-import java.util.Random;
+import com.arkcraft.mod.common.ARKCraft;
+import com.arkcraft.mod.common.entity.EntityTameableDinosaur;
+import com.arkcraft.mod.common.entity.aggressive.EntityRaptor;
+import com.arkcraft.mod.common.entity.item.projectiles.EntityTranqArrow;
+import com.arkcraft.mod.common.items.ARKCraftItems;
+import com.arkcraft.mod.common.items.ItemMetalHatchet;
+import com.arkcraft.mod.common.items.ItemMetalPick;
+import com.arkcraft.mod.common.items.ItemStoneHatchet;
+import com.arkcraft.mod.common.items.ItemStonePick;
+import com.arkcraft.mod.common.items.weapons.handlers.IItemWeapon;
+import com.arkcraft.mod.common.lib.BALANCE;
+import com.arkcraft.mod.common.lib.LogHelper;
 
 /**
  * 
@@ -98,22 +104,82 @@ public class ARKEventHandler {
 	
 	@SubscribeEvent
 	public void onDrops(BlockEvent.HarvestDropsEvent event) {
+		
 		Random r = new Random();
+		
 		int j = r.nextInt(3);
 		int k = r.nextInt(5)+1;
-//		System.out.println(j);
+		
 		if (event.harvester != null && event.harvester.getHeldItem() != null && event.state.getBlock() == Blocks.log || event.state.getBlock() == Blocks.log2) {
-			if(event.harvester.getHeldItem().getItem() instanceof ItemPickaxe){
-			for (int i = 0; i < k; i++) {
-				event.drops.add(new ItemStack(ARKCraftItems.thatch));
-			}
-			}else if(event.harvester.getHeldItem().getItem() instanceof ItemAxe){
-				for (int i = 0; i < j; i++){
-					event.drops.add(new ItemStack(ARKCraftItems.thatch));
+	
+		LogHelper.info("Harvest Event");
+				if(event.harvester.getHeldItem().getItem() instanceof ItemStonePick){	
+					event.drops.clear();
+					for (int i = 0; i < j; i++){
+			
+						event.drops.add(new ItemStack(ARKCraftItems.thatch));
+						event.drops.add(new ItemStack(ARKCraftItems.wood));		
+				}		
+		        }else if(event.harvester.getHeldItem().getItem() instanceof ItemStoneHatchet){
+		        	event.drops.clear();
+					for (int i = 0; i < j; i++){
+			
+						event.drops.add(new ItemStack(ARKCraftItems.thatch));
+						event.drops.add(new ItemStack(ARKCraftItems.wood));		
+				}		
+				}else if(event.harvester.getHeldItem().getItem() instanceof ItemMetalHatchet){
+					event.drops.clear();
+					for (int i = 0; i < k; i++){
+			
+						event.drops.add(new ItemStack(ARKCraftItems.thatch));
+						event.drops.add(new ItemStack(ARKCraftItems.wood));		
+				}
+				}else if(event.harvester.getHeldItem().getItem() instanceof ItemMetalPick){
+					event.drops.clear();
+					for (int i = 0; i < k; i++){
+			
+						event.drops.add(new ItemStack(ARKCraftItems.thatch));
+						event.drops.add(new ItemStack(ARKCraftItems.wood));		
+
+					}
+				}		
+			}	
+		
+			if(event.state.getBlock() == Blocks.stone)
+			{
+				
+				 if(event.harvester.getHeldItem().getItem() instanceof ItemStonePick){
+						event.drops.clear();
+			  			for (int i = 0; i < j; i++){
+			  				
+		        			event.drops.add(new ItemStack(Items.flint));
+		        			event.drops.add(new ItemStack(ARKCraftItems.rock));
+			  			}
+			        }else if(event.harvester.getHeldItem().getItem() instanceof ItemStoneHatchet){
+						event.drops.clear();
+						for (int i = 0; i < j; i++){
+							
+							event.drops.add(new ItemStack(Items.flint));
+							event.drops.add(new ItemStack(ARKCraftItems.rock));					
+					}		
+					}else if(event.harvester.getHeldItem().getItem() instanceof ItemMetalHatchet){
+						event.drops.clear();
+						for (int i = 0; i < k; i++){
+							
+							event.drops.add(new ItemStack(Items.flint));
+							event.drops.add(new ItemStack(ARKCraftItems.rock));
+					}
+					}else if(event.harvester.getHeldItem().getItem() instanceof ItemMetalPick){
+						event.drops.clear();
+						for (int i = 0; i < k; i++){
+							
+							event.drops.add(new ItemStack(Items.flint));
+							event.drops.add(new ItemStack(ARKCraftItems.rock));
+						}
+					}		
 				}
 			}
-		}
-	}
+	
 	public static void init() {
 	        ARKEventHandler handler = new ARKEventHandler();
 	        FMLCommonHandler.instance().bus().register(handler);
