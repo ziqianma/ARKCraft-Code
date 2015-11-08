@@ -10,7 +10,6 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.FOVUpdateEvent;
@@ -106,79 +105,159 @@ public class ARKEventHandler {
 		
 		Random r = new Random();
 		
-		int j = r.nextInt(3);
-		int k = r.nextInt(5)+1;
-		
+		//Stone Tool
+		int j = r.nextInt(2)+1;
+		int s = r.nextInt(1)+1;
+		//Metal Tool
+		int k = r.nextInt(4)+1;
+		int p = r.nextInt(3);
+					
 		if (event.harvester != null && event.harvester.getHeldItem() != null && event.state.getBlock() == Blocks.log || event.state.getBlock() == Blocks.log2) {
 	
 		LogHelper.info("Harvest Event");
-				if(event.harvester.getHeldItem().getItem() instanceof ItemStonePick){	
+			if(event.harvester.getHeldItem().getItem() instanceof ItemStonePick){	
 					event.drops.clear();
-					for (int i = 0; i < j; i++){
-			
+					for (int i = 0; i < j; i++)
+					{
 						event.drops.add(new ItemStack(ARKCraftItems.thatch));
-						event.drops.add(new ItemStack(ARKCraftItems.wood));		
-				}		
-		        }else if(event.harvester.getHeldItem().getItem() instanceof ItemStoneHatchet){
-		        	event.drops.clear();
-					for (int i = 0; i < j; i++){
-			
-						event.drops.add(new ItemStack(ARKCraftItems.thatch));
-						event.drops.add(new ItemStack(ARKCraftItems.wood));		
-				}		
-				}else if(event.harvester.getHeldItem().getItem() instanceof ItemMetalHatchet){
-					event.drops.clear();
-					for (int i = 0; i < k; i++){
-			
-						event.drops.add(new ItemStack(ARKCraftItems.thatch));
-						event.drops.add(new ItemStack(ARKCraftItems.wood));		
-				}
-				}else if(event.harvester.getHeldItem().getItem() instanceof ItemMetalPick){
-					event.drops.clear();
-					for (int i = 0; i < k; i++){
-			
-						event.drops.add(new ItemStack(ARKCraftItems.thatch));
-						event.drops.add(new ItemStack(ARKCraftItems.wood));		
-
+					}
+					for (int x = 0; x < s; x++)
+					{
+						event.drops.add(new ItemStack(ARKCraftItems.wood));	
 					}
 				}		
-			}	
-		
+		        else if(event.harvester.getHeldItem().getItem() instanceof ItemStoneHatchet){
+		        	event.drops.clear();
+					for (int i = 0; i < j; i++)
+					{
+						event.drops.add(new ItemStack(ARKCraftItems.wood));
+					}
+					for (int x = 0; x < s; x++)
+					{
+						event.drops.add(new ItemStack(ARKCraftItems.thatch));
+					}
+				}			
+				else if(event.harvester.getHeldItem().getItem() instanceof ItemMetalHatchet){
+					event.drops.clear();
+					for (int i = 0; i < k; i++)
+					{
+						event.drops.add(new ItemStack(ARKCraftItems.wood));
+					}
+					for (int x = 0; x < p; x++)
+					{
+						event.drops.add(new ItemStack(ARKCraftItems.thatch));
+					}
+				}
+				else if(event.harvester.getHeldItem().getItem() instanceof ItemMetalPick){
+					event.drops.clear();
+					for (int i = 0; i < k; i++)
+					{
+						event.drops.add(new ItemStack(ARKCraftItems.thatch));
+					}
+					for (int x = 0; x < p; x++)
+					{
+						event.drops.add(new ItemStack(ARKCraftItems.wood));
+					}
+				}		
+			}
 			if(event.state.getBlock() == Blocks.stone)
 			{
 				
-				 if(event.harvester.getHeldItem().getItem() instanceof ItemStonePick){
-						event.drops.clear();
-			  			for (int i = 0; i < j; i++){
-			  				
-		        			event.drops.add(new ItemStack(Items.flint));
-		        			event.drops.add(new ItemStack(ARKCraftItems.rock));
-			  			}
-			        }else if(event.harvester.getHeldItem().getItem() instanceof ItemStoneHatchet){
-						event.drops.clear();
-						for (int i = 0; i < j; i++){
-							
-							event.drops.add(new ItemStack(Items.flint));
-							event.drops.add(new ItemStack(ARKCraftItems.rock));					
-					}		
-					}else if(event.harvester.getHeldItem().getItem() instanceof ItemMetalHatchet){
-						event.drops.clear();
-						for (int i = 0; i < k; i++){
-							
-							event.drops.add(new ItemStack(Items.flint));
-							event.drops.add(new ItemStack(ARKCraftItems.rock));
+				if(event.harvester.getHeldItem().getItem() instanceof ItemStonePick){
+					event.drops.clear();
+					for (int i = 0; i < j; i++)
+					{
+						event.drops.add(new ItemStack(ARKCraftItems.flint));
 					}
-					}else if(event.harvester.getHeldItem().getItem() instanceof ItemMetalPick){
-						event.drops.clear();
-						for (int i = 0; i < k; i++){
-							
-							event.drops.add(new ItemStack(Items.flint));
-							event.drops.add(new ItemStack(ARKCraftItems.rock));
-						}
-					}		
+					for (int x = 0; x < s; x++)
+					{
+						event.drops.add(new ItemStack(ARKCraftItems.rock));	
+					}
+					for (int y = 0; y < s*0.5; y++)
+					{
+						event.drops.add(new ItemStack(ARKCraftItems.metal));	
+					}
 				}
+				else if(event.harvester.getHeldItem().getItem() instanceof ItemStoneHatchet){
+					event.drops.clear();
+					for (int i = 0; i < j; i++)
+					{
+						event.drops.add(new ItemStack(ARKCraftItems.rock));
+					}
+					for (int x = 0; x < s; x++)
+					{
+						event.drops.add(new ItemStack(ARKCraftItems.flint));	
+					}
+					for (int y = 0; y < s*0.3; y++)
+					{
+						event.drops.add(new ItemStack(ARKCraftItems.metal));	
+					}
+				}		
+				else if(event.harvester.getHeldItem().getItem() instanceof ItemMetalHatchet){
+					event.drops.clear();
+					for (int i = 0; i < p; i++)
+					{
+						event.drops.add(new ItemStack(ARKCraftItems.rock));
+					}
+					for (int x = 0; x < j; x++)
+					{
+						event.drops.add(new ItemStack(ARKCraftItems.flint));
+					}
+					for (int y = 0; y < s+0.5; y++)
+					{
+						event.drops.add(new ItemStack(ARKCraftItems.metal));	
+					}
+				 }
+				 else if(event.harvester.getHeldItem().getItem() instanceof ItemMetalPick){
+					event.drops.clear();
+					for (int i = 0; i < p; i++)
+					{
+						event.drops.add(new ItemStack(ARKCraftItems.flint));
+					}
+					for (int x = 0; x < j; x++)
+					{
+						event.drops.add(new ItemStack(ARKCraftItems.rock));
+					}
+					for (int y = 0; y < s+0.7; y++)
+					{
+						event.drops.add(new ItemStack(ARKCraftItems.metal));	
+					}					
+				}		
 			}
-	
+			if(event.state.getBlock() == Blocks.iron_ore)
+			{
+				
+				if(event.harvester.getHeldItem().getItem() instanceof ItemStonePick){
+					event.drops.clear();
+					for (int i = 0; i < j; i++)
+					{
+						event.drops.add(new ItemStack(ARKCraftItems.metal));
+					}
+				}
+				else if(event.harvester.getHeldItem().getItem() instanceof ItemStoneHatchet){
+					event.drops.clear();
+					for (int i = 0; i < j; i++)
+					{
+						event.drops.add(new ItemStack(ARKCraftItems.metal));
+					}
+				}
+				else if(event.harvester.getHeldItem().getItem() instanceof ItemMetalHatchet){
+					event.drops.clear();
+					for (int i = 0; i < k; i++)
+					{	
+						event.drops.add(new ItemStack(ARKCraftItems.metal));
+					}
+				}
+				else if(event.harvester.getHeldItem().getItem() instanceof ItemMetalPick){
+					event.drops.clear();
+					for (int i = 0; i < p; i++)
+					{
+						event.drops.add(new ItemStack(ARKCraftItems.metal));
+					}
+				}
+			}							
+		}
+
 	public static void init() {
 	        ARKEventHandler handler = new ARKEventHandler();
 	        FMLCommonHandler.instance().bus().register(handler);

@@ -31,41 +31,29 @@ public class SmithyCraftingManager extends ARKCraftingManager{
 		return instance; 
 	}
 	
-	public static void registerSmithyCraftingRecipes() {		
+	public static void registerSmithyCraftingRecipes() {
+		
+		//Small Saddle
 		getInstance().addShapelessRecipe(
 				new ItemStack(ARKCraftItems.saddle_small, 1), 
 				new ItemStack(Items.leather, 15), 
 				new ItemStack(Items.iron_ingot, 10), 
 				new ItemStack(ARKCraftItems.fiber, 15)
 				);
+		//Medium Saddle
 		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.saddle_medium, 1), 
 				new ItemStack(Items.leather, 48),
 				new ItemStack(Items.iron_ingot, 32), 
 				new ItemStack(ARKCraftItems.fiber, 32),
 				new ItemStack(Items.diamond, 1)
 				);
+		//Large Saddle
 		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.saddle_large, 1), 
 				new ItemStack(ARKCraftItems.chitin, 32),
 				new ItemStack(Items.iron_ingot, 16), 
 				new ItemStack(ARKCraftItems.fiber, 32),
 				new ItemStack(Items.diamond, 4)
 				);
-//		getInstance().addShapelessRecipe(new ItemStack(ModItems.boneHelm, 1),
-//				new ItemStack(ModItems.trex_skull, 1),
-//				new ItemStack(ModItems.bones_large, 5)
-//				);
-//		getInstance().addShapelessRecipe(new ItemStack(ModItems.boneChest, 1),
-//				new ItemStack(Items.bone, 16),
-//				new ItemStack(ModItems.bones_large, 8)
-//				);
-//		getInstance().addShapelessRecipe(new ItemStack(ModItems.boneLegs, 1),
-//				new ItemStack(Items.bone, 16),
-//				new ItemStack(ModItems.bones_large, 7)
-//				);
-//		getInstance().addShapelessRecipe(new ItemStack(ModItems.boneBoots, 1),
-//				new ItemStack(Items.bone, 16),
-//				new ItemStack(ModItems.bones_large, 7)
-//				);
 		
 		// Chitin Armor
 		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.chitinChest, 1),
@@ -89,9 +77,15 @@ public class SmithyCraftingManager extends ARKCraftingManager{
 				new ItemStack(ARKCraftItems.chitin, 12)
 		);
 
-		// Weapons
+		//Simple Pistol
 		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.simple_pistol, 1),
-				new ItemStack(Items.iron_ingot, 20),
+				new ItemStack(ARKCraftItems.metal, 60),
+				new ItemStack(ARKCraftItems.wood, 5),
+				new ItemStack(ARKCraftItems.hide, 15)
+				);
+		//Simple Bullet
+		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.simple_bullet, 1),
+				new ItemStack(ARKCraftItems.gun_powder, 6),
 				new ItemStack(Blocks.log, 2, ARKShapelessRecipe.ANY), // Any Wood
 				new ItemStack(ARKCraftItems.hide, 5)
 				);
@@ -106,11 +100,7 @@ public class SmithyCraftingManager extends ARKCraftingManager{
 				);
 		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.longneck_rifle_scoped, 1),
 				new ItemStack(ARKCraftItems.longneck_rifle, 1),
-				new ItemStack(ARKCraftItems.spy_glass, 1)
-				);
-		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.longneck_rifle, 1),
-				new ItemStack(Items.iron_ingot, 32),
-				new ItemStack(Blocks.glass, 1)
+				new ItemStack(ARKCraftItems.scope, 1)
 				);
 		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.shotgun, 1),
 				new ItemStack(Items.iron_ingot, 32),

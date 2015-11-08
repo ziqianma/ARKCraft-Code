@@ -52,11 +52,11 @@ import java.util.Map;
  */
 public class ARKCraftItems
 {
-	public static ItemARKFood tintoBerry, amarBerry, azulBerry, mejoBerry, narcoBerry, stimBerry, meat_raw, meat_cooked, primemeat_raw, primemeat_cooked;
+	public static ItemARKFood tintoBerry, amarBerry, azulBerry, mejoBerry, narcoBerry, stimBerry, meat_raw, meat_cooked, primemeat_raw, primemeat_cooked, spoiled_meat;
 	public static ItemARKSeed tintoBerrySeed, amarBerrySeed, azulBerrySeed, mejoBerrySeed, narcoBerrySeed, stimBerrySeed;
-	public static ItemARKBase rock,cementing_pastes, fiber, chitin, narcotics, dodo_bag, dodo_feather, gun_powder, spark_powder, hide;
+	public static ItemARKBase rock,cementing_pastes, fiber, chitin, narcotics, dodo_bag, dodo_feather, gun_powder, spark_powder, hide, scope;
 	public static ItemThatch thatch;
-	public static ItemARKBase wood, metal, metal_ingot;
+	public static ItemARKBase wood, metal, metal_ingot, flint;
 	public static ItemFeces dodo_feces, player_feces, fertilizer;
 	public static ItemDinosaurEgg dodo_egg;
 	public static ItemDinosaurSaddle saddle_small, saddle_medium, saddle_large;
@@ -116,6 +116,7 @@ public class ARKCraftItems
 		meat_cooked = addFood("meat_cooked", 6, 0.9F, false, false);
 		primemeat_raw = addFood("primemeat_raw", 3, 0.3F, false, false);
 		primemeat_cooked = addFood("primemeat_cooked", 8, 1.2F, false, false);
+		spoiled_meat = addFood("spoiled_meat", 2, 0.1F, false, false);
 
 		// Seeds
 		tintoBerrySeed = addSeedItem("tintoBerrySeed"); 
@@ -129,6 +130,7 @@ public class ARKCraftItems
 		
 		// Weapons and tools
 		rock = addItem("rock");
+		scope = addItem("scope");
 		cementing_pastes = addItem("cementing_paste");
 		slingshot = addSlingshot("slingshot");
 		grenade = addGrenade("grenade");
@@ -146,6 +148,7 @@ public class ARKCraftItems
 		wood = addItem("wood");
 		metal = addItem("metal");
 		metal_ingot = addItem("metal_ingot");
+		flint = addItem("flint");
 		chitin = addItem("chitin");
 		dodo_feather = addItem("dodo_feather");
 		dodo_bag = addItem("dodo_bag");

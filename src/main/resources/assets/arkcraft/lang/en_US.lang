@@ -91,6 +91,7 @@ item.metal_ingot.name=Metal Ingot
 item.wooden_club.name=Wooden Club
 item.grenade.name=Grenade
 item.cementing_paste.name=Cementing Paste
+item.scope.name=Scope
 
 
 # Miscellaneous
