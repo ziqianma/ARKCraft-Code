@@ -2,7 +2,6 @@ package com.arkcraft.mod.common.handlers;
 
 import java.util.Random;
 
-import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.model.ModelPlayer;
@@ -234,7 +233,7 @@ public class ARKEventHandler {
     
 	@SubscribeEvent(priority = EventPriority.NORMAL)
 	public void onRender(RenderGameOverlayEvent evt) {
-        if (evt.type == RenderGameOverlayEvent.ElementType.CROSSHAIRS){
+        if (evt.type == RenderGameOverlayEvent.ElementType.HELMET){
 			if (mc.gameSettings.thirdPersonView == 0 && ShowScopeOverlap) {
 	            evt.setCanceled(true); // Removes the normal crosshairs and uses just the overlay crosshairs 
 				LogHelper.info("onRender ShowScopeOverlap = true");
