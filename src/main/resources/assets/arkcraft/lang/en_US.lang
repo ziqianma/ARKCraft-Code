@@ -34,10 +34,10 @@ item.cloth_helm.name=Cloth Hat
 item.cloth_chest.name=Cloth Shirt
 item.cloth_legs.name=Cloth Pants
 item.cloth_boots.name=Cloth Shoes
-item.bone_helm.name=Dino Bone Helmet
-item.bone_chest.name=Dino Bone Chestplate
-item.bone_legs.name=Dino Bone Leggings
-item.bone_boots.name=Dino Bone Boots
+item.leather_helm.name=Dino Bone Helmet
+item.leather_chest.name=Dino Bone Chestplate
+item.leather_legs.name=Dino Bone Leggings
+item.leather_boots.name=Dino Bone Boots
 item.tranq_arrow.name=Tranquilizer Arrow
 item.slingshot.name=Slingshot
 item.ironPike.name=Iron Pike
@@ -45,7 +45,7 @@ item.spear.name=Stone Spear
 item.saddle_small.name=Small Saddle
 item.saddle_medium.name=Medium Saddle
 item.saddle_large.name=Large Saddle
-item.cobble_ball.name=Cobblestone Ball
+item.rock.name=Rock
 item.explosive_ball.name=Explosive Cobblestone Ball
 item.mortar_and_pestle.name=Mortar and Pestle
 item.meat_cooked.name=Cooked Meat
@@ -61,10 +61,12 @@ item.player_feces.name=Player Feces
 item.fertilizer.name=Fertilizer
 item.tranq_gun.name=Tranquilizer Gun
 item.simple_pistol.name=Simple Pistol
+item.simple_pistol_scoped.name=Scoped Simple Pistol
 item.tranquilizer.name=Tranquilizer
 item.simple_bullet.name=Simple Bullet
 item.shotgun.name=Shotgun
 item.longneck_rifle.name=Longneck Rifle
+item.longneck_rifle_scoped.name=Scoped Longneck Rifle
 item.stone_arrow.name=Stone Arrow
 item.metal_arrow.name=Metal Arrow
 item.simple_rifle_ammo.name=Simple Rifle Ammo
@@ -75,10 +77,22 @@ item.compound_bow.name=Compound Bow
 item.crossbow.name=Crossbow
 item.thatch.name=Thatch
 item.gun_powder.name=Gunpowder
+item.spark_powder.name=Spark Powder
 item.spy_glass.name=Spy Glass
 item.item_berry_bush.name=Berry Bush
 item.item_compost_bin.name=Compost Bin
+item.item_crop_plot.name=Crop Plot
+item.item_mortar_and_pestle.name=Mortar and Pestle
 item.item_smithy.name=Smithy
+item.wood.name=Wood
+item.metal.name=Metal
+item.hide.name=Hide
+item.metal_ingot.name=Metal Ingot
+item.wooden_club.name=Wooden Club
+item.grenade.name=Grenade
+item.cementing_paste.name=Cementing Paste
+item.scope.name=Scope
+
 
 # Miscellaneous
 itemGroup.tabARKCraft=ARKCraft: Survival Evolved
@@ -111,3 +125,37 @@ chat.ammo= ammo
 
 # Attributes
 attribute.name.arkcraft.reloadTime=Reload Time
+
+# Tooltips
+item.narcotics.tooltip=%12A Knockout of a Drink
+item.rock.tooltip=%6A Rocky Road to Victory
+item.explosive_ball.tooltip=%12A Rocky Road to Destruction
+item.dodo_bag.tooltip=Backpack for the Dodo
+item.gun_powder.tooltip=Recipe for Destruction
+
+item.fiber.tooltip=%6Material of the Ages
+item.chitin.tooltip=%6Material of the Ages
+item.dodo_feather.tooltip=%6Material of the Ages
+item.spark_powder.tooltip=%6Material of the Ages
+item.wood.tooltip=%6Material of the Ages
+item.metal.tooltip=%6Material of the Ages
+item.metal_ingot.tooltip=%6Material of the Ages
+
+item.leather_helm.tooltip=%4Armor of the Ancients
+item.leather_chest.tooltip=%4Armor of the Ancients
+item.leather_legs.tooltip=%4Armor of the Ancients
+item.leather_boots.tooltip=%4Armor of the Ancients
+
+item.chitin_helm.tooltip=%oArmor, Made to Fit
+item.chitin_chest.tooltip=%oArmor, Made to Fit
+item.chitin_legs.tooltip=%oArmor, Made to Fit
+item.chitin_boots.tooltip=%oArmor, Made to Fit
+
+item.cloth_helm.tooltip=%oArmor, Made to Fit
+item.cloth_chest.tooltip=%oArmor, Made to Fit
+item.cloth_legs.tooltip=%oArmor, Made to Fit
+item.cloth_boots.tooltip=%oArmor, Made to Fit
+
+item.saddle_small.tooltip=%oA Dino Rider's Dream
+item.saddle_medium.tooltip=%oA Dino Rider's Dream
+item.saddle_large.tooltip=%oA Dino Rider's Dream

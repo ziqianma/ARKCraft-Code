@@ -1,13 +1,12 @@
 package com.arkcraft.mod.common.entity.passive;
 
 import com.arkcraft.mod.GlobalAdditions.GUI;
-import com.arkcraft.mod.client.gui.InventoryDino;
+import com.arkcraft.mod.common.container.inventory.InventoryDino;
 import com.arkcraft.mod.common.ARKCraft;
 import com.arkcraft.mod.common.entity.ai.EntityDodoAILookIdle;
 import com.arkcraft.mod.common.items.ARKCraftItems;
-import com.arkcraft.mod.common.items.ARKFood;
+import com.arkcraft.mod.common.items.ItemARKFood;
 import com.arkcraft.mod.common.lib.LogHelper;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
@@ -281,7 +280,7 @@ public class EntityDodo extends EntityTameable {
 	 */
 	@Override
 	public boolean isBreedingItem(ItemStack stack) {
-		return stack != null ? stack.getItem() instanceof ARKFood : false;
+		return stack != null ? stack.getItem() instanceof ItemARKFood : false;
 	}
 
 	@Override
@@ -354,7 +353,7 @@ public class EntityDodo extends EntityTameable {
     }
 
 	public boolean isFavoriteFood(ItemStack itemstack) {
-		if (itemstack.getItem() instanceof ARKFood && 
+		if (itemstack.getItem() instanceof ItemARKFood &&
 				(itemstack.getItem() == ARKCraftItems.amarBerry || itemstack.getItem() == ARKCraftItems.azulBerry
 				|| itemstack.getItem() == ARKCraftItems.mejoBerry || itemstack.getItem() == ARKCraftItems.tintoBerry)){
 			return true;

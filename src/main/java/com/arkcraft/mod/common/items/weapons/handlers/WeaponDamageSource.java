@@ -1,6 +1,6 @@
 package com.arkcraft.mod.common.items.weapons.handlers;
 
-import com.arkcraft.mod.common.items.weapons.projectiles.EntityShootable;
+import com.arkcraft.mod.common.entity.item.projectiles.EntityShootable;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSourceIndirect;

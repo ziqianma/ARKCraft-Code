@@ -2,13 +2,12 @@ package com.arkcraft.mod.common.entity;
 
 
 import com.arkcraft.mod.GlobalAdditions.GUI;
-import com.arkcraft.mod.client.gui.InventoryDino;
-import com.arkcraft.mod.client.gui.InventorySaddle;
-import com.arkcraft.mod.client.gui.InventoryTaming;
+import com.arkcraft.mod.common.container.inventory.InventoryDino;
+import com.arkcraft.mod.common.container.inventory.InventorySaddle;
+import com.arkcraft.mod.common.container.inventory.InventoryTaming;
 import com.arkcraft.mod.common.ARKCraft;
 import com.arkcraft.mod.common.items.ARKCraftItems;
 import com.arkcraft.mod.common.lib.LogHelper;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -91,7 +90,7 @@ public abstract class EntityTameableDinosaur extends EntityTameable {
 		this.invTamedDino = new InventoryDino("Items", true, saddleType.getInventorySize());
 		this.invTaming = new InventoryTaming(this);
 		this.saddleType = saddleType;
-		this.invSaddle = new InventorySaddle(this);
+		this.invSaddle = new InventorySaddle();
 	}
 	
 	// Use this constructor if you want to create a dino that is not tameable
@@ -104,7 +103,7 @@ public abstract class EntityTameableDinosaur extends EntityTameable {
         	this.tamingSeconds = tamingSeconds; // This must be before the InventoryTaming
         	this.invTamedDino = new InventoryDino("Items", true, saddleType.getInventorySize());
         	this.invTaming = new InventoryTaming(this);
-    		this.invSaddle = new InventorySaddle(this);
+    		this.invSaddle = new InventorySaddle();
         }
         
         // Stuff for when tamed

@@ -1,7 +1,6 @@
 package com.arkcraft.mod.common.handlers;
 
 import com.arkcraft.mod.common.items.ARKCraftItems;
-
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -35,13 +34,23 @@ public class PestleCraftingManager  extends ARKCraftingManager{
 	public static void registerPestleCraftingRecipes() {
 		getInstance().addShapelessRecipe(
 				new ItemStack(ARKCraftItems.narcotics, 1),
-				new ItemStack(Items.bowl, 1), 
-				new ItemStack(ARKCraftItems.narcoBerry, 1)
+				new ItemStack(ARKCraftItems.narcoBerry, 5),
+				new ItemStack(ARKCraftItems.spoiled_meat, 1)
 				);
 		getInstance().addShapelessRecipe(
 				new ItemStack(ARKCraftItems.gun_powder, 1),
-				new ItemStack(Blocks.stone, 1, ARKShapelessRecipe.ANY), // Any Stone 
+				new ItemStack(Blocks.stone, 1, ARKShapelessRecipe.ANY),
 				new ItemStack(ARKCraftItems.narcoBerry, 1)
+				);
+		getInstance().addShapelessRecipe(
+				new ItemStack(ARKCraftItems.spark_powder, 1),
+				new ItemStack(Items.flint, 2),
+				new ItemStack(ARKCraftItems.rock, 1) 
+				);
+		getInstance().addShapelessRecipe(
+				new ItemStack(ARKCraftItems.cementing_pastes, 1),
+				new ItemStack(ARKCraftItems.rock, 8), 
+				new ItemStack(ARKCraftItems.chitin, 4) 
 				);
 	}
 }

@@ -1,7 +1,7 @@
 package com.arkcraft.mod.client.render;
 
 import com.arkcraft.mod.common.ARKCraft;
-import com.arkcraft.mod.common.items.weapons.projectiles.EntityMetalArrow;
+import com.arkcraft.mod.common.entity.item.projectiles.EntityMetalArrow;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;

@@ -41,7 +41,7 @@ public class RecipeHandler {
 					'B', Items.stick);
 			
 			//Cobble Ball
-			GameRegistry.addRecipe(new ItemStack(ARKCraftItems.cobble_ball, 4),
+			GameRegistry.addRecipe(new ItemStack(ARKCraftItems.rock, 4),
 					" B ", 
 					"BAB", 
 					" B ", 
@@ -92,7 +92,7 @@ public class RecipeHandler {
 			GameRegistry.addShapelessRecipe(new ItemStack(ARKCraftItems.narcotics, 1), new ItemStack(Items.bowl), new ItemStack(ARKCraftItems.narcoBerry), new ItemStack(ARKCraftItems.fiber,1));
 			GameRegistry.addRecipe(new ItemStack(ARKCraftItems.stoneSpear), "B  ", " A ", "  A", 'A', new ItemStack(Items.stick), 'B', new ItemStack(Blocks.stone));
 			GameRegistry.addRecipe(new ItemStack(ARKCraftItems.ironPike), "B  ", " A ", "  A", 'A', new ItemStack(Items.stick), 'B', new ItemStack(Items.iron_ingot));
-			GameRegistry.addRecipe(new ItemStack(ARKCraftItems.cobble_ball), "BB ", "BB ", 'B', new ItemStack(Blocks.cobblestone));
+			GameRegistry.addRecipe(new ItemStack(ARKCraftItems.rock), "BB ", "BB ", 'B', new ItemStack(Blocks.cobblestone));
 			*/
 //			GameRegistry.addShapelessRecipe(new ItemStack(ARKCraftItems.saddle_small, 1), Items.leather, Items.iron_ingot,
 //					ARKCraftItems.fiber, ARKCraftItems.fiber, ARKCraftItems.fiber, ARKCraftItems.fiber, ARKCraftItems.fiber);

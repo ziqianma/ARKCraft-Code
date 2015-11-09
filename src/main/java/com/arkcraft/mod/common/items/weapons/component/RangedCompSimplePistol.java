@@ -1,7 +1,8 @@
 package com.arkcraft.mod.common.items.weapons.component;
 
 import com.arkcraft.mod.common.items.weapons.handlers.ReloadHelper;
-import com.arkcraft.mod.common.items.weapons.projectiles.EntitySimpleBullet;
+import com.arkcraft.mod.common.entity.item.projectiles.EntitySimpleBullet;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumParticleTypes;
@@ -64,8 +65,8 @@ public class RangedCompSimplePistol extends RangedComponent
 	@Override
 	public void effectShoot(World world, double x, double y, double z, float yaw, float pitch)
 	{
-	//	world.playSoundEffect(x, y, z, "random.explode", 3F, 1F / (weapon.getItemRand().nextFloat() * 0.4F + 0.7F));
-	//	world.playSoundEffect(x, y, z, "ambient.weather.thunder", 3F, 1F / (weapon.getItemRand().nextFloat() * 0.4F + 0.4F));
+		world.playSoundEffect(x, y, z, "random.explode", 1.5F, 1F / (weapon.getItemRand().nextFloat() * 0.4F + 0.7F));
+		world.playSoundEffect(x, y, z, "ambient.weather.thunder", 1.5F, 1F / (weapon.getItemRand().nextFloat() * 0.4F + 0.4F));
 
 		float particleX = -MathHelper.sin(((yaw + 23) / 180F) * 3.141593F) * MathHelper.cos((pitch / 180F) * 3.141593F);
 		float particleY = -MathHelper.sin((pitch / 180F) * 3.141593F) - 0.1F;
@@ -76,5 +77,10 @@ public class RangedCompSimplePistol extends RangedComponent
 			world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x + particleX, y + particleY, z + particleZ, 0.0D, 0.0D, 0.0D);
 		}
 		world.spawnParticle(EnumParticleTypes.FLAME, x + particleX, y + particleY, z + particleZ, 0.0D, 0.0D, 0.0D);
+	}
+	
+	@Override
+	public boolean getReach() {
+		return false;
 	}
 }

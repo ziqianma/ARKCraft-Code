@@ -2,7 +2,7 @@ package com.arkcraft.mod.common.items.weapons.component;
 
 import com.arkcraft.mod.common.ARKCraft;
 import com.arkcraft.mod.common.items.weapons.handlers.ReloadHelper;
-import com.arkcraft.mod.common.items.weapons.projectiles.EntityTranquilizer;
+import com.arkcraft.mod.common.entity.item.projectiles.EntityTranquilizer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

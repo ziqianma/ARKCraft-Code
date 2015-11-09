@@ -1,13 +1,13 @@
 package com.arkcraft.mod.client.gui;
 
 import com.arkcraft.mod.common.ARKCraft;
+import com.arkcraft.mod.common.container.ContainerInventoryDino;
+import com.arkcraft.mod.common.container.inventory.InventoryDino;
 import com.arkcraft.mod.common.entity.EntityTameableDinosaur;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.util.ResourceLocation;
-
 import org.lwjgl.opengl.GL11;
 
 import java.awt.Color;

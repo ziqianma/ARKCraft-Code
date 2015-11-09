@@ -8,12 +8,8 @@ import net.minecraft.client.model.ModelPlayer;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
-import net.minecraft.client.renderer.block.model.ItemCameraTransforms.TransformType;
-import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemAxe;
-import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.FOVUpdateEvent;
@@ -21,13 +17,11 @@ import net.minecraftforge.client.event.MouseEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderHandEvent;
 import net.minecraftforge.client.event.RenderLivingEvent;
-import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -36,9 +30,13 @@ import org.lwjgl.opengl.GL11;
 import com.arkcraft.mod.common.ARKCraft;
 import com.arkcraft.mod.common.entity.EntityTameableDinosaur;
 import com.arkcraft.mod.common.entity.aggressive.EntityRaptor;
+import com.arkcraft.mod.common.entity.item.projectiles.EntityTranqArrow;
 import com.arkcraft.mod.common.items.ARKCraftItems;
+import com.arkcraft.mod.common.items.ItemMetalHatchet;
+import com.arkcraft.mod.common.items.ItemMetalPick;
+import com.arkcraft.mod.common.items.ItemStoneHatchet;
+import com.arkcraft.mod.common.items.ItemStonePick;
 import com.arkcraft.mod.common.items.weapons.handlers.IItemWeapon;
-import com.arkcraft.mod.common.items.weapons.projectiles.EntityTranqArrow;
 import com.arkcraft.mod.common.lib.BALANCE;
 import com.arkcraft.mod.common.lib.LogHelper;
 
@@ -104,22 +102,162 @@ public class ARKEventHandler {
 	
 	@SubscribeEvent
 	public void onDrops(BlockEvent.HarvestDropsEvent event) {
+		
 		Random r = new Random();
-		int j = r.nextInt(3);
-		int k = r.nextInt(5)+1;
-//		System.out.println(j);
+		
+		//Stone Tool
+		int j = r.nextInt(2)+1;
+		int s = r.nextInt(1)+1;
+		//Metal Tool
+		int k = r.nextInt(4)+1;
+		int p = r.nextInt(3);
+					
 		if (event.harvester != null && event.harvester.getHeldItem() != null && event.state.getBlock() == Blocks.log || event.state.getBlock() == Blocks.log2) {
-			if(event.harvester.getHeldItem().getItem() instanceof ItemPickaxe){
-			for (int i = 0; i < k; i++) {
-				event.drops.add(new ItemStack(ARKCraftItems.thatch));
-			}
-			}else if(event.harvester.getHeldItem().getItem() instanceof ItemAxe){
-				for (int i = 0; i < j; i++){
-					event.drops.add(new ItemStack(ARKCraftItems.thatch));
+	
+		LogHelper.info("Harvest Event");
+			if(event.harvester.getHeldItem().getItem() instanceof ItemStonePick){	
+					event.drops.clear();
+					for (int i = 0; i < j; i++)
+					{
+						event.drops.add(new ItemStack(ARKCraftItems.thatch));
+					}
+					for (int x = 0; x < s; x++)
+					{
+						event.drops.add(new ItemStack(ARKCraftItems.wood));	
+					}
+				}		
+		        else if(event.harvester.getHeldItem().getItem() instanceof ItemStoneHatchet){
+		        	event.drops.clear();
+					for (int i = 0; i < j; i++)
+					{
+						event.drops.add(new ItemStack(ARKCraftItems.wood));
+					}
+					for (int x = 0; x < s; x++)
+					{
+						event.drops.add(new ItemStack(ARKCraftItems.thatch));
+					}
+				}			
+				else if(event.harvester.getHeldItem().getItem() instanceof ItemMetalHatchet){
+					event.drops.clear();
+					for (int i = 0; i < k; i++)
+					{
+						event.drops.add(new ItemStack(ARKCraftItems.wood));
+					}
+					for (int x = 0; x < p; x++)
+					{
+						event.drops.add(new ItemStack(ARKCraftItems.thatch));
+					}
 				}
+				else if(event.harvester.getHeldItem().getItem() instanceof ItemMetalPick){
+					event.drops.clear();
+					for (int i = 0; i < k; i++)
+					{
+						event.drops.add(new ItemStack(ARKCraftItems.thatch));
+					}
+					for (int x = 0; x < p; x++)
+					{
+						event.drops.add(new ItemStack(ARKCraftItems.wood));
+					}
+				}		
 			}
+			if(event.state.getBlock() == Blocks.stone)
+			{
+				
+				if(event.harvester.getHeldItem().getItem() instanceof ItemStonePick){
+					event.drops.clear();
+					for (int i = 0; i < j; i++)
+					{
+						event.drops.add(new ItemStack(ARKCraftItems.flint));
+					}
+					for (int x = 0; x < s; x++)
+					{
+						event.drops.add(new ItemStack(ARKCraftItems.rock));	
+					}
+					for (int y = 0; y < s*0.5; y++)
+					{
+						event.drops.add(new ItemStack(ARKCraftItems.metal));	
+					}
+				}
+				else if(event.harvester.getHeldItem().getItem() instanceof ItemStoneHatchet){
+					event.drops.clear();
+					for (int i = 0; i < j; i++)
+					{
+						event.drops.add(new ItemStack(ARKCraftItems.rock));
+					}
+					for (int x = 0; x < s; x++)
+					{
+						event.drops.add(new ItemStack(ARKCraftItems.flint));	
+					}
+					for (int y = 0; y < s*0.3; y++)
+					{
+						event.drops.add(new ItemStack(ARKCraftItems.metal));	
+					}
+				}		
+				else if(event.harvester.getHeldItem().getItem() instanceof ItemMetalHatchet){
+					event.drops.clear();
+					for (int i = 0; i < p; i++)
+					{
+						event.drops.add(new ItemStack(ARKCraftItems.rock));
+					}
+					for (int x = 0; x < j; x++)
+					{
+						event.drops.add(new ItemStack(ARKCraftItems.flint));
+					}
+					for (int y = 0; y < s+0.5; y++)
+					{
+						event.drops.add(new ItemStack(ARKCraftItems.metal));	
+					}
+				 }
+				 else if(event.harvester.getHeldItem().getItem() instanceof ItemMetalPick){
+					event.drops.clear();
+					for (int i = 0; i < p; i++)
+					{
+						event.drops.add(new ItemStack(ARKCraftItems.flint));
+					}
+					for (int x = 0; x < j; x++)
+					{
+						event.drops.add(new ItemStack(ARKCraftItems.rock));
+					}
+					for (int y = 0; y < s+0.7; y++)
+					{
+						event.drops.add(new ItemStack(ARKCraftItems.metal));	
+					}					
+				}		
+			}
+			if(event.state.getBlock() == Blocks.iron_ore)
+			{
+				
+				if(event.harvester.getHeldItem().getItem() instanceof ItemStonePick){
+					event.drops.clear();
+					for (int i = 0; i < j; i++)
+					{
+						event.drops.add(new ItemStack(ARKCraftItems.metal));
+					}
+				}
+				else if(event.harvester.getHeldItem().getItem() instanceof ItemStoneHatchet){
+					event.drops.clear();
+					for (int i = 0; i < j; i++)
+					{
+						event.drops.add(new ItemStack(ARKCraftItems.metal));
+					}
+				}
+				else if(event.harvester.getHeldItem().getItem() instanceof ItemMetalHatchet){
+					event.drops.clear();
+					for (int i = 0; i < k; i++)
+					{	
+						event.drops.add(new ItemStack(ARKCraftItems.metal));
+					}
+				}
+				else if(event.harvester.getHeldItem().getItem() instanceof ItemMetalPick){
+					event.drops.clear();
+					for (int i = 0; i < p; i++)
+					{
+						event.drops.add(new ItemStack(ARKCraftItems.metal));
+					}
+				}
+			}							
 		}
-	}
+
 	public static void init() {
 	        ARKEventHandler handler = new ARKEventHandler();
 	        FMLCommonHandler.instance().bus().register(handler);
@@ -132,38 +270,32 @@ public class ARKEventHandler {
 	
     @SubscribeEvent
     public void onMouseEvent(MouseEvent evt) {
-    	
     	 Minecraft mc = Minecraft.getMinecraft();
 	     EntityPlayer thePlayer = mc.thePlayer;
 	     
-        if (thePlayer != null && evt.button == 0) 
-        {
+        if (thePlayer != null && evt.button == 0) {
         	LogHelper.info("mouse down");
 	     	ItemStack stack = thePlayer.getCurrentEquippedItem();
-	     	if (stack != null)
-        	{
+	     	if (stack != null){
 		        IItemWeapon i_item_weapon;
-		        if (stack.getItem() instanceof IItemWeapon)
-	            {
+		        if (stack.getItem() instanceof IItemWeapon){
 		        	i_item_weapon = (IItemWeapon) stack.getItem();
 	            } 
-		        else
-	            {
+		        else{
 		        	i_item_weapon = null;
 	            }
-	     	     if (i_item_weapon != null)
-	             {
+		        // Weapon with scope?
+	     	    if (i_item_weapon != null && i_item_weapon.getReach()){
 	     	    	if (evt.buttonstate)
 	     	    		ShowScopeOverlap = true;
-	     	    		
-	                	
 	     	    	else
 	     	    		ShowScopeOverlap = false;
 	                evt.setCanceled(true);
-	             }
+	            }
         	}
         }
     }
+    
     @SubscribeEvent
     public void onFOVUpdate(FOVUpdateEvent evt) {
         if (mc.gameSettings.thirdPersonView == 0 && ShowScopeOverlap) {
@@ -180,16 +312,17 @@ public class ARKEventHandler {
     
 	@SubscribeEvent(priority = EventPriority.NORMAL)
 	public void onRender(RenderGameOverlayEvent evt) {
-		if (mc.gameSettings.thirdPersonView == 0 && ShowScopeOverlap) {
-			LogHelper.info("onRender ShowScopeOverlap = true");
-			ShowScope(); 
+        if (evt.type == RenderGameOverlayEvent.ElementType.HELMET){
+			if (mc.gameSettings.thirdPersonView == 0 && ShowScopeOverlap) {
+	            evt.setCanceled(true); // Removes the normal crosshairs and uses just the overlay crosshairs 
+				LogHelper.info("onRender ShowScopeOverlap = true");
+				ShowScope();
+			}
 		}
 	}
 	
 	@SubscribeEvent
-    public void Holding(RenderLivingEvent.Pre event)
-    {
-		
+    public void Holding(RenderLivingEvent.Pre event){
 		//!event.isCanceled() & 
     	Minecraft mc = Minecraft.getMinecraft();
 	    EntityPlayer thePlayer = mc.thePlayer;
@@ -198,7 +331,7 @@ public class ARKEventHandler {
         	ItemStack stack = thePlayer.getCurrentEquippedItem();
         	if (stack != null)
         	{
-        		 IItemWeapon i_item_weapon;
+        		IItemWeapon i_item_weapon;
  		        if (stack.getItem() instanceof IItemWeapon)
  	            {
  		        	i_item_weapon = (IItemWeapon) stack.getItem();

@@ -1,11 +1,10 @@
 package com.arkcraft.mod.common.tile;
 
-import com.arkcraft.mod.common.blocks.BlockInventoryCropPlot;
-import com.arkcraft.mod.common.items.ARKFecesItem;
-import com.arkcraft.mod.common.items.ARKSeedItem;
+import com.arkcraft.mod.common.blocks.BlockCropPlot;
+import com.arkcraft.mod.common.items.ItemFeces;
+import com.arkcraft.mod.common.items.ItemARKSeed;
 import com.arkcraft.mod.common.lib.BALANCE;
 import com.arkcraft.mod.common.lib.LogHelper;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -215,7 +214,7 @@ public class TileInventoryCropPlot extends TileEntity implements IInventory, IUp
 		//    the client needs it for rendering and the server needs it for crop growth etc
 		if (prevGrowthStage != growthStage) {
 			IBlockState state = worldObj.getBlockState(pos);
-            worldObj.setBlockState(pos, state.withProperty(BlockInventoryCropPlot.AGE, Integer.valueOf(growthStage)), 2);
+            worldObj.setBlockState(pos, state.withProperty(BlockCropPlot.AGE, Integer.valueOf(growthStage)), 2);
 			if (worldObj.isRemote) {
 				worldObj.markBlockForUpdate(pos);
 			}
@@ -370,12 +369,12 @@ public class TileInventoryCropPlot extends TileEntity implements IInventory, IUp
 //		if (rand.nextInt(100) == 0)
 //			return stack;
 //		else
-			return ARKSeedItem.getBerryForSeed(stack); 
+			return ItemARKSeed.getBerryForSeed(stack);
 	}
 
 	// returns the number of ticks the given item will grow. Returns 0 if the given item is not a valid fertilizer
 	public static short getItemGrowTime(ItemStack stack) {
-		int growtime = ARKFecesItem.getItemGrowTime(stack);
+		int growtime = ItemFeces.getItemGrowTime(stack);
 		return (short)MathHelper.clamp_int(growtime, 0, Short.MAX_VALUE);
 	}
 
@@ -499,7 +498,7 @@ public class TileInventoryCropPlot extends TileEntity implements IInventory, IUp
 
 	// Return true if stack is a valid fertilizer for the crop plot
 	public boolean isItemValidForFertilizerSlot(ItemStack stack) {
-		if (stack != null && stack.getItem() instanceof ARKFecesItem)
+		if (stack != null && stack.getItem() instanceof ItemFeces)
 			return true;
 		else
 			return false;
@@ -515,7 +514,7 @@ public class TileInventoryCropPlot extends TileEntity implements IInventory, IUp
 
 	// Return true if stack is a valid seed for the crop plot
 	public boolean isItemValidForSeedSlot(ItemStack stack) {
-		if (stack != null && stack.getItem() instanceof ARKSeedItem)
+		if (stack != null && stack.getItem() instanceof ItemARKSeed)
 			return true;
 		else
 			return false;

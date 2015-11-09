@@ -119,5 +119,7 @@ public final class BALANCE {
 	public static class DINO_PROPERTIES {
 		@DefaultInt(value = 120, minValue = 30, maxValue = 3600, name = "Seconds to tame raptor.", comment = "Time need to tame")
 		public static int SECONDS_TO_TAME_RAPTOR;		
+		@DefaultInt(value = 15, minValue = 0, maxValue = 100, name = "Dino spawn probability", comment = "Percentage chance of spawning")
+		public static int SPAWN_PROBABILITY;		
 	}
 }

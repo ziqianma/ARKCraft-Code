@@ -1,5 +1,22 @@
 package com.arkcraft.mod.client.proxy;
 
+import java.util.Map;
+
+import net.ilexiconn.llibrary.client.render.RenderHelper;
+import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.RenderSnowball;
+import net.minecraft.client.resources.model.ModelBakery;
+import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+
+import com.arkcraft.mod.client.event.ClientEventHandler;
 import com.arkcraft.mod.client.gui.overlay.GuiOverlay;
 import com.arkcraft.mod.client.gui.overlay.GuiOverlayReloading;
 import com.arkcraft.mod.client.model.ModelBrontosaurus;
@@ -18,37 +35,20 @@ import com.arkcraft.mod.common.ARKCraft;
 import com.arkcraft.mod.common.blocks.ARKCraftBlocks;
 import com.arkcraft.mod.common.entity.EntityCobble;
 import com.arkcraft.mod.common.entity.EntityDodoEgg;
-import com.arkcraft.mod.common.entity.EntityExplosive;
 import com.arkcraft.mod.common.entity.aggressive.EntityRaptor;
+import com.arkcraft.mod.common.entity.item.projectiles.EntityGrenade;
+import com.arkcraft.mod.common.entity.item.projectiles.EntityMetalArrow;
+import com.arkcraft.mod.common.entity.item.projectiles.EntitySimpleBullet;
+import com.arkcraft.mod.common.entity.item.projectiles.EntitySpear;
+import com.arkcraft.mod.common.entity.item.projectiles.EntityStoneArrow;
+import com.arkcraft.mod.common.entity.item.projectiles.EntityTranqArrow;
 import com.arkcraft.mod.common.entity.neutral.EntityBrontosaurus;
 import com.arkcraft.mod.common.entity.passive.EntityDodo;
-import com.arkcraft.mod.client.event.ClientEventHandler;
 import com.arkcraft.mod.common.items.ARKCraftItems;
-import com.arkcraft.mod.common.items.ARKFood;
-import com.arkcraft.mod.common.items.weapons.projectiles.EntityMetalArrow;
-import com.arkcraft.mod.common.items.weapons.projectiles.EntitySimpleBullet;
-import com.arkcraft.mod.common.items.weapons.projectiles.EntitySpear;
-import com.arkcraft.mod.common.items.weapons.projectiles.EntityStoneArrow;
-import com.arkcraft.mod.common.items.weapons.projectiles.EntityTranqArrow;
+import com.arkcraft.mod.common.items.ItemARKFood;
 import com.arkcraft.mod.common.lib.BALANCE;
 import com.arkcraft.mod.common.lib.LogHelper;
 import com.arkcraft.mod.common.proxy.CommonProxy;
-
-import net.ilexiconn.llibrary.client.render.RenderHelper;
-import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.RenderSnowball;
-import net.minecraft.client.resources.model.ModelBakery;
-import net.minecraft.client.resources.model.ModelResourceLocation;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.client.registry.RenderingRegistry;
-import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-
-import java.util.Map;
 
 public class ClientProxy extends CommonProxy
 {
@@ -61,23 +61,24 @@ public class ClientProxy extends CommonProxy
 		MinecraftForge.EVENT_BUS.register(new GuiOverlay());
 		MinecraftForge.EVENT_BUS.register(new GuiOverlayReloading());
 
-		RenderingRegistry.registerEntityRenderingHandler(EntityCobble.class, new RenderSnowball(Minecraft.getMinecraft().getRenderManager(), ARKCraftItems.cobble_ball, Minecraft.getMinecraft().getRenderItem()));
+		RenderingRegistry.registerEntityRenderingHandler(EntityCobble.class, new RenderSnowball(Minecraft.getMinecraft().getRenderManager(), ARKCraftItems.rock, Minecraft.getMinecraft().getRenderItem()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityTranqArrow.class, new RenderTranqArrow());
 		RenderingRegistry.registerEntityRenderingHandler(EntityStoneArrow.class, new RenderStoneArrow());
 		RenderingRegistry.registerEntityRenderingHandler(EntityMetalArrow.class, new RenderMetalArrow());
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityDodoEgg.class, new RenderSnowball(Minecraft.getMinecraft().getRenderManager(), ARKCraftItems.dodo_egg, Minecraft.getMinecraft().getRenderItem()));
-		RenderingRegistry.registerEntityRenderingHandler(EntityExplosive.class, new RenderSnowball(Minecraft.getMinecraft().getRenderManager(), ARKCraftItems.explosive_ball, Minecraft.getMinecraft().getRenderItem()));
+		RenderingRegistry.registerEntityRenderingHandler(EntityGrenade.class, new RenderSnowball(Minecraft.getMinecraft().getRenderManager(), ARKCraftItems.grenade, Minecraft.getMinecraft().getRenderItem()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityRaptor.class, new RenderRaptor(new ModelRaptorNew(), 0.5F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityDodo.class, new RenderDodo(new ModelDodo(), 0.3F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityBrontosaurus.class, new RenderBrontosaurus(new ModelBrontosaurus(), 0.5f));
 	//	RenderingRegistry.registerEntityRenderingHandler(EntityTranqAmmo.class, new RenderTranqAmmo());
 	//	RenderingRegistry.registerEntityRenderingHandler(EntitySimpleBullet.class, new RenderSimpleBullet());
 		
-		GameRegistry.addSmelting(ARKCraftItems.meat_raw, new ItemStack(ARKCraftItems.meat_cooked, 1), (int) Math.floor(ARKFood.globalHealAmount/2));
-		GameRegistry.addSmelting(ARKCraftItems.primemeat_raw, new ItemStack(ARKCraftItems.primemeat_cooked, 1), (int) Math.floor(ARKFood.globalHealAmount/2));
+		GameRegistry.addSmelting(ARKCraftItems.meat_raw, new ItemStack(ARKCraftItems.meat_cooked, 1), (int) Math.floor(ItemARKFood.globalHealAmount/2));
+		GameRegistry.addSmelting(ARKCraftItems.primemeat_raw, new ItemStack(ARKCraftItems.primemeat_cooked, 1), (int) Math.floor(ItemARKFood.globalHealAmount/2));
 		
 		ModelBakery.addVariantName(ARKCraftItems.slingshot, "arkcraft:slingshot", "arkcraft:slingshot_pulled");
+		ModelBakery.addVariantName(ARKCraftItems.longneck_rifle, "arkcraft:longneck_rifle", "arkcraft:longneck_rifle_scope");
 
 		RenderHelper.registerModelExtension(new PlayerModelOverride());
 

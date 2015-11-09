@@ -40,7 +40,7 @@ public class IslandGen
             {
                 for (int x = 0; x < width; x++)
                 {
-                    int height = (int) ((image.getRGB(x, y) & 0x0000FF) * 1.5F);
+                    int height = (int) ((image.getRGB(x, y) & 0x0000FF) * 2);
 
                     if (height + 5 > 255)
                     {
@@ -72,6 +72,7 @@ public class IslandGen
         biomes.put(0x007F7F, BiomeGenBase.swampland);
         biomes.put(0xFFFFFF, BiomeGenBase.icePlains);
         biomes.put(0x9393C4, BiomeGenBase.frozenOcean);
+        biomes.put(0x65BC00, BiomeGenBase.plains);
 
         try
         {

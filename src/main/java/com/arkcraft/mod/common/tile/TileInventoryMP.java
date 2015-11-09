@@ -1,6 +1,6 @@
 package com.arkcraft.mod.common.tile;
 
-import com.arkcraft.mod.client.gui.InventoryBlueprints;
+import com.arkcraft.mod.common.container.inventory.InventoryBlueprints;
 import com.arkcraft.mod.common.ARKCraft;
 import com.arkcraft.mod.common.handlers.IARKRecipe;
 import com.arkcraft.mod.common.handlers.PestleCraftingManager;

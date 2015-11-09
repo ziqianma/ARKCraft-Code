@@ -4,11 +4,10 @@ import com.arkcraft.mod.common.ARKCraft;
 import com.arkcraft.mod.common.entity.EntityTameableDinosaur;
 import com.arkcraft.mod.common.entity.SaddleType;
 import com.arkcraft.mod.common.items.ARKCraftItems;
-import com.arkcraft.mod.common.items.ARKFood;
+import com.arkcraft.mod.common.items.ItemARKFood;
 import com.arkcraft.mod.common.lib.BALANCE;
 import com.arkcraft.mod.common.lib.LogHelper;
 import com.google.common.base.Predicate;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
@@ -209,7 +208,7 @@ public class EntityRaptor extends EntityTameableDinosaur
 
 	@Override
 	public boolean isFavoriteFood(ItemStack itemstack) {
-		if (itemstack.getItem() instanceof ARKFood && 
+		if (itemstack.getItem() instanceof ItemARKFood &&
 				(itemstack.getItem() == ARKCraftItems.meat_raw || itemstack.getItem() == ARKCraftItems.meat_cooked
 				|| itemstack.getItem() == ARKCraftItems.primemeat_raw || itemstack.getItem() == ARKCraftItems.primemeat_cooked)){
 			return true;

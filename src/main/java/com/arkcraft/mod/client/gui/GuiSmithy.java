@@ -1,6 +1,7 @@
 package com.arkcraft.mod.client.gui;
 
 import com.arkcraft.mod.common.ARKCraft;
+import com.arkcraft.mod.common.container.ContainerInventorySmithy;
 import com.arkcraft.mod.common.tile.TileInventorySmithy;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;

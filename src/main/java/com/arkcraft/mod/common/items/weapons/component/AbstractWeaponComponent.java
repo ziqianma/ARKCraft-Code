@@ -1,10 +1,7 @@
 package com.arkcraft.mod.common.items.weapons.component;
 
-import java.util.List;
-
 import com.arkcraft.mod.common.items.weapons.handlers.IItemWeapon;
 import com.google.common.collect.Multimap;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -17,6 +14,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.util.List;
+
 public abstract class AbstractWeaponComponent
 {
 	public Item	item;
@@ -28,7 +27,7 @@ public abstract class AbstractWeaponComponent
 		weapon = null;
 	}
 	
-	final void setItem(IItemWeapon itemweapon)
+	public final void setItem(IItemWeapon itemweapon)
 	{
 		item = (Item) itemweapon;
 		weapon = itemweapon;

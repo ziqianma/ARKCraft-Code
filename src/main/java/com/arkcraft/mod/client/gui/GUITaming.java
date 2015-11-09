@@ -1,6 +1,8 @@
 package com.arkcraft.mod.client.gui;
 
 import com.arkcraft.mod.common.ARKCraft;
+import com.arkcraft.mod.common.container.ContainerInventoryTaming;
+import com.arkcraft.mod.common.container.inventory.InventoryTaming;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;

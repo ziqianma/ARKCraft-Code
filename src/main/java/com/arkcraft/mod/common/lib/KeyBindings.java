@@ -2,7 +2,6 @@ package com.arkcraft.mod.common.lib;
 
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
-
 import org.lwjgl.input.Keyboard;
 
 /**

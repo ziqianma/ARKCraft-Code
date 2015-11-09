@@ -1,8 +1,7 @@
 package com.arkcraft.mod.common.handlers;
 
-import com.arkcraft.mod.client.gui.InventoryPlayerCrafting;
+import com.arkcraft.mod.common.container.inventory.InventoryPlayerCrafting;
 import com.google.common.collect.Lists;
-
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

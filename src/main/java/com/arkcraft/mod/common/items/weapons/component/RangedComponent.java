@@ -3,10 +3,9 @@ package com.arkcraft.mod.common.items.weapons.component;
 import com.arkcraft.mod.common.ARKCraft;
 import com.arkcraft.mod.common.items.weapons.handlers.ReloadHelper;
 import com.arkcraft.mod.common.items.weapons.handlers.WeaponModAttributes;
-import com.arkcraft.mod.common.items.weapons.projectiles.EntityShootable;
+import com.arkcraft.mod.common.entity.item.projectiles.EntityShootable;
 import com.arkcraft.mod.common.lib.BALANCE;
 import com.google.common.collect.Multimap;
-
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -171,7 +170,7 @@ public abstract class RangedComponent extends AbstractWeaponComponent
 				} else {
 					//Begin reloading
 					entityplayer.setItemInUse(itemstack, getMaxItemUseDuration(itemstack));	
-					if (world.isRemote)
+					if (world.isRemote && !entityplayer.capabilities.isCreativeMode)
 						// i.e. "20 ammo"
 						entityplayer.addChatMessage(new ChatComponentText(getAmmoQuantity(entityplayer) + StatCollector.translateToLocal("chat.ammo")));
 				}

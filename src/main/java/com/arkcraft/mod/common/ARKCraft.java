@@ -16,8 +16,6 @@ import com.arkcraft.mod.common.network.UpdateMPToCraftItem;
 import com.arkcraft.mod.common.network.UpdatePlayerCrafting;
 import com.arkcraft.mod.common.network.UpdateSmithyToCraftItem;
 import com.arkcraft.mod.common.proxy.CommonProxy;
-
-import net.ilexiconn.llibrary.LLibrary;
 import net.minecraft.item.Item;
 import net.minecraft.world.WorldType;
 import net.minecraftforge.common.MinecraftForge;
@@ -33,7 +31,6 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
-
 import org.apache.logging.log4j.Logger;
 
 import java.util.HashMap;
