@@ -2,7 +2,7 @@
 "__comment": "Designed by Creativeone with BDcraft Cubik PRO 0.95 Beta - http://bdcraft.net",
 "textures": {
     "particle": "arkcraft:items/longneck_rifle",
-    "texture": "arkcraft:items/longneck_rifle"
+    "texture": "arkcraft:items/longneck_rifle_scope"
 },
 "elements": [ 
 {
