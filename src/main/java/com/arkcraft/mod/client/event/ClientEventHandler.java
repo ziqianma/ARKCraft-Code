@@ -1,24 +1,18 @@
 package com.arkcraft.mod.client.event;
 
-import com.arkcraft.mod.client.gui.GuiMainMenuOverride;
-import com.arkcraft.mod.client.sound.SoundARKTheme;
-import com.arkcraft.mod.common.items.weapons.component.RangedComponent;
-import com.arkcraft.mod.common.items.weapons.handlers.IItemWeapon;
 import net.ilexiconn.llibrary.client.gui.GuiLLibraryMainMenu;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.ISound;
 import net.minecraft.client.gui.GuiMainMenu;
-import net.minecraft.client.gui.GuiMultiplayer;
-import net.minecraft.client.gui.GuiOptions;
-import net.minecraft.client.gui.GuiScreenRealmsProxy;
-import net.minecraft.client.gui.GuiSelectWorld;
-import net.minecraftforge.client.event.FOVUpdateEvent;
 import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.client.event.sound.PlaySoundEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import com.arkcraft.mod.client.gui.GuiMainMenuOverride;
+import com.arkcraft.mod.client.sound.SoundARKTheme;
 
 @SideOnly(Side.CLIENT)
 public class ClientEventHandler
