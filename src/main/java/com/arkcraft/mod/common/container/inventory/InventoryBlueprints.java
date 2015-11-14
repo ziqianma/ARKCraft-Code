@@ -6,11 +6,10 @@ import com.arkcraft.mod.common.handlers.ARKCraftingManager;
 import com.arkcraft.mod.common.handlers.IARKRecipe;
 import com.arkcraft.mod.common.lib.LogHelper;
 import com.arkcraft.mod.common.network.UpdatePlayerCrafting;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.MathHelper;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
@@ -27,6 +26,7 @@ import java.util.List;
 public class InventoryBlueprints extends InventoryBasic {
 	ARKCraftingManager craftingManager;
 	InventoryPlayerCrafting invCrafting;
+//	IInventory invCrafting;
 	
 	public InventoryBlueprints(String title, boolean customName, int slotCount) {
 		super(title, customName, slotCount);
@@ -42,41 +42,7 @@ public class InventoryBlueprints extends InventoryBasic {
 		CRAFT_TIME_FOR_ITEM = craftTimeForItem;
 	}
 
-    public void loadInventoryFromNBT(NBTTagCompound nbt)  {
-//		final byte NBT_TYPE_COMPOUND = 10;  
-//		NBTTagList dataForAllBlueprints = nbt.getTagList("Blueprints", NBT_TYPE_COMPOUND);
-//		loadInventoryFromNBT(dataForAllBlueprints);
-    }
-    
-    public void loadInventoryFromNBT(NBTTagList nbt)  {
-//        int i;
-//        for (i = 0; i < this.getSizeInventory(); ++i) {
-//            this.setInventorySlotContents(i, (ItemStack)null);
-//        }
-//        for (i = 0; i < nbt.tagCount(); ++i) {
-//            NBTTagCompound nbttagcompound = nbt.getCompoundTagAt(i);
-//            int j = nbttagcompound.getByte("Slot") & 255;
-//
-//            if (j >= 0 && j < this.getSizeInventory()) {
-//                this.setInventorySlotContents(j, ItemStack.loadItemStackFromNBT(nbttagcompound));
-//            }
-//        }
-    }
-
-    public void saveInventoryToNBT(NBTTagCompound nbt) {
-//        NBTTagList nbttaglist = new NBTTagList();
-//        for (int i = 0; i < this.getSizeInventory(); ++i) {
-//            ItemStack itemstack = this.getStackInSlot(i);
-//            if (itemstack != null) {
-//                NBTTagCompound nbttagcompound = new NBTTagCompound();
-//                nbttagcompound.setByte("Slot", (byte)i);
-//                itemstack.writeToNBT(nbttagcompound);
-//                nbttaglist.appendTag(nbttagcompound);
-//                LogHelper.info("InventoryBlueprints: Saved a " + itemstack.getItem() + " to inventory.");
-//            }
-//        }
-//		nbt.setTag("Blueprints", nbttaglist);
-    }
+	// We do not save the blueprint inventory to NBT, it is loaded from the Crafting Manager
 
     /**
      * Do not give this method the name canInteractWith because it clashes with Container
@@ -302,7 +268,7 @@ public class InventoryBlueprints extends InventoryBasic {
         }	
 	}
 	
-	// ----- For the progess indicator in the GUI: -----
+	// ----- For the progress indicator in the GUI: -----
 	/** x position in GUI of the button pressed */
 	private int xButtonPressed;
 	public int getxButtonPressed() { return xButtonPressed;	}
