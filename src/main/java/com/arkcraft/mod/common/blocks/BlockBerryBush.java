@@ -53,6 +53,11 @@ public class BlockBerryBush extends Block {
 			}
 		}
 	}
+	
+	@SideOnly(Side.CLIENT)
+    public Item getItem(World worldIn, BlockPos pos){
+		return ARKCraftItems.item_berry_bush;
+	}	
 
 	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
 	{

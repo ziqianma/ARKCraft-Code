@@ -33,46 +33,56 @@ public class PlayerCraftingManager extends ARKCraftingManager{
 	}
 	
 	public static void registerPlayerCraftingRecipes() {
+		
+		//Compost Bin
 		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.item_compost_bin, 1),
-				new ItemStack(Blocks.log, 50, ARKShapelessRecipe.ANY), // Any Wood
-				new ItemStack(ARKCraftItems.thatch, 10), 
+				new ItemStack(ARKCraftItems.wood, 50), 
+				new ItemStack(ARKCraftItems.thatch, 15), 
 				new ItemStack(ARKCraftItems.fiber, 12)
 				);
+		
+		//Slingshot
 		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.slingshot, 1),
-				new ItemStack(Items.leather, 1), 
-				new ItemStack(Blocks.log, 5, ARKShapelessRecipe.ANY), // Any Wood
+				new ItemStack(ARKCraftItems.hide, 1), 
+				new ItemStack(ARKCraftItems.wood, 5), 
 				new ItemStack(ARKCraftItems.fiber, 20)
 				);
+		
+		//Spear
 		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.spear, 1),
 				new ItemStack(Items.flint, 2), 
-				new ItemStack(Blocks.log, 8, ARKShapelessRecipe.ANY), // Any Wood
+				new ItemStack(Blocks.log, 8, ARKShapelessRecipe.ANY), 
 				new ItemStack(ARKCraftItems.fiber, 12)
 				);
-		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.spy_glass, 1),
-				new ItemStack(Blocks.log, 5, ARKShapelessRecipe.ANY), // Any Wood
-				new ItemStack(Items.leather, 10), 
-				new ItemStack(ARKCraftItems.fiber, 10),
-				new ItemStack(Items.diamond, 2)
-				);
+		
+		//Mortar and Pestle
 		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.item_mortar_and_pestle, 1),
-				new ItemStack(Items.leather, 15), 
-				new ItemStack(Blocks.cobblestone, 65)
+				new ItemStack(ARKCraftItems.hide, 15), 
+				new ItemStack(ARKCraftItems.rock, 65)
 				);
+		
+		//Smithy
 		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.item_smithy, 1),
-				new ItemStack(Items.iron_ingot, 15), 
-				new ItemStack(Blocks.cobblestone, 50),
-				new ItemStack(Blocks.log, 30, ARKShapelessRecipe.ANY), // Any Wood
-				new ItemStack(Items.leather, 20) 
+				new ItemStack(ARKCraftItems.metal, 5), 
+				new ItemStack(ARKCraftItems.rock, 50),
+				new ItemStack(ARKCraftItems.wood, 30), 
+				new ItemStack(ARKCraftItems.hide, 20) 
 				);
+		
+		//Tranq Arrow
 		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.tranq_arrow, 1),
 				new ItemStack(ARKCraftItems.stone_arrow, 1),
 				new ItemStack(ARKCraftItems.narcotics, 1)
 				);
+		
+		//Stone Arrow
 		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.stone_arrow, 1),
-				new ItemStack(ARKCraftItems.fiber, 6),
-				new ItemStack(ARKCraftItems.thatch, 4),
-				new ItemStack(Items.flint, 2)
+				new ItemStack(ARKCraftItems.fiber, 2),
+				new ItemStack(ARKCraftItems.thatch, 2),
+				new ItemStack(ARKCraftItems.flint, 1)
 				);
+		
+		//Cloth Armor
 		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.clothChest, 1),
 				new ItemStack(ARKCraftItems.fiber, 40)
 				);
@@ -80,25 +90,29 @@ public class PlayerCraftingManager extends ARKCraftingManager{
 				new ItemStack(ARKCraftItems.fiber, 50)
 				);
 		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.clothHelm, 1),
-				new ItemStack(ARKCraftItems.fiber, 10),
-				new ItemStack(Items.leather, 4)
+				new ItemStack(ARKCraftItems.fiber, 10)
 				);
 		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.clothBoots, 1),
 				new ItemStack(ARKCraftItems.fiber, 25),
-				new ItemStack(Items.leather, 6)
+				new ItemStack(ARKCraftItems.hide, 6)
 				);	
-		// TODO: Might want to move these to the Smithy!
-		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.leatherBoots, 1),
-				new ItemStack(ARKCraftItems.hide, 8) 
+		
+		//Hide Armor
+		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.hideBoots, 1),
+				new ItemStack(ARKCraftItems.hide, 12),
+				new ItemStack(ARKCraftItems.fiber, 5)
 				);
-		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.leatherLegs, 1),
-				new ItemStack(ARKCraftItems.hide, 7) 
+		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.hideLegs, 1),
+				new ItemStack(ARKCraftItems.hide, 25),
+				new ItemStack(ARKCraftItems.fiber, 10)
 				);
-		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.leatherChest, 1),
-				new ItemStack(ARKCraftItems.hide, 5) 
+		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.hideChest, 1),
+				new ItemStack(ARKCraftItems.hide, 20),
+				new ItemStack(ARKCraftItems.fiber, 8)
 				);
-		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.leatherChest, 1),
-				new ItemStack(ARKCraftItems.hide, 7) 
+		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.hideHelm, 1),
+				new ItemStack(ARKCraftItems.hide, 15),
+				new ItemStack(ARKCraftItems.fiber, 6)
 				);
 	}
 }

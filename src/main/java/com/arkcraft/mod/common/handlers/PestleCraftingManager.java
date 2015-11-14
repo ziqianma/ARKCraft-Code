@@ -32,21 +32,27 @@ public class PestleCraftingManager  extends ARKCraftingManager{
 	}
    
 	public static void registerPestleCraftingRecipes() {
+		
+		//Narcotics
 		getInstance().addShapelessRecipe(
 				new ItemStack(ARKCraftItems.narcotics, 1),
 				new ItemStack(ARKCraftItems.narcoBerry, 5),
 				new ItemStack(ARKCraftItems.spoiled_meat, 1)
 				);
+		//Gun Powder
 		getInstance().addShapelessRecipe(
 				new ItemStack(ARKCraftItems.gun_powder, 1),
-				new ItemStack(Blocks.stone, 1, ARKShapelessRecipe.ANY),
-				new ItemStack(ARKCraftItems.narcoBerry, 1)
+				new ItemStack(ARKCraftItems.flint, 1),
+				new ItemStack(Items.coal, 1)
 				);
+		//Spark Powder
 		getInstance().addShapelessRecipe(
 				new ItemStack(ARKCraftItems.spark_powder, 1),
-				new ItemStack(Items.flint, 2),
+				new ItemStack(ARKCraftItems.flint, 2),
 				new ItemStack(ARKCraftItems.rock, 1) 
 				);
+		
+		//Cementing Pastes
 		getInstance().addShapelessRecipe(
 				new ItemStack(ARKCraftItems.cementing_pastes, 1),
 				new ItemStack(ARKCraftItems.rock, 8), 

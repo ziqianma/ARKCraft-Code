@@ -62,11 +62,12 @@ public class ARKCraftItems
 	public static ItemDinosaurSaddle saddle_small, saddle_medium, saddle_large;
 	public static ItemARKArmor chitinHelm, chitinChest, chitinLegs, chitinBoots;
 	public static ItemARKArmor clothHelm, clothChest, clothLegs, clothBoots;
-	public static ItemARKArmor leatherHelm, leatherChest, leatherLegs, leatherBoots;
+	public static ItemARKArmor hideHelm, hideChest, hideLegs, hideBoots;
 	public static Dossier dino_book;
 	public static ItemBerryBush item_berry_bush;
 	public static ItemCompostBin item_compost_bin;
 	public static ItemSmithy item_smithy;
+	public static ItemCrystal item_crystal;
 	public static ItemCropPlot item_crop_plot;
 	public static ItemMortarAndPestle item_mortar_and_pestle;
 	public static ItemSpyGlass spy_glass;
@@ -93,7 +94,7 @@ public class ARKCraftItems
 
 	public static ArmorMaterial CLOTH = EnumHelper.addArmorMaterial("CLOTH_MAT", "CLOTH_MAT", 4, new int[] {1,2,1,1}, 15);
 	public static ArmorMaterial CHITIN = EnumHelper.addArmorMaterial("CHITIN_MAT", "CHITIN_MAT", 16, new int[] { 3,7,6,3 } , 10);
-	public static ArmorMaterial BONE = EnumHelper.addArmorMaterial("BONE_MAT", "BONE_MAT", 40, new int[] { 3, 8, 6, 3 }, 30);
+	public static ArmorMaterial HIDE = EnumHelper.addArmorMaterial("HIDE_MAT", "HIDE_MAT", 40, new int[] { 3, 8, 6, 3 }, 30);
 	
 	public static ToolMaterial METAL = EnumHelper.addToolMaterial("METAL_MAT", 3, 1500, 6.0F, 0.8F, 8);
 	public static ToolMaterial STONE = EnumHelper.addToolMaterial("STONE_MAT", 2, 500, 3.5F, 0.4F, 13);
@@ -163,6 +164,7 @@ public class ARKCraftItems
 		item_smithy = addSmithyItem("item_smithy");
 		item_crop_plot = addCropPlot("item_crop_plot");
 		item_mortar_and_pestle = addMortarAndPestle("item_mortar_and_pestle");
+		item_crystal = addCrystalItem("item_crystal");
 		
 		//Bows
 		compound_bow = new ItemCompoundBow();
@@ -200,10 +202,10 @@ public class ARKCraftItems
 		clothChest = addArmorItem("cloth_chest", CLOTH, "clothArmor", 1, false);
 		clothLegs = addArmorItem("cloth_legs", CLOTH, "clothArmor", 2, false);
 		clothBoots = addArmorItem("cloth_boots", CLOTH, "clothArmor", 3, false);
-		leatherHelm = addArmorItem("leather_helm", BONE, "leatherArmor", 0, true);
-		leatherChest = addArmorItem("leather_chest", BONE, "leatherArmor", 1, true);
-		leatherLegs = addArmorItem("leather_legs", BONE, "leatherArmor", 2, true);
-		leatherBoots = addArmorItem("leather_boots", BONE, "leatherArmor", 3, true);
+		hideHelm = addArmorItem("hide_helm", HIDE, "hideArmor", 0, true);
+		hideChest = addArmorItem("hide_chest", HIDE, "hideArmor", 1, true);
+		hideLegs = addArmorItem("hide_legs", HIDE, "hideArmor", 2, true);
+		hideBoots = addArmorItem("hide_boots", HIDE, "hideArmor", 3, true);
 		
 		registerDispenseBehavior();
 		registerWeaponEntities();
@@ -374,6 +376,12 @@ public class ARKCraftItems
 	
 	protected static ItemCropPlot addCropPlot(String name) {
 		ItemCropPlot i = new ItemCropPlot();
+		registerItem(name, i);
+		return i;
+	}
+	
+	protected static ItemCrystal addCrystalItem(String name) {
+		ItemCrystal i = new ItemCrystal();
 		registerItem(name, i);
 		return i;
 	}
