@@ -15,18 +15,18 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
 import com.arkcraft.mod.common.ARKCraft;
-import com.arkcraft.mod.common.container.ContainerInventoryCompostBin;
-import com.arkcraft.mod.common.tile.TileInventoryCompostBin;
+import com.arkcraft.mod.common.container.ContainerInventoryForge;
+import com.arkcraft.mod.common.tile.TileInventoryForge;
 
 @SideOnly(Side.CLIENT)
 public class GUIForge extends GuiContainer {
 	
 	public static final ResourceLocation texture = new ResourceLocation(ARKCraft.MODID, "textures/gui/forge_gui.png");
-	private TileInventoryCompostBin tileEntity;
+	private TileInventoryForge tileEntity;
 	
-	public GUIForge(InventoryPlayer invPlayer, TileInventoryCompostBin tileInventoryCropPlot) {
-		super(new ContainerInventoryCompostBin(invPlayer, tileInventoryCropPlot));
-		this.tileEntity = tileInventoryCropPlot;
+	public GUIForge(InventoryPlayer invPlayer, TileInventoryForge tileInventoryForge) {
+		super(new ContainerInventoryForge(invPlayer, tileInventoryForge));
+		this.tileEntity = tileInventoryForge;
 		
 		// Width and height of the gui:
 		this.xSize = 175;
@@ -58,15 +58,15 @@ public class GUIForge extends GuiContainer {
 		for (int row = 0; row < 2; row++) {
 			for (int col = 0; col < 4; col++) {
 				int index = col + 4 * row;
-				if (tileEntity.secondsOfThatchRemaining(index) > 0) {
-					int x = guiLeft + ContainerInventoryCompostBin.COMPOST_SLOT_XPOS;
-					int y = guiTop + ContainerInventoryCompostBin.COMPOST_SLOT_YPOS;
+				if (tileEntity.secondsOfBurnTimeRemaining(index) > 0) {
+					int x = guiLeft + ContainerInventoryForge.FORGE_SLOT_XPOS;
+					int y = guiTop + ContainerInventoryForge.FORGE_SLOT_YPOS;
 					if (isInRect(x + 18 * col, y + 18 * row, 16, 16, mouseX, mouseY)) {
 						ItemStack stack = tileEntity.getStackInSlot(index);
 						if (stack != null){
 							String thatchName = stack.getItem().getItemStackDisplayName(stack);
 							hoveringText.add(thatchName + " - composting Time Remaining:");
-							hoveringText.add(tileEntity.secondsOfThatchRemaining(index) + "s");
+							hoveringText.add(tileEntity.secondsOfBurnTimeRemaining(index) + "s");
 						}
 					}
 				}

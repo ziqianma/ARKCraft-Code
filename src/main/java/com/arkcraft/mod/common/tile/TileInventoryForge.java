@@ -32,11 +32,11 @@ import com.arkcraft.mod.common.lib.LogHelper;
  *
  */
 public class TileInventoryForge extends TileEntity implements IInventory, IUpdatePlayerListBox {
-	public static final int COMPOST_SLOTS_COUNT = 8;
-	public static final int TOTAL_SLOTS_COUNT = COMPOST_SLOTS_COUNT;
+	public static final int FORGE_SLOTS_COUNT = 8;
+	public static final int TOTAL_SLOTS_COUNT = FORGE_SLOTS_COUNT;
 	public static final int LAST_INVENTORY_SLOT = TOTAL_SLOTS_COUNT - 1; 
 
-	public static final int FIRST_COMPOST_SLOT = 0;
+	public static final int FIRST_FORGE_SLOT = 0;
 
 	// Create and initialize the itemStacks variable that will store store the itemStacks
 	private ItemStack[] itemStacks = new ItemStack[TOTAL_SLOTS_COUNT];
@@ -44,31 +44,32 @@ public class TileInventoryForge extends TileEntity implements IInventory, IUpdat
 	// Other class variables
 	int tick = 20;
 
-	/** The number of composting seconds remaining on the current piece of thatch */
-	private int [] compostTimeRemaining = new int[COMPOST_SLOTS_COUNT];
-	/** The initial composting value of the currently burning thatch (in seconds of composting duration) */
-	private static int compostTimeInitialValue = BALANCE.COMPOST_BIN.COMPOST_TIME_FOR_THATCH;
-	/** Seconds of thatch burn time remaining for the item in a slot */
-	public int secondsOfThatchRemaining(int i) {
-		if (itemStacks[i] != null && getItemCompostTime(itemStacks[i]) > 0) {
-			if (compostTimeRemaining[i] > 0){
-				return compostTimeRemaining[i];
+	/** The number of burning seconds remaining on the current piece of fuel */
+	private int [] burningTimeRemaining = new int[FORGE_SLOTS_COUNT];
+	/** The initial burning value of the currently burning fuel (in seconds of burning duration) */
+//	private static int burningTimeInitialValue = BALANCE.COMPOST_BIN.COMPOST_TIME_FOR_THATCH;
+	private static int burningTimeInitialValue = 30; // TODO: Replace with config value or TBD
+	/** Seconds of fue burn time remaining for the item in a slot */
+	public int secondsOfBurnTimeRemaining(int i) {
+		if (itemStacks[i] != null && getItemBurnTime(itemStacks[i]) > 0) {
+			if (burningTimeRemaining[i] > 0){
+				return burningTimeRemaining[i];
 			}
 		}
 		return 0;
 	}
 
 	/** The number of seconds the current item has been composting */
-	private short compostTime;
-	/** The number of seconds required to create a fertilizer */
+	private short burnTime;
+	/** The number of seconds required to create an output */
 	private static final short COMPOST_TIME_FOR_FECES = (short) BALANCE.COMPOST_BIN.COMPOST_TIME_FOR_FECES;
 	/** Returns double between 0 and 1 representing % complete */
 	public double getFractionCompostTimeComplete() {
-		double fraction = compostTime / (double)COMPOST_TIME_FOR_FECES;
+		double fraction = burnTime / (double)COMPOST_TIME_FOR_FECES;
 		return MathHelper.clamp_double(fraction, 0.0, 1.0);
 	}
 	
-	/** The number of compost slots with feces */
+	/** The number of forge slots with ??? feces */
 	private int cachedNumberOfDecomposingSlots = -1;
 
 	/** This method is called every tick to update the tile entity, i.e.
@@ -95,17 +96,17 @@ public class TileInventoryForge extends TileEntity implements IInventory, IUpdat
 		if (isThatchPresent() && numberDecomposing > 0 && canCompost()) {
 			burnThatch();
 
-			compostTime += numberDecomposing;
+			burnTime += numberDecomposing;
 				
 			// If compostTime is reached, create a fertilizer and reset compostTime
-			if (compostTime >= COMPOST_TIME_FOR_FECES) {
+			if (burnTime >= COMPOST_TIME_FOR_FECES) {
 //				LogHelper.info("TileInventoryCompostBin: About to create fertilizer on " + (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT ? "client" : "server"));
 				compostFertilizer();
-				compostTime = 0;
+				burnTime = 0;
 			}
 		}
 		else
-			compostTime = 0;
+			burnTime = 0;
 	}
 
 	/**
@@ -117,7 +118,7 @@ public class TileInventoryForge extends TileEntity implements IInventory, IUpdat
 		boolean inventoryChanged = false;
 		
 		// Iterate over all the compost bin slots
-		for (int i = 0; i < COMPOST_SLOTS_COUNT; i++) {
+		for (int i = 0; i < FORGE_SLOTS_COUNT; i++) {
 			if (itemStacks[i] != null && getItemDecompostTime(itemStacks[i]) > 0 && itemStacks[i].getItem() != ARKCraftItems.fertilizer) {
 				if (increaseStackDamage(itemStacks[i])) {
 					itemStacks[i] = null;
@@ -138,24 +139,24 @@ public class TileInventoryForge extends TileEntity implements IInventory, IUpdat
 		boolean inventoryChanged = false;
 		
 		// Iterate over all the compost bin slots
-		for (int i = 0; i < COMPOST_SLOTS_COUNT; i++) {
-			if (itemStacks[i] != null && getItemCompostTime(itemStacks[i]) > 0) {
-				if (compostTimeRemaining[i] > 0){
-					compostTimeRemaining[i]--;
-					if (compostTimeRemaining[i] <= 0){
+		for (int i = 0; i < FORGE_SLOTS_COUNT; i++) {
+			if (itemStacks[i] != null && getItemBurnTime(itemStacks[i]) > 0) {
+				if (burningTimeRemaining[i] > 0){
+					burningTimeRemaining[i]--;
+					if (burningTimeRemaining[i] <= 0){
 						itemStacks[i].stackSize--;
 						inventoryChanged = true;
 						if (itemStacks[i].stackSize == 0){
 							itemStacks[i] = null;
 						}
 						else {
-							compostTimeRemaining[i] = compostTimeInitialValue; 
+							burningTimeRemaining[i] = burningTimeInitialValue; 
 						}
 					}
 				}
 				// Initialize a new stack just added
 				else {
-					compostTimeRemaining[i] = compostTimeInitialValue; 
+					burningTimeRemaining[i] = burningTimeInitialValue; 
 				}
 				break; // Just burn one thatch at a time							
 			}				
@@ -168,8 +169,8 @@ public class TileInventoryForge extends TileEntity implements IInventory, IUpdat
 	 */
 	private boolean isThatchPresent() {
 		// Iterate over all the compost bin slots
-		for (int i = 0; i < COMPOST_SLOTS_COUNT; i++) {
-			if (itemStacks[i] != null && getItemCompostTime(itemStacks[i]) > 0) {
+		for (int i = 0; i < FORGE_SLOTS_COUNT; i++) {
+			if (itemStacks[i] != null && getItemBurnTime(itemStacks[i]) > 0) {
 				return true;
 			}
 		}
@@ -197,7 +198,7 @@ public class TileInventoryForge extends TileEntity implements IInventory, IUpdat
 		Integer firstSuitableOutputSlot = null;
 
 		// find the first suitable output slot- either empty, or with identical item that has enough space
-		for (int outputSlot = LAST_INVENTORY_SLOT; outputSlot > FIRST_COMPOST_SLOT; outputSlot--) {
+		for (int outputSlot = LAST_INVENTORY_SLOT; outputSlot > FIRST_FORGE_SLOT; outputSlot--) {
 			ItemStack outputStack = itemStacks[outputSlot];
 			// Empty slot?
 			if (outputStack == null) {
@@ -249,11 +250,11 @@ public class TileInventoryForge extends TileEntity implements IInventory, IUpdat
 	 * @param stack
 	 * @return Returns 0 if the given item is not a valid thatching item
 	 */
-	public static short getItemCompostTime(ItemStack stack) {
+	public static short getItemBurnTime(ItemStack stack) {
 		int compostTime = 0;		
 		if (stack != null){
 			if (stack.getItem() == ARKCraftItems.thatch)
-				compostTime = compostTimeInitialValue;
+				compostTime = burningTimeInitialValue;
 		}		
 		return (short)MathHelper.clamp_int(compostTime, 0, Short.MAX_VALUE);
 	}
@@ -369,7 +370,7 @@ public class TileInventoryForge extends TileEntity implements IInventory, IUpdat
 			if (getItemDecompostTime(stack) > 0)
 				return true;
 			// Thatch?
-			if (getItemCompostTime(stack) > 0)
+			if (getItemBurnTime(stack) > 0)
 				return true;
 		}
 		return false;
@@ -423,8 +424,8 @@ public class TileInventoryForge extends TileEntity implements IInventory, IUpdat
 		parentNBTTagCompound.setTag("Items", dataForAllSlots);
 
 		// Save everything else
-		parentNBTTagCompound.setShort("compostTime", compostTime);
-		parentNBTTagCompound.setTag("compostTimeRemaining", new NBTTagIntArray(compostTimeRemaining));
+		parentNBTTagCompound.setShort("compostTime", burnTime);
+		parentNBTTagCompound.setTag("compostTimeRemaining", new NBTTagIntArray(burningTimeRemaining));
 		LogHelper.info("TileInventoryCompostBin: Wrote inventory.");
 	}
 
@@ -446,8 +447,8 @@ public class TileInventoryForge extends TileEntity implements IInventory, IUpdat
 		}
 
 		// Load everything else.  Trim the arrays (or pad with 0) to make sure they have the correct number of elements
-		compostTime = nbtTagCompound.getShort("compostTime");
-		compostTimeRemaining = Arrays.copyOf(nbtTagCompound.getIntArray("compostTimeRemaining"), COMPOST_SLOTS_COUNT);
+		burnTime = nbtTagCompound.getShort("compostTime");
+		burningTimeRemaining = Arrays.copyOf(nbtTagCompound.getIntArray("compostTimeRemaining"), FORGE_SLOTS_COUNT);
 		cachedNumberOfDecomposingSlots = -1;
 		LogHelper.info("TileInventoryCompostBin: Read inventory.");
 	}
@@ -475,13 +476,13 @@ public class TileInventoryForge extends TileEntity implements IInventory, IUpdat
 
 	private static final byte COMPOST_FIELD_ID = 0;
 	private static final byte FIRST_COMPOST_TIME_FIELD_ID = 1;
-	private static final byte NUMBER_OF_FIELDS = FIRST_COMPOST_TIME_FIELD_ID + (byte)COMPOST_SLOTS_COUNT;
+	private static final byte NUMBER_OF_FIELDS = FIRST_COMPOST_TIME_FIELD_ID + (byte)FORGE_SLOTS_COUNT;
 
 	@Override
 	public int getField(int id) {
-		if (id == COMPOST_FIELD_ID) return compostTime;
+		if (id == COMPOST_FIELD_ID) return burnTime;
 		if (id >= FIRST_COMPOST_TIME_FIELD_ID && id < NUMBER_OF_FIELDS){
-			return compostTimeRemaining[id - FIRST_COMPOST_TIME_FIELD_ID];
+			return burningTimeRemaining[id - FIRST_COMPOST_TIME_FIELD_ID];
 		}
 		System.err.println("Invalid field ID in TileInventoryCompost.getField:" + id);
 		return 0;
@@ -490,9 +491,9 @@ public class TileInventoryForge extends TileEntity implements IInventory, IUpdat
 	@Override
 	public void setField(int id, int value)	{
 		if (id == COMPOST_FIELD_ID) {
-			compostTime = (short)value;
+			burnTime = (short)value;
 		} else if (id >= FIRST_COMPOST_TIME_FIELD_ID && id < NUMBER_OF_FIELDS) {
-			compostTimeRemaining[id - FIRST_COMPOST_TIME_FIELD_ID] = value;
+			burningTimeRemaining[id - FIRST_COMPOST_TIME_FIELD_ID] = value;
 		} else {
 			System.err.println("Invalid field ID in TileInventoryCompost.setField:" + id);
 		}

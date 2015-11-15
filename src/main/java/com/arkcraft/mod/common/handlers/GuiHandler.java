@@ -12,6 +12,7 @@ import com.arkcraft.mod.common.container.ContainerInventorySmithy;
 import com.arkcraft.mod.common.container.ContainerInventoryTaming;
 import com.arkcraft.mod.client.gui.GUICompostBin;
 import com.arkcraft.mod.client.gui.GUICropPlot;
+import com.arkcraft.mod.client.gui.GUIForge;
 import com.arkcraft.mod.client.gui.GUITaming;
 import com.arkcraft.mod.client.gui.GuiInventoryDino;
 import com.arkcraft.mod.client.gui.GuiInventoryDodo;
@@ -173,7 +174,7 @@ public class GuiHandler implements IGuiHandler {
 			BlockPos xyz = new BlockPos(x, y, z);
 			TileEntity tileEntity = world.getTileEntity(xyz);
 			if (tileEntity instanceof TileInventoryForge)			
-				return new ContainerInventoryForge(player.inventory, (TileInventoryForge) tileEntity);
+				return new GUIForge(player.inventory, (TileInventoryForge) tileEntity);
 			else {
 				LogHelper.info("GuiHandler - getClientGuiElement: TileEntityForge not found!");				
 			}

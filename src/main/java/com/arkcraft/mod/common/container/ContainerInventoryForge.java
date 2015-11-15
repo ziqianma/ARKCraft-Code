@@ -14,27 +14,27 @@ import com.arkcraft.mod.common.lib.LogHelper;
 import com.arkcraft.mod.common.tile.TileInventoryForge;
 
 public class ContainerInventoryForge extends Container {
-	private TileInventoryForge tileInventoryCompostBin;
-	private final int COMPOST_SLOT_COUNT = 8;
-	public static final int COMPOST_SLOT_YPOS = 26;
-	public static final int COMPOST_SLOT_XPOS = 53;
+	private TileInventoryForge tileInventoryForge;
+	private final int FORGE_SLOT_COUNT = 8;
+	public static final int FORGE_SLOT_YPOS = 26;
+	public static final int FORGE_SLOT_XPOS = 53;
 
 	// These store cache values, used by the server to only update the client side tile entity when values have changed
 	private int [] cachedFields;
 
-	public ContainerInventoryForge(InventoryPlayer invPlayer, TileInventoryForge tileInventoryCompostBin) {
-		LogHelper.info("ContainerInventoryCompostBin: constructor called.");
-		this.tileInventoryCompostBin = tileInventoryCompostBin;
+	public ContainerInventoryForge(InventoryPlayer invPlayer, TileInventoryForge tileInventoryForge) {
+		LogHelper.info("ContainerInventoryForge: constructor called.");
+		this.tileInventoryForge = tileInventoryForge;
 		
 		/* Compost bin inventory */
-		if (COMPOST_SLOT_COUNT != tileInventoryCompostBin.getSizeInventory()) {
-			LogHelper.error("Mismatched slot count in container(" + COMPOST_SLOT_COUNT + ") and CompostBinInventory (" 
-						+ tileInventoryCompostBin.getSizeInventory()+")");
+		if (FORGE_SLOT_COUNT != tileInventoryForge.getSizeInventory()) {
+			LogHelper.error("Mismatched slot count in container(" + FORGE_SLOT_COUNT + ") and ForgeInventory (" 
+						+ tileInventoryForge.getSizeInventory()+")");
 		}
 		for(int row = 0; row < 2; row++) {
 			for(int col = 0; col < 4; col++) {
 				int slotIndex =  col + row * 4;
-				addSlotToContainer(new SlotCompost(tileInventoryCompostBin, slotIndex, COMPOST_SLOT_XPOS + col * 18, COMPOST_SLOT_YPOS + row * 18));
+				addSlotToContainer(new SlotForge(tileInventoryForge, slotIndex, FORGE_SLOT_XPOS + col * 18, FORGE_SLOT_YPOS + row * 18));
 			}
 		}
 
@@ -60,17 +60,17 @@ public class ContainerInventoryForge extends Container {
     }
     
 	public ItemStack transferStackInSlot(EntityPlayer playerIn, int sourceSlotIndex) {
-		LogHelper.info("ContainerInventoryCompostBin: transferStackInSlot called.");
+		LogHelper.info("ContainerInventoryForge: transferStackInSlot called.");
 		Slot sourceSlot = (Slot)inventorySlots.get(sourceSlotIndex);
 		if (sourceSlot == null || !sourceSlot.getHasStack()) return null;
 		ItemStack sourceStack = sourceSlot.getStack();
 		ItemStack copyOfSourceStack = sourceStack.copy();
 
 		// Check if the slot clicked is one of the vanilla container slots
-		if(sourceSlotIndex >= COMPOST_SLOT_COUNT && sourceSlotIndex < 36 + COMPOST_SLOT_COUNT) {
-			if (tileInventoryCompostBin.isItemValidForSlot(sourceStack)) {
-				// This is a vanilla container slot so merge the stack into the composting bin inventory
-				if(!mergeItemStack(sourceStack, 0, COMPOST_SLOT_COUNT, false)) {
+		if(sourceSlotIndex >= FORGE_SLOT_COUNT && sourceSlotIndex < 36 + FORGE_SLOT_COUNT) {
+			if (tileInventoryForge.isItemValidForSlot(sourceStack)) {
+				// This is a vanilla container slot so merge the stack into the forge inventory
+				if(!mergeItemStack(sourceStack, 0, FORGE_SLOT_COUNT, false)) {
 					return null;
 				}
 			}
@@ -78,9 +78,9 @@ public class ContainerInventoryForge extends Container {
 				return null;
 		}
 		// Check if the slot clicked is a compost bin container slot
-		else if (sourceSlotIndex >= 0 && sourceSlotIndex < COMPOST_SLOT_COUNT) {
-			// This is a compost bin slot so merge the stack into the players inventory
-			if (!mergeItemStack(sourceStack, COMPOST_SLOT_COUNT, 36 + COMPOST_SLOT_COUNT, false)){
+		else if (sourceSlotIndex >= 0 && sourceSlotIndex < FORGE_SLOT_COUNT) {
+			// This is a forge slot so merge the stack into the players inventory
+			if (!mergeItemStack(sourceStack, FORGE_SLOT_COUNT, 36 + FORGE_SLOT_COUNT, false)){
 				return null;
 			}
 		} else {
@@ -101,7 +101,7 @@ public class ContainerInventoryForge extends Container {
 
 	@Override
 	public boolean canInteractWith(EntityPlayer playerIn) {
-		return tileInventoryCompostBin.isUseableByPlayer(playerIn);
+		return tileInventoryForge.isUseableByPlayer(playerIn);
 	}	  
 
 	// This is where you check if any values have changed and if so send an update to any clients accessing this container
@@ -117,14 +117,14 @@ public class ContainerInventoryForge extends Container {
 		super.detectAndSendChanges();
 
 		boolean allFieldsHaveChanged = false;
-		boolean fieldHasChanged [] = new boolean[tileInventoryCompostBin.getFieldCount()];
+		boolean fieldHasChanged [] = new boolean[tileInventoryForge.getFieldCount()];
 		if (cachedFields == null) {
-			cachedFields = new int[tileInventoryCompostBin.getFieldCount()];
+			cachedFields = new int[tileInventoryForge.getFieldCount()];
 			allFieldsHaveChanged = true;
 		}
 		for (int i = 0; i < cachedFields.length; ++i) {
-			if (allFieldsHaveChanged || cachedFields[i] != tileInventoryCompostBin.getField(i)) {
-				cachedFields[i] = tileInventoryCompostBin.getField(i);
+			if (allFieldsHaveChanged || cachedFields[i] != tileInventoryForge.getField(i)) {
+				cachedFields[i] = tileInventoryForge.getField(i);
 				fieldHasChanged[i] = true;
 			}
 		}
@@ -132,7 +132,7 @@ public class ContainerInventoryForge extends Container {
 		// go through the list of crafters (players using this container) and update them if necessary
 		for (int i = 0; i < this.crafters.size(); ++i) {
 			ICrafting icrafting = (ICrafting)this.crafters.get(i);
-			for (int fieldID = 0; fieldID < tileInventoryCompostBin.getFieldCount(); ++fieldID) {
+			for (int fieldID = 0; fieldID < tileInventoryForge.getFieldCount(); ++fieldID) {
 				if (fieldHasChanged[fieldID]) {
 					// Note that although sendProgressBarUpdate takes 2 ints on a server these are truncated to shorts
 					icrafting.sendProgressBarUpdate(this, fieldID, cachedFields[fieldID]);
@@ -146,19 +146,19 @@ public class ContainerInventoryForge extends Container {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void updateProgressBar(int id, int data) {
-		tileInventoryCompostBin.setField(id, data);
+		tileInventoryForge.setField(id, data);
 	}
 
-	// SlotFertilizer is a slot for fertilizer items
-	public class SlotCompost extends Slot {
-		public SlotCompost(IInventory inventoryIn, int index, int xPosition, int yPosition) {
+	// SlotForge is a slot for forge items
+	public class SlotForge extends Slot {
+		public SlotForge(IInventory inventoryIn, int index, int xPosition, int yPosition) {
 			super(inventoryIn, index, xPosition, yPosition);
 		}
 
 		// if this function returns false, the player won't be able to insert the given item into this slot
 		@Override
 		public boolean isItemValid(ItemStack stack) {
-			return tileInventoryCompostBin.isItemValidForSlot(stack);
+			return tileInventoryForge.isItemValidForSlot(stack);
 		}
 	}	
 }
