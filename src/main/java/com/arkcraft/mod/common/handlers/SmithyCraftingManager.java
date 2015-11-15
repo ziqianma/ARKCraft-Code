@@ -1,9 +1,9 @@
 package com.arkcraft.mod.common.handlers;
 
-import com.arkcraft.mod.common.items.ARKCraftItems;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+
+import com.arkcraft.mod.common.items.ARKCraftItems;
 
 /**
  * 
@@ -76,18 +76,6 @@ public class SmithyCraftingManager extends ARKCraftingManager{
 				new ItemStack(ARKCraftItems.hide, 6), 
 				new ItemStack(ARKCraftItems.chitin, 12)
 		);
-
-		//Simple Pistol
-		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.simple_pistol, 1),
-				new ItemStack(ARKCraftItems.metal, 60),
-				new ItemStack(ARKCraftItems.wood, 5),
-				new ItemStack(ARKCraftItems.hide, 15)
-				);
-		//Simple Bullet
-		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.simple_bullet, 1),
-				new ItemStack(ARKCraftItems.gun_powder, 6),
-				new ItemStack(ARKCraftItems.metal, 1)
-				);
 		
 		//Spy Glass
 		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.spy_glass, 1),
@@ -97,10 +85,39 @@ public class SmithyCraftingManager extends ARKCraftingManager{
 				new ItemStack(ARKCraftItems.item_crystal, 2)
 				);
 		
-		//Scoped Pistol
-		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.simple_pistol_scoped, 1),
-				new ItemStack(ARKCraftItems.simple_pistol, 1),
-				new ItemStack(ARKCraftItems.scope, 1)
+		//Scope
+		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.scope, 1),
+				new ItemStack(ARKCraftItems.rock, 5), 
+				new ItemStack(ARKCraftItems.metal, 40), 
+				new ItemStack(ARKCraftItems.item_crystal, 20)
+				);
+		
+		//Pike
+		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.ironPike, 1),
+				new ItemStack(ARKCraftItems.metal, 10), 
+				new ItemStack(ARKCraftItems.wood, 10), 
+				new ItemStack(ARKCraftItems.hide, 20)
+				);
+
+		//Metal Pick
+		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.metal_pick, 1),
+				new ItemStack(ARKCraftItems.metal, 1), 
+				new ItemStack(ARKCraftItems.wood, 1), 
+				new ItemStack(ARKCraftItems.hide, 10)
+				);
+		//Metal Hatchet
+		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.metal_hatchet, 1),
+				new ItemStack(ARKCraftItems.metal, 8), 
+				new ItemStack(ARKCraftItems.wood, 1), 
+				new ItemStack(ARKCraftItems.hide, 10)
+				);
+		
+		//Guns		
+		//Simple Pistol
+		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.simple_pistol, 1),
+				new ItemStack(ARKCraftItems.metal, 60),
+				new ItemStack(ARKCraftItems.wood, 5),
+				new ItemStack(ARKCraftItems.hide, 15)
 				);
 		
 		//Longneck Rifle
@@ -110,17 +127,66 @@ public class SmithyCraftingManager extends ARKCraftingManager{
 				new ItemStack(ARKCraftItems.hide, 25)
 				);
 		
-		//Scoped Longneck Rifle
-		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.longneck_rifle_scoped, 1),
-				new ItemStack(ARKCraftItems.longneck_rifle, 1),
-				new ItemStack(ARKCraftItems.scope, 1)
-				);
 		//Shotgun
 		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.shotgun, 1),
 				new ItemStack(ARKCraftItems.metal, 80),
 				new ItemStack(ARKCraftItems.wood, 20), 
 				new ItemStack(ARKCraftItems.hide, 25)
 				);
+		
+		//Crossbow
+		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.crossbow, 1),
+				new ItemStack(ARKCraftItems.metal, 7),
+				new ItemStack(ARKCraftItems.wood, 10), 
+				new ItemStack(ARKCraftItems.fiber, 35)
+				);
+		
+		//Simple Pistol with Scope
+		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.simple_pistol_scoped, 1),
+				new ItemStack(ARKCraftItems.simple_pistol, 1),
+				new ItemStack(ARKCraftItems.scope, 1)
+				);
+				
+		//Scope with Longneck Rifle
+		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.longneck_rifle_scoped, 1),
+				new ItemStack(ARKCraftItems.longneck_rifle, 1),
+				new ItemStack(ARKCraftItems.scope, 1)
+				);	
+		
+		//Bullets
+		//Simple Bullet
+		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.simple_bullet, 1),
+				new ItemStack(ARKCraftItems.gun_powder, 6),
+				new ItemStack(ARKCraftItems.metal, 1)
+				);
+		//Simple Rifle Ammo
+		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.simple_rifle_ammo, 1),
+				new ItemStack(ARKCraftItems.gun_powder, 12),
+				new ItemStack(ARKCraftItems.metal, 2)
+				);
+		//Simple Shotgun Ammo
+		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.simple_shotgun_ammo, 1),
+				new ItemStack(ARKCraftItems.gun_powder, 3),
+				new ItemStack(ARKCraftItems.metal, 1),
+				new ItemStack(ARKCraftItems.simple_bullet, 3)
+				);
+		//Tranquilizer
+		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.tranquilizer, 1),
+				new ItemStack(ARKCraftItems.narcotics, 3),
+				new ItemStack(ARKCraftItems.metal, 2),
+				new ItemStack(ARKCraftItems.simple_rifle_ammo, 1)
+				);
+		//Grenade
+		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.grenade, 1),
+				new ItemStack(ARKCraftItems.gun_powder, 30),
+				new ItemStack(ARKCraftItems.fiber, 15),
+				new ItemStack(ARKCraftItems.rock, 20),
+				new ItemStack(ARKCraftItems.metal, 2),
+				new ItemStack(ARKCraftItems.hide, 5)
+		//		new ItemStack(ARKCraftItems.oil, 4)
+				);
+		
+		
 		
 		//Rocket Launcher
 		//Second Release
@@ -131,11 +197,5 @@ public class SmithyCraftingManager extends ARKCraftingManager{
 				new ItemStack(Items.redstone, 16)
 				);	*/
 		
-		//Crossbow
-		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.crossbow, 1),
-				new ItemStack(ARKCraftItems.metal, 7),
-				new ItemStack(ARKCraftItems.wood, 10), 
-				new ItemStack(ARKCraftItems.fiber, 35)
-				);
 	}	
 }

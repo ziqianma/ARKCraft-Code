@@ -93,6 +93,11 @@ item.grenade.name=Grenade
 item.cementing_paste.name=Cementing Paste
 item.scope.name=Scope
 item.item_crystal.name=Crystal
+item.metal_pick.name=Metal Pickaxe
+item.metal_hatchet.name=Metal Hatchet
+item.stone_pick.name=Stone Pickaxe
+item.stone_hatchet.name=Stone Hatchet
+item.item_refining_forge.name=Refining Forge
 
 
 # Miscellaneous

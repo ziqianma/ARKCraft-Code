@@ -69,6 +69,7 @@ public class ARKCraftItems
 	public static ItemSmithy item_smithy;
 	public static ItemCrystal item_crystal;
 	public static ItemCropPlot item_crop_plot;
+	public static ItemRefiningForge item_refining_forge;
 	public static ItemMortarAndPestle item_mortar_and_pestle;
 	public static ItemSpyGlass spy_glass;
 	public static ItemGrenade grenade;
@@ -165,6 +166,7 @@ public class ARKCraftItems
 		item_crop_plot = addCropPlot("item_crop_plot");
 		item_mortar_and_pestle = addMortarAndPestle("item_mortar_and_pestle");
 		item_crystal = addCrystalItem("item_crystal");
+		item_refining_forge = addRefiningForge("item_refining_forge");
 		
 		//Bows
 		compound_bow = new ItemCompoundBow();
@@ -388,6 +390,12 @@ public class ARKCraftItems
 	
 	protected static ItemMortarAndPestle addMortarAndPestle(String name) {
 		ItemMortarAndPestle i = new ItemMortarAndPestle();
+		registerItem(name, i);
+		return i;
+	}
+	
+	protected static ItemRefiningForge addRefiningForge(String name) {
+		ItemRefiningForge i = new ItemRefiningForge();
 		registerItem(name, i);
 		return i;
 	}

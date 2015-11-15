@@ -1,10 +1,10 @@
 package com.arkcraft.mod.common.handlers;
 
-import com.arkcraft.mod.common.blocks.ARKCraftBlocks;
-import com.arkcraft.mod.common.items.ARKCraftItems;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+
+import com.arkcraft.mod.common.items.ARKCraftItems;
 
 /**
  * 
@@ -41,18 +41,12 @@ public class PlayerCraftingManager extends ARKCraftingManager{
 				new ItemStack(ARKCraftItems.fiber, 12)
 				);
 		
-		//Slingshot
-		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.slingshot, 1),
-				new ItemStack(ARKCraftItems.hide, 1), 
-				new ItemStack(ARKCraftItems.wood, 5), 
-				new ItemStack(ARKCraftItems.fiber, 20)
-				);
-		
-		//Spear
-		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.spear, 1),
-				new ItemStack(Items.flint, 2), 
-				new ItemStack(Blocks.log, 8, ARKShapelessRecipe.ANY), 
-				new ItemStack(ARKCraftItems.fiber, 12)
+		//Crop Plot
+		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.item_crop_plot, 1),
+				new ItemStack(ARKCraftItems.wood, 40), 
+				new ItemStack(ARKCraftItems.thatch, 20), 
+				new ItemStack(ARKCraftItems.fiber, 30),
+				new ItemStack(ARKCraftItems.rock, 50)
 				);
 		
 		//Mortar and Pestle
@@ -67,6 +61,35 @@ public class PlayerCraftingManager extends ARKCraftingManager{
 				new ItemStack(ARKCraftItems.rock, 50),
 				new ItemStack(ARKCraftItems.wood, 30), 
 				new ItemStack(ARKCraftItems.hide, 20) 
+				);
+		
+		//Forge
+		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.item_refining_forge, 1),
+				new ItemStack(ARKCraftItems.flint, 5), 
+				new ItemStack(ARKCraftItems.rock, 125),
+				new ItemStack(ARKCraftItems.wood, 20), 
+				new ItemStack(ARKCraftItems.hide, 65),
+				new ItemStack(ARKCraftItems.fiber, 40) 
+				);
+				
+		//Slingshot
+		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.slingshot, 1),
+				new ItemStack(ARKCraftItems.hide, 1), 
+				new ItemStack(ARKCraftItems.wood, 5), 
+				new ItemStack(ARKCraftItems.fiber, 20)
+				);
+		
+		//Spear
+		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.spear, 1),
+				new ItemStack(ARKCraftItems.flint, 2), 
+				new ItemStack(ARKCraftItems.wood, 8), 
+				new ItemStack(ARKCraftItems.fiber, 12)
+				);
+		
+		//Wooden Club
+		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.wooden_club, 1),
+				new ItemStack(ARKCraftItems.wood, 4), 
+				new ItemStack(ARKCraftItems.fiber, 15)
 				);
 		
 		//Tranq Arrow
@@ -113,6 +136,20 @@ public class PlayerCraftingManager extends ARKCraftingManager{
 		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.hideHelm, 1),
 				new ItemStack(ARKCraftItems.hide, 15),
 				new ItemStack(ARKCraftItems.fiber, 6)
+				);
+		
+		//Stone Pick
+		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.stone_pick, 1),
+				new ItemStack(ARKCraftItems.rock, 1), 
+				new ItemStack(ARKCraftItems.wood, 1), 
+				new ItemStack(ARKCraftItems.thatch, 10)
+				);
+		
+		//Stone Hatchet
+		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.stone_hatchet, 1),
+				new ItemStack(ARKCraftItems.thatch, 10), 
+				new ItemStack(ARKCraftItems.flint, 1), 
+				new ItemStack(ARKCraftItems.wood, 1)
 				);
 	}
 }
