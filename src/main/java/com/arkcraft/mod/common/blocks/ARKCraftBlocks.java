@@ -4,8 +4,10 @@ import com.arkcraft.mod.GlobalAdditions;
 import com.arkcraft.mod.common.handlers.GenerationHandler;
 import com.arkcraft.mod.common.tile.TileInventoryCompostBin;
 import com.arkcraft.mod.common.tile.TileInventoryCropPlot;
+import com.arkcraft.mod.common.tile.TileInventoryForge;
 import com.arkcraft.mod.common.tile.TileInventoryMP;
 import com.arkcraft.mod.common.tile.TileInventorySmithy;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.ResourceLocation;
@@ -27,6 +29,7 @@ public class ARKCraftBlocks
 	public static BlockSmithy smithy;
 	public static BlockMortarAndPestle pestle;
 	public static BlockCropPlot crop_plot;
+	public static BlockRefiningForge refining_forge;
 
 	public static ARKCraftBlocks getInstance() { return new ARKCraftBlocks(); }
 	public static Map<String, Block> allBlocks = new HashMap<String, Block>();
@@ -49,12 +52,14 @@ public class ARKCraftBlocks
 		pestle = registerMortarAndPestle("mortar_and_pestle", Material.rock, GlobalAdditions.GUI.PESTLE_AND_MORTAR.getID(), false, false, 3);
 		crop_plot = registerCropPlot("crop_plot", Material.wood, GlobalAdditions.GUI.CROP_PLOT.getID(), false, 3);
 		compost_bin = registerCompostBin("compost_bin", Material.wood, GlobalAdditions.GUI.COMPOST_BIN.getID(), false, false, 3);
+		refining_forge = registerRefiningForge("refining_forge", Material.rock, GlobalAdditions.GUI.FORGE_GUI.getID(), false, false, 3);
 
 		// Tile Entities
 		GameRegistry.registerTileEntity(TileInventoryCropPlot.class, "TileInventoryCropPlot");
 		GameRegistry.registerTileEntity(TileInventoryMP.class, "TileInventoryMP");
 		GameRegistry.registerTileEntity(TileInventoryCompostBin.class, "TileEntityCompostBin");
 		GameRegistry.registerTileEntity(TileInventorySmithy.class, "TileInventorySmithy");
+		GameRegistry.registerTileEntity(TileInventoryForge.class, "TileInventoryForge");
 	}
 
 	private static Block registerBlock(Block block, String name)
@@ -97,6 +102,16 @@ public class ARKCraftBlocks
 	
 	protected static BlockMortarAndPestle registerMortarAndPestle(String name, Material mat, int ID, boolean renderAsNormalBlock, boolean isOpaque, int renderType) {
 		BlockMortarAndPestle container = new BlockMortarAndPestle(mat, ID);
+		container.setRenderAsNormalBlock(renderAsNormalBlock);
+		container.setOpaque(isOpaque);
+		container.setRenderType(renderType);
+		allBlocks.put(name, container);
+		registerBlockNoTab(container, name);
+		return container;
+	}
+	
+	protected static BlockRefiningForge registerRefiningForge(String name, Material mat, int ID, boolean renderAsNormalBlock, boolean isOpaque, int renderType) {
+		BlockRefiningForge container = new BlockRefiningForge(mat, ID);
 		container.setRenderAsNormalBlock(renderAsNormalBlock);
 		container.setOpaque(isOpaque);
 		container.setRenderType(renderType);

@@ -5,6 +5,7 @@ import com.arkcraft.mod.common.container.ContainerInventoryCompostBin;
 import com.arkcraft.mod.common.container.ContainerInventoryCropPlot;
 import com.arkcraft.mod.common.container.ContainerInventoryDino;
 import com.arkcraft.mod.common.container.ContainerInventoryDodo;
+import com.arkcraft.mod.common.container.ContainerInventoryForge;
 import com.arkcraft.mod.common.container.ContainerInventoryMP;
 import com.arkcraft.mod.common.container.ContainerInventoryPlayerCrafting;
 import com.arkcraft.mod.common.container.ContainerInventorySmithy;
@@ -25,8 +26,10 @@ import com.arkcraft.mod.common.entity.passive.EntityDodo;
 import com.arkcraft.mod.common.lib.LogHelper;
 import com.arkcraft.mod.common.tile.TileInventoryCompostBin;
 import com.arkcraft.mod.common.tile.TileInventoryCropPlot;
+import com.arkcraft.mod.common.tile.TileInventoryForge;
 import com.arkcraft.mod.common.tile.TileInventoryMP;
 import com.arkcraft.mod.common.tile.TileInventorySmithy;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -72,6 +75,15 @@ public class GuiHandler implements IGuiHandler {
 				return new ContainerInventoryCompostBin(player.inventory, (TileInventoryCompostBin) tileEntity);
 			else {
 				LogHelper.info("GuiHandler - getClientGuiElement: TileEntityCompostBin not found!");				
+			}
+		}
+		else if (ID == GlobalAdditions.GUI.FORGE_GUI.getID()) {
+			BlockPos xyz = new BlockPos(x, y, z);
+			TileEntity tileEntity = world.getTileEntity(xyz);
+			if (tileEntity instanceof TileInventoryForge)			
+				return new ContainerInventoryForge(player.inventory, (TileInventoryForge) tileEntity);
+			else {
+				LogHelper.info("GuiHandler - getClientGuiElement: TileEntityForge not found!");				
 			}
 		}
 		else if (ID == GlobalAdditions.GUI.CROP_PLOT.getID()) {
@@ -155,6 +167,15 @@ public class GuiHandler implements IGuiHandler {
 				return new GUICropPlot(player.inventory, (TileInventoryCropPlot) tileEntity);
 			else {
 				LogHelper.info("GuiHandler - getClientGuiElement: TileEntityCropPlot not found!");				
+			}
+		}
+		else if (ID == GlobalAdditions.GUI.FORGE_GUI.getID()) {
+			BlockPos xyz = new BlockPos(x, y, z);
+			TileEntity tileEntity = world.getTileEntity(xyz);
+			if (tileEntity instanceof TileInventoryForge)			
+				return new ContainerInventoryForge(player.inventory, (TileInventoryForge) tileEntity);
+			else {
+				LogHelper.info("GuiHandler - getClientGuiElement: TileEntityForge not found!");				
 			}
 		}
 		else if (ID == GlobalAdditions.GUI.COMPOST_BIN.getID()) {
