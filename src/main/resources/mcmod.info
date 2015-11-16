@@ -2,15 +2,15 @@
 {
   "modid": "arkcraft",
   "name": "ARKCraft",
-  "description": "ARKCraft: Survival of the fitess?",
+  "description": "ARK: Survival Evolved - Minecraft Style!",
   "version": "1.0.0",
   "mcversion": "1.8",
   "url": "https://github.com/SolarCactus/ARKCraft-Code",
   "updateUrl": "",
   "authorList": ["Vastatio and wildbill22"],
-  "credits": "Nickilpicle and the rest of the team (too many to mentio)",
+  "credits": "Nickilpicle and the whole ARKCraft Team",
   "logoFile": "",
   "screenshots": [],
-  "dependencies": []
+  "dependencies": ["llibrary"]
 }
 ]
