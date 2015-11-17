@@ -47,18 +47,20 @@ public class GUIForge extends GuiContainer {
 		// Add hovering text
 		List<String> hoveringText = new ArrayList<String>();				
 
+		/*
 		// If the mouse is over the display text add the growth stage bar hovering text
 		if (isInRect(guiLeft + LABEL_XPOS, guiTop + LABEL_YPOS, 50, 8, mouseX, mouseY)){
 			hoveringText.add("Fertilizer compost time: ");
-			int compostPercentage = (int) (tileEntity.getFractionCompostTimeComplete() * 100);
+			int compostPercentage = (int) (tileEntity.getFieldCount() * 100);
 			hoveringText.add(compostPercentage + "%");
 		}
 
+		/*
 		// If the mouse is over one of the thatch slots add the burn time indicator hovering text
 		for (int row = 0; row < 2; row++) {
 			for (int col = 0; col < 4; col++) {
 				int index = col + 4 * row;
-				if (tileEntity.secondsOfBurnTimeRemaining(index) > 0) {
+				if (tileEntity.getItemBurnTime(index) > 0) {
 					int x = guiLeft + ContainerInventoryForge.FORGE_SLOT_XPOS;
 					int y = guiTop + ContainerInventoryForge.FORGE_SLOT_YPOS;
 					if (isInRect(x + 18 * col, y + 18 * row, 16, 16, mouseX, mouseY)) {
@@ -72,7 +74,7 @@ public class GUIForge extends GuiContainer {
 				}
 			}
 		}
-
+*/
 		// If hoveringText is not empty draw the hovering text
 		if (!hoveringText.isEmpty()){
 			drawHoveringText(hoveringText, mouseX - guiLeft, mouseY - guiTop, fontRendererObj);

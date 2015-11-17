@@ -116,6 +116,13 @@ public final class BALANCE {
 		public static int COMPOST_TIME_FOR_FECES;
 	}
 	
+	public static class REFINING_FORGE {
+		@DefaultInt(value = 30, minValue = 15, maxValue = 600, name = "Metal smelting time.", comment = "Seconds of smelting")
+		public static int METAL_SMELTING_TIME;
+		@DefaultInt(value = 60, minValue = 15, maxValue = 600, name = "Feces composting time.", comment = "Seconds to compost feces into fertilizer")		
+		public static int COMPOST_TIME_FOR_FECES;
+	}
+	
 	public static class DINO_PROPERTIES {
 		@DefaultInt(value = 120, minValue = 30, maxValue = 3600, name = "Seconds to tame raptor.", comment = "Time need to tame")
 		public static int SECONDS_TO_TAME_RAPTOR;		

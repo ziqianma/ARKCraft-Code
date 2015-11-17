@@ -13,6 +13,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockSpikes extends Block{
 	
+	private int renderType = 3; //default value
+	
 	public BlockSpikes(Material m, float hardness) {
 		super(m);
 		this.setHardness(hardness);
@@ -44,5 +46,9 @@ public class BlockSpikes extends Block{
 	
 	@Override
     public boolean isOpaqueCube()	{return false;}
+	
+    public void setRenderType(int renderType) { this.renderType = renderType; }
+	public int getRenderType() { return renderType; }
+
     
 }

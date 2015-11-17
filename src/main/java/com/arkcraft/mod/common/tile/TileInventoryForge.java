@@ -1,13 +1,22 @@
 package com.arkcraft.mod.common.tile;
 
-import java.util.Arrays;
-
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockFurnace;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.SlotFurnaceFuel;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
+import net.minecraft.item.ItemTool;
+import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagIntArray;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
@@ -20,11 +29,10 @@ import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.arkcraft.mod.common.items.ARKCraftItems;
-import com.arkcraft.mod.common.items.ItemFeces;
-import com.arkcraft.mod.common.lib.BALANCE;
-import com.arkcraft.mod.common.lib.LogHelper;
 
 /***
  * 
@@ -37,248 +45,236 @@ public class TileInventoryForge extends TileEntity implements IInventory, IUpdat
 	public static final int LAST_INVENTORY_SLOT = TOTAL_SLOTS_COUNT - 1; 
 
 	public static final int FIRST_FORGE_SLOT = 0;
+    private int furnaceBurnTime;
+    private int currentItemBurnTime;
+    private int cookTime;
+    private int totalCookTime;
 
 	// Create and initialize the itemStacks variable that will store store the itemStacks
 	private ItemStack[] itemStacks = new ItemStack[TOTAL_SLOTS_COUNT];
 	
-	// Other class variables
-	int tick = 20;
 
-	/** The number of burning seconds remaining on the current piece of fuel */
-	private int [] burningTimeRemaining = new int[FORGE_SLOTS_COUNT];
-	/** The initial burning value of the currently burning fuel (in seconds of burning duration) */
-//	private static int burningTimeInitialValue = BALANCE.COMPOST_BIN.COMPOST_TIME_FOR_THATCH;
-	private static int burningTimeInitialValue = 30; // TODO: Replace with config value or TBD
-	/** Seconds of fue burn time remaining for the item in a slot */
-	public int secondsOfBurnTimeRemaining(int i) {
-		if (itemStacks[i] != null && getItemBurnTime(itemStacks[i]) > 0) {
-			if (burningTimeRemaining[i] > 0){
-				return burningTimeRemaining[i];
-			}
-		}
-		return 0;
-	}
+		
+    public boolean isBurning()
+    {
+        return this.furnaceBurnTime > 0;
+    }
 
-	/** The number of seconds the current item has been composting */
-	private short burnTime;
-	/** The number of seconds required to create an output */
-	private static final short COMPOST_TIME_FOR_FECES = (short) BALANCE.COMPOST_BIN.COMPOST_TIME_FOR_FECES;
-	/** Returns double between 0 and 1 representing % complete */
-	public double getFractionCompostTimeComplete() {
-		double fraction = burnTime / (double)COMPOST_TIME_FOR_FECES;
-		return MathHelper.clamp_double(fraction, 0.0, 1.0);
-	}
-	
-	/** The number of forge slots with ??? feces */
-	private int cachedNumberOfDecomposingSlots = -1;
+    @SideOnly(Side.CLIENT)
+    public static boolean isBurning(IInventory p_174903_0_)
+    {
+        return p_174903_0_.getField(0) > 0;
+    }
 
-	/** This method is called every tick to update the tile entity, i.e.
-	 * - decompose the feces in the compost bin
-	 * - See if there is thatch and at least one empty slot, if there is burn the thatch and increment compost time
-	 * - Create one fertilizer when compost time is reached
-	 * Runs on both the server and client
-	*/
 	@Override
-	public void update() {
-		if (tick >= 0){
-			tick--;
-			return;			
-		} else {
-			tick = 20;
-		}
+    public void update()
+    {
 		
-		int numberDecomposing = decomposeFeces();
-		if (cachedNumberOfDecomposingSlots != numberDecomposing) {
-			cachedNumberOfDecomposingSlots = numberDecomposing;
-		}
-		
-		// If there is no feces decomposing or there is no thatch or room in the output, don't burn the thatch
-		if (isThatchPresent() && numberDecomposing > 0 && canCompost()) {
-			burnThatch();
+        boolean flag = this.isBurning();
+        boolean flag1 = false;
 
-			burnTime += numberDecomposing;
-				
-			// If compostTime is reached, create a fertilizer and reset compostTime
-			if (burnTime >= COMPOST_TIME_FOR_FECES) {
-//				LogHelper.info("TileInventoryCompostBin: About to create fertilizer on " + (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT ? "client" : "server"));
-				compostFertilizer();
-				burnTime = 0;
-			}
-		}
-		else
-			burnTime = 0;
-	}
+        if (this.isBurning())
+        {
+            --this.furnaceBurnTime;
+        }
 
-	/**
-	 * 	for each slot with feces: decreases the burn time, checks if burnTimeRemaining = 0 
-	 *  and tries to consume a new piece of thatch if one is available
-	 */
-	private int decomposeFeces() {
-		int decomposingCount = 0;
-		boolean inventoryChanged = false;
-		
-		// Iterate over all the compost bin slots
-		for (int i = 0; i < FORGE_SLOTS_COUNT; i++) {
-			if (itemStacks[i] != null && getItemDecompostTime(itemStacks[i]) > 0 && itemStacks[i].getItem() != ARKCraftItems.fertilizer) {
-				if (increaseStackDamage(itemStacks[i])) {
-					itemStacks[i] = null;
-					inventoryChanged = true;
-				}
-				++decomposingCount;
-			}
-		}
-		if (inventoryChanged) markDirty();					
-		return decomposingCount;
-	}
+        if (!this.worldObj.isRemote)
+        {
+            if (!this.isBurning() && (this.itemStacks[1] == null || this.itemStacks[0] == null))
+            {
+                if (!this.isBurning() && this.cookTime > 0)
+                {
+                    this.cookTime = MathHelper.clamp_int(this.cookTime - 2, 0, this.totalCookTime);
+                }
+            }
+            else
+            {
+                if (!this.isBurning() && this.canSmelt())
+                {
+                    this.currentItemBurnTime = this.furnaceBurnTime = getItemBurnTime(this.itemStacks[1]);
 
-	/**
-	 * 	for each slot with thatch: decreases the burn time, checks if burnTimeRemaining = 0 
-	 *  and tries to consume a new piece of thatch if one is available
-	 */
-	private void burnThatch() {
-		boolean inventoryChanged = false;
-		
-		// Iterate over all the compost bin slots
-		for (int i = 0; i < FORGE_SLOTS_COUNT; i++) {
-			if (itemStacks[i] != null && getItemBurnTime(itemStacks[i]) > 0) {
-				if (burningTimeRemaining[i] > 0){
-					burningTimeRemaining[i]--;
-					if (burningTimeRemaining[i] <= 0){
-						itemStacks[i].stackSize--;
-						inventoryChanged = true;
-						if (itemStacks[i].stackSize == 0){
-							itemStacks[i] = null;
-						}
-						else {
-							burningTimeRemaining[i] = burningTimeInitialValue; 
-						}
-					}
-				}
-				// Initialize a new stack just added
-				else {
-					burningTimeRemaining[i] = burningTimeInitialValue; 
-				}
-				break; // Just burn one thatch at a time							
-			}				
-		}
-		if (inventoryChanged) markDirty();					
-	}
+                    if (this.isBurning())
+                    {
+                        flag1 = true;
 
-	/**
-	 * 	Check each slot for thatch 
-	 */
-	private boolean isThatchPresent() {
-		// Iterate over all the compost bin slots
-		for (int i = 0; i < FORGE_SLOTS_COUNT; i++) {
-			if (itemStacks[i] != null && getItemBurnTime(itemStacks[i]) > 0) {
-				return true;
-			}
-		}
-		return false;					
-	}
+                        if (this.itemStacks[1] != null)
+                        {
+                            --this.itemStacks[1].stackSize;
 
-	/**
-	 * Check if the compost bin is composting and there is sufficient space in the output slots
-	 * @return true if harvesting a berry is possible
-	 */
-	private boolean canCompost() {return compostFeces(false);}
+                            if (this.itemStacks[1].stackSize == 0)
+                            {
+                                this.itemStacks[1] = itemStacks[1].getItem().getContainerItem(itemStacks[1]);
+                            }
+                        }
+                    }
+                }
 
-	/**
-	 * Harvest a berry from the seed, if possible
-	 */
-	private void compostFertilizer() {compostFeces(true);}
+                if (this.isBurning() && this.canSmelt())
+                {
+                    ++this.cookTime;
 
-	/**
-	 * checks that there is an item to be composted in one of the input slots and that there is room for the result in the output slots
-	 * If desired, performs the compost to fertilizer
-	 * @param compostFeces  If true, harvest a berry. If false, check whether harvesting is possible, but don't change the inventory
-	 * @return false if no fertilizer can be composted, true otherwise
-	 */
-	private boolean compostFeces(boolean compostFeces){
-		Integer firstSuitableOutputSlot = null;
+                    if (this.cookTime == this.totalCookTime)
+                    {
+                        this.cookTime = 0;
+                        this.totalCookTime = this.func_174904_a(this.itemStacks[0]);
+                        this.smeltItem();
+                        flag1 = true;
+                    }
+                }
+                else
+                {
+                    this.cookTime = 0;
+                }
+            }
 
-		// find the first suitable output slot- either empty, or with identical item that has enough space
-		for (int outputSlot = LAST_INVENTORY_SLOT; outputSlot > FIRST_FORGE_SLOT; outputSlot--) {
-			ItemStack outputStack = itemStacks[outputSlot];
-			// Empty slot?
-			if (outputStack == null) {
-				firstSuitableOutputSlot = outputSlot;
-				break;
-			}
-			// Fertilizer item and with enough space? 
-			if (itemStacks[outputSlot].getItem() == ARKCraftItems.fertilizer) {
-				int combinedSize = itemStacks[outputSlot].stackSize + 1;
-				if (combinedSize <= getInventoryStackLimit() && combinedSize <= itemStacks[outputSlot].getMaxStackSize()) {
+            if (flag != this.isBurning())
+            {
+                flag1 = true;
+                BlockFurnace.setState(this.isBurning(), this.worldObj, this.pos);
+            }
+        }
+
+        if (flag1)
+        {
+            this.markDirty();
+        }
+    }
+	
+	  public int func_174904_a(ItemStack p_174904_1_)
+	    {
+	        return 200;
+	    }
+
+	  private boolean canSmelt()
+	    {
+		  	Integer firstSuitableOutputSlot = null;
+
+			// find the first suitable output slot- either empty, or with identical item that has enough space
+			for (int outputSlot = LAST_INVENTORY_SLOT; outputSlot > FIRST_FORGE_SLOT; outputSlot--) {
+				ItemStack outputStack = itemStacks[outputSlot];
+				// Empty slot?
+				if (outputStack == null) {
 					firstSuitableOutputSlot = outputSlot;
 					break;
 				}
-			}
-		}
-	
-		// If no suitable output slot, return false
-		if (firstSuitableOutputSlot == null) return false;
+				// Fertilizer item and with enough space? 
+				if (itemStacks[outputSlot].getItem() == ARKCraftItems.metal) {
+					int combinedSize = itemStacks[outputSlot].stackSize + 1;
+					if (combinedSize <= getInventoryStackLimit() && combinedSize <= itemStacks[outputSlot].getMaxStackSize()) {
+						firstSuitableOutputSlot = outputSlot;
+						break;
+					}
+				}
+			}	
 		
-		// If true, we create a new fertilizer
-		if (!compostFeces) return true;
+			// If no suitable output slot, return false
+			if (firstSuitableOutputSlot == null) return false;
 
-		// alter output slot
-		if (itemStacks[firstSuitableOutputSlot] == null) {
-			itemStacks[firstSuitableOutputSlot] = new ItemStack(ARKCraftItems.fertilizer);
-		} else {
-			itemStacks[firstSuitableOutputSlot].stackSize += 1;
-		}
-		markDirty();
-		return true;
-	}
-
-	/** returns the number of seconds the given item will decompose. 
-	 * 
-	 * @param stack
-	 * @return Returns 0 if the given item is not a valid feces
-	 */
-	public static short getItemDecompostTime(ItemStack stack) {
-		int growtime = 0;		
-		if (stack != null){
-			if (stack.getItem() instanceof ItemFeces)
-				growtime = ItemFeces.getItemGrowTime(stack);
-		}		
-		return (short)MathHelper.clamp_int(growtime, 0, Short.MAX_VALUE);
-	}
-
-	/** returns the number of seconds the given item will decompose. 
-	 * 
-	 * @param stack
-	 * @return Returns 0 if the given item is not a valid thatching item
-	 */
-	public static short getItemBurnTime(ItemStack stack) {
-		int compostTime = 0;		
-		if (stack != null){
-			if (stack.getItem() == ARKCraftItems.thatch)
-				compostTime = burningTimeInitialValue;
-		}		
-		return (short)MathHelper.clamp_int(compostTime, 0, Short.MAX_VALUE);
-	}
-
-	/**
-	 * Adds one one damage to stack
-	 * @param itemStack
-	 * @return true if stack is destroyed
-	 * 
-	 */
-	private static boolean increaseStackDamage(ItemStack itemStack) {
-		if (itemStack == null)
+			// alter output slot
+			if (itemStacks[firstSuitableOutputSlot] == null) {
+				
+				ItemStack itemstack = FurnaceRecipes.instance().getSmeltingResult(this.itemStacks[0]);
+	            if (itemstack == null) return false;
+	            if (this.itemStacks[2] == null) return true;
+	            if (!this.itemStacks[2].isItemEqual(itemstack)) return false;
+	            int result = itemStacks[2].stackSize + itemstack.stackSize;
+	            return result <= getInventoryStackLimit() && result <= this.itemStacks[2].getMaxStackSize(); 
+	            //Forge BugFix: Make it respect stack sizes properly.	        
+			
+			} else {
+				itemStacks[firstSuitableOutputSlot].stackSize += 1;
+			}
+			markDirty();
 			return true;
-		int itemDamage = itemStack.getItemDamage();
-		itemStack.setItemDamage(++itemDamage);
-		if (itemStack.getItemDamage() >= itemStack.getItem().getMaxDamage()) {
-			return true;
-		}		
-		return false;
-	}
+	            
+	    }
+
+	    /**
+	     * Turn one item from the furnace source stack into the appropriate smelted item in the furnace result stack
+	     */
+	    public void smeltItem()
+	    {	    	
+	        if (this.canSmelt())
+	        {
+	            ItemStack itemstack = FurnaceRecipes.instance().getSmeltingResult(this.itemStacks[0]);
+
+	            if (this.itemStacks[2] == null)
+	            {
+	                this.itemStacks[2] = itemstack.copy();
+	            }
+	            else if (this.itemStacks[2].getItem() == itemstack.getItem())
+	            {
+	                this.itemStacks[2].stackSize += itemstack.stackSize; // Forge BugFix: Results may have multiple items
+	            }
+
+	            if (this.itemStacks[0].getItem() == Item.getItemFromBlock(Blocks.sponge) && this.itemStacks[0].getMetadata() == 1 && this.itemStacks[1] != null && this.itemStacks[1].getItem() == Items.bucket)
+	            {
+	                this.itemStacks[1] = new ItemStack(Items.water_bucket);
+	            }
+
+	            --this.itemStacks[0].stackSize;
+
+	            if (this.itemStacks[0].stackSize <= 0)
+	            {
+	                this.itemStacks[0] = null;
+	            }
+	        }
+	    }
+
+	 public static int getItemBurnTime(ItemStack p_145952_0_)
+	    {
+	        if (p_145952_0_ == null)
+	        {
+	            return 0;
+	        }
+	        else
+	        {
+	            Item item = p_145952_0_.getItem();
+
+	            if (item instanceof ItemBlock && Block.getBlockFromItem(item) != Blocks.air)
+	            {
+	                Block block = Block.getBlockFromItem(item);
+
+	                if (block == Blocks.wooden_slab)
+	                {
+	                    return 150;
+	                }
+
+	                if (block.getMaterial() == Material.wood)
+	                {
+	                    return 300;
+	                }
+
+	                if (block == Blocks.coal_block)
+	                {
+	                    return 16000;
+	                }
+	            }
+
+	            if (item instanceof ItemTool && ((ItemTool)item).getToolMaterialName().equals("WOOD")) return 200;
+	            if (item instanceof ItemSword && ((ItemSword)item).getToolMaterialName().equals("WOOD")) return 200;
+	            if (item instanceof ItemHoe && ((ItemHoe)item).getMaterialName().equals("WOOD")) return 200;
+	            if (item == Items.stick) return 100;
+	            if (item == Items.coal) return 1600;
+	            if (item == Items.lava_bucket) return 20000;
+	            if (item == Item.getItemFromBlock(Blocks.sapling)) return 100;
+	            if (item == Items.blaze_rod) return 2400;
+	            return net.minecraftforge.fml.common.registry.GameRegistry.getFuelValue(p_145952_0_);
+	        }
+	    }
+	 
+	  public static boolean isItemFuel(ItemStack p_145954_0_)
+	    {
+	        /**
+	         * Returns the number of ticks that the supplied fuel item will keep the furnace burning, or 0 if the item isn't
+	         * fuel
+	         */
+	        return getItemBurnTime(p_145954_0_) > 0;
+	    }
 
 	@Override
 	public String getName() {
-		return "tile.compost_bin.name";
+		return "tile.forge.name";
 	}
 
 	@Override
@@ -320,6 +316,7 @@ public class TileInventoryForge extends TileEntity implements IInventory, IUpdat
 		return itemStackRemoved;
 	}
 
+	
 	// Nothing to do, this is a furnace type inventory
 	@Override
 	public ItemStack getStackInSlotOnClosing(int index) {
@@ -359,27 +356,10 @@ public class TileInventoryForge extends TileEntity implements IInventory, IUpdat
 	}
 
 	@Override
-	public boolean isItemValidForSlot(int index, ItemStack stack) {
-		return isItemValidForSlot(stack);
-	}
-	
-	// Return true if stack is a valid item for the compost bin
-	public boolean isItemValidForSlot(ItemStack stack) {
-		if (stack != null){
-			// Feces?
-			if (getItemDecompostTime(stack) > 0)
-				return true;
-			// Thatch?
-			if (getItemBurnTime(stack) > 0)
-				return true;
-		}
-		return false;
-	}
-
-	@Override
-	public void clear() {
-		Arrays.fill(itemStacks, null);
-	}
+	public boolean isItemValidForSlot(int index, ItemStack stack)
+    {
+        return index == 2 ? false : (index != 1 ? true : isItemFuel(stack) || SlotFurnaceFuel.isBucket(stack));
+    }
 
     /**
      * Called from Chunk.setBlockIDWithMetadata, determines if this tile entity should be re-created when the ID, or Metadata changes.
@@ -398,60 +378,49 @@ public class TileInventoryForge extends TileEntity implements IInventory, IUpdat
 	
 	//------------------------------
 
-	// This is where you save any data that you don't want to lose when the tile entity unloads
-	// In this case, it saves the state of the compost bin (burn time etc) and the itemstacks in the inventory
-	@Override
-	public void writeToNBT(NBTTagCompound parentNBTTagCompound)
-	{
-		super.writeToNBT(parentNBTTagCompound); // The super call is required to save and load the tiles location
+	public void readFromNBT(NBTTagCompound compound)
+    {
+        super.readFromNBT(compound);
+        NBTTagList nbttaglist = compound.getTagList("Items", 10);
+        this.itemStacks = new ItemStack[this.getSizeInventory()];
 
-		// Save the stored item stacks
+        for (int i = 0; i < nbttaglist.tagCount(); ++i)
+        {
+            NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
+            byte b0 = nbttagcompound1.getByte("Slot");
 
-		// to use an analogy with Java, this code generates an array of hashmaps
-		// The itemStack in each slot is converted to an NBTTagCompound, which is effectively a hashmap of key->value pairs such
-		//   as slot=1, id=2353, count=1, etc
-		// Each of these NBTTagCompound are then inserted into NBTTagList, which is similar to an array.
-		NBTTagList dataForAllSlots = new NBTTagList();
-		for (int i = 0; i < this.itemStacks.length; ++i) {
-			if (this.itemStacks[i] != null) {
-				NBTTagCompound dataForThisSlot = new NBTTagCompound();
-				dataForThisSlot.setByte("Slot", (byte) i);
-				this.itemStacks[i].writeToNBT(dataForThisSlot);
-				dataForAllSlots.appendTag(dataForThisSlot);
-			}
-		}
-		// the array of hashmaps is then inserted into the parent hashmap for the container
-		parentNBTTagCompound.setTag("Items", dataForAllSlots);
+            if (b0 >= 0 && b0 < this.itemStacks.length)
+            {
+                this.itemStacks[b0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
+            }
+        }
 
-		// Save everything else
-		parentNBTTagCompound.setShort("compostTime", burnTime);
-		parentNBTTagCompound.setTag("compostTimeRemaining", new NBTTagIntArray(burningTimeRemaining));
-		LogHelper.info("TileInventoryCompostBin: Wrote inventory.");
-	}
+        this.furnaceBurnTime = compound.getShort("BurnTime");
+        this.cookTime = compound.getShort("CookTime");
+        this.totalCookTime = compound.getShort("CookTimeTotal");
+        this.currentItemBurnTime = getItemBurnTime(this.itemStacks[1]);
 
-	// This is where you load the data that you saved in writeToNBT
-	@Override
-	public void readFromNBT(NBTTagCompound nbtTagCompound)
-	{
-		super.readFromNBT(nbtTagCompound); // The super call is required to save and load the tiles location
-		final byte NBT_TYPE_COMPOUND = 10;       // See NBTBase.createNewByType() for a listing
-		NBTTagList dataForAllSlots = nbtTagCompound.getTagList("Items", NBT_TYPE_COMPOUND);
+    }
 
-		Arrays.fill(itemStacks, null);           // set all slots to empty
-		for (int i = 0; i < dataForAllSlots.tagCount(); ++i) {
-			NBTTagCompound dataForOneSlot = dataForAllSlots.getCompoundTagAt(i);
-			byte slotNumber = dataForOneSlot.getByte("Slot");
-			if (slotNumber >= 0 && slotNumber < this.itemStacks.length) {
-				this.itemStacks[slotNumber] = ItemStack.loadItemStackFromNBT(dataForOneSlot);
-			}
-		}
+    public void writeToNBT(NBTTagCompound compound)
+    {
+        super.writeToNBT(compound);
+        compound.setShort("BurnTime", (short)this.furnaceBurnTime);
+        compound.setShort("CookTime", (short)this.cookTime);
+        compound.setShort("CookTimeTotal", (short)this.totalCookTime);
+        NBTTagList nbttaglist = new NBTTagList();
 
-		// Load everything else.  Trim the arrays (or pad with 0) to make sure they have the correct number of elements
-		burnTime = nbtTagCompound.getShort("compostTime");
-		burningTimeRemaining = Arrays.copyOf(nbtTagCompound.getIntArray("compostTimeRemaining"), FORGE_SLOTS_COUNT);
-		cachedNumberOfDecomposingSlots = -1;
-		LogHelper.info("TileInventoryCompostBin: Read inventory.");
-	}
+        for (int i = 0; i < this.itemStacks.length; ++i)
+        {
+            if (this.itemStacks[i] != null)
+            {
+                NBTTagCompound nbttagcompound1 = new NBTTagCompound();
+                nbttagcompound1.setByte("Slot", (byte)i);
+                this.itemStacks[i].writeToNBT(nbttagcompound1);
+                nbttaglist.appendTag(nbttagcompound1);
+            }
+        }
+    }
 
 	// When the world loads from disk, the server needs to send the TileEntity information to the client
 	//  it uses getDescriptionPacket() and onDataPacket() to do this
@@ -468,39 +437,54 @@ public class TileInventoryForge extends TileEntity implements IInventory, IUpdat
 		readFromNBT(pkt.getNbtCompound());
 	}
 
-	// Fields are used to send non-inventory information from the server to interested clients
-	// The container code caches the fields and sends the client any fields which have changed.
-	// The field ID is limited to byte, and the field value is limited to short. (if you use more than this, they get cast down
-	//   in the network packets)
-	// If you need more than this, or shorts are too small, use a custom packet in your container instead.
-
-	private static final byte COMPOST_FIELD_ID = 0;
-	private static final byte FIRST_COMPOST_TIME_FIELD_ID = 1;
-	private static final byte NUMBER_OF_FIELDS = FIRST_COMPOST_TIME_FIELD_ID + (byte)FORGE_SLOTS_COUNT;
-
 	@Override
-	public int getField(int id) {
-		if (id == COMPOST_FIELD_ID) return burnTime;
-		if (id >= FIRST_COMPOST_TIME_FIELD_ID && id < NUMBER_OF_FIELDS){
-			return burningTimeRemaining[id - FIRST_COMPOST_TIME_FIELD_ID];
-		}
-		System.err.println("Invalid field ID in TileInventoryCompost.getField:" + id);
-		return 0;
-	}
-
-	@Override
-	public void setField(int id, int value)	{
-		if (id == COMPOST_FIELD_ID) {
-			burnTime = (short)value;
-		} else if (id >= FIRST_COMPOST_TIME_FIELD_ID && id < NUMBER_OF_FIELDS) {
-			burningTimeRemaining[id - FIRST_COMPOST_TIME_FIELD_ID] = value;
-		} else {
-			System.err.println("Invalid field ID in TileInventoryCompost.setField:" + id);
-		}
-	}
-
-	@Override
-	public int getFieldCount() {
-		return NUMBER_OF_FIELDS;
-	}	
+	 public int getField(int id)
+	    {
+	        switch (id)
+	        {
+	            case 0:
+	                return this.furnaceBurnTime;
+	            case 1:
+	                return this.currentItemBurnTime;
+	            case 2:
+	                return this.cookTime;
+	            case 3:
+	                return this.totalCookTime;
+	            default:
+	                return 0;
+	        }
+	    }
+		
+		@Override
+	    public void setField(int id, int value)
+	    {
+	        switch (id)
+	        {
+	            case 0:
+	                this.furnaceBurnTime = value;
+	                break;
+	            case 1:
+	                this.currentItemBurnTime = value;
+	                break;
+	            case 2:
+	                this.cookTime = value;
+	                break;
+	            case 3:
+	                this.totalCookTime = value;
+	        }
+	    }
+		
+		@Override
+	    public int getFieldCount()
+	    {
+	        return 4;
+	    }
+		
+	    public void clear()
+	    {
+	        for (int i = 0; i < this.itemStacks.length; ++i)
+	        {
+	            this.itemStacks[i] = null;
+	        }
+	    }
 }

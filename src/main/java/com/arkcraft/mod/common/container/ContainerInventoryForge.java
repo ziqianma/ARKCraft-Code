@@ -68,7 +68,7 @@ public class ContainerInventoryForge extends Container {
 
 		// Check if the slot clicked is one of the vanilla container slots
 		if(sourceSlotIndex >= FORGE_SLOT_COUNT && sourceSlotIndex < 36 + FORGE_SLOT_COUNT) {
-			if (tileInventoryForge.isItemValidForSlot(sourceStack)) {
+			if (tileInventoryForge.isItemValidForSlot(sourceSlotIndex, sourceStack)) {
 				// This is a vanilla container slot so merge the stack into the forge inventory
 				if(!mergeItemStack(sourceStack, 0, FORGE_SLOT_COUNT, false)) {
 					return null;
@@ -156,9 +156,6 @@ public class ContainerInventoryForge extends Container {
 		}
 
 		// if this function returns false, the player won't be able to insert the given item into this slot
-		@Override
-		public boolean isItemValid(ItemStack stack) {
-			return tileInventoryForge.isItemValidForSlot(stack);
-		}
+		
 	}	
 }
