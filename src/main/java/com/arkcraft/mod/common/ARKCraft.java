@@ -3,7 +3,6 @@ package com.arkcraft.mod.common;
 import com.arkcraft.mod.GlobalAdditions;
 import com.arkcraft.mod.common.blocks.ARKCraftBlocks;
 import com.arkcraft.mod.common.gen.WorldGeneratorBushes;
-import com.arkcraft.mod.common.gen.island.IslandGen;
 import com.arkcraft.mod.common.gen.island.WorldTypeIsland;
 import com.arkcraft.mod.common.handlers.ARKEventHandler;
 import com.arkcraft.mod.common.handlers.ARKPlayerEventHandler;
@@ -36,7 +35,7 @@ import org.apache.logging.log4j.Logger;
 import java.util.HashMap;
 import java.util.Map;
 
-@Mod(modid= ARKCraft.MODID, version= ARKCraft.VERSION, name= ARKCraft.MODID, guiFactory = "com.arkcraft.mod.common.lib.ModGuiFactory", dependencies = "required-after:llibrary@[0.4.3]")
+@Mod(modid= ARKCraft.MODID, version= ARKCraft.VERSION, name= ARKCraft.MODID, guiFactory = "com.arkcraft.mod.common.lib.ModGuiFactory", dependencies = "required-after:llibrary@[0.5.5]")
 public class ARKCraft
 {
 	public static final String MODID = "arkcraft", VERSION = "${version}", NAME = "ARKCraft";
@@ -47,7 +46,7 @@ public class ARKCraft
 	public static SimpleNetworkWrapper modChannel;
 	public static Logger	modLog;
 
-	public static final WorldType island = new WorldTypeIsland(1);
+	public static final WorldType island = new WorldTypeIsland();
 
 	public static Map<String, Item> allItems = new HashMap<String, Item>();
 	
@@ -81,8 +80,6 @@ public class ARKCraft
 	
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
-		IslandGen.loadHeightmap();
-		IslandGen.loadBiomemap();
 	}
 
 	public static ARKCraft instance() { return instance; }

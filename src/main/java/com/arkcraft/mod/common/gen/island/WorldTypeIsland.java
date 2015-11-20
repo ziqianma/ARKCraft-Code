@@ -1,5 +1,8 @@
 package com.arkcraft.mod.common.gen.island;
 
+import net.ilexiconn.llibrary.common.world.gen.gen.ChunkProviderHeightmap;
+import net.ilexiconn.llibrary.common.world.gen.gen.WorldChunkManagerHeightmap;
+import net.ilexiconn.llibrary.common.world.gen.gen.WorldHeightmapGenerator;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.WorldChunkManager;
@@ -9,22 +12,22 @@ import net.minecraft.world.biome.WorldChunkManager;
  */
 public class WorldTypeIsland extends WorldType
 {
-    public double scale;
+    private WorldHeightmapGenerator generator;
 
-    public WorldTypeIsland(double scale)
+    public WorldTypeIsland()
     {
         super("island");
-        this.scale = scale;
+        this.generator = new IslandGenerator();
     }
 
     public net.minecraft.world.chunk.IChunkProvider getChunkGenerator(World world, String generatorOptions)
     {
-        return new ChunkProviderIsland(world, world.getSeed(), world.getWorldInfo().isMapFeaturesEnabled(), generatorOptions, scale);
+        return new ChunkProviderHeightmap(world, world.getSeed(), generator);
     }
 
     public WorldChunkManager getChunkManager(World world)
     {
-        return new WorldChunkManagerIsland(world, scale);
+        return new WorldChunkManagerHeightmap(world, generator);
     }
 
     /**
