@@ -1,7 +1,8 @@
 package com.arkcraft.mod.common.container;
 
+import com.arkcraft.lib.LogHelper;
 import com.arkcraft.mod.common.container.inventory.InventoryTaming;
-import com.arkcraft.mod.common.lib.LogHelper;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;

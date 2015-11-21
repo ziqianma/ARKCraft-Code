@@ -1,9 +1,10 @@
 package com.arkcraft.mod.client.gui.book;
 
+import com.arkcraft.lib.LogHelper;
 import com.arkcraft.mod.client.gui.book.fonts.SmallFontRenderer;
 import com.arkcraft.mod.common.ARKCraft;
-import com.arkcraft.mod.common.lib.LogHelper;
 import com.google.gson.GsonBuilder;
+
 import net.minecraft.util.ResourceLocation;
 /***
  * 

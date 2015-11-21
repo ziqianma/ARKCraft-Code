@@ -1,11 +1,12 @@
 package com.arkcraft.mod.client.gui.book.deserialization;
 
+import com.arkcraft.lib.LogHelper;
 import com.arkcraft.mod.client.gui.book.pages.PageData;
-import com.arkcraft.mod.common.lib.LogHelper;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.world.World;

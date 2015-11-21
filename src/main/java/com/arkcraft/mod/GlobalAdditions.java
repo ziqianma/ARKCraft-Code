@@ -15,22 +15,22 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 
 import com.arkcraft.mod.common.ARKCraft;
+import com.arkcraft.mod.common.config.MOD1_BALANCE;
 import com.arkcraft.mod.common.creativetabs.ARKTabs;
-import com.arkcraft.mod.common.entity.EntityCobble;
-import com.arkcraft.mod.common.entity.EntityDodoEgg;
 import com.arkcraft.mod.common.entity.aggressive.EntityRaptor;
-import com.arkcraft.mod.common.entity.item.projectiles.EntityGrenade;
-import com.arkcraft.mod.common.entity.item.projectiles.EntitySpear;
 import com.arkcraft.mod.common.entity.neutral.EntityBrontosaurus;
 import com.arkcraft.mod.common.entity.passive.EntityDodo;
 import com.arkcraft.mod.common.handlers.EntityHandler;
 import com.arkcraft.mod.common.handlers.GuiHandler;
-import com.arkcraft.mod.common.handlers.PestleCraftingManager;
-import com.arkcraft.mod.common.handlers.PlayerCraftingManager;
-import com.arkcraft.mod.common.handlers.RecipeHandler;
-import com.arkcraft.mod.common.handlers.SmithyCraftingManager;
-import com.arkcraft.mod.common.lib.BALANCE;
-import com.arkcraft.mod.common.lib.KeyBindings;
+import com.arkcraft.mod2.common.config.KeyBindings;
+import com.arkcraft.mod2.common.entity.EntityCobble;
+import com.arkcraft.mod2.common.entity.EntityDodoEgg;
+import com.arkcraft.mod2.common.entity.item.projectiles.EntityGrenade;
+import com.arkcraft.mod2.common.entity.item.projectiles.EntitySpear;
+import com.arkcraft.mod2.common.handlers.PestleCraftingManager;
+import com.arkcraft.mod2.common.handlers.PlayerCraftingManager;
+import com.arkcraft.mod2.common.handlers.RecipeHandler;
+import com.arkcraft.mod2.common.handlers.SmithyCraftingManager;
 
 /**
  * @author Vastatio
@@ -82,7 +82,7 @@ public class GlobalAdditions {
 	// Stuff we don't want that is normally in Minecraft
 	private static void removeTheseMCMobs(){
 		// Don't spawn the normal Minecraft hostile mobs?
-		if (!BALANCE.GEN.mcHostileMobs) {
+		if (!MOD1_BALANCE.GEN.mcHostileMobs) {
 			for (int i=0; i < BiomeGenBase.getBiomeGenArray().length; i++){
 				if (BiomeGenBase.getBiomeGenArray()[i] != null){
 					EntityRegistry.removeSpawn(EntityZombie.class, EnumCreatureType.MONSTER, BiomeGenBase.getBiomeGenArray()[i]);

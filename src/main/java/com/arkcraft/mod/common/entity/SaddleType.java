@@ -1,6 +1,7 @@
 package com.arkcraft.mod.common.entity;
 
-import com.arkcraft.mod.common.items.ARKCraftItems;
+import com.arkcraft.mod2.common.items.ARKCraftItems;
+
 import net.minecraft.item.Item;
 
 public enum SaddleType {

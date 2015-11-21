@@ -1,13 +1,14 @@
 package com.arkcraft.mod.common.entity;
 
 
+import com.arkcraft.lib.LogHelper;
 import com.arkcraft.mod.GlobalAdditions.GUI;
 import com.arkcraft.mod.common.container.inventory.InventoryDino;
 import com.arkcraft.mod.common.container.inventory.InventorySaddle;
 import com.arkcraft.mod.common.container.inventory.InventoryTaming;
 import com.arkcraft.mod.common.ARKCraft;
-import com.arkcraft.mod.common.items.ARKCraftItems;
-import com.arkcraft.mod.common.lib.LogHelper;
+import com.arkcraft.mod2.common.items.ARKCraftItems;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;

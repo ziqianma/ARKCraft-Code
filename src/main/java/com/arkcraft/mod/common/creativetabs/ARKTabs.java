@@ -1,6 +1,7 @@
 package com.arkcraft.mod.common.creativetabs;
 
-import com.arkcraft.mod.common.items.ARKCraftItems;
+import com.arkcraft.mod2.common.items.ARKCraftItems;
+
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 

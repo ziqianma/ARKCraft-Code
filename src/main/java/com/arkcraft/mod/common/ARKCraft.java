@@ -1,20 +1,23 @@
 package com.arkcraft.mod.common;
 
 import com.arkcraft.mod.GlobalAdditions;
-import com.arkcraft.mod.common.blocks.ARKCraftBlocks;
+import com.arkcraft.mod.common.config.Mod1Config;
+import com.arkcraft.mod.common.event.Mod1ARKEventHandler;
 import com.arkcraft.mod.common.gen.WorldGeneratorBushes;
 import com.arkcraft.mod.common.gen.island.WorldTypeIsland;
-import com.arkcraft.mod.common.handlers.ARKEventHandler;
-import com.arkcraft.mod.common.handlers.ARKPlayerEventHandler;
-import com.arkcraft.mod.common.handlers.FMLCommonEventHandler;
-import com.arkcraft.mod.common.items.ARKCraftItems;
-import com.arkcraft.mod.common.lib.Config;
-import com.arkcraft.mod.common.network.OpenPlayerCrafting;
-import com.arkcraft.mod.common.network.PlayerPoop;
-import com.arkcraft.mod.common.network.UpdateMPToCraftItem;
-import com.arkcraft.mod.common.network.UpdatePlayerCrafting;
-import com.arkcraft.mod.common.network.UpdateSmithyToCraftItem;
 import com.arkcraft.mod.common.proxy.CommonProxy;
+import com.arkcraft.mod2.common.blocks.ARKCraftBlocks;
+import com.arkcraft.mod2.common.config.Mod2Config;
+import com.arkcraft.mod2.common.event.ARKPlayerEventHandler;
+import com.arkcraft.mod2.common.event.FMLCommonEventHandler;
+import com.arkcraft.mod2.common.event.Mod2ARKEventHandler;
+import com.arkcraft.mod2.common.items.ARKCraftItems;
+import com.arkcraft.mod2.common.network.OpenPlayerCrafting;
+import com.arkcraft.mod2.common.network.PlayerPoop;
+import com.arkcraft.mod2.common.network.UpdateMPToCraftItem;
+import com.arkcraft.mod2.common.network.UpdatePlayerCrafting;
+import com.arkcraft.mod2.common.network.UpdateSmithyToCraftItem;
+
 import net.minecraft.item.Item;
 import net.minecraft.world.WorldType;
 import net.minecraftforge.common.MinecraftForge;
@@ -30,12 +33,13 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
+
 import org.apache.logging.log4j.Logger;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@Mod(modid= ARKCraft.MODID, version= ARKCraft.VERSION, name= ARKCraft.MODID, guiFactory = "com.arkcraft.mod.common.lib.ModGuiFactory", dependencies = "required-after:llibrary@[0.5.5]")
+@Mod(modid= ARKCraft.MODID, version= ARKCraft.VERSION, name= ARKCraft.MODID, guiFactory = "com.arkcraft.lib.ModGuiFactory", dependencies = "required-after:llibrary@[0.5.5]")
 public class ARKCraft
 {
 	public static final String MODID = "arkcraft", VERSION = "${version}", NAME = "ARKCraft";
@@ -55,8 +59,12 @@ public class ARKCraft
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		// Create the config first, it is used below
-		Config.init(event.getSuggestedConfigurationFile());
-		FMLCommonHandler.instance().bus().register(new Config());
+//		Config.init(event.getSuggestedConfigurationFile());
+		Mod1Config.init(event.getModConfigurationDirectory());
+		FMLCommonHandler.instance().bus().register(new Mod1Config());
+		Mod2Config.init(event.getModConfigurationDirectory());
+		FMLCommonHandler.instance().bus().register(new Mod2Config());
+
 		GameRegistry.registerWorldGenerator(new WorldGeneratorBushes(), 0);
 
 		ARKCraftBlocks.init();
@@ -69,7 +77,8 @@ public class ARKCraft
 	
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
-		MinecraftForge.EVENT_BUS.register(new ARKEventHandler());
+		MinecraftForge.EVENT_BUS.register(new Mod1ARKEventHandler());
+		MinecraftForge.EVENT_BUS.register(new Mod2ARKEventHandler());
 		MinecraftForge.EVENT_BUS.register(new ARKPlayerEventHandler());
 		FMLCommonHandler.instance().bus().register(new FMLCommonEventHandler());
 		proxy.registerRenderers();

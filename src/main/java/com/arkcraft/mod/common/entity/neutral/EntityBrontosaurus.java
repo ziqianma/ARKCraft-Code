@@ -1,6 +1,7 @@
 package com.arkcraft.mod.common.entity.neutral;
 
-import com.arkcraft.mod.common.items.ARKCraftItems;
+import com.arkcraft.mod2.common.items.ARKCraftItems;
+
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIFollowOwner;

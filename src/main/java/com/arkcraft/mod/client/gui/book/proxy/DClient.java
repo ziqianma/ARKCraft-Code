@@ -1,5 +1,6 @@
 package com.arkcraft.mod.client.gui.book.proxy;
 
+import com.arkcraft.lib.LogHelper;
 import com.arkcraft.mod.client.gui.book.BookDocument;
 import com.arkcraft.mod.client.gui.book.DossierInfo;
 import com.arkcraft.mod.client.gui.book.deserialization.EntityLivingBaseDeserializer;
@@ -15,9 +16,9 @@ import com.arkcraft.mod.common.ARKCraft;
 import com.arkcraft.mod.common.entity.aggressive.EntityRaptor;
 import com.arkcraft.mod.common.entity.neutral.EntityBrontosaurus;
 import com.arkcraft.mod.common.entity.passive.EntityDodo;
-import com.arkcraft.mod.common.lib.LogHelper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;

@@ -1,11 +1,12 @@
 package com.arkcraft.mod.client.gui.book;
 
+import com.arkcraft.lib.LogHelper;
 import com.arkcraft.mod.client.gui.book.deserialization.PageDeserializer;
 import com.arkcraft.mod.client.gui.book.pages.IPage;
 import com.arkcraft.mod.common.ARKCraft;
-import com.arkcraft.mod.common.lib.LogHelper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
 

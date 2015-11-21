@@ -3,6 +3,7 @@ package com.arkcraft.mod.client.gui.book;
 import com.arkcraft.mod.GlobalAdditions;
 import com.arkcraft.mod.client.gui.book.proxy.DClient;
 import com.arkcraft.mod.common.ARKCraft;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

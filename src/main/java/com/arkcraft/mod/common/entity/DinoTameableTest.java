@@ -1,7 +1,8 @@
 package com.arkcraft.mod.common.entity;
 
 import com.arkcraft.mod.common.entity.ai.EntityDinoAIFollowOwner;
-import com.arkcraft.mod.common.items.ARKCraftItems;
+import com.arkcraft.mod2.common.items.ARKCraftItems;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityOwnable;

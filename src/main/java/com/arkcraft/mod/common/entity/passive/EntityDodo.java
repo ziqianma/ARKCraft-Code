@@ -1,12 +1,13 @@
 package com.arkcraft.mod.common.entity.passive;
 
+import com.arkcraft.lib.LogHelper;
 import com.arkcraft.mod.GlobalAdditions.GUI;
 import com.arkcraft.mod.common.container.inventory.InventoryDino;
 import com.arkcraft.mod.common.ARKCraft;
 import com.arkcraft.mod.common.entity.ai.EntityDodoAILookIdle;
-import com.arkcraft.mod.common.items.ARKCraftItems;
-import com.arkcraft.mod.common.items.ItemARKFood;
-import com.arkcraft.mod.common.lib.LogHelper;
+import com.arkcraft.mod2.common.items.ARKCraftItems;
+import com.arkcraft.mod2.common.items.ItemARKFood;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;

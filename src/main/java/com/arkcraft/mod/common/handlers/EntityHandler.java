@@ -1,7 +1,7 @@
 package com.arkcraft.mod.common.handlers;
 
 import com.arkcraft.mod.common.ARKCraft;
-import com.arkcraft.mod.common.lib.BALANCE;
+import com.arkcraft.mod.common.config.MOD1_BALANCE;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
@@ -56,7 +56,7 @@ public class EntityHandler {
 			
 			EntityRegistry.registerGlobalEntityID(eClass, name, id);
 			EntityRegistry.registerModEntity(eClass, name, id, ARKCraft.instance(), 64, 4, true);
-			EntityRegistry.addSpawn(eClass, BALANCE.DINO_PROPERTIES.SPAWN_PROBABILITY, 2, 4, EnumCreatureType.CREATURE, biomes);
+			EntityRegistry.addSpawn(eClass, MOD1_BALANCE.DINO_PROPERTIES.SPAWN_PROBABILITY, 2, 4, EnumCreatureType.CREATURE, biomes);
 	    	EntityList.idToClassMapping.put(id, eClass);
 	    	EntityList.entityEggs.put(Integer.valueOf(id), new EntityList.EntityEggInfo(id, mainColor, secondColor));
 	    }

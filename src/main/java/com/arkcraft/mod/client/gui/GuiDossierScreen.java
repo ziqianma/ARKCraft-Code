@@ -1,13 +1,15 @@
 package com.arkcraft.mod.client.gui;
 
+import com.arkcraft.lib.LogHelper;
 import com.arkcraft.mod.client.gui.book.button.PageButton;
 import com.arkcraft.mod.common.ARKCraft;
 import com.arkcraft.mod.common.handlers.BookDrawHandler;
-import com.arkcraft.mod.common.lib.LogHelper;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL11;
 
 /**

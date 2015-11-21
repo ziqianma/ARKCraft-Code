@@ -1,13 +1,14 @@
 package com.arkcraft.mod.common.entity.aggressive;
 
+import com.arkcraft.lib.LogHelper;
 import com.arkcraft.mod.common.ARKCraft;
+import com.arkcraft.mod.common.config.MOD1_BALANCE;
 import com.arkcraft.mod.common.entity.EntityTameableDinosaur;
 import com.arkcraft.mod.common.entity.SaddleType;
-import com.arkcraft.mod.common.items.ARKCraftItems;
-import com.arkcraft.mod.common.items.ItemARKFood;
-import com.arkcraft.mod.common.lib.BALANCE;
-import com.arkcraft.mod.common.lib.LogHelper;
+import com.arkcraft.mod2.common.items.ARKCraftItems;
+import com.arkcraft.mod2.common.items.ItemARKFood;
 import com.google.common.base.Predicate;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
@@ -52,7 +53,7 @@ public class EntityRaptor extends EntityTameableDinosaur
 	
 	@SuppressWarnings("rawtypes")
 	public EntityRaptor(World world, int raptorType) {
-		super(world, SaddleType.SMALL, true, BALANCE.DINO_PROPERTIES.SECONDS_TO_TAME_RAPTOR);
+		super(world, SaddleType.SMALL, true, MOD1_BALANCE.DINO_PROPERTIES.SECONDS_TO_TAME_RAPTOR);
         this.setSize(0.8F, 1.5F);
 
         ((PathNavigateGround)this.getNavigator()).func_179690_a(true);

@@ -1,6 +1,7 @@
 package com.arkcraft.mod.common.gen;
 
-import com.arkcraft.mod.common.blocks.ARKCraftBlocks;
+import com.arkcraft.mod2.common.blocks.ARKCraftBlocks;
+
 import net.minecraft.block.BlockGrass;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
