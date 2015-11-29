@@ -26,7 +26,7 @@ public class ContainerInventoryForge extends Container {
 		LogHelper.info("ContainerInventoryForge: constructor called.");
 		this.tileInventoryForge = tileInventoryForge;
 		
-		/* Compost bin inventory */
+		/* Forge inventory */
 		if (FORGE_SLOT_COUNT != tileInventoryForge.getSizeInventory()) {
 			LogHelper.error("Mismatched slot count in container(" + FORGE_SLOT_COUNT + ") and ForgeInventory (" 
 						+ tileInventoryForge.getSizeInventory()+")");
@@ -77,7 +77,7 @@ public class ContainerInventoryForge extends Container {
 			else
 				return null;
 		}
-		// Check if the slot clicked is a compost bin container slot
+		// Check if the slot clicked is a forge container slot
 		else if (sourceSlotIndex >= 0 && sourceSlotIndex < FORGE_SLOT_COUNT) {
 			// This is a forge slot so merge the stack into the players inventory
 			if (!mergeItemStack(sourceStack, FORGE_SLOT_COUNT, 36 + FORGE_SLOT_COUNT, false)){

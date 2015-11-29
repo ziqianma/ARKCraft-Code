@@ -43,8 +43,8 @@ public class TileInventoryForge extends TileEntity implements IInventory, IUpdat
 	public static final int FORGE_SLOTS_COUNT = 8;
 	public static final int TOTAL_SLOTS_COUNT = FORGE_SLOTS_COUNT;
 	public static final int LAST_INVENTORY_SLOT = TOTAL_SLOTS_COUNT - 1; 
-
 	public static final int FIRST_FORGE_SLOT = 0;
+	
     private int furnaceBurnTime;
     private int currentItemBurnTime;
     private int cookTime;
@@ -52,11 +52,8 @@ public class TileInventoryForge extends TileEntity implements IInventory, IUpdat
 
 	// Create and initialize the itemStacks variable that will store store the itemStacks
 	private ItemStack[] itemStacks = new ItemStack[TOTAL_SLOTS_COUNT];
-	
-
 		
-    public boolean isBurning()
-    {
+    public boolean isBurning(){
         return this.furnaceBurnTime > 0;
     }
 
