@@ -1,8 +1,33 @@
-/*
-!/src
-!/gradle
-!build.gradle
-!.gitignore
-!.gitattributes
-!*.md
-*.db
+# eclipse
+bin
+*.launch
+.settings
+.metadata
+.classpath
+.project
+
+# idea
+out
+*.ipr
+*.iws
+*.iml
+.idea
+
+# gradle
+build
+.gradle
+
+# other
+eclipse
+run
+saves/
+config/
+options.txt
+usercache.json
+usernamecache.json
+logs/
+crash-reports/
+*.launch
+
+# Minecraft
+minecraft

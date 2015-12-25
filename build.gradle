@@ -22,15 +22,8 @@ repositories {
 	}
 }
 
-configurations {
-	include
-}
-
 dependencies {
 	compile 'net.ilexiconn:llibrary:0.5.5-1.8:dev'
-	include "net.ilexiconn:llibrary-wrapper:1.8"  
-    configurations.compile.extendsFrom(configurations.include)  
-
 }
 
 processResources {
@@ -44,15 +37,6 @@ processResources {
 
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
-    }
-}
-
-
-jar {
-	from configurations.include.collect { it.isDirectory() ? it : zipTree(it) } 
-	
-	manifest {
-        attributes "FMLCorePlugin": "net.ilexiconn.llibrary.LLibraryWrapper"
     }
 }
 
