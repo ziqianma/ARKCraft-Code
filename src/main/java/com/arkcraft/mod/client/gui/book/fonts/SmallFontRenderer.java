@@ -1,6 +1,7 @@
 package com.arkcraft.mod.client.gui.book.fonts;
 
-import com.arkcraft.mod.common.lib.LogHelper;
+import com.arkcraft.lib.LogHelper;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureManager;
@@ -11,9 +12,11 @@ import net.minecraft.util.ChatAllowedCharacters;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
 import org.lwjgl.opengl.GL11;
 
 import javax.imageio.ImageIO;
+
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;

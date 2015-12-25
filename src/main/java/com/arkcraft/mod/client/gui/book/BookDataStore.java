@@ -1,6 +1,6 @@
 package com.arkcraft.mod.client.gui.book;
 
-import com.arkcraft.mod.common.lib.LogHelper;
+import com.arkcraft.lib.LogHelper;
 import com.google.common.collect.HashBiMap;
 /***
  * 

@@ -1,9 +1,10 @@
 package com.arkcraft.mod.client.gui.book;
 
+import com.arkcraft.lib.LogHelper;
 import com.arkcraft.mod.client.gui.book.proxy.DClient;
 import com.arkcraft.mod.common.ARKCraft;
-import com.arkcraft.mod.common.items.ARKCraftItems;
-import com.arkcraft.mod.common.lib.LogHelper;
+import com.arkcraft.mod2.common.items.ARKCraftItems;
+
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.FMLCommonHandler;

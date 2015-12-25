@@ -1,6 +1,7 @@
 package com.arkcraft.mod.common.container.inventory;
 
-import com.arkcraft.mod.common.items.ItemDinosaurSaddle;
+import com.arkcraft.mod2.common.items.ItemDinosaurSaddle;
+
 import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.item.ItemStack;
 

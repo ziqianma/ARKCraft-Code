@@ -104,7 +104,8 @@ item.item_refining_forge.name=Refining Forge
 itemGroup.tabARKCraft=ARKCraft: Survival Evolved
 
 # Configuration GUI
-category.arkcraft.balance=Balance settings
+category.arkcraft.mod1_balance=Entity & World Gen Balance Settings
+category.arkcraft.mod2_balance=Item, Block, and Player Balance Settings
 category.arkcraft.balance.tooltip=Balance settings
 
 # Entities

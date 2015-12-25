@@ -1,10 +1,11 @@
 package com.arkcraft.mod.common.container.inventory;
 
+import com.arkcraft.lib.LogHelper;
 import com.arkcraft.mod.common.entity.EntityTameableDinosaur;
-import com.arkcraft.mod.common.items.ARKCraftItems;
-import com.arkcraft.mod.common.items.ItemARKFood;
-import com.arkcraft.mod.common.items.ItemARKBase;
-import com.arkcraft.mod.common.lib.LogHelper;
+import com.arkcraft.mod2.common.items.ARKCraftItems;
+import com.arkcraft.mod2.common.items.ItemARKBase;
+import com.arkcraft.mod2.common.items.ItemARKFood;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;

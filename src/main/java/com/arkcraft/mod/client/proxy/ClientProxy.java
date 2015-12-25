@@ -16,39 +16,40 @@ import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-import com.arkcraft.mod.client.event.ClientEventHandler;
-import com.arkcraft.mod.client.gui.overlay.GuiOverlay;
-import com.arkcraft.mod.client.gui.overlay.GuiOverlayReloading;
+import com.arkcraft.lib.LogHelper;
+import com.arkcraft.mod.client.event.Mod1ClientEventHandler;
 import com.arkcraft.mod.client.model.ModelBrontosaurus;
 import com.arkcraft.mod.client.model.ModelDodo;
 import com.arkcraft.mod.client.model.ModelRaptorNew;
-import com.arkcraft.mod.client.model.override.PlayerModelOverride;
 import com.arkcraft.mod.client.render.RenderBrontosaurus;
 import com.arkcraft.mod.client.render.RenderDodo;
-import com.arkcraft.mod.client.render.RenderMetalArrow;
 import com.arkcraft.mod.client.render.RenderRaptor;
-import com.arkcraft.mod.client.render.RenderSimpleBullet;
-import com.arkcraft.mod.client.render.RenderSpear;
-import com.arkcraft.mod.client.render.RenderStoneArrow;
-import com.arkcraft.mod.client.render.RenderTranqArrow;
 import com.arkcraft.mod.common.ARKCraft;
-import com.arkcraft.mod.common.blocks.ARKCraftBlocks;
-import com.arkcraft.mod.common.entity.EntityCobble;
-import com.arkcraft.mod.common.entity.EntityDodoEgg;
 import com.arkcraft.mod.common.entity.aggressive.EntityRaptor;
-import com.arkcraft.mod.common.entity.item.projectiles.EntityGrenade;
-import com.arkcraft.mod.common.entity.item.projectiles.EntityMetalArrow;
-import com.arkcraft.mod.common.entity.item.projectiles.EntitySimpleBullet;
-import com.arkcraft.mod.common.entity.item.projectiles.EntitySpear;
-import com.arkcraft.mod.common.entity.item.projectiles.EntityStoneArrow;
-import com.arkcraft.mod.common.entity.item.projectiles.EntityTranqArrow;
 import com.arkcraft.mod.common.entity.neutral.EntityBrontosaurus;
 import com.arkcraft.mod.common.entity.passive.EntityDodo;
-import com.arkcraft.mod.common.items.ARKCraftItems;
-import com.arkcraft.mod.common.items.ItemARKFood;
-import com.arkcraft.mod.common.lib.BALANCE;
-import com.arkcraft.mod.common.lib.LogHelper;
 import com.arkcraft.mod.common.proxy.CommonProxy;
+import com.arkcraft.mod2.client.event.Mod2ClientEventHandler;
+import com.arkcraft.mod2.client.gui.overlay.GuiOverlay;
+import com.arkcraft.mod2.client.gui.overlay.GuiOverlayReloading;
+import com.arkcraft.mod2.client.model.override.PlayerModelOverride;
+import com.arkcraft.mod2.client.render.RenderMetalArrow;
+import com.arkcraft.mod2.client.render.RenderSimpleBullet;
+import com.arkcraft.mod2.client.render.RenderSpear;
+import com.arkcraft.mod2.client.render.RenderStoneArrow;
+import com.arkcraft.mod2.client.render.RenderTranqArrow;
+import com.arkcraft.mod2.common.blocks.ARKCraftBlocks;
+import com.arkcraft.mod2.common.config.MOD2_BALANCE;
+import com.arkcraft.mod2.common.entity.EntityCobble;
+import com.arkcraft.mod2.common.entity.EntityDodoEgg;
+import com.arkcraft.mod2.common.entity.item.projectiles.EntityGrenade;
+import com.arkcraft.mod2.common.entity.item.projectiles.EntityMetalArrow;
+import com.arkcraft.mod2.common.entity.item.projectiles.EntitySimpleBullet;
+import com.arkcraft.mod2.common.entity.item.projectiles.EntitySpear;
+import com.arkcraft.mod2.common.entity.item.projectiles.EntityStoneArrow;
+import com.arkcraft.mod2.common.entity.item.projectiles.EntityTranqArrow;
+import com.arkcraft.mod2.common.items.ARKCraftItems;
+import com.arkcraft.mod2.common.items.ItemARKFood;
 
 public class ClientProxy extends CommonProxy
 {
@@ -90,30 +91,35 @@ public class ClientProxy extends CommonProxy
 	@Override
 	public void registerEventHandlers()	{
 		super.registerEventHandlers();
-		ClientEventHandler eventhandler = new ClientEventHandler();
-		FMLCommonHandler.instance().bus().register(eventhandler);
-		MinecraftForge.EVENT_BUS.register(eventhandler);
+		
+		Mod1ClientEventHandler mod1Eventhandler = new Mod1ClientEventHandler();
+		FMLCommonHandler.instance().bus().register(mod1Eventhandler);
+		MinecraftForge.EVENT_BUS.register(mod1Eventhandler);
+		
+		Mod2ClientEventHandler mod2Eventhandler = new Mod2ClientEventHandler();
+		FMLCommonHandler.instance().bus().register(mod2Eventhandler);
+		MinecraftForge.EVENT_BUS.register(mod2Eventhandler);
 	}
 	
 	
 	@Override
 	public void registerWeapons(){
-	if (BALANCE.WEAPONS.SIMPLE_PISTOL){
+	if (MOD2_BALANCE.WEAPONS.SIMPLE_PISTOL){
 		RenderingRegistry.registerEntityRenderingHandler(EntitySimpleBullet.class, new RenderSimpleBullet());
 	}
-	if (BALANCE.WEAPONS.SHOTGUN){
+	if (MOD2_BALANCE.WEAPONS.SHOTGUN){
 	//	RenderingRegistry.registerEntityRenderingHandler(EntitySimpleShotgunAmmo.class, new RenderSimpleShotgunAmmo());
 	}
-	if (BALANCE.WEAPONS.LONGNECK_RIFLE)	{
+	if (MOD2_BALANCE.WEAPONS.LONGNECK_RIFLE)	{
 	//	RenderingRegistry.registerEntityRenderingHandler(EntitySimpleRifleAmmo.class, new RenderSimpleBullet());
 	}
-	if (BALANCE.WEAPONS.SPEAR)	{
+	if (MOD2_BALANCE.WEAPONS.SPEAR)	{
 		RenderingRegistry.registerEntityRenderingHandler(EntitySpear.class, new RenderSpear());
 	}
-	if (BALANCE.WEAPONS.TRANQ_GUN)	{
+	if (MOD2_BALANCE.WEAPONS.TRANQ_GUN)	{
 	//	RenderingRegistry.registerEntityRenderingHandler(EntityTranquilizer.class, new RenderSimpleBullet());
 	}
-	if (BALANCE.WEAPONS.TRANQ_GUN)	{
+	if (MOD2_BALANCE.WEAPONS.TRANQ_GUN)	{
 	// RenderingRegistry.registerEntityRenderingHandler(EntityRocketPropelledGrenade.class, new RenderRocketPropelledGrenade());
 	}
 }

@@ -1,7 +1,8 @@
 package com.arkcraft.mod.common.proxy;
 
 import com.arkcraft.mod.client.gui.book.proxy.DCommon;
-import com.arkcraft.mod.common.event.CommonEventHandler;
+import com.arkcraft.mod2.common.event.CommonEventHandler;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.SidedProxy;

@@ -1,9 +1,10 @@
 package com.arkcraft.mod.common.handlers;
 
+import com.arkcraft.lib.LogHelper;
+import com.arkcraft.mod.common.config.MOD1_BALANCE;
 import com.arkcraft.mod.common.gen.ore.WrappedOreGenerator;
 import com.arkcraft.mod.common.gen.ore.WrappedOreGenerator.Instruction;
-import com.arkcraft.mod.common.lib.BALANCE;
-import com.arkcraft.mod.common.lib.LogHelper;
+
 import net.minecraft.block.Block;
 
 import java.util.ArrayList;
@@ -21,12 +22,12 @@ public class GenerationHandler {
 	 */
 	public static void addOreToGen(Block block, int height) {
 		/* This is for standard ore generation. */
-		addOreToGen(block, height, BALANCE.GEN.MAX_DEFAULT_ORE_BLOCKS_SPAWN_PER_VEIN, BALANCE.GEN.MAX_DEFAULT_ORE_VEIN_SPAWN_PER_CHUNK);
+		addOreToGen(block, height, MOD1_BALANCE.GEN.MAX_DEFAULT_ORE_BLOCKS_SPAWN_PER_VEIN, MOD1_BALANCE.GEN.MAX_DEFAULT_ORE_VEIN_SPAWN_PER_CHUNK);
 		
 	}
 	
 	public static void addOreToGen(Block block, int height, int maxBlocksInVain) {
-		addOreToGen(block, height, maxBlocksInVain, BALANCE.GEN.MAX_DEFAULT_ORE_VEIN_SPAWN_PER_CHUNK);
+		addOreToGen(block, height, maxBlocksInVain, MOD1_BALANCE.GEN.MAX_DEFAULT_ORE_VEIN_SPAWN_PER_CHUNK);
 	}
 	
 	/***

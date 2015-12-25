@@ -1,10 +1,11 @@
 package com.arkcraft.mod.common.entity;
 
+import com.arkcraft.lib.LogHelper;
 import com.arkcraft.mod.common.ARKCraft;
 import com.arkcraft.mod.common.entity.ai.EntityDinoAIOwnerHurtByTarget;
 import com.arkcraft.mod.common.entity.ai.EntityDinoAIOwnerHurtTarget;
 import com.arkcraft.mod.common.entity.ai.EntityDinoAITargetNonTamed;
-import com.arkcraft.mod.common.lib.LogHelper;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;

@@ -1,8 +1,9 @@
 package com.arkcraft.mod.client.gui.book.pages;
 
+import com.arkcraft.lib.LogHelper;
 import com.arkcraft.mod.client.gui.book.GuiDossier;
 import com.arkcraft.mod.client.gui.book.fonts.SmallFontRenderer;
-import com.arkcraft.mod.common.lib.LogHelper;
+
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.StatCollector;
