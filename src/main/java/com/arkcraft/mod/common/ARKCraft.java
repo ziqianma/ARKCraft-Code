@@ -35,7 +35,7 @@ import org.apache.logging.log4j.Logger;
 import java.util.HashMap;
 import java.util.Map;
 
-@Mod(modid= ARKCraft.MODID, version= ARKCraft.VERSION, name= ARKCraft.MODID, guiFactory = "com.arkcraft.mod.common.lib.ModGuiFactory", dependencies = "required-after:llibrary@[0.5.5]")
+@Mod(modid= ARKCraft.MODID, version= ARKCraft.VERSION, name= ARKCraft.MODID, guiFactory = "com.arkcraft.mod.common.lib.ModGuiFactory", dependencies = "required-after:llibrary@[0.5.5,")
 public class ARKCraft
 {
 	public static final String MODID = "arkcraft", VERSION = "${version}", NAME = "ARKCraft";
