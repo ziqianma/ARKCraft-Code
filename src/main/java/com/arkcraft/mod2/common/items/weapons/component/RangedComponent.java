@@ -1,12 +1,5 @@
 package com.arkcraft.mod2.common.items.weapons.component;
 
-import com.arkcraft.mod.common.ARKCraft;
-import com.arkcraft.mod2.common.config.MOD2_BALANCE;
-import com.arkcraft.mod2.common.entity.item.projectiles.EntityShootable;
-import com.arkcraft.mod2.common.items.weapons.handlers.ReloadHelper;
-import com.arkcraft.mod2.common.items.weapons.handlers.WeaponModAttributes;
-import com.google.common.collect.Multimap;
-
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -22,6 +15,13 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import com.arkcraft.mod.common.ARKCraft;
+import com.arkcraft.mod2.common.config.MOD2_BALANCE;
+import com.arkcraft.mod2.common.entity.item.projectiles.Test;
+import com.arkcraft.mod2.common.items.weapons.handlers.ReloadHelper;
+import com.arkcraft.mod2.common.items.weapons.handlers.WeaponModAttributes;
+import com.google.common.collect.Multimap;
 
 public abstract class RangedComponent extends AbstractWeaponComponent
 {
@@ -245,12 +245,12 @@ public abstract class RangedComponent extends AbstractWeaponComponent
 	
 	public abstract void effectShoot(World world, double x, double y, double z, float yaw, float pitch);
 	
-	public void applyProjectileEnchantments(EntityShootable entity, ItemStack itemstack)
+	public void applyProjectileEnchantments(Test entity, ItemStack itemstack)
 	{
 		int damage = EnchantmentHelper.getEnchantmentLevel(Enchantment.power.effectId, itemstack);
 		if (damage > 0)
 		{
-			entity.setExtraDamage(damage);
+			entity.setDamage(damage);
 		}
 		
 		int knockback = EnchantmentHelper.getEnchantmentLevel(Enchantment.punch.effectId, itemstack);

@@ -72,6 +72,7 @@ public class Mod2ARKEventHandler {
 	 * This makes logs drop thatch, all pickaxes and axes are recognised (tools from other mods too). Axe drops 0-2 thatch and pickaxe 1-5.
 	 */
 	
+	/*
 	@SubscribeEvent
 	public void onDrops(BlockEvent.HarvestDropsEvent event) {
 		
@@ -229,7 +230,8 @@ public class Mod2ARKEventHandler {
 				}
 			}							
 		}
-
+	*/
+	
 	private static final Minecraft mc = Minecraft.getMinecraft();
 	private static final ResourceLocation OVERLAY_TEXTURE = new ResourceLocation(ARKCraft.MODID, "textures/gui/scope.png");
 	public boolean ShowScopeOverlap = false;

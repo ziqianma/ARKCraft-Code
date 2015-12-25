@@ -4,12 +4,14 @@ import com.arkcraft.mod2.common.items.weapons.handlers.WeaponDamageSource;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
-public class EntitySimpleBullet extends EntityShootable
+public class EntitySimpleBullet extends Test
 {	
 	public EntitySimpleBullet(World world)
 	{
@@ -22,19 +24,38 @@ public class EntitySimpleBullet extends EntityShootable
 		setPosition(d, d1, d2);
 	}
 	
-	public EntitySimpleBullet(World world, EntityLivingBase entityliving, float deviation)
+	public EntitySimpleBullet(World worldIn, EntityLivingBase shooter, float speed)
 	{
-		this(world);
-		thrower = entityliving;
-		setLocationAndAngles(entityliving.posX, entityliving.posY + entityliving.getEyeHeight(), entityliving.posZ, entityliving.rotationYaw, entityliving.rotationPitch);
-		posX -= MathHelper.cos((rotationYaw / 180F) * 3.141593F) * 0.16F;
-		posY -= 0.1D;
-		posZ -= MathHelper.sin((rotationYaw / 180F) * 3.141593F) * 0.16F;
-		setPosition(posX, posY, posZ);
-		motionX = -MathHelper.sin((rotationYaw / 180F) * 3.141593F) * MathHelper.cos((rotationPitch / 180F) * 3.141593F);
-		motionZ = MathHelper.cos((rotationYaw / 180F) * 3.141593F) * MathHelper.cos((rotationPitch / 180F) * 3.141593F);
-		motionY = -MathHelper.sin((rotationPitch / 180F) * 3.141593F);
-		setThrowableHeading(motionX, motionY, motionZ, 5.0F, deviation);
+	        super(worldIn);
+	        this.shootingEntity = shooter;
+
+	        if (shooter instanceof EntityPlayer)
+	        {
+	            this.canBePickedUp = 0;
+	        }
+
+	        this.setSize(0.05F, 0.05F);
+	        this.setLocationAndAngles(shooter.posX, shooter.posY + (double)shooter.getEyeHeight(), shooter.posZ, shooter.rotationYaw, shooter.rotationPitch);
+	        this.posX -= (double)(MathHelper.cos(this.rotationYaw / 180.0F * (float)Math.PI) * 0.16F);
+	        this.posY -= 0.10000000149011612D;
+	        this.posZ -= (double)(MathHelper.sin(this.rotationYaw / 180.0F * (float)Math.PI) * 0.16F);
+	        this.setPosition(this.posX, this.posY, this.posZ);
+	        this.motionX = (double)(-MathHelper.sin(this.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float)Math.PI));
+	        this.motionZ = (double)(MathHelper.cos(this.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float)Math.PI));
+	        this.motionY = (double)(-MathHelper.sin(this.rotationPitch / 180.0F * (float)Math.PI));
+	        this.setThrowableHeading(this.motionX, this.motionY, this.motionZ, speed * 2F, 6.0F);
+	}
+	
+	@Override
+	public float getGravity() 
+    {
+		return 0.005F;
+	}
+	
+	@Override
+	public float getAirResistance() 
+	{
+		return 0.98F;
 	}
 	
 	@Override
@@ -42,42 +63,42 @@ public class EntitySimpleBullet extends EntityShootable
 	{
 		super.onUpdate();
 		
-		if (inGround)
+		if (this.inGround)
 		{
 			if (rand.nextInt(4) == 0)
 			{
-				worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, posX, posY, posZ, 0.0D, 0.0D, 0.0D);
+				worldObj.spawnParticle(EnumParticleTypes.CRIT, posX, posY, posZ, 0.0D, 0.0D, 0.0D);
 			}
 			return;
 		}
 		
-		double speed = getGravityVelocity();
+		if (ticksInAir > 120)
+		{
+			setDead();
+		}
+		
 		double amount = 16D;
-		if (speed > 2.0D)
+		float speed = 3F;
+		if (speed == 3F)
 		{
 			for (int i1 = 1; i1 < amount; i1++)
 			{
 				worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, posX + (motionX * i1) / amount, posY + (motionY * i1) / amount, posZ + (motionZ * i1) / amount, 0.0D, 0.0D, 0.0D);
 			}
-			
-			  if (!this.worldObj.isRemote)
-		        {
-		            this.setDead();
-		        }
 		}
 	}	
 	
 	@Override
 	public void onEntityHit(Entity entity)
 	{
-		float damage = 7F + extraDamage;
+		float damage = 7F;
 		DamageSource damagesource = null;
-		if (thrower == null)
+		if (shootingEntity == null)
 		{
-			damagesource = WeaponDamageSource.causeProjectileWeaponDamage(this, this);
+			damagesource = WeaponDamageSource.causeThrownDamage(this, this);
 		} else
 		{
-			damagesource = WeaponDamageSource.causeProjectileWeaponDamage(this, thrower);
+			damagesource = WeaponDamageSource.causeThrownDamage(this, shootingEntity);
 		}
 		if (entity.attackEntityFrom(damagesource, damage))
 		{
@@ -87,13 +108,10 @@ public class EntitySimpleBullet extends EntityShootable
 	}
 	
 	@Override
-	protected float getVelocity()
+	public void onGroundHit(MovingObjectPosition movingobjectposition) 
 	{
-	        return 0F;
+		worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, posX, posY, posZ, 0.0D, 0.0D, 0.0D);
+		this.setDead();
 	}
-	@Override
-	public boolean canBeCritical()
-	{
-		return true;
-	}
+	
 }

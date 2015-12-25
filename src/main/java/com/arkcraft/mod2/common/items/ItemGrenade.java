@@ -1,5 +1,6 @@
 package com.arkcraft.mod2.common.items;
 
+import com.arkcraft.mod2.common.entity.item.projectiles.EntityBase;
 import com.arkcraft.mod2.common.entity.item.projectiles.EntityGrenade;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -33,7 +34,7 @@ public class ItemGrenade extends Item{
 			world.playSoundAtEntity(entityplayer, "random.bow", 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 0.8F));
 			if (!world.isRemote)
 			{
-				EntityGrenade entiyGrenade = new EntityGrenade(world, entityplayer);
+				EntityBase entiyGrenade = new EntityBase(world, entityplayer);
 				world.spawnEntityInWorld(entiyGrenade);
 			}
 		}

@@ -5,12 +5,15 @@ import com.arkcraft.mod2.common.items.weapons.handlers.WeaponDamageSource;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
-public class EntitySimpleShotgunAmmo extends EntityShootable
+public class EntitySimpleShotgunAmmo extends Test
 {
 	public EntitySimpleShotgunAmmo(World world)
 	{
@@ -23,19 +26,39 @@ public class EntitySimpleShotgunAmmo extends EntityShootable
 		setPosition(x, y, z);
 	}
 	
-	public EntitySimpleShotgunAmmo(World world, EntityLivingBase entityliving)
+	
+	public EntitySimpleShotgunAmmo(World worldIn, EntityLivingBase shooter)
 	{
-		this(world);
-		thrower = entityliving;
-		setLocationAndAngles(entityliving.posX, entityliving.posY + entityliving.getEyeHeight(), entityliving.posZ, entityliving.rotationYaw, entityliving.rotationPitch);
-		posX -= MathHelper.cos((rotationYaw / 180F) * 3.141593F) * 0.16F;
-		posY -= 0.1D;
-		posZ -= MathHelper.sin((rotationYaw / 180F) * 3.141593F) * 0.16F;
-		setPosition(posX, posY, posZ);
-		motionX = -MathHelper.sin((rotationYaw / 180F) * 3.141593F) * MathHelper.cos((rotationPitch / 180F) * 3.141593F);
-		motionZ = MathHelper.cos((rotationYaw / 180F) * 3.141593F) * MathHelper.cos((rotationPitch / 180F) * 3.141593F);
-		motionY = -MathHelper.sin((rotationPitch / 180F) * 3.141593F);
-		setThrowableHeading(motionX, motionY, motionZ, 5.0F, 15.0F);
+	        super(worldIn);
+	        this.shootingEntity = shooter;
+
+	        if (shooter instanceof EntityPlayer)
+	        {
+	            this.canBePickedUp = 0;
+	        }
+
+	        this.setSize(0.05F, 0.05F);
+	        this.setLocationAndAngles(shooter.posX, shooter.posY + (double)shooter.getEyeHeight(), shooter.posZ, shooter.rotationYaw, shooter.rotationPitch);
+	        this.posX -= (double)(MathHelper.cos(this.rotationYaw / 180.0F * (float)Math.PI) * 0.16F);
+	        this.posY -= 0.10000000149011612D;
+	        this.posZ -= (double)(MathHelper.sin(this.rotationYaw / 180.0F * (float)Math.PI) * 0.16F);
+	        this.setPosition(this.posX, this.posY, this.posZ);
+	        this.motionX = (double)(-MathHelper.sin(this.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float)Math.PI));
+	        this.motionZ = (double)(MathHelper.cos(this.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float)Math.PI));
+	        this.motionY = (double)(-MathHelper.sin(this.rotationPitch / 180.0F * (float)Math.PI));
+	        this.setThrowableHeading(this.motionX, this.motionY, this.motionZ, 3F, 10.0F);
+	}	
+
+	@Override
+	public float getGravity() 
+    {
+		return 0.005F;
+	}
+	
+	@Override
+	public float getAirResistance() 
+	{
+		return 0.98F;
 	}
 	
 	@Override
@@ -52,15 +75,15 @@ public class EntitySimpleShotgunAmmo extends EntityShootable
 	@Override
 	public void onEntityHit(Entity entity)
 	{
-		float damage = 10F + extraDamage;
+		float damage = 10F;
 		
 		DamageSource damagesource;
-		if (thrower == null)
+		if (shootingEntity == null)
 		{
-			damagesource = WeaponDamageSource.causeProjectileWeaponDamage(this, this);
+			damagesource = WeaponDamageSource.causeThrownDamage(this, this);
 		} else
 		{
-			damagesource = WeaponDamageSource.causeProjectileWeaponDamage(this, thrower);
+			damagesource = WeaponDamageSource.causeThrownDamage(this, shootingEntity);
 		}
 		
 		int prevhurtrestime = entity.hurtResistantTime;
@@ -71,6 +94,13 @@ public class EntitySimpleShotgunAmmo extends EntityShootable
 			playHitSound();
 			setDead();
 		}
+	}
+	
+	@Override
+	public void onGroundHit(MovingObjectPosition movingobjectposition) 
+	{
+		worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, posX, posY, posZ, 0.0D, 0.0D, 0.0D);
+		this.setDead();
 	}
 	
 	public static void fireSpreadShot(World world, EntityLivingBase entityliving, RangedComponent item, ItemStack itemstack)
@@ -99,10 +129,10 @@ public class EntitySimpleShotgunAmmo extends EntityShootable
 	{
 		for (int i1 = 0; i1 < 2; i1++)
 		{
-			EntitySimpleShotgunAmmo entityblundershot = new EntitySimpleShotgunAmmo(world, d, d1, d2);
+			EntitySimpleShotgunAmmo entityShotgunShot = new EntitySimpleShotgunAmmo(world, d, d1, d2);
 			
-			entityblundershot.setThrowableHeading(i, j, k, 5.0F, 15.0F);
-			world.spawnEntityInWorld(entityblundershot);
+			entityShotgunShot.setThrowableHeading(i, j, k, 3F, 10.0F);
+			world.spawnEntityInWorld(entityShotgunShot);
 		}
 	}
 }

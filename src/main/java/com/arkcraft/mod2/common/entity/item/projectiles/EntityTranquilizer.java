@@ -1,83 +1,79 @@
 package com.arkcraft.mod2.common.entity.item.projectiles;
 
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.MathHelper;
+import net.minecraft.world.World;
+
 import com.arkcraft.mod.common.entity.EntityTameableDinosaur;
 import com.arkcraft.mod2.common.config.MOD2_BALANCE;
 import com.arkcraft.mod2.common.items.weapons.handlers.WeaponDamageSource;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.MathHelper;
-import net.minecraft.world.World;
-
-public class EntityTranquilizer extends EntityShootable
+public class EntityTranquilizer extends Test
 {
-	
+
 	public EntityTranquilizer(World world)
 	{
-		super(world);
+		super(world);	
 	}
 	
-	public EntityTranquilizer(World world, double d, double d1, double d2)
+	public EntityTranquilizer(World world, double x, double y, double z)
 	{
 		this(world);
-		setPosition(d, d1, d2);
+		setPosition(x, y, z);
 	}
 	
-	public EntityTranquilizer(World world, EntityLivingBase entityliving, float deviation)
+	public EntityTranquilizer(World worldIn, EntityLivingBase shooter, float speed)
 	{
-		this(world);
-		thrower = entityliving;
-		setLocationAndAngles(entityliving.posX, entityliving.posY + entityliving.getEyeHeight(), entityliving.posZ, entityliving.rotationYaw, entityliving.rotationPitch);
-		posX -= MathHelper.cos((rotationYaw / 180F) * 3.141593F) * 0.16F;
-		posY -= 0.1D;
-		posZ -= MathHelper.sin((rotationYaw / 180F) * 3.141593F) * 0.16F;
-		setPosition(posX, posY, posZ);
-		motionX = -MathHelper.sin((rotationYaw / 180F) * 3.141593F) * MathHelper.cos((rotationPitch / 180F) * 3.141593F);
-		motionZ = MathHelper.cos((rotationYaw / 180F) * 3.141593F) * MathHelper.cos((rotationPitch / 180F) * 3.141593F);
-		motionY = -MathHelper.sin((rotationPitch / 180F) * 3.141593F);
-		setThrowableHeading(motionX, motionY, motionZ, 5.0F, deviation);
+	        super(worldIn);
+	        this.shootingEntity = shooter;
+
+	        if (shooter instanceof EntityPlayer)
+	        {
+	            this.canBePickedUp = 1;
+	        }
+
+	        this.setSize(0.05F, 0.05F);
+	        this.setLocationAndAngles(shooter.posX, shooter.posY + (double)shooter.getEyeHeight(), shooter.posZ, shooter.rotationYaw, shooter.rotationPitch);
+	        this.posX -= (double)(MathHelper.cos(this.rotationYaw / 180.0F * (float)Math.PI) * 0.16F);
+	        this.posY -= 0.10000000149011612D;
+	        this.posZ -= (double)(MathHelper.sin(this.rotationYaw / 180.0F * (float)Math.PI) * 0.16F);
+	        this.setPosition(this.posX, this.posY, this.posZ);
+	        this.motionX = (double)(-MathHelper.sin(this.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float)Math.PI));
+	        this.motionZ = (double)(MathHelper.cos(this.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float)Math.PI));
+	        this.motionY = (double)(-MathHelper.sin(this.rotationPitch / 180.0F * (float)Math.PI));
+	        this.setThrowableHeading(this.motionX, this.motionY, this.motionZ, speed * 2F, 1.0F);
 	}
 	
 	@Override
-	public void onUpdate()
+	public float getGravity() 
+    {
+		return 0.005F;
+	}
+	
+	@Override
+	public float getAirResistance() 
 	{
-		super.onUpdate();
-		
-		if (inGround)
-		{
-			if (rand.nextInt(4) == 0)
-			{
-				worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, posX, posY, posZ, 0.0D, 0.0D, 0.0D);
-			}
-			return;
-		}
-		
-		double speed = getGravityVelocity();
-		double amount = 16D;
-		if (speed > 2.0D)
-		{
-			for (int i1 = 1; i1 < amount; i1++)
-			{
-				worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, posX + (motionX * i1) / amount, posY + (motionY * i1) / amount, posZ + (motionZ * i1) / amount, 0.0D, 0.0D, 0.0D);
-			}
-			
-			  if (!this.worldObj.isRemote)
-		        {
-		            this.setDead();
-		        }
-		}
-	}	
+		return 0.98F;
+	}
+	
+	@Override
+	public void playHitSound()
+	{
+		worldObj.playSoundAtEntity(this, "random.bowhit", 1.0F, 1.0F / (rand.nextFloat() * 0.4F + 0.9F));
+	}
 	
 	@Override
 	public void onEntityHit(Entity entity){
-		float damage = (float) (MOD2_BALANCE.WEAPONS.TRANQ_AMMO_DAMAGE + extraDamage);
+		
+		float damage = (float) (MOD2_BALANCE.WEAPONS.TRANQ_AMMO_DAMAGE);
 		DamageSource damagesource = null;
-		if (thrower == null){
-			damagesource = WeaponDamageSource.causeProjectileWeaponDamage(this, this);
+		if (shootingEntity == null){
+			damagesource = WeaponDamageSource.causeThrownDamage(this, this);
 		} else{
-			damagesource = WeaponDamageSource.causeProjectileWeaponDamage(this, thrower);
+			damagesource = WeaponDamageSource.causeThrownDamage(this, shootingEntity);
 		}
 		if (entity.attackEntityFrom(damagesource, damage)){
 			playHitSound();
@@ -86,16 +82,5 @@ public class EntityTranquilizer extends EntityShootable
 		if (entity instanceof EntityTameableDinosaur){
 			((EntityTameableDinosaur)entity).increaseTorpor(MOD2_BALANCE.WEAPONS.TRANQ_AMMO_TORPOR_TIME);
 		}
-	}
-	
-	@Override
-	protected float getVelocity()
-	{
-	        return 0F;
-	}
-	@Override
-	public boolean canBeCritical()
-	{
-		return true;
 	}
 }

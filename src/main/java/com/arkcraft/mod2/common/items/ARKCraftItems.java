@@ -1,10 +1,23 @@
 package com.arkcraft.mod2.common.items;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import net.minecraft.block.BlockDispenser;
+import net.minecraft.item.Item;
+import net.minecraft.item.Item.ToolMaterial;
+import net.minecraft.item.ItemArmor.ArmorMaterial;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
+import net.minecraftforge.common.util.EnumHelper;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+
 import com.arkcraft.mod.GlobalAdditions;
 import com.arkcraft.mod.client.gui.book.Dossier;
 import com.arkcraft.mod.common.ARKCraft;
 import com.arkcraft.mod.common.handlers.EntityHandler;
 import com.arkcraft.mod2.common.config.MOD2_BALANCE;
+import com.arkcraft.mod2.common.entity.item.projectiles.EntityBase;
 import com.arkcraft.mod2.common.entity.item.projectiles.EntityMetalArrow;
 import com.arkcraft.mod2.common.entity.item.projectiles.EntityRocketPropelledGrenade;
 import com.arkcraft.mod2.common.entity.item.projectiles.EntitySimpleBullet;
@@ -34,18 +47,6 @@ import com.arkcraft.mod2.common.items.weapons.component.RangedCompSimplePistolSc
 import com.arkcraft.mod2.common.items.weapons.component.RangedCompSpyGlass;
 import com.arkcraft.mod2.common.items.weapons.component.RangedCompTranqGun;
 import com.arkcraft.mod2.common.items.weapons.component.RangedComponent;
-
-import net.minecraft.block.BlockDispenser;
-import net.minecraft.item.Item;
-import net.minecraft.item.Item.ToolMaterial;
-import net.minecraft.item.ItemArmor.ArmorMaterial;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
-import net.minecraftforge.common.util.EnumHelper;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author wildbill22
@@ -92,7 +93,7 @@ public class ARKCraftItems
 	public static ItemRangedWeapon longneck_rifle, longneck_rifle_scoped;
 	public static ItemRangedWeapon shotgun;
 	public static ItemRangedWeapon crossbow;
-
+	
 	public static ArmorMaterial CLOTH = EnumHelper.addArmorMaterial("CLOTH_MAT", "CLOTH_MAT", 4, new int[] {1,2,1,1}, 15);
 	public static ArmorMaterial CHITIN = EnumHelper.addArmorMaterial("CHITIN_MAT", "CHITIN_MAT", 16, new int[] { 3,7,6,3 } , 10);
 	public static ArmorMaterial HIDE = EnumHelper.addArmorMaterial("HIDE_MAT", "HIDE_MAT", 40, new int[] { 3, 8, 6, 3 }, 30);
@@ -207,7 +208,10 @@ public class ARKCraftItems
 		hideHelm = addArmorItem("hide_helm", HIDE, "hideArmor", 0, true);
 		hideChest = addArmorItem("hide_chest", HIDE, "hideArmor", 1, true);
 		hideLegs = addArmorItem("hide_legs", HIDE, "hideArmor", 2, true);
-		hideBoots = addArmorItem("hide_boots", HIDE, "hideArmor", 3, true);
+		hideBoots = addArmorItem("hide_boots", HIDE, "hideArmor", 3, true);		
+		
+		
+		EntityHandler.registerModEntity(EntityBase.class, "Entity Base", ARKCraft.instance, 64, 10, true);
 		
 		registerDispenseBehavior();
 		registerWeaponEntities();
@@ -216,7 +220,7 @@ public class ARKCraftItems
 	
 	public static void registerWeaponEntities(){
 		if (MOD2_BALANCE.WEAPONS.SIMPLE_PISTOL){
-			EntityHandler.registerModEntity(EntitySimpleBullet.class, "Simple Bullet", ARKCraft.instance, 64, 10, true);
+			EntityHandler.registerModEntity(EntitySimpleBullet.class, "Simple Bullet", ARKCraft.instance, 16, 20, true);
 		}
 		if (MOD2_BALANCE.WEAPONS.SHOTGUN){
 			EntityHandler.registerModEntity(EntitySimpleShotgunAmmo.class, "Simple Shotgun Ammo", ARKCraft.instance, 64, 10, true);		

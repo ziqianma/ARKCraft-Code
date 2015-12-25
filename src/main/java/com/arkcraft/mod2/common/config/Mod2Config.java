@@ -49,6 +49,7 @@ public class Mod2Config {
 		loadFields(cat_balance, MOD2_BALANCE.MORTAR_AND_PESTLE.class);		
 		loadFields(cat_balance, MOD2_BALANCE.PLAYER_CRAFTING.class);		
 		loadFields(cat_balance, MOD2_BALANCE.COMPOST_BIN.class);
+		loadFields(cat_balance, MOD2_BALANCE.EXPLOSIVE_DEVICE.class);
 		// TODO: Add more classes from BALANCE here when available
 	}
 

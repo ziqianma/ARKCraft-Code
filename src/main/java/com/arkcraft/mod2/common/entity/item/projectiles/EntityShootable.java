@@ -52,7 +52,7 @@ public abstract class EntityShootable extends Entity implements IProjectile
 		extraDamage = 0;
 		knockBack = 0;
 		
-		setSize(0.25F, 0.25F);
+		setSize(0.1F, 0.1F);
     }
 
     protected void entityInit() {}
@@ -70,11 +70,11 @@ public abstract class EntityShootable extends Entity implements IProjectile
         return distance < d1 * d1;
     }
 
-    public EntityShootable(World worldIn, EntityLivingBase throwerIn)
+    public EntityShootable(World worldIn, EntityLivingBase throwerIn, float inaccuracy)
     {
         super(worldIn);
         this.thrower = throwerIn;
-        this.setSize(0.25F, 0.25F);
+        this.setSize(0.05F, 0.05F);
         this.setLocationAndAngles(throwerIn.posX, throwerIn.posY + (double)throwerIn.getEyeHeight(), throwerIn.posZ, throwerIn.rotationYaw, throwerIn.rotationPitch);
         this.posX -= (double)(MathHelper.cos(this.rotationYaw / 180.0F * (float)Math.PI) * 0.16F);
         this.posY -= 0.10000000149011612D;
@@ -83,26 +83,21 @@ public abstract class EntityShootable extends Entity implements IProjectile
         float f = 0.4F;
         this.motionX = (double)(-MathHelper.sin(this.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float)Math.PI) * f);
         this.motionZ = (double)(MathHelper.cos(this.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float)Math.PI) * f);
-        this.motionY = (double)(-MathHelper.sin((this.rotationPitch + this.getInaccuracy()) / 180.0F * (float)Math.PI) * f);
-        this.setThrowableHeading(this.motionX, this.motionY, this.motionZ, this.getGravityVelocity(), 1.0F);
+        this.motionY = (double)(-MathHelper.sin(this.rotationPitch / 180.0F * (float)Math.PI) * f);
+        this.setThrowableHeading(this.motionX, this.motionY, this.motionZ, 100F, inaccuracy);
     }
 
     public EntityShootable(World worldIn, double x, double y, double p_i1778_6_)
     {
         super(worldIn);
         this.ticksInGround = 0;
-        this.setSize(0.25F, 0.25F);
+        this.setSize(0.05F, 0.05F);
         this.setPosition(x, y, p_i1778_6_);
-    }
-
-    protected float getVelocity()
-    {
-        return 1.5F;
     }
 
     protected float getInaccuracy()
     {
-        return 0.0F;
+        return 0.001F;
     }
     
 
@@ -153,6 +148,7 @@ public abstract class EntityShootable extends Entity implements IProjectile
     /**
      * Called to update the entity's position/logic.
      */
+    @Override
     public void onUpdate()
     {
         this.lastTickPosX = this.posX;
@@ -243,19 +239,16 @@ public abstract class EntityShootable extends Entity implements IProjectile
 		{
 			if (movingobjectposition.entityHit != null)
 			{
-				onEntityHit(movingobjectposition.entityHit);
-		
+				onEntityHit(movingobjectposition.entityHit);		
 			}
-		}
-        if (movingobjectposition != null)
-        {
-            if (movingobjectposition.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK && this.worldObj.getBlockState(movingobjectposition.getBlockPos()).getBlock() == Blocks.portal)
+
+			else if (movingobjectposition.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK && this.worldObj.getBlockState(movingobjectposition.getBlockPos()).getBlock() == Blocks.portal)
             {
                 this.setInPortal();
             }
             else
             {
-                this.onImpact(movingobjectposition);
+                this.onGroundHit(movingobjectposition);
             }
         }
         
@@ -312,7 +305,7 @@ public abstract class EntityShootable extends Entity implements IProjectile
      */
     protected float getGravityVelocity()
     {
-        return 0.03F;
+        return 0.001F;
     }
    
 	public void playHitSound()
@@ -346,8 +339,17 @@ public abstract class EntityShootable extends Entity implements IProjectile
 	{
 		knockBack = i;
 	}
-	
-	public void onImpact(MovingObjectPosition movingobjectposition) {}
+	public void onGroundHit(MovingObjectPosition movingobjectposition)
+	{
+		applyGroundHitEffects(movingobjectposition);
+	}
+
+	public void applyGroundHitEffects(MovingObjectPosition movingobjectposition) 
+	{
+   //     this.worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, this.posX, this.posY, this.posZ, ((double)this.rand.nextFloat() - 0.5D) * 0.08D, ((double)this.rand.nextFloat() - 0.5D) * 0.08D, ((double)this.rand.nextFloat() - 0.5D) * 0.08D);
+		worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, posX, posY, posZ, 0.0D, 0.0D, 0.0D);
+		this.setDead();
+	}
 	
 	public void onEntityHit(Entity entity)
 	{

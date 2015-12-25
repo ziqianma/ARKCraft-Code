@@ -42,12 +42,13 @@ import com.arkcraft.mod2.common.blocks.ARKCraftBlocks;
 import com.arkcraft.mod2.common.config.MOD2_BALANCE;
 import com.arkcraft.mod2.common.entity.EntityCobble;
 import com.arkcraft.mod2.common.entity.EntityDodoEgg;
-import com.arkcraft.mod2.common.entity.item.projectiles.EntityGrenade;
+import com.arkcraft.mod2.common.entity.item.projectiles.EntityBase;
 import com.arkcraft.mod2.common.entity.item.projectiles.EntityMetalArrow;
 import com.arkcraft.mod2.common.entity.item.projectiles.EntitySimpleBullet;
 import com.arkcraft.mod2.common.entity.item.projectiles.EntitySpear;
 import com.arkcraft.mod2.common.entity.item.projectiles.EntityStoneArrow;
 import com.arkcraft.mod2.common.entity.item.projectiles.EntityTranqArrow;
+import com.arkcraft.mod2.common.handlers.PotionEffectHandler;
 import com.arkcraft.mod2.common.items.ARKCraftItems;
 import com.arkcraft.mod2.common.items.ItemARKFood;
 
@@ -55,6 +56,7 @@ public class ClientProxy extends CommonProxy
 {
 	boolean initDone = false;
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	public void init() {
 		if(initDone) return;
@@ -68,7 +70,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntityMetalArrow.class, new RenderMetalArrow());
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityDodoEgg.class, new RenderSnowball(Minecraft.getMinecraft().getRenderManager(), ARKCraftItems.dodo_egg, Minecraft.getMinecraft().getRenderItem()));
-		RenderingRegistry.registerEntityRenderingHandler(EntityGrenade.class, new RenderSnowball(Minecraft.getMinecraft().getRenderManager(), ARKCraftItems.grenade, Minecraft.getMinecraft().getRenderItem()));
+		RenderingRegistry.registerEntityRenderingHandler(EntityBase.class, new RenderSnowball(Minecraft.getMinecraft().getRenderManager(), ARKCraftItems.grenade, Minecraft.getMinecraft().getRenderItem()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityRaptor.class, new RenderRaptor(new ModelRaptorNew(), 0.5F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityDodo.class, new RenderDodo(new ModelDodo(), 0.3F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityBrontosaurus.class, new RenderBrontosaurus(new ModelBrontosaurus(), 0.5f));
@@ -95,6 +97,8 @@ public class ClientProxy extends CommonProxy
 		Mod1ClientEventHandler mod1Eventhandler = new Mod1ClientEventHandler();
 		FMLCommonHandler.instance().bus().register(mod1Eventhandler);
 		MinecraftForge.EVENT_BUS.register(mod1Eventhandler);
+		
+		MinecraftForge.EVENT_BUS.register(new PotionEffectHandler());
 		
 		Mod2ClientEventHandler mod2Eventhandler = new Mod2ClientEventHandler();
 		FMLCommonHandler.instance().bus().register(mod2Eventhandler);

@@ -27,13 +27,13 @@ public class DispenseSimpleRifleAmmo extends DispenseWeaponProjectile
 	@Override
 	public float getDeviation()
 	{
-		return 3F;
+		return 1.0F;
 	}
 	
 	@Override
 	public float getVelocity()
 	{
-		return 5F;
+		return 100F;
 	}
 	
 	@Override

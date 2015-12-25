@@ -1,10 +1,10 @@
 package com.arkcraft.mod2.common.items.weapons.handlers;
 
-import com.arkcraft.mod2.common.entity.item.projectiles.EntityShootable;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSourceIndirect;
+
+import com.arkcraft.mod2.common.entity.item.projectiles.EntityShootable;
 
 public class WeaponDamageSource extends EntityDamageSourceIndirect
 {

@@ -66,6 +66,7 @@ public class GlobalAdditions {
 		EntityHandler.registerModEntity(EntityCobble.class, "Cobblestone Ball", ARKCraft.instance, 64, 10, true);
 		EntityHandler.registerModEntity(EntityDodoEgg.class, "Dodo Egg", ARKCraft.instance, 64, 10, true);
 		EntityHandler.registerModEntity(EntityGrenade.class, "Grenade", ARKCraft.instance, 64, 10, true);
+
 		
 		EntityHandler.registerEntityEgg(EntityRaptor.class, "raptor", BiomeGenBase.icePlains);
 		EntityHandler.registerEntityEgg(EntityDodo.class, "dodo", BiomeGenBase.beach, BiomeGenBase.desert, BiomeGenBase.forest, BiomeGenBase.birchForest, BiomeGenBase.extremeHills);

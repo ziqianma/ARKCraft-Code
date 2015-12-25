@@ -1,5 +1,13 @@
 package com.arkcraft.mod2.common.blocks;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+
 import com.arkcraft.mod.GlobalAdditions;
 import com.arkcraft.mod.common.handlers.GenerationHandler;
 import com.arkcraft.mod2.common.tile.TileInventoryCompostBin;
@@ -7,14 +15,6 @@ import com.arkcraft.mod2.common.tile.TileInventoryCropPlot;
 import com.arkcraft.mod2.common.tile.TileInventoryForge;
 import com.arkcraft.mod2.common.tile.TileInventoryMP;
 import com.arkcraft.mod2.common.tile.TileInventorySmithy;
-
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author wildbill22
@@ -30,6 +30,8 @@ public class ARKCraftBlocks
 	public static BlockMortarAndPestle pestle;
 	public static BlockCropPlot crop_plot;
 	public static BlockRefiningForge refining_forge;
+//	public static BlockImprovisedExplosiveDevice block_explosive_device;
+//	public static BlockExplosiveDeviceWire block_explosive_wire;
 
 	public static ARKCraftBlocks getInstance() { return new ARKCraftBlocks(); }
 	public static Map<String, Block> allBlocks = new HashMap<String, Block>();
@@ -40,11 +42,16 @@ public class ARKCraftBlocks
 		berryBush = (BlockBerryBush) registerBlockNoTab(new BlockBerryBush(0.4F), "berryBush");
 		GenerationHandler.addOreToGen(oreSurface, 0); //Sets to the values in BALENCE.GEN.class
 		
+	//	block_explosive_device = (BlockImprovisedExplosiveDevice)registerBlock(new BlockImprovisedExplosiveDevice(null), "block_explosive_device");
+	//	block_explosive_wire = (BlockExplosiveDeviceWire)registerBlock(new BlockExplosiveDeviceWire(), "block_explosive_wire");
+
+		
 		// Blocks
 		oreSurface = (BlockARKBase) registerBlock(new BlockARKBase(Material.rock, 3.0F), "oreSurface");
 
 		//blockNarcoBrerry = addBlock(Material.ground, "narcoBerryBlock", 3.0F);
 		blockNarcoBrerry = getRegisteredBlock("blockNarcoBerry");
+	//	block_explosive_device = (BlockImprovisedExplosiveDevice) registerBlockNoTab(new BlockImprovisedExplosiveDevice(), "block_explosive_device");
 		wooden_spikes = (BlockSpikes) registerBlock(new BlockSpikes(Material.wood, 3.0F), "wooden_spikes");
 
 		// Containers
@@ -53,6 +60,7 @@ public class ARKCraftBlocks
 		crop_plot = registerCropPlot("crop_plot", Material.wood, GlobalAdditions.GUI.CROP_PLOT.getID(), false, 3);
 		compost_bin = registerCompostBin("compost_bin", Material.wood, GlobalAdditions.GUI.COMPOST_BIN.getID(), false, false, 3);
 		refining_forge = registerRefiningForge("refining_forge", Material.rock, GlobalAdditions.GUI.FORGE_GUI.getID(), false, false, 3);
+
 
 		// Tile Entities
 		GameRegistry.registerTileEntity(TileInventoryCropPlot.class, "TileInventoryCropPlot");

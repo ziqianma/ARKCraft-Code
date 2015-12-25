@@ -117,4 +117,8 @@ public final class MOD2_BALANCE {
 		@DefaultInt(value = 60, minValue = 15, maxValue = 600, name = "Feces composting time.", comment = "Seconds to compost feces into fertilizer")		
 		public static int COMPOST_TIME_FOR_FECES;
 	}	
+	public static class EXPLOSIVE_DEVICE {
+		@DefaultInt(value = 5, minValue = 0, maxValue = 10, name = "Wire range.", comment = "Wire range")
+		public static int WIRE_RANGE;
+	}
 }

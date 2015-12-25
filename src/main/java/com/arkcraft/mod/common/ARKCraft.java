@@ -12,6 +12,7 @@ import com.arkcraft.mod2.common.event.ARKPlayerEventHandler;
 import com.arkcraft.mod2.common.event.FMLCommonEventHandler;
 import com.arkcraft.mod2.common.event.Mod2ARKEventHandler;
 import com.arkcraft.mod2.common.items.ARKCraftItems;
+import com.arkcraft.mod2.common.items.potions.ARKCraftPotionEffects;
 import com.arkcraft.mod2.common.network.OpenPlayerCrafting;
 import com.arkcraft.mod2.common.network.PlayerPoop;
 import com.arkcraft.mod2.common.network.UpdateMPToCraftItem;
@@ -19,6 +20,7 @@ import com.arkcraft.mod2.common.network.UpdatePlayerCrafting;
 import com.arkcraft.mod2.common.network.UpdateSmithyToCraftItem;
 
 import net.minecraft.item.Item;
+import net.minecraft.potion.Potion;
 import net.minecraft.world.WorldType;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -36,6 +38,8 @@ import net.minecraftforge.fml.relauncher.Side;
 
 import org.apache.logging.log4j.Logger;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -69,7 +73,29 @@ public class ARKCraft
 
 		ARKCraftBlocks.init();
 		ARKCraftItems.init();
+		ARKCraftPotionEffects.init();
 		GlobalAdditions.init();
+		
+		Potion[] potionTypes;
+
+		for (Field f : Potion.class.getDeclaredFields()) {
+			f.setAccessible(true);
+
+			try {
+				if (f.getName().equals("potionTypes") || f.getName().equals("field_76425_a")) {
+					Field modfield = Field.class.getDeclaredField("modifiers");
+					modfield.setAccessible(true);
+					modfield.setInt(f, f.getModifiers() & ~Modifier.FINAL);
+					potionTypes = (Potion[]) f.get(null);
+					final Potion[] newPotionTypes = new Potion[256];
+					System.arraycopy(potionTypes, 0, newPotionTypes, 0, potionTypes.length);
+					f.set(null, newPotionTypes);
+				}
+			} catch (Exception e) {
+				System.err.println("(Potions!) Severe error, please report this to the mod author:");
+				System.err.println(e);
+			}
+		}
 		
 		setupNetwork();	
 		modLog = event.getModLog();		
