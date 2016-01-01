@@ -10,7 +10,7 @@ import net.minecraft.world.World;
 
 public class EntityRocketPropelledGrenade extends Test
 {
-	public float explosionRadius = 4F;
+	public float explosionRadius = 100F;
 	
 	public EntityRocketPropelledGrenade(World world)
 	{

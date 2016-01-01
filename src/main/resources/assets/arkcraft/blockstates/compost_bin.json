@@ -1,12 +1,12 @@
 {
 	"variants": {
-		"facing=south,part=left": { "model": "arkcraft:blank" },
-		"facing=west,part=left": { "model": "arkcraft:blank", "y": 90 },
-		"facing=north,part=left": { "model": "arkcraft:blank", "y": 180 },
-		"facing=east,part=left": { "model": "arkcraft:blank" , "y": 270 },
-		"facing=south,part=right": { "model": "arkcraft:compost_bin" },
-		"facing=west,part=right": { "model": "arkcraft:compost_bin", "y": 90 },
-		"facing=north,part=right": { "model": "arkcraft:compost_bin", "y": 180 },
-		"facing=east,part=right": { "model": "arkcraft:compost_bin", "y": 270  }
+		"facing=south,part=left": { "model": "arkcraft:compost_bin_l" },
+		"facing=west,part=left": { "model": "arkcraft:compost_bin_l", "y": 90 },
+		"facing=north,part=left": { "model": "arkcraft:compost_bin_l", "y": 180 },
+		"facing=east,part=left": { "model": "arkcraft:compost_bin_l" , "y": 270 },
+		"facing=south,part=right": { "model": "arkcraft:compost_bin_r" },
+		"facing=west,part=right": { "model": "arkcraft:compost_bin_r", "y": 90 },
+		"facing=north,part=right": { "model": "arkcraft:compost_bin_r", "y": 180 },
+		"facing=east,part=right": { "model": "arkcraft:compost_bin_r", "y": 270  }
 	}
 }

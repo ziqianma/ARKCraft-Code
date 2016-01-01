@@ -310,6 +310,7 @@ public abstract class RangedComponent extends AbstractWeaponComponent
 		ROCKETLAUNCHER("arkcraft:rocket_propelled_grenade", 1, 250, 1),
 		SHOTGUN("arkcraft:simple_shotgun_ammo", 2, 200, 5),
 		LONGNECKRIFLE("arkcraft:simple_rifle_ammo", 3, 350, 1),
+		LONGNECKRIFLE_TRANQ("arkcraft:tranquilizer", 3, 350, 1),
 		TRANQGUN("arkcraft:tranquilizer", 4, 350, 1),
 		CROSSBOW("arkcraft:stone_arrow, metal_arrow, tranq_arrow", 5, 250, 1);
 		

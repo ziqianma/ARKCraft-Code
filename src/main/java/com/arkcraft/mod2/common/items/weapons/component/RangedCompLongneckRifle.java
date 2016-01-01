@@ -1,15 +1,16 @@
 package com.arkcraft.mod2.common.items.weapons.component;
 
-import com.arkcraft.mod2.common.entity.item.projectiles.EntitySimpleRifleAmmo;
-import com.arkcraft.mod2.common.items.weapons.component.RangedComponent.RangedSpecs;
-import com.arkcraft.mod2.common.items.weapons.handlers.ReloadHelper;
-
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+
+import com.arkcraft.mod2.common.entity.item.projectiles.EntitySimpleRifleAmmo;
+import com.arkcraft.mod2.common.entity.item.projectiles.EntityTranquilizer;
+import com.arkcraft.mod2.common.items.ARKCraftItems;
+import com.arkcraft.mod2.common.items.weapons.handlers.ReloadHelper;
 
 public class RangedCompLongneckRifle extends RangedComponent
 {
@@ -30,21 +31,33 @@ public class RangedCompLongneckRifle extends RangedComponent
 	{
 		return true;
 	}
+	
+	
 
 	@Override
 	public void fire(ItemStack itemstack, World world, EntityPlayer entityplayer, int i)
 	{
-		if (!world.isRemote)
+		if (!world.isRemote) 
 		{
-			EntitySimpleRifleAmmo entityprojectile = new EntitySimpleRifleAmmo(world, entityplayer, 1F);
-			applyProjectileEnchantments(entityprojectile, itemstack);
-			world.spawnEntityInWorld(entityprojectile);
+			if(entityplayer.inventory.hasItem(ARKCraftItems.simple_rifle_ammo) || entityplayer.capabilities.isCreativeMode)
+			{
+				EntitySimpleRifleAmmo entityprojectile = new EntitySimpleRifleAmmo(world, entityplayer, 1F);
+				applyProjectileEnchantments(entityprojectile, itemstack);
+				world.spawnEntityInWorld(entityprojectile);
+			}  
+			else if(entityplayer.inventory.hasItem(ARKCraftItems.tranquilizer))
+			{
+				EntityTranquilizer entityprojectile = new EntityTranquilizer(world, entityplayer, 1F);
+				applyProjectileEnchantments(entityprojectile, itemstack);
+				world.spawnEntityInWorld(entityprojectile);
+			}  
 		}
-		int damage = 1;
-		if (itemstack.getItemDamage() + damage <= itemstack.getMaxDamage())
-		{
+	
+		 int damage = 1;
+		 if (itemstack.getItemDamage() + damage <= itemstack.getMaxDamage())
+		 {
 			setReloadState(itemstack, ReloadHelper.STATE_NONE);
-		}
+		 }
 
 		itemstack.damageItem(damage, entityplayer);
 		postShootingEffects(itemstack, entityplayer, world);

@@ -51,6 +51,7 @@ import com.arkcraft.mod2.common.entity.item.projectiles.EntityTranqArrow;
 import com.arkcraft.mod2.common.handlers.PotionEffectHandler;
 import com.arkcraft.mod2.common.items.ARKCraftItems;
 import com.arkcraft.mod2.common.items.ItemARKFood;
+import com.arkcraft.mod2.common.network.ARKMessagePipeline;
 
 public class ClientProxy extends CommonProxy
 {
@@ -88,6 +89,11 @@ public class ClientProxy extends CommonProxy
 		dossierProxy.init();
 		LogHelper.info("CommonProxy: Init run finished.");
 		initDone = true;
+	}
+	@Override
+	public void registerPackets(ARKMessagePipeline pipeline)
+	{
+		super.registerPackets(pipeline);
 	}
 
 	@Override

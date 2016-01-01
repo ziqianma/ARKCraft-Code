@@ -13,6 +13,7 @@ import com.arkcraft.mod2.common.event.FMLCommonEventHandler;
 import com.arkcraft.mod2.common.event.Mod2ARKEventHandler;
 import com.arkcraft.mod2.common.items.ARKCraftItems;
 import com.arkcraft.mod2.common.items.potions.ARKCraftPotionEffects;
+import com.arkcraft.mod2.common.network.ARKMessagePipeline;
 import com.arkcraft.mod2.common.network.OpenPlayerCrafting;
 import com.arkcraft.mod2.common.network.PlayerPoop;
 import com.arkcraft.mod2.common.network.UpdateMPToCraftItem;
@@ -53,12 +54,17 @@ public class ARKCraft
 	public static ARKCraft instance;
 	public static SimpleNetworkWrapper modChannel;
 	public static Logger	modLog;
+	public ARKMessagePipeline		messagePipeline;
 
 	public static final WorldType island = new WorldTypeIsland();
 
 	public static Map<String, Item> allItems = new HashMap<String, Item>();
 	
-	public ARKCraft() { instance = this; }
+	public ARKCraft() 
+	{
+		instance = this; 
+		messagePipeline = new ARKMessagePipeline();	
+	}
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
@@ -111,10 +117,14 @@ public class ARKCraft
 		proxy.registerWeapons();
 		proxy.registerEventHandlers();		
 		proxy.init();
+		messagePipeline.initalize();
+		proxy.registerPackets(messagePipeline);
 	}
 	
 	@EventHandler
-	public void postInit(FMLPostInitializationEvent event) {
+	public void postInit(FMLPostInitializationEvent event) 
+	{
+		messagePipeline.postInitialize();
 	}
 
 	public static ARKCraft instance() { return instance; }

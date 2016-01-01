@@ -3,7 +3,9 @@ package com.arkcraft.mod2.common.event;
 import com.arkcraft.mod.GlobalAdditions;
 import com.arkcraft.mod.common.ARKCraft;
 import com.arkcraft.mod2.common.config.KeyBindings;
+import com.arkcraft.mod2.common.entity.item.projectiles.EntityBallista;
 import com.arkcraft.mod2.common.entity.player.ARKPlayer;
+import com.arkcraft.mod2.common.network.MsgBallistaShot;
 import com.arkcraft.mod2.common.network.OpenPlayerCrafting;
 
 import net.minecraft.client.Minecraft;
@@ -35,8 +37,7 @@ public class FMLCommonEventHandler {
 				player.openGui(ARKCraft.instance(), GlobalAdditions.GUI.PLAYER.getID(),	player.worldObj, 0, 0, 0);
 				ARKCraft.modChannel.sendToServer(new OpenPlayerCrafting(true));
 			}			
-		}
-		
+		}	
 	}	
 
 	@SubscribeEvent
@@ -45,6 +46,18 @@ public class FMLCommonEventHandler {
 		if (ARKPlayer.get(event.player).getInventoryBlueprints().isCrafting()){
 			ARKPlayer.get(event.player).getInventoryBlueprints().update();
 		}
+		else if (event.phase == TickEvent.Phase.START && event.player instanceof EntityPlayerSP)
+		{	
+		EntityPlayerSP entity = (EntityPlayerSP) event.player;
+		if (entity.movementInput.jump && entity.ridingEntity instanceof EntityBallista && ((EntityBallista) entity.ridingEntity).isLoaded())	
+			{	
+			((EntityBallista) entity.ridingEntity).fireBallista();
+		//	MsgBallistaShot msg = new MsgBallistaShot((EntityBallista)entity.ridingEntity);
+		//	ARKCraft.instance.messagePipeline.sendToServer(msg);
+			}
+		}
+	}
+}
 
-	} 
-}	
+	
+

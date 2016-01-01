@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.minecraft.block.BlockDispenser;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
@@ -17,6 +18,8 @@ import com.arkcraft.mod.client.gui.book.Dossier;
 import com.arkcraft.mod.common.ARKCraft;
 import com.arkcraft.mod.common.handlers.EntityHandler;
 import com.arkcraft.mod2.common.config.MOD2_BALANCE;
+import com.arkcraft.mod2.common.entity.item.projectiles.EntityBallista;
+import com.arkcraft.mod2.common.entity.item.projectiles.EntityBallistaBolt;
 import com.arkcraft.mod2.common.entity.item.projectiles.EntityBase;
 import com.arkcraft.mod2.common.entity.item.projectiles.EntityMetalArrow;
 import com.arkcraft.mod2.common.entity.item.projectiles.EntityRocketPropelledGrenade;
@@ -26,6 +29,7 @@ import com.arkcraft.mod2.common.entity.item.projectiles.EntitySimpleShotgunAmmo;
 import com.arkcraft.mod2.common.entity.item.projectiles.EntityStoneArrow;
 import com.arkcraft.mod2.common.entity.item.projectiles.EntityTranqArrow;
 import com.arkcraft.mod2.common.entity.item.projectiles.EntityTranquilizer;
+import com.arkcraft.mod2.common.entity.item.projectiles.dispense.DispenseBallistaBolt;
 import com.arkcraft.mod2.common.entity.item.projectiles.dispense.DispenseRocketPropelledGrenade;
 import com.arkcraft.mod2.common.entity.item.projectiles.dispense.DispenseSimpleBullet;
 import com.arkcraft.mod2.common.entity.item.projectiles.dispense.DispenseSimpleRifleAmmo;
@@ -34,7 +38,6 @@ import com.arkcraft.mod2.common.entity.item.projectiles.dispense.DispenseTranqui
 import com.arkcraft.mod2.common.items.weapons.ItemCompoundBow;
 import com.arkcraft.mod2.common.items.weapons.ItemRangedWeapon;
 import com.arkcraft.mod2.common.items.weapons.ItemSpear;
-import com.arkcraft.mod2.common.items.weapons.ItemSpyGlass;
 import com.arkcraft.mod2.common.items.weapons.ItemWoodenClub;
 import com.arkcraft.mod2.common.items.weapons.bullets.ItemProjectile;
 import com.arkcraft.mod2.common.items.weapons.component.RangedCompCrossbow;
@@ -87,12 +90,13 @@ public class ARKCraftItems
 	public static ItemRangedWeapon tranq_gun;
 	public static ItemCompoundBow compound_bow;
 	public static ItemRangedWeapon rocket_launcher;
-	public static ItemProjectile tranquilizer, stone_arrow, tranq_arrow, metal_arrow;
+	public static ItemProjectile tranquilizer, stone_arrow, tranq_arrow, metal_arrow, ballista_bolt;
 	public static ItemProjectile simple_bullet, simple_rifle_ammo, simple_shotgun_ammo, rocket_propelled_grenade;
 	public static ItemRangedWeapon simple_pistol, simple_pistol_scoped;
 	public static ItemRangedWeapon longneck_rifle, longneck_rifle_scoped;
 	public static ItemRangedWeapon shotgun;
 	public static ItemRangedWeapon crossbow;
+	public static ItemBallista ballista;
 	
 	public static ArmorMaterial CLOTH = EnumHelper.addArmorMaterial("CLOTH_MAT", "CLOTH_MAT", 4, new int[] {1,2,1,1}, 15);
 	public static ArmorMaterial CHITIN = EnumHelper.addArmorMaterial("CHITIN_MAT", "CHITIN_MAT", 16, new int[] { 3,7,6,3 } , 10);
@@ -139,6 +143,8 @@ public class ARKCraftItems
 		grenade = addGrenade("grenade");
 		//stoneSpear = addWeaponThrowable("stoneSpear", ToolMaterial.STONE);
 		ironPike = addWeapon("ironPike", ToolMaterial.IRON);
+		ballista = addBallista("ballista");
+		ballista_bolt = addItemProjectile("ballista_bolt");
 		
 		metal_pick = addMetalPick("metal_pick", METAL);
 		metal_hatchet = addMetalHatchet("metal_hatchet", METAL);
@@ -158,7 +164,7 @@ public class ARKCraftItems
 		gun_powder = addItem("gun_powder");
 		spark_powder = addItem("spark_powder");
 		hide = addItem("hide");
-		spy_glass = addSpyGlass("spy_glass", new RangedCompSpyGlass());
+		spy_glass = addSpyGlass("spy_glass");
 		
 		//Block Items
 		item_berry_bush = addBushItem("item_berry_bush");
@@ -210,6 +216,8 @@ public class ARKCraftItems
 		hideLegs = addArmorItem("hide_legs", HIDE, "hideArmor", 2, true);
 		hideBoots = addArmorItem("hide_boots", HIDE, "hideArmor", 3, true);		
 		
+		EntityHandler.registerModEntity(EntityBallista.class, "ballista", ARKCraft.instance, 64, 128, false);
+		EntityHandler.registerModEntity(EntityBallistaBolt.class, "ballistaBolt", ARKCraft.instance, 64, 20, true);
 		
 		EntityHandler.registerModEntity(EntityBase.class, "Entity Base", ARKCraft.instance, 64, 10, true);
 		
@@ -238,6 +246,9 @@ public class ARKCraftItems
 			EntityHandler.registerModEntity(EntityTranqArrow.class, "Tranq Arrow", ARKCraft.instance, 64, 10, true);
 			EntityHandler.registerModEntity(EntityStoneArrow.class, "Stone Arrow", ARKCraft.instance, 64, 10, true);
 			EntityHandler.registerModEntity(EntityMetalArrow.class, "Metal Arrow", ARKCraft.instance, 64, 10, true);
+	//	if (MOD2_BALANCE.WEAPONS.CROSSBOW)	{
+	//		
+	//		}
 		}
 	}
 	
@@ -287,6 +298,11 @@ public class ARKCraftItems
 		}
 		if (rocket_propelled_grenade != null) {
 			BlockDispenser.dispenseBehaviorRegistry.putObject(rocket_propelled_grenade, new DispenseRocketPropelledGrenade());
+		}
+		if (ballista != null) {
+			DispenseBallistaBolt behavior = new DispenseBallistaBolt();
+			BlockDispenser.dispenseBehaviorRegistry.putObject(ballista_bolt, behavior);
+			BlockDispenser.dispenseBehaviorRegistry.putObject(Items.gunpowder, behavior);
 		}
 	}
 	
@@ -392,6 +408,12 @@ public class ARKCraftItems
 		return i;
 	}
 	
+	protected static ItemBallista addBallista(String name) {
+		ItemBallista i = new ItemBallista();
+		registerItem(name, i);
+		return i;
+	}
+	
 	protected static ItemMortarAndPestle addMortarAndPestle(String name) {
 		ItemMortarAndPestle i = new ItemMortarAndPestle();
 		registerItem(name, i);
@@ -404,8 +426,8 @@ public class ARKCraftItems
 		return i;
 	}
 	
-	protected static ItemSpyGlass addSpyGlass(String name, RangedComponent rangedcomponent) {
-		ItemSpyGlass i = new ItemSpyGlass(rangedcomponent);
+	protected static ItemSpyGlass addSpyGlass(String name) {
+		ItemSpyGlass i = new ItemSpyGlass();
 		registerItem(name, i);
 		return i;
 	}
