@@ -75,7 +75,7 @@ public abstract class AbstractWeaponComponent
 	
 	public abstract void onItemLeftClickTick(EntityPlayer entityplayer, World world1, int i);
 	
-	public abstract boolean  getReach();
+	public abstract boolean  ifCanScope();
 
 	@SideOnly(Side.CLIENT)
 	public abstract boolean shouldRotateAroundWhenRendering();

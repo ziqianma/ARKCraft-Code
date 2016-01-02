@@ -12,7 +12,7 @@ public class RangedCompLongneckRifleScoped extends RangedCompLongneckRifle
 	}
 
 	@Override
-	public boolean getReach() {
+	public boolean ifCanScope() {
 		return true;
 	}
 

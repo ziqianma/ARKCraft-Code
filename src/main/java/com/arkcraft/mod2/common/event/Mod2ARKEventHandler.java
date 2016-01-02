@@ -253,7 +253,7 @@ public class Mod2ARKEventHandler {
 		        	i_item_weapon = null;
 	            }
 		        // Weapon with scope?
-	     	    if (i_item_weapon != null && i_item_weapon.getReach()){
+	     	    if (i_item_weapon != null && i_item_weapon.ifCanScope()){
 	     	    	if (evt.buttonstate)
 	     	    		ShowScopeOverlap = true;
 	     	    	else

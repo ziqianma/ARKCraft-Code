@@ -2,6 +2,7 @@ package com.arkcraft.mod2.client.render;
 
 import com.arkcraft.mod.common.ARKCraft;
 import com.arkcraft.mod2.common.entity.item.projectiles.EntitySimpleBullet;
+import com.arkcraft.mod2.common.entity.item.projectiles.EntitySimpleRifleAmmo;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
@@ -12,16 +13,16 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-public class RenderSimpleBullet extends Render
+public class RenderSimpleRifleAmmo extends Render
 {
 	private static final ResourceLocation texture = new ResourceLocation(ARKCraft.MODID + ":textures/entity/bullet.png");
     
-    public RenderSimpleBullet() 
+    public RenderSimpleRifleAmmo() 
 	{
 		super(Minecraft.getMinecraft().getRenderManager());
 	}
 
-	public void doRender(EntitySimpleBullet entityarrow, double d, double d1, double d2, float f, float f1)
+	public void doRender(EntitySimpleRifleAmmo entityarrow, double d, double d1, double d2, float f, float f1)
 	{
 		bindEntityTexture(entityarrow);
 		GL11.glPushMatrix();
@@ -66,7 +67,7 @@ public class RenderSimpleBullet extends Render
 	@Override
 	public void doRender(Entity entity, double d, double d1, double d2, float f, float f1)
 	{
-		doRender((EntitySimpleBullet) entity, d, d1, d2, f, f1);
+		doRender((EntitySimpleRifleAmmo) entity, d, d1, d2, f, f1);
 	}
 	
 	@Override

@@ -8,7 +8,7 @@ public class RangedCompSimplePistolScoped extends RangedCompSimplePistol
 	}
 
 	@Override
-	public boolean getReach() {
+	public boolean ifCanScope() {
 		return true;
 	}
 }

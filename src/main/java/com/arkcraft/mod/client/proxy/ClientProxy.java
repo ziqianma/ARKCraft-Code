@@ -38,6 +38,7 @@ import com.arkcraft.mod2.client.render.RenderSimpleBullet;
 import com.arkcraft.mod2.client.render.RenderSpear;
 import com.arkcraft.mod2.client.render.RenderStoneArrow;
 import com.arkcraft.mod2.client.render.RenderTranqArrow;
+import com.arkcraft.mod2.client.render.RenderTranquilizer;
 import com.arkcraft.mod2.common.blocks.ARKCraftBlocks;
 import com.arkcraft.mod2.common.config.MOD2_BALANCE;
 import com.arkcraft.mod2.common.entity.EntityCobble;
@@ -48,6 +49,7 @@ import com.arkcraft.mod2.common.entity.item.projectiles.EntitySimpleBullet;
 import com.arkcraft.mod2.common.entity.item.projectiles.EntitySpear;
 import com.arkcraft.mod2.common.entity.item.projectiles.EntityStoneArrow;
 import com.arkcraft.mod2.common.entity.item.projectiles.EntityTranqArrow;
+import com.arkcraft.mod2.common.entity.item.projectiles.EntityTranquilizer;
 import com.arkcraft.mod2.common.handlers.PotionEffectHandler;
 import com.arkcraft.mod2.common.items.ARKCraftItems;
 import com.arkcraft.mod2.common.items.ItemARKFood;
@@ -69,6 +71,8 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntityTranqArrow.class, new RenderTranqArrow());
 		RenderingRegistry.registerEntityRenderingHandler(EntityStoneArrow.class, new RenderStoneArrow());
 		RenderingRegistry.registerEntityRenderingHandler(EntityMetalArrow.class, new RenderMetalArrow());
+		RenderingRegistry.registerEntityRenderingHandler(EntityTranquilizer.class, new RenderTranquilizer());
+
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityDodoEgg.class, new RenderSnowball(Minecraft.getMinecraft().getRenderManager(), ARKCraftItems.dodo_egg, Minecraft.getMinecraft().getRenderItem()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityBase.class, new RenderSnowball(Minecraft.getMinecraft().getRenderManager(), ARKCraftItems.grenade, Minecraft.getMinecraft().getRenderItem()));

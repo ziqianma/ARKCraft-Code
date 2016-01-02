@@ -1,14 +1,13 @@
 package com.arkcraft.mod2.common.items.weapons.component;
 
-import com.arkcraft.mod2.common.entity.item.projectiles.EntityMetalArrow;
-import com.arkcraft.mod2.common.entity.item.projectiles.EntityStoneArrow;
-import com.arkcraft.mod2.common.entity.item.projectiles.EntityTranqArrow;
-import com.arkcraft.mod2.common.items.weapons.component.RangedComponent.RangedSpecs;
-import com.arkcraft.mod2.common.items.weapons.handlers.ReloadHelper;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+
+import com.arkcraft.mod2.common.entity.item.projectiles.EntityMetalArrow;
+import com.arkcraft.mod2.common.entity.item.projectiles.EntityStoneArrow;
+import com.arkcraft.mod2.common.entity.item.projectiles.EntityTranqArrow;
+import com.arkcraft.mod2.common.items.weapons.handlers.ReloadHelper;
 
 public class RangedCompCrossbow extends RangedComponent
 {

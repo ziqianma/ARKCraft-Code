@@ -108,8 +108,8 @@ public class ItemRangedWeapon extends ItemBow implements IItemWeapon
 	}
 
 	@Override
-	public boolean getReach() 
+	public boolean ifCanScope() 
 	{
-		return rangedComponent.getReach();
+		return rangedComponent.ifCanScope();
 	}
 }

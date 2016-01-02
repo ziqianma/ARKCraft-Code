@@ -16,5 +16,5 @@ public interface IItemWeapon
 	
 	public RangedComponent getRangedComponent();
 	
-	public boolean getReach();
+	public boolean ifCanScope();
 }

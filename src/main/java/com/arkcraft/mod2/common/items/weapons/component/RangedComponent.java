@@ -300,7 +300,7 @@ public abstract class RangedComponent extends AbstractWeaponComponent
 	}
     
 	@Override
-	public boolean getReach() {
+	public boolean ifCanScope() {
 
 	return false;
 	}
@@ -347,6 +347,7 @@ public abstract class RangedComponent extends AbstractWeaponComponent
 			if (reloadTime < 0 && ARKCraft.instance != null){
 				reloadTime = getReloadTime(reloadTimeId);
 				ARKCraft.modLog.debug("Found reaload time " + reloadTime + " for " + reloadTimeId + " @" + this);
+				System.out.println("Found reaload time " + reloadTime + " for " + reloadTimeId + " @" + this);
 			}
 			return reloadTime;
 		}
@@ -355,6 +356,7 @@ public abstract class RangedComponent extends AbstractWeaponComponent
 			if (ammoItem == null && ammoItemTag != null){
 				ammoItem = (Item) Item.itemRegistry.getObject(ammoItemTag);
 				ARKCraft.modLog.debug("Found item " + ammoItem + " for " + ammoItemTag + " @" + this);
+				System.out.println("Found item " + ammoItem + " for " + ammoItemTag + " @" + this);
 				ammoItemTag = null;
 			}
 			return ammoItem;

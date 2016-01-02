@@ -16,7 +16,7 @@ public class ItemSpyGlass extends Item implements IItemWeapon
     }
 	
 	@Override
-	public boolean getReach() 
+	public boolean ifCanScope() 
 	{
 		return true;
 	}

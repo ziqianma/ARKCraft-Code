@@ -47,8 +47,6 @@ import com.arkcraft.mod2.common.items.weapons.component.RangedCompRocketLauncher
 import com.arkcraft.mod2.common.items.weapons.component.RangedCompShotgun;
 import com.arkcraft.mod2.common.items.weapons.component.RangedCompSimplePistol;
 import com.arkcraft.mod2.common.items.weapons.component.RangedCompSimplePistolScoped;
-import com.arkcraft.mod2.common.items.weapons.component.RangedCompSpyGlass;
-import com.arkcraft.mod2.common.items.weapons.component.RangedCompTranqGun;
 import com.arkcraft.mod2.common.items.weapons.component.RangedComponent;
 
 /**
@@ -62,7 +60,7 @@ public class ARKCraftItems
 	public static ItemThatch thatch;
 	public static ItemARKBase wood, metal, metal_ingot, flint;
 	public static ItemFeces dodo_feces, player_feces, fertilizer;
-	public static ItemDinosaurEgg dodo_egg;
+	public static ItemDinosaurEgg dodo_egg;	
 	public static ItemDinosaurSaddle saddle_small, saddle_medium, saddle_large;
 	public static ItemARKArmor chitinHelm, chitinChest, chitinLegs, chitinBoots;
 	public static ItemARKArmor clothHelm, clothChest, clothLegs, clothBoots;
@@ -266,10 +264,6 @@ public class ARKCraftItems
 		if (MOD2_BALANCE.WEAPONS.SHOTGUN) {
 			shotgun = addShooter("shotgun", new RangedCompShotgun());
 			simple_shotgun_ammo = addItemProjectile("simple_shotgun_ammo");
-		}
-		if (MOD2_BALANCE.WEAPONS.TRANQ_GUN) {
-			tranq_gun = addShooter("tranq_gun", new RangedCompTranqGun());
-			tranquilizer = addItemProjectile("tranquilizer");
 		}
 		if (MOD2_BALANCE.WEAPONS.ROCKET_LAUNCHER) {
 			rocket_launcher = addShooter("rocket_launcher", new RangedCompRocketLauncher());

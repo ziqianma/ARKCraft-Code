@@ -80,7 +80,7 @@ public class RangedCompSimplePistol extends RangedComponent
 	}
 	
 	@Override
-	public boolean getReach() {
+	public boolean ifCanScope() {
 		return false;
 	}
 }

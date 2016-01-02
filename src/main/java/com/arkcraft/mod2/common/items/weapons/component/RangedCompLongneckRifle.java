@@ -39,18 +39,19 @@ public class RangedCompLongneckRifle extends RangedComponent
 	{
 		if (!world.isRemote) 
 		{
-			if(entityplayer.inventory.hasItem(ARKCraftItems.simple_rifle_ammo) || entityplayer.capabilities.isCreativeMode)
-			{
-				EntitySimpleRifleAmmo entityprojectile = new EntitySimpleRifleAmmo(world, entityplayer, 1F);
-				applyProjectileEnchantments(entityprojectile, itemstack);
-				world.spawnEntityInWorld(entityprojectile);
-			}  
-			else if(entityplayer.inventory.hasItem(ARKCraftItems.tranquilizer))
-			{
-				EntityTranquilizer entityprojectile = new EntityTranquilizer(world, entityplayer, 1F);
-				applyProjectileEnchantments(entityprojectile, itemstack);
-				world.spawnEntityInWorld(entityprojectile);
-			}  
+			
+		//	if(entityplayer.inventory.hasItem(ARKCraftItems.simple_rifle_ammo) || entityplayer.capabilities.isCreativeMode)
+		//	{
+		//		EntitySimpleRifleAmmo entityprojectile = new EntitySimpleRifleAmmo(world, entityplayer, 1F);
+		//		applyProjectileEnchantments(entityprojectile, itemstack);
+		//		world.spawnEntityInWorld(entityprojectile);
+		//	}  
+		//	 if(entityplayer.inventory.hasItem(ARKCraftItems.tranquilizer) || entityplayer.capabilities.isCreativeMode)
+		//	{
+		//		EntityTranquilizer entityprojectile = new EntityTranquilizer(world, entityplayer, 1F);
+		//		applyProjectileEnchantments(entityprojectile, itemstack);
+		//		world.spawnEntityInWorld(entityprojectile);
+		//	}  
 		}
 	
 		 int damage = 1;
@@ -91,7 +92,7 @@ public class RangedCompLongneckRifle extends RangedComponent
 	}
 	
 	@Override
-	public boolean getReach() {
+	public boolean ifCanScope() {
 		return false;
 	}
 }
