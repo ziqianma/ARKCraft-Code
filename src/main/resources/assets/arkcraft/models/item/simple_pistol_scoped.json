@@ -1,5 +1,9 @@
 {
 "__comment": "Designed by Creativeone with BDcraft Cubik PRO 0.95 Beta - http://bdcraft.net",
+"textures": {
+    "particle": "arkcraft:items/simple_pistol",
+    "texture": "arkcraft:items/simple_pistol"
+},
 "elements": [ 
 {
     "from": [ 7.5, 8.75, 2.25 ],
