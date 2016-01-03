@@ -78,6 +78,10 @@ public abstract class AbstractWeaponComponent
 	
 	public abstract boolean  ifCanScope();
 	
+	public abstract boolean canOpenGui(); 
+	
+
+	
 	public abstract ModelResourceLocation getModel(ItemStack stack, EntityPlayer player);
 
 	@SideOnly(Side.CLIENT)

@@ -1,12 +1,12 @@
 package com.arkcraft.mod2.common.items.weapons.handlers;
 
-import com.arkcraft.mod2.common.items.weapons.component.RangedComponent;
+import java.util.Random;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
-import java.util.Random;
+import com.arkcraft.mod2.common.items.weapons.component.RangedComponent;
 
 public interface IItemWeapon
 {
@@ -17,4 +17,6 @@ public interface IItemWeapon
 	public RangedComponent getRangedComponent();
 	
 	public boolean ifCanScope();
+	
+	public boolean canOpenGui();
 }

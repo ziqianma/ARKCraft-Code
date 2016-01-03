@@ -42,6 +42,12 @@ public class RangedCompLongneckRifle extends RangedComponent
 		else return null;
 	}
 	
+	@Override
+	public boolean canOpenGui()
+	{
+		return true;
+	}
+	
 	public boolean scope;
 	
 

@@ -10,15 +10,15 @@ import org.lwjgl.input.Keyboard;
  *
  */
 public class KeyBindings {
-	public static KeyBinding playerPooping, playerScoping, playerCrafting;
+	public static KeyBinding playerPooping, attachment, playerCrafting;
 	
 	public static void preInit() {
 		playerPooping = new KeyBinding("key.playerPoop", Keyboard.KEY_Z, "ARKCraft");
-		playerScoping = new KeyBinding("key.playerScope",  Keyboard.KEY_X, "ARKCraft");
+		attachment = new KeyBinding("key.attachment",  Keyboard.KEY_M, "ARKCraft");
 		playerCrafting = new KeyBinding("key.playerCraft", Keyboard.KEY_V, "ARKCraft");
 		
 		ClientRegistry.registerKeyBinding(playerPooping);
-		ClientRegistry.registerKeyBinding(playerScoping);
+		ClientRegistry.registerKeyBinding(attachment);
 		ClientRegistry.registerKeyBinding(playerCrafting);
 		
 	}

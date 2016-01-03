@@ -5,7 +5,10 @@ import java.util.Random;
 import com.arkcraft.mod2.common.items.weapons.component.RangedComponent;
 import com.arkcraft.mod2.common.items.weapons.handlers.IItemWeapon;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 
 public class ItemSpyGlass extends Item implements IItemWeapon
 {
@@ -29,5 +32,11 @@ public class ItemSpyGlass extends Item implements IItemWeapon
 	@Override
 	public RangedComponent getRangedComponent() {
 		return null;
+	}
+
+	@Override
+	public boolean canOpenGui() {
+
+		return false;
 	}
 }

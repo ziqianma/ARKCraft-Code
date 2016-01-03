@@ -1,18 +1,23 @@
 package com.arkcraft.mod2.common.event;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.InputEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
+
+import com.arkcraft.lib.LogHelper;
 import com.arkcraft.mod.GlobalAdditions;
 import com.arkcraft.mod.common.ARKCraft;
 import com.arkcraft.mod2.common.config.KeyBindings;
 import com.arkcraft.mod2.common.entity.item.projectiles.EntityBallista;
 import com.arkcraft.mod2.common.entity.player.ARKPlayer;
-import com.arkcraft.mod2.common.network.MsgBallistaShot;
+import com.arkcraft.mod2.common.items.ARKCraftItems;
+import com.arkcraft.mod2.common.items.weapons.component.RangedCompLongneckRifle;
+import com.arkcraft.mod2.common.items.weapons.handlers.IItemWeapon;
 import com.arkcraft.mod2.common.network.OpenPlayerCrafting;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityPlayerSP;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.InputEvent;
-import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 /**
  * 
@@ -22,7 +27,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 //All events in this class are type FMLCommonHandler.bus()
 
 public class FMLCommonEventHandler {
-	
+		
 	@SubscribeEvent
 	public void onPlayerKeypressed(InputEvent.KeyInputEvent event) {
 		if (KeyBindings.playerPooping.isPressed()) {
@@ -38,7 +43,25 @@ public class FMLCommonEventHandler {
 				ARKCraft.modChannel.sendToServer(new OpenPlayerCrafting(true));
 			}			
 		}	
-	}	
+		else if (KeyBindings.attachment.isPressed()) {
+			EntityPlayerSP player = Minecraft.getMinecraft().thePlayer;
+			if (player instanceof EntityPlayerSP && player.getHeldItem().getItem() == ARKCraftItems.longneck_rifle ||  player.getHeldItem().getItem() == ARKCraftItems.longneck_rifle_scoped)
+			{
+				LogHelper("Found Longneckrifle");
+				player.openGui(ARKCraft.instance(), GlobalAdditions.GUI.ATTACHMENT_GUI.getID(),	player.worldObj, 0, 0, 0);
+		//		ARKCraft.modChannel.sendToServer(new OpenPlayerCrafting(true));
+	       	}
+	     	
+		}	
+		
+	}
+	
+
+	private void LogHelper(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 	@SubscribeEvent
 	public void onPlayerTickEvent(TickEvent.PlayerTickEvent event) {

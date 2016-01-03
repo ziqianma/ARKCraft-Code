@@ -13,6 +13,7 @@ import com.arkcraft.mod.client.gui.book.BookDataStore;
 import com.arkcraft.mod.client.gui.book.GuiDossier;
 import com.arkcraft.mod.common.entity.EntityTameableDinosaur;
 import com.arkcraft.mod.common.entity.passive.EntityDodo;
+import com.arkcraft.mod2.client.gui.GUIAttachment;
 import com.arkcraft.mod2.client.gui.GUICompostBin;
 import com.arkcraft.mod2.client.gui.GUICropPlot;
 import com.arkcraft.mod2.client.gui.GUIForge;
@@ -25,6 +26,8 @@ import com.arkcraft.mod2.common.container.ContainerInventoryForge;
 import com.arkcraft.mod2.common.container.ContainerInventoryMP;
 import com.arkcraft.mod2.common.container.ContainerInventoryPlayerCrafting;
 import com.arkcraft.mod2.common.container.ContainerInventorySmithy;
+import com.arkcraft.mod2.common.container.ContainerInventoryAttachment;
+import com.arkcraft.mod2.common.tile.TileInventoryAttachment;
 import com.arkcraft.mod2.common.tile.TileInventoryCompostBin;
 import com.arkcraft.mod2.common.tile.TileInventoryCropPlot;
 import com.arkcraft.mod2.common.tile.TileInventoryForge;
@@ -124,6 +127,9 @@ public class GuiHandler implements IGuiHandler {
 		}
 		else if (ID == GlobalAdditions.GUI.PLAYER.getID()) {
 			return new ContainerInventoryPlayerCrafting(player.inventory, player);
+		}	
+		else if (ID == GlobalAdditions.GUI.ATTACHMENT_GUI.getID()) {
+			return new ContainerInventoryAttachment(player, player.inventory, new TileInventoryAttachment(player.getHeldItem()));
 		}
 		else if (ID == GlobalAdditions.GUI.TAMED_DINO.getID()) {
 			Entity entity = getEntityAt(player, x, y, z);
@@ -223,6 +229,10 @@ public class GuiHandler implements IGuiHandler {
 		}
 		else if (ID == GlobalAdditions.GUI.PLAYER.getID()) {
 			return new GuiPlayerCrafting(player.inventory, player);			
+		}
+		else if (ID == GlobalAdditions.GUI.ATTACHMENT_GUI.getID()) {
+			return new GUIAttachment(player, player.inventory, new TileInventoryAttachment(player.getHeldItem()));
+					
 		}
 		else if (ID == GlobalAdditions.GUI.TAMED_DINO.getID()) {
 			Entity entity = getEntityAt(player, x, y, z);

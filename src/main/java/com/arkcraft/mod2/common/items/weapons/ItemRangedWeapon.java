@@ -113,4 +113,9 @@ public class ItemRangedWeapon extends ItemBow implements IItemWeapon
 	{
 		return rangedComponent.ifCanScope();
 	}
+
+	@Override
+	public boolean canOpenGui() {
+		return false;
+	}
 }

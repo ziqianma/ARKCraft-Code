@@ -62,6 +62,12 @@ public abstract class RangedComponent extends AbstractWeaponComponent
 	}
 	
 	@Override
+	public boolean canOpenGui()
+	{
+		return false;
+	}
+	
+	@Override
 	public float getEntityDamageMaterialPart()
 	{
 		return 0;
