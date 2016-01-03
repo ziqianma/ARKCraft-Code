@@ -63,23 +63,10 @@ public class EntitySimpleBullet extends Test
 	{
 		super.onUpdate();
 		
-		if (this.inGround)
-		{
-			if (rand.nextInt(4) == 0)
-			{
-				worldObj.spawnParticle(EnumParticleTypes.CRIT, posX, posY, posZ, 0.0D, 0.0D, 0.0D);
-			}
-			return;
-		}
-	
-		double amount = 16D;
 		float speed = 3F;
 		if (speed == 3F)
 		{
-			for (int i1 = 1; i1 < amount; i1++)
-			{
-				worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, posX + (motionX * i1) / amount, posY + (motionY * i1) / amount, posZ + (motionZ * i1) / amount, 0.0D, 0.0D, 0.0D);
-			}
+			worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, posX, posY, posZ, 0.0D, 0.0D, 0.0D);
 		}
 	}	
 	

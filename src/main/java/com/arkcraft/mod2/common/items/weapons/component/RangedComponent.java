@@ -1,6 +1,7 @@
 package com.arkcraft.mod2.common.items.weapons.component;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -112,6 +113,12 @@ public abstract class RangedComponent extends AbstractWeaponComponent
 	public int getItemEnchantability()
 	{
 		return 1;
+	}
+	
+	@Override
+	public ModelResourceLocation getModel(ItemStack stack, EntityPlayer player) 
+	{
+		return null;
 	}
 	
 	@Override

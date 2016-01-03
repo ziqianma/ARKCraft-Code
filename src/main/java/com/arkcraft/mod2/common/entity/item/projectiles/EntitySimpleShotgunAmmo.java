@@ -70,6 +70,12 @@ public class EntitySimpleShotgunAmmo extends Test
 		{
 			setDead();
 		}
+
+		float speed = 3F;
+		if (speed == 3F)
+		{
+			worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, posX, posY, posZ, 0.0D, 0.0D, 0.0D);
+		}
 	}
 	
 	@Override

@@ -25,7 +25,7 @@ public class EntitySimpleRifleAmmo extends Test
 		setPosition(x, y, z);
 	}
 	
-	public EntitySimpleRifleAmmo(World worldIn, EntityLivingBase shooter, float speed)
+	public EntitySimpleRifleAmmo(World worldIn, EntityLivingBase shooter)
 	{
 	        super(worldIn);
 	        this.shootingEntity = shooter;
@@ -44,7 +44,7 @@ public class EntitySimpleRifleAmmo extends Test
 	        this.motionX = (double)(-MathHelper.sin(this.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float)Math.PI));
 	        this.motionZ = (double)(MathHelper.cos(this.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float)Math.PI));
 	        this.motionY = (double)(-MathHelper.sin(this.rotationPitch / 180.0F * (float)Math.PI));
-	        this.setThrowableHeading(this.motionX, this.motionY, this.motionZ, speed * 3F, 1.0F);
+	        this.setThrowableHeading(this.motionX, this.motionY, this.motionZ,  3F, 1.0F);
 	}
 	
 	@Override
@@ -59,28 +59,15 @@ public class EntitySimpleRifleAmmo extends Test
 		return 0.98F;
 	}
 	
-	
 	@Override
 	public void onUpdate()
 	{
 		super.onUpdate();
 		
-		if (this.inGround)
-		{
-			if (rand.nextInt(4) == 0)
-			{
-				worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, posX, posY, posZ, 0.0D, 0.0D, 0.0D);
-			}
-			return;
-		}
-		double amount = 16D;
 		float speed = 3F;
 		if (speed == 3F)
 		{
-			for (int i1 = 1; i1 < amount; i1++)
-			{
-				worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, posX + (motionX * i1) / amount, posY + (motionY * i1) / amount, posZ + (motionZ * i1) / amount, 0.0D, 0.0D, 0.0D);
-			}
+			worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, posX, posY, posZ, 0.0D, 0.0D, 0.0D);
 		}
 	}	
 	

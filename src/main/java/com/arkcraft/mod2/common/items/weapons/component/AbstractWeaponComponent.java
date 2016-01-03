@@ -4,6 +4,7 @@ import com.arkcraft.mod2.common.items.weapons.handlers.IItemWeapon;
 import com.google.common.collect.Multimap;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -76,6 +77,8 @@ public abstract class AbstractWeaponComponent
 	public abstract void onItemLeftClickTick(EntityPlayer entityplayer, World world1, int i);
 	
 	public abstract boolean  ifCanScope();
+	
+	public abstract ModelResourceLocation getModel(ItemStack stack, EntityPlayer player);
 
 	@SideOnly(Side.CLIENT)
 	public abstract boolean shouldRotateAroundWhenRendering();

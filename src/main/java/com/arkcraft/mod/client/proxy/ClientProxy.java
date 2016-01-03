@@ -35,6 +35,8 @@ import com.arkcraft.mod2.client.gui.overlay.GuiOverlayReloading;
 import com.arkcraft.mod2.client.model.override.PlayerModelOverride;
 import com.arkcraft.mod2.client.render.RenderMetalArrow;
 import com.arkcraft.mod2.client.render.RenderSimpleBullet;
+import com.arkcraft.mod2.client.render.RenderSimpleRifleAmmo;
+import com.arkcraft.mod2.client.render.RenderSimpleShotgunAmmo;
 import com.arkcraft.mod2.client.render.RenderSpear;
 import com.arkcraft.mod2.client.render.RenderStoneArrow;
 import com.arkcraft.mod2.client.render.RenderTranqArrow;
@@ -46,6 +48,8 @@ import com.arkcraft.mod2.common.entity.EntityDodoEgg;
 import com.arkcraft.mod2.common.entity.item.projectiles.EntityBase;
 import com.arkcraft.mod2.common.entity.item.projectiles.EntityMetalArrow;
 import com.arkcraft.mod2.common.entity.item.projectiles.EntitySimpleBullet;
+import com.arkcraft.mod2.common.entity.item.projectiles.EntitySimpleRifleAmmo;
+import com.arkcraft.mod2.common.entity.item.projectiles.EntitySimpleShotgunAmmo;
 import com.arkcraft.mod2.common.entity.item.projectiles.EntitySpear;
 import com.arkcraft.mod2.common.entity.item.projectiles.EntityStoneArrow;
 import com.arkcraft.mod2.common.entity.item.projectiles.EntityTranqArrow;
@@ -71,7 +75,6 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntityTranqArrow.class, new RenderTranqArrow());
 		RenderingRegistry.registerEntityRenderingHandler(EntityStoneArrow.class, new RenderStoneArrow());
 		RenderingRegistry.registerEntityRenderingHandler(EntityMetalArrow.class, new RenderMetalArrow());
-		RenderingRegistry.registerEntityRenderingHandler(EntityTranquilizer.class, new RenderTranquilizer());
 
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityDodoEgg.class, new RenderSnowball(Minecraft.getMinecraft().getRenderManager(), ARKCraftItems.dodo_egg, Minecraft.getMinecraft().getRenderItem()));
@@ -86,7 +89,7 @@ public class ClientProxy extends CommonProxy
 		GameRegistry.addSmelting(ARKCraftItems.primemeat_raw, new ItemStack(ARKCraftItems.primemeat_cooked, 1), (int) Math.floor(ItemARKFood.globalHealAmount/2));
 		
 		ModelBakery.addVariantName(ARKCraftItems.slingshot, "arkcraft:slingshot", "arkcraft:slingshot_pulled");
-		ModelBakery.addVariantName(ARKCraftItems.longneck_rifle, "arkcraft:longneck_rifle", "arkcraft:longneck_rifle_scope");
+		ModelBakery.addVariantName(ARKCraftItems.longneck_rifle, "arkcraft:longneck_rifle", "arkcraft:longneck_rifle_scoped");
 
 		RenderHelper.registerModelExtension(new PlayerModelOverride());
 
@@ -122,19 +125,14 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntitySimpleBullet.class, new RenderSimpleBullet());
 	}
 	if (MOD2_BALANCE.WEAPONS.SHOTGUN){
-	//	RenderingRegistry.registerEntityRenderingHandler(EntitySimpleShotgunAmmo.class, new RenderSimpleShotgunAmmo());
+		RenderingRegistry.registerEntityRenderingHandler(EntitySimpleShotgunAmmo.class, new RenderSimpleShotgunAmmo());
 	}
 	if (MOD2_BALANCE.WEAPONS.LONGNECK_RIFLE)	{
-	//	RenderingRegistry.registerEntityRenderingHandler(EntitySimpleRifleAmmo.class, new RenderSimpleBullet());
+		RenderingRegistry.registerEntityRenderingHandler(EntitySimpleRifleAmmo.class, new RenderSimpleRifleAmmo());
+		RenderingRegistry.registerEntityRenderingHandler(EntityTranquilizer.class, new RenderTranquilizer());
 	}
 	if (MOD2_BALANCE.WEAPONS.SPEAR)	{
 		RenderingRegistry.registerEntityRenderingHandler(EntitySpear.class, new RenderSpear());
-	}
-	if (MOD2_BALANCE.WEAPONS.TRANQ_GUN)	{
-	//	RenderingRegistry.registerEntityRenderingHandler(EntityTranquilizer.class, new RenderSimpleBullet());
-	}
-	if (MOD2_BALANCE.WEAPONS.TRANQ_GUN)	{
-	// RenderingRegistry.registerEntityRenderingHandler(EntityRocketPropelledGrenade.class, new RenderRocketPropelledGrenade());
 	}
 }
 	

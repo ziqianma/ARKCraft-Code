@@ -1,5 +1,6 @@
 package com.arkcraft.mod2.common.items.weapons.component;
 
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -7,6 +8,7 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
+import com.arkcraft.mod.common.ARKCraft;
 import com.arkcraft.mod2.common.entity.item.projectiles.EntitySimpleRifleAmmo;
 import com.arkcraft.mod2.common.entity.item.projectiles.EntityTranquilizer;
 import com.arkcraft.mod2.common.items.ARKCraftItems;
@@ -23,6 +25,7 @@ public class RangedCompLongneckRifle extends RangedComponent
 	public void effectReloadDone(ItemStack itemstack, World world, EntityPlayer entityplayer)
 	{
 		entityplayer.swingItem();
+		scope = true;
 		world.playSoundAtEntity(entityplayer, "random.door_close", 1.2F, 1.0F / (weapon.getItemRand().nextFloat() * 0.2F + 0.0F));
 	}
 	
@@ -32,6 +35,26 @@ public class RangedCompLongneckRifle extends RangedComponent
 		return true;
 	}
 	
+	@Override
+	public ModelResourceLocation getModel(ItemStack stack, EntityPlayer player) {
+		if (scope = true)
+		return new ModelResourceLocation(ARKCraft.MODID + ":longneck_rifle_scoped", "inventory");
+		else return null;
+	}
+	
+	public boolean scope;
+	
+
+	/*
+	@SuppressWarnings("unused")
+	private void setLastUseTime(ItemStack stack, long time) {
+		stack.setTagInfo("LastUse", new NBTTagLong(time));
+	}
+
+	private long getLastUseTime(ItemStack stack) {
+		return stack.hasTagCompound() ? stack.getTagCompound().getLong(
+				"LastUse") : 0;
+	}	*/
 	
 
 	@Override
@@ -40,18 +63,18 @@ public class RangedCompLongneckRifle extends RangedComponent
 		if (!world.isRemote) 
 		{
 			
-		//	if(entityplayer.inventory.hasItem(ARKCraftItems.simple_rifle_ammo) || entityplayer.capabilities.isCreativeMode)
-		//	{
-		//		EntitySimpleRifleAmmo entityprojectile = new EntitySimpleRifleAmmo(world, entityplayer, 1F);
-		//		applyProjectileEnchantments(entityprojectile, itemstack);
-		//		world.spawnEntityInWorld(entityprojectile);
-		//	}  
-		//	 if(entityplayer.inventory.hasItem(ARKCraftItems.tranquilizer) || entityplayer.capabilities.isCreativeMode)
-		//	{
-		//		EntityTranquilizer entityprojectile = new EntityTranquilizer(world, entityplayer, 1F);
-		//		applyProjectileEnchantments(entityprojectile, itemstack);
-		//		world.spawnEntityInWorld(entityprojectile);
-		//	}  
+			if(entityplayer.inventory.hasItem(ARKCraftItems.simple_rifle_ammo) || entityplayer.capabilities.isCreativeMode)
+			{
+				EntitySimpleRifleAmmo entityprojectile = new EntitySimpleRifleAmmo(world, entityplayer);
+				applyProjectileEnchantments(entityprojectile, itemstack);
+				world.spawnEntityInWorld(entityprojectile);
+			}  
+			 if(entityplayer.inventory.hasItem(ARKCraftItems.tranquilizer) || entityplayer.capabilities.isCreativeMode)
+			{
+				EntityTranquilizer entityprojectile = new EntityTranquilizer(world, entityplayer, 1F);
+				applyProjectileEnchantments(entityprojectile, itemstack);
+				world.spawnEntityInWorld(entityprojectile);
+			}  
 		}
 	
 		 int damage = 1;

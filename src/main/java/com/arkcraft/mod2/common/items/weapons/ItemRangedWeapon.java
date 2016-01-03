@@ -5,6 +5,7 @@ import com.arkcraft.mod2.common.items.weapons.handlers.IItemWeapon;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
@@ -63,7 +64,7 @@ public class ItemRangedWeapon extends ItemBow implements IItemWeapon
 	{
 		return rangedComponent.onItemRightClick(itemstack, world, entityplayer);
 	}
-	
+
 	@Override
 	public void onUsingTick(ItemStack itemstack, EntityPlayer entityplayer, int count)
 	{
