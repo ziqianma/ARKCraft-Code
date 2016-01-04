@@ -5,15 +5,16 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-/***
- * 
+/**
  * @author wildbill22
- *
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.FIELD })
-public @interface DefaultBoolean {
-	String comment() default "";
-	String name();
-	boolean value();
+public @interface DefaultBoolean
+{
+    String comment() default "";
+
+    String name();
+
+    boolean value();
 }
