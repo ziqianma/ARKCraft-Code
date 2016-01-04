@@ -11,8 +11,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.lwjgl.opengl.GL11;
 
+import com.arkcraft.mod.common.ARKCraft;
 import com.arkcraft.mod2.common.container.ContainerInventoryAttachment;
 import com.arkcraft.mod2.common.tile.TileInventoryAttachment;
+import com.arkcraft.mod2.common.tile.TileInventoryAttachment2;
 
 /***
  * 
@@ -28,12 +30,12 @@ public class GUIAttachment extends GuiContainer
 	 * I have provided a sample texture file that works with this tutorial. Download it
 	 * from Forge_Tutorials/textures/gui/
 	 */
-	private static final ResourceLocation iconLocation = new ResourceLocation("inventoryitemmod", "textures/gui/inventoryitem.png");
+	public static final ResourceLocation iconLocation = new ResourceLocation(ARKCraft.MODID, "textures/gui/attachment_gui.png");
 
 	/** The inventory to render on screen */
-	private final TileInventoryAttachment inventory;
+	public final TileInventoryAttachment2 inventory;
 
-	public GUIAttachment(EntityPlayer player,InventoryPlayer invPlayer, TileInventoryAttachment inventoryItem)
+	public GUIAttachment(EntityPlayer player,InventoryPlayer invPlayer, TileInventoryAttachment2 inventoryItem)
 	{
 		super(new ContainerInventoryAttachment(player, invPlayer, inventoryItem));
 		this.inventory = inventoryItem;

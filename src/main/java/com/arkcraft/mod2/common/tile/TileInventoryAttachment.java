@@ -1,5 +1,8 @@
 package com.arkcraft.mod2.common.tile;
 
+import java.util.Random;
+
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -8,8 +11,10 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.IChatComponent;
 
 import com.arkcraft.mod2.common.items.ARKCraftItems;
+import com.arkcraft.mod2.common.items.weapons.component.RangedComponent;
+import com.arkcraft.mod2.common.items.weapons.handlers.IItemWeapon;
 
-public class TileInventoryAttachment implements IInventory
+public class TileInventoryAttachment implements IItemWeapon, IInventory 
 {
 	private String name = "Inventory Item";
 	
@@ -107,13 +112,32 @@ public class TileInventoryAttachment implements IInventory
 	 * items can still be left-clicked and placed in the inventory
 	 * even when this returns false
 	 */
+	/*
+	public boolean allowScoping()
+	{
+		return false; 
+	}	*/
+	
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack itemstack)
 	{
+		if (itemstack.getItem() == ARKCraftItems.scope)
+		{
+			return ifCanScope() == true;
+		//	LogHelper("Itemis Vailid");
+
+		}
 		// Don't want to be able to store the inventory item within itself
 		// Bad things will happen, like losing your inventory
 		// Actually, this needs a custom Slot to work
-		return !(itemstack.getItem() == ARKCraftItems.longneck_rifle);
+		else return !(itemstack.getItem() == ARKCraftItems.longneck_rifle);
+	}
+	
+
+	@Override
+	public boolean ifCanScope() 
+	{
+		return false;
 	}
 
 	/**
@@ -228,5 +252,30 @@ public class TileInventoryAttachment implements IInventory
 	public void clear() 
 	{
 
+	}
+
+	@Override
+	public boolean onLeftClickEntity(ItemStack itemstack, EntityPlayer player,
+			Entity entity) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Random getItemRand() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public RangedComponent getRangedComponent() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean canOpenGui() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

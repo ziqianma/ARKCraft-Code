@@ -12,12 +12,14 @@ import com.arkcraft.lib.LogHelper;
 import com.arkcraft.mod.GlobalAdditions;
 import com.arkcraft.mod.common.ARKCraft;
 import com.arkcraft.mod2.common.config.KeyBindings;
+import com.arkcraft.mod2.common.container.ContainerInventoryAttachment;
 import com.arkcraft.mod2.common.entity.item.projectiles.EntityBallista;
 import com.arkcraft.mod2.common.entity.player.ARKPlayer;
 import com.arkcraft.mod2.common.items.ARKCraftItems;
 import com.arkcraft.mod2.common.items.weapons.component.RangedCompLongneckRifle;
 import com.arkcraft.mod2.common.items.weapons.handlers.IItemWeapon;
 import com.arkcraft.mod2.common.network.OpenPlayerCrafting;
+import com.arkcraft.mod2.common.tile.TileInventoryAttachment;
 
 /**
  * 
@@ -79,7 +81,29 @@ public class FMLCommonEventHandler {
 		//	ARKCraft.instance.messagePipeline.sendToServer(msg);
 			}
 		}
+	//	else if(event.player instanceof EntityPlayer){
+	//		EntityPlayer player = (EntityPlayer) event.player;
+	//     	ItemStack stack = player.getHeldItem();
+	      //  IItemWeapon i_item_weapon = null;
+	    //    if (stack.getItem() instanceof IItemWeapon){
+	      //  	i_item_weapon = (IItemWeapon) stack.getItem();
+	//		TileInventoryAttachment tileInventoryAttachment = new TileInventoryAttachment(stack);
+	//		if(stack != null && stack.getItem() == ARKCraftItems.longneck_rifle) 
+	//		{
+	//			LogHelper("It is working mate");
+			//	i_item_weapon.ifCanScope();
+				
+			}
+		//}
+	//}
+
+
+	public boolean canShowScope() 
+	{
+		return true;	
 	}
+	
+	
 }
 
 	

@@ -28,6 +28,7 @@ import com.arkcraft.mod2.common.container.ContainerInventoryPlayerCrafting;
 import com.arkcraft.mod2.common.container.ContainerInventorySmithy;
 import com.arkcraft.mod2.common.container.ContainerInventoryAttachment;
 import com.arkcraft.mod2.common.tile.TileInventoryAttachment;
+import com.arkcraft.mod2.common.tile.TileInventoryAttachment2;
 import com.arkcraft.mod2.common.tile.TileInventoryCompostBin;
 import com.arkcraft.mod2.common.tile.TileInventoryCropPlot;
 import com.arkcraft.mod2.common.tile.TileInventoryForge;
@@ -129,7 +130,7 @@ public class GuiHandler implements IGuiHandler {
 			return new ContainerInventoryPlayerCrafting(player.inventory, player);
 		}	
 		else if (ID == GlobalAdditions.GUI.ATTACHMENT_GUI.getID()) {
-			return new ContainerInventoryAttachment(player, player.inventory, new TileInventoryAttachment(player.getHeldItem()));
+			return new ContainerInventoryAttachment(player, player.inventory, new TileInventoryAttachment2(player.getHeldItem()));
 		}
 		else if (ID == GlobalAdditions.GUI.TAMED_DINO.getID()) {
 			Entity entity = getEntityAt(player, x, y, z);
@@ -231,7 +232,7 @@ public class GuiHandler implements IGuiHandler {
 			return new GuiPlayerCrafting(player.inventory, player);			
 		}
 		else if (ID == GlobalAdditions.GUI.ATTACHMENT_GUI.getID()) {
-			return new GUIAttachment(player, player.inventory, new TileInventoryAttachment(player.getHeldItem()));
+			return new GUIAttachment(player, player.inventory, new TileInventoryAttachment2(player.getHeldItem()));
 					
 		}
 		else if (ID == GlobalAdditions.GUI.TAMED_DINO.getID()) {

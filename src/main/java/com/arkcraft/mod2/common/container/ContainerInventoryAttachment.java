@@ -1,319 +1,171 @@
 package com.arkcraft.mod2.common.container;
 
-import com.arkcraft.mod2.common.items.ARKCraftItems;
-import com.arkcraft.mod2.common.tile.TileInventoryAttachment;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
+import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ContainerInventoryAttachment extends Container
-{
-	/** The Item Inventory for this Container, only needed if you want to reference isUseableByPlayer */
-	private final TileInventoryAttachment inventory;
+import com.arkcraft.lib.LogHelper;
+import com.arkcraft.mod2.common.items.ARKCraftItems;
+import com.arkcraft.mod2.common.tile.TileInventoryAttachment;
+import com.arkcraft.mod2.common.tile.TileInventoryAttachment2;
 
-	/** Using these will make transferStackInSlot easier to understand and implement
-	 * INV_START is the index of the first slot in the Player's Inventory, so our
-	 * InventoryItem's number of slots (e.g. 5 slots is array indices 0-4, so start at 5)
-	 * Notice how we don't have to remember how many slots we made? We can just use
-	 * InventoryItem.INV_SIZE and if we ever change it, the Container updates automatically. */
-	private static final int INV_START = TileInventoryAttachment.INV_SIZE, INV_END = INV_START+26,
-			HOTBAR_START = INV_END+1, HOTBAR_END = HOTBAR_START+8;
+/***
+ * 
+ * @author wildbill22
+ *
+ */
+public class ContainerInventoryAttachment extends Container {
+	private TileInventoryAttachment2 tileInventoryAttachment;
+	private final int SLOT_COUNT = 4;
+	public static final int COMPOST_SLOT_YPOS = 26;
+	public static final int COMPOST_SLOT_XPOS = 53;
 
-	// If you're planning to add armor slots, put those first like this:
-	// ARMOR_START = InventoryItem.INV_SIZE, ARMOR_END = ARMOR_START+3,
-	// INV_START = ARMOR_END+1, and then carry on like above.
+	// These store cache values, used by the server to only update the client side tile entity when values have changed
+	private int [] cachedFields;
 
-	public ContainerInventoryAttachment(EntityPlayer par1Player, InventoryPlayer inventoryPlayer, TileInventoryAttachment inventoryItem)
-	{
-		this.inventory = inventoryItem;
-
-		int i;
-
-		// ITEM INVENTORY - you'll need to adjust the slot locations to match your texture file
-		// I have them set vertically in columns of 4 to the right of the player model
-		for (i = 0; i < TileInventoryAttachment.INV_SIZE; ++i)
-		{
-			// You can make a custom Slot if you need different behavior,
-			// such as only certain item types can be put into this slot
-			// We made a custom slot to prevent our inventory-storing item
-			// from being stored within itself, but if you want to allow that and
-			// you followed my advice at the end of the above step, then you
-			// could get away with using the vanilla Slot class
-			this.addSlotToContainer(new SlotItemInv(this.inventory, i, 80 + (18 * (int)(i/4)), 8 + (18*(i%4))));
+	public ContainerInventoryAttachment(EntityPlayer player, InventoryPlayer invPlayer, TileInventoryAttachment2 tileInventoryAttachment) {
+		LogHelper.info("ContainerInventoryAttachment: constructor called.");
+		this.tileInventoryAttachment = tileInventoryAttachment;
+		
+		/* Compost bin inventory */
+		if (SLOT_COUNT != tileInventoryAttachment.getSizeInventory()) {
+			LogHelper.error("Mismatched slot count in container(" + SLOT_COUNT + ") and CompostBinInventory (" 
+						+ tileInventoryAttachment.getSizeInventory()+")");
 		}
-
-		// If you want, you can add ARMOR SLOTS here as well, but you need to
-		// make a public version of SlotArmor. I won't be doing that in this tutorial.
-		/*
-		for (i = 0; i < 4; ++i)
-		{
-			// These are the standard positions for survival inventory layout
-			this.addSlotToContainer(new SlotArmor(this.player, inventoryPlayer, inventoryPlayer.getSizeInventory() - 1 - i, 8, 8 + i * 18, i));
-		}
-		*/
-
-		// PLAYER INVENTORY - uses default locations for standard inventory texture file
-		for (i = 0; i < 3; ++i)
-		{
-			for (int j = 0; j < 9; ++j)
-			{
-				this.addSlotToContainer(new Slot(inventoryPlayer, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
+		for(int row = 0; row < 2; row++) {
+			for(int col = 0; col < 4; col++) {
+				int slotIndex =  col + row * 4;
+				addSlotToContainer(new SlotCompost(tileInventoryAttachment, slotIndex, COMPOST_SLOT_XPOS + col * 18, COMPOST_SLOT_YPOS + row * 18));
 			}
 		}
 
-		// PLAYER ACTION BAR - uses default locations for standard action bar texture file
-		for (i = 0; i < 9; ++i)
-		{
-			this.addSlotToContainer(new Slot(inventoryPlayer, i, 8 + i * 18, 142));
+		/* Player inventory */
+		final int PLAYER_INVENTORY_YPOS = 84;
+		for(int row = 0; row < 3; row++) {
+			for(int col = 0; col < 9; col++) {
+				int slotIndex =  col + row * 9 + 9;
+				addSlotToContainer(new Slot(invPlayer, slotIndex, 8 + col * 18, PLAYER_INVENTORY_YPOS + row * 18));
+			}
 		}
+		
+		/* Hotbar inventory */
+		final int HOTBAR_YPOS = 142;
+		for(int col = 0; col < 9; col++) {
+			addSlotToContainer(new Slot(invPlayer, col, 8 + col * 18, HOTBAR_YPOS));
+		}		
 	}
 
-	@Override
-	public boolean canInteractWith(EntityPlayer entityplayer)
-	{
-		// be sure to return the inventory's isUseableByPlayer method
-		// if you defined special behavior there:
-		return inventory.isUseableByPlayer(entityplayer);
-	}
+	/* Nothing to do, this is a furnace type container */
+    public void onContainerClosed(EntityPlayer playerIn) {
+    	super.onContainerClosed(playerIn);
+    }
+    
+	public ItemStack transferStackInSlot(EntityPlayer playerIn, int sourceSlotIndex) {
+		LogHelper.info("ContainerInventoryCompostBin: transferStackInSlot called.");
+		Slot sourceSlot = (Slot)inventorySlots.get(sourceSlotIndex);
+		if (sourceSlot == null || !sourceSlot.getHasStack()) return null;
+		ItemStack sourceStack = sourceSlot.getStack();
+		ItemStack copyOfSourceStack = sourceStack.copy();
 
-	/**
-	 * Called when a player shift-clicks on a slot. You must override this or you will crash when someone does that.
-	 */
-	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int index)
-	{
-		ItemStack itemstack = null;
-		Slot slot = (Slot) this.inventorySlots.get(index);
-
-		if (slot != null && slot.getHasStack())
-		{
-			ItemStack itemstack1 = slot.getStack();
-			itemstack = itemstack1.copy();
-
-			// If item is in our custom Inventory or armor slot
-			if (index < INV_START)
-			{
-				// try to place in player inventory / action bar
-				if (!this.mergeItemStack(itemstack1, INV_START, HOTBAR_END+1, true))
-				{
+		// Check if the slot clicked is one of the vanilla container slots
+		if(sourceSlotIndex >= SLOT_COUNT && sourceSlotIndex < 36 + SLOT_COUNT) {
+			if (tileInventoryAttachment.isItemValidForSlot(sourceSlotIndex, sourceStack)) {
+				// This is a vanilla container slot so merge the stack into the composting bin inventory
+				if(!mergeItemStack(sourceStack, 0, SLOT_COUNT, false)) {
 					return null;
 				}
-
-				slot.onSlotChange(itemstack1, itemstack);
-			}
-			// Item is in inventory / hotbar, try to place in custom inventory or armor slots
-			else
-			{
-				/*
-				If your inventory only stores certain instances of Items,
-				you can implement shift-clicking to your inventory like this:
-				
-				// Check that the item is the right type
-				if (itemstack1.getItem() instanceof ItemCustom)
-				{
-					// Try to merge into your custom inventory slots
-					// We use 'InventoryItem.INV_SIZE' instead of INV_START just in case
-					// you also add armor or other custom slots
-					if (!this.mergeItemStack(itemstack1, 0, InventoryItem.INV_SIZE, false))
-					{
-						return null;
-					}
-				}
-				// If you added armor slots, check them here as well:
-				// Item being shift-clicked is armor - try to put in armor slot
-				if (itemstack1.getItem() instanceof ItemArmor)
-				{
-					int type = ((ItemArmor) itemstack1.getItem()).armorType;
-					if (!this.mergeItemStack(itemstack1, ARMOR_START + type, ARMOR_START + type + 1, false))
-					{
-						return null;
-					}
-				}
-				Otherwise, you have basically 2 choices:
-				1. shift-clicking between player inventory and custom inventory
-				2. shift-clicking between action bar and inventory
-				 
-				Be sure to choose only ONE of the following implementations!!!
-				*/
-				/**
-				 * Implementation number 1: Shift-click into your custom inventory
-				 */
-				if (index >= INV_START)
-				{
-					// place in custom inventory
-					if (!this.mergeItemStack(itemstack1, 0, INV_START, false))
-					{
-						return null;
-					}
-				}
-				
-				/**
-				 * Implementation number 2: Shift-click items between action bar and inventory
-				 */
-				// item is in player's inventory, but not in action bar
-				if (index >= INV_START && index < HOTBAR_START)
-				{
-					// place in action bar
-					if (!this.mergeItemStack(itemstack1, HOTBAR_START, HOTBAR_END+1, false))
-					{
-						return null;
-					}
-				}
-				// item in action bar - place in player inventory
-				else if (index >= HOTBAR_START && index < HOTBAR_END+1)
-				{
-					if (!this.mergeItemStack(itemstack1, INV_START, INV_END+1, false))
-					{
-						return null;
-					}
-				}
-			}
-
-			if (itemstack1.stackSize == 0)
-			{
-				slot.putStack((ItemStack) null);
 			}
 			else
-			{
-				slot.onSlotChanged();
-			}
-
-			if (itemstack1.stackSize == itemstack.stackSize)
-			{
+				return null;
+		}
+		// Check if the slot clicked is a compost bin container slot
+		else if (sourceSlotIndex >= 0 && sourceSlotIndex < SLOT_COUNT) {
+			// This is a compost bin slot so merge the stack into the players inventory
+			if (!mergeItemStack(sourceStack, SLOT_COUNT, 36 + SLOT_COUNT, false)){
 				return null;
 			}
-
-			slot.onPickupFromSlot(par1EntityPlayer, itemstack1);
-		}
-
-		return itemstack;
-	}
-
-	/**
-	 * You should override this method to prevent the player from moving the stack that
-	 * opened the inventory, otherwise if the player moves it, the inventory will not
-	 * be able to save properly
-	 */
-	@Override
-	public ItemStack slotClick(int slot, int button, int flag, EntityPlayer player) {
-		// this will prevent the player from interacting with the item that opened the inventory:
-		if (slot >= 0 && getSlot(slot) != null && getSlot(slot).getStack() == player.getHeldItem()) {
+		} else {
+			LogHelper.error("Invalid slotIndex:" + sourceSlotIndex);
 			return null;
 		}
-		return super.slotClick(slot, button, flag, player);
-	}
 
-
-/*
-Special note: If your custom inventory's stack limit is 1 and you allow shift-clicking itemstacks into it,
-you will need to override mergeStackInSlot to avoid losing all the items but one in a stack when you shift-click.
-*/
-/**
- * Vanilla mergeItemStack method doesn't correctly handle inventories whose
- * max stack size is 1 when you shift-click into the inventory.
- * This is a modified method I wrote to handle such cases.
- * Note you only need it if your slot / inventory's max stack size is 1
- */
-@Override
-protected boolean mergeItemStack(ItemStack stack, int start, int end, boolean backwards)
-{
-	boolean flag1 = false;
-	int k = (backwards ? end - 1 : start);
-	Slot slot;
-	ItemStack itemstack1;
-
-	if (stack.isStackable())
-	{
-		while (stack.stackSize > 0 && (!backwards && k < end || backwards && k >= start))
-		{
-			slot = (Slot) inventorySlots.get(k);
-			itemstack1 = slot.getStack();
-
-			if (!slot.isItemValid(stack)) {
-				k += (backwards ? -1 : 1);
-				continue;
-			}
-
-			if (itemstack1 != null && itemstack1.getItem() == stack.getItem() &&
-					(!stack.getHasSubtypes() || stack.getItemDamage() == itemstack1.getItemDamage()) && ItemStack.areItemStackTagsEqual(stack, itemstack1))
-			{
-				int l = itemstack1.stackSize + stack.stackSize;
-
-				if (l <= stack.getMaxStackSize() && l <= slot.getSlotStackLimit()) {
-					stack.stackSize = 0;
-					itemstack1.stackSize = l;
-					inventory.markDirty();
-					flag1 = true;
-				} else if (itemstack1.stackSize < stack.getMaxStackSize() && l < slot.getSlotStackLimit()) {
-					stack.stackSize -= stack.getMaxStackSize() - itemstack1.stackSize;
-					itemstack1.stackSize = stack.getMaxStackSize();
-					inventory.markDirty();
-					flag1 = true;
-				}
-			}
-
-			k += (backwards ? -1 : 1);
+		// If stack size == 0 (the entire stack was moved) set slot contents to null
+		if (sourceStack.stackSize == 0) {
+			sourceSlot.putStack(null);
+		} else {
+			sourceSlot.onSlotChanged();
 		}
-	}
-	if (stack.stackSize > 0)
-	{
-		k = (backwards ? end - 1 : start);
-		while (!backwards && k < end || backwards && k >= start) {
-			slot = (Slot) inventorySlots.get(k);
-			itemstack1 = slot.getStack();
-
-			if (!slot.isItemValid(stack)) {
-				k += (backwards ? -1 : 1);
-				continue;
-			}
-
-			if (itemstack1 == null) {
-				int l = stack.stackSize;
-				if (l <= slot.getSlotStackLimit()) {
-					slot.putStack(stack.copy());
-					stack.stackSize = 0;
-					inventory.markDirty();
-					flag1 = true;
-					break;
-				} else {
-					putStackInSlot(k, new ItemStack(stack.getItem(), slot.getSlotStackLimit(), stack.getItemDamage()));
-					stack.stackSize -= slot.getSlotStackLimit();
-					inventory.markDirty();
-					flag1 = true;
-				}
-			}
-
-			k += (backwards ? -1 : 1);
-		}
+		
+		sourceSlot.onPickupFromSlot(playerIn, sourceStack);
+		return copyOfSourceStack;
 	}
 
-	return flag1;
-}
-/*
-Making the custom slot is very simple, if you're going that route:
-*/
-public class SlotItemInv extends Slot
-{
-	public SlotItemInv(IInventory inv, int index, int xPos, int yPos)
-	{
-		super(inv, index, xPos, yPos);
-	}
-
-	// This is the only method we need to override so that
-	// we can't place our inventory-storing Item within
-	// its own inventory (thus making it permanently inaccessible)
-	// as well as preventing abuse of storing backpacks within backpacks
-	/**
-	 * Check if the stack is a valid item for this slot.
-	 */
 	@Override
-	public boolean isItemValid(ItemStack itemstack)
-	{
-		// Everything returns true except an instance of our Item
-		return !(itemstack.getItem() == ARKCraftItems.longneck_rifle);
+	public boolean canInteractWith(EntityPlayer playerIn) {
+		return tileInventoryAttachment.isUseableByPlayer(playerIn);
+	}	  
+
+	// This is where you check if any values have changed and if so send an update to any clients accessing this container
+	// The container itemstacks are tested in Container.detectAndSendChanges, so we don't need to do that
+	// We iterate through all of the TileEntity Fields to find any which have changed, and send them.
+	// You don't have to use fields if you don't wish to; just manually match the ID in sendProgressBarUpdate with the value in
+	//   updateProgressBar()
+	// The progress bar values are restricted to shorts.  If you have a larger value (eg int), it's not a good idea to try and split it
+	//   up into two shorts because the progress bar values are sent independently, and unless you add synchronisation logic at the
+	//   receiving side, your int value will be wrong until the second short arrives.  Use a custom packet instead.
+	@Override
+	public void detectAndSendChanges() {
+		super.detectAndSendChanges();
+
+		boolean allFieldsHaveChanged = false;
+		boolean fieldHasChanged [] = new boolean[tileInventoryAttachment.getFieldCount()];
+		if (cachedFields == null) {
+			cachedFields = new int[tileInventoryAttachment.getFieldCount()];
+			allFieldsHaveChanged = true;
+		}
+		for (int i = 0; i < cachedFields.length; ++i) {
+			if (allFieldsHaveChanged || cachedFields[i] != tileInventoryAttachment.getField(i)) {
+				cachedFields[i] = tileInventoryAttachment.getField(i);
+				fieldHasChanged[i] = true;
+			}
+		}
+
+		// go through the list of crafters (players using this container) and update them if necessary
+		for (int i = 0; i < this.crafters.size(); ++i) {
+			ICrafting icrafting = (ICrafting)this.crafters.get(i);
+			for (int fieldID = 0; fieldID < tileInventoryAttachment.getFieldCount(); ++fieldID) {
+				if (fieldHasChanged[fieldID]) {
+					// Note that although sendProgressBarUpdate takes 2 ints on a server these are truncated to shorts
+					icrafting.sendProgressBarUpdate(this, fieldID, cachedFields[fieldID]);
+				}
+			}
+		}
 	}
-}
+
+	// Called when a progress bar update is received from the server. The two values (id and data) are the same two
+	// values given to sendProgressBarUpdate.  In this case we are using fields so we just pass them to the tileEntity.
+	@SideOnly(Side.CLIENT)
+	@Override
+	public void updateProgressBar(int id, int data) {
+		tileInventoryAttachment.setField(id, data);
+	}
+
+	// SlotFertilizer is a slot for fertilizer items
+	public class SlotCompost extends Slot {
+		public SlotCompost(IInventory inventoryIn, int index, int xPosition, int yPosition) {
+			super(inventoryIn, index, xPosition, yPosition);
+		}
+
+		// if this function returns false, the player won't be able to insert the given item into this slot
+		@Override
+		public boolean isItemValid(ItemStack stack) {
+			return !(stack.getItem() == ARKCraftItems.longneck_rifle);
+		}
+	}	
 }
