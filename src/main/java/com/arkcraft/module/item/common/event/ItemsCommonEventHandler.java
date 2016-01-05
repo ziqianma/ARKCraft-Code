@@ -417,6 +417,7 @@ public class ItemsCommonEventHandler
 				ARKCraft.modChannel.sendToServer(new OpenPlayerCrafting(true));
 			}
 		}
+		/*
 		else if (KeyBindings.attachment.isPressed())
 		{
 			EntityPlayerSP player = Minecraft.getMinecraft().thePlayer;
@@ -427,16 +428,9 @@ public class ItemsCommonEventHandler
 				//		ARKCraft.modChannel.sendToServer(new OpenPlayerCrafting(true));
 			}
 
-		}
+		}	*/
 
 	}
-
-	private void LogHelper(String string)
-	{
-		// TODO Auto-generated method stub
-
-	}
-
 
 	@SubscribeEvent
 	public void onPlayerTickEvent(TickEvent.PlayerTickEvent event)

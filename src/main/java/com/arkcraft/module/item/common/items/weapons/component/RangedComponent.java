@@ -317,7 +317,7 @@ public abstract class RangedComponent extends AbstractWeaponComponent
         return entityplayer.capabilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantment.infinity.effectId, itemstack) > 0 || entityplayer.inventory.hasItem(getAmmoItem());
     }
 
-    private int getAmmoQuantity(EntityPlayer entityplayer)
+    protected int getAmmoQuantity(EntityPlayer entityplayer)
     {
         int numInStack = 0;
         Item ammoItem = getAmmoItem();

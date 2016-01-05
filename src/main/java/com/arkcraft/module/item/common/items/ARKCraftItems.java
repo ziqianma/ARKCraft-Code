@@ -1,52 +1,52 @@
 package com.arkcraft.module.item.common.items;
 
-import com.arkcraft.module.item.common.entity.item.projectiles.EntityRocketPropelledGrenade;
-import com.arkcraft.module.item.common.entity.item.projectiles.EntitySimpleBullet;
-import com.arkcraft.module.item.common.entity.item.projectiles.EntitySimpleShotgunAmmo;
-import com.arkcraft.module.item.common.entity.item.projectiles.EntityTranqArrow;
-import com.arkcraft.module.item.common.entity.item.projectiles.dispense.DispenseTranquilizer;
-import com.arkcraft.module.item.common.items.weapons.component.RangedCompLongneckRifle;
-import com.arkcraft.module.item.common.items.weapons.component.RangedCompSimplePistolScoped;
+import java.util.HashMap;
+import java.util.Map;
+
+import net.minecraft.block.BlockDispenser;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.item.Item.ToolMaterial;
+import net.minecraft.item.ItemArmor.ArmorMaterial;
+import net.minecraft.potion.PotionEffect;
+import net.minecraftforge.common.util.EnumHelper;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+
+import com.arkcraft.module.core.ARKCraft;
 import com.arkcraft.module.core.GlobalAdditions;
 import com.arkcraft.module.core.client.gui.book.Dossier;
-import com.arkcraft.module.core.ARKCraft;
 import com.arkcraft.module.core.common.handlers.EntityHandler;
 import com.arkcraft.module.item.common.config.ModuleItemBalance;
 import com.arkcraft.module.item.common.entity.item.projectiles.EntityBallista;
 import com.arkcraft.module.item.common.entity.item.projectiles.EntityBallistaBolt;
 import com.arkcraft.module.item.common.entity.item.projectiles.EntityBase;
 import com.arkcraft.module.item.common.entity.item.projectiles.EntityMetalArrow;
+import com.arkcraft.module.item.common.entity.item.projectiles.EntityRocketPropelledGrenade;
+import com.arkcraft.module.item.common.entity.item.projectiles.EntitySimpleBullet;
 import com.arkcraft.module.item.common.entity.item.projectiles.EntitySimpleRifleAmmo;
+import com.arkcraft.module.item.common.entity.item.projectiles.EntitySimpleShotgunAmmo;
 import com.arkcraft.module.item.common.entity.item.projectiles.EntityStoneArrow;
+import com.arkcraft.module.item.common.entity.item.projectiles.EntityTranqArrow;
 import com.arkcraft.module.item.common.entity.item.projectiles.EntityTranquilizer;
 import com.arkcraft.module.item.common.entity.item.projectiles.dispense.DispenseBallistaBolt;
 import com.arkcraft.module.item.common.entity.item.projectiles.dispense.DispenseRocketPropelledGrenade;
 import com.arkcraft.module.item.common.entity.item.projectiles.dispense.DispenseSimpleBullet;
 import com.arkcraft.module.item.common.entity.item.projectiles.dispense.DispenseSimpleRifleAmmo;
 import com.arkcraft.module.item.common.entity.item.projectiles.dispense.DispenseSimpleShotgunAmmo;
+import com.arkcraft.module.item.common.entity.item.projectiles.dispense.DispenseTranquilizer;
 import com.arkcraft.module.item.common.items.weapons.ItemCompoundBow;
 import com.arkcraft.module.item.common.items.weapons.ItemRangedWeapon;
 import com.arkcraft.module.item.common.items.weapons.ItemSpear;
 import com.arkcraft.module.item.common.items.weapons.ItemWoodenClub;
 import com.arkcraft.module.item.common.items.weapons.bullets.ItemProjectile;
 import com.arkcraft.module.item.common.items.weapons.component.RangedCompCrossbow;
+import com.arkcraft.module.item.common.items.weapons.component.RangedCompLongneckRifle;
 import com.arkcraft.module.item.common.items.weapons.component.RangedCompLongneckRifleScoped;
 import com.arkcraft.module.item.common.items.weapons.component.RangedCompRocketLauncher;
 import com.arkcraft.module.item.common.items.weapons.component.RangedCompShotgun;
 import com.arkcraft.module.item.common.items.weapons.component.RangedCompSimplePistol;
+import com.arkcraft.module.item.common.items.weapons.component.RangedCompSimplePistolScoped;
 import com.arkcraft.module.item.common.items.weapons.component.RangedComponent;
-import net.minecraft.block.BlockDispenser;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.Item.ToolMaterial;
-import net.minecraft.item.ItemArmor.ArmorMaterial;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
-import net.minecraftforge.common.util.EnumHelper;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author wildbill22
@@ -90,7 +90,7 @@ public class ARKCraftItems
     public static ItemProjectile tranquilizer, stone_arrow, tranq_arrow, metal_arrow, ballista_bolt;
     public static ItemProjectile simple_bullet, simple_rifle_ammo, simple_shotgun_ammo, rocket_propelled_grenade;
     public static ItemRangedWeapon simple_pistol, simple_pistol_scoped;
-    public static ItemRangedWeapon longneck_rifle, longneck_rifle_scoped;
+    public static ItemRangedWeapon longneck_rifle_scoped, longneck_rifle;
     public static ItemRangedWeapon shotgun;
     public static ItemRangedWeapon crossbow;
     public static ItemBallista ballista;
@@ -338,7 +338,7 @@ public class ARKCraftItems
         registerItem(name, i);
         return i;
     }
-
+   
     protected static ItemSlingshot addSlingshot(String name)
     {
         ItemSlingshot slingshot = new ItemSlingshot();

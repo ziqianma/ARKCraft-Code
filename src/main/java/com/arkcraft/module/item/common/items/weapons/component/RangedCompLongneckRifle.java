@@ -1,17 +1,20 @@
 package com.arkcraft.module.item.common.items.weapons.component;
 
-import com.arkcraft.module.item.common.items.weapons.handlers.ReloadHelper;
-import com.arkcraft.module.core.ARKCraft;
-import com.arkcraft.module.item.common.entity.item.projectiles.EntitySimpleRifleAmmo;
-import com.arkcraft.module.item.common.entity.item.projectiles.EntityTranquilizer;
-import com.arkcraft.module.item.common.items.ARKCraftItems;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+
+import com.arkcraft.module.core.ARKCraft;
+import com.arkcraft.module.core.GlobalAdditions;
+import com.arkcraft.module.item.common.config.KeyBindings;
+import com.arkcraft.module.item.common.entity.item.projectiles.EntitySimpleRifleAmmo;
+import com.arkcraft.module.item.common.items.weapons.handlers.ReloadHelper;
 
 public class RangedCompLongneckRifle extends RangedComponent
 {
@@ -30,9 +33,57 @@ public class RangedCompLongneckRifle extends RangedComponent
 
     @Override
     public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack)
-    {
+    {	
         return true;
     }
+    
+    @Override
+    public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entityplayer)
+    {
+        if (itemstack.stackSize <= 0 || entityplayer.isUsingItem())
+        {
+            return itemstack;
+        }
+        
+        if (!world.isRemote && KeyBindings.attachment.isKeyDown())
+    	{
+    		// If player not sneaking, open the inventory gui
+    		if (!entityplayer.isSneaking()) {
+    			entityplayer.openGui(ARKCraft.instance, GlobalAdditions.GUI.ATTACHMENT_GUI.getID(), world, 0, 0, 0);
+    		}
+    		return itemstack;	
+    	}
+
+        //Check can reload
+        if (hasAmmo(itemstack, world, entityplayer))
+        {
+            if (isReadyToFire(itemstack))
+            {
+                //Start aiming weapon to fire
+                soundCharge(itemstack, world, entityplayer);
+                entityplayer.setItemInUse(itemstack, getMaxItemUseDuration(itemstack));
+
+            }
+            else
+            {
+                //Begin reloading
+                entityplayer.setItemInUse(itemstack, getMaxItemUseDuration(itemstack));
+                if (world.isRemote && !entityplayer.capabilities.isCreativeMode)
+                // i.e. "20 ammo"
+                {
+                    entityplayer.addChatMessage(new ChatComponentText(getAmmoQuantity(entityplayer) + StatCollector.translateToLocal("chat.ammo")));
+                }
+            }
+        }
+        else
+        {
+            //Can't reload; no ammo
+            soundEmpty(itemstack, world, entityplayer);
+            setReloadState(itemstack, ReloadHelper.STATE_NONE);
+        }
+        return itemstack;
+    } 
+		
 
     @Override
     public ModelResourceLocation getModel(ItemStack stack, EntityPlayer player)
@@ -73,19 +124,9 @@ public class RangedCompLongneckRifle extends RangedComponent
     {
         if (!world.isRemote)
         {
-
-            if (entityplayer.inventory.hasItem(ARKCraftItems.simple_rifle_ammo) || entityplayer.capabilities.isCreativeMode)
-            {
-                EntitySimpleRifleAmmo entityprojectile = new EntitySimpleRifleAmmo(world, entityplayer);
-                applyProjectileEnchantments(entityprojectile, itemstack);
-                world.spawnEntityInWorld(entityprojectile);
-            }
-            if (entityplayer.inventory.hasItem(ARKCraftItems.tranquilizer) || entityplayer.capabilities.isCreativeMode)
-            {
-                EntityTranquilizer entityprojectile = new EntityTranquilizer(world, entityplayer, 1F);
-                applyProjectileEnchantments(entityprojectile, itemstack);
-                world.spawnEntityInWorld(entityprojectile);
-            }
+            EntitySimpleRifleAmmo entityprojectile = new EntitySimpleRifleAmmo(world, entityplayer);
+            applyProjectileEnchantments(entityprojectile, itemstack);
+            world.spawnEntityInWorld(entityprojectile);     
         }
 
         int damage = 1;
