@@ -161,6 +161,51 @@
             }
         ]
     },
+     "fabricated_pistol_shoot": {
+        "category": "neutral",
+        "sounds": [
+            {
+                "name": "fabricated_pistol_shoot",
+                "stream": false
+            }
+        ]
+    },
+     "fabricated_pistol_reload": {
+        "category": "neutral",
+        "sounds": [
+            {
+                "name": "fabricated_pistol_reload",
+                "stream": false
+            }
+        ]
+    },
+     "simple_pistol_shoot": {
+        "category": "neutral",
+        "sounds": [
+            {
+                "name": "simple_pistol_shoot",
+                "stream": false
+            }
+        ]
+    },
+     "simple_pistol_reload": {
+        "category": "neutral",
+        "sounds": [
+            {
+                "name": "simple_pistol_shoot",
+                "stream": false
+            }
+        ]
+    },
+    "shotgun_doubleShoot": {
+        "category": "neutral",
+        "sounds": [
+            {
+                "name": "shotgun_doubleShoot",
+                "stream": false
+            }
+        ]
+    },
 	"reload_tranq_gun": {
         "category": "neutral",
         "sounds": [
