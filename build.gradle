@@ -1,30 +1,16 @@
-buildscript {
-    repositories {
-        mavenCentral()
-        maven {
-            name = "forge"
-            url = "http://files.minecraftforge.net/maven"
-        }
-        maven {
-            name = "sonatype"
-            url = "https://oss.sonatype.org/content/repositories/snapshots/"
-        }
-    }
-    dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
-    }
+plugins {
+    id "net.minecraftforge.gradle.forge" version "2.0.2"
 }
-
-apply plugin: 'forge'
 
 version = "0.1-ALPHA"
 group= "com.arkcraft.mod" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "ARKCraft"
 
 minecraft {
-    version = "1.8-11.14.3.1450"
+    version = "1.8-11.14.4.1563"
     runDir = "minecraft"
     replace '${version}', project.version
+	replace '${mcversion}', project.minecraft.version
     mappings = "snapshot_20141130"
 }
 
@@ -37,7 +23,7 @@ repositories {
 }
 
 dependencies {
-	compile 'net.ilexiconn:llibrary:0.4.3-1.8:dev'
+	compile 'net.ilexiconn:llibrary:0.5.5-1.8:dev'
 }
 
 processResources {

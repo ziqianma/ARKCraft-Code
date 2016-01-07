@@ -34,10 +34,10 @@ item.cloth_helm.name=Cloth Hat
 item.cloth_chest.name=Cloth Shirt
 item.cloth_legs.name=Cloth Pants
 item.cloth_boots.name=Cloth Shoes
-item.leather_helm.name=Dino Bone Helmet
-item.leather_chest.name=Dino Bone Chestplate
-item.leather_legs.name=Dino Bone Leggings
-item.leather_boots.name=Dino Bone Boots
+item.hide_helm.name=Hide Helmet
+item.hide_chest.name=Hide Chestplate
+item.hide_legs.name=Hide Leggings
+item.hide_boots.name=Hide Boots
 item.tranq_arrow.name=Tranquilizer Arrow
 item.slingshot.name=Slingshot
 item.ironPike.name=Iron Pike
@@ -92,13 +92,20 @@ item.wooden_club.name=Wooden Club
 item.grenade.name=Grenade
 item.cementing_paste.name=Cementing Paste
 item.scope.name=Scope
+item.item_crystal.name=Crystal
+item.metal_pick.name=Metal Pickaxe
+item.metal_hatchet.name=Metal Hatchet
+item.stone_pick.name=Stone Pickaxe
+item.stone_hatchet.name=Stone Hatchet
+item.item_refining_forge.name=Refining Forge
 
 
 # Miscellaneous
 itemGroup.tabARKCraft=ARKCraft: Survival Evolved
 
 # Configuration GUI
-category.arkcraft.balance=Balance settings
+category.arkcraft.mod1_balance=Entity & World Gen Balance Settings
+category.arkcraft.mod2_balance=Item, Block, and Player Balance Settings
 category.arkcraft.balance.tooltip=Balance settings
 
 # Entities

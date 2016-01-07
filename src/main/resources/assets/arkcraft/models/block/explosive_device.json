@@ -1,0 +1,6 @@
+{
+    "parent": "block/tallgrass",
+    "textures": {
+        "cross": "arkcraft:blocks/berryBush_1"
+    }
+}
