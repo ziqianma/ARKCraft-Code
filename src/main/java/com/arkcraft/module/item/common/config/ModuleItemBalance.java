@@ -63,10 +63,10 @@ public final class ModuleItemBalance
         @DefaultDouble(value = 0.7, minValue = 0.2, maxValue = 5.0, name = "Time to reload shotgun.", comment = "Seconds to reload")
         public static double SHOTGUN_RELOAD;
 
-        @DefaultBoolean(value = true, name = "Include Tranq Gun", comment = "Include Tranq Gun")
-        public static boolean TRANQ_GUN;
-        @DefaultDouble(value = 1.0, minValue = 0.2, maxValue = 5.0, name = "Time to reload tranq_gun.", comment = "Seconds to reload")
-        public static double TRANQ_GUN_RELOAD;
+        @DefaultBoolean(value = true, name = "Include Fabricated Pistol", comment = "Include Fabricated Pistol")
+        public static boolean FABRICATED_PISTOL;
+        @DefaultDouble(value = 1.0, minValue = 0.2, maxValue = 5.0, name = "Time to reload fabricated_pistol.", comment = "Seconds to reload")
+        public static double FABRICATED_PISTOL_RELOAD;
 
         @DefaultBoolean(value = true, name = "Include Rocket Launcher", comment = "Include Rocket Launcher")
         public static boolean ROCKET_LAUNCHER;

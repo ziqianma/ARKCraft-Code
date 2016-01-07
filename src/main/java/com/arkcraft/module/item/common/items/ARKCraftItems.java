@@ -17,6 +17,7 @@ import com.arkcraft.module.core.GlobalAdditions;
 import com.arkcraft.module.core.client.gui.book.Dossier;
 import com.arkcraft.module.core.common.handlers.EntityHandler;
 import com.arkcraft.module.item.common.config.ModuleItemBalance;
+import com.arkcraft.module.item.common.entity.item.projectiles.EntityAdvancedBullet;
 import com.arkcraft.module.item.common.entity.item.projectiles.EntityBallista;
 import com.arkcraft.module.item.common.entity.item.projectiles.EntityBallistaBolt;
 import com.arkcraft.module.item.common.entity.item.projectiles.EntityBase;
@@ -40,6 +41,7 @@ import com.arkcraft.module.item.common.items.weapons.ItemSpear;
 import com.arkcraft.module.item.common.items.weapons.ItemWoodenClub;
 import com.arkcraft.module.item.common.items.weapons.bullets.ItemProjectile;
 import com.arkcraft.module.item.common.items.weapons.component.RangedCompCrossbow;
+import com.arkcraft.module.item.common.items.weapons.component.RangedCompFabricatedPistol;
 import com.arkcraft.module.item.common.items.weapons.component.RangedCompLongneckRifle;
 import com.arkcraft.module.item.common.items.weapons.component.RangedCompLongneckRifleScoped;
 import com.arkcraft.module.item.common.items.weapons.component.RangedCompRocketLauncher;
@@ -88,8 +90,9 @@ public class ARKCraftItems
     public static ItemCompoundBow compound_bow;
     public static ItemRangedWeapon rocket_launcher;
     public static ItemProjectile tranquilizer, stone_arrow, tranq_arrow, metal_arrow, ballista_bolt;
-    public static ItemProjectile simple_bullet, simple_rifle_ammo, simple_shotgun_ammo, rocket_propelled_grenade;
+    public static ItemProjectile simple_bullet, simple_rifle_ammo, simple_shotgun_ammo, rocket_propelled_grenade, advanced_bullet;
     public static ItemRangedWeapon simple_pistol, simple_pistol_scoped;
+    public static ItemRangedWeapon fabricated_pistol;
     public static ItemRangedWeapon longneck_rifle_scoped, longneck_rifle;
     public static ItemRangedWeapon shotgun;
     public static ItemRangedWeapon crossbow;
@@ -241,9 +244,9 @@ public class ARKCraftItems
             EntityHandler.registerModEntity(EntitySimpleRifleAmmo.class, "Simple Rifle Ammo", ARKCraft.instance, 64, 10, true);
         }
 
-        if (ModuleItemBalance.WEAPONS.TRANQ_GUN)
+        if (ModuleItemBalance.WEAPONS.FABRICATED_PISTOL)
         {
-            EntityHandler.registerModEntity(EntityTranquilizer.class, "Tranquilizer", ARKCraft.instance, 64, 10, true);
+            EntityHandler.registerModEntity(EntityAdvancedBullet.class, "Advanced Bullet", ARKCraft.instance, 64, 10, true);
         }
 
         if (ModuleItemBalance.WEAPONS.ROCKET_LAUNCHER)
@@ -285,6 +288,11 @@ public class ARKCraftItems
         {
             rocket_launcher = addShooter("rocket_launcher", new RangedCompRocketLauncher());
             rocket_propelled_grenade = addItemProjectile("rocket_propelled_grenade");
+        }
+        if (ModuleItemBalance.WEAPONS.FABRICATED_PISTOL)
+        {
+            fabricated_pistol = addShooter("fabricated_pistol", new RangedCompFabricatedPistol());
+            advanced_bullet = addItemProjectile("advanced_bullet");
         }
         if (ModuleItemBalance.WEAPONS.CROSSBOW)
         {

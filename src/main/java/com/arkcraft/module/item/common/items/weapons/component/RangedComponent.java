@@ -348,8 +348,8 @@ public abstract class RangedComponent extends AbstractWeaponComponent
         ROCKETLAUNCHER("arkcraft:rocket_propelled_grenade", 1, 250, 1),
         SHOTGUN("arkcraft:simple_shotgun_ammo", 2, 200, 5),
         LONGNECKRIFLE("arkcraft:simple_rifle_ammo", 3, 350, 1),
-        LONGNECKRIFLE_TRANQ("arkcraft:tranquilizer", 3, 350, 1),
-        TRANQGUN("arkcraft:tranquilizer", 4, 350, 1),
+   //     LONGNECKRIFLE_TRANQ("arkcraft:tranquilizer", 3, 350, 1),
+        FABRICATEDPISTOL("arkcraft:advanced_bullet", 4, 350, 1),
         CROSSBOW("arkcraft:stone_arrow, metal_arrow, tranq_arrow", 5, 250, 1);
 
         private int getReloadTime(int id)
@@ -365,7 +365,7 @@ public abstract class RangedComponent extends AbstractWeaponComponent
                 case 3:
                     return (int) (ModuleItemBalance.WEAPONS.LONGNECK_RIFLE_RELOAD * 20.0);
                 case 4:
-                    return (int) (ModuleItemBalance.WEAPONS.TRANQ_GUN_RELOAD * 20.0);
+                    return (int) (ModuleItemBalance.WEAPONS.FABRICATED_PISTOL_RELOAD * 20.0);
                 case 5:
                     return (int) (ModuleItemBalance.WEAPONS.CROSSBOW_RELOAD * 20.0);
                 default:
