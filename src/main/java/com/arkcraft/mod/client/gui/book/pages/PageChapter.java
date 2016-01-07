@@ -1,11 +1,12 @@
 package com.arkcraft.mod.client.gui.book.pages;
 
-import com.arkcraft.mod.client.gui.book.GuiDossier;
-import com.arkcraft.mod.client.gui.book.fonts.SmallFontRenderer;
-import com.arkcraft.mod.common.ARKCraft;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
+
+import com.arkcraft.mod.client.gui.book.GuiDossier;
+import com.arkcraft.mod.client.gui.book.fonts.SmallFontRenderer;
+import com.arkcraft.mod.common.ARKCraft;
 
 /**
  * Table of Contents Page.
@@ -26,33 +27,21 @@ public class PageChapter extends Page {
 		}
 	
 		if(links != null) {
+			for(int i = 0; i < links.length; i++) {
+				if(links[i] != null) {
+					if(canTranslate) StatCollector.translateToLocal(links[i].getLinkText());
+					ResourceLocation loc = links[i].getLinkIcon(ARKCraft.MODID);
+					if(loc != null) {
+						int iw = 32, ih = 32;
+						Minecraft.getMinecraft().getTextureManager().bindTexture(loc);
+						/* Texture Draw Position is offset by 20 from the middle of the page. Height offset is 40 pixels from each selection */
+						GuiDossier.drawModalRectWithCustomSizedTexture((guiLeft + (dossier.guiWidth-iw) / 2) - 20, guiTop + 20 + (i * iw + 8), 0, 0, iw, ih, iw, ih);
+					}
+				}
+			}
 		}
 	}
 	
 	public String getTitle() { return title; }
-	
-	public void drawIcon(String iconName, GuiDossier dossier, int guiTop, int guiLeft) {
-		ResourceLocation loc = new ResourceLocation(ARKCraft.MODID, "textures/gui/icons.png");
-		if(iconName == "dino") {
-			if(loc != null) Minecraft.getMinecraft().getTextureManager().bindTexture(loc);
-			dossier.drawTexturedModalRect(guiLeft + (dossier.guiWidth-64)/2, guiTop + 30,64,64,64,64);
-		}
-		
-		if(iconName == "mammal") {
-			if(loc != null) Minecraft.getMinecraft().getTextureManager().bindTexture(loc);
-			dossier.drawTexturedModalRect(guiLeft + (dossier.guiWidth-64)/2, guiTop + 30,0,0,64,64);
-		}
-		
-		if(iconName == "reptile") {
-			if(loc != null) Minecraft.getMinecraft().getTextureManager().bindTexture(loc);
-			dossier.drawTexturedModalRect(guiLeft + (dossier.guiWidth-64)/2, guiTop + 30,0,64,64,64);
-		}
-		
-		if(iconName == "other") {
-			if(loc != null) Minecraft.getMinecraft().getTextureManager().bindTexture(loc);
-			dossier.drawTexturedModalRect(guiLeft + (dossier.guiWidth-64)/2, guiTop + 30,0,64,0,64);
-		}
-	}
-	
 	public LinkObj[] getLinkObjects() { return links; }
 }
