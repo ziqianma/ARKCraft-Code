@@ -92,7 +92,8 @@ public class ClientProxy extends CommonProxy
 
         ModelBakery.addVariantName(ARKCraftItems.slingshot, "arkcraft:slingshot", "arkcraft:slingshot_pulled");
         ModelBakery.addVariantName(ARKCraftItems.longneck_rifle, "arkcraft:longneck_rifle", "arkcraft:longneck_rifle_scoped");
-
+        
+        
         dossierProxy.init();
         LogHelper.info("CommonProxy: Init run finished.");
         initDone = true;

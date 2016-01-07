@@ -122,7 +122,7 @@ public abstract class RangedComponent extends AbstractWeaponComponent
     }
 
     @Override
-    public ModelResourceLocation getModel(ItemStack stack, EntityPlayer player)
+    public ModelResourceLocation getModel(ItemStack stack, EntityPlayer player, int useRemaining)
     {
         return null;
     }

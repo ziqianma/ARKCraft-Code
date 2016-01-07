@@ -1,29 +1,34 @@
 package com.arkcraft.module.item.common.tile;
 
-import com.arkcraft.module.item.common.items.ARKCraftItems;
-import com.arkcraft.module.item.common.items.weapons.ItemRangedWeapon;
+import java.util.Random;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.server.gui.IUpdatePlayerListBox;
-public class TileInventoryAttachment2 extends AbstractInventory implements IUpdatePlayerListBox
+import net.minecraft.nbt.NBTTagList;
+
+import com.arkcraft.lib.LogHelper;
+import com.arkcraft.module.item.common.items.ARKCraftItems;
+import com.arkcraft.module.item.common.items.weapons.ItemRangedWeapon;
+import com.arkcraft.module.item.common.items.weapons.component.RangedComponent;
+import com.arkcraft.module.item.common.items.weapons.handlers.IItemWeapon;
+import com.arkcraft.module.item.common.items.weapons.handlers.TestBoolean;
+
+public class TileInventoryAttachment2 extends AbstractInventory implements TestBoolean 
 {
-	private String name = "Bag of Holding";
+	private String name = "Attachment Inventory";
 
 	/** The key used to store and retrieve the inventory from NBT */
-	private static final String SAVE_KEY = "ItemInventory";
-
-	/** Defining your inventory size this way is handy */
+	private static final String SAVE_KEY = "AttachmentInventory";
 	public static final int INV_SIZE = 10;
-	public static final int TOTAL_SLOTS_COUNT = INV_SIZE;
-    private ItemStack[] itemStacks = new ItemStack[TOTAL_SLOTS_COUNT];
-
-
+	
 	/** Provides NBT Tag Compound to reference */
 	private final ItemStack invStack;
+	public boolean activate_scoping;
 
-	public TileInventoryAttachment2(ItemStack stack) {
+	public TileInventoryAttachment2(ItemStack stack) 
+	{
 		inventory = new ItemStack[INV_SIZE];
 		this.invStack = stack;
 		if (!invStack.hasTagCompound()) {
@@ -33,17 +38,20 @@ public class TileInventoryAttachment2 extends AbstractInventory implements IUpda
 	}
 
 	@Override
-	public String getName() {
+	public String getName() 
+	{
 		return name;
 	}
 
 	@Override
-	public boolean hasCustomName() {
+	public boolean hasCustomName() 
+	{
 		return name.length() > 0;
 	}
 
 	@Override
-	public int getInventoryStackLimit() {
+	public int getInventoryStackLimit() 
+	{
 		return 64;
 	}
 
@@ -53,65 +61,99 @@ public class TileInventoryAttachment2 extends AbstractInventory implements IUpda
 	 */
 	@Override
 	public void markDirty() {
-		
-		if (isScopePresent())
+		  
+	/*	else
 		{
-	       System.out.println("scope found");
-	    }	       	   
+			activate_scoping = false;
+		}		*/
 		
 		for (int i = 0; i < getSizeInventory(); ++i) {
 			if (getStackInSlot(i) != null && getStackInSlot(i).stackSize == 0)
 				inventory[i] = null;
 		}
-		writeToNBT(invStack.getTagCompound());
-	}
-	
-	/*
-	@Override
-	public void update()
-	{
+		
 		if (isScopePresent())
 		{
-	       System.out.println("scope found");
-	    }	       	    
-	}	*/
+			activate_scoping = true;
+			LogHelper.info("scope found");
+	    }	
+		
+		writeToNBT(invStack.getTagCompound());
+	}
+
 	
 	private boolean isScopePresent()
+	{
+		for (int i = 0; i < INV_SIZE; i++)
 	    {
-	        // Iterate over all the compost bin slots
-	        for (int i = 0; i < INV_SIZE; i++)
+			if(inventory[i] != null && inventory[i].getItem() == ARKCraftItems.scope)
 	        {
-	            if (itemStacks[i] != null && itemStacks[i].getItem() == ARKCraftItems.scope)
-	            {
-	                return true;
-	            }
+				return true;
 	        }
-	        return false;
 	    }
-
+	    return false;
+	}	
+	
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer player) {
-		// this will close the inventory if the player tries to move
-		// the item that opened it, but you need to return this method
-		// from the Container's canInteractWith method
-		// an alternative would be to override the slotClick method and
-		// prevent the current item slot from being clicked
+	public boolean isUseableByPlayer(EntityPlayer player) 
+	{
 		return player.getHeldItem() == invStack;
 	}
 
 	@Override
-	public boolean isItemValidForSlot(int slot, ItemStack stack) {
+	public boolean isItemValidForSlot(int slot, ItemStack stack) 
+	{
 		return !(stack.getItem() instanceof ItemRangedWeapon);
 	}
 
 	@Override
-	protected String getNbtKey() {
+	protected String getNbtKey() 
+	{
 		return SAVE_KEY;
 	}
-
+	
 	@Override
-	public void update() {
-		// TODO Auto-generated method stub
-		
+	public void writeToNBT(NBTTagCompound compound) {
+		String key = getNbtKey();
+		if (key == null || key.equals("")) {
+			return;
+		}
+		NBTTagList items = new NBTTagList();
+		for (int i = 0; i < getSizeInventory(); ++i) {
+			if (getStackInSlot(i) != null) {
+				NBTTagCompound item = new NBTTagCompound();
+				item.setByte("Slot", (byte) i);
+				getStackInSlot(i).writeToNBT(item);
+				items.appendTag(item);
+			}
+		}
+		compound.setTag(key, items);
+	}
+
+	/**
+	 * Loads this inventory from NBT; must be called manually
+	 * Fails silently if {@link #getNbtKey} returns null or an empty string
+	 */
+	@Override
+	public void readFromNBT(NBTTagCompound compound) {
+		String key = getNbtKey();
+		if (key == null || key.equals("")) {
+			return;
+		}
+		NBTTagList items = compound.getTagList(key, compound.getId());
+		for (int i = 0; i < items.tagCount(); ++i) {
+			NBTTagCompound item = items.getCompoundTagAt(i);
+			byte slot = item.getByte("Slot");
+			if (slot >= 0 && slot < getSizeInventory()) 
+			{
+				inventory[slot] = ItemStack.loadItemStackFromNBT(item);
+			}		
+		}
+	}
+	
+	@Override
+	public boolean attachment()
+	{
+		return activate_scoping;
 	}
 }

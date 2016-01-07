@@ -1,5 +1,7 @@
 package com.arkcraft.module.item.common.tile;
 
+import com.arkcraft.module.item.common.items.ARKCraftItems;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -152,7 +154,8 @@ public abstract class AbstractInventory implements IInventory
 		for (int i = 0; i < items.tagCount(); ++i) {
 			NBTTagCompound item = items.getCompoundTagAt(i);
 			byte slot = item.getByte("Slot");
-			if (slot >= 0 && slot < getSizeInventory()) {
+			if (slot >= 0 && slot < getSizeInventory()) 
+			{
 				inventory[slot] = ItemStack.loadItemStackFromNBT(item);
 			}
 		}

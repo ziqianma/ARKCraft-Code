@@ -18,4 +18,7 @@ public interface IItemWeapon
     public boolean ifCanScope();
 
     public boolean canOpenGui();
+    
+//    public boolean attachment();
+
 }

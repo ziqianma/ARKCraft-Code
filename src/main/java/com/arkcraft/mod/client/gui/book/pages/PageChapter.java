@@ -7,6 +7,8 @@ import net.minecraft.util.StatCollector;
 import com.arkcraft.mod.client.gui.book.GuiDossier;
 import com.arkcraft.mod.client.gui.book.fonts.SmallFontRenderer;
 import com.arkcraft.mod.common.ARKCraft;
+import com.arkcraft.module.core.client.gui.book.pages.LinkObj;
+import com.arkcraft.module.core.client.gui.book.pages.Page;
 
 /**
  * Table of Contents Page.

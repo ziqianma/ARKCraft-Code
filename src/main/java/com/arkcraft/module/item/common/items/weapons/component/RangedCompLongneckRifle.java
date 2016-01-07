@@ -1,9 +1,11 @@
 package com.arkcraft.module.item.common.items.weapons.component;
 
 import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagLong;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.MathHelper;
@@ -27,7 +29,6 @@ public class RangedCompLongneckRifle extends RangedComponent
     public void effectReloadDone(ItemStack itemstack, World world, EntityPlayer entityplayer)
     {
         entityplayer.swingItem();
-        scope = true;
         world.playSoundAtEntity(entityplayer, "random.door_close", 1.2F, 1.0F / (weapon.getItemRand().nextFloat() * 0.2F + 0.0F));
     }
 
@@ -51,6 +52,7 @@ public class RangedCompLongneckRifle extends RangedComponent
     		if (!entityplayer.isSneaking()) {
     			entityplayer.openGui(ARKCraft.instance, GlobalAdditions.GUI.ATTACHMENT_GUI.getID(), world, 0, 0, 0);
     		}
+    		
     		return itemstack;	
     	}
 
@@ -84,11 +86,10 @@ public class RangedCompLongneckRifle extends RangedComponent
         return itemstack;
     } 
 		
-
     @Override
-    public ModelResourceLocation getModel(ItemStack stack, EntityPlayer player)
+    public ModelResourceLocation getModel(ItemStack stack, EntityPlayer player,int useRemaining)
     {
-        if (scope = true)
+        if (ifCanScope())
         {
             return new ModelResourceLocation(ARKCraft.MODID + ":longneck_rifle_scoped", "inventory");
         }
@@ -96,16 +97,13 @@ public class RangedCompLongneckRifle extends RangedComponent
         {
             return null;
         }
-    }
-
+    }	
+    
     @Override
-    public boolean canOpenGui()
+    public void onUpdate(ItemStack itemstack, World world, Entity entity, int i, boolean flag)
     {
-        return true;
+    	
     }
-
-    public boolean scope;
-
 
 	/*
 	@SuppressWarnings("unused")
@@ -165,10 +163,10 @@ public class RangedCompLongneckRifle extends RangedComponent
         }
         world.spawnParticle(EnumParticleTypes.FLAME, x + particleX, y + particleY, z + particleZ, 0.0D, 0.0D, 0.0D);
     }
-
+    /*
     @Override
     public boolean ifCanScope()
     {
-        return false;
-    }
+        return true;
+    }	*/
 }

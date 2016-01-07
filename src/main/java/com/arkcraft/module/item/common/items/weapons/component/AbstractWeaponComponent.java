@@ -80,7 +80,7 @@ public abstract class AbstractWeaponComponent
     public abstract boolean canOpenGui();
 
 
-    public abstract ModelResourceLocation getModel(ItemStack stack, EntityPlayer player);
+    public abstract ModelResourceLocation getModel(ItemStack stack, EntityPlayer player, int useRemaining);
 
     @SideOnly(Side.CLIENT)
     public abstract boolean shouldRotateAroundWhenRendering();
