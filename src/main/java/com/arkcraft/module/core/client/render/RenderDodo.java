@@ -1,7 +1,11 @@
 package com.arkcraft.module.core.client.render;
 
 import com.arkcraft.module.core.ARKCraft;
+import com.arkcraft.module.core.client.model.ModelRaptorNew;
+import com.arkcraft.module.core.common.entity.DodoType;
+import com.arkcraft.module.core.common.entity.aggressive.RaptorType;
 import com.arkcraft.module.core.common.entity.passive.EntityDodo;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
@@ -15,11 +19,19 @@ import net.minecraft.util.ResourceLocation;
  */
 public class RenderDodo extends RenderLiving
 {
+	private static ResourceLocation[] texture;
+	protected ModelRaptorNew modelEntity;
     private static final ResourceLocation dodoTexture = new ResourceLocation(ARKCraft.MODID + ":textures/model/dodo.png");
 
     public RenderDodo(ModelBase base, float par2)
     {
+     //   super(Minecraft.getMinecraft().getRenderManager(), base, par2);
         super(Minecraft.getMinecraft().getRenderManager(), base, par2);
+        modelEntity = ((ModelRaptorNew) mainModel);
+        texture = new ResourceLocation[DodoType.numDodos];
+        texture[0] = new ResourceLocation(ARKCraft.MODID + ":textures/model/albino.png");
+        texture[1] = new ResourceLocation(ARKCraft.MODID + ":textures/model/dodo_pink_brown.png");
+
     }
 
     // Stuff to make the Dodo rotate when floating?
