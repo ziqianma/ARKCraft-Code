@@ -7,17 +7,7 @@ import java.util.Random;
  */
 public enum DodoType
 {
-    PINK_BROWN(0),
-    BREEN_WHITE(1),
-    CYAN_LGREEN(2),
-    RAINBOW(3),
-    GREEN_GREY(4),
-    GREEN_TAN(5),
-    GREEN_WHITE(6),
-    GREY_GREY(7),
-    LBROWN_TAN(8),
-    RED_TAN(9),
-    TAN_WHITE(10);
+	PINK_BROWN(0);
 
     private int type;
     public static final int numDodos = 11;
@@ -68,7 +58,7 @@ public enum DodoType
                 return "Tan White";
             case 0:
             default:
-                return "Albino";
+                return "Pink brown";
         }
     }
 }
