@@ -6,12 +6,16 @@ import com.arkcraft.module.item.common.items.weapons.handlers.ReloadHelper;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 public class RangedCompSimplePistol extends RangedComponent
 {
+	public boolean setSound;
+	
     public RangedCompSimplePistol()
     {
         super(RangedSpecs.SIMPLEPISTOL);
@@ -21,7 +25,53 @@ public class RangedCompSimplePistol extends RangedComponent
     public void effectReloadDone(ItemStack itemstack, World world, EntityPlayer entityplayer)
     {
         entityplayer.swingItem();
-        world.playSoundAtEntity(entityplayer, ARKCraft.MODID + ":" + "simple_pistol_reload", 0.7F, 0.9F / (weapon.getItemRand().nextFloat() * 0.2F + 0.0F));
+  //      world.playSoundAtEntity(entityplayer, ARKCraft.MODID + ":" + "simple_pistol_reload", 0.7F, 0.9F / (weapon.getItemRand().nextFloat() * 0.2F + 0.0F));
+    }
+    
+    @Override
+    public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entityplayer)
+    {
+        if (itemstack.stackSize <= 0 || entityplayer.isUsingItem())
+        {
+            return itemstack;
+        }
+
+        //Check can reload
+        if (hasAmmo(itemstack, world, entityplayer))
+        {   	
+            if (isReadyToFire(itemstack))
+            {
+                //Start aiming weapon to fire
+                soundCharge(itemstack, world, entityplayer);
+                entityplayer.setItemInUse(itemstack, getMaxItemUseDuration(itemstack));
+            	setSound = false;
+
+            }
+            else
+            {
+            	setSound = true;
+                //Begin reloading
+                entityplayer.setItemInUse(itemstack, getMaxItemUseDuration(itemstack));
+                if(setSound = true)
+                {
+                	world.playSoundAtEntity(entityplayer, ARKCraft.MODID + ":" + "simple_pistol_reload", 1.0F, 0.9F / (weapon.getItemRand().nextFloat() * 0.2F + 0.0F));
+                	setSound = false;
+                }
+                if (world.isRemote && !entityplayer.capabilities.isCreativeMode)
+                // i.e. "20 ammo"
+                {
+                    entityplayer.addChatMessage(new ChatComponentText(getAmmoQuantity(entityplayer) + StatCollector.translateToLocal("chat.ammo")));
+                }
+            }
+        }
+        else
+        {
+            //Can't reload; no ammo
+        	setSound = false;
+            soundEmpty(itemstack, world, entityplayer);
+            setReloadState(itemstack, ReloadHelper.STATE_NONE);
+        }
+        return itemstack;
     }
 
     @Override
