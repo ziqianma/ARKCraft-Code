@@ -2,7 +2,7 @@ package com.arkcraft.mod.client.gui.book.deserialization;
 
 import java.lang.reflect.Type;
 
-import com.arkcraft.mod.client.gui.book.pages.LinkObj;
+import com.arkcraft.module.core.client.gui.book.pages.LinkObj;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
@@ -27,7 +27,4 @@ public class LinkDeserializer implements JsonDeserializer<LinkObj>  {
 		}
 		return null;
 	}
-
-	
-	
 }

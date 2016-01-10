@@ -4,9 +4,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 
-import com.arkcraft.mod.client.gui.book.GuiDossier;
-import com.arkcraft.mod.client.gui.book.fonts.SmallFontRenderer;
-import com.arkcraft.mod.common.ARKCraft;
+import com.arkcraft.module.core.ARKCraft;
+import com.arkcraft.module.core.client.gui.book.GuiDossier;
+import com.arkcraft.module.core.client.gui.book.fonts.SmallFontRenderer;
 import com.arkcraft.module.core.client.gui.book.pages.LinkObj;
 import com.arkcraft.module.core.client.gui.book.pages.Page;
 
