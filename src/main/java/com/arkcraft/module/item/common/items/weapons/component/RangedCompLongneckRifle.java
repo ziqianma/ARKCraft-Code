@@ -5,7 +5,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagLong;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.MathHelper;
@@ -29,7 +28,8 @@ public class RangedCompLongneckRifle extends RangedComponent
     public void effectReloadDone(ItemStack itemstack, World world, EntityPlayer entityplayer)
     {
         entityplayer.swingItem();
-        world.playSoundAtEntity(entityplayer, "random.door_close", 1.2F, 1.0F / (weapon.getItemRand().nextFloat() * 0.2F + 0.0F));
+ //       world.playSoundAtEntity(entityplayer, "random.door_close", 1.2F, 1.0F / (weapon.getItemRand().nextFloat() * 0.2F + 0.0F));
+        world.playSoundAtEntity(entityplayer, ARKCraft.MODID + ":" + "longneck_rifle_reload", 0.7F, 0.9F / (weapon.getItemRand().nextFloat() * 0.2F + 0.0F));
     }
 
     @Override
@@ -150,8 +150,10 @@ public class RangedCompLongneckRifle extends RangedComponent
     @Override
     public void effectShoot(World world, double x, double y, double z, float yaw, float pitch)
     {
-        world.playSoundEffect(x, y, z, "random.explode", 3F, 1F / (weapon.getItemRand().nextFloat() * 0.4F + 0.7F));
-        world.playSoundEffect(x, y, z, "ambient.weather.thunder", 3F, 1F / (weapon.getItemRand().nextFloat() * 0.4F + 0.4F));
+//        world.playSoundEffect(x, y, z, "random.explode", 3F, 1F / (weapon.getItemRand().nextFloat() * 0.4F + 0.7F));
+//        world.playSoundEffect(x, y, z, "ambient.weather.thunder", 3F, 1F / (weapon.getItemRand().nextFloat() * 0.4F + 0.4F));
+        world.playSoundEffect(x, y, z,  ARKCraft.MODID + ":" + "longneck_rifle_shoot", 1.5F, 1F / (weapon.getItemRand().nextFloat() * 0.4F + 0.7F));
+
 
         float particleX = -MathHelper.sin(((yaw + 23) / 180F) * 3.141593F) * MathHelper.cos((pitch / 180F) * 3.141593F);
         float particleY = -MathHelper.sin((pitch / 180F) * 3.141593F) - 0.1F;
