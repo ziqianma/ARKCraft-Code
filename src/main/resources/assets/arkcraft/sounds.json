@@ -206,6 +206,24 @@
             }
         ]
     },
+    "longneck_rifle_reload": {
+        "category": "neutral",
+        "sounds": [
+            {
+                "name": "longneck_rifle_reload",
+                "stream": false
+            }
+        ]
+    },
+     "longneck_rifle_shoot": {
+        "category": "neutral",
+        "sounds": [
+            {
+                "name": "longneck_rifle_shoot",
+                "stream": false
+            }
+        ]
+    },
 	"reload_tranq_gun": {
         "category": "neutral",
         "sounds": [
