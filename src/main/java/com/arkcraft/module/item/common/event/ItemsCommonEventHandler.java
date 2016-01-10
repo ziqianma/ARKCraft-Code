@@ -12,6 +12,7 @@ import com.arkcraft.module.item.common.items.weapons.handlers.IItemWeapon;
 import com.arkcraft.module.core.ARKCraft;
 import com.arkcraft.module.core.common.entity.EntityTameableDinosaur;
 import com.arkcraft.module.item.common.config.ModuleItemBalance;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.ScaledResolution;
@@ -38,6 +39,9 @@ import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
 import org.lwjgl.opengl.GL11;
 
 /**
@@ -241,6 +245,7 @@ public class ItemsCommonEventHandler
     private static final ResourceLocation OVERLAY_TEXTURE = new ResourceLocation(ARKCraft.MODID, "textures/gui/scope.png");
     public boolean ShowScopeOverlap = false;
 
+    @SideOnly(Side.CLIENT)
     @SubscribeEvent
     public void onMouseEvent(MouseEvent evt)
     {
@@ -397,6 +402,7 @@ public class ItemsCommonEventHandler
         GL11.glPopMatrix();
     }
 
+    @SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public void onPlayerKeypressed(InputEvent.KeyInputEvent event)
 	{
