@@ -3,6 +3,7 @@ package com.arkcraft.module.core;
 import com.arkcraft.module.core.common.config.CoreBalance;
 import com.arkcraft.module.core.common.creativetabs.ARKTabs;
 import com.arkcraft.module.core.common.entity.aggressive.EntityRaptor;
+import com.arkcraft.module.core.common.entity.aggressive.EntitySabertooth;
 import com.arkcraft.module.core.common.entity.neutral.EntityBrontosaurus;
 import com.arkcraft.module.core.common.entity.passive.EntityDodo;
 import com.arkcraft.module.core.common.handlers.EntityHandler;
@@ -16,6 +17,7 @@ import com.arkcraft.module.item.common.handlers.PestleCraftingManager;
 import com.arkcraft.module.item.common.handlers.PlayerCraftingManager;
 import com.arkcraft.module.item.common.handlers.RecipeHandler;
 import com.arkcraft.module.item.common.handlers.SmithyCraftingManager;
+
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.monster.EntityCaveSpider;
@@ -70,11 +72,10 @@ public class GlobalAdditions
 
 
         EntityHandler.registerEntityEgg(EntityRaptor.class, "raptor", BiomeGenBase.icePlains);
+        EntityHandler.registerEntityEgg(EntitySabertooth.class, "saber", BiomeGenBase.icePlains);
         EntityHandler.registerEntityEgg(EntityDodo.class, "dodo", BiomeGenBase.beach, BiomeGenBase.desert, BiomeGenBase.forest, BiomeGenBase.birchForest, BiomeGenBase.extremeHills);
         EntityHandler.registerEntityEgg(EntityBrontosaurus.class, "brontosaurus");
         //EntityHandler.registerMonster(EntityCoelacanth.class, "coelacanth", BiomeGenBase.deepOcean, BiomeGenBase.ocean, BiomeGenBase.river);
-
-        KeyBindings.preInit();
         removeTheseMCMobs();
 
         // Other Stuff

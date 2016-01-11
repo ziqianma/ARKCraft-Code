@@ -4,29 +4,28 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.util.MathHelper;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.ResourceLocation;
 
 import com.arkcraft.module.core.ARKCraft;
-import com.arkcraft.module.core.client.model.ModelDodo;
+import com.arkcraft.module.core.client.model.ModelSabertooth;
 import com.arkcraft.module.core.common.entity.DodoType;
-import com.arkcraft.module.core.common.entity.passive.EntityDodo;
+import com.arkcraft.module.core.common.entity.aggressive.EntitySabertooth;
 
 /**
  * @author wildbill22
  */
-public class RenderDodo extends RenderLiving
+public class RenderSabertooth extends RenderLiving
 {
 	private static ResourceLocation[] texture;
-	protected ModelDodo modelEntity;
-    private static final ResourceLocation dodoTexture = new ResourceLocation(ARKCraft.MODID + ":textures/model/dodo.png");
+	protected ModelSabertooth modelEntity;
+    private static final ResourceLocation saberTexture = new ResourceLocation(ARKCraft.MODID + ":textures/model/saber.png");
 
-    public RenderDodo(ModelBase base, float par2)
+    public RenderSabertooth(ModelBase base, float par2)
     {
      //   super(Minecraft.getMinecraft().getRenderManager(), base, par2);
         super(Minecraft.getMinecraft().getRenderManager(), base, par2);
-        modelEntity = ((ModelDodo) mainModel);
+        modelEntity = ((ModelSabertooth) mainModel);
         texture = new ResourceLocation[DodoType.numDodos];
         texture[0] = new ResourceLocation(ARKCraft.MODID + ":textures/model/dodo_pink_brown.png");
    //     texture[1] = new ResourceLocation(ARKCraft.MODID + ":textures/model/dodo_pink_brown.png");
@@ -34,28 +33,26 @@ public class RenderDodo extends RenderLiving
     }
 
     // Stuff to make the Dodo rotate when floating?
-    protected float func_180569_a(EntityDodo entity, float par2)
+    public void render(EntitySabertooth entity, double x, double y, double z, float u, float v)
     {
-        float f1 = entity.field_70888_h + (entity.field_70886_e - entity.field_70888_h) * par2;
-        float f2 = entity.field_70884_g + (entity.destPos - entity.field_70884_g) * par2;
-        return (MathHelper.sin(f1) + 1.0F) * f2;
+        super.doRender(entity, x, y, z, u, v);
     }
 
-    /**
-     * Defines what float the third param in setRotationAngles of ModelBase is
-     */
-    @Override
-    protected float handleRotationFloat(EntityLivingBase entity, float par2)
+    public void doRenderLiving(EntityLiving entity, double x, double y, double z, float u, float v)
     {
-        return this.func_180569_a((EntityDodo) entity, par2);
+        render((EntitySabertooth) entity, x, y, z, u, v);
     }
 
+    public void doRender(Entity entity, double x, double y, double z, float u, float v)
+    {
+        render((EntitySabertooth) entity, x, y, z, u, v);
+    }
     /**
      * Returns the location of an entity's texture.
      */
     @Override
     protected ResourceLocation getEntityTexture(Entity entity)
     {
-        return dodoTexture;
+        return saberTexture;
     }
 }

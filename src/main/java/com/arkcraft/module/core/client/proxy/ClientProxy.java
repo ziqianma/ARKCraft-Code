@@ -5,11 +5,14 @@ import com.arkcraft.module.core.client.event.CoreClientEventHandler;
 import com.arkcraft.module.core.client.model.ModelBrontosaurus;
 import com.arkcraft.module.core.client.model.ModelDodo;
 import com.arkcraft.module.core.client.model.ModelRaptorNew;
+import com.arkcraft.module.core.client.model.ModelSabertooth;
 import com.arkcraft.module.core.client.render.RenderBrontosaurus;
 import com.arkcraft.module.core.client.render.RenderDodo;
 import com.arkcraft.module.core.client.render.RenderRaptor;
+import com.arkcraft.module.core.client.render.RenderSabertooth;
 import com.arkcraft.module.core.ARKCraft;
 import com.arkcraft.module.core.common.entity.aggressive.EntityRaptor;
+import com.arkcraft.module.core.common.entity.aggressive.EntitySabertooth;
 import com.arkcraft.module.core.common.entity.neutral.EntityBrontosaurus;
 import com.arkcraft.module.core.common.entity.passive.EntityDodo;
 import com.arkcraft.module.core.common.proxy.CommonProxy;
@@ -25,6 +28,7 @@ import com.arkcraft.module.item.client.render.RenderStoneArrow;
 import com.arkcraft.module.item.client.render.RenderTranqArrow;
 import com.arkcraft.module.item.client.render.RenderTranquilizer;
 import com.arkcraft.module.item.common.blocks.ARKCraftBlocks;
+import com.arkcraft.module.item.common.config.KeyBindings;
 import com.arkcraft.module.item.common.config.ModuleItemBalance;
 import com.arkcraft.module.item.common.entity.EntityCobble;
 import com.arkcraft.module.item.common.entity.EntityDodoEgg;
@@ -41,6 +45,7 @@ import com.arkcraft.module.item.common.handlers.PotionEffectHandler;
 import com.arkcraft.module.item.common.items.ARKCraftItems;
 import com.arkcraft.module.item.common.items.ItemARKFood;
 import com.arkcraft.module.core.common.network.ARKMessagePipeline;
+
 import net.ilexiconn.llibrary.client.render.RenderHelper;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -82,6 +87,7 @@ public class ClientProxy extends CommonProxy
         RenderingRegistry.registerEntityRenderingHandler(EntityDodoEgg.class, new RenderSnowball(Minecraft.getMinecraft().getRenderManager(), ARKCraftItems.dodo_egg, Minecraft.getMinecraft().getRenderItem()));
         RenderingRegistry.registerEntityRenderingHandler(EntityBase.class, new RenderSnowball(Minecraft.getMinecraft().getRenderManager(), ARKCraftItems.grenade, Minecraft.getMinecraft().getRenderItem()));
         RenderingRegistry.registerEntityRenderingHandler(EntityRaptor.class, new RenderRaptor(new ModelRaptorNew(), 0.5F));
+        RenderingRegistry.registerEntityRenderingHandler(EntitySabertooth.class, new RenderSabertooth(new ModelSabertooth(), 0.5F));
         RenderingRegistry.registerEntityRenderingHandler(EntityDodo.class, new RenderDodo(new ModelDodo(), 0.3F));
         RenderingRegistry.registerEntityRenderingHandler(EntityBrontosaurus.class, new RenderBrontosaurus(new ModelBrontosaurus(), 0.5f));
         //	RenderingRegistry.registerEntityRenderingHandler(EntityTranqAmmo.class, new RenderTranqAmmo());
@@ -93,7 +99,7 @@ public class ClientProxy extends CommonProxy
         ModelBakery.addVariantName(ARKCraftItems.slingshot, "arkcraft:slingshot", "arkcraft:slingshot_pulled");
         ModelBakery.addVariantName(ARKCraftItems.longneck_rifle, "arkcraft:longneck_rifle", "arkcraft:longneck_rifle_scoped");
         
-        
+        KeyBindings.preInit();
         dossierProxy.init();
         LogHelper.info("CommonProxy: Init run finished.");
         initDone = true;
