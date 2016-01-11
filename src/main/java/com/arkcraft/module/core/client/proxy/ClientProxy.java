@@ -25,6 +25,7 @@ import com.arkcraft.module.item.client.render.RenderStoneArrow;
 import com.arkcraft.module.item.client.render.RenderTranqArrow;
 import com.arkcraft.module.item.client.render.RenderTranquilizer;
 import com.arkcraft.module.item.common.blocks.ARKCraftBlocks;
+import com.arkcraft.module.item.common.config.KeyBindings;
 import com.arkcraft.module.item.common.config.ModuleItemBalance;
 import com.arkcraft.module.item.common.entity.EntityCobble;
 import com.arkcraft.module.item.common.entity.EntityDodoEgg;
@@ -41,6 +42,7 @@ import com.arkcraft.module.item.common.handlers.PotionEffectHandler;
 import com.arkcraft.module.item.common.items.ARKCraftItems;
 import com.arkcraft.module.item.common.items.ItemARKFood;
 import com.arkcraft.module.core.common.network.ARKMessagePipeline;
+
 import net.ilexiconn.llibrary.client.render.RenderHelper;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -93,7 +95,7 @@ public class ClientProxy extends CommonProxy
         ModelBakery.addVariantName(ARKCraftItems.slingshot, "arkcraft:slingshot", "arkcraft:slingshot_pulled");
         ModelBakery.addVariantName(ARKCraftItems.longneck_rifle, "arkcraft:longneck_rifle", "arkcraft:longneck_rifle_scoped");
         
-        
+        KeyBindings.preInit();
         dossierProxy.init();
         LogHelper.info("CommonProxy: Init run finished.");
         initDone = true;

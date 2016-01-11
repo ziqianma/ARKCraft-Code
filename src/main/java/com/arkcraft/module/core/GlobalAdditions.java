@@ -73,8 +73,6 @@ public class GlobalAdditions
         EntityHandler.registerEntityEgg(EntityDodo.class, "dodo", BiomeGenBase.beach, BiomeGenBase.desert, BiomeGenBase.forest, BiomeGenBase.birchForest, BiomeGenBase.extremeHills);
         EntityHandler.registerEntityEgg(EntityBrontosaurus.class, "brontosaurus");
         //EntityHandler.registerMonster(EntityCoelacanth.class, "coelacanth", BiomeGenBase.deepOcean, BiomeGenBase.ocean, BiomeGenBase.river);
-
-        KeyBindings.preInit();
         removeTheseMCMobs();
 
         // Other Stuff
