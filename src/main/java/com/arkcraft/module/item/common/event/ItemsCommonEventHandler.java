@@ -9,6 +9,7 @@ import com.arkcraft.module.item.common.entity.item.projectiles.EntityTranqArrow;
 import com.arkcraft.module.item.common.entity.player.ARKPlayer;
 import com.arkcraft.module.item.common.items.ARKCraftItems;
 import com.arkcraft.module.item.common.items.weapons.handlers.IItemWeapon;
+import com.arkcraft.module.item.common.tile.TileInventoryAttachment2;
 import com.arkcraft.module.core.ARKCraft;
 import com.arkcraft.module.core.common.entity.EntityTameableDinosaur;
 import com.arkcraft.module.item.common.config.ModuleItemBalance;
@@ -262,24 +263,37 @@ public class ItemsCommonEventHandler
                 if (stack.getItem() instanceof IItemWeapon)
                 {
                     i_item_weapon = (IItemWeapon) stack.getItem();
+                    TileInventoryAttachment2 inv = new TileInventoryAttachment2(stack);
+                    if (inv.isScopePresent())
+                    {
+                    	if (evt.buttonstate)
+    					{
+    						ShowScopeOverlap = true;
+    					}
+    					else
+    					{
+    						ShowScopeOverlap = false;
+    					}
+                        evt.setCanceled(true);
+                    }
                 }
                 else
                 {
                     i_item_weapon = null;
                 }
                 // Weapon with scope?
-                if (i_item_weapon != null && i_item_weapon.ifCanScope())
-                {
-					if (evt.buttonstate)
-					{
-						ShowScopeOverlap = true;
-					}
-					else
-					{
-						ShowScopeOverlap = false;
-					}
-                    evt.setCanceled(true);
-                }
+//                if (i_item_weapon != null && i_item_weapon.ifCanScope())
+//                {
+//					if (evt.buttonstate)
+//					{
+//						ShowScopeOverlap = true;
+//					}
+//					else
+//					{
+//						ShowScopeOverlap = false;
+//					}
+//                    evt.setCanceled(true);
+//                }
             }
         }
     }

@@ -1,23 +1,5 @@
 package com.arkcraft.module.core;
 
-import com.arkcraft.module.core.common.config.CoreBalance;
-import com.arkcraft.module.core.common.creativetabs.ARKTabs;
-import com.arkcraft.module.core.common.entity.aggressive.EntityRaptor;
-import com.arkcraft.module.core.common.entity.aggressive.EntitySabertooth;
-import com.arkcraft.module.core.common.entity.neutral.EntityBrontosaurus;
-import com.arkcraft.module.core.common.entity.passive.EntityDodo;
-import com.arkcraft.module.core.common.handlers.EntityHandler;
-import com.arkcraft.module.core.common.handlers.GuiHandler;
-import com.arkcraft.module.item.common.config.KeyBindings;
-import com.arkcraft.module.item.common.entity.EntityCobble;
-import com.arkcraft.module.item.common.entity.EntityDodoEgg;
-import com.arkcraft.module.item.common.entity.item.projectiles.EntityGrenade;
-import com.arkcraft.module.item.common.entity.item.projectiles.EntitySpear;
-import com.arkcraft.module.item.common.handlers.PestleCraftingManager;
-import com.arkcraft.module.item.common.handlers.PlayerCraftingManager;
-import com.arkcraft.module.item.common.handlers.RecipeHandler;
-import com.arkcraft.module.item.common.handlers.SmithyCraftingManager;
-
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.monster.EntityCaveSpider;
@@ -31,6 +13,23 @@ import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
+
+import com.arkcraft.module.core.common.config.CoreBalance;
+import com.arkcraft.module.core.common.creativetabs.ARKTabs;
+import com.arkcraft.module.core.common.entity.aggressive.EntityRaptor;
+import com.arkcraft.module.core.common.entity.aggressive.EntitySabertooth;
+import com.arkcraft.module.core.common.entity.neutral.EntityBrontosaurus;
+import com.arkcraft.module.core.common.entity.passive.EntityDodo;
+import com.arkcraft.module.core.common.handlers.EntityHandler;
+import com.arkcraft.module.core.common.handlers.GuiHandler;
+import com.arkcraft.module.item.common.entity.EntityCobble;
+import com.arkcraft.module.item.common.entity.EntityDodoEgg;
+import com.arkcraft.module.item.common.entity.item.projectiles.EntityGrenade;
+import com.arkcraft.module.item.common.entity.item.projectiles.EntitySpear;
+import com.arkcraft.module.item.common.handlers.PestleCraftingManager;
+import com.arkcraft.module.item.common.handlers.PlayerCraftingManager;
+import com.arkcraft.module.item.common.handlers.RecipeHandler;
+import com.arkcraft.module.item.common.handlers.SmithyCraftingManager;
 
 /**
  * @author Vastatio
