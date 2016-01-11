@@ -55,6 +55,6 @@ public class RenderRaptor extends RenderLiving
     @Override
     protected ResourceLocation getEntityTexture(Entity e)
     {
-        return new ResourceLocation(ARKCraft.MODID + ":textures/model/raptor.png");//texture[((EntityRaptor)e).raptorType];
+        return (texture[((EntityRaptor)e).raptorType]);//texture[((EntityRaptor)e).raptorType];
     }
 }
