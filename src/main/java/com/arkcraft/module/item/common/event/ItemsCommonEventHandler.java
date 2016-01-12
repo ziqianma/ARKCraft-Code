@@ -47,6 +47,7 @@ import com.arkcraft.module.item.common.tile.TileInventoryAttachment2;
 /**
  * @author wildbill22
  */
+// TODO split clientside from the rest
 public class ItemsCommonEventHandler
 {
 	public static void init()
