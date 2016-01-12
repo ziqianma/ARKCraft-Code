@@ -1,6 +1,16 @@
-plugins {
-    id "net.minecraftforge.gradle.forge" version "2.0.2"
+buildscript {
+    repositories {
+        jcenter()
+        maven {
+            name = "forge"
+            url = "http://files.minecraftforge.net/maven"
+        }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.0-SNAPSHOT'
+    }
 }
+apply plugin: 'net.minecraftforge.gradle.forge'
 
 version = "0.1-ALPHA"
 group= "com.arkcraft.mod" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
@@ -38,8 +48,4 @@ processResources {
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
-}
-
-sourceSets {
-    main { output.resourcesDir = output.classesDir }
 }
