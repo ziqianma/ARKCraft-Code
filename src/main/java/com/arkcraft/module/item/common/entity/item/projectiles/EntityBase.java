@@ -5,7 +5,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public class EntityBase extends Test
+public class EntityBase extends EntityProjectile
 {
     double bounceFactor;
     int fuse = 120;

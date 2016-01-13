@@ -10,7 +10,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
-public class EntitySimpleBullet extends Test
+public class EntitySimpleBullet extends EntityProjectile
 {
     public EntitySimpleBullet(World world)
     {

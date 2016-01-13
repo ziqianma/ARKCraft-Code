@@ -17,7 +17,7 @@ public class TileInventoryAttachment2 extends AbstractInventory implements TestB
 
 	/** The key used to store and retrieve the inventory from NBT */
 	private static final String SAVE_KEY = "AttachmentInventory";
-	public static final int INV_SIZE = 10;
+	public static final int INV_SIZE = 10;// TODO
 
 	/** Provides NBT Tag Compound to reference */
 	private final ItemStack invStack;
@@ -81,10 +81,11 @@ public class TileInventoryAttachment2 extends AbstractInventory implements TestB
 
 	public boolean isScopePresent()
 	{
-		for (int i = 0; i < INV_SIZE; i++)
+		for (ItemStack stack : inventory)
 		{
-			if (inventory[i] != null && inventory[i].getItem() == ARKCraftItems.scope) { return true; }
+			if (stack != null && stack.getItem() == ARKCraftItems.scope) return true;
 		}
+
 		return false;
 	}
 

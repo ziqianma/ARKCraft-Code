@@ -30,7 +30,6 @@ public class ItemRangedWeapon extends ItemBow implements IItemWeapon
 	public ItemRangedWeapon(RangedComponent rangedcomponent)
 	{
 		super();
-
 		rangedComponent = rangedcomponent;
 		rangedcomponent.setItem(this);
 		rangedcomponent.setThisItemProperties();
@@ -124,11 +123,5 @@ public class ItemRangedWeapon extends ItemBow implements IItemWeapon
 	public boolean ifCanScope()
 	{
 		return rangedComponent.ifCanScope();
-	}
-
-	@Override
-	public boolean canOpenGui()
-	{
-		return false;
 	}
 }

@@ -36,73 +36,108 @@ import com.arkcraft.module.item.common.handlers.SmithyCraftingManager;
  */
 public class GlobalAdditions
 {
-    public static CreativeTabs tabARK = new ARKTabs(CreativeTabs.getNextID(), "tabARKCraft");
+	public static CreativeTabs tabARK = new ARKTabs(CreativeTabs.getNextID(), "tabARKCraft");
 
-    public enum GUI
-    {
-        SMITHY(0), PESTLE_AND_MORTAR(1), INV_DODO(2), BOOK_GUI(3), CROP_PLOT(4), TAMING_GUI(5), COMPOST_BIN(6),
-        SCOPE(7), PLAYER(8), TAMED_DINO(9), FORGE_GUI(10), ATTACHMENT_GUI(11);
-        int id;
+	public enum GUI
+	{
+		SMITHY(0),
+		PESTLE_AND_MORTAR(1),
+		INV_DODO(2),
+		BOOK_GUI(3),
+		CROP_PLOT(4),
+		TAMING_GUI(5),
+		COMPOST_BIN(6),
+		SCOPE(7),
+		PLAYER(8),
+		TAMED_DINO(9),
+		FORGE_GUI(10),
+		ATTACHMENT_GUI(11);
+		int id;
 
-        GUI(int id)
-        {
-            this.id = id;
-        }
+		GUI(int id)
+		{
+			this.id = id;
+		}
 
-        public int getID() { return id; }
-    }
+		public int getID()
+		{
+			return id;
+		}
+	}
 
-    public static void init()
-    {
-        // Handlers
-        RecipeHandler.registerVanillaCraftingRecipes();
-        PestleCraftingManager.registerPestleCraftingRecipes();
-        SmithyCraftingManager.registerSmithyCraftingRecipes();
-        PlayerCraftingManager.registerPlayerCraftingRecipes();
+	public static void init()
+	{
+		// Handlers
+		RecipeHandler.registerVanillaCraftingRecipes();
+		PestleCraftingManager.registerPestleCraftingRecipes();
+		SmithyCraftingManager.registerSmithyCraftingRecipes();
+		PlayerCraftingManager.registerPlayerCraftingRecipes();
 
-        EntityHandler.registerModEntity(EntitySpear.class, "Spear", ARKCraft.instance, 64, 10, true);
-//		EntityHandler.registerModEntity(EntityTranqArrow.class, "Tranq Arrow", ARKCraft.instance, 64, 10, true);
-//		EntityHandler.registerModEntity(EntityStoneArrow.class, "Stone Arrow", ARKCraft.instance, 64, 10, true);
-//		EntityHandler.registerModEntity(EntityMetalArrow.class, "Metal Arrow", ARKCraft.instance, 64, 10, true);
+		EntityHandler
+				.registerModEntity(EntitySpear.class, "Spear", ARKCraft.instance, 64, 10, true);
+		// EntityHandler.registerModEntity(EntityTranqArrow.class,
+		// "Tranq Arrow", ARKCraft.instance, 64, 10, true);
+		// EntityHandler.registerModEntity(EntityStoneArrow.class,
+		// "Stone Arrow", ARKCraft.instance, 64, 10, true);
+		// EntityHandler.registerModEntity(EntityMetalArrow.class,
+		// "Metal Arrow", ARKCraft.instance, 64, 10, true);
 
-        EntityHandler.registerModEntity(EntityCobble.class, "Cobblestone Ball", ARKCraft.instance, 64, 10, true);
-        EntityHandler.registerModEntity(EntityDodoEgg.class, "Dodo Egg", ARKCraft.instance, 64, 10, true);
-        EntityHandler.registerModEntity(EntityGrenade.class, "Grenade", ARKCraft.instance, 64, 10, true);
+		EntityHandler.registerModEntity(EntityCobble.class, "Cobblestone Ball", ARKCraft.instance,
+				64, 10, true);
+		EntityHandler.registerModEntity(EntityDodoEgg.class, "Dodo Egg", ARKCraft.instance, 64, 10,
+				true);
+		EntityHandler.registerModEntity(EntityGrenade.class, "Grenade", ARKCraft.instance, 64, 10,
+				true);
 
+		EntityHandler.registerEntityEgg(EntityRaptor.class, ARKCraft.MODID + ".raptor",
+				BiomeGenBase.icePlains);
+		EntityHandler.registerEntityEgg(EntitySabertooth.class, ARKCraft.MODID + ".saber",
+				BiomeGenBase.icePlains);
+		EntityHandler.registerEntityEgg(EntityDodo.class, ARKCraft.MODID + ".dodo",
+				BiomeGenBase.beach, BiomeGenBase.desert, BiomeGenBase.forest,
+				BiomeGenBase.birchForest, BiomeGenBase.extremeHills);
+		EntityHandler.registerEntityEgg(EntityBrontosaurus.class, ARKCraft.MODID + ".brontosaurus");
+		// EntityHandler.registerMonster(EntityCoelacanth.class, "coelacanth",
+		// BiomeGenBase.deepOcean, BiomeGenBase.ocean, BiomeGenBase.river);
+		removeTheseMCMobs();
 
-        EntityHandler.registerEntityEgg(EntityRaptor.class, "raptor", BiomeGenBase.icePlains);
-        EntityHandler.registerEntityEgg(EntitySabertooth.class, "saber", BiomeGenBase.icePlains);
-        EntityHandler.registerEntityEgg(EntityDodo.class, "dodo", BiomeGenBase.beach, BiomeGenBase.desert, BiomeGenBase.forest, BiomeGenBase.birchForest, BiomeGenBase.extremeHills);
-        EntityHandler.registerEntityEgg(EntityBrontosaurus.class, "brontosaurus");
-        //EntityHandler.registerMonster(EntityCoelacanth.class, "coelacanth", BiomeGenBase.deepOcean, BiomeGenBase.ocean, BiomeGenBase.river);
-        removeTheseMCMobs();
+		// Other Stuff
+		NetworkRegistry.INSTANCE.registerGuiHandler(ARKCraft.instance, new GuiHandler());
+	}
 
-        // Other Stuff
-        NetworkRegistry.INSTANCE.registerGuiHandler(ARKCraft.instance, new GuiHandler());
-    }
+	// Stuff we don't want that is normally in Minecraft
+	private static void removeTheseMCMobs()
+	{
+		// Don't spawn the normal Minecraft hostile mobs?
+		if (!CoreBalance.GEN.mcHostileMobs)
+		{
+			for (int i = 0; i < BiomeGenBase.getBiomeGenArray().length; i++)
+			{
+				if (BiomeGenBase.getBiomeGenArray()[i] != null)
+				{
+					EntityRegistry.removeSpawn(EntityZombie.class, EnumCreatureType.MONSTER,
+							BiomeGenBase.getBiomeGenArray()[i]);
+					EntityRegistry.removeSpawn(EntityCreeper.class, EnumCreatureType.MONSTER,
+							BiomeGenBase.getBiomeGenArray()[i]);
+					EntityRegistry.removeSpawn(EntitySkeleton.class, EnumCreatureType.MONSTER,
+							BiomeGenBase.getBiomeGenArray()[i]);
+					EntityRegistry.removeSpawn(EntitySpider.class, EnumCreatureType.MONSTER,
+							BiomeGenBase.getBiomeGenArray()[i]);
+					EntityRegistry.removeSpawn(EntitySilverfish.class, EnumCreatureType.MONSTER,
+							BiomeGenBase.getBiomeGenArray()[i]);
+					EntityRegistry.removeSpawn(EntityWitch.class, EnumCreatureType.MONSTER,
+							BiomeGenBase.getBiomeGenArray()[i]);
+					EntityRegistry.removeSpawn(EntityEnderman.class, EnumCreatureType.MONSTER,
+							BiomeGenBase.getBiomeGenArray()[i]);
+					EntityRegistry.removeSpawn(EntityCaveSpider.class, EnumCreatureType.MONSTER,
+							BiomeGenBase.getBiomeGenArray()[i]);
+				}
+			}
+		}
+	}
 
-    // Stuff we don't want that is normally in Minecraft
-    private static void removeTheseMCMobs()
-    {
-        // Don't spawn the normal Minecraft hostile mobs?
-        if (!CoreBalance.GEN.mcHostileMobs)
-        {
-            for (int i = 0; i < BiomeGenBase.getBiomeGenArray().length; i++)
-            {
-                if (BiomeGenBase.getBiomeGenArray()[i] != null)
-                {
-                    EntityRegistry.removeSpawn(EntityZombie.class, EnumCreatureType.MONSTER, BiomeGenBase.getBiomeGenArray()[i]);
-                    EntityRegistry.removeSpawn(EntityCreeper.class, EnumCreatureType.MONSTER, BiomeGenBase.getBiomeGenArray()[i]);
-                    EntityRegistry.removeSpawn(EntitySkeleton.class, EnumCreatureType.MONSTER, BiomeGenBase.getBiomeGenArray()[i]);
-                    EntityRegistry.removeSpawn(EntitySpider.class, EnumCreatureType.MONSTER, BiomeGenBase.getBiomeGenArray()[i]);
-                    EntityRegistry.removeSpawn(EntitySilverfish.class, EnumCreatureType.MONSTER, BiomeGenBase.getBiomeGenArray()[i]);
-                    EntityRegistry.removeSpawn(EntityWitch.class, EnumCreatureType.MONSTER, BiomeGenBase.getBiomeGenArray()[i]);
-                    EntityRegistry.removeSpawn(EntityEnderman.class, EnumCreatureType.MONSTER, BiomeGenBase.getBiomeGenArray()[i]);
-                    EntityRegistry.removeSpawn(EntityCaveSpider.class, EnumCreatureType.MONSTER, BiomeGenBase.getBiomeGenArray()[i]);
-                }
-            }
-        }
-    }
-
-    public static GlobalAdditions getInstance() { return new GlobalAdditions(); }
+	public static GlobalAdditions getInstance()
+	{
+		return new GlobalAdditions();
+	}
 }
