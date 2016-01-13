@@ -1,6 +1,7 @@
 package com.arkcraft.module.item.common.entity;
 
-import com.arkcraft.module.core.common.entity.EntityTameableDinosaur;
+import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -24,7 +25,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.List;
+import com.arkcraft.module.core.common.entity.EntityTameableDinosaur;
 
 public class EntityTranqAmmo extends Entity implements IProjectile
 {

@@ -10,7 +10,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
-public class EntitySimpleRifleAmmo extends Test
+public class EntitySimpleRifleAmmo extends EntityProjectile
 {
 
     public EntitySimpleRifleAmmo(World world)

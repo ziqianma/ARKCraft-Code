@@ -10,7 +10,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public class EntitySpear extends Test
+public class EntitySpear extends EntityProjectile
 {
     public EntitySpear(World world)
     {

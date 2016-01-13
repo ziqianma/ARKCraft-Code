@@ -27,7 +27,4 @@ public class LinkDeserializer implements JsonDeserializer<LinkObj>  {
 		}
 		return null;
 	}
-
-	
-	
 }

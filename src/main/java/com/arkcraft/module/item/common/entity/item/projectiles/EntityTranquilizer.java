@@ -10,7 +10,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public class EntityTranquilizer extends Test
+public class EntityTranquilizer extends EntityProjectile
 {
 
     public EntityTranquilizer(World world)

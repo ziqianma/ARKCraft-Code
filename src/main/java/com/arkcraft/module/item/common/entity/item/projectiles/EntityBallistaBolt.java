@@ -8,7 +8,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
-public class EntityBallistaBolt extends Test
+public class EntityBallistaBolt extends EntityProjectile
 {
     public EntityBallistaBolt(World world)
     {

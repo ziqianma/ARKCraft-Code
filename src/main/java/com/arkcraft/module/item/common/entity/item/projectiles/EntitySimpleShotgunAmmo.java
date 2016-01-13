@@ -12,7 +12,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
-public class EntitySimpleShotgunAmmo extends Test
+public class EntitySimpleShotgunAmmo extends EntityProjectile
 {
     public EntitySimpleShotgunAmmo(World world)
     {
@@ -24,7 +24,6 @@ public class EntitySimpleShotgunAmmo extends Test
         this(world);
         setPosition(x, y, z);
     }
-
 
     public EntitySimpleShotgunAmmo(World worldIn, EntityLivingBase shooter)
     {

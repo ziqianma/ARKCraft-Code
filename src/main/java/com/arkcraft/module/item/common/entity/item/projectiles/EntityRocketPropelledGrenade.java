@@ -8,7 +8,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
-public class EntityRocketPropelledGrenade extends Test
+public class EntityRocketPropelledGrenade extends EntityProjectile
 {
     public float explosionRadius = 100F;
 

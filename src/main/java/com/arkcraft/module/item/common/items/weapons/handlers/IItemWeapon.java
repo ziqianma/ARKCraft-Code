@@ -9,16 +9,14 @@ import java.util.Random;
 
 public interface IItemWeapon
 {
-    public boolean onLeftClickEntity(ItemStack itemstack, EntityPlayer player, Entity entity);
+	public boolean onLeftClickEntity(ItemStack itemstack, EntityPlayer player, Entity entity);
 
-    public Random getItemRand();
+	public Random getItemRand();
 
-    public RangedComponent getRangedComponent();
+	public RangedComponent getRangedComponent();
 
-    public boolean ifCanScope();
+	boolean ifCanScope();
 
-    public boolean canOpenGui();
-    
-//    public boolean attachment();
+	// public boolean attachment();
 
 }

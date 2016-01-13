@@ -1,9 +1,5 @@
 package com.arkcraft.module.item.common.items.weapons;
 
-import com.arkcraft.module.item.common.entity.item.projectiles.EntityMetalArrow;
-import com.arkcraft.module.item.common.entity.item.projectiles.EntityStoneArrow;
-import com.arkcraft.module.item.common.entity.item.projectiles.EntityTranqArrow;
-import com.arkcraft.module.item.common.items.ARKCraftItems;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,8 +10,14 @@ import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
 import net.minecraft.world.World;
+import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import com.arkcraft.module.item.common.entity.item.projectiles.EntityMetalArrow;
+import com.arkcraft.module.item.common.entity.item.projectiles.EntityStoneArrow;
+import com.arkcraft.module.item.common.entity.item.projectiles.EntityTranqArrow;
+import com.arkcraft.module.item.common.items.ARKCraftItems;
 
 public class ItemCompoundBow extends ItemBow
 {
@@ -32,7 +34,7 @@ public class ItemCompoundBow extends ItemBow
     public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityPlayer playerIn, int timeLeft)
     {
         int j = this.getMaxItemUseDuration(stack) - timeLeft;
-        net.minecraftforge.event.entity.player.ArrowLooseEvent event = new net.minecraftforge.event.entity.player.ArrowLooseEvent(playerIn, stack, j);
+        ArrowLooseEvent event = new ArrowLooseEvent(playerIn, stack, j);
         if (net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(event))
         {
             return;

@@ -1,7 +1,5 @@
 package com.arkcraft.module.item.common.entity;
 
-import com.arkcraft.module.item.common.items.ARKCraftItems;
-import com.arkcraft.module.core.common.entity.passive.EntityDodo;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.item.Item;
@@ -9,6 +7,9 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+
+import com.arkcraft.module.core.common.entity.passive.EntityDodo;
+import com.arkcraft.module.item.common.items.ARKCraftItems;
 
 public class EntityDodoEgg extends EntityThrowable
 {
