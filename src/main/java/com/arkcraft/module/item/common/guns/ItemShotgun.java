@@ -15,7 +15,7 @@ public class ItemShotgun extends ItemRangedWeapon
 
 	public ItemShotgun()
 	{
-		super("shotgun", 300, 5);
+		super("shotgun", 200, 5);
 	}
 
 	@Override

@@ -10,7 +10,6 @@ import org.lwjgl.opengl.GL11;
 
 public class GuiScope extends Gui
 {
-
     @SuppressWarnings("unused")
     private void renderOverlayWithTexture(ScaledResolution scres, ResourceLocation rl)
     {

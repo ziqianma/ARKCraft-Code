@@ -35,6 +35,7 @@ import com.arkcraft.module.core.common.network.UpdateMPToCraftItem;
 import com.arkcraft.module.core.common.network.UpdatePlayerCrafting;
 import com.arkcraft.module.core.common.network.UpdateSmithyToCraftItem;
 import com.arkcraft.module.core.common.proxy.CommonProxy;
+import com.arkcraft.module.item.client.event.ItemsClientEventHandler;
 import com.arkcraft.module.item.common.blocks.ARKCraftBlocks;
 import com.arkcraft.module.item.common.config.ModuleItemConfig;
 import com.arkcraft.module.item.common.event.ItemsCommonEventHandler;
@@ -122,10 +123,10 @@ public class ARKCraft
 
 		if (FMLCommonHandler.instance().getSide().equals(Side.CLIENT))
 		{
-			ItemsCommonEventHandler itemsEventHandler = new ItemsCommonEventHandler();
-			MinecraftForge.EVENT_BUS.register(itemsEventHandler);
-			FMLCommonHandler.instance().bus().register(itemsEventHandler);
+			ItemsClientEventHandler.init();
 		}
+
+		ItemsCommonEventHandler.init();
 
 		proxy.registerRenderers();
 		proxy.registerWeapons();

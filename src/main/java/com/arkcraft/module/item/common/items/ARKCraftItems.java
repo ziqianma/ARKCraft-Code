@@ -36,11 +36,11 @@ import com.arkcraft.module.item.common.entity.item.projectiles.dispense.Dispense
 import com.arkcraft.module.item.common.entity.item.projectiles.dispense.DispenseTranquilizer;
 import com.arkcraft.module.item.common.guns.ItemLongneckRifle;
 import com.arkcraft.module.item.common.guns.ItemRangedWeapon;
+import com.arkcraft.module.item.common.guns.ItemShotgun;
 import com.arkcraft.module.item.common.items.weapons.ItemCompoundBow;
 import com.arkcraft.module.item.common.items.weapons.ItemSpear;
 import com.arkcraft.module.item.common.items.weapons.ItemWoodenClub;
 import com.arkcraft.module.item.common.items.weapons.bullets.ItemProjectile;
-import com.arkcraft.module.item.common.items.weapons.component.RangedCompLongneckRifleScoped;
 import com.arkcraft.module.item.common.items.weapons.component.RangedComponent;
 
 /**
@@ -300,6 +300,12 @@ public class ARKCraftItems
 			longneck_rifle.registerProjectile(simple_rifle_ammo);
 			longneck_rifle.registerProjectile(tranquilizer);
 		}
+		if (ModuleItemBalance.WEAPONS.SHOTGUN)
+		{
+			shotgun = addShooter(new ItemShotgun());
+			simple_shotgun_ammo = addItemProjectile("simple_shotgun_ammo");
+			shotgun.registerProjectile(simple_shotgun_ammo);
+		}
 		// if (ModuleItemBalance.WEAPONS.SIMPLE_PISTOL)
 		// {
 		// simple_pistol = addShooter("simple_pistol", new
@@ -308,13 +314,14 @@ public class ARKCraftItems
 		// RangedCompSimplePistolScoped());
 		// simple_bullet = addItemProjectile("simple_bullet");
 		// }
-		if (ModuleItemBalance.WEAPONS.LONGNECK_RIFLE)
-		{
-			// longneck_rifle = addShooter("longneck_rifle", new
-			// RangedCompLongneckRifle());
-			longneck_rifle_scoped = addShooter("longneck_rifle_scoped",
-					new RangedCompLongneckRifleScoped(GlobalAdditions.GUI.SCOPE.getID()));
-		}
+		// if (ModuleItemBalance.WEAPONS.LONGNECK_RIFLE)
+		// {
+		// longneck_rifle = addShooter("longneck_rifle", new
+		// RangedCompLongneckRifle());
+		// longneck_rifle_scoped = addShooter("longneck_rifle_scoped",
+		// new
+		// RangedCompLongneckRifleScoped(GlobalAdditions.GUI.SCOPE.getID()));
+		// }
 		// if (ModuleItemBalance.WEAPONS.SHOTGUN)
 		// {
 		// shotgun = addShooter("shotgun", new RangedCompShotgun());
