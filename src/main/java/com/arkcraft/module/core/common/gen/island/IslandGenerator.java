@@ -27,7 +27,7 @@ public class IslandGenerator extends WorldHeightmapGenerator
     @Override
     public double getWorldScale()
     {
-        return 0.5;
+        return 1.0;
     }
 
     @Override
