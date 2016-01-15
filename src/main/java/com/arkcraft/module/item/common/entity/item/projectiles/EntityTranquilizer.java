@@ -62,13 +62,18 @@ public class EntityTranquilizer extends EntityProjectile
 	{
 		return 0.98F;
 	}
+	
+	 @Override
+	    public void onUpdate()
+	    {
+	        super.onUpdate();
 
-	@Override
-	public void playHitSound()
-	{
-		worldObj.playSoundAtEntity(this, "random.bowhit", 1.0F,
-				1.0F / (rand.nextFloat() * 0.4F + 0.9F));
-	}
+	        float speed = 3F;
+	        if (speed == 3F)
+	        {
+	            worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, posX, posY, posZ, 0.0D, 0.0D, 0.0D);
+	        }
+	    }
 
 	@Override
 	public void onEntityHit(Entity entity)
