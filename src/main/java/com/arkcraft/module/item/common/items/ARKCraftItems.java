@@ -34,9 +34,13 @@ import com.arkcraft.module.item.common.entity.item.projectiles.dispense.Dispense
 import com.arkcraft.module.item.common.entity.item.projectiles.dispense.DispenseSimpleRifleAmmo;
 import com.arkcraft.module.item.common.entity.item.projectiles.dispense.DispenseSimpleShotgunAmmo;
 import com.arkcraft.module.item.common.entity.item.projectiles.dispense.DispenseTranquilizer;
+import com.arkcraft.module.item.common.guns.ItemCrossbow;
+import com.arkcraft.module.item.common.guns.ItemFabricatedPistol;
 import com.arkcraft.module.item.common.guns.ItemLongneckRifle;
 import com.arkcraft.module.item.common.guns.ItemRangedWeapon;
+import com.arkcraft.module.item.common.guns.ItemRocketLauncher;
 import com.arkcraft.module.item.common.guns.ItemShotgun;
+import com.arkcraft.module.item.common.guns.ItemSimplePistol;
 import com.arkcraft.module.item.common.items.weapons.ItemCompoundBow;
 import com.arkcraft.module.item.common.items.weapons.ItemSpear;
 import com.arkcraft.module.item.common.items.weapons.ItemWoodenClub;
@@ -306,47 +310,34 @@ public class ARKCraftItems
 			simple_shotgun_ammo = addItemProjectile("simple_shotgun_ammo");
 			shotgun.registerProjectile(simple_shotgun_ammo);
 		}
-		// if (ModuleItemBalance.WEAPONS.SIMPLE_PISTOL)
-		// {
-		// simple_pistol = addShooter("simple_pistol", new
-		// RangedCompSimplePistol());
-		// simple_pistol_scoped = addShooter("simple_pistol_scoped", new
-		// RangedCompSimplePistolScoped());
-		// simple_bullet = addItemProjectile("simple_bullet");
-		// }
-		// if (ModuleItemBalance.WEAPONS.LONGNECK_RIFLE)
-		// {
-		// longneck_rifle = addShooter("longneck_rifle", new
-		// RangedCompLongneckRifle());
-		// longneck_rifle_scoped = addShooter("longneck_rifle_scoped",
-		// new
-		// RangedCompLongneckRifleScoped(GlobalAdditions.GUI.SCOPE.getID()));
-		// }
-		// if (ModuleItemBalance.WEAPONS.SHOTGUN)
-		// {
-		// shotgun = addShooter("shotgun", new RangedCompShotgun());
-		// simple_shotgun_ammo = addItemProjectile("simple_shotgun_ammo");
-		// }
-		// if (ModuleItemBalance.WEAPONS.ROCKET_LAUNCHER)
-		// {
-		// rocket_launcher = addShooter("rocket_launcher", new
-		// RangedCompRocketLauncher());
-		// rocket_propelled_grenade =
-		// addItemProjectile("rocket_propelled_grenade");
-		// }
-		// if (ModuleItemBalance.WEAPONS.FABRICATED_PISTOL)
-		// {
-		// fabricated_pistol = addShooter("fabricated_pistol", new
-		// RangedCompFabricatedPistol());
-		// advanced_bullet = addItemProjectile("advanced_bullet");
-		// }
-		// if (ModuleItemBalance.WEAPONS.CROSSBOW)
-		// {
-		// crossbow = addShooter("crossbow", new RangedCompCrossbow());
-		// metal_arrow = addItemProjectile("metal_arrow");
-		// tranq_arrow = addItemProjectile("tranq_arrow");
-		// stone_arrow = addItemProjectile("stone_arrow");
-		// }
+		if (ModuleItemBalance.WEAPONS.SIMPLE_PISTOL)
+		{
+			simple_pistol = addShooter(new ItemSimplePistol());
+			simple_bullet = addItemProjectile("simple_bullet");
+			simple_pistol.registerProjectile(simple_bullet);
+		}
+		if (ModuleItemBalance.WEAPONS.ROCKET_LAUNCHER)
+		{
+			rocket_launcher = addShooter(new ItemRocketLauncher());
+			rocket_propelled_grenade = addItemProjectile("rocket_propelled_grenade");
+			rocket_launcher.registerProjectile(rocket_propelled_grenade);
+		}
+		if (ModuleItemBalance.WEAPONS.FABRICATED_PISTOL)
+		{
+			fabricated_pistol = addShooter(new ItemFabricatedPistol());
+			advanced_bullet = addItemProjectile("advanced_bullet");
+			fabricated_pistol.registerProjectile(advanced_bullet);
+		}
+		if (ModuleItemBalance.WEAPONS.CROSSBOW)
+		{
+			crossbow = addShooter(new ItemCrossbow());
+			metal_arrow = addItemProjectile("metal_arrow");
+			tranq_arrow = addItemProjectile("tranq_arrow");
+			stone_arrow = addItemProjectile("stone_arrow");
+			crossbow.registerProjectile(metal_arrow);
+			crossbow.registerProjectile(tranq_arrow);
+			crossbow.registerProjectile(stone_arrow);
+		}
 	}
 
 	public static void registerDispenseBehavior()
