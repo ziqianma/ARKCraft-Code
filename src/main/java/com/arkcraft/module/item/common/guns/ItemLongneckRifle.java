@@ -13,7 +13,7 @@ public class ItemLongneckRifle extends ItemRangedWeapon
 {
 	public ItemLongneckRifle()
 	{
-		super("longneck_rifle", 350, 1);
+		super("longneck_rifle", 350, 1, "simple_rifle_ammo");
 	}
 
 	@Override

@@ -14,7 +14,7 @@ public class ItemFabricatedPistol extends ItemRangedWeapon
 
 	public ItemFabricatedPistol()
 	{
-		super("fabricated_pistol", 350, 13);
+		super("fabricated_pistol", 350, 13, "advanced_bullet");
 	}
 
 	@Override
