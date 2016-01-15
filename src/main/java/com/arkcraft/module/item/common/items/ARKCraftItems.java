@@ -388,14 +388,6 @@ public class ARKCraftItems
 		return weapon;
 	}
 
-	protected static com.arkcraft.module.item.common.items.weapons.ItemRangedWeapon addShooter(String name, RangedComponent comp)
-	{
-		com.arkcraft.module.item.common.items.weapons.ItemRangedWeapon weapon = new com.arkcraft.module.item.common.items.weapons.ItemRangedWeapon(
-				comp);
-		registerItem(name, weapon);
-		return weapon;
-	}
-
 	protected static ItemSlingshot addSlingshot(String name)
 	{
 		ItemSlingshot slingshot = new ItemSlingshot();
