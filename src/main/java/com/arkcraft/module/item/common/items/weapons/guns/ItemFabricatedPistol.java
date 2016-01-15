@@ -1,4 +1,4 @@
-package com.arkcraft.module.item.common.guns;
+package com.arkcraft.module.item.common.items.weapons.guns;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -9,24 +9,18 @@ import net.minecraft.world.World;
 import com.arkcraft.module.core.ARKCraft;
 import com.arkcraft.module.item.common.config.ModuleItemBalance;
 
-public class ItemLongneckRifle extends ItemRangedWeapon
+public class ItemFabricatedPistol extends ItemRangedWeapon
 {
-	public ItemLongneckRifle()
+
+	public ItemFabricatedPistol()
 	{
-		super("longneck_rifle", 350, 1, "simple_rifle_ammo");
+		super("fabricated_pistol", 350, 13, "advanced_bullet", 1, 0.2);
 	}
 
 	@Override
 	public int getReloadDuration()
 	{
-		return (int) (ModuleItemBalance.WEAPONS.LONGNECK_RIFLE_RELOAD * 20.0);
-	}
-
-	@Override
-	public void soundCharge(ItemStack stack, World world, EntityPlayer player)
-	{
-		world.playSoundAtEntity(player, ARKCraft.MODID + ":" + "longneck_rifle_reload", 0.7F,
-				0.9F / (getItemRand().nextFloat() * 0.2F + 0.0F));
+		return (int) (ModuleItemBalance.WEAPONS.FABRICATED_PISTOL_RELOAD * 20.0);
 	}
 
 	@Override
@@ -44,11 +38,11 @@ public class ItemLongneckRifle extends ItemRangedWeapon
 	@Override
 	public void effectShoot(World world, double x, double y, double z, float yaw, float pitch)
 	{
-		// world.playSoundEffect(x, y, z, "random.explode", 3F, 1F /
+		// world.playSoundEffect(x, y, z, "random.explode", 1.5F, 1F /
 		// (weapon.getItemRand().nextFloat() * 0.4F + 0.7F));
-		// world.playSoundEffect(x, y, z, "ambient.weather.thunder", 3F, 1F /
+		// world.playSoundEffect(x, y, z, "ambient.weather.thunder", 1.5F, 1F /
 		// (weapon.getItemRand().nextFloat() * 0.4F + 0.4F));
-		world.playSoundEffect(x, y, z, ARKCraft.MODID + ":" + "longneck_rifle_shoot", 1.5F,
+		world.playSoundEffect(x, y, z, ARKCraft.MODID + ":" + "fabricated_pistol_shoot", 1.5F,
 				1F / (this.getItemRand().nextFloat() * 0.4F + 0.7F));
 
 		float particleX = -MathHelper.sin(((yaw + 23) / 180F) * 3.141593F) * MathHelper

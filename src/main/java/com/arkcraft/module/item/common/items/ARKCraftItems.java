@@ -34,18 +34,17 @@ import com.arkcraft.module.item.common.entity.item.projectiles.dispense.Dispense
 import com.arkcraft.module.item.common.entity.item.projectiles.dispense.DispenseSimpleRifleAmmo;
 import com.arkcraft.module.item.common.entity.item.projectiles.dispense.DispenseSimpleShotgunAmmo;
 import com.arkcraft.module.item.common.entity.item.projectiles.dispense.DispenseTranquilizer;
-import com.arkcraft.module.item.common.guns.ItemCrossbow;
-import com.arkcraft.module.item.common.guns.ItemFabricatedPistol;
-import com.arkcraft.module.item.common.guns.ItemLongneckRifle;
-import com.arkcraft.module.item.common.guns.ItemRangedWeapon;
-import com.arkcraft.module.item.common.guns.ItemRocketLauncher;
-import com.arkcraft.module.item.common.guns.ItemShotgun;
-import com.arkcraft.module.item.common.guns.ItemSimplePistol;
 import com.arkcraft.module.item.common.items.weapons.ItemCompoundBow;
 import com.arkcraft.module.item.common.items.weapons.ItemSpear;
 import com.arkcraft.module.item.common.items.weapons.ItemWoodenClub;
 import com.arkcraft.module.item.common.items.weapons.bullets.ItemProjectile;
-import com.arkcraft.module.item.common.items.weapons.component.RangedComponent;
+import com.arkcraft.module.item.common.items.weapons.guns.ItemCrossbow;
+import com.arkcraft.module.item.common.items.weapons.guns.ItemFabricatedPistol;
+import com.arkcraft.module.item.common.items.weapons.guns.ItemLongneckRifle;
+import com.arkcraft.module.item.common.items.weapons.guns.ItemRangedWeapon;
+import com.arkcraft.module.item.common.items.weapons.guns.ItemRocketLauncher;
+import com.arkcraft.module.item.common.items.weapons.guns.ItemShotgun;
+import com.arkcraft.module.item.common.items.weapons.guns.ItemSimplePistol;
 
 /**
  * @author wildbill22
@@ -86,19 +85,12 @@ public class ARKCraftItems
 	public static ItemARKWeaponBase ironPike;
 	public static ItemSpear spear;
 	public static ItemWoodenClub wooden_club;
-	public static ItemRangedWeapon tranq_gun;
 	public static ItemCompoundBow compound_bow;
-	public static ItemRangedWeapon rocket_launcher;
 	public static ItemProjectile tranquilizer, stone_arrow, tranq_arrow, metal_arrow,
-			ballista_bolt;
-	public static ItemProjectile simple_bullet, simple_rifle_ammo, simple_shotgun_ammo,
+			ballista_bolt, simple_bullet, simple_rifle_ammo, simple_shotgun_ammo,
 			rocket_propelled_grenade, advanced_bullet;
-	public static ItemRangedWeapon simple_pistol, simple_pistol_scoped;
-	public static ItemRangedWeapon fabricated_pistol;
-	public static com.arkcraft.module.item.common.items.weapons.ItemRangedWeapon longneck_rifle_scoped;
-	public static ItemRangedWeapon longneck_rifle;
-	public static ItemRangedWeapon shotgun;
-	public static ItemRangedWeapon crossbow;
+	public static ItemRangedWeapon rocket_launcher, tranq_gun, simple_pistol, fabricated_pistol,
+			longneck_rifle, shotgun, crossbow;
 	public static ItemBallista ballista;
 
 	public static ArmorMaterial CLOTH = EnumHelper.addArmorMaterial("CLOTH_MAT", "CLOTH_MAT", 4,

@@ -1,4 +1,4 @@
-package com.arkcraft.module.item.common.guns;
+package com.arkcraft.module.item.common.items.weapons.guns;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -18,18 +18,16 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.arkcraft.lib.LogHelper;
 import com.arkcraft.module.core.ARKCraft;
 import com.arkcraft.module.item.common.entity.item.projectiles.EntityProjectile;
 import com.arkcraft.module.item.common.entity.item.projectiles.ProjectileType;
 import com.arkcraft.module.item.common.items.weapons.bullets.ItemProjectile;
+import com.arkcraft.module.item.common.items.weapons.handlers.IItemWeapon;
 import com.arkcraft.module.item.common.items.weapons.handlers.WeaponModAttributes;
 import com.arkcraft.module.item.common.tile.TileInventoryAttachment2;
 import com.google.common.collect.HashMultimap;
@@ -41,11 +39,16 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 
 	private Set<ItemProjectile> projectiles;
 	private final int maxAmmo;
+	private final int ammoConsumption;
 	private final String defaultAmmoType;
+	private final long shotInterval;
+	private long nextShotMillis = 0;
 
-	public ItemRangedWeapon(String name, int durability, int maxAmmo, String defaultAmmoType)
+	public ItemRangedWeapon(String name, int durability, int maxAmmo, String defaultAmmoType, int ammoConsumption, double shotInterval)
 	{
 		super();
+		this.shotInterval = (long) shotInterval * 1000;
+		this.ammoConsumption = ammoConsumption;
 		this.defaultAmmoType = defaultAmmoType;
 		this.maxAmmo = maxAmmo;
 		this.setMaxDamage(durability);
@@ -64,6 +67,16 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 	public int getMaxAmmo()
 	{
 		return this.maxAmmo;
+	}
+
+	public long getShotInterval()
+	{
+		return this.shotInterval;
+	}
+
+	public int getAmmoConsumption()
+	{
+		return this.ammoConsumption;
 	}
 
 	public boolean registerProjectile(ItemProjectile projectile)
@@ -110,22 +123,9 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 	{
 		if (stack.stackSize <= 0 || player.isUsingItem()) { return stack; }
 
-		// if (!world.isRemote && KeyBindings.attachment.isKeyDown())
-		// {
-		// // TODO Why no work other way
-		// // If player not sneaking, open the inventory gui
-		// if (!player.isSneaking())
-		// {
-		// player.openGui(ARKCraft.instance,
-		// GlobalAdditions.GUI.ATTACHMENT_GUI.getID(),
-		// world, 0, 0, 0);
-		// }
-		//
-		// return stack;
-		// }
-
 		if (canFire(stack, player))
 		{
+			if (this.nextShotMillis < System.currentTimeMillis())
 			// Start aiming weapon to fire
 			player.setItemInUse(stack, getMaxItemUseDuration(stack));
 		}
@@ -135,12 +135,6 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 			// Begin reloading
 			soundCharge(stack, world, player);
 			player.setItemInUse(stack, getMaxItemUseDuration(stack));
-			if (world.isRemote && !player.capabilities.isCreativeMode)
-			// i.e. "20 ammo"
-			{
-				player.addChatMessage(new ChatComponentText(getAmmoQuantity(stack) + StatCollector
-						.translateToLocal("chat.ammo")));
-			}
 		}
 		else
 		{
@@ -281,7 +275,6 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 	public String getAmmoType(ItemStack stack)
 	{
 		String type = this.getDefaultAmmoType();
-		LogHelper.info("Found ammotype ? " + stack.getTagCompound().hasKey("ammotype"));
 		if (stack.hasTagCompound() && stack.getTagCompound().hasKey("ammotype")) type = stack
 				.getTagCompound().getString("ammotype");
 		return type.toLowerCase();
@@ -351,54 +344,22 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 
 	public void fire(ItemStack stack, World world, EntityPlayer player, int timeLeft)
 	{
+		// TODO
 		if (!world.isRemote)
 		{
-			String type = this.getAmmoType(stack);
-			LogHelper.info("Projectile type: " + type);
-			Object x = null;
-			try
+			for (int i = 0; i < getAmmoConsumption(); i++)
 			{
-				Class<?> c = Class
-						.forName("com.arkcraft.module.item.common.entity.item.projectiles." + ProjectileType
-								.valueOf(type.toUpperCase()).getEntity());
-				Constructor<?> con = c.getConstructor(World.class, EntityLivingBase.class);
-				x = con.newInstance(world, player);
-
+				EntityProjectile p = createProjectile(stack, world, player);
+				applyProjectileEnchantments(p, stack);
+				if (p != null) world.spawnEntityInWorld(p);
 			}
-			catch (ClassNotFoundException e)
-			{
-				e.printStackTrace();
-			}
-			catch (NoSuchMethodException e)
-			{
-				e.printStackTrace();
-			}
-			catch (SecurityException e)
-			{
-				e.printStackTrace();
-			}
-			catch (InstantiationException e)
-			{
-				e.printStackTrace();
-			}
-			catch (IllegalAccessException e)
-			{
-				e.printStackTrace();
-			}
-			catch (IllegalArgumentException e)
-			{
-				e.printStackTrace();
-			}
-			catch (InvocationTargetException e)
-			{
-				e.printStackTrace();
-			}
-			EntityProjectile projectile = (EntityProjectile) x;
-			applyProjectileEnchantments(projectile, stack);
-			world.spawnEntityInWorld(projectile);
 		}
+		afterFire(stack, world, player);
+	}
 
-		this.setAmmoQuantity(stack, this.getAmmoQuantity(stack) - 1);
+	protected void afterFire(ItemStack stack, World world, EntityPlayer player)
+	{
+		this.setAmmoQuantity(stack, this.getAmmoQuantity(stack) - ammoConsumption);
 		int damage = 1;
 		if (stack.getItemDamage() + damage > stack.getMaxDamage())
 		{
@@ -408,9 +369,51 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 			ItemStack s = new ItemStack(i, ammo);
 			player.inventory.addItemStackToInventory(s);
 		}
-
+		this.nextShotMillis = System.currentTimeMillis() + this.shotInterval;
 		stack.damageItem(damage, player);
 		postShootingEffects(stack, player, world);
+	}
+
+	protected EntityProjectile createProjectile(ItemStack stack, World world, EntityPlayer player)
+	{
+		try
+		{
+			String type = this.getAmmoType(stack);
+			Class<?> c = Class
+					.forName("com.arkcraft.module.item.common.entity.item.projectiles." + ProjectileType
+							.valueOf(type.toUpperCase()).getEntity());
+			Constructor<?> con = c.getConstructor(World.class, EntityLivingBase.class);
+			return (EntityProjectile) con.newInstance(world, player);
+		}
+		catch (ClassNotFoundException e)
+		{
+			e.printStackTrace();
+		}
+		catch (NoSuchMethodException e)
+		{
+			e.printStackTrace();
+		}
+		catch (SecurityException e)
+		{
+			e.printStackTrace();
+		}
+		catch (IllegalArgumentException e)
+		{
+			e.printStackTrace();
+		}
+		catch (InstantiationException e)
+		{
+			e.printStackTrace();
+		}
+		catch (IllegalAccessException e)
+		{
+			e.printStackTrace();
+		}
+		catch (InvocationTargetException e)
+		{
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	public void effectReloadDone(ItemStack stack, World world, EntityPlayer player)

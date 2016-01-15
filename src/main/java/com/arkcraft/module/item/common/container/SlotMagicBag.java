@@ -4,7 +4,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-import com.arkcraft.module.item.common.items.weapons.ItemRangedWeapon;
+import com.arkcraft.module.item.common.items.weapons.guns.ItemRangedWeapon;
 
 public class SlotMagicBag extends Slot
 {

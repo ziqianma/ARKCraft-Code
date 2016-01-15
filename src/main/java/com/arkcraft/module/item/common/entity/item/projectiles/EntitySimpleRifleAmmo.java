@@ -63,6 +63,19 @@ public class EntitySimpleRifleAmmo extends EntityProjectile
 	}
 
 	@Override
+	public void onUpdate()
+	{
+		super.onUpdate();
+
+		float speed = 3F;
+		if (speed == 3F)
+		{
+			worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, posX, posY, posZ, 0.0D,
+					0.0D, 0.0D);
+		}
+	}
+
+	@Override
 	public void onEntityHit(Entity entity)
 	{
 		float damage = 15F;

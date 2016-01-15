@@ -8,6 +8,7 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
+import com.arkcraft.lib.LogHelper;
 import com.arkcraft.module.core.common.entity.EntityTameableDinosaur;
 import com.arkcraft.module.item.common.config.ModuleItemBalance;
 import com.arkcraft.module.item.common.items.weapons.handlers.WeaponDamageSource;
@@ -62,18 +63,26 @@ public class EntityTranquilizer extends EntityProjectile
 	{
 		return 0.98F;
 	}
-	
-	 @Override
-	    public void onUpdate()
-	    {
-	        super.onUpdate();
 
-	        float speed = 3F;
-	        if (speed == 3F)
-	        {
-	            worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, posX, posY, posZ, 0.0D, 0.0D, 0.0D);
-	        }
-	    }
+	@Override
+	public void onUpdate()
+	{
+		super.onUpdate();
+		LogHelper.info(this.getTotalVelocity());
+		float speed = 3F;
+		if (speed == 3F)
+		{
+			worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, posX, posY, posZ, 0.0D,
+					0.0D, 0.0D);
+		}
+	}
+
+	@Override
+	public void playHitSound()
+	{
+		worldObj.playSoundAtEntity(this, "random.bowhit", 1.0F,
+				1.0F / (rand.nextFloat() * 0.4F + 0.9F));
+	}
 
 	@Override
 	public void onEntityHit(Entity entity)

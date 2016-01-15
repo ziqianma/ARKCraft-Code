@@ -34,8 +34,8 @@ import com.arkcraft.module.core.common.network.OpenPlayerCrafting;
 import com.arkcraft.module.item.common.config.KeyBindings;
 import com.arkcraft.module.item.common.entity.item.projectiles.EntityBallista;
 import com.arkcraft.module.item.common.entity.player.ARKPlayer;
-import com.arkcraft.module.item.common.guns.IItemWeapon;
-import com.arkcraft.module.item.common.guns.ItemRangedWeapon;
+import com.arkcraft.module.item.common.items.weapons.guns.ItemRangedWeapon;
+import com.arkcraft.module.item.common.items.weapons.handlers.IItemWeapon;
 import com.arkcraft.module.item.common.tile.TileInventoryAttachment2;
 
 public class ItemsClientEventHandler
