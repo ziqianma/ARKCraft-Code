@@ -25,7 +25,7 @@ import org.lwjgl.opengl.GL11;
 
 import com.arkcraft.lib.LogHelper;
 import com.arkcraft.module.core.ARKCraft;
-import com.arkcraft.module.item.common.items.weapons.handlers.IItemWeapon;
+import com.arkcraft.module.item.common.guns.IItemWeapon;
 import com.arkcraft.module.item.common.tile.TileInventoryAttachment2;
 
 public class ItemsClientEventHandler

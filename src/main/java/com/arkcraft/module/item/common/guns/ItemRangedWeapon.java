@@ -24,8 +24,9 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.arkcraft.lib.LogHelper;
 import com.arkcraft.module.core.ARKCraft;
+import com.arkcraft.module.core.GlobalAdditions;
+import com.arkcraft.module.item.common.config.KeyBindings;
 import com.arkcraft.module.item.common.entity.item.projectiles.EntityProjectile;
 import com.arkcraft.module.item.common.entity.item.projectiles.ProjectileType;
 import com.arkcraft.module.item.common.items.weapons.bullets.ItemProjectile;
@@ -81,7 +82,6 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 		{
 			jsonPath = jsonPath + "_scoped";
 		}
-		LogHelper.debug(jsonPath);
 		return new ModelResourceLocation(jsonPath, "inventory");
 	}
 
@@ -107,6 +107,19 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player)
 	{
 		if (stack.stackSize <= 0 || player.isUsingItem()) { return stack; }
+
+		if (!world.isRemote && KeyBindings.attachment.isKeyDown())
+		{
+			// TODO Why no work other way
+			// If player not sneaking, open the inventory gui
+			if (!player.isSneaking())
+			{
+				player.openGui(ARKCraft.instance, GlobalAdditions.GUI.ATTACHMENT_GUI.getID(),
+						world, 0, 0, 0);
+			}
+
+			return stack;
+		}
 
 		if (canFire(stack, player))
 		{
@@ -206,7 +219,9 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 
 	private boolean isJustReloaded(ItemStack stack)
 	{
-		return stack.getTagCompound().getBoolean("justReloaded");
+		if (stack.getTagCompound() != null) return stack.getTagCompound()
+				.getBoolean("justReloaded");
+		return false;
 	}
 
 	private void setJustReloaded(ItemStack stack, boolean bool)
@@ -272,8 +287,11 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 		world.playSoundAtEntity(entityplayer, "random.click", 1.0F, 1.0F / 0.8F);
 	}
 
-	public void soundCharge(ItemStack itemstack, World world, EntityPlayer entityplayer)
+	public void soundCharge(ItemStack stack, World world, EntityPlayer player)
 	{
+		world.playSoundAtEntity(player,
+				ARKCraft.MODID + ":" + this.getUnlocalizedName() + "_reload", 0.7F,
+				0.9F / (getItemRand().nextFloat() * 0.2F + 0.0F));
 	}
 
 	public abstract int getReloadDuration();
@@ -375,7 +393,7 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 
 	public void effectReloadDone(ItemStack stack, World world, EntityPlayer player)
 	{
-		player.swingItem();
+		// player.swingItem();
 	}
 
 	@Override

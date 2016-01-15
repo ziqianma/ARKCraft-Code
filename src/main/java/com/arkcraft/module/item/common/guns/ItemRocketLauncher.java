@@ -1,6 +1,5 @@
 package com.arkcraft.module.item.common.guns;
 
-import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumParticleTypes;
@@ -10,55 +9,45 @@ import net.minecraft.world.World;
 import com.arkcraft.module.core.ARKCraft;
 import com.arkcraft.module.item.common.config.ModuleItemBalance;
 
-public class ItemShotgun extends ItemRangedWeapon
+public class ItemRocketLauncher extends ItemRangedWeapon
 {
-	public ItemShotgun()
+	public ItemRocketLauncher()
 	{
-		super("shotgun", 200, 5);
+		super("rocket_launcher", 250, 1);
 	}
 
 	@Override
-	public ModelResourceLocation getModel(ItemStack stack, EntityPlayer player, int useRemaining)
+	public void soundCharge(ItemStack stack, World world, EntityPlayer player)
 	{
-		ModelResourceLocation m = super.getModel(stack, player, useRemaining);
-		if (player.isUsingItem() && this.canReload(stack)) return new ModelResourceLocation(
-				ARKCraft.MODID + ":" + m.getResourcePath() + "_reload", "inventory");
-		return m;
+		world.playSoundAtEntity(player, ARKCraft.MODID + ":" + "rocket_launcher_reload", 0.7F,
+				0.9F / (getItemRand().nextFloat() * 0.2F + 0.0F));
 	}
 
 	@Override
 	public int getReloadDuration()
 	{
-		return (int) (ModuleItemBalance.WEAPONS.SHOTGUN_RELOAD * 20.0);
-	}
-
-	@Override
-	public void effectReloadDone(ItemStack stack, World world, EntityPlayer player)
-	{
-		world.playSoundAtEntity(player, "random.door_close", 0.8F, 1.0F / (this.getItemRand()
-				.nextFloat() * 0.2F + 0.0F));
+		return (int) (ModuleItemBalance.WEAPONS.ROCKET_LAUNCHER_RELOAD * 20.0);
 	}
 
 	@Override
 	public void effectPlayer(ItemStack itemstack, EntityPlayer entityplayer, World world)
 	{
-		float f = entityplayer.isSneaking() ? -0.1F : -0.2F;
+		float f = entityplayer.isSneaking() ? -0.01F : -0.02F;
 		double d = -MathHelper.sin((entityplayer.rotationYaw / 180F) * 3.141593F) * MathHelper
 				.cos((0 / 180F) * 3.141593F) * f;
 		double d1 = MathHelper.cos((entityplayer.rotationYaw / 180F) * 3.141593F) * MathHelper
 				.cos((0 / 180F) * 3.141593F) * f;
-		entityplayer.rotationPitch -= entityplayer.isSneaking() ? 17.5F : 25F;
+		entityplayer.rotationPitch -= entityplayer.isSneaking() ? 2.5F : 5F;
 		entityplayer.addVelocity(d, 0, d1);
 	}
 
 	@Override
 	public void effectShoot(World world, double x, double y, double z, float yaw, float pitch)
 	{
-		// world.playSoundEffect(x, y, z, ARKCraft.MODID + ":" +
-		// "shotgun_doubleShoot", 5.0F, 0.7F / (weapon.getItemRand().nextFloat()
-		// * 0.4F + 0.6F));
-		world.playSoundEffect(x, y, z, ARKCraft.MODID + ":" + "shotgun_doubleShoot", 1.5F,
+		world.playSoundEffect(x, y, z, "random.explode", 3F,
 				1F / (this.getItemRand().nextFloat() * 0.4F + 0.7F));
+		world.playSoundEffect(x, y, z, "ambient.weather.thunder", 3F, 1F / (this.getItemRand()
+				.nextFloat() * 0.4F + 0.4F));
 
 		float particleX = -MathHelper.sin(((yaw + 23) / 180F) * 3.141593F) * MathHelper
 				.cos((pitch / 180F) * 3.141593F);
@@ -73,13 +62,12 @@ public class ItemShotgun extends ItemRangedWeapon
 		}
 		world.spawnParticle(EnumParticleTypes.FLAME, x + particleX, y + particleY, z + particleZ,
 				0.0D, 0.0D, 0.0D);
-
 	}
 
 	@Override
-	public void soundCharge(ItemStack stack, World world, EntityPlayer player)
+	public void effectReloadDone(ItemStack stack, World world, EntityPlayer player)
 	{
-		world.playSoundAtEntity(player, ARKCraft.MODID + ":" + "shotgun_reload", 0.7F,
-				0.9F / (getItemRand().nextFloat() * 0.2F + 0.0F));
+		world.playSoundAtEntity(player, "random.door_close", 1.2F, 1.0F / (this.getItemRand()
+				.nextFloat() * 0.2F + 0.0F));
 	}
 }

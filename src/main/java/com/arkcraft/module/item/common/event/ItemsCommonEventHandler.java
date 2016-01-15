@@ -2,47 +2,30 @@ package com.arkcraft.module.item.common.event;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
-import net.minecraft.client.gui.ScaledResolution;
-import net.minecraft.client.model.ModelPlayer;
-import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.event.FOVUpdateEvent;
-import net.minecraftforge.client.event.MouseEvent;
-import net.minecraftforge.client.event.RenderGameOverlayEvent;
-import net.minecraftforge.client.event.RenderHandEvent;
-import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-
-import org.lwjgl.opengl.GL11;
 
 import com.arkcraft.lib.LogHelper;
 import com.arkcraft.module.core.ARKCraft;
 import com.arkcraft.module.core.GlobalAdditions;
 import com.arkcraft.module.core.common.entity.EntityTameableDinosaur;
+import com.arkcraft.module.core.common.network.OpenAttachmentInventory;
 import com.arkcraft.module.core.common.network.OpenPlayerCrafting;
 import com.arkcraft.module.item.common.config.KeyBindings;
 import com.arkcraft.module.item.common.config.ModuleItemBalance;
 import com.arkcraft.module.item.common.entity.item.projectiles.EntityBallista;
 import com.arkcraft.module.item.common.entity.item.projectiles.EntityTranqArrow;
 import com.arkcraft.module.item.common.entity.player.ARKPlayer;
-import com.arkcraft.module.item.common.items.weapons.handlers.IItemWeapon;
-import com.arkcraft.module.item.common.tile.TileInventoryAttachment2;
+import com.arkcraft.module.item.common.guns.ItemRangedWeapon;
 
 /**
  * @author wildbill22
@@ -152,13 +135,12 @@ public class ItemsCommonEventHandler
 
 	private static final Minecraft mc = Minecraft.getMinecraft();
 
-	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public void onPlayerKeypressed(InputEvent.KeyInputEvent event)
 	{
 		if (KeyBindings.playerPooping.isPressed())
 		{
-			EntityPlayerSP player = Minecraft.getMinecraft().thePlayer;
+			EntityPlayerSP player = mc.thePlayer;
 			if (player instanceof EntityPlayerSP)
 			{
 				ARKPlayer.get(player).Poop();
@@ -174,20 +156,14 @@ public class ItemsCommonEventHandler
 				ARKCraft.modChannel.sendToServer(new OpenPlayerCrafting(true));
 			}
 		}
-		/*
-		 * else if (KeyBindings.attachment.isPressed()) { EntityPlayerSP player
-		 * = Minecraft.getMinecraft().thePlayer; if (player instanceof
-		 * EntityPlayerSP && player.getHeldItem().getItem() ==
-		 * ARKCraftItems.longneck_rifle || player.getHeldItem().getItem() ==
-		 * ARKCraftItems.longneck_rifle_scoped) {
-		 * LogHelper("Found Longneckrifle"); player.openGui(ARKCraft.instance(),
-		 * GlobalAdditions.GUI.ATTACHMENT_GUI.getID(), player.worldObj, 0, 0,
-		 * 0); // ARKCraft.modChannel.sendToServer(new
-		 * OpenPlayerCrafting(true)); }
-		 * 
-		 * }
-		 */
-
+//		else if (KeyBindings.attachment.isPressed())
+//		{
+//			EntityPlayerSP p = mc.thePlayer;
+//			if (p.inventory.getCurrentItem().getItem() instanceof ItemRangedWeapon) p.openGui(
+//					ARKCraft.instance, GlobalAdditions.GUI.ATTACHMENT_GUI.getID(), p.worldObj, 0,
+//					0, 0);
+//			ARKCraft.modChannel.sendToServer(new OpenAttachmentInventory(true));
+//		}
 	}
 
 	@SubscribeEvent
@@ -279,4 +255,5 @@ public class ItemsCommonEventHandler
 			}
 		}
 	}
+
 }
