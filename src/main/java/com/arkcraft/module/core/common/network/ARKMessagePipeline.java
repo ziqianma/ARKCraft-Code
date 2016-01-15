@@ -121,7 +121,7 @@ public class ARKMessagePipeline extends MessageToMessageCodec<FMLProxyPacket, AR
 
     public void initalize()
     {
-        channels = NetworkRegistry.INSTANCE.newChannel("WeaponMod", this);
+        channels = NetworkRegistry.INSTANCE.newChannel("ARKCraft", this);
     }
 
     public void postInitialize()

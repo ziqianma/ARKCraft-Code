@@ -70,7 +70,6 @@ public class RenderSimpleRifleAmmo extends Render
     @Override
     protected ResourceLocation getEntityTexture(Entity entity)
     {
-
         return texture;
     }
 }

@@ -73,7 +73,6 @@ public class TileInventoryAttachment2 extends AbstractInventory implements TestB
 		if (isScopePresent())
 		{
 			activate_scoping = true;
-			LogHelper.info("scope found");
 		}
 
 		writeToNBT(invStack.getTagCompound());
