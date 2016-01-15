@@ -10,7 +10,7 @@ public class ItemCrossbow extends ItemRangedWeapon
 {
 	public ItemCrossbow()
 	{
-		super("crossbow", 250, 1);
+		super("crossbow", 250, 1, "stone_arrow");
 	}
 
 	@Override

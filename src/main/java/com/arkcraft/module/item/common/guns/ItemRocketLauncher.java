@@ -13,7 +13,7 @@ public class ItemRocketLauncher extends ItemRangedWeapon
 {
 	public ItemRocketLauncher()
 	{
-		super("rocket_launcher", 250, 1);
+		super("rocket_launcher", 250, 1, "rocket_propelled_grenade");
 	}
 
 	@Override

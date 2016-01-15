@@ -13,7 +13,7 @@ public class ItemSimplePistol extends ItemRangedWeapon
 {
 	public ItemSimplePistol()
 	{
-		super("simple_pistol", 150, 6);
+		super("simple_pistol", 150, 6, "simple_bullet");
 	}
 
 	@Override

@@ -39,12 +39,14 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 {
 	protected static final int MAX_DELAY = 72000;
 
-	public Set<ItemProjectile> projectiles;
-	public final int maxAmmo;
+	private Set<ItemProjectile> projectiles;
+	private final int maxAmmo;
+	private final String defaultAmmoType;
 
-	public ItemRangedWeapon(String name, int durability, int maxAmmo)
+	public ItemRangedWeapon(String name, int durability, int maxAmmo, String defaultAmmoType)
 	{
 		super();
+		this.defaultAmmoType = defaultAmmoType;
 		this.maxAmmo = maxAmmo;
 		this.setMaxDamage(durability);
 		this.setMaxStackSize(1);
@@ -264,7 +266,8 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 
 	public int getAmmoQuantity(ItemStack stack)
 	{
-		return stack.getTagCompound().getInteger("ammo");
+		if (stack.hasTagCompound()) return stack.getTagCompound().getInteger("ammo");
+		else return 0;
 	}
 
 	public void setAmmoQuantity(ItemStack stack, int ammo)
@@ -274,7 +277,13 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 
 	public String getAmmoType(ItemStack stack)
 	{
-		return stack.getTagCompound().getString("ammotype");
+		if (stack.hasTagCompound()) return stack.getTagCompound().getString("ammotype");
+		else return this.getDefaultAmmoType();
+	}
+
+	private String getDefaultAmmoType()
+	{
+		return this.defaultAmmoType;
 	}
 
 	public boolean isLoaded(ItemStack stack)
