@@ -18,14 +18,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.arkcraft.lib.LogHelper;
 import com.arkcraft.module.core.ARKCraft;
 import com.arkcraft.module.item.common.entity.item.projectiles.EntityProjectile;
 import com.arkcraft.module.item.common.entity.item.projectiles.ProjectileType;
@@ -110,20 +107,6 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 	{
 		if (stack.stackSize <= 0 || player.isUsingItem()) { return stack; }
 
-		// if (!world.isRemote && KeyBindings.attachment.isKeyDown())
-		// {
-		// // TODO Why no work other way
-		// // If player not sneaking, open the inventory gui
-		// if (!player.isSneaking())
-		// {
-		// player.openGui(ARKCraft.instance,
-		// GlobalAdditions.GUI.ATTACHMENT_GUI.getID(),
-		// world, 0, 0, 0);
-		// }
-		//
-		// return stack;
-		// }
-
 		if (canFire(stack, player))
 		{
 			// Start aiming weapon to fire
@@ -135,12 +118,6 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 			// Begin reloading
 			soundCharge(stack, world, player);
 			player.setItemInUse(stack, getMaxItemUseDuration(stack));
-			if (world.isRemote && !player.capabilities.isCreativeMode)
-			// i.e. "20 ammo"
-			{
-				player.addChatMessage(new ChatComponentText(getAmmoQuantity(stack) + StatCollector
-						.translateToLocal("chat.ammo")));
-			}
 		}
 		else
 		{
@@ -281,7 +258,6 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 	public String getAmmoType(ItemStack stack)
 	{
 		String type = this.getDefaultAmmoType();
-		LogHelper.info("Found ammotype ? " + stack.getTagCompound().hasKey("ammotype"));
 		if (stack.hasTagCompound() && stack.getTagCompound().hasKey("ammotype")) type = stack
 				.getTagCompound().getString("ammotype");
 		return type.toLowerCase();
@@ -354,7 +330,6 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 		if (!world.isRemote)
 		{
 			String type = this.getAmmoType(stack);
-			LogHelper.info("Projectile type: " + type);
 			Object x = null;
 			try
 			{

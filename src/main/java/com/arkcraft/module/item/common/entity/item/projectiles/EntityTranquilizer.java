@@ -8,6 +8,7 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
+import com.arkcraft.lib.LogHelper;
 import com.arkcraft.module.core.common.entity.EntityTameableDinosaur;
 import com.arkcraft.module.item.common.config.ModuleItemBalance;
 import com.arkcraft.module.item.common.items.weapons.handlers.WeaponDamageSource;
@@ -61,6 +62,19 @@ public class EntityTranquilizer extends EntityProjectile
 	public float getAirResistance()
 	{
 		return 0.98F;
+	}
+
+	@Override
+	public void onUpdate()
+	{
+		super.onUpdate();
+		LogHelper.info(this.getTotalVelocity());
+		float speed = 3F;
+		if (speed == 3F)
+		{
+			worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, posX, posY, posZ, 0.0D,
+					0.0D, 0.0D);
+		}
 	}
 
 	@Override
