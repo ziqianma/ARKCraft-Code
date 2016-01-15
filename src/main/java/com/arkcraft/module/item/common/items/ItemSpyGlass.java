@@ -5,7 +5,6 @@ import java.util.Random;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-import com.arkcraft.module.item.common.items.weapons.component.RangedComponent;
 import com.arkcraft.module.item.common.items.weapons.handlers.IItemWeapon;
 
 public class ItemSpyGlass extends Item implements IItemWeapon
@@ -17,20 +16,14 @@ public class ItemSpyGlass extends Item implements IItemWeapon
 	}
 
 	@Override
-	public boolean ifCanScope()
-	{
-		return true;
-	}
-
-	@Override
 	public Random getItemRand()
 	{
 		return null;
 	}
 
 	@Override
-	public RangedComponent getRangedComponent()
+	public boolean canScope(ItemStack stack)
 	{
-		return null;
+		return true;
 	}
 }

@@ -45,7 +45,7 @@ public class EntityRocketPropelledGrenade extends EntityProjectile
 		this.motionZ = (double) (MathHelper.cos(this.rotationYaw / 180.0F * (float) Math.PI) * MathHelper
 				.cos(this.rotationPitch / 180.0F * (float) Math.PI));
 		this.motionY = (double) (-MathHelper.sin(this.rotationPitch / 180.0F * (float) Math.PI));
-		setThrowableHeading(motionX, motionY, motionZ, 2F * 1.7F, 1.5F);
+		setThrowableHeading(motionX, motionY, motionZ, 1F * 1.7F, 1.5F);
 	}
 
 	@Override

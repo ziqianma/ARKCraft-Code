@@ -1,4 +1,4 @@
-package com.arkcraft.module.item.common.guns;
+package com.arkcraft.module.item.common.items.weapons.guns;
 
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
@@ -9,12 +9,13 @@ import net.minecraft.world.World;
 
 import com.arkcraft.module.core.ARKCraft;
 import com.arkcraft.module.item.common.config.ModuleItemBalance;
+import com.arkcraft.module.item.common.entity.item.projectiles.EntityProjectile;
 
 public class ItemShotgun extends ItemRangedWeapon
 {
 	public ItemShotgun()
 	{
-		super("shotgun", 200, 5, "simple_shotgun_ammo");
+		super("shotgun", 200, 2, "simple_shotgun_ammo", 1, 0);
 	}
 
 	@Override
@@ -81,5 +82,23 @@ public class ItemShotgun extends ItemRangedWeapon
 	{
 		world.playSoundAtEntity(player, ARKCraft.MODID + ":" + "shotgun_reload", 0.7F,
 				0.9F / (getItemRand().nextFloat() * 0.2F + 0.0F));
+	}
+
+	@Override
+	public void fire(ItemStack stack, World world, EntityPlayer player, int timeLeft)
+	{
+		if (!world.isRemote)
+		{
+			for (int i = 0; i < this.getAmmoConsumption() * 4; i++)
+			{
+				EntityProjectile projectile = createProjectile(stack, world, player);
+				if (projectile != null)
+				{
+					applyProjectileEnchantments(projectile, stack);
+					world.spawnEntityInWorld(projectile);
+				}
+			}
+		}
+		afterFire(stack, world, player);
 	}
 }

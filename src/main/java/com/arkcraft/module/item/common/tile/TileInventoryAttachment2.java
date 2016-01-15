@@ -5,13 +5,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
-import com.arkcraft.lib.LogHelper;
 import com.arkcraft.module.core.ARKCraft;
 import com.arkcraft.module.item.common.items.ARKCraftItems;
-import com.arkcraft.module.item.common.items.weapons.ItemRangedWeapon;
-import com.arkcraft.module.item.common.items.weapons.handlers.TestBoolean;
+import com.arkcraft.module.item.common.items.weapons.guns.ItemRangedWeapon;
 
-public class TileInventoryAttachment2 extends AbstractInventory implements TestBoolean
+public class TileInventoryAttachment2 extends AbstractInventory
 {
 	private String name = "Attachment Inventory";
 
@@ -151,11 +149,5 @@ public class TileInventoryAttachment2 extends AbstractInventory implements TestB
 				inventory[slot] = ItemStack.loadItemStackFromNBT(item);
 			}
 		}
-	}
-
-	@Override
-	public boolean attachment()
-	{
-		return activate_scoping;
 	}
 }

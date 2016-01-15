@@ -1,4 +1,4 @@
-package com.arkcraft.module.item.common.guns;
+package com.arkcraft.module.item.common.items.weapons.guns;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -9,18 +9,24 @@ import net.minecraft.world.World;
 import com.arkcraft.module.core.ARKCraft;
 import com.arkcraft.module.item.common.config.ModuleItemBalance;
 
-public class ItemFabricatedPistol extends ItemRangedWeapon
+public class ItemSimplePistol extends ItemRangedWeapon
 {
-
-	public ItemFabricatedPistol()
+	public ItemSimplePistol()
 	{
-		super("fabricated_pistol", 350, 13, "advanced_bullet");
+		super("simple_pistol", 150, 6, "simple_bullet", 1, 1 / 2.1);
+	}
+
+	@Override
+	public void soundCharge(ItemStack stack, World world, EntityPlayer player)
+	{
+		world.playSoundAtEntity(player, ARKCraft.MODID + ":" + "simple_pistol_reload", 0.7F,
+				0.9F / (getItemRand().nextFloat() * 0.2F + 0.0F));
 	}
 
 	@Override
 	public int getReloadDuration()
 	{
-		return (int) (ModuleItemBalance.WEAPONS.FABRICATED_PISTOL_RELOAD * 20.0);
+		return (int) (ModuleItemBalance.WEAPONS.SIMPLE_PISTOL_RELOAD * 20.0);
 	}
 
 	@Override
@@ -42,7 +48,7 @@ public class ItemFabricatedPistol extends ItemRangedWeapon
 		// (weapon.getItemRand().nextFloat() * 0.4F + 0.7F));
 		// world.playSoundEffect(x, y, z, "ambient.weather.thunder", 1.5F, 1F /
 		// (weapon.getItemRand().nextFloat() * 0.4F + 0.4F));
-		world.playSoundEffect(x, y, z, ARKCraft.MODID + ":" + "fabricated_pistol_shoot", 1.5F,
+		world.playSoundEffect(x, y, z, ARKCraft.MODID + ":" + "simple_pistol_shoot", 1.5F,
 				1F / (this.getItemRand().nextFloat() * 0.4F + 0.7F));
 
 		float particleX = -MathHelper.sin(((yaw + 23) / 180F) * 3.141593F) * MathHelper
