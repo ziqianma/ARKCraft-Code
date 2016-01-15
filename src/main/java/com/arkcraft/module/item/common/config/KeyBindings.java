@@ -2,11 +2,15 @@ package com.arkcraft.module.item.common.config;
 
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
 import org.lwjgl.input.Keyboard;
 
 /**
  * @author wildbill22
  */
+@SideOnly(Side.CLIENT)
 public class KeyBindings
 {
     public static KeyBinding playerPooping, attachment, playerCrafting;
