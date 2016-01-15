@@ -29,6 +29,7 @@ import com.arkcraft.module.core.common.event.CoreCommonEventHandler;
 import com.arkcraft.module.core.common.gen.WorldGeneratorBushes;
 import com.arkcraft.module.core.common.gen.island.WorldTypeIsland;
 import com.arkcraft.module.core.common.network.ARKMessagePipeline;
+import com.arkcraft.module.core.common.network.OpenAttachmentInventory;
 import com.arkcraft.module.core.common.network.OpenPlayerCrafting;
 import com.arkcraft.module.core.common.network.PlayerPoop;
 import com.arkcraft.module.core.common.network.UpdateMPToCraftItem;
@@ -163,6 +164,8 @@ public class ARKCraft
 				id++, Side.SERVER);
 		modChannel.registerMessage(UpdatePlayerCrafting.Handler.class, UpdatePlayerCrafting.class,
 				id++, Side.SERVER);
+		modChannel.registerMessage(OpenAttachmentInventory.Handler.class,
+				OpenAttachmentInventory.class, id++, Side.SERVER);
 	}
 
 	public boolean isDebugger()

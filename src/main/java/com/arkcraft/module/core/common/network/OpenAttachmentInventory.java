@@ -12,23 +12,18 @@ import com.arkcraft.module.core.GlobalAdditions;
 
 public class OpenAttachmentInventory implements IMessage
 {
-	private boolean doIt;
-
-	public OpenAttachmentInventory(boolean b)
+	public OpenAttachmentInventory()
 	{
-		doIt = b;
 	}
 
 	@Override
 	public void fromBytes(ByteBuf buf)
 	{
-		this.doIt = buf.readBoolean();
 	}
 
 	@Override
 	public void toBytes(ByteBuf buf)
 	{
-		buf.writeBoolean(this.doIt);
 	}
 
 	public static class Handler implements IMessageHandler<OpenAttachmentInventory, IMessage>

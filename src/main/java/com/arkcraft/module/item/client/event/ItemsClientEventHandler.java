@@ -29,11 +29,13 @@ import org.lwjgl.opengl.GL11;
 import com.arkcraft.lib.LogHelper;
 import com.arkcraft.module.core.ARKCraft;
 import com.arkcraft.module.core.GlobalAdditions;
+import com.arkcraft.module.core.common.network.OpenAttachmentInventory;
 import com.arkcraft.module.core.common.network.OpenPlayerCrafting;
 import com.arkcraft.module.item.common.config.KeyBindings;
 import com.arkcraft.module.item.common.entity.item.projectiles.EntityBallista;
 import com.arkcraft.module.item.common.entity.player.ARKPlayer;
 import com.arkcraft.module.item.common.guns.IItemWeapon;
+import com.arkcraft.module.item.common.guns.ItemRangedWeapon;
 import com.arkcraft.module.item.common.tile.TileInventoryAttachment2;
 
 public class ItemsClientEventHandler
@@ -258,7 +260,17 @@ public class ItemsClientEventHandler
 	@SubscribeEvent
 	public void onPlayerKeypressed(InputEvent.KeyInputEvent event)
 	{
-		if (KeyBindings.playerPooping.isPressed())
+		if (KeyBindings.attachment.isPressed())
+		{
+			EntityPlayerSP p = mc.thePlayer;
+			if (p instanceof EntityPlayerSP && p.inventory.getCurrentItem().getItem() instanceof ItemRangedWeapon)
+			{
+				p.openGui(ARKCraft.instance, GlobalAdditions.GUI.ATTACHMENT_GUI.getID(),
+						p.worldObj, 0, 0, 0);
+				ARKCraft.modChannel.sendToServer(new OpenAttachmentInventory());
+			}
+		}
+		else if (KeyBindings.playerPooping.isPressed())
 		{
 			EntityPlayerSP player = mc.thePlayer;
 			if (player instanceof EntityPlayerSP)
@@ -276,15 +288,5 @@ public class ItemsClientEventHandler
 				ARKCraft.modChannel.sendToServer(new OpenPlayerCrafting(true));
 			}
 		}
-		// else if (KeyBindings.attachment.isPressed())
-		// {
-		// EntityPlayerSP p = mc.thePlayer;
-		// if (p.inventory.getCurrentItem().getItem() instanceof
-		// ItemRangedWeapon) p.openGui(
-		// ARKCraft.instance, GlobalAdditions.GUI.ATTACHMENT_GUI.getID(),
-		// p.worldObj, 0,
-		// 0, 0);
-		// ARKCraft.modChannel.sendToServer(new OpenAttachmentInventory(true));
-		// }
 	}
 }

@@ -17,6 +17,7 @@ import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
@@ -24,9 +25,8 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import com.arkcraft.lib.LogHelper;
 import com.arkcraft.module.core.ARKCraft;
-import com.arkcraft.module.core.GlobalAdditions;
-import com.arkcraft.module.item.common.config.KeyBindings;
 import com.arkcraft.module.item.common.entity.item.projectiles.EntityProjectile;
 import com.arkcraft.module.item.common.entity.item.projectiles.ProjectileType;
 import com.arkcraft.module.item.common.items.weapons.bullets.ItemProjectile;
@@ -80,7 +80,7 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 	public ModelResourceLocation getModel(ItemStack stack, EntityPlayer player, int useRemaining)
 	{
 		String jsonPath = ARKCraft.MODID + ":" + this.getUnlocalizedName();
-		if (new TileInventoryAttachment2(stack).isScopePresent())
+		if (canScope(stack))
 		{
 			jsonPath = jsonPath + "_scoped";
 		}
@@ -110,18 +110,19 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 	{
 		if (stack.stackSize <= 0 || player.isUsingItem()) { return stack; }
 
-		if (!world.isRemote && KeyBindings.attachment.isKeyDown())
-		{
-			// TODO Why no work other way
-			// If player not sneaking, open the inventory gui
-			if (!player.isSneaking())
-			{
-				player.openGui(ARKCraft.instance, GlobalAdditions.GUI.ATTACHMENT_GUI.getID(),
-						world, 0, 0, 0);
-			}
-
-			return stack;
-		}
+		// if (!world.isRemote && KeyBindings.attachment.isKeyDown())
+		// {
+		// // TODO Why no work other way
+		// // If player not sneaking, open the inventory gui
+		// if (!player.isSneaking())
+		// {
+		// player.openGui(ARKCraft.instance,
+		// GlobalAdditions.GUI.ATTACHMENT_GUI.getID(),
+		// world, 0, 0, 0);
+		// }
+		//
+		// return stack;
+		// }
 
 		if (canFire(stack, player))
 		{
@@ -171,13 +172,13 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 	private boolean hasAmmoAndConsume(ItemStack stack, EntityPlayer player)
 	{
 		int ammoFinal = 0;
+		String type = "";
 		for (ItemStack invStack : player.inventory.mainInventory)
 		{
 			if (invStack != null) if (isValidProjectile(invStack.getItem()))
 			{
 				int stackSize = invStack.stackSize;
-				String type = invStack.getItem().getUnlocalizedName().toUpperCase();
-				stack.getTagCompound().setString("ammotype", type);
+				type = invStack.getItem().getUnlocalizedName();
 				int ammo = stackSize < this.getMaxAmmo() - ammoFinal ? stackSize : this
 						.getMaxAmmo();
 				ammoFinal += ammo;
@@ -187,8 +188,9 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 		}
 		if (ammoFinal > 0)
 		{
-			this.setAmmoQuantity(stack, ammoFinal);
-			this.setJustReloaded(stack, true);
+			setAmmoType(stack, type);
+			setAmmoQuantity(stack, ammoFinal);
+			setJustReloaded(stack, true);
 			return true;
 		}
 
@@ -198,7 +200,6 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 	@Override
 	public void onPlayerStoppedUsing(ItemStack stack, World world, EntityPlayer player, int timeLeft)
 	{
-		if (!isLoaded(stack)) { return; }
 		if (canFire(stack, player))
 		{
 			{
@@ -207,6 +208,7 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 			}
 		}
 		this.setJustReloaded(stack, false);
+		if (!isLoaded(stack)) { return; }
 	}
 
 	public boolean canReload(ItemStack stack)
@@ -221,13 +223,13 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 
 	private boolean isJustReloaded(ItemStack stack)
 	{
-		if (stack.getTagCompound() != null) return stack.getTagCompound()
-				.getBoolean("justReloaded");
+		if (stack.hasTagCompound()) return stack.getTagCompound().getBoolean("justReloaded");
 		return false;
 	}
 
 	private void setJustReloaded(ItemStack stack, boolean bool)
 	{
+		if (!stack.hasTagCompound()) stack.setTagCompound(new NBTTagCompound());
 		stack.getTagCompound().setBoolean("justReloaded", bool);
 	}
 
@@ -270,15 +272,25 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 		else return 0;
 	}
 
-	public void setAmmoQuantity(ItemStack stack, int ammo)
+	private void setAmmoQuantity(ItemStack stack, int ammo)
 	{
+		if (!stack.hasTagCompound()) stack.setTagCompound(new NBTTagCompound());
 		stack.getTagCompound().setInteger("ammo", ammo);
 	}
 
 	public String getAmmoType(ItemStack stack)
 	{
-		if (stack.hasTagCompound()) return stack.getTagCompound().getString("ammotype");
-		else return this.getDefaultAmmoType();
+		String type = this.getDefaultAmmoType();
+		LogHelper.info("Found ammotype ? " + stack.getTagCompound().hasKey("ammotype"));
+		if (stack.hasTagCompound() && stack.getTagCompound().hasKey("ammotype")) type = stack
+				.getTagCompound().getString("ammotype");
+		return type.toLowerCase();
+	}
+
+	private void setAmmoType(ItemStack stack, String type)
+	{
+		if (!stack.hasTagCompound()) stack.setTagCompound(new NBTTagCompound());
+		stack.getTagCompound().setString("ammotype", type);
 	}
 
 	private String getDefaultAmmoType()
@@ -342,12 +354,13 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 		if (!world.isRemote)
 		{
 			String type = this.getAmmoType(stack);
+			LogHelper.info("Projectile type: " + type);
 			Object x = null;
 			try
 			{
 				Class<?> c = Class
 						.forName("com.arkcraft.module.item.common.entity.item.projectiles." + ProjectileType
-								.valueOf(type).getEntity());
+								.valueOf(type.toUpperCase()).getEntity());
 				Constructor<?> con = c.getConstructor(World.class, EntityLivingBase.class);
 				x = con.newInstance(world, player);
 
