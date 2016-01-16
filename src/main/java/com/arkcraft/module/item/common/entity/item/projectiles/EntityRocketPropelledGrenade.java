@@ -10,7 +10,7 @@ import net.minecraft.world.World;
 
 public class EntityRocketPropelledGrenade extends EntityProjectile
 {
-	public float explosionRadius = 100F;
+	public float explosionRadius = 4F;
 
 	public EntityRocketPropelledGrenade(World world)
 	{
@@ -76,12 +76,6 @@ public class EntityRocketPropelledGrenade extends EntityProjectile
 						posZ + (motionZ * i1) / amount, 0.0D, 0.0D, 0.0D);
 			}
 		}
-		/*
-		 * if(onGround) { BlockPos blockpos = new BlockPos(this.xTile,
-		 * this.yTile, this.zTile); if (this.worldObj.isAirBlock(blockpos)) {
-		 * this.worldObj.setBlockState(blockpos, Blocks.fire.getDefaultState());
-		 * } }
-		 */
 	}
 
 	@Override

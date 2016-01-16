@@ -3,13 +3,12 @@ package com.arkcraft.module.item.common.tile;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 
 import com.arkcraft.module.core.ARKCraft;
 import com.arkcraft.module.item.common.items.ARKCraftItems;
 import com.arkcraft.module.item.common.items.weapons.guns.ItemRangedWeapon;
 
-public class TileInventoryAttachment2 extends AbstractInventory
+public class TileInventoryAttachment extends AbstractInventory
 {
 	private String name = "Attachment Inventory";
 
@@ -21,7 +20,7 @@ public class TileInventoryAttachment2 extends AbstractInventory
 	private final ItemStack invStack;
 	public boolean activate_scoping;
 
-	public TileInventoryAttachment2(ItemStack stack)
+	public TileInventoryAttachment(ItemStack stack)
 	{
 		inventory = new ItemStack[INV_SIZE];
 		this.invStack = stack;
@@ -50,19 +49,9 @@ public class TileInventoryAttachment2 extends AbstractInventory
 		return 64;
 	}
 
-	/**
-	 * For inventories stored in ItemStacks, it is critical to implement this
-	 * method in order to write the inventory to the ItemStack's NBT whenever it
-	 * changes.
-	 */
 	@Override
 	public void markDirty()
 	{
-
-		/*
-		 * else { activate_scoping = false; }
-		 */
-
 		for (int i = 0; i < getSizeInventory(); ++i)
 		{
 			if (getStackInSlot(i) != null && getStackInSlot(i).stackSize == 0) inventory[i] = null;
@@ -98,13 +87,7 @@ public class TileInventoryAttachment2 extends AbstractInventory
 	{
 		return player.getHeldItem() == invStack;
 	}
-
-	@Override
-	public boolean isItemValidForSlot(int slot, ItemStack stack)
-	{
-		return !(stack.getItem() instanceof ItemRangedWeapon);
-	}
-
+	
 	@Override
 	protected String getNbtKey()
 	{
@@ -112,42 +95,14 @@ public class TileInventoryAttachment2 extends AbstractInventory
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound compound)
+	public boolean isItemValidForSlot(int index, ItemStack stack) 
 	{
-		String key = getNbtKey();
-		if (key == null || key.equals("")) { return; }
-		NBTTagList items = new NBTTagList();
-		for (int i = 0; i < getSizeInventory(); ++i)
-		{
-			if (getStackInSlot(i) != null)
-			{
-				NBTTagCompound item = new NBTTagCompound();
-				item.setByte("Slot", (byte) i);
-				getStackInSlot(i).writeToNBT(item);
-				items.appendTag(item);
-			}
-		}
-		compound.setTag(key, items);
+		return !(stack.getItem() instanceof ItemRangedWeapon);
+	}
+	
+	@Override
+	public ItemStack getStackInSlot(int slot) {
+		return inventory[slot];
 	}
 
-	/**
-	 * Loads this inventory from NBT; must be called manually Fails silently if
-	 * {@link #getNbtKey} returns null or an empty string
-	 */
-	@Override
-	public void readFromNBT(NBTTagCompound compound)
-	{
-		String key = getNbtKey();
-		if (key == null || key.equals("")) { return; }
-		NBTTagList items = compound.getTagList(key, compound.getId());
-		for (int i = 0; i < items.tagCount(); ++i)
-		{
-			NBTTagCompound item = items.getCompoundTagAt(i);
-			byte slot = item.getByte("Slot");
-			if (slot >= 0 && slot < getSizeInventory())
-			{
-				inventory[slot] = ItemStack.loadItemStackFromNBT(item);
-			}
-		}
-	}
 }

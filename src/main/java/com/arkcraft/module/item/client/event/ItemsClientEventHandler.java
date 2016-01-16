@@ -36,7 +36,7 @@ import com.arkcraft.module.item.common.entity.item.projectiles.EntityBallista;
 import com.arkcraft.module.item.common.entity.player.ARKPlayer;
 import com.arkcraft.module.item.common.items.weapons.guns.ItemRangedWeapon;
 import com.arkcraft.module.item.common.items.weapons.handlers.IItemWeapon;
-import com.arkcraft.module.item.common.tile.TileInventoryAttachment2;
+import com.arkcraft.module.item.common.tile.TileInventoryAttachment;
 
 public class ItemsClientEventHandler
 {
@@ -69,7 +69,7 @@ public class ItemsClientEventHandler
 				if (stack.getItem() instanceof IItemWeapon)
 				{
 					i_item_weapon = (IItemWeapon) stack.getItem();
-					TileInventoryAttachment2 inv = new TileInventoryAttachment2(stack);
+					TileInventoryAttachment inv = new TileInventoryAttachment(stack);
 					if (inv.isScopePresent())
 					{
 						if (evt.buttonstate)

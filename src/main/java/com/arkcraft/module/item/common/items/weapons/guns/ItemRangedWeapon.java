@@ -29,7 +29,7 @@ import com.arkcraft.module.item.common.entity.item.projectiles.ProjectileType;
 import com.arkcraft.module.item.common.items.weapons.bullets.ItemProjectile;
 import com.arkcraft.module.item.common.items.weapons.handlers.IItemWeapon;
 import com.arkcraft.module.item.common.items.weapons.handlers.WeaponModAttributes;
-import com.arkcraft.module.item.common.tile.TileInventoryAttachment2;
+import com.arkcraft.module.item.common.tile.TileInventoryAttachment;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 
@@ -115,7 +115,7 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 	@Override
 	public boolean canScope(ItemStack stack)
 	{
-		return new TileInventoryAttachment2(stack).isScopePresent();
+		return new TileInventoryAttachment(stack).isScopePresent();
 	}
 
 	@Override

@@ -1,14 +1,14 @@
 package com.arkcraft.module.item.common.container;
 
+import com.arkcraft.module.item.common.items.weapons.guns.ItemRangedWeapon;
+
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-import com.arkcraft.module.item.common.items.weapons.guns.ItemRangedWeapon;
-
-public class SlotMagicBag extends Slot
+public class SlotAttachment extends Slot
 {
-	public SlotMagicBag(IInventory inv, int index, int xPos, int yPos) {
+	public SlotAttachment(IInventory inv, int index, int xPos, int yPos) {
 		super(inv, index, xPos, yPos);
 	}
 
@@ -16,5 +16,5 @@ public class SlotMagicBag extends Slot
 	public boolean isItemValid(ItemStack stack) {
 		return !(stack.getItem() instanceof ItemRangedWeapon);
 
-	}
+	}	
 }

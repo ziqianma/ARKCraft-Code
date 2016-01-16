@@ -1,5 +1,7 @@
 package com.arkcraft.module.item.client.gui;
 
+import java.awt.Color;
+
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,40 +12,31 @@ import org.lwjgl.opengl.GL11;
 
 import com.arkcraft.module.core.ARKCraft;
 import com.arkcraft.module.item.common.container.ContainerInventoryAttachment;
-import com.arkcraft.module.item.common.tile.TileInventoryAttachment2;
+import com.arkcraft.module.item.common.container.ContainerInventoryCompostBin;
+import com.arkcraft.module.item.common.tile.TileInventoryAttachment;
 
 public class GUIAttachment extends GuiContainer
 {
-	/** x and y size of the inventory window in pixels. Defined as float, passed as int
-	 *  These are used for drawing the player model. */
-	private float xSize_lo;
-	private float ySize_lo;
 
-	/** ResourceLocation takes 2 parameters: ModId, path to texture at the location:
-	 *  "src/minecraft/assets/modid/" */
 	private static final ResourceLocation iconLocation = new ResourceLocation(ARKCraft.MODID, "textures/gui/attachment_gui.png");
 
 	/** The inventory to render on screen */
-	private final TileInventoryAttachment2 inventory;
+	private final TileInventoryAttachment inventory;
 
-	public GUIAttachment(EntityPlayer player, InventoryPlayer inv1, TileInventoryAttachment2 inv2)
+	public GUIAttachment(EntityPlayer player, InventoryPlayer InvPlayer, TileInventoryAttachment tileEntity)
 	{
-		super(new ContainerInventoryAttachment(player, inv1, inv2));
-		this.inventory = inv2;
+		super(new ContainerInventoryAttachment(player, InvPlayer, tileEntity));
+		this.inventory = tileEntity;
+		this.xSize = 175;
+	    this.ySize = 165;
 	}
-
-	@Override
-	public void drawScreen(int mouseX, int mouseY, float f) {
-		super.drawScreen(mouseX, mouseY, f);
-		xSize_lo = mouseX;
-		ySize_lo = mouseY;
-	}
-
+	
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2) {
-		String s = inventory.hasCustomName() ? inventory.getName() : I18n.format(inventory.getName());
-		fontRendererObj.drawString(s, xSize / 2 - fontRendererObj.getStringWidth(s) / 2, 0, 4210752);
-		fontRendererObj.drawString(I18n.format("container.inventory"), 26, ySize - 96 + 4, 4210752);
+		 String name = inventory.getDisplayName().getUnformattedText();
+	     final int LABEL_YPOS = 7;
+	     final int LABEL_XPOS = (xSize / 2) - (name.length() * 5 / 2);
+	     this.fontRendererObj.drawString(name, LABEL_XPOS, LABEL_YPOS, Color.darkGray.getRGB());
 	}
 
 	@Override
@@ -53,6 +46,5 @@ public class GUIAttachment extends GuiContainer
 		int k = (width - xSize) / 2;
 		int l = (height - ySize) / 2;
 		drawTexturedModalRect(k, l, 0, 0, xSize, ySize);
-	//	GuiInventory.drawEntityOnScreen(k + 51, l + 75, 30, (k + 51) - xSize_lo, (l + 75 - 50) - ySize_lo, mc.thePlayer);
 	}
 }

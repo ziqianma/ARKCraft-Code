@@ -1,6 +1,5 @@
 package com.arkcraft.module.item.common.entity.item.projectiles;
 
-import com.arkcraft.module.item.common.items.weapons.handlers.WeaponDamageSource;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -9,6 +8,8 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+
+import com.arkcraft.module.item.common.items.weapons.handlers.WeaponDamageSource;
 
 public class EntityAdvancedBullet extends EntityProjectile
 {

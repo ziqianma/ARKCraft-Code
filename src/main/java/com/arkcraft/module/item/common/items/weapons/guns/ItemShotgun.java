@@ -21,10 +21,14 @@ public class ItemShotgun extends ItemRangedWeapon
 	@Override
 	public ModelResourceLocation getModel(ItemStack stack, EntityPlayer player, int useRemaining)
 	{
-		ModelResourceLocation m = super.getModel(stack, player, useRemaining);
-		if (player.isUsingItem() && this.canReload(stack)) return new ModelResourceLocation(
-				ARKCraft.MODID + ":" + m.getResourcePath() + "_reload", "inventory");
-		return m;
+		if(!player.capabilities.isCreativeMode)
+		{
+			ModelResourceLocation m = super.getModel(stack, player, useRemaining);
+			if (player.isUsingItem() && this.canReload(stack)) return new ModelResourceLocation(
+					ARKCraft.MODID + ":" + m.getResourcePath() + "_reload", "inventory");
+			return m;
+		}
+		return null;
 	}
 
 	@Override

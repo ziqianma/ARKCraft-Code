@@ -1,7 +1,5 @@
 package com.arkcraft.module.item.common.tile;
 
-import com.arkcraft.module.item.common.items.ARKCraftItems;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -10,7 +8,6 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.IChatComponent;
-
 /**
  * 
  * Class aiming to minimize amount of code needed for an inventory.
@@ -107,7 +104,7 @@ public abstract class AbstractInventory implements IInventory
 
 	@Override
 	public boolean hasCustomName() {
-		return false;
+		return true;
 	}
 
 	@Override
