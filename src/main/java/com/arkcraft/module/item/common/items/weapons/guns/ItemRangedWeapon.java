@@ -153,7 +153,7 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 	@Override
 	public void onUsingTick(ItemStack stack, EntityPlayer player, int count)
 	{
-		if (canReload(stack) && this.getMaxItemUseDuration(stack) - count >= getReloadDuration())
+		if (canReload(stack, player) && this.getMaxItemUseDuration(stack) - count >= getReloadDuration())
 		{
 			if (hasAmmoAndConsume(stack, player))
 			{
@@ -205,9 +205,9 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 		if (!isLoaded(stack)) { return; }
 	}
 
-	public boolean canReload(ItemStack stack)
+	public boolean canReload(ItemStack stack, EntityPlayer player)
 	{
-		return getAmmoQuantity(stack) <= 0;
+		return getAmmoQuantity(stack) <= 0 && !player.capabilities.isCreativeMode;
 	}
 
 	public boolean canFire(ItemStack stack, EntityPlayer player)
