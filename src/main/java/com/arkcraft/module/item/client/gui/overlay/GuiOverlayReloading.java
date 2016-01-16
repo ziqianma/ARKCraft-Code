@@ -24,12 +24,11 @@ public class GuiOverlayReloading extends Gui
 		EntityPlayer p = mc.thePlayer;
 		if (p != null)
 		{
-			// TODO
 			ItemStack is = p.getCurrentEquippedItem();
 			if (is != null && is.getItem() instanceof ItemRangedWeapon)
 			{
 				ItemRangedWeapon weapon = (ItemRangedWeapon) is.getItem();
-				boolean rld = weapon.isLoaded(is);
+				boolean rld = weapon.canFire(is, p);
 				GL11.glColor4f(1F, 1F, 1F, 1F);
 				GL11.glDisable(GL11.GL_LIGHTING);
 				float f;
