@@ -2,11 +2,10 @@ package com.arkcraft.module.item.common.entity.item.projectiles;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public class EntityStoneArrow extends EntityArrow
+public class EntityStoneArrow extends EntityProjectile
 {
 
     public EntityStoneArrow(World worldIn)

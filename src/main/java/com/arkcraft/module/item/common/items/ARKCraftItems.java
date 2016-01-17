@@ -28,6 +28,7 @@ import com.arkcraft.module.item.common.entity.item.projectiles.EntitySimpleRifle
 import com.arkcraft.module.item.common.entity.item.projectiles.EntitySimpleShotgunAmmo;
 import com.arkcraft.module.item.common.entity.item.projectiles.EntityStoneArrow;
 import com.arkcraft.module.item.common.entity.item.projectiles.EntityTranqArrow;
+import com.arkcraft.module.item.common.entity.item.projectiles.EntityTranquilizer;
 import com.arkcraft.module.item.common.entity.item.projectiles.dispense.DispenseBallistaBolt;
 import com.arkcraft.module.item.common.entity.item.projectiles.dispense.DispenseRocketPropelledGrenade;
 import com.arkcraft.module.item.common.entity.item.projectiles.dispense.DispenseSimpleBullet;
@@ -257,6 +258,8 @@ public class ARKCraftItems
 		if (ModuleItemBalance.WEAPONS.LONGNECK_RIFLE)
 		{
 			EntityHandler.registerModEntity(EntitySimpleRifleAmmo.class, "Simple Rifle Ammo",
+					ARKCraft.instance, 64, 10, true);
+			EntityHandler.registerModEntity(EntityTranquilizer.class, "Tranquilizer",
 					ARKCraft.instance, 64, 10, true);
 		}
 

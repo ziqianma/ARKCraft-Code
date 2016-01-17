@@ -2,9 +2,7 @@ package com.arkcraft.module.item.common.entity.item.projectiles;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
@@ -23,29 +21,36 @@ public class EntityRocketPropelledGrenade extends EntityProjectile
 		setPosition(x, y, z);
 	}
 
-	public EntityRocketPropelledGrenade(World worldIn, EntityLivingBase shooter)
+	public EntityRocketPropelledGrenade(World worldIn, EntityLivingBase shooter, Float speed, Float inaccuracy)
 	{
-		super(worldIn);
-		this.shootingEntity = shooter;
-
-		if (shooter instanceof EntityPlayer)
-		{
-			this.canBePickedUp = 0;
-		}
-
-		this.setSize(0.05F, 0.05F);
-		this.setLocationAndAngles(shooter.posX, shooter.posY + (double) shooter.getEyeHeight(),
-				shooter.posZ, shooter.rotationYaw, shooter.rotationPitch);
-		this.posX -= (double) (MathHelper.cos(this.rotationYaw / 180.0F * (float) Math.PI) * 0.16F);
-		this.posY -= 0.10000000149011612D;
-		this.posZ -= (double) (MathHelper.sin(this.rotationYaw / 180.0F * (float) Math.PI) * 0.16F);
-		this.setPosition(this.posX, this.posY, this.posZ);
-		this.motionX = (double) (-MathHelper.sin(this.rotationYaw / 180.0F * (float) Math.PI) * MathHelper
-				.cos(this.rotationPitch / 180.0F * (float) Math.PI));
-		this.motionZ = (double) (MathHelper.cos(this.rotationYaw / 180.0F * (float) Math.PI) * MathHelper
-				.cos(this.rotationPitch / 180.0F * (float) Math.PI));
-		this.motionY = (double) (-MathHelper.sin(this.rotationPitch / 180.0F * (float) Math.PI));
-		setThrowableHeading(motionX, motionY, motionZ, 1F * 1.7F, 1.5F);
+		super(worldIn, shooter, speed, inaccuracy);
+		// super(worldIn);
+		// this.shootingEntity = shooter;
+		//
+		// if (shooter instanceof EntityPlayer)
+		// {
+		// this.canBePickedUp = 0;
+		// }
+		//
+		// this.setSize(0.05F, 0.05F);
+		// this.setLocationAndAngles(shooter.posX, shooter.posY + (double)
+		// shooter.getEyeHeight(),
+		// shooter.posZ, shooter.rotationYaw, shooter.rotationPitch);
+		// this.posX -= (double) (MathHelper.cos(this.rotationYaw / 180.0F *
+		// (float) Math.PI) * 0.16F);
+		// this.posY -= 0.10000000149011612D;
+		// this.posZ -= (double) (MathHelper.sin(this.rotationYaw / 180.0F *
+		// (float) Math.PI) * 0.16F);
+		// this.setPosition(this.posX, this.posY, this.posZ);
+		// this.motionX = (double) (-MathHelper.sin(this.rotationYaw / 180.0F *
+		// (float) Math.PI) * MathHelper
+		// .cos(this.rotationPitch / 180.0F * (float) Math.PI));
+		// this.motionZ = (double) (MathHelper.cos(this.rotationYaw / 180.0F *
+		// (float) Math.PI) * MathHelper
+		// .cos(this.rotationPitch / 180.0F * (float) Math.PI));
+		// this.motionY = (double) (-MathHelper.sin(this.rotationPitch / 180.0F
+		// * (float) Math.PI));
+		// setThrowableHeading(motionX, motionY, motionZ, 1F * 1.7F, 1.5F);
 	}
 
 	@Override

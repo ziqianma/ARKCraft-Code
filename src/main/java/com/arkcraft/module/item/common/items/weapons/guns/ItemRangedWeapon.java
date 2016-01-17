@@ -6,13 +6,9 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
-import org.lwjgl.input.Mouse;
-
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
@@ -46,11 +42,15 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 	private final int ammoConsumption;
 	private final String defaultAmmoType;
 	private final long shotInterval;
+	private final float speed;
+	private final float inaccuracy;
 	private long nextShotMillis = 0;
 
-	public ItemRangedWeapon(String name, int durability, int maxAmmo, String defaultAmmoType, int ammoConsumption, double shotInterval)
+	public ItemRangedWeapon(String name, int durability, int maxAmmo, String defaultAmmoType, int ammoConsumption, double shotInterval, float speed, float inaccuracy)
 	{
 		super();
+		this.speed = speed;
+		this.inaccuracy = inaccuracy;
 		this.shotInterval = (long) shotInterval * 1000;
 		this.ammoConsumption = ammoConsumption;
 		this.defaultAmmoType = defaultAmmoType;
@@ -121,19 +121,67 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 	{
 		return new TileInventoryAttachment(stack).isScopePresent();
 	}
-	
-	@Override 
-    public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) 
-	{
-	//	EntityPlayer player = Minecraft.getMinecraft().thePlayer;
 
-		if(Mouse.isButtonDown(-1) == true)
-		{
-			System.out.print("Found mouse left click");
-		}
-	}
+	// @Override
+	// public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int
+	// itemSlot, boolean isSelected)
+	// {
+	// if (FMLCommonHandler.instance().getSide().isClient())
+	// {
+	// if
+	// (FMLClientHandler.instance().getClient().gameSettings.keyBindAttack.isPressed())
+	// {
+	//
+	// }
+	// }
+	// }
+	//
+	// private boolean onItemLeftClick(EntityPlayer player, ItemStack stack)
+	// {
+	// World world = player.worldObj;
+	// if (stack.stackSize <= 0 || player.isUsingItem()) { return false; }
+	// LogHelper.info("Leftclick");
+	// if (canFire(stack, player))
+	// {
+	// LogHelper.info("Fire");
+	// if (this.nextShotMillis < System.currentTimeMillis())
+	// // Start aiming weapon to fire
+	// player.setItemInUse(stack, getMaxItemUseDuration(stack));
+	// }
+	// // Check can reload
+	// else if (hasAmmoInInventory(player))
+	// {
+	// LogHelper.info("Reload");
+	// // Begin reloading
+	// for (int x = 1; x < 1; x++)
+	// {
+	// soundCharge(stack, world, player);
+	// }
+	// player.setItemInUse(stack, getMaxItemUseDuration(stack));
+	// }
+	// else
+	// {
+	// // Can't reload; no ammo
+	// soundEmpty(stack, world, player);
+	// }
+	// return true;
+	// }
+	//
+	// private void setPlayerItemInUse(EntityPlayer player, ItemStack stack, int
+	// duration)
+	// {
+	// if (stack != player.getItemInUse())
+	// {
+	// player.itemInUse = stack;
+	// player.itemInUseCount = duration;
+	//
+	// if (!player.worldObj.isRemote)
+	// {
+	// player.setEating(true);
+	// }
+	// }
+	// }
 
-	
 	@Override
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player)
 	{
@@ -149,7 +197,7 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 		else if (hasAmmoInInventory(player))
 		{
 			// Begin reloading
-			for (int x=1; x<1; x++)
+			for (int x = 1; x < 1; x++)
 			{
 				soundCharge(stack, world, player);
 			}
@@ -161,7 +209,7 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 			soundEmpty(stack, world, player);
 		}
 		return stack;
-	}	
+	}
 
 	@Override
 	public EnumAction getItemUseAction(ItemStack stack)
@@ -221,7 +269,7 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 			}
 		}
 		this.setJustReloaded(stack, false);
-		if (!isLoaded(stack)) { return; }
+		if (!isLoaded(stack, player)) { return; }
 	}
 
 	public boolean canReload(ItemStack stack, EntityPlayer player)
@@ -231,7 +279,7 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 
 	public boolean canFire(ItemStack stack, EntityPlayer player)
 	{
-		return (player.capabilities.isCreativeMode || isLoaded(stack)) && !isJustReloaded(stack);
+		return (player.capabilities.isCreativeMode || isLoaded(stack, player)) && !isJustReloaded(stack);
 	}
 
 	private boolean isJustReloaded(ItemStack stack)
@@ -310,9 +358,9 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 		return this.defaultAmmoType;
 	}
 
-	public boolean isLoaded(ItemStack stack)
+	public boolean isLoaded(ItemStack stack, EntityPlayer player)
 	{
-		return getAmmoQuantity(stack) > 0;
+		return getAmmoQuantity(stack) > 0 || player.capabilities.isCreativeMode;
 	}
 
 	public void soundEmpty(ItemStack itemstack, World world, EntityPlayer entityplayer)
@@ -323,10 +371,10 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 	public void soundCharge(ItemStack stack, World world, EntityPlayer player)
 	{
 		/*
-		world.playSoundAtEntity(player,
-				ARKCraft.MODID + ":" + this.getUnlocalizedName() + "_reload", 0.7F,
-				0.9F / (getItemRand().nextFloat() * 0.2F + 0.0F));
-				*/
+		 * world.playSoundAtEntity(player, ARKCraft.MODID + ":" +
+		 * this.getUnlocalizedName() + "_reload", 0.7F, 0.9F /
+		 * (getItemRand().nextFloat() * 0.2F + 0.0F));
+		 */
 	}
 
 	public abstract int getReloadDuration();
@@ -365,7 +413,6 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 
 	public void fire(ItemStack stack, World world, EntityPlayer player, int timeLeft)
 	{
-		// TODO
 		if (!world.isRemote)
 		{
 			for (int i = 0; i < getAmmoConsumption(); i++)
@@ -403,8 +450,9 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 			Class<?> c = Class
 					.forName("com.arkcraft.module.item.common.entity.item.projectiles." + ProjectileType
 							.valueOf(type.toUpperCase()).getEntity());
-			Constructor<?> con = c.getConstructor(World.class, EntityLivingBase.class);
-			return (EntityProjectile) con.newInstance(world, player);
+			Constructor<?> con = c.getConstructor(World.class, EntityLivingBase.class, Float.class,
+					Float.class);
+			return (EntityProjectile) con.newInstance(world, player, this.speed, this.inaccuracy);
 		}
 		catch (ClassNotFoundException e)
 		{
