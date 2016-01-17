@@ -43,7 +43,7 @@ public class EntityAdvancedBullet extends EntityProjectile
         this.motionX = (double) (-MathHelper.sin(this.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float) Math.PI));
         this.motionZ = (double) (MathHelper.cos(this.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float) Math.PI));
         this.motionY = (double) (-MathHelper.sin(this.rotationPitch / 180.0F * (float) Math.PI));
-        this.setThrowableHeading(this.motionX, this.motionY, this.motionZ, 2F, 6.0F);
+        this.setThrowableHeading(this.motionX, this.motionY, this.motionZ, 6F, 1.3F);
     }
 
     @Override
@@ -63,17 +63,19 @@ public class EntityAdvancedBullet extends EntityProjectile
     {
         super.onUpdate();
 
-        float speed = 3F;
-        if (speed == 3F)
-        {
-            worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, posX, posY, posZ, 0.0D, 0.0D, 0.0D);
-        }
+        if (ticksInAir > 100)
+		{
+			setDead();
+		}
+
+        worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, posX, posY, posZ, 0.0D, 0.0D, 0.0D);
+
     }
 
     @Override
     public void onEntityHit(Entity entity)
     {
-        float damage = 7F;
+        float damage = 14F;
         DamageSource damagesource = null;
         if (shootingEntity == null)
         {

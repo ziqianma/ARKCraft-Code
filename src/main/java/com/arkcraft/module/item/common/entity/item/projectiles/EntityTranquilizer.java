@@ -8,7 +8,6 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-import com.arkcraft.lib.LogHelper;
 import com.arkcraft.module.core.common.entity.EntityTameableDinosaur;
 import com.arkcraft.module.item.common.config.ModuleItemBalance;
 import com.arkcraft.module.item.common.items.weapons.handlers.WeaponDamageSource;
@@ -49,7 +48,7 @@ public class EntityTranquilizer extends EntityProjectile
 		this.motionZ = (double) (MathHelper.cos(this.rotationYaw / 180.0F * (float) Math.PI) * MathHelper
 				.cos(this.rotationPitch / 180.0F * (float) Math.PI));
 		this.motionY = (double) (-MathHelper.sin(this.rotationPitch / 180.0F * (float) Math.PI));
-		this.setThrowableHeading(this.motionX, this.motionY, this.motionZ, 3.2F, 1.0F);
+		this.setThrowableHeading(this.motionX, this.motionY, this.motionZ, 5F, 1.1F);
 	}
 
 	@Override
@@ -68,13 +67,10 @@ public class EntityTranquilizer extends EntityProjectile
 	public void onUpdate()
 	{
 		super.onUpdate();
-		LogHelper.info(this.getTotalVelocity());
-		float speed = 3F;
-		if (speed == 3F)
-		{
-			worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, posX, posY, posZ, 0.0D,
+
+		worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, posX, posY, posZ, 0.0D,
 					0.0D, 0.0D);
-		}
+		
 	}
 
 	@Override

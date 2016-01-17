@@ -35,6 +35,7 @@ import com.arkcraft.module.core.common.proxy.CommonProxy;
 import com.arkcraft.module.item.client.event.Mod2ClientEventHandler;
 import com.arkcraft.module.item.client.gui.overlay.GuiOverlay;
 import com.arkcraft.module.item.client.gui.overlay.GuiOverlayReloading;
+import com.arkcraft.module.item.client.render.RenderAdvancedBullet;
 import com.arkcraft.module.item.client.render.RenderMetalArrow;
 import com.arkcraft.module.item.client.render.RenderSimpleBullet;
 import com.arkcraft.module.item.client.render.RenderSimpleRifleAmmo;
@@ -48,6 +49,7 @@ import com.arkcraft.module.item.common.config.KeyBindings;
 import com.arkcraft.module.item.common.config.ModuleItemBalance;
 import com.arkcraft.module.item.common.entity.EntityCobble;
 import com.arkcraft.module.item.common.entity.EntityDodoEgg;
+import com.arkcraft.module.item.common.entity.item.projectiles.EntityAdvancedBullet;
 import com.arkcraft.module.item.common.entity.item.projectiles.EntityBase;
 import com.arkcraft.module.item.common.entity.item.projectiles.EntityMetalArrow;
 import com.arkcraft.module.item.common.entity.item.projectiles.EntitySimpleBullet;
@@ -168,6 +170,10 @@ public class ClientProxy extends CommonProxy
 		if (ModuleItemBalance.WEAPONS.SPEAR)
 		{
 			RenderingRegistry.registerEntityRenderingHandler(EntitySpear.class, new RenderSpear());
+		}
+		if (ModuleItemBalance.WEAPONS.FABRICATED_PISTOL)
+		{
+			RenderingRegistry.registerEntityRenderingHandler(EntityAdvancedBullet.class, new RenderAdvancedBullet());
 		}
 	}
 

@@ -133,7 +133,10 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 		else if (hasAmmoInInventory(player))
 		{
 			// Begin reloading
-			soundCharge(stack, world, player);
+			for (int x=1; x<1; x++)
+			{
+				soundCharge(stack, world, player);
+			}
 			player.setItemInUse(stack, getMaxItemUseDuration(stack));
 		}
 		else
@@ -303,9 +306,11 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 
 	public void soundCharge(ItemStack stack, World world, EntityPlayer player)
 	{
+		/*
 		world.playSoundAtEntity(player,
 				ARKCraft.MODID + ":" + this.getUnlocalizedName() + "_reload", 0.7F,
 				0.9F / (getItemRand().nextFloat() * 0.2F + 0.0F));
+				*/
 	}
 
 	public abstract int getReloadDuration();
