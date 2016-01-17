@@ -8,7 +8,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
 
-import com.arkcraft.module.item.common.entity.item.projectiles.EntitySimpleRifleAmmo;
+import com.arkcraft.module.item.common.entity.item.projectiles.EntityRocketPropelledGrenade;
 
 public class DispenseRocketPropelledGrenade extends DispenseWeaponProjectile
 {
@@ -16,7 +16,7 @@ public class DispenseRocketPropelledGrenade extends DispenseWeaponProjectile
 	protected IProjectile getProjectileEntity(World world, IPosition pos)
 	{
 		// TODO
-		return new EntitySimpleRifleAmmo(world, pos.getX(), pos.getY(), pos.getZ());
+		return new EntityRocketPropelledGrenade(world, pos.getX(), pos.getY(), pos.getZ());
 	}
 
 	@Override

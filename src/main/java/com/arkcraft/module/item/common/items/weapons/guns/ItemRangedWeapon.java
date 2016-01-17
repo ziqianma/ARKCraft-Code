@@ -6,9 +6,13 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
+import org.lwjgl.input.Mouse;
+
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
@@ -117,7 +121,19 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 	{
 		return new TileInventoryAttachment(stack).isScopePresent();
 	}
+	
+	@Override 
+    public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) 
+	{
+	//	EntityPlayer player = Minecraft.getMinecraft().thePlayer;
 
+		if(Mouse.isButtonDown(-1) == true)
+		{
+			System.out.print("Found mouse left click");
+		}
+	}
+
+	
 	@Override
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player)
 	{
@@ -133,7 +149,10 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 		else if (hasAmmoInInventory(player))
 		{
 			// Begin reloading
-			soundCharge(stack, world, player);
+			for (int x=1; x<1; x++)
+			{
+				soundCharge(stack, world, player);
+			}
 			player.setItemInUse(stack, getMaxItemUseDuration(stack));
 		}
 		else
@@ -142,7 +161,7 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 			soundEmpty(stack, world, player);
 		}
 		return stack;
-	}
+	}	
 
 	@Override
 	public EnumAction getItemUseAction(ItemStack stack)
@@ -303,9 +322,11 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 
 	public void soundCharge(ItemStack stack, World world, EntityPlayer player)
 	{
+		/*
 		world.playSoundAtEntity(player,
 				ARKCraft.MODID + ":" + this.getUnlocalizedName() + "_reload", 0.7F,
 				0.9F / (getItemRand().nextFloat() * 0.2F + 0.0F));
+				*/
 	}
 
 	public abstract int getReloadDuration();

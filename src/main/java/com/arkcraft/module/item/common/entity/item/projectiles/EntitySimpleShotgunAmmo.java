@@ -66,7 +66,7 @@ public class EntitySimpleShotgunAmmo extends EntityProjectile
 	{
 		super.onUpdate();
 
-		if (ticksInAir > 5)
+		if (ticksInAir > 10)
 		{
 			setDead();
 		}
