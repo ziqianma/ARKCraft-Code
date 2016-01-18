@@ -7,7 +7,7 @@ import net.minecraft.world.World;
 
 import com.arkcraft.module.item.common.config.ModuleItemBalance;
 
-public class EntityTranqArrow extends EntityProjectile
+public class EntityTranqArrow extends EntityArkArrow
 {
 
 	public EntityTranqArrow(World worldIn)
@@ -57,9 +57,9 @@ public class EntityTranqArrow extends EntityProjectile
 		}
 	}
 
-	public EntityTranqArrow(World worldIn, EntityLivingBase shooter, float p_i1756_3_)
+	public EntityTranqArrow(World worldIn, EntityLivingBase shooter, float speed)
 	{
-		super(worldIn);
+		super(worldIn, shooter, speed);
 		this.setDamage(ModuleItemBalance.WEAPONS.TRANQ_AMMO_DAMAGE);
 		this.renderDistanceWeight = 10.0D;
 		this.shootingEntity = shooter;
@@ -81,11 +81,13 @@ public class EntityTranqArrow extends EntityProjectile
 		this.motionZ = (double) (MathHelper.cos(this.rotationYaw / 180.0F * (float) Math.PI) * MathHelper
 				.cos(this.rotationPitch / 180.0F * (float) Math.PI));
 		this.motionY = (double) (-MathHelper.sin(this.rotationPitch / 180.0F * (float) Math.PI));
-		this.setThrowableHeading(this.motionX, this.motionY, this.motionZ, p_i1756_3_ * 1.5F, 1.0F);
+		this.setThrowableHeading(this.motionX, this.motionY, this.motionZ, speed * 1.5F, 1.0F);
 	}
 
-	protected void entityInit()
+	public EntityTranqArrow(World worldIn, EntityLivingBase shooter, float speed, float inaccuracy)
 	{
-		this.dataWatcher.addObject(16, Byte.valueOf((byte) 0));
+		super(worldIn, shooter, speed, inaccuracy);
+		this.setDamage(ModuleItemBalance.WEAPONS.TRANQ_AMMO_DAMAGE);
+		this.renderDistanceWeight = 10.0D;
 	}
 }

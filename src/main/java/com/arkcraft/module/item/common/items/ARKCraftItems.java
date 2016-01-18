@@ -39,13 +39,13 @@ import com.arkcraft.module.item.common.items.weapons.ItemCompoundBow;
 import com.arkcraft.module.item.common.items.weapons.ItemSpear;
 import com.arkcraft.module.item.common.items.weapons.ItemWoodenClub;
 import com.arkcraft.module.item.common.items.weapons.bullets.ItemProjectile;
-import com.arkcraft.module.item.common.items.weapons.guns.ItemCrossbow;
-import com.arkcraft.module.item.common.items.weapons.guns.ItemFabricatedPistol;
-import com.arkcraft.module.item.common.items.weapons.guns.ItemLongneckRifle;
-import com.arkcraft.module.item.common.items.weapons.guns.ItemRangedWeapon;
-import com.arkcraft.module.item.common.items.weapons.guns.ItemRocketLauncher;
-import com.arkcraft.module.item.common.items.weapons.guns.ItemShotgun;
-import com.arkcraft.module.item.common.items.weapons.guns.ItemSimplePistol;
+import com.arkcraft.module.item.common.items.weapons.ranged.ItemCrossbow;
+import com.arkcraft.module.item.common.items.weapons.ranged.ItemFabricatedPistol;
+import com.arkcraft.module.item.common.items.weapons.ranged.ItemLongneckRifle;
+import com.arkcraft.module.item.common.items.weapons.ranged.ItemRangedWeapon;
+import com.arkcraft.module.item.common.items.weapons.ranged.ItemRocketLauncher;
+import com.arkcraft.module.item.common.items.weapons.ranged.ItemShotgun;
+import com.arkcraft.module.item.common.items.weapons.ranged.ItemSimplePistol;
 
 /**
  * @author wildbill22

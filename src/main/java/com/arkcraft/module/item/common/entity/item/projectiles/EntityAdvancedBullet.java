@@ -2,10 +2,8 @@ package com.arkcraft.module.item.common.entity.item.projectiles;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
@@ -13,90 +11,74 @@ import com.arkcraft.module.item.common.items.weapons.handlers.WeaponDamageSource
 
 public class EntityAdvancedBullet extends EntityProjectile
 {
-    public EntityAdvancedBullet(World world)
-    {
-        super(world);
-    }
+	public EntityAdvancedBullet(World world)
+	{
+		super(world);
+	}
 
-    public EntityAdvancedBullet(World world, double d, double d1, double d2)
-    {
-        this(world);
-        setPosition(d, d1, d2);
-    }
+	public EntityAdvancedBullet(World world, double d, double d1, double d2)
+	{
+		this(world);
+		setPosition(d, d1, d2);
+	}
 
-    public EntityAdvancedBullet(World worldIn, EntityLivingBase shooter)
-    {
-        super(worldIn);
-        this.shootingEntity = shooter;
+	public EntityAdvancedBullet(World worldIn, EntityLivingBase shooter, float speed, float inaccuracy)
+	{
+		super(worldIn, shooter, speed, inaccuracy);
+	}
 
-        if (shooter instanceof EntityPlayer)
-        {
-            this.canBePickedUp = 0;
-        }
+	@Override
+	public float getGravity()
+	{
+		return 0.005F;
+	}
 
-        this.setSize(0.05F, 0.05F);
-        this.setLocationAndAngles(shooter.posX, shooter.posY + (double) shooter.getEyeHeight(), shooter.posZ, shooter.rotationYaw, shooter.rotationPitch);
-        this.posX -= (double) (MathHelper.cos(this.rotationYaw / 180.0F * (float) Math.PI) * 0.16F);
-        this.posY -= 0.10000000149011612D;
-        this.posZ -= (double) (MathHelper.sin(this.rotationYaw / 180.0F * (float) Math.PI) * 0.16F);
-        this.setPosition(this.posX, this.posY, this.posZ);
-        this.motionX = (double) (-MathHelper.sin(this.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float) Math.PI));
-        this.motionZ = (double) (MathHelper.cos(this.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float) Math.PI));
-        this.motionY = (double) (-MathHelper.sin(this.rotationPitch / 180.0F * (float) Math.PI));
-        this.setThrowableHeading(this.motionX, this.motionY, this.motionZ, 6F, 1.3F);
-    }
+	@Override
+	public float getAirResistance()
+	{
+		return 0.98F;
+	}
 
-    @Override
-    public float getGravity()
-    {
-        return 0.005F;
-    }
+	@Override
+	public void onUpdate()
+	{
+		super.onUpdate();
 
-    @Override
-    public float getAirResistance()
-    {
-        return 0.98F;
-    }
-
-    @Override
-    public void onUpdate()
-    {
-        super.onUpdate();
-
-        if (ticksInAir > 100)
+		if (ticksInAir > 100)
 		{
 			setDead();
 		}
 
-        worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, posX, posY, posZ, 0.0D, 0.0D, 0.0D);
+		worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, posX, posY, posZ, 0.0D, 0.0D,
+				0.0D);
 
-    }
+	}
 
-    @Override
-    public void onEntityHit(Entity entity)
-    {
-        float damage = 14F;
-        DamageSource damagesource = null;
-        if (shootingEntity == null)
-        {
-            damagesource = WeaponDamageSource.causeThrownDamage(this, this);
-        }
-        else
-        {
-            damagesource = WeaponDamageSource.causeThrownDamage(this, shootingEntity);
-        }
-        if (entity.attackEntityFrom(damagesource, damage))
-        {
-            playHitSound();
-            setDead();
-        }
-    }
+	@Override
+	public void onEntityHit(Entity entity)
+	{
+		float damage = 14F;
+		DamageSource damagesource = null;
+		if (shootingEntity == null)
+		{
+			damagesource = WeaponDamageSource.causeThrownDamage(this, this);
+		}
+		else
+		{
+			damagesource = WeaponDamageSource.causeThrownDamage(this, shootingEntity);
+		}
+		if (entity.attackEntityFrom(damagesource, damage))
+		{
+			playHitSound();
+			setDead();
+		}
+	}
 
-    @Override
-    public void onGroundHit(MovingObjectPosition movingobjectposition)
-    {
-        worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, posX, posY, posZ, 0.0D, 0.0D, 0.0D);
-        this.setDead();
-    }
+	@Override
+	public void onGroundHit(MovingObjectPosition movingobjectposition)
+	{
+		worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, posX, posY, posZ, 0.0D, 0.0D, 0.0D);
+		this.setDead();
+	}
 
 }

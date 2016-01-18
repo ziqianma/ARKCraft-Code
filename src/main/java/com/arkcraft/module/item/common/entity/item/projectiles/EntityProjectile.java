@@ -76,7 +76,7 @@ public class EntityProjectile extends Entity implements IProjectile
 		this.setPosition(x, y, z);
 	}
 
-	public EntityProjectile(World worldIn, EntityLivingBase shooter, Float speed, Float inaccuracy)
+	public EntityProjectile(World worldIn, EntityLivingBase shooter, float speed, float inaccuracy)
 	{
 		super(worldIn);
 		this.shootingEntity = shooter;
@@ -103,27 +103,7 @@ public class EntityProjectile extends Entity implements IProjectile
 
 	public EntityProjectile(World worldIn, EntityLivingBase shooter, float speed)
 	{
-		super(worldIn);
-		this.shootingEntity = shooter;
-
-		if (shooter instanceof EntityPlayer)
-		{
-			this.canBePickedUp = 0;
-		}
-
-		this.setSize(0.05F, 0.05F);
-		this.setLocationAndAngles(shooter.posX, shooter.posY + (double) shooter.getEyeHeight(),
-				shooter.posZ, shooter.rotationYaw, shooter.rotationPitch);
-		this.posX -= (double) (MathHelper.cos(this.rotationYaw / 180.0F * (float) Math.PI) * 0.16F);
-		this.posY -= 0.10000000149011612D;
-		this.posZ -= (double) (MathHelper.sin(this.rotationYaw / 180.0F * (float) Math.PI) * 0.16F);
-		this.setPosition(this.posX, this.posY, this.posZ);
-		this.motionX = (double) (-MathHelper.sin(this.rotationYaw / 180.0F * (float) Math.PI) * MathHelper
-				.cos(this.rotationPitch / 180.0F * (float) Math.PI));
-		this.motionZ = (double) (MathHelper.cos(this.rotationYaw / 180.0F * (float) Math.PI) * MathHelper
-				.cos(this.rotationPitch / 180.0F * (float) Math.PI));
-		this.motionY = (double) (-MathHelper.sin(this.rotationPitch / 180.0F * (float) Math.PI));
-		this.setThrowableHeading(this.motionX, this.motionY, this.motionZ, speed * 1.5F, 1.0F);
+		this(worldIn, shooter, speed, 1.0F);
 	}
 
 	protected void entityInit()

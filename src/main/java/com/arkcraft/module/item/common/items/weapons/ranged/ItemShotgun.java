@@ -1,4 +1,4 @@
-package com.arkcraft.module.item.common.items.weapons.guns;
+package com.arkcraft.module.item.common.items.weapons.ranged;
 
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;

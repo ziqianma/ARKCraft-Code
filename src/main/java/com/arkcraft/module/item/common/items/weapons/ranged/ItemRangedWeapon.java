@@ -1,4 +1,4 @@
-package com.arkcraft.module.item.common.items.weapons.guns;
+package com.arkcraft.module.item.common.items.weapons.ranged;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -450,8 +450,8 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 			Class<?> c = Class
 					.forName("com.arkcraft.module.item.common.entity.item.projectiles." + ProjectileType
 							.valueOf(type.toUpperCase()).getEntity());
-			Constructor<?> con = c.getConstructor(World.class, EntityLivingBase.class, Float.class,
-					Float.class);
+			Constructor<?> con = c.getConstructor(World.class, EntityLivingBase.class, float.class,
+					float.class);
 			return (EntityProjectile) con.newInstance(world, player, this.speed, this.inaccuracy);
 		}
 		catch (ClassNotFoundException e)
