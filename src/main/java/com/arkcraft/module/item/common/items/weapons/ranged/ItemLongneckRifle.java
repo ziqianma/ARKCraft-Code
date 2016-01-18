@@ -1,4 +1,4 @@
-package com.arkcraft.module.item.common.items.weapons.guns;
+package com.arkcraft.module.item.common.items.weapons.ranged;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -13,7 +13,7 @@ public class ItemLongneckRifle extends ItemRangedWeapon
 {
 	public ItemLongneckRifle()
 	{
-		super("longneck_rifle", 350, 1, "simple_rifle_ammo", 1, 5);
+		super("longneck_rifle", 350, 1, "simple_rifle_ammo", 1, 5, 8F, 1F);
 	}
 
 	@Override

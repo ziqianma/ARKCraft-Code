@@ -1,4 +1,4 @@
-package com.arkcraft.module.item.common.items.weapons.guns;
+package com.arkcraft.module.item.common.items.weapons.ranged;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -13,7 +13,7 @@ public class ItemSimplePistol extends ItemRangedWeapon
 {
 	public ItemSimplePistol()
 	{
-		super("simple_pistol", 150, 6, "simple_bullet", 1, 1 / 2.1);
+		super("simple_pistol", 150, 6, "simple_bullet", 1, 1 / 2.1, 5F, 2.5F);
 	}
 
 	@Override

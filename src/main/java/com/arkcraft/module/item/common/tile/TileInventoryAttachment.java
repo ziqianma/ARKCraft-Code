@@ -6,7 +6,7 @@ import net.minecraft.nbt.NBTTagCompound;
 
 import com.arkcraft.module.core.ARKCraft;
 import com.arkcraft.module.item.common.items.ARKCraftItems;
-import com.arkcraft.module.item.common.items.weapons.guns.ItemRangedWeapon;
+import com.arkcraft.module.item.common.items.weapons.ranged.ItemRangedWeapon;
 
 public class TileInventoryAttachment extends AbstractInventory
 {

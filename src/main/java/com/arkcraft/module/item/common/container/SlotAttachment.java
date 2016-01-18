@@ -1,6 +1,6 @@
 package com.arkcraft.module.item.common.container;
 
-import com.arkcraft.module.item.common.items.weapons.guns.ItemRangedWeapon;
+import com.arkcraft.module.item.common.items.weapons.ranged.ItemRangedWeapon;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;

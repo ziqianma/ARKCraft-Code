@@ -1,4 +1,4 @@
-package com.arkcraft.module.item.common.items.weapons.guns;
+package com.arkcraft.module.item.common.items.weapons.ranged;
 
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,7 +15,7 @@ public class ItemShotgun extends ItemRangedWeapon
 {
 	public ItemShotgun()
 	{
-		super("shotgun", 200, 2, "simple_shotgun_ammo", 1, 0);
+		super("shotgun", 200, 2, "simple_shotgun_ammo", 1, 0, 6F, 14F);
 	}
 
 	@Override

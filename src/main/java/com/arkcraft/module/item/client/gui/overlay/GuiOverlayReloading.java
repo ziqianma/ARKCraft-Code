@@ -10,7 +10,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import org.lwjgl.opengl.GL11;
 
-import com.arkcraft.module.item.common.items.weapons.guns.ItemRangedWeapon;
+import com.arkcraft.module.item.common.items.weapons.ranged.ItemRangedWeapon;
 
 public class GuiOverlayReloading extends Gui
 {
@@ -28,7 +28,7 @@ public class GuiOverlayReloading extends Gui
 			if (is != null && is.getItem() instanceof ItemRangedWeapon)
 			{
 				ItemRangedWeapon weapon = (ItemRangedWeapon) is.getItem();
-				boolean rld = weapon.canFire(is, p);
+				boolean rld = weapon.isLoaded(is, p);
 				GL11.glColor4f(1F, 1F, 1F, 1F);
 				GL11.glDisable(GL11.GL_LIGHTING);
 				float f;

@@ -86,34 +86,6 @@ public class EntityProjectile extends Entity implements IProjectile
 			this.canBePickedUp = 0;
 		}
 
-		this.posY = shooter.posY + (double) shooter.getEyeHeight() - 0.10000000149011612D;
-		double d0 = shooter.posX - shooter.posX;
-		double d1 = shooter.getEntityBoundingBox().minY + (double) (shooter.height / 3.0F) - this.posY;
-		double d2 = shooter.posZ - shooter.posZ;
-		double d3 = (double) MathHelper.sqrt_double(d0 * d0 + d2 * d2);
-
-		if (d3 >= 1.0E-7D)
-		{
-			float f2 = (float) (Math.atan2(d2, d0) * 180.0D / Math.PI) - 90.0F;
-			float f3 = (float) (-(Math.atan2(d1, d3) * 180.0D / Math.PI));
-			double d4 = d0 / d3;
-			double d5 = d2 / d3;
-			this.setLocationAndAngles(shooter.posX + d4, this.posY, shooter.posZ + d5, f2, f3);
-			float f4 = (float) (d3 * 0.20000000298023224D);
-			this.setThrowableHeading(d0, d1 + (double) f4, d2, speed, inaccuracy);
-		}
-	}
-
-	public EntityProjectile(World worldIn, EntityLivingBase shooter, float speed)
-	{
-		super(worldIn);
-		this.shootingEntity = shooter;
-
-		if (shooter instanceof EntityPlayer)
-		{
-			this.canBePickedUp = 0;
-		}
-
 		this.setSize(0.05F, 0.05F);
 		this.setLocationAndAngles(shooter.posX, shooter.posY + (double) shooter.getEyeHeight(),
 				shooter.posZ, shooter.rotationYaw, shooter.rotationPitch);
@@ -126,7 +98,12 @@ public class EntityProjectile extends Entity implements IProjectile
 		this.motionZ = (double) (MathHelper.cos(this.rotationYaw / 180.0F * (float) Math.PI) * MathHelper
 				.cos(this.rotationPitch / 180.0F * (float) Math.PI));
 		this.motionY = (double) (-MathHelper.sin(this.rotationPitch / 180.0F * (float) Math.PI));
-		this.setThrowableHeading(this.motionX, this.motionY, this.motionZ, speed * 1.5F, 1.0F);
+		setThrowableHeading(motionX, motionY, motionZ, speed, inaccuracy);
+	}
+
+	public EntityProjectile(World worldIn, EntityLivingBase shooter, float speed)
+	{
+		this(worldIn, shooter, speed, 1.0F);
 	}
 
 	protected void entityInit()
@@ -141,24 +118,25 @@ public class EntityProjectile extends Entity implements IProjectile
 	 * @param inaccuracy
 	 *            Higher means more error.
 	 */
-	public void setThrowableHeading(double x, double y, double z, float speed, float inaccuracy)
+	public void setThrowableHeading(double motionX, double motionY, double motionZ, float speed, float inaccuracy)
 	{
-		float f2 = MathHelper.sqrt_double(x * x + y * y + z * z);
-		x /= (double) f2;
-		y /= (double) f2;
-		z /= (double) f2;
-		x += this.rand.nextGaussian() * (double) (this.rand.nextBoolean() ? -1 : 1) * 0.007499999832361937D * (double) inaccuracy;
-		y += this.rand.nextGaussian() * (double) (this.rand.nextBoolean() ? -1 : 1) * 0.007499999832361937D * (double) inaccuracy;
-		z += this.rand.nextGaussian() * (double) (this.rand.nextBoolean() ? -1 : 1) * 0.007499999832361937D * (double) inaccuracy;
-		x *= (double) speed;
-		y *= (double) speed;
-		z *= (double) speed;
-		this.motionX = x;
-		this.motionY = y;
-		this.motionZ = z;
-		float f3 = MathHelper.sqrt_double(x * x + z * z);
-		this.prevRotationYaw = this.rotationYaw = (float) (Math.atan2(x, z) * 180.0D / Math.PI);
-		this.prevRotationPitch = this.rotationPitch = (float) (Math.atan2(y, (double) f3) * 180.0D / Math.PI);
+		float f2 = MathHelper
+				.sqrt_double(motionX * motionX + motionY * motionY + motionZ * motionZ);
+		motionX /= (double) f2;
+		motionY /= (double) f2;
+		motionZ /= (double) f2;
+		motionX += this.rand.nextGaussian() * (double) (this.rand.nextBoolean() ? -1 : 1) * 0.007499999832361937D * (double) inaccuracy;
+		motionY += this.rand.nextGaussian() * (double) (this.rand.nextBoolean() ? -1 : 1) * 0.007499999832361937D * (double) inaccuracy;
+		motionZ += this.rand.nextGaussian() * (double) (this.rand.nextBoolean() ? -1 : 1) * 0.007499999832361937D * (double) inaccuracy;
+		motionX *= (double) speed;
+		motionY *= (double) speed;
+		motionZ *= (double) speed;
+		this.motionX = motionX;
+		this.motionY = motionY;
+		this.motionZ = motionZ;
+		float f3 = MathHelper.sqrt_double(motionX * motionX + motionZ * motionZ);
+		this.prevRotationYaw = this.rotationYaw = (float) (Math.atan2(motionX, motionZ) * 180.0D / Math.PI);
+		this.prevRotationPitch = this.rotationPitch = (float) (Math.atan2(motionY, (double) f3) * 180.0D / Math.PI);
 		this.ticksInGround = 0;
 	}
 

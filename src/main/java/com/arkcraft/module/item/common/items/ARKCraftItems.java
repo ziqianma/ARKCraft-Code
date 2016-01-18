@@ -28,6 +28,7 @@ import com.arkcraft.module.item.common.entity.item.projectiles.EntitySimpleRifle
 import com.arkcraft.module.item.common.entity.item.projectiles.EntitySimpleShotgunAmmo;
 import com.arkcraft.module.item.common.entity.item.projectiles.EntityStoneArrow;
 import com.arkcraft.module.item.common.entity.item.projectiles.EntityTranqArrow;
+import com.arkcraft.module.item.common.entity.item.projectiles.EntityTranquilizer;
 import com.arkcraft.module.item.common.entity.item.projectiles.dispense.DispenseBallistaBolt;
 import com.arkcraft.module.item.common.entity.item.projectiles.dispense.DispenseRocketPropelledGrenade;
 import com.arkcraft.module.item.common.entity.item.projectiles.dispense.DispenseSimpleBullet;
@@ -38,13 +39,13 @@ import com.arkcraft.module.item.common.items.weapons.ItemCompoundBow;
 import com.arkcraft.module.item.common.items.weapons.ItemSpear;
 import com.arkcraft.module.item.common.items.weapons.ItemWoodenClub;
 import com.arkcraft.module.item.common.items.weapons.bullets.ItemProjectile;
-import com.arkcraft.module.item.common.items.weapons.guns.ItemCrossbow;
-import com.arkcraft.module.item.common.items.weapons.guns.ItemFabricatedPistol;
-import com.arkcraft.module.item.common.items.weapons.guns.ItemLongneckRifle;
-import com.arkcraft.module.item.common.items.weapons.guns.ItemRangedWeapon;
-import com.arkcraft.module.item.common.items.weapons.guns.ItemRocketLauncher;
-import com.arkcraft.module.item.common.items.weapons.guns.ItemShotgun;
-import com.arkcraft.module.item.common.items.weapons.guns.ItemSimplePistol;
+import com.arkcraft.module.item.common.items.weapons.ranged.ItemCrossbow;
+import com.arkcraft.module.item.common.items.weapons.ranged.ItemFabricatedPistol;
+import com.arkcraft.module.item.common.items.weapons.ranged.ItemLongneckRifle;
+import com.arkcraft.module.item.common.items.weapons.ranged.ItemRangedWeapon;
+import com.arkcraft.module.item.common.items.weapons.ranged.ItemRocketLauncher;
+import com.arkcraft.module.item.common.items.weapons.ranged.ItemShotgun;
+import com.arkcraft.module.item.common.items.weapons.ranged.ItemSimplePistol;
 
 /**
  * @author wildbill22
@@ -257,6 +258,8 @@ public class ARKCraftItems
 		if (ModuleItemBalance.WEAPONS.LONGNECK_RIFLE)
 		{
 			EntityHandler.registerModEntity(EntitySimpleRifleAmmo.class, "Simple Rifle Ammo",
+					ARKCraft.instance, 64, 10, true);
+			EntityHandler.registerModEntity(EntityTranquilizer.class, "Tranquilizer",
 					ARKCraft.instance, 64, 10, true);
 		}
 

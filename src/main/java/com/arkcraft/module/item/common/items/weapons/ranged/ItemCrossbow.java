@@ -1,4 +1,4 @@
-package com.arkcraft.module.item.common.items.weapons.guns;
+package com.arkcraft.module.item.common.items.weapons.ranged;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -10,7 +10,7 @@ public class ItemCrossbow extends ItemRangedWeapon
 {
 	public ItemCrossbow()
 	{
-		super("crossbow", 250, 1, "stone_arrow", 1, 2);
+		super("crossbow", 250, 1, "stone_arrow", 1, 2, 1.5F, 2F);
 	}
 
 	@Override
