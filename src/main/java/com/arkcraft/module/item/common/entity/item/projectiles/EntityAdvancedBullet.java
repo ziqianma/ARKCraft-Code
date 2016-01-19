@@ -39,20 +39,21 @@ public class EntityAdvancedBullet extends EntityProjectile
 		return 0.98F;
 	}
 
+	
 	@Override
 	public void onUpdate()
 	{
 		super.onUpdate();
 
-		if (ticksInAir > 100)
+		if (secsInAir > 1)
 		{
 			setDead();
 		}
-
+	
 		worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, posX, posY, posZ, 0.0D, 0.0D,
 				0.0D);
 
-	}
+	}	
 
 	@Override
 	public void onEntityHit(Entity entity)

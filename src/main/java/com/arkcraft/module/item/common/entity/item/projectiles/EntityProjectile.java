@@ -48,6 +48,8 @@ public class EntityProjectile extends Entity implements IProjectile
 	public Entity shootingEntity;
 	public int ticksInGround;
 	public int ticksInAir;
+	public int secsInAir = ticksInAir * 20;
+	public int secsInGround = ticksInGround * 20;
 	public double damage = 2.0D;
 	/**
 	 * The amount of knockback an arrow applies when it hits a mob.
@@ -183,7 +185,7 @@ public class EntityProjectile extends Entity implements IProjectile
 		BlockPos blockpos = new BlockPos(this.xTile, this.yTile, this.zTile);
 		IBlockState iblockstate = this.worldObj.getBlockState(blockpos);
 		Block block = iblockstate.getBlock();
-
+		
 		if (block.getMaterial() != Material.air)
 		{
 			block.setBlockBoundsBasedOnState(this.worldObj, blockpos);
@@ -196,7 +198,7 @@ public class EntityProjectile extends Entity implements IProjectile
 				this.inGround = true;
 			}
 		}
-
+	
 		if (this.arrowShake > 0)
 		{
 			--this.arrowShake;
@@ -363,8 +365,9 @@ public class EntityProjectile extends Entity implements IProjectile
 							this.posY - this.motionY * (double) f4,
 							this.posZ - this.motionZ * (double) f4, this.motionX, this.motionY,
 							this.motionZ, new int[0]);
+					
 				}
-
+				
 				res = 0.6F;
 			}
 
@@ -417,7 +420,7 @@ public class EntityProjectile extends Entity implements IProjectile
 			this.inTile.onEntityCollidedWithBlock(this.worldObj, blockpos1, iblockstate, this);
 		}
 	}
-
+	
 	public int getMaxLifetime()
 	{
 		return 1200;

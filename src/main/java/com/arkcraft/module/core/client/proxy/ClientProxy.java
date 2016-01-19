@@ -4,6 +4,7 @@ import java.util.Map;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.ItemModelMesher;
 import net.minecraft.client.renderer.entity.RenderSnowball;
 import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.client.resources.model.ModelResourceLocation;
@@ -14,6 +15,8 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.arkcraft.lib.LogHelper;
 import com.arkcraft.module.core.ARKCraft;
@@ -62,10 +65,13 @@ import com.arkcraft.module.item.common.entity.item.projectiles.EntityTranquilize
 import com.arkcraft.module.item.common.handlers.PotionEffectHandler;
 import com.arkcraft.module.item.common.items.ARKCraftItems;
 import com.arkcraft.module.item.common.items.ItemARKFood;
+import com.arkcraft.module.item.common.items.weapons.ItemARKBow;
 
 public class ClientProxy extends CommonProxy
 {
 	boolean initDone = false;
+	public static ItemARKBow bow;
+
 
 	@SuppressWarnings("deprecation")
 	@Override
@@ -79,13 +85,14 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntityCobble.class, new RenderSnowball(
 				Minecraft.getMinecraft().getRenderManager(), ARKCraftItems.rock, Minecraft
 						.getMinecraft().getRenderItem()));
+		/*
 		RenderingRegistry.registerEntityRenderingHandler(EntityTranqArrow.class,
 				new RenderTranqArrow());
 		RenderingRegistry.registerEntityRenderingHandler(EntityStoneArrow.class,
 				new RenderStoneArrow());
 		RenderingRegistry.registerEntityRenderingHandler(EntityMetalArrow.class,
 				new RenderMetalArrow());
-
+	*/
 		RenderingRegistry.registerEntityRenderingHandler(EntityDodoEgg.class, new RenderSnowball(
 				Minecraft.getMinecraft().getRenderManager(), ARKCraftItems.dodo_egg, Minecraft
 						.getMinecraft().getRenderItem()));
@@ -118,13 +125,19 @@ public class ClientProxy extends CommonProxy
 				"arkcraft:longneck_rifle_scoped");
 		ModelBakery.addVariantName(ARKCraftItems.shotgun, "arkcraft:shotgun",
 				"arkcraft:shotgun_reload");
+		
+		ModelBakery.addVariantName(ARKCraftItems.bow, 
+				"arkcraft:bow",
+				"arkcraft:bow_pulling_0", 
+				"arkcraft:bow_pulling_1", 
+				"arkcraft:bow_pulling_2");
 
 		KeyBindings.preInit();
 		dossierProxy.init();
 		LogHelper.info("CommonProxy: Init run finished.");
 		initDone = true;
 	}
-
+	
 	@Override
 	public void registerPackets(ARKMessagePipeline pipeline)
 	{
