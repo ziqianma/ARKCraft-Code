@@ -35,6 +35,7 @@ import com.arkcraft.module.item.common.entity.item.projectiles.dispense.Dispense
 import com.arkcraft.module.item.common.entity.item.projectiles.dispense.DispenseSimpleRifleAmmo;
 import com.arkcraft.module.item.common.entity.item.projectiles.dispense.DispenseSimpleShotgunAmmo;
 import com.arkcraft.module.item.common.entity.item.projectiles.dispense.DispenseTranquilizer;
+import com.arkcraft.module.item.common.items.weapons.ItemARKBow;
 import com.arkcraft.module.item.common.items.weapons.ItemCompoundBow;
 import com.arkcraft.module.item.common.items.weapons.ItemSpear;
 import com.arkcraft.module.item.common.items.weapons.ItemWoodenClub;
@@ -86,6 +87,7 @@ public class ARKCraftItems
 	public static ItemARKWeaponBase ironPike;
 	public static ItemSpear spear;
 	public static ItemWoodenClub wooden_club;
+	public static ItemARKBow bow;
 	public static ItemCompoundBow compound_bow;
 	public static ItemProjectile tranquilizer, stone_arrow, tranq_arrow, metal_arrow,
 			ballista_bolt, simple_bullet, simple_rifle_ammo, simple_shotgun_ammo,
@@ -186,7 +188,12 @@ public class ARKCraftItems
 		// Bows
 		compound_bow = new ItemCompoundBow();
 		registerItem("compound_bow", compound_bow);
+		
+		bow = new ItemARKBow();
+		registerItem("bow", bow);
+	
 
+	         
 		// Bullets
 		// tranq_arrow = addItemProjectile("tranq_arrow");
 		// stone_arrow = addItemProjectile("stone_arrow");
