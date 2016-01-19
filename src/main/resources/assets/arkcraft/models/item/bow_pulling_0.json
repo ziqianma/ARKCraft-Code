@@ -3,7 +3,7 @@
 	"textures": {
 		"particle": "arkcraft:items/bow",
 		"texture": "arkcraft:items/bow",
-		"arrow": "entity/arrow"
+		"arrow": "arkcraft:items/arrow"
 	},
 	"elements": [
 		{
