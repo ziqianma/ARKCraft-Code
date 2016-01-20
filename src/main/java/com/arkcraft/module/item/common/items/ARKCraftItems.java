@@ -58,7 +58,7 @@ public class ARKCraftItems
 	public static ItemARKSeed tintoBerrySeed, amarBerrySeed, azulBerrySeed, mejoBerrySeed,
 			narcoBerrySeed, stimBerrySeed;
 	public static ItemARKBase rock, cementing_pastes, fiber, chitin, narcotics, dodo_bag,
-			dodo_feather, gun_powder, spark_powder, hide, scope;
+			dodo_feather, gun_powder, spark_powder, hide;
 	public static ItemThatch thatch;
 	public static ItemARKBase wood, metal, metal_ingot, flint;
 	public static ItemFeces dodo_feces, player_feces, fertilizer;
@@ -81,6 +81,9 @@ public class ARKCraftItems
 	public static ItemStoneHatchet stone_hatchet;
 	public static ItemMetalPick metal_pick;
 	public static ItemMetalHatchet metal_hatchet;
+	
+	//Attachments
+	public static ItemARKBase scope, flash_light;
 
 	// Weapons
 	public static ItemSlingshot slingshot;
@@ -148,6 +151,7 @@ public class ARKCraftItems
 		// Weapons and tools
 		rock = addItem("rock");
 		scope = addItem("scope");
+		flash_light = addItem("flash_light");
 		cementing_pastes = addItem("cementing_paste");
 		slingshot = addSlingshot("slingshot");
 		grenade = addGrenade("grenade");
