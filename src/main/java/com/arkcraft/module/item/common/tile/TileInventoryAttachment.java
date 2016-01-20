@@ -19,6 +19,7 @@ public class TileInventoryAttachment extends AbstractInventory
 	/** Provides NBT Tag Compound to reference */
 	private final ItemStack invStack;
 	public boolean activate_scoping;
+	public boolean activate_flashlight;
 
 	public TileInventoryAttachment(ItemStack stack)
 	{
@@ -61,6 +62,10 @@ public class TileInventoryAttachment extends AbstractInventory
 		{
 			activate_scoping = true;
 		}
+		else if (isFlashPresent())
+		{
+			activate_flashlight = true;
+		}
 
 		writeToNBT(invStack.getTagCompound());
 	}
@@ -70,6 +75,16 @@ public class TileInventoryAttachment extends AbstractInventory
 		for (ItemStack stack : inventory)
 		{
 			if (stack != null && stack.getItem() == ARKCraftItems.scope) return true;
+		}
+
+		return false;
+	}
+	
+	public boolean isFlashPresent()
+	{
+		for (ItemStack stack : inventory)
+		{
+			if (stack != null && stack.getItem() == ARKCraftItems.flash_light) return true;
 		}
 
 		return false;

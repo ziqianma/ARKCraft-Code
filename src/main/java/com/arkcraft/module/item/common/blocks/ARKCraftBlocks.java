@@ -1,5 +1,6 @@
 package com.arkcraft.module.item.common.blocks;
 
+import com.arkcraft.module.item.common.tile.TileFlashlight;
 import com.arkcraft.module.item.common.tile.TileInventoryCropPlot;
 import com.arkcraft.module.item.common.tile.TileInventoryForge;
 import com.arkcraft.module.item.common.tile.TileInventoryMP;
@@ -7,6 +8,7 @@ import com.arkcraft.module.core.GlobalAdditions;
 import com.arkcraft.module.core.common.handlers.GenerationHandler;
 import com.arkcraft.module.item.common.tile.TileInventoryCompostBin;
 import com.arkcraft.module.item.common.tile.TileInventorySmithy;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.ResourceLocation;
@@ -29,6 +31,7 @@ public class ARKCraftBlocks
     public static BlockMortarAndPestle pestle;
     public static BlockCropPlot crop_plot;
     public static BlockRefiningForge refining_forge;
+    public static BlockFlashlight block_flashlight;
 //	public static BlockImprovisedExplosiveDevice block_explosive_device;
 //	public static BlockExplosiveDeviceWire block_explosive_wire;
 
@@ -53,6 +56,9 @@ public class ARKCraftBlocks
 
         //blockNarcoBrerry = addBlock(Material.ground, "narcoBerryBlock", 3.0F);
         blockNarcoBrerry = getRegisteredBlock("blockNarcoBerry");
+        block_flashlight = new BlockFlashlight();
+        GameRegistry.registerBlock(block_flashlight, "block_flashlight");
+
         //	block_explosive_device = (BlockImprovisedExplosiveDevice) registerBlockNoTab(new BlockImprovisedExplosiveDevice(), "block_explosive_device");
         wooden_spikes = (BlockSpikes) registerBlock(new BlockSpikes(Material.wood, 3.0F), "wooden_spikes");
 
@@ -70,6 +76,8 @@ public class ARKCraftBlocks
         GameRegistry.registerTileEntity(TileInventoryCompostBin.class, "TileEntityCompostBin");
         GameRegistry.registerTileEntity(TileInventorySmithy.class, "TileInventorySmithy");
         GameRegistry.registerTileEntity(TileInventoryForge.class, "TileInventoryForge");
+        GameRegistry.registerTileEntity(TileFlashlight.class, "TileFlashlight");
+
     }
 
     private static Block registerBlock(Block block, String name)
