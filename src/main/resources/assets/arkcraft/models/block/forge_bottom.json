@@ -1,0 +1,26 @@
+{
+"__comment": "Designed by Creativeone with BDcraft Cubik PRO 0.95 Beta - http://bdcraft.net",
+"textures": {
+    "particle": "blocks/cobblestone",
+    "texture": "blocks/cobblestone",
+    "coal_block": "blocks/coal_block",
+    "cauldron_inner": "blocks/cauldron_inner",
+    "furnace_top": "blocks/furnace_top",
+    "log_oak": "blocks/log_oak",
+    "furnace_front_on": "blocks/furnace_front_on"
+},
+"elements": [ 
+{
+    "from": [ 0, 0, 0 ],
+    "to": [ 16, 16, 16 ],
+    "faces": {
+        "down":  { "uv": [ 0, 0, 16, 16 ], "texture": "#furnace_top" },
+        "up":    { "uv": [ 0, 0, 16, 16 ], "texture": "#furnace_top" },
+        "north": { "uv": [ 0, 0, 16, 16 ], "texture": "#furnace_top" },
+        "south": { "uv": [ 0, 0, 16, 16 ], "texture": "#furnace_top" },
+        "west":  { "uv": [ 0, 0, 16, 16 ], "texture": "#furnace_top" },
+        "east":  { "uv": [ 0, 0, 16, 16 ], "texture": "#furnace_top" }
+    }
+}
+]
+}
