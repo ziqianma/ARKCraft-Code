@@ -53,6 +53,7 @@ public class TileInventoryAttachment extends AbstractInventory
 	@Override
 	public void markDirty()
 	{
+		super.markDirty();
 		for (int i = 0; i < getSizeInventory(); ++i)
 		{
 			if (getStackInSlot(i) != null && getStackInSlot(i).stackSize == 0) inventory[i] = null;
