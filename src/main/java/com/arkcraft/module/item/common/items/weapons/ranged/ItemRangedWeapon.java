@@ -9,6 +9,7 @@ import java.util.Set;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,17 +19,22 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.arkcraft.module.core.ARKCraft;
+import com.arkcraft.module.item.common.blocks.ARKCraftBlocks;
 import com.arkcraft.module.item.common.entity.item.projectiles.EntityProjectile;
 import com.arkcraft.module.item.common.entity.item.projectiles.ProjectileType;
 import com.arkcraft.module.item.common.items.weapons.bullets.ItemProjectile;
 import com.arkcraft.module.item.common.items.weapons.handlers.IItemWeapon;
 import com.arkcraft.module.item.common.items.weapons.handlers.WeaponModAttributes;
+import com.arkcraft.module.item.common.tile.TileFlashlight;
 import com.arkcraft.module.item.common.tile.TileInventoryAttachment;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
@@ -181,6 +187,75 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 	// }
 	// }
 	// }
+	
+	@Override
+    public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
+	{
+		if(entityIn instanceof EntityPlayer)
+		{
+			TileInventoryAttachment inv = new TileInventoryAttachment(stack);
+			MovingObjectPosition mop = rayTrace(entityIn, 20, 1.0F);
+		
+			if (inv.isFlashPresent())
+			{
+				if (mop != null)
+				{
+					if (!(mop.typeOfHit == MovingObjectPosition.MovingObjectType.MISS))
+					{
+						BlockPos pos;
+	
+						if (mop.typeOfHit == MovingObjectPosition.MovingObjectType.ENTITY)
+						{
+							pos = mop.entityHit.getPosition();
+						}
+						else
+						{
+							pos = mop.getBlockPos();
+							pos = pos.offset(mop.sideHit);
+						}
+	
+						if (entityIn.worldObj.getBlockState(pos).getBlock() == ARKCraftBlocks.block_flashlight)
+						{
+							TileFlashlight tileLight = (TileFlashlight) entityIn.worldObj
+									.getTileEntity(pos);
+							tileLight.ticks = 0;
+						}
+						else if (entityIn.worldObj.isAirBlock(pos))
+						{
+							entityIn.worldObj.setBlockState(pos,
+									ARKCraftBlocks.block_flashlight.getDefaultState());
+	
+						}
+					}
+				}
+			}
+		}
+	}
+
+	public Vec3 getPositionEyes(Entity player, float partialTick)
+	{
+		if (partialTick == 1.0F)
+		{
+			return new Vec3(player.posX, player.posY + (double) player.getEyeHeight(), player.posZ);
+		}
+		else
+		{
+			double d0 = player.prevPosX + (player.posX - player.prevPosX) * (double) partialTick;
+			double d1 = player.prevPosY + (player.posY - player.prevPosY) * (double) partialTick + (double) player
+					.getEyeHeight();
+			double d2 = player.prevPosZ + (player.posZ - player.prevPosZ) * (double) partialTick;
+			return new Vec3(d0, d1, d2);
+		}
+	}
+
+	public MovingObjectPosition rayTrace(Entity player, double distance, float partialTick)
+	{
+		Vec3 vec3 = getPositionEyes(player, partialTick);
+		Vec3 vec31 = player.getLook(partialTick);
+		Vec3 vec32 = vec3.addVector(vec31.xCoord * distance, vec31.yCoord * distance,
+				vec31.zCoord * distance);
+		return player.worldObj.rayTraceBlocks(vec3, vec32, false, false, true);
+	}
 
 	@Override
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player)
