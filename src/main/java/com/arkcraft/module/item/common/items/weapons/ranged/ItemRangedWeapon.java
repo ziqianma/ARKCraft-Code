@@ -190,13 +190,13 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 	
 	@Override
     public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
-	{
+	{		
 		if(entityIn instanceof EntityPlayer)
 		{
 			TileInventoryAttachment inv = new TileInventoryAttachment(stack);
 			MovingObjectPosition mop = rayTrace(entityIn, 20, 1.0F);
 		
-			if (inv.isFlashPresent())
+			if (inv.isFlashPresent() && stack.getItem() instanceof IItemWeapon)
 			{
 				if (mop != null)
 				{
