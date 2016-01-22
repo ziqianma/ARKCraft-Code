@@ -56,11 +56,17 @@ public class EntitySimpleShotgunAmmo extends EntityProjectile
 					0.0D, 0.0D);
 		}
 	}
+	
+	@Override
+	public void setKnockbackStrength(int knockBack)
+	{
+		this.knockbackStrength = 10;
+	}
 
 	@Override
 	public void onEntityHit(Entity entity)
 	{
-		float damage = 8F;
+		float damage = 2.5F;
 
 		DamageSource damagesource;
 		if (shootingEntity == null)
@@ -86,6 +92,7 @@ public class EntitySimpleShotgunAmmo extends EntityProjectile
 	public void onGroundHit(MovingObjectPosition movingobjectposition)
 	{
 		worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, posX, posY, posZ, 0.0D, 0.0D, 0.0D);
+		breakGlass(movingobjectposition);
 		this.setDead();
 	}
 

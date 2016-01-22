@@ -15,7 +15,7 @@ public class ItemShotgun extends ItemRangedWeapon
 {
 	public ItemShotgun()
 	{
-		super("shotgun", 200, 2, "simple_shotgun_ammo", 1, 0, 6F, 14F);
+		super("shotgun", 200, 2, "simple_shotgun_ammo", 1, 0, 6F, 20F);
 	}
 
 	@Override
@@ -58,7 +58,7 @@ public class ItemShotgun extends ItemRangedWeapon
 		// world.playSoundEffect(x, y, z, ARKCraft.MODID + ":" +
 		// "shotgun_doubleShoot", 5.0F, 0.7F / (weapon.getItemRand().nextFloat()
 		// * 0.4F + 0.6F));
-		world.playSoundEffect(x, y, z, ARKCraft.MODID + ":" + "shotgun_doubleShoot", 1.5F,
+		world.playSoundEffect(x, y, z, ARKCraft.MODID + ":" + "shotgun_shot", 1.5F,
 				1F / (this.getItemRand().nextFloat() * 0.4F + 0.7F));
 
 		float particleX = -MathHelper.sin(((yaw + 23) / 180F) * 3.141593F) * MathHelper
@@ -89,7 +89,7 @@ public class ItemShotgun extends ItemRangedWeapon
 	{
 		if (!world.isRemote)
 		{
-			for (int i = 0; i < this.getAmmoConsumption() * 4; i++)
+			for (int i = 0; i < this.getAmmoConsumption() * 10; i++)
 			{
 				EntityProjectile projectile = createProjectile(stack, world, player);
 				if (projectile != null)

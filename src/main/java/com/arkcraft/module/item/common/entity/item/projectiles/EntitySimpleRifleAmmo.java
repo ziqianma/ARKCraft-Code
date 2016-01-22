@@ -74,6 +74,7 @@ public class EntitySimpleRifleAmmo extends EntityProjectile
 	public void onGroundHit(MovingObjectPosition movingobjectposition)
 	{
 		worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, posX, posY, posZ, 0.0D, 0.0D, 0.0D);
+		breakGlass(movingobjectposition);
 		this.setDead();
 	}
 }

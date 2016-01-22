@@ -2,6 +2,9 @@ package com.arkcraft.module.item.common.entity.item.projectiles;
 
 import java.util.List;
 
+import com.arkcraft.lib.LogHelper;
+import com.arkcraft.module.item.common.blocks.ARKCraftBlocks;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -12,9 +15,13 @@ import net.minecraft.entity.IProjectile;
 import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.play.server.S2BPacketChangeGameState;
+import net.minecraft.stats.StatList;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumParticleTypes;
@@ -388,7 +395,26 @@ public class EntityProjectile extends Entity implements IProjectile
 	public void onGroundHit(MovingObjectPosition movingobjectposition)
 	{
 		applyGroundHitEffects(movingobjectposition);
-		// this.setDead();
+//		breakGlass(movingobjectposition);
+	}
+	
+	public void breakGlass(MovingObjectPosition movingobjectposition) {
+		
+		BlockPos blockpos1 = movingobjectposition.getBlockPos();
+
+		if (movingobjectposition.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK)
+	    {
+			if (this.worldObj.getBlockState(blockpos1).getBlock() == Blocks.glass_pane)
+			{
+				worldObj.destroyBlock(blockpos1, false);
+				worldObj.playSoundEffect(xTile, yTile, zTile, "random.break_glass", 2F, 3F);
+				LogHelper.error("Found block Glass");
+			}	
+	    }
+		else 
+		{
+			this.setDead();
+		}
 	}
 
 	public void applyGroundHitEffects(MovingObjectPosition movingobjectposition)
@@ -414,11 +440,11 @@ public class EntityProjectile extends Entity implements IProjectile
 		beenInGround = true;
 		this.arrowShake = getMaxArrowShake();
 		this.setIsCritical(false);
-
+        
 		if (this.inTile.getMaterial() != Material.air)
 		{
 			this.inTile.onEntityCollidedWithBlock(this.worldObj, blockpos1, iblockstate, this);
-		}
+		}		
 	}
 	
 	public int getMaxLifetime()

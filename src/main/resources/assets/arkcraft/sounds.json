@@ -152,15 +152,6 @@
             }
         ]
     },
-    "shotgun_shot": {
-        "category": "neutral",
-        "sounds": [
-            {
-                "name": "shotgun_shot",
-                "stream": false
-            }
-        ]
-    },
      "fabricated_pistol_shoot": {
         "category": "neutral",
         "sounds": [
@@ -197,11 +188,20 @@
             }
         ]
     },
-    "shotgun_doubleShoot": {
+    "shotgun_shot": {
         "category": "neutral",
         "sounds": [
             {
-                "name": "shotgun_doubleShoot",
+                "name": "shotgun_shot",
+                "stream": false
+            }
+        ]
+    },
+    "shotgun_reload": {
+        "category": "neutral",
+        "sounds": [
+            {
+                "name": "shotgun_reload",
                 "stream": false
             }
         ]
