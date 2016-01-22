@@ -37,7 +37,7 @@ public class TileFlashlight extends TileEntity implements IUpdatePlayerListBox
 	@Override
 	public Packet getDescriptionPacket()
 	{
-		NBTTagCompound nbt = getTileData();
+		NBTTagCompound nbt = new NBTTagCompound();
 		writeToNBT(nbt);
 		return new S35PacketUpdateTileEntity(this.pos, getBlockMetadata(), nbt);
 	}
@@ -46,7 +46,7 @@ public class TileFlashlight extends TileEntity implements IUpdatePlayerListBox
 	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)
 	{
 		NBTTagCompound nbt = pkt.getNbtCompound();
-		if (nbt != null && nbt.hasKey("ticks"))
+		if (nbt != null)
 		{
 			this.readFromNBT(nbt);
 		}
@@ -55,13 +55,11 @@ public class TileFlashlight extends TileEntity implements IUpdatePlayerListBox
 	@Override
 	public void update()
 	{
-		ticks++;
-
-		if (ticks > 2)
+		if (++ticks > 2)
 		{
-			this.worldObj.removeTileEntity(pos);
+			this.invalidate();
 			this.worldObj.setBlockState(pos, Blocks.air.getDefaultState());
-			this.worldObj.markBlockForUpdate(pos);
+			return;
 		}
 	}
 }
