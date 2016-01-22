@@ -2,9 +2,6 @@ package com.arkcraft.module.item.common.entity.item.projectiles;
 
 import java.util.List;
 
-import com.arkcraft.lib.LogHelper;
-import com.arkcraft.module.item.common.blocks.ARKCraftBlocks;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -16,12 +13,9 @@ import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.play.server.S2BPacketChangeGameState;
-import net.minecraft.stats.StatList;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumParticleTypes;
@@ -32,6 +26,8 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import com.arkcraft.lib.LogHelper;
 
 public class EntityProjectile extends Entity implements IProjectile
 {
@@ -192,7 +188,7 @@ public class EntityProjectile extends Entity implements IProjectile
 		BlockPos blockpos = new BlockPos(this.xTile, this.yTile, this.zTile);
 		IBlockState iblockstate = this.worldObj.getBlockState(blockpos);
 		Block block = iblockstate.getBlock();
-		
+
 		if (block.getMaterial() != Material.air)
 		{
 			block.setBlockBoundsBasedOnState(this.worldObj, blockpos);
@@ -205,7 +201,7 @@ public class EntityProjectile extends Entity implements IProjectile
 				this.inGround = true;
 			}
 		}
-	
+
 		if (this.arrowShake > 0)
 		{
 			--this.arrowShake;
@@ -372,9 +368,9 @@ public class EntityProjectile extends Entity implements IProjectile
 							this.posY - this.motionY * (double) f4,
 							this.posZ - this.motionZ * (double) f4, this.motionX, this.motionY,
 							this.motionZ, new int[0]);
-					
+
 				}
-				
+
 				res = 0.6F;
 			}
 
@@ -395,23 +391,24 @@ public class EntityProjectile extends Entity implements IProjectile
 	public void onGroundHit(MovingObjectPosition movingobjectposition)
 	{
 		applyGroundHitEffects(movingobjectposition);
-//		breakGlass(movingobjectposition);
+		breakGlass(movingobjectposition);
 	}
-	
-	public void breakGlass(MovingObjectPosition movingobjectposition) {
-		
+
+	public void breakGlass(MovingObjectPosition movingobjectposition)
+	{
+
 		BlockPos blockpos1 = movingobjectposition.getBlockPos();
 
 		if (movingobjectposition.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK)
-	    {
+		{
 			if (this.worldObj.getBlockState(blockpos1).getBlock() == Blocks.glass_pane)
 			{
 				worldObj.destroyBlock(blockpos1, false);
 				worldObj.playSoundEffect(xTile, yTile, zTile, "random.break_glass", 2F, 3F);
 				LogHelper.error("Found block Glass");
-			}	
-	    }
-		else 
+			}
+		}
+		else
 		{
 			this.setDead();
 		}
@@ -440,13 +437,13 @@ public class EntityProjectile extends Entity implements IProjectile
 		beenInGround = true;
 		this.arrowShake = getMaxArrowShake();
 		this.setIsCritical(false);
-        
+
 		if (this.inTile.getMaterial() != Material.air)
 		{
 			this.inTile.onEntityCollidedWithBlock(this.worldObj, blockpos1, iblockstate, this);
-		}		
+		}
 	}
-	
+
 	public int getMaxLifetime()
 	{
 		return 1200;
