@@ -187,23 +187,23 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 	// }
 	// }
 	// }
-	
+
 	@Override
-    public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
-	{		
-		if(entityIn instanceof EntityPlayer)
+	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
+	{
+		if (isSelected && entityIn instanceof EntityPlayer)
 		{
 			TileInventoryAttachment inv = new TileInventoryAttachment(stack);
 			MovingObjectPosition mop = rayTrace(entityIn, 20, 1.0F);
-		
-			if (inv.isFlashPresent() && stack.getItem() instanceof IItemWeapon)
+
+			if (inv.isFlashPresent())
 			{
 				if (mop != null)
 				{
 					if (!(mop.typeOfHit == MovingObjectPosition.MovingObjectType.MISS))
 					{
 						BlockPos pos;
-	
+
 						if (mop.typeOfHit == MovingObjectPosition.MovingObjectType.ENTITY)
 						{
 							pos = mop.entityHit.getPosition();
@@ -213,7 +213,7 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 							pos = mop.getBlockPos();
 							pos = pos.offset(mop.sideHit);
 						}
-	
+
 						if (entityIn.worldObj.getBlockState(pos).getBlock() == ARKCraftBlocks.block_flashlight)
 						{
 							TileFlashlight tileLight = (TileFlashlight) entityIn.worldObj
@@ -224,7 +224,7 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 						{
 							entityIn.worldObj.setBlockState(pos,
 									ARKCraftBlocks.block_flashlight.getDefaultState());
-	
+
 						}
 					}
 				}
@@ -445,11 +445,9 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 
 	public void soundCharge(ItemStack stack, World world, EntityPlayer player)
 	{
-		/*
-		 * world.playSoundAtEntity(player, ARKCraft.MODID + ":" +
-		 * this.getUnlocalizedName() + "_reload", 0.7F, 0.9F /
-		 * (getItemRand().nextFloat() * 0.2F + 0.0F));
-		 */
+		world.playSoundAtEntity(player,
+				ARKCraft.MODID + ":" + this.getUnlocalizedName() + "_reload", 0.7F,
+				0.9F / (getItemRand().nextFloat() * 0.2F + 0.0F));
 	}
 
 	public abstract int getReloadDuration();
