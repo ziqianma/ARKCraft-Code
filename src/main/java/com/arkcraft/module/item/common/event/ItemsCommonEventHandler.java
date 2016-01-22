@@ -160,6 +160,7 @@ public class ItemsCommonEventHandler
 		}
 	}
 
+	/*
 	@SubscribeEvent
 	public void playerTick(TickEvent.PlayerTickEvent event)
 	{
@@ -231,7 +232,7 @@ public class ItemsCommonEventHandler
 		Vec3 vec32 = vec3.addVector(vec31.xCoord * distance, vec31.yCoord * distance,
 				vec31.zCoord * distance);
 		return player.worldObj.rayTraceBlocks(vec3, vec32, false, false, true);
-	}
+	}	*/
 
 	@SubscribeEvent
 	public void onClonePlayer(PlayerEvent.Clone event)

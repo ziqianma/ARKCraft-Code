@@ -218,9 +218,9 @@
         "scale": [ 3, 3, 3 ]
     },
     "firstperson": {
-        "rotation": [ 0, 132, 0 ],
-        "translation": [ -4.6, 9.9, 0 ],
-        "scale": [ 2, 2, 2 ]
+        "rotation": [ -4, 133, -3 ],
+        "translation": [ -6, 11, -2.1 ],
+        "scale": [ 2.6, 2.6, 2.6 ]
     },
     "gui": {
         "rotation": [ -26, 16, 40 ],
