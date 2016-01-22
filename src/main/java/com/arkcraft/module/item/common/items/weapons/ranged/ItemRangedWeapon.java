@@ -416,9 +416,10 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 
 	public String getAmmoType(ItemStack stack)
 	{
-		String type = this.getDefaultAmmoType();
+		String type = null;
 		if (stack.hasTagCompound() && stack.getTagCompound().hasKey("ammotype")) type = stack
 				.getTagCompound().getString("ammotype");
+		if (type == null || type.equals("")) type = this.getDefaultAmmoType();
 		return type.toLowerCase();
 	}
 
@@ -428,7 +429,7 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 		stack.getTagCompound().setString("ammotype", type);
 	}
 
-	private String getDefaultAmmoType()
+	public String getDefaultAmmoType()
 	{
 		return this.defaultAmmoType;
 	}
@@ -502,13 +503,17 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 	{
 		this.setAmmoQuantity(stack, this.getAmmoQuantity(stack) - ammoConsumption);
 		int damage = 1;
+		int ammo = this.getAmmoQuantity(stack);
 		if (stack.getItemDamage() + damage > stack.getMaxDamage())
 		{
-			int ammo = this.getAmmoQuantity(stack);
 			String type = this.getAmmoType(stack);
 			Item i = GameRegistry.findItem(ARKCraft.MODID, type);
 			ItemStack s = new ItemStack(i, ammo);
 			player.inventory.addItemStackToInventory(s);
+		}
+		else if (ammo < 1)
+		{
+			this.setAmmoType(stack, "");
 		}
 		this.nextShotMillis = System.currentTimeMillis() + this.shotInterval;
 		stack.damageItem(damage, player);
@@ -520,6 +525,7 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 		try
 		{
 			String type = this.getAmmoType(stack);
+
 			Class<?> c = Class
 					.forName("com.arkcraft.module.item.common.entity.item.projectiles." + ProjectileType
 							.valueOf(type.toUpperCase()).getEntity());
