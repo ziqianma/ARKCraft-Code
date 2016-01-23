@@ -86,7 +86,6 @@ public class ItemsClientEventHandler
 				evt.setCanceled(true);
 				return;
 			}
-			else evt.setCanceled(true);
 			showScopeOverlap = false;
 			// Weapon with scope?
 			// if (i_item_weapon != null && i_item_weapon.ifCanScope())
