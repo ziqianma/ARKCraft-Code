@@ -25,7 +25,7 @@ public class TileInventoryAttachment extends AbstractInventory
 	{
 		inventory = new ItemStack[INV_SIZE];
 		this.invStack = stack;
-		if (!invStack.hasTagCompound())
+		if (invStack != null && !invStack.hasTagCompound())
 		{
 			invStack.setTagCompound(new NBTTagCompound());
 		}
@@ -80,7 +80,7 @@ public class TileInventoryAttachment extends AbstractInventory
 
 		return false;
 	}
-	
+
 	public boolean isFlashPresent()
 	{
 		for (ItemStack stack : inventory)
@@ -103,7 +103,7 @@ public class TileInventoryAttachment extends AbstractInventory
 	{
 		return player.getHeldItem() == invStack;
 	}
-	
+
 	@Override
 	protected String getNbtKey()
 	{
@@ -111,13 +111,14 @@ public class TileInventoryAttachment extends AbstractInventory
 	}
 
 	@Override
-	public boolean isItemValidForSlot(int index, ItemStack stack) 
+	public boolean isItemValidForSlot(int index, ItemStack stack)
 	{
 		return !(stack.getItem() instanceof ItemRangedWeapon);
 	}
-	
+
 	@Override
-	public ItemStack getStackInSlot(int slot) {
+	public ItemStack getStackInSlot(int slot)
+	{
 		return inventory[slot];
 	}
 
