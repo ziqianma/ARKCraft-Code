@@ -119,7 +119,7 @@ public class ARKMessagePipeline extends MessageToMessageCodec<FMLProxyPacket, AR
         out.add(pkt);
     }
 
-    public void initalize()
+    public void initialize()
     {
         channels = NetworkRegistry.INSTANCE.newChannel("ARKCraft", this);
     }

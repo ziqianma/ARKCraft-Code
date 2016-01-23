@@ -47,13 +47,13 @@ public class EntitySimpleRifleAmmo extends EntityProjectile
 
 		worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, posX, posY, posZ, 0.0D, 0.0D,
 				0.0D);
-
 	}
 
 	@Override
 	public void onEntityHit(Entity entity)
 	{
 		float damage = 15F;
+		
 		DamageSource damagesource = null;
 		if (shootingEntity == null)
 		{

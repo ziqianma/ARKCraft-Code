@@ -35,6 +35,7 @@ import com.arkcraft.module.core.common.entity.neutral.EntityBrontosaurus;
 import com.arkcraft.module.core.common.entity.passive.EntityDodo;
 import com.arkcraft.module.core.common.network.ARKMessagePipeline;
 import com.arkcraft.module.core.common.proxy.CommonProxy;
+import com.arkcraft.module.item.client.event.KeyBindings;
 import com.arkcraft.module.item.client.event.Mod2ClientEventHandler;
 import com.arkcraft.module.item.client.gui.overlay.GuiOverlay;
 import com.arkcraft.module.item.client.gui.overlay.GuiOverlayReloading;
@@ -48,7 +49,6 @@ import com.arkcraft.module.item.client.render.RenderStoneArrow;
 import com.arkcraft.module.item.client.render.RenderTranqArrow;
 import com.arkcraft.module.item.client.render.RenderTranquilizer;
 import com.arkcraft.module.item.common.blocks.ARKCraftBlocks;
-import com.arkcraft.module.item.common.config.KeyBindings;
 import com.arkcraft.module.item.common.config.ModuleItemBalance;
 import com.arkcraft.module.item.common.entity.EntityCobble;
 import com.arkcraft.module.item.common.entity.EntityDodoEgg;
@@ -73,7 +73,6 @@ public class ClientProxy extends CommonProxy
 	public static ItemARKBow bow;
 
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public void init()
 	{

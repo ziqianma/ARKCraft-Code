@@ -32,6 +32,8 @@ import com.arkcraft.module.core.common.network.ARKMessagePipeline;
 import com.arkcraft.module.core.common.network.OpenAttachmentInventory;
 import com.arkcraft.module.core.common.network.OpenPlayerCrafting;
 import com.arkcraft.module.core.common.network.PlayerPoop;
+import com.arkcraft.module.core.common.network.ReloadFinished;
+import com.arkcraft.module.core.common.network.ReloadStarted;
 import com.arkcraft.module.core.common.network.UpdateMPToCraftItem;
 import com.arkcraft.module.core.common.network.UpdatePlayerCrafting;
 import com.arkcraft.module.core.common.network.UpdateSmithyToCraftItem;
@@ -133,7 +135,7 @@ public class ARKCraft
 		proxy.registerWeapons();
 		proxy.registerEventHandlers();
 		proxy.init();
-		messagePipeline.initalize();
+		messagePipeline.initialize();
 		proxy.registerPackets(messagePipeline);
 	}
 
@@ -166,6 +168,10 @@ public class ARKCraft
 				id++, Side.SERVER);
 		modChannel.registerMessage(OpenAttachmentInventory.Handler.class,
 				OpenAttachmentInventory.class, id++, Side.SERVER);
+		modChannel.registerMessage(ReloadStarted.Handler.class, ReloadStarted.class, id++,
+				Side.SERVER);
+		modChannel.registerMessage(ReloadFinished.Handler.class, ReloadFinished.class, id++,
+				Side.CLIENT);
 	}
 
 	public boolean isDebugger()

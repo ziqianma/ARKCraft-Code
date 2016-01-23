@@ -49,14 +49,10 @@ public class EntitySimpleShotgunAmmo extends EntityProjectile
 			setDead();
 		}
 
-		float speed = 3F;
-		if (speed == 3F)
-		{
-			worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, posX, posY, posZ, 0.0D,
-					0.0D, 0.0D);
-		}
+		worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, posX, posY, posZ, 0.0D, 0.0D,
+				0.0D);
 	}
-	
+
 	@Override
 	public void setKnockbackStrength(int knockBack)
 	{
@@ -66,7 +62,7 @@ public class EntitySimpleShotgunAmmo extends EntityProjectile
 	@Override
 	public void onEntityHit(Entity entity)
 	{
-		float damage = 2.5F;
+		float damage = 3F;
 
 		DamageSource damagesource;
 		if (shootingEntity == null)

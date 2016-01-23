@@ -12,7 +12,6 @@ import net.minecraft.entity.IProjectile;
 import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.play.server.S2BPacketChangeGameState;
@@ -401,10 +400,12 @@ public class EntityProjectile extends Entity implements IProjectile
 
 		if (movingobjectposition.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK)
 		{
-			if (this.worldObj.getBlockState(blockpos1).getBlock() == Blocks.glass_pane)
+			if (this.worldObj.getBlockState(blockpos1).getBlock().getMaterial()
+					.equals(Material.glass))
 			{
-				worldObj.destroyBlock(blockpos1, false);
-				worldObj.playSoundEffect(xTile, yTile, zTile, "random.break_glass", 2F, 3F);
+				worldObj.destroyBlock(blockpos1, true);
+				// worldObj.playSoundEffect(xTile, yTile, zTile,
+				// "random.break_glass", 2F, 3F);
 				LogHelper.error("Found block Glass");
 			}
 		}

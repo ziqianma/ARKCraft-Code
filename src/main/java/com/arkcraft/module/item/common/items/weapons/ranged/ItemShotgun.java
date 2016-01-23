@@ -1,6 +1,5 @@
 package com.arkcraft.module.item.common.items.weapons.ranged;
 
-import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumParticleTypes;
@@ -15,16 +14,7 @@ public class ItemShotgun extends ItemRangedWeapon
 {
 	public ItemShotgun()
 	{
-		super("shotgun", 200, 2, "simple_shotgun_ammo", 1, 0, 6F, 20F);
-	}
-
-	@Override
-	public ModelResourceLocation getModel(ItemStack stack, EntityPlayer player, int useRemaining)
-	{
-		ModelResourceLocation m = super.getModel(stack, player, useRemaining);
-		if (player.isUsingItem() && this.canReload(stack, player)) return new ModelResourceLocation(
-				ARKCraft.MODID + ":" + m.getResourcePath() + "_reload", "inventory");
-		return m;
+		super("shotgun", 200, 2, "simple_shotgun_ammo", 1, 0, 6F, 15F);
 	}
 
 	@Override
@@ -58,8 +48,8 @@ public class ItemShotgun extends ItemRangedWeapon
 		// world.playSoundEffect(x, y, z, ARKCraft.MODID + ":" +
 		// "shotgun_doubleShoot", 5.0F, 0.7F / (weapon.getItemRand().nextFloat()
 		// * 0.4F + 0.6F));
-		world.playSoundEffect(x, y, z, ARKCraft.MODID + ":" + "shotgun_shot", 1.5F,
-				1F / (this.getItemRand().nextFloat() * 0.4F + 0.7F));
+		world.playSoundEffect(x, y, z, ARKCraft.MODID + ":" + "shotgun_shot", 1.5F, 1F / (this
+				.getItemRand().nextFloat() * 0.4F + 0.7F));
 
 		float particleX = -MathHelper.sin(((yaw + 23) / 180F) * 3.141593F) * MathHelper
 				.cos((pitch / 180F) * 3.141593F);
