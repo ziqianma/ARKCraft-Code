@@ -1,5 +1,7 @@
 package com.arkcraft.module.item.client.event;
 
+import java.util.Random;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.ScaledResolution;
@@ -33,7 +35,7 @@ import com.arkcraft.module.core.ARKCraft;
 import com.arkcraft.module.core.GlobalAdditions;
 import com.arkcraft.module.core.common.network.OpenAttachmentInventory;
 import com.arkcraft.module.core.common.network.OpenPlayerCrafting;
-import com.arkcraft.module.item.common.config.KeyBindings;
+import com.arkcraft.module.core.common.network.ReloadStarted;
 import com.arkcraft.module.item.common.entity.item.projectiles.EntityBallista;
 import com.arkcraft.module.item.common.entity.player.ARKPlayer;
 import com.arkcraft.module.item.common.items.weapons.handlers.IItemWeapon;
@@ -42,6 +44,12 @@ import com.arkcraft.module.item.common.tile.TileInventoryAttachment;
 
 public class ItemsClientEventHandler
 {
+	private static int ticks;
+	private static final int maxTicks = 20;
+	private static float yawSway;
+	private static float pitchSway;
+	private static final Random random = new Random();
+
 	public static void init()
 	{
 		ItemsClientEventHandler handler = new ItemsClientEventHandler();
@@ -53,6 +61,7 @@ public class ItemsClientEventHandler
 			"textures/gui/scope.png");
 	public boolean showScopeOverlap = false;
 	private Minecraft mc = Minecraft.getMinecraft();
+	private int slot = 1000;
 
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
@@ -60,50 +69,40 @@ public class ItemsClientEventHandler
 	{
 		Minecraft mc = Minecraft.getMinecraft();
 		EntityPlayer thePlayer = mc.thePlayer;
-
+		if (showScopeOverlap && slot != thePlayer.inventory.currentItem && slot != 1000)
+		{
+			showScopeOverlap = false;
+			return;
+		}
+		slot = thePlayer.inventory.currentItem;
+		ItemStack held = thePlayer.getCurrentEquippedItem();
 		if (thePlayer != null && evt.button == 0)
 		{
-			LogHelper.info("mouse down");
-			ItemStack stack = thePlayer.getCurrentEquippedItem();
-			if (stack != null)
+			TileInventoryAttachment inv = new TileInventoryAttachment(held);
+			if (inv.isScopePresent())
 			{
-				IItemWeapon i_item_weapon;
-				if (stack.getItem() instanceof IItemWeapon)
-				{
-					i_item_weapon = (IItemWeapon) stack.getItem();
-					TileInventoryAttachment inv = new TileInventoryAttachment(stack);
-					if (inv.isScopePresent())
-					{
-						if (evt.buttonstate)
-						{
-							showScopeOverlap = true;
-						}
-						else
-						{
-							showScopeOverlap = false;
-						}
-						evt.setCanceled(true);
-					}
-				}
-				else
-				{
-					i_item_weapon = null;
-				}
-				// Weapon with scope?
-				// if (i_item_weapon != null && i_item_weapon.ifCanScope())
-				// {
-				// if (evt.buttonstate)
-				// {
-				// ShowScopeOverlap = true;
-				// }
-				// else
-				// {
-				// ShowScopeOverlap = false;
-				// }
-				// evt.setCanceled(true);
-				// }
+				if (evt.buttonstate) showScopeOverlap = true;
+				else showScopeOverlap = false;
+				evt.setCanceled(true);
+				return;
 			}
+			else evt.setCanceled(true);
+			showScopeOverlap = false;
+			// Weapon with scope?
+			// if (i_item_weapon != null && i_item_weapon.ifCanScope())
+			// {
+			// if (evt.buttonstate)
+			// {
+			// ShowScopeOverlap = true;
+			// }
+			// else
+			// {
+			// ShowScopeOverlap = false;
+			// }
+			// evt.setCanceled(true);
+			// }
 		}
+
 	}
 
 	@SubscribeEvent
@@ -137,6 +136,7 @@ public class ItemsClientEventHandler
 				showScope();
 			}
 		}
+		else if (evt.type == RenderGameOverlayEvent.ElementType.CROSSHAIRS) evt.setCanceled(true);
 	}
 
 	@SubscribeEvent
@@ -193,8 +193,20 @@ public class ItemsClientEventHandler
 
 	public void showScope()
 	{
-		LogHelper.info("In ShowScope");
 		Minecraft mc = Minecraft.getMinecraft();
+
+		// add sway
+		ticks++;
+		if (ticks > maxTicks)
+		{
+			ticks = 0;
+			yawSway = ((random.nextFloat() * 2 - 1) / 5) / maxTicks;
+			pitchSway = ((random.nextFloat() * 2 - 1) / 5) / maxTicks;
+		}
+		EntityPlayer p = mc.thePlayer;
+		p.rotationPitch += yawSway;
+		p.rotationYaw += pitchSway;
+
 		GL11.glPushMatrix();
 		mc.entityRenderer.setupOverlayRendering();
 		GL11.glEnable(GL11.GL_BLEND);
@@ -241,6 +253,7 @@ public class ItemsClientEventHandler
 				// ARKCraft.instance.messagePipeline.sendToServer(msg);
 			}
 		}
+		if (showScopeOverlap) onMouseEvent(null);
 	}
 
 	public Vec3 getPositionEyes(EntityPlayer player, float partialTick)
@@ -271,32 +284,43 @@ public class ItemsClientEventHandler
 	@SubscribeEvent
 	public void onPlayerKeypressed(InputEvent.KeyInputEvent event)
 	{
+		EntityPlayerSP player = Minecraft.getMinecraft().thePlayer;
 		if (KeyBindings.attachment.isPressed())
 		{
-			EntityPlayerSP p = mc.thePlayer;
-			if (p instanceof EntityPlayerSP && p.inventory.getCurrentItem().getItem() instanceof ItemRangedWeapon)
+			if (player.inventory.getCurrentItem().getItem() instanceof ItemRangedWeapon)
 			{
-				p.openGui(ARKCraft.instance, GlobalAdditions.GUI.ATTACHMENT_GUI.getID(),
-						p.worldObj, 0, 0, 0);
+				player.openGui(ARKCraft.instance, GlobalAdditions.GUI.ATTACHMENT_GUI.getID(),
+						player.worldObj, 0, 0, 0);
 				ARKCraft.modChannel.sendToServer(new OpenAttachmentInventory());
 			}
 		}
 		else if (KeyBindings.playerPooping.isPressed())
 		{
-			EntityPlayerSP player = mc.thePlayer;
-			if (player instanceof EntityPlayerSP)
-			{
-				ARKPlayer.get(player).Poop();
-			}
+			ARKPlayer.get(player).Poop();
 		}
 		else if (KeyBindings.playerCrafting.isPressed())
 		{
-			EntityPlayerSP player = Minecraft.getMinecraft().thePlayer;
-			if (player instanceof EntityPlayerSP)
+			player.openGui(ARKCraft.instance(), GlobalAdditions.GUI.PLAYER.getID(),
+					player.worldObj, 0, 0, 0);
+			ARKCraft.modChannel.sendToServer(new OpenPlayerCrafting(true));
+		}
+		else if (KeyBindings.reload.isPressed())
+		{
+			doReload();
+		}
+	}
+
+	public static void doReload()
+	{
+		EntityPlayerSP player = Minecraft.getMinecraft().thePlayer;
+		ItemStack stack = player.getCurrentEquippedItem();
+		if (stack != null && stack.getItem() instanceof ItemRangedWeapon)
+		{
+			ItemRangedWeapon weapon = (ItemRangedWeapon) stack.getItem();
+			if (!weapon.isReloading(stack) && weapon.canReload(stack, player))
 			{
-				player.openGui(ARKCraft.instance(), GlobalAdditions.GUI.PLAYER.getID(),
-						player.worldObj, 0, 0, 0);
-				ARKCraft.modChannel.sendToServer(new OpenPlayerCrafting(true));
+				ARKCraft.modChannel.sendToServer(new ReloadStarted());
+				weapon.setReloading(stack, player, true);
 			}
 		}
 	}

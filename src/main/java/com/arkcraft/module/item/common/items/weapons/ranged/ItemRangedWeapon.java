@@ -13,6 +13,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
@@ -23,11 +24,14 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.arkcraft.module.core.ARKCraft;
+import com.arkcraft.module.core.common.network.ReloadFinished;
+import com.arkcraft.module.item.client.event.ItemsClientEventHandler;
 import com.arkcraft.module.item.common.blocks.ARKCraftBlocks;
 import com.arkcraft.module.item.common.entity.item.projectiles.EntityProjectile;
 import com.arkcraft.module.item.common.entity.item.projectiles.ProjectileType;
@@ -106,6 +110,10 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 		if (canScope(stack))
 		{
 			jsonPath = jsonPath + "_scoped";
+		}
+		if (isReloading(stack))
+		{
+			jsonPath = jsonPath + "_reload";
 		}
 		return new ModelResourceLocation(jsonPath, "inventory");
 	}
@@ -188,45 +196,114 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 	// }
 	// }
 
+	public void setReloading(ItemStack stack, EntityPlayer player, boolean reloading)
+	{
+		stack.getTagCompound().setBoolean("reloading", reloading);
+	}
+
+	public boolean isReloading(ItemStack stack)
+	{
+		checkNBT(stack);
+		return stack.getTagCompound().getBoolean("reloading");
+	}
+
+	public int getReloadTicks(ItemStack stack)
+	{
+		return stack.getTagCompound().getInteger("reloadTicks");
+	}
+
+	private void setReloadTicks(ItemStack stack, int reloadTicks)
+	{
+		stack.getTagCompound().setInteger("reloadTicks", reloadTicks);
+	}
+
+	private void checkNBT(ItemStack stack)
+	{
+		if (!stack.hasTagCompound()) stack.setTagCompound(new NBTTagCompound());
+	}
+
 	@Override
 	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
 	{
-		if (isSelected && entityIn instanceof EntityPlayer)
+		if (entityIn instanceof EntityPlayer)
 		{
-			TileInventoryAttachment inv = new TileInventoryAttachment(stack);
-			MovingObjectPosition mop = rayTrace(entityIn, 20, 1.0F);
-
-			if (inv.isFlashPresent())
+			if (isSelected)
 			{
-				if (mop != null)
+				if (isReloading(stack))
 				{
-					if (!(mop.typeOfHit == MovingObjectPosition.MovingObjectType.MISS))
-					{
-						BlockPos pos;
+					updateReload(stack, worldIn, (EntityPlayer) entityIn);
+					return;
+				}
 
-						if (mop.typeOfHit == MovingObjectPosition.MovingObjectType.ENTITY)
-						{
-							pos = mop.entityHit.getPosition();
-						}
-						else
-						{
-							pos = mop.getBlockPos();
-							pos = pos.offset(mop.sideHit);
-						}
+				TileInventoryAttachment inv = new TileInventoryAttachment(stack);
 
-						if (entityIn.worldObj.getBlockState(pos).getBlock() == ARKCraftBlocks.block_flashlight)
-						{
-							TileFlashlight tileLight = (TileFlashlight) entityIn.worldObj
-									.getTileEntity(pos);
-							tileLight.ticks = 0;
-						}
-						else if (entityIn.worldObj.isAirBlock(pos))
-						{
-							entityIn.worldObj.setBlockState(pos,
-									ARKCraftBlocks.block_flashlight.getDefaultState());
+				if (inv.isFlashPresent())
+				{
+					updateFlashlight(entityIn);
+				}
+			}
+			else if (isReloading(stack))
+			{
+				resetReload(stack, (EntityPlayer) entityIn);
+			}
+		}
+	}
 
-						}
-					}
+	private void resetReload(ItemStack stack, EntityPlayer player)
+	{
+		setReloading(stack, player, false);
+		setReloadTicks(stack, 0);
+	}
+
+	private void updateReload(ItemStack stack, World worldIn, EntityPlayer entityIn)
+	{
+		int reloadTicks = getReloadTicks(stack);
+		if (++reloadTicks <= getReloadDuration())
+		{
+			setReloadTicks(stack, reloadTicks);
+		}
+		else
+		{
+			if (!worldIn.isRemote)
+			{
+				setReloading(stack, entityIn, false);
+				setReloadTicks(stack, 0);
+				hasAmmoAndConsume(stack, entityIn);
+
+				ARKCraft.modChannel.sendTo(new ReloadFinished(), (EntityPlayerMP) entityIn);
+			}
+		}
+	}
+
+	private void updateFlashlight(Entity entityIn)
+	{
+		MovingObjectPosition mop = rayTrace(entityIn, 20, 1.0F);
+		if (mop != null)
+		{
+			if (!(mop.typeOfHit == MovingObjectPosition.MovingObjectType.MISS))
+			{
+				BlockPos pos;
+
+				if (mop.typeOfHit == MovingObjectPosition.MovingObjectType.ENTITY)
+				{
+					pos = mop.entityHit.getPosition();
+				}
+				else
+				{
+					pos = mop.getBlockPos();
+					pos = pos.offset(mop.sideHit);
+				}
+
+				if (entityIn.worldObj.getBlockState(pos).getBlock() == ARKCraftBlocks.block_flashlight)
+				{
+					TileFlashlight tileLight = (TileFlashlight) entityIn.worldObj
+							.getTileEntity(pos);
+					tileLight.ticks = 0;
+				}
+				else if (entityIn.worldObj.isAirBlock(pos))
+				{
+					entityIn.worldObj.setBlockState(pos,
+							ARKCraftBlocks.block_flashlight.getDefaultState());
 				}
 			}
 		}
@@ -269,15 +346,12 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 			player.setItemInUse(stack, getMaxItemUseDuration(stack));
 		}
 		// Check can reload
-		else if (hasAmmoInInventory(player))
-		{
-			// Begin reloading
-			for (int x = 1; x < 1; x++)
-			{
-				soundCharge(stack, world, player);
-			}
-			player.setItemInUse(stack, getMaxItemUseDuration(stack));
-		}
+		// else if (hasAmmoInInventory(player))
+		// {
+		// // Begin reloading
+		// soundCharge(stack, world, player);
+		// player.setItemInUse(stack, getMaxItemUseDuration(stack));
+		// }
 		else
 		{
 			// Can't reload; no ammo
@@ -307,18 +381,22 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 
 	private boolean hasAmmoAndConsume(ItemStack stack, EntityPlayer player)
 	{
-		int ammoFinal = 0;
+		int ammoFinal = getAmmoQuantity(stack);
 		String type = "";
-		for (ItemStack invStack : player.inventory.mainInventory)
+		ItemStack[] inventory = player.inventory.mainInventory;
+		for (int i = 0; i < inventory.length; i++)
 		{
+			ItemStack invStack = inventory[i];
 			if (invStack != null) if (isValidProjectile(invStack.getItem()))
 			{
 				int stackSize = invStack.stackSize;
 				type = invStack.getItem().getUnlocalizedName();
 				int ammo = stackSize < this.getMaxAmmo() - ammoFinal ? stackSize : this
-						.getMaxAmmo();
+						.getMaxAmmo() - ammoFinal;
 				ammoFinal += ammo;
+
 				invStack.stackSize = stackSize - ammo;
+				if (invStack.stackSize < 1) inventory[i] = null;
 				if (ammoFinal == this.getMaxAmmo()) break;
 			}
 		}
@@ -326,7 +404,6 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 		{
 			setAmmoType(stack, type);
 			setAmmoQuantity(stack, ammoFinal);
-			setJustReloaded(stack, true);
 			return true;
 		}
 
@@ -343,30 +420,16 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 				return;
 			}
 		}
-		this.setJustReloaded(stack, false);
-		if (!isLoaded(stack, player)) { return; }
 	}
 
 	public boolean canReload(ItemStack stack, EntityPlayer player)
 	{
-		return getAmmoQuantity(stack) <= 0 && !player.capabilities.isCreativeMode;
+		return getAmmoQuantity(stack) < getMaxAmmo() && !player.capabilities.isCreativeMode;
 	}
 
 	public boolean canFire(ItemStack stack, EntityPlayer player)
 	{
-		return (player.capabilities.isCreativeMode || isLoaded(stack, player)) && !isJustReloaded(stack);
-	}
-
-	private boolean isJustReloaded(ItemStack stack)
-	{
-		if (stack.hasTagCompound()) return stack.getTagCompound().getBoolean("justReloaded");
-		return false;
-	}
-
-	private void setJustReloaded(ItemStack stack, boolean bool)
-	{
-		if (!stack.hasTagCompound()) stack.setTagCompound(new NBTTagCompound());
-		stack.getTagCompound().setBoolean("justReloaded", bool);
+		return (player.capabilities.isCreativeMode || isLoaded(stack, player));
 	}
 
 	public boolean hasAmmoInInventory(EntityPlayer player)
@@ -393,7 +456,7 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 		{
 			for (ItemStack s : inventory.mainInventory)
 			{
-				if (s.getItem().equals(item))
+				if (s != null && s.getItem().equals(item))
 				{
 					out += s.stackSize;
 				}
@@ -446,8 +509,8 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 
 	public void soundCharge(ItemStack stack, World world, EntityPlayer player)
 	{
-		world.playSoundAtEntity(player,
-				ARKCraft.MODID + ":" + this.getUnlocalizedName() + "_reload", 0.7F,
+		String name = ARKCraft.MODID + ":" + this.getUnlocalizedName() + "_reload";
+		world.playSoundAtEntity(player, name, 0.7F,
 				0.9F / (getItemRand().nextFloat() * 0.2F + 0.0F));
 	}
 
@@ -513,7 +576,14 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 		}
 		else if (ammo < 1)
 		{
-			this.setAmmoType(stack, "");
+			if (hasAmmoInInventory(player) && FMLCommonHandler.instance().getSide().isClient())
+			{
+				ItemsClientEventHandler.doReload();
+			}
+			else
+			{
+				this.setAmmoType(stack, "");
+			}
 		}
 		this.nextShotMillis = System.currentTimeMillis() + this.shotInterval;
 		stack.damageItem(damage, player);

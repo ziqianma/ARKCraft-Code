@@ -1,38 +1,25 @@
 package com.arkcraft.module.item.common.items.weapons.ranged;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.MathHelper;
-import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
 import com.arkcraft.module.core.ARKCraft;
-import com.arkcraft.module.item.common.blocks.ARKCraftBlocks;
 import com.arkcraft.module.item.common.config.ModuleItemBalance;
-import com.arkcraft.module.item.common.tile.TileFlashlight;
-import com.arkcraft.module.item.common.tile.TileInventoryAttachment;
 
 public class ItemLongneckRifle extends ItemRangedWeapon
 {
 	public ItemLongneckRifle()
 	{
-		super("longneck_rifle", 350, 1, "simple_rifle_ammo", 1, 5, 7F, 0.2F);
+		super("longneck_rifle", 350, 1, "simple_rifle_ammo", 1, 3, 7F, 0F);
 	}
 
 	@Override
 	public int getReloadDuration()
 	{
 		return (int) (ModuleItemBalance.WEAPONS.LONGNECK_RIFLE_RELOAD * 20.0);
-	}
-
-	@Override
-	public void soundCharge(ItemStack stack, World world, EntityPlayer player)
-	{
-		world.playSoundAtEntity(player, ARKCraft.MODID + ":" + "longneck_rifle_reload", 0.7F,
-				0.9F / (getItemRand().nextFloat() * 0.2F + 0.0F));
 	}
 
 	@Override
