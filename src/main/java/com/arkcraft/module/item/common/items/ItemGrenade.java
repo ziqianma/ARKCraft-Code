@@ -49,7 +49,7 @@ public class ItemGrenade extends Item
     @Override
     public EnumAction getItemUseAction(ItemStack itemstack)
     {
-        return EnumAction.BLOCK;
+        return EnumAction.BOW;
     }
 
     @Override

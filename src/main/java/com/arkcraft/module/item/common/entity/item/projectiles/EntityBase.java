@@ -7,8 +7,10 @@ import net.minecraft.world.World;
 
 public class EntityBase extends EntityProjectile
 {
-    double bounceFactor;
+    double bounceFactor1;
+    double bounceFactor = 0.8;
     int fuse = 120;
+    boolean stopped = false;
 
     public EntityBase(World world)
     {
@@ -36,7 +38,7 @@ public class EntityBase extends EntityProjectile
         motionZ = 0.5 * zHeading * MathHelper.cos((entity.rotationPitch / 180F) * 3.141593F);
 
         // Set the position
-        setPosition(entity.posX + xHeading * 0.8, entity.posY, entity.posZ + zHeading * 0.8);
+        setPosition(entity.posX, entity.posY, entity.posZ);
         prevPosX = posX;
         prevPosY = posY;
         prevPosZ = posZ;
@@ -48,43 +50,6 @@ public class EntityBase extends EntityProjectile
     {
         super.onUpdate();
 
-        if (onGround)
-        {
-            motionY *= -1.0D;
-        }
-
-        double prevVelX = motionX;
-        double prevVelY = motionY;
-        double prevVelZ = motionZ;
-        prevPosX = posX;
-        prevPosY = posY;
-        prevPosZ = posZ;
-        moveEntity(motionX, motionY, motionZ);
-
-        // Take into account bouncing (normal displacement just sets them to 0)
-        if (motionX != prevVelX)
-        {
-            motionX = -bounceFactor * prevVelX;
-        }
-        if (motionY != prevVelY)
-        {
-            motionY = -bounceFactor * prevVelY;
-        }
-
-        if (motionZ != prevVelZ)
-        {
-            motionZ = -bounceFactor * prevVelZ;
-        }
-        else
-        {
-            motionY -= 0.04;
-        }
-
-        // Air friction
-        motionX *= 0.99;
-        motionY *= 0.99;
-        motionZ *= 0.99;
-
         if (!worldObj.isRemote)
         {
             if (ticksExisted == fuse)
@@ -92,6 +57,45 @@ public class EntityBase extends EntityProjectile
                 explode();
             }
         }
+  
+        if (!this.stopped) {
+            double prevVelX = this.motionX;
+            double prevVelY = this.motionY;
+            double prevVelZ = this.motionZ;  
+            prevPosX = posX;
+            prevPosY = posY;
+            prevPosZ = posZ;
+            moveEntity(motionX, motionY, motionZ);
+            boolean collided = false;
+            if (this.motionX != prevVelX) {
+                this.motionX = - prevVelX;
+                collided = true;
+            }
+            if (this.motionZ != prevVelZ) {
+                this.motionZ = - prevVelZ;
+                collided = true;
+            }
+            if (this.motionY != prevVelY) {
+                this.motionY = - prevVelY;
+                collided = true;
+            } else {
+                this.motionY -= 0.04;
+            }
+            if (collided) {
+                this.motionX *= this.bounceFactor;
+                this.motionY *= this.bounceFactor;
+                this.motionZ *= this.bounceFactor;
+            }
+            this.motionX *= 1.0;
+            this.motionY *= 0.99;
+            this.motionZ *= 1.0;
+            if (Math.abs(this.motionX) + Math.abs(this.motionY) + Math.abs(this.motionZ) < 0.2) {
+                this.stopped = true;
+                this.motionX = 0.0;
+                this.motionY = 0.0;
+                this.motionZ = 0.0;
+            }
+        } 
     }
 
     private void explode()
