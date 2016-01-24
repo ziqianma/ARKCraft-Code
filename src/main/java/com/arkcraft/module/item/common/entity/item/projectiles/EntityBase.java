@@ -44,7 +44,7 @@ public class EntityBase extends EntityProjectile
 		prevPosZ = posZ;
 
 	}
-
+	
 	@Override
 	public void onUpdate()
 	{

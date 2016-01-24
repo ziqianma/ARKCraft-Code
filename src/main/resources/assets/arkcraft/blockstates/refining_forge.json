@@ -1,5 +1,9 @@
 {
-	"variants": {
-		"normal": { "model": "arkcraft:refining_forge" }
-	}
+    "variants": {
+        "facing=north": { "model": "arkcraft:refining_forge" },
+        "facing=south": { "model": "arkcraft:refining_forge", "y": 180 },
+        "facing=west":  { "model": "arkcraft:refining_forge", "y": 270 },
+        "facing=east":  { "model": "arkcraft:refining_forge", "y": 90 }
+    }
 }
+
