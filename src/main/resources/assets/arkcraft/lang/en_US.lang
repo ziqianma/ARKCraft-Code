@@ -7,6 +7,9 @@ tile.wooden_spikes.name=Wooden Spikes
 tile.compost_bin.name=Compost Bin
 tile.oreSurface.name=Ore Surface
 
+# Containers
+container.inventory_refining_forge.name=Refining Forge
+
 # World Types
 generator.island=ARK: The Island
 

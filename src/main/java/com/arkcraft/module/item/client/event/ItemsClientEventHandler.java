@@ -76,7 +76,7 @@ public class ItemsClientEventHandler
 		}
 		slot = thePlayer.inventory.currentItem;
 		ItemStack held = thePlayer.getCurrentEquippedItem();
-		if (thePlayer != null && evt.button == 0)
+		if (thePlayer != null && evt.button == 0 && held != null)
 		{
 			TileInventoryAttachment inv = new TileInventoryAttachment(held);
 			if (inv.isScopePresent())

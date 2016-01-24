@@ -1,9 +1,5 @@
 package com.arkcraft.module.item.client.render;
 
-import com.arkcraft.module.item.common.entity.item.projectiles.EntityAdvancedBullet;
-import com.arkcraft.module.item.common.entity.item.projectiles.EntitySimpleRifleAmmo;
-import com.arkcraft.module.core.ARKCraft;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
@@ -12,6 +8,9 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
+
+import com.arkcraft.module.core.ARKCraft;
+import com.arkcraft.module.item.common.entity.item.projectiles.EntityAdvancedBullet;
 
 public class RenderAdvancedBullet extends Render
 {
