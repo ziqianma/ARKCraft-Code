@@ -30,7 +30,7 @@ public class ARKCraftBlocks
     public static BlockSmithy smithy;
     public static BlockMortarAndPestle pestle;
     public static BlockCropPlot crop_plot;
-    public static BlockRefiningForge refining_forge;
+    public static BlockRefiningForge refining_forge, refining_forge_burning;
     public static BlockFlashlight block_flashlight;
 //	public static BlockImprovisedExplosiveDevice block_explosive_device;
 //	public static BlockExplosiveDeviceWire block_explosive_wire;
@@ -67,7 +67,9 @@ public class ARKCraftBlocks
         pestle = registerMortarAndPestle("mortar_and_pestle", Material.rock, GlobalAdditions.GUI.PESTLE_AND_MORTAR.getID(), false, false, 3);
         crop_plot = registerCropPlot("crop_plot", Material.wood, GlobalAdditions.GUI.CROP_PLOT.getID(), false, 3);
         compost_bin = registerCompostBin("compost_bin", Material.wood, GlobalAdditions.GUI.COMPOST_BIN.getID(), false, false, 3);
-        refining_forge = registerRefiningForge("refining_forge", Material.rock, GlobalAdditions.GUI.FORGE_GUI.getID(), false, false, 3);
+        refining_forge = registerRefiningForge("refining_forge", Material.rock, false, GlobalAdditions.GUI.FORGE_GUI.getID(), false, false, 3);
+        refining_forge_burning = registerRefiningForge("refining_forge_burning", Material.rock, true, GlobalAdditions.GUI.FORGE_GUI.getID(), false, false, 3);
+
 
 
         // Tile Entities
@@ -132,12 +134,9 @@ public class ARKCraftBlocks
         return container;
     }
 
-    protected static BlockRefiningForge registerRefiningForge(String name, Material mat, int ID, boolean renderAsNormalBlock, boolean isOpaque, int renderType)
+    protected static BlockRefiningForge registerRefiningForge(String name, Material mat, boolean isBurning, int ID, boolean renderAsNormalBlock, boolean isOpaque, int renderType)
     {
         BlockRefiningForge container = new BlockRefiningForge(mat, ID);
-        container.setRenderAsNormalBlock(renderAsNormalBlock);
-        container.setOpaque(isOpaque);
-        container.setRenderType(renderType);
         allBlocks.put(name, container);
         registerBlockNoTab(container, name);
         return container;
