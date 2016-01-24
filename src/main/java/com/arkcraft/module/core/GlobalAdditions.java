@@ -26,6 +26,7 @@ import com.arkcraft.module.item.common.entity.EntityCobble;
 import com.arkcraft.module.item.common.entity.EntityDodoEgg;
 import com.arkcraft.module.item.common.entity.item.projectiles.EntityGrenade;
 import com.arkcraft.module.item.common.entity.item.projectiles.EntitySpear;
+import com.arkcraft.module.item.common.handlers.ForgeHandler;
 import com.arkcraft.module.item.common.handlers.PestleCraftingManager;
 import com.arkcraft.module.item.common.handlers.PlayerCraftingManager;
 import com.arkcraft.module.item.common.handlers.RecipeHandler;
@@ -72,6 +73,7 @@ public class GlobalAdditions
 		PestleCraftingManager.registerPestleCraftingRecipes();
 		SmithyCraftingManager.registerSmithyCraftingRecipes();
 		PlayerCraftingManager.registerPlayerCraftingRecipes();
+		ForgeHandler.registerForgeRecipes();
 
 		EntityHandler
 				.registerModEntity(EntitySpear.class, "Spear", ARKCraft.instance, 64, 10, true);

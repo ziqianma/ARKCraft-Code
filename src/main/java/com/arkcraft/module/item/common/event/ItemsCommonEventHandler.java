@@ -1,11 +1,7 @@
 package com.arkcraft.module.item.common.event;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.Vec3;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
@@ -13,17 +9,12 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import com.arkcraft.lib.LogHelper;
 import com.arkcraft.module.core.common.entity.EntityTameableDinosaur;
-import com.arkcraft.module.item.common.blocks.ARKCraftBlocks;
 import com.arkcraft.module.item.common.config.ModuleItemBalance;
 import com.arkcraft.module.item.common.entity.item.projectiles.EntityTranqArrow;
 import com.arkcraft.module.item.common.entity.player.ARKPlayer;
-import com.arkcraft.module.item.common.items.weapons.handlers.IItemWeapon;
-import com.arkcraft.module.item.common.tile.TileFlashlight;
-import com.arkcraft.module.item.common.tile.TileInventoryAttachment;
 
 /**
  * @author wildbill22

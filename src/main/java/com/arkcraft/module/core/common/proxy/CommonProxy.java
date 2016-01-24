@@ -1,13 +1,11 @@
 package com.arkcraft.module.core.common.proxy;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraftforge.fml.common.SidedProxy;
+
 import com.arkcraft.module.core.client.gui.book.proxy.DCommon;
 import com.arkcraft.module.core.common.network.ARKMessagePipeline;
 import com.arkcraft.module.core.common.network.MsgBallistaShot;
-import com.arkcraft.module.item.common.event.ItemsCommonEventHandler;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.common.SidedProxy;
 
 public class CommonProxy
 {
