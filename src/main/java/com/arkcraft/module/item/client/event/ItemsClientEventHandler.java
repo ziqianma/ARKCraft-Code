@@ -143,6 +143,18 @@ public class ItemsClientEventHandler
 	{
 		Minecraft mc = Minecraft.getMinecraft();
 		EntityPlayer thePlayer = mc.thePlayer;
+		ItemStack stack = thePlayer.getCurrentEquippedItem();
+		if(!event.isCanceled() & event.entity instanceof EntityPlayer && stack != null)
+		{		
+			if(stack.getItem() instanceof ItemRangedWeapon)
+			{
+				ModelPlayer model = (ModelPlayer) event.renderer.getMainModel();
+				model.aimedBow = true;
+			}
+		}
+		
+		/*
+		
 		if (!event.isCanceled() & event.entity instanceof EntityPlayer && showScopeOverlap)
 		{
 			ItemStack stack = thePlayer.getCurrentEquippedItem();
@@ -159,53 +171,38 @@ public class ItemsClientEventHandler
 				}
 				if (i_item_weapon != null)
 				{
-
 					ModelPlayer model = (ModelPlayer) event.renderer.getMainModel();
-
 					model.aimedBow = true;
 				}
-
-				/*
-				 * ModelPlayer model =
-				 * (ModelPlayer)event.renderer.getMainModel();
-				 * model.bipedLeftArm.rotateAngleX =
-				 * model.bipedLeftArm.rotateAngleX * 0.5F - ((float)Math.PI /
-				 * 10F) * (float)model.heldItemLeft; model.heldItemRight = 0;
-				 * 
-				 * /* if (model.heldItemLeft != 0) {
-				 * model.bipedLeftArm.rotateAngleX =
-				 * model.bipedLeftArm.rotateAngleX * 0.5F - ((float)Math.PI /
-				 * 10F) * (float)model.heldItemLeft; } switch
-				 * (model.heldItemRight) { case 0: case 2: default: break; case
-				 * 1: model.bipedRightArm.rotateAngleX =
-				 * model.bipedRightArm.rotateAngleX * 0.5F - ((float)Math.PI /
-				 * 10F) * (float)model.heldItemRight; break; case 3:
-				 * model.bipedRightArm.rotateAngleX =
-				 * model.bipedRightArm.rotateAngleX * 0.5F - ((float)Math.PI /
-				 * 10F) * (float)model.heldItemRight;
-				 * model.bipedRightArm.rotateAngleY = -0.5235988F; }
-				 */
-
 			}
-		}
+		} */
 	}
 
 	public void showScope()
 	{
 		Minecraft mc = Minecraft.getMinecraft();
+		EntityPlayer thePlayer = mc.thePlayer;
 
 		// add sway
 		ticks++;
-		if (ticks > maxTicks)
+		if (ticks > maxTicks && !thePlayer.isSneaking())
 		{
 			ticks = 0;
 			yawSway = ((random.nextFloat() * 2 - 1) / 5) / maxTicks;
 			pitchSway = ((random.nextFloat() * 2 - 1) / 5) / maxTicks;
+			LogHelper.info("not sneaking");
+		}
+		else if (thePlayer.isSneaking() && ticks > maxTicks)
+		{
+			ticks = 0;
+			yawSway = ((random.nextFloat() * 2 - 1) / 16) / maxTicks;
+			pitchSway = ((random.nextFloat() * 2 - 1) / 16) / maxTicks;
+			LogHelper.info("sneaking");
 		}
 		EntityPlayer p = mc.thePlayer;
 		p.rotationPitch += yawSway;
 		p.rotationYaw += pitchSway;
-
+		
 		GL11.glPushMatrix();
 		mc.entityRenderer.setupOverlayRendering();
 		GL11.glEnable(GL11.GL_BLEND);
