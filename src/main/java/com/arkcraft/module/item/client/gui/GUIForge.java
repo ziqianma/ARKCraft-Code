@@ -23,6 +23,8 @@ public class GUIForge extends GuiContainer
 	// This is the resource location for the background image
 	public static final ResourceLocation texture = new ResourceLocation(ARKCraft.MODID,
 			"textures/gui/forge_gui.png");
+	public static final ResourceLocation textureFlame = new ResourceLocation(ARKCraft.MODID,
+			"textures/gui/forge_flame");
 
 	private TileInventoryForge tileEntity;
 
@@ -117,8 +119,7 @@ public class GUIForge extends GuiContainer
 
 		// remaining bar for each fuel slot flame
 		// TODO add texture
-		Minecraft.getMinecraft().getTextureManager()
-				.bindTexture(new ResourceLocation(ARKCraft.MODID, ""));
+		Minecraft.getMinecraft().getTextureManager().bindTexture(textureFlame);
 		boolean burning = tileEntity.isBurning();
 		int yOffset = (int) ((1.0 - (burning ? 0 : 1)) * FLAME_HEIGHT);
 		drawTexturedModalRect(guiLeft + FLAME_XPOS + FLAME_X_SPACING,

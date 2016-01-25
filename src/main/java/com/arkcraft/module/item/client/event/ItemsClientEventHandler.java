@@ -15,7 +15,6 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Vec3;
 import net.minecraftforge.client.event.FOVUpdateEvent;
-import net.minecraftforge.client.event.MouseEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderHandEvent;
 import net.minecraftforge.client.event.RenderLivingEvent;
@@ -28,9 +27,9 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
-import com.arkcraft.lib.LogHelper;
 import com.arkcraft.module.core.ARKCraft;
 import com.arkcraft.module.core.GlobalAdditions;
 import com.arkcraft.module.core.common.network.OpenAttachmentInventory;
@@ -38,10 +37,11 @@ import com.arkcraft.module.core.common.network.OpenPlayerCrafting;
 import com.arkcraft.module.core.common.network.ReloadStarted;
 import com.arkcraft.module.item.common.entity.item.projectiles.EntityBallista;
 import com.arkcraft.module.item.common.entity.player.ARKPlayer;
-import com.arkcraft.module.item.common.items.weapons.handlers.IItemWeapon;
+import com.arkcraft.module.item.common.items.ARKCraftItems;
 import com.arkcraft.module.item.common.items.weapons.ranged.ItemRangedWeapon;
 import com.arkcraft.module.item.common.tile.TileInventoryAttachment;
 
+@SideOnly(Side.CLIENT)
 public class ItemsClientEventHandler
 {
 	private static int ticks;
@@ -61,48 +61,6 @@ public class ItemsClientEventHandler
 			"textures/gui/scope.png");
 	public boolean showScopeOverlap = false;
 	private Minecraft mc = Minecraft.getMinecraft();
-	private int slot = 1000;
-
-	@SideOnly(Side.CLIENT)
-	@SubscribeEvent
-	public void onMouseEvent(MouseEvent evt)
-	{
-		Minecraft mc = Minecraft.getMinecraft();
-		EntityPlayer thePlayer = mc.thePlayer;
-		if (showScopeOverlap && slot != thePlayer.inventory.currentItem && slot != 1000)
-		{
-			showScopeOverlap = false;
-			return;
-		}
-		slot = thePlayer.inventory.currentItem;
-		ItemStack held = thePlayer.getCurrentEquippedItem();
-		if (thePlayer != null && evt.button == 0 && held != null)
-		{
-			TileInventoryAttachment inv = new TileInventoryAttachment(held);
-			if (inv.isScopePresent())
-			{
-				if (evt.buttonstate) showScopeOverlap = true;
-				else showScopeOverlap = false;
-				evt.setCanceled(true);
-				return;
-			}
-			showScopeOverlap = false;
-			// Weapon with scope?
-			// if (i_item_weapon != null && i_item_weapon.ifCanScope())
-			// {
-			// if (evt.buttonstate)
-			// {
-			// ShowScopeOverlap = true;
-			// }
-			// else
-			// {
-			// ShowScopeOverlap = false;
-			// }
-			// evt.setCanceled(true);
-			// }
-		}
-
-	}
 
 	@SubscribeEvent
 	public void onFOVUpdate(FOVUpdateEvent evt)
@@ -125,17 +83,26 @@ public class ItemsClientEventHandler
 	@SubscribeEvent(priority = EventPriority.NORMAL)
 	public void onRender(RenderGameOverlayEvent evt)
 	{
-		if (evt.type == RenderGameOverlayEvent.ElementType.HELMET)
+		showScopeOverlap = false;
+		ItemStack stack = Minecraft.getMinecraft().thePlayer.getCurrentEquippedItem();
+		showScopeOverlap = stack != null && (new TileInventoryAttachment(stack).isScopePresent() || stack
+				.getItem().equals(ARKCraftItems.spy_glass)) && Mouse.isButtonDown(0);
+
+		if (showScopeOverlap)
 		{
-			if (mc.gameSettings.thirdPersonView == 0 && showScopeOverlap)
+			// Render scope
+			if (evt.type == RenderGameOverlayEvent.ElementType.HELMET)
 			{
-				evt.setCanceled(true); // Removes the normal crosshairs and uses
-										// just the overlay crosshairs
-				LogHelper.info("onRender ShowScopeOverlap = true");
-				showScope();
+				if (mc.gameSettings.thirdPersonView == 0)
+				{
+					evt.setCanceled(true);
+					showScope();
+				}
 			}
+			// Remove crosshairs
+			else if (evt.type == RenderGameOverlayEvent.ElementType.CROSSHAIRS && showScopeOverlap) evt
+					.setCanceled(true);
 		}
-		else if (evt.type == RenderGameOverlayEvent.ElementType.CROSSHAIRS) evt.setCanceled(true);
 	}
 
 	@SubscribeEvent
@@ -144,38 +111,26 @@ public class ItemsClientEventHandler
 		Minecraft mc = Minecraft.getMinecraft();
 		EntityPlayer thePlayer = mc.thePlayer;
 		ItemStack stack = thePlayer.getCurrentEquippedItem();
-		if(!event.isCanceled() & event.entity instanceof EntityPlayer && stack != null)
-		{		
-			if(stack.getItem() instanceof ItemRangedWeapon)
+		if (!event.isCanceled() & event.entity instanceof EntityPlayer && stack != null)
+		{
+			if (stack.getItem() instanceof ItemRangedWeapon)
 			{
 				ModelPlayer model = (ModelPlayer) event.renderer.getMainModel();
 				model.aimedBow = true;
 			}
 		}
-		
+
 		/*
-		
-		if (!event.isCanceled() & event.entity instanceof EntityPlayer && showScopeOverlap)
-		{
-			ItemStack stack = thePlayer.getCurrentEquippedItem();
-			if (stack != null)
-			{
-				IItemWeapon i_item_weapon;
-				if (stack.getItem() instanceof IItemWeapon)
-				{
-					i_item_weapon = (IItemWeapon) stack.getItem();
-				}
-				else
-				{
-					i_item_weapon = null;
-				}
-				if (i_item_weapon != null)
-				{
-					ModelPlayer model = (ModelPlayer) event.renderer.getMainModel();
-					model.aimedBow = true;
-				}
-			}
-		} */
+		 * 
+		 * if (!event.isCanceled() & event.entity instanceof EntityPlayer &&
+		 * showScopeOverlap) { ItemStack stack =
+		 * thePlayer.getCurrentEquippedItem(); if (stack != null) { IItemWeapon
+		 * i_item_weapon; if (stack.getItem() instanceof IItemWeapon) {
+		 * i_item_weapon = (IItemWeapon) stack.getItem(); } else { i_item_weapon
+		 * = null; } if (i_item_weapon != null) { ModelPlayer model =
+		 * (ModelPlayer) event.renderer.getMainModel(); model.aimedBow = true; }
+		 * } }
+		 */
 	}
 
 	public void showScope()
@@ -185,24 +140,25 @@ public class ItemsClientEventHandler
 
 		// add sway
 		ticks++;
-		if (ticks > maxTicks && !thePlayer.isSneaking())
+		if (ticks > maxTicks)
 		{
 			ticks = 0;
-			yawSway = ((random.nextFloat() * 2 - 1) / 5) / maxTicks;
-			pitchSway = ((random.nextFloat() * 2 - 1) / 5) / maxTicks;
-			LogHelper.info("not sneaking");
+			if (!thePlayer.isSneaking())
+			{
+				yawSway = ((random.nextFloat() * 2 - 1) / 5) / maxTicks;
+				pitchSway = ((random.nextFloat() * 2 - 1) / 5) / maxTicks;
+			}
+			else
+			{
+				yawSway = ((random.nextFloat() * 2 - 1) / 16) / maxTicks;
+				pitchSway = ((random.nextFloat() * 2 - 1) / 16) / maxTicks;
+			}
 		}
-		else if (thePlayer.isSneaking() && ticks > maxTicks)
-		{
-			ticks = 0;
-			yawSway = ((random.nextFloat() * 2 - 1) / 16) / maxTicks;
-			pitchSway = ((random.nextFloat() * 2 - 1) / 16) / maxTicks;
-			LogHelper.info("sneaking");
-		}
+
 		EntityPlayer p = mc.thePlayer;
 		p.rotationPitch += yawSway;
 		p.rotationYaw += pitchSway;
-		
+
 		GL11.glPushMatrix();
 		mc.entityRenderer.setupOverlayRendering();
 		GL11.glEnable(GL11.GL_BLEND);
@@ -249,7 +205,6 @@ public class ItemsClientEventHandler
 				// ARKCraft.instance.messagePipeline.sendToServer(msg);
 			}
 		}
-		if (showScopeOverlap) onMouseEvent(null);
 	}
 
 	public Vec3 getPositionEyes(EntityPlayer player, float partialTick)
@@ -317,6 +272,7 @@ public class ItemsClientEventHandler
 			{
 				ARKCraft.modChannel.sendToServer(new ReloadStarted());
 				weapon.setReloading(stack, player, true);
+				stack.setItemDamage(1);
 			}
 		}
 	}
