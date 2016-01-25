@@ -37,6 +37,7 @@ import com.arkcraft.module.core.common.network.OpenPlayerCrafting;
 import com.arkcraft.module.core.common.network.ReloadStarted;
 import com.arkcraft.module.item.common.entity.item.projectiles.EntityBallista;
 import com.arkcraft.module.item.common.entity.player.ARKPlayer;
+import com.arkcraft.module.item.common.items.ARKCraftItems;
 import com.arkcraft.module.item.common.items.weapons.ranged.ItemRangedWeapon;
 import com.arkcraft.module.item.common.tile.TileInventoryAttachment;
 
@@ -82,9 +83,10 @@ public class ItemsClientEventHandler
 	@SubscribeEvent(priority = EventPriority.NORMAL)
 	public void onRender(RenderGameOverlayEvent evt)
 	{
+		showScopeOverlap = false;
 		ItemStack stack = Minecraft.getMinecraft().thePlayer.getCurrentEquippedItem();
-		showScopeOverlap = stack != null && new TileInventoryAttachment(stack).isScopePresent() && Mouse
-				.isButtonDown(0);
+		showScopeOverlap = stack != null && (new TileInventoryAttachment(stack).isScopePresent() || stack
+				.getItem().equals(ARKCraftItems.spy_glass)) && Mouse.isButtonDown(0);
 
 		if (showScopeOverlap)
 		{
@@ -100,7 +102,6 @@ public class ItemsClientEventHandler
 			// Remove crosshairs
 			else if (evt.type == RenderGameOverlayEvent.ElementType.CROSSHAIRS && showScopeOverlap) evt
 					.setCanceled(true);
-			showScopeOverlap = false;
 		}
 	}
 
