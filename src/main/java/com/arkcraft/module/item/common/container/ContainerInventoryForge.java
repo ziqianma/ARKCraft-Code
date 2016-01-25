@@ -58,15 +58,17 @@ public class ContainerInventoryForge extends Container
 		// Add the tile fuel slots
 		for (int x = 0; x < FURNACE_SLOT_COUNT; x++)
 		{
-			for (x = x; x < 4; x++)
+			for (int y = 0; y < 4; x++)
 			{
 				addSlotToContainer(new Slot(tileInventoryFurnace, x,
 						FURNACE_SLOTS_XPOS + SLOT_X_SPACING * x, FURNACE_SLOTS_YPOS));
+				y = x;
 			}
-			for (x = x; x < FURNACE_SLOT_COUNT; x++)
+			for (int y = 4; y < FURNACE_SLOT_COUNT; x++)
 			{
 				addSlotToContainer(new Slot(tileInventoryFurnace, x,
 						FURNACE_SLOTS_XPOS + SLOT_X_SPACING * (x - 4), FURNACE_SLOTS_YPOS + 18));
+				y = x;
 			}
 		}
 
