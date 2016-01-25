@@ -272,6 +272,7 @@ public class ItemsClientEventHandler
 			{
 				ARKCraft.modChannel.sendToServer(new ReloadStarted());
 				weapon.setReloading(stack, player, true);
+				stack.setItemDamage(1);
 			}
 		}
 	}

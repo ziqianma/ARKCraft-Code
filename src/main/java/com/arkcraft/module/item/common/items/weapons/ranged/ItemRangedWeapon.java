@@ -13,7 +13,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
@@ -30,7 +29,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.arkcraft.module.core.ARKCraft;
-import com.arkcraft.module.core.common.network.ReloadFinished;
 import com.arkcraft.module.item.client.event.ItemsClientEventHandler;
 import com.arkcraft.module.item.common.blocks.ARKCraftBlocks;
 import com.arkcraft.module.item.common.entity.item.projectiles.EntityProjectile;
@@ -264,13 +262,14 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 		}
 		else
 		{
+			setReloading(stack, entityIn, false);
+			setReloadTicks(stack, 0);
+			hasAmmoAndConsume(stack, entityIn);
 			if (!worldIn.isRemote)
 			{
-				setReloading(stack, entityIn, false);
-				setReloadTicks(stack, 0);
-				hasAmmoAndConsume(stack, entityIn);
 
-				ARKCraft.modChannel.sendTo(new ReloadFinished(), (EntityPlayerMP) entityIn);
+				// ARKCraft.modChannel.sendTo(new ReloadFinished(),
+				// (EntityPlayerMP) entityIn);
 			}
 		}
 	}

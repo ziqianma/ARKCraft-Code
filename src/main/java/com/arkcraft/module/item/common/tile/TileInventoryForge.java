@@ -166,13 +166,15 @@ public class TileInventoryForge extends TileEntity implements IForge
 				}
 				if (outputStack != -1)
 				{
-					for (ItemStack stack : this.itemStacks)
+					for (int i = 0; i < this.itemStacks.length; i++)
 					{
+						ItemStack stack = itemStacks[i];
 						if (stack != null)
 						{
-							while (input.remove(stack.getItem()))
+							while (input.remove(stack.getItem()) && stack.stackSize > 0)
 							{
 								stack.stackSize--;
+								if (stack.stackSize == 0) itemStacks[i] = null;
 							}
 						}
 					}
