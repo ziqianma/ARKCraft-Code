@@ -48,7 +48,7 @@ public final class ModuleItemBalance
 
 		@DefaultBoolean(value = true, name = "Include Simple Pistol", comment = "Include Simple Pistol")
 		public static boolean SIMPLE_PISTOL;
-		@DefaultDouble(value = 0.5, minValue = 0.2, maxValue = 2.0, name = "Time to reload pistol.", comment = "Seconds to reload")
+		@DefaultDouble(value = 2.5, minValue = 0.2, maxValue = 2.5, name = "Time to reload pistol.", comment = "Seconds to reload")
 		public static double SIMPLE_PISTOL_RELOAD;
 
 		@DefaultBoolean(value = true, name = "Include Longneck Rifle", comment = "Include  Longneck Rifle")

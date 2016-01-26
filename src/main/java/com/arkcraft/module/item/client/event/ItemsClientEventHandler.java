@@ -50,6 +50,7 @@ public class ItemsClientEventHandler
 	private static float yawSway;
 	private static float pitchSway;
 	private static final Random random = new Random();
+	private ItemStack selected;
 
 	public static void init()
 	{
@@ -66,7 +67,60 @@ public class ItemsClientEventHandler
 	@SubscribeEvent
 	public void onMouseEvent(MouseEvent evt)
 	{
-		if (showScopeOverlap && evt.button == 0) evt.setCanceled(true);
+		Minecraft mc = Minecraft.getMinecraft();
+		EntityPlayer thePlayer = mc.thePlayer;
+
+		if (evt.button == 0)
+		{
+			if (evt.button == 0)
+			{
+				ItemStack stack = thePlayer.getCurrentEquippedItem();
+				showScopeOverlap = stack != null && (new TileInventoryAttachment(stack)
+						.isScopePresent() || stack.getItem().equals(ARKCraftItems.spy_glass)) && evt.buttonstate;
+				selected = stack;
+				if (new TileInventoryAttachment(stack).isScopePresent()) evt.setCanceled(true);
+			}
+
+			// ItemStack stack = thePlayer.getCurrentEquippedItem();
+			// if (stack != null)
+			// {
+			// IItemWeapon i_item_weapon;
+			// if (stack.getItem() instanceof IItemWeapon)
+			// {
+			// i_item_weapon = (IItemWeapon) stack.getItem();
+			// TileInventoryAttachment inv = new TileInventoryAttachment(stack);
+			// if (inv.isScopePresent())
+			// {
+			// if (evt.buttonstate)
+			// {
+			// showScopeOverlap = true;
+			// }
+			// else
+			// {
+			// showScopeOverlap = false;
+			// }
+			// evt.setCanceled(true);
+			// }
+			// }
+			// else
+			// {
+			// i_item_weapon = null;
+			// }
+			// Weapon with scope?
+			// if (i_item_weapon != null && i_item_weapon.ifCanScope())
+			// {
+			// if (evt.buttonstate)
+			// {
+			// ShowScopeOverlap = true;
+			// }
+			// else
+			// {
+			// ShowScopeOverlap = false;
+			// }
+			// evt.setCanceled(true);
+			// }
+			// }
+		}
 	}
 
 	@SubscribeEvent
@@ -90,29 +144,26 @@ public class ItemsClientEventHandler
 	@SubscribeEvent(priority = EventPriority.NORMAL)
 	public void onRender(RenderGameOverlayEvent evt)
 	{
-		if (mc.inGameHasFocus)
+
+		if (showScopeOverlap && (Minecraft.getMinecraft().thePlayer.getCurrentEquippedItem() != selected || !Mouse
+				.isButtonDown(0)))
 		{
 			showScopeOverlap = false;
-			ItemStack stack = Minecraft.getMinecraft().thePlayer.getCurrentEquippedItem();
-			showScopeOverlap = stack != null && (new TileInventoryAttachment(stack)
-					.isScopePresent() || stack.getItem().equals(ARKCraftItems.spy_glass)) && Mouse
-					.isButtonDown(0);
-
-			if (showScopeOverlap)
+		}
+		if (showScopeOverlap)
+		{
+			// Render scope
+			if (evt.type == RenderGameOverlayEvent.ElementType.HELMET)
 			{
-				// Render scope
-				if (evt.type == RenderGameOverlayEvent.ElementType.HELMET)
+				if (mc.gameSettings.thirdPersonView == 0)
 				{
-					if (mc.gameSettings.thirdPersonView == 0)
-					{
-						evt.setCanceled(true);
-						showScope();
-					}
+					evt.setCanceled(true);
+					showScope();
 				}
-				// Remove crosshairs
-				else if (evt.type == RenderGameOverlayEvent.ElementType.CROSSHAIRS && showScopeOverlap) evt
-						.setCanceled(true);
 			}
+			// Remove crosshairs
+			else if (evt.type == RenderGameOverlayEvent.ElementType.CROSSHAIRS && showScopeOverlap) evt
+					.setCanceled(true);
 		}
 	}
 
