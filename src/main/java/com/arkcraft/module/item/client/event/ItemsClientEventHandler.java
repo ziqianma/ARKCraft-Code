@@ -15,6 +15,7 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Vec3;
 import net.minecraftforge.client.event.FOVUpdateEvent;
+import net.minecraftforge.client.event.MouseEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderHandEvent;
 import net.minecraftforge.client.event.RenderLivingEvent;
@@ -63,6 +64,12 @@ public class ItemsClientEventHandler
 	private Minecraft mc = Minecraft.getMinecraft();
 
 	@SubscribeEvent
+	public void onMouseEvent(MouseEvent evt)
+	{
+		if (showScopeOverlap && evt.button == 0) evt.setCanceled(true);
+	}
+
+	@SubscribeEvent
 	public void onFOVUpdate(FOVUpdateEvent evt)
 	{
 		if (mc.gameSettings.thirdPersonView == 0 && showScopeOverlap)
@@ -83,25 +90,29 @@ public class ItemsClientEventHandler
 	@SubscribeEvent(priority = EventPriority.NORMAL)
 	public void onRender(RenderGameOverlayEvent evt)
 	{
-		showScopeOverlap = false;
-		ItemStack stack = Minecraft.getMinecraft().thePlayer.getCurrentEquippedItem();
-		showScopeOverlap = stack != null && (new TileInventoryAttachment(stack).isScopePresent() || stack
-				.getItem().equals(ARKCraftItems.spy_glass)) && Mouse.isButtonDown(0);
-
-		if (showScopeOverlap)
+		if (mc.inGameHasFocus)
 		{
-			// Render scope
-			if (evt.type == RenderGameOverlayEvent.ElementType.HELMET)
+			showScopeOverlap = false;
+			ItemStack stack = Minecraft.getMinecraft().thePlayer.getCurrentEquippedItem();
+			showScopeOverlap = stack != null && (new TileInventoryAttachment(stack)
+					.isScopePresent() || stack.getItem().equals(ARKCraftItems.spy_glass)) && Mouse
+					.isButtonDown(0);
+
+			if (showScopeOverlap)
 			{
-				if (mc.gameSettings.thirdPersonView == 0)
+				// Render scope
+				if (evt.type == RenderGameOverlayEvent.ElementType.HELMET)
 				{
-					evt.setCanceled(true);
-					showScope();
+					if (mc.gameSettings.thirdPersonView == 0)
+					{
+						evt.setCanceled(true);
+						showScope();
+					}
 				}
+				// Remove crosshairs
+				else if (evt.type == RenderGameOverlayEvent.ElementType.CROSSHAIRS && showScopeOverlap) evt
+						.setCanceled(true);
 			}
-			// Remove crosshairs
-			else if (evt.type == RenderGameOverlayEvent.ElementType.CROSSHAIRS && showScopeOverlap) evt
-					.setCanceled(true);
 		}
 	}
 
@@ -272,7 +283,6 @@ public class ItemsClientEventHandler
 			{
 				ARKCraft.modChannel.sendToServer(new ReloadStarted());
 				weapon.setReloading(stack, player, true);
-				stack.setItemDamage(1);
 			}
 		}
 	}

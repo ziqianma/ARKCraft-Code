@@ -6,6 +6,7 @@ tile.crop_plot.name=Crop Plot
 tile.wooden_spikes.name=Wooden Spikes
 tile.compost_bin.name=Compost Bin
 tile.oreSurface.name=Ore Surface
+tile.refining_forge.name=Refining Forge
 
 # Containers
 container.inventory_refining_forge.name=Refining Forge
