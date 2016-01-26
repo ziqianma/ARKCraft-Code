@@ -22,7 +22,6 @@ import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.world.EnumSkyBlock;
 
-import com.arkcraft.lib.LogHelper;
 import com.arkcraft.module.item.common.handlers.ForgeHandler;
 import com.arkcraft.module.item.common.handlers.ForgeRecipe;
 

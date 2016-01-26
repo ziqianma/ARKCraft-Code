@@ -2,7 +2,8 @@
 "__comment": "Designed by Creativeone with BDcraft Cubik PRO 0.95 Beta - http://bdcraft.net",
 "textures": {
     "particle": "arkcraft:items/simple_pistol",
-    "texture": "arkcraft:items/simple_pistol"
+    "texture": "arkcraft:items/simple_pistol",
+    "longneck_rifle_scope":"arkcraft:items/longneck_rifle_scope"
 },
 "elements": [ 
 {
@@ -104,58 +105,58 @@
     "from": [ 8.1875, 10.4875, 4.75 ],
     "to": [ 9.325, 11.625, 5.4 ],
     "faces": {
-        "down":  { "uv": [ 6.625, 5.875, 7.5, 6.375 ], "texture": "#longneck rifle_scope" },
-        "up":    { "uv": [ 6.625, 5.875, 7.5, 6.375 ], "texture": "#longneck rifle_scope" },
-        "north": { "uv": [ 1.375, 0, 2.25, 0.875 ], "texture": "#longneck rifle_scope" },
-        "south": { "uv": [ 2.25, 0, 3.125, 0.875 ], "texture": "#longneck rifle_scope" },
-        "west":  { "uv": [ 2.5, 0, 3, 0.875 ], "texture": "#longneck rifle_scope" },
-        "east":  { "uv": [ 2.5, 0, 3, 0.875 ], "texture": "#longneck rifle_scope" }
+        "down":  { "uv": [ 6.625, 5.875, 7.5, 6.375 ], "texture": "#longneck_rifle_scope" },
+        "up":    { "uv": [ 6.625, 5.875, 7.5, 6.375 ], "texture": "#longneck_rifle_scope" },
+        "north": { "uv": [ 1.375, 0, 2.25, 0.875 ], "texture": "#longneck_rifle_scope" },
+        "south": { "uv": [ 2.25, 0, 3.125, 0.875 ], "texture": "#longneck_rifle_scope" },
+        "west":  { "uv": [ 2.5, 0, 3, 0.875 ], "texture": "#longneck_rifle_scope" },
+        "east":  { "uv": [ 2.5, 0, 3, 0.875 ], "texture": "#longneck_rifle_scope" }
     }
 },
 {
     "from": [ 8.3125, 10.6875, 5.375 ],
     "to": [ 9.125, 11.5, 9.1125 ],
     "faces": {
-        "down":  { "uv": [ 6, 5.75, 8.875, 6.375 ], "rotation": 90, "texture": "#longneck rifle_scope" },
-        "up":    { "uv": [ 6, 5.75, 8.875, 6.375 ], "rotation": 90, "texture": "#longneck rifle_scope" },
-        "north": { "uv": [ 2.375, 0.125, 3, 0.75 ], "texture": "#longneck rifle_scope" },
-        "south": { "uv": [ 2.375, 0.125, 3, 0.75 ], "texture": "#longneck rifle_scope" },
-        "west":  { "uv": [ 6, 5.75, 8.875, 6.375 ], "texture": "#longneck rifle_scope" },
-        "east":  { "uv": [ 6, 5.75, 8.875, 6.375 ], "texture": "#longneck rifle_scope" }
+        "down":  { "uv": [ 6, 5.75, 8.875, 6.375 ], "rotation": 90, "texture": "#longneck_rifle_scope" },
+        "up":    { "uv": [ 6, 5.75, 8.875, 6.375 ], "rotation": 90, "texture": "#longneck_rifle_scope" },
+        "north": { "uv": [ 2.375, 0.125, 3, 0.75 ], "texture": "#longneck_rifle_scope" },
+        "south": { "uv": [ 2.375, 0.125, 3, 0.75 ], "texture": "#longneck_rifle_scope" },
+        "west":  { "uv": [ 6, 5.75, 8.875, 6.375 ], "texture": "#longneck_rifle_scope" },
+        "east":  { "uv": [ 6, 5.75, 8.875, 6.375 ], "texture": "#longneck_rifle_scope" }
     }
 },
 {
     "from": [ 8.1875, 10.4875, 9.125 ],
     "to": [ 9.325, 11.625, 9.775 ],
     "faces": {
-        "down":  { "uv": [ 6.625, 5.875, 7.5, 6.375 ], "texture": "#longneck rifle_scope" },
-        "up":    { "uv": [ 6.625, 5.875, 7.5, 6.375 ], "texture": "#longneck rifle_scope" },
-        "north": { "uv": [ 2.25, 0, 3.125, 0.875 ], "texture": "#longneck rifle_scope" },
-        "south": { "uv": [ 1.375, 0, 2.25, 0.875 ], "texture": "#longneck rifle_scope" },
-        "west":  { "uv": [ 2.5, 0, 3, 0.875 ], "texture": "#longneck rifle_scope" },
-        "east":  { "uv": [ 2.5, 0, 3, 0.875 ], "texture": "#longneck rifle_scope" }
+        "down":  { "uv": [ 6.625, 5.875, 7.5, 6.375 ], "texture": "#longneck_rifle_scope" },
+        "up":    { "uv": [ 6.625, 5.875, 7.5, 6.375 ], "texture": "#longneck_rifle_scope" },
+        "north": { "uv": [ 2.25, 0, 3.125, 0.875 ], "texture": "#longneck_rifle_scope" },
+        "south": { "uv": [ 1.375, 0, 2.25, 0.875 ], "texture": "#longneck_rifle_scope" },
+        "west":  { "uv": [ 2.5, 0, 3, 0.875 ], "texture": "#longneck_rifle_scope" },
+        "east":  { "uv": [ 2.5, 0, 3, 0.875 ], "texture": "#longneck_rifle_scope" }
     }
 },
 {
     "from": [ 8, 10, 5.875 ],
     "to": [ 8.375, 11.25, 6.25 ],
     "faces": {
-        "up":    { "uv": [ 6.125, 7.375, 6.5, 7.75 ], "texture": "#longneck rifle_scope" },
-        "north": { "uv": [ 6.125, 7, 6.5, 8.25 ], "texture": "#longneck rifle_scope" },
-        "south": { "uv": [ 6.125, 7, 6.5, 8.25 ], "texture": "#longneck rifle_scope" },
-        "west":  { "uv": [ 6.125, 7, 6.5, 8.25 ], "texture": "#longneck rifle_scope" },
-        "east":  { "uv": [ 6.125, 7, 6.5, 8.25 ], "texture": "#longneck rifle_scope" }
+        "up":    { "uv": [ 6.125, 7.375, 6.5, 7.75 ], "texture": "#longneck_rifle_scope" },
+        "north": { "uv": [ 6.125, 7, 6.5, 8.25 ], "texture": "#longneck_rifle_scope" },
+        "south": { "uv": [ 6.125, 7, 6.5, 8.25 ], "texture": "#longneck_rifle_scope" },
+        "west":  { "uv": [ 6.125, 7, 6.5, 8.25 ], "texture": "#longneck_rifle_scope" },
+        "east":  { "uv": [ 6.125, 7, 6.5, 8.25 ], "texture": "#longneck_rifle_scope" }
     }
 },
 {
     "from": [ 8, 10, 8.125 ],
     "to": [ 8.375, 11.25, 8.5 ],
     "faces": {
-        "up":    { "uv": [ 6.125, 7.375, 6.5, 7.75 ], "texture": "#longneck rifle_scope" },
-        "north": { "uv": [ 6.125, 7, 6.5, 8.25 ], "texture": "#longneck rifle_scope" },
-        "south": { "uv": [ 6.125, 7, 6.5, 8.25 ], "texture": "#longneck rifle_scope" },
-        "west":  { "uv": [ 6.125, 7, 6.5, 8.25 ], "texture": "#longneck rifle_scope" },
-        "east":  { "uv": [ 6.125, 7, 6.5, 8.25 ], "texture": "#longneck rifle_scope" }
+        "up":    { "uv": [ 6.125, 7.375, 6.5, 7.75 ], "texture": "#longneck_rifle_scope" },
+        "north": { "uv": [ 6.125, 7, 6.5, 8.25 ], "texture": "#longneck_rifle_scope" },
+        "south": { "uv": [ 6.125, 7, 6.5, 8.25 ], "texture": "#longneck_rifle_scope" },
+        "west":  { "uv": [ 6.125, 7, 6.5, 8.25 ], "texture": "#longneck_rifle_scope" },
+        "east":  { "uv": [ 6.125, 7, 6.5, 8.25 ], "texture": "#longneck_rifle_scope" }
     }
 }
 ],
