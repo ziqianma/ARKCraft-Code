@@ -1,18 +1,85 @@
 {
-    "parent":"builtin/generated",
-    "textures": {
-        "layer0":"arkcraft:items/grenade"
-    },
-    "display": {
-        "thirdperson": {
-            "rotation": [ -90, 0, 0 ],
-            "translation": [ 0, 1, -3 ],
-            "scale": [ 0.55, 0.55, 0.55 ]
-        },
-        "firstperson": {
-            "rotation": [ 0, -135, 25 ],
-            "translation": [ 0, 4, 2 ],
-            "scale": [ 1.7, 1.7, 1.7 ]
-        }
+"__comment": "Designed by Creativeone with BDcraft Cubik PRO 0.95 Beta - http://bdcraft.net",
+"textures": {
+    "particle": "arkcraft:items/grenade",
+    "texture": "arkcraft:items/grenade"
+},
+"elements": [ 
+{
+    "from": [ 8, 11, 2 ],
+    "to": [ 9, 14, 5 ],
+    "rotation": { "origin": [ 8, 14, 2 ], "axis": "x", "angle": 22.5 },
+    "faces": {
+        "down":  { "uv": [ 0, 3.5, 1, 6.5 ], "texture": "#texture" },
+        "up":    { "uv": [ 0, 3.5, 1, 6.5 ], "texture": "#texture" },
+        "north": { "uv": [ 0, 3.5, 1, 6.5 ], "texture": "#texture" },
+        "south": { "uv": [ 0, 3.5, 1, 6.5 ], "texture": "#texture" },
+        "west":  { "uv": [ 0, 0, 3, 3 ], "texture": "#texture" },
+        "east":  { "uv": [ 0, 0, 3, 3 ], "texture": "#texture" }
     }
+},
+{
+    "from": [ 4, 0, 4 ],
+    "to": [ 12, 11, 12 ],
+    "faces": {
+        "down":  { "uv": [ 0, 8, 8, 16 ], "texture": "#texture" },
+        "up":    { "uv": [ 0, 8, 8, 16 ], "texture": "#texture" },
+        "north": { "uv": [ 8, 5, 16, 16 ], "texture": "#texture" },
+        "south": { "uv": [ 8, 5, 16, 16 ], "texture": "#texture" },
+        "west":  { "uv": [ 16, 5, 8, 16 ], "texture": "#texture" },
+        "east":  { "uv": [ 16, 5, 8, 16 ], "texture": "#texture" }
+    }
+},
+{
+    "from": [ 6.5, 11, 6.5 ],
+    "to": [ 9.5, 15, 9.5 ],
+    "faces": {
+        "down":  { "uv": [ 10.5, 1, 13.5, 4 ], "texture": "#texture" },
+        "up":    { "uv": [ 10.5, 1, 13.5, 4 ], "texture": "#texture" },
+        "north": { "uv": [ 10.5, 1, 13.5, 5 ], "texture": "#texture" },
+        "south": { "uv": [ 10.5, 1, 13.5, 5 ], "texture": "#texture" },
+        "west":  { "uv": [ 10.5, 1, 13.5, 5 ], "texture": "#texture" },
+        "east":  { "uv": [ 10.5, 1, 13.5, 5 ], "texture": "#texture" }
+    }
+},
+{
+    "from": [ 7.5, 12.5, 4 ],
+    "to": [ 8.5, 13.5, 6.5 ],
+    "faces": {
+        "down":  { "uv": [ 8, 2.5, 10.5, 3.5 ], "rotation": 90, "texture": "#texture" },
+        "up":    { "uv": [ 8, 2.5, 10.5, 3.5 ], "rotation": 90, "texture": "#texture" },
+        "north": { "uv": [ 8, 2.5, 9, 3.5 ], "texture": "#texture" },
+        "south": { "uv": [ 8, 2.5, 9, 3.5 ], "texture": "#texture" },
+        "west":  { "uv": [ 8, 2.5, 10.5, 3.5 ], "texture": "#texture" },
+        "east":  { "uv": [ 8, 2.5, 10.5, 3.5 ], "texture": "#texture" }
+    }
+}
+],
+"display": {
+    "thirdperson": {
+        "rotation": [ 0, -113, 116 ],
+        "translation": [ 0.9, 0.4, -2.4 ],
+        "scale": [ 0.5, 0.5, 0.5 ]
+    },
+    "ground": {
+        "rotation": [ 0, 0, 0 ],
+        "translation": [ 0, 0, 0 ],
+        "scale": [ 1.5, 1.5, 1.5 ]
+    },
+    "fixed": {
+        "rotation": [ 0, 90, 0 ],
+        "translation": [ 0, 0.8, 0 ],
+        "scale": [ 2.2, 2.2, 2.2 ]
+    },
+    "firstperson": {
+        "rotation": [ 0, 0, 0 ],
+        "translation": [ 0, 3.8, 0 ],
+        "scale": [ 1.2, 1.2, 1.2 ]
+    },
+    "gui": {
+        "rotation": [ 0, 0, 0 ],
+        "translation": [ 0, 0, 0 ],
+        "scale": [ 1, 1, 1 ]
+    }
+}
 }
