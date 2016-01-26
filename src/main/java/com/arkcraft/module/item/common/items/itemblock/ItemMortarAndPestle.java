@@ -1,4 +1,4 @@
-package com.arkcraft.module.item.common.items;
+package com.arkcraft.module.item.common.items.itemblock;
 
 import com.arkcraft.module.item.common.blocks.ARKCraftBlocks;
 import net.minecraft.block.Block;
@@ -10,9 +10,9 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
-public class ItemRefiningForge extends Item
+public class ItemMortarAndPestle extends Item
 {
-    public ItemRefiningForge()
+    public ItemMortarAndPestle()
     {
         super();
         this.setMaxStackSize(1);
@@ -21,7 +21,6 @@ public class ItemRefiningForge extends Item
     /**
      * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
      */
-
     public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
     {
         boolean flag = worldIn.getBlockState(pos).getBlock().isReplaceable(worldIn, pos);
@@ -39,10 +38,10 @@ public class ItemRefiningForge extends Item
             {
                 return false;
             }
-            else if (ARKCraftBlocks.refining_forge.canPlaceBlockAt(worldIn, blockpos1))
+            else if (ARKCraftBlocks.pestle.canPlaceBlockAt(worldIn, blockpos1))
             {
                 --stack.stackSize;
-                worldIn.setBlockState(blockpos1, ARKCraftBlocks.refining_forge.getDefaultState());
+                worldIn.setBlockState(blockpos1, ARKCraftBlocks.pestle.getDefaultState());
                 return true;
             }
             else

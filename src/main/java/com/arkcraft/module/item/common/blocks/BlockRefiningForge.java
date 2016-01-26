@@ -1,12 +1,16 @@
 package com.arkcraft.module.item.common.blocks;
 
+import java.util.Arrays;
+
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.properties.PropertyInteger;
+import net.minecraft.block.properties.PropertyBool;
+import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryHelper;
@@ -41,6 +45,13 @@ public class BlockRefiningForge extends BlockContainer
 	public TileEntity createNewTileEntity(World worldIn, int meta)
 	{
 		return new TileInventoryForge();
+	}
+
+	@Override
+	public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
+	{
+		BlockUtils.getCardinalDirection(pos, placer);
+		return this.getDefaultState().withProperty(BURNING, false).withProperty(FACING, EnumFacing.EAST);
 	}
 
 	// Called when the block is right clicked
@@ -108,27 +119,14 @@ public class BlockRefiningForge extends BlockContainer
 	// The code below isn't necessary for illustrating the Inventory Furnace
 	// concepts, it's just used for rendering.
 	// For more background information see MBE03
-
-	// we will give our Block a property which tracks the number of burning
-	// sides, 0 - 4.
-	// This will affect the appearance of the block model, but does not need to
-	// be stored in metadata (it's stored in
-	// the tileEntity) so we only need to implement getActualState.
-	// getStateFromMeta, getMetaFromState aren't required
-	// but we give defaults anyway because the base class getMetaFromState gives
-	// an error if we don't
-
-	// update the block state depending on the number of slots which contain
-	// burning fuel
 	@Override
 	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
 	{
 		TileEntity tileEntity = worldIn.getTileEntity(pos);
 		if (tileEntity instanceof TileInventoryForge)
 		{
-			TileInventoryForge tileInventoryFurnace = (TileInventoryForge) tileEntity;
-			int burningSlots = tileInventoryFurnace.isBurning() ? 4 : 0;
-			return getDefaultState().withProperty(BURNING_SIDES_COUNT, burningSlots);
+			TileInventoryForge tileInventoryForge = (TileInventoryForge) tileEntity;
+			return state.withProperty(BURNING, tileInventoryForge.isBurning());
 		}
 		return state;
 	}
@@ -154,37 +152,32 @@ public class BlockRefiningForge extends BlockContainer
 	@Override
 	protected BlockState createBlockState()
 	{
-		return new BlockState(this, new IProperty[] { BURNING_SIDES_COUNT });
+		return new BlockState(this, new IProperty[] { BURNING, FACING });
 	}
 
-	public static final PropertyInteger BURNING_SIDES_COUNT = PropertyInteger.create(
-			"burning_sides_count", 0, 4);
-
-	// change the furnace emitted light ("block light") depending on how many
-	// slots are burning
-	private static final int FOUR_SIDE_LIGHT_VALUE = 15; // light value for four
-															// sides burning
-	private static final int ONE_SIDE_LIGHT_VALUE = 8; // light value for a
-														// single side burning
+	public static final PropertyBool BURNING = PropertyBool.create("burning");
+	public static final PropertyDirection FACING = PropertyDirection
+			.create("facing",
+					Arrays.asList(new EnumFacing[] { EnumFacing.EAST, EnumFacing.WEST, EnumFacing.NORTH, EnumFacing.SOUTH }));
 
 	@Override
 	public int getLightValue(IBlockAccess world, BlockPos pos)
 	{
 		int lightValue = 0;
 		IBlockState blockState = getActualState(getDefaultState(), world, pos);
-		int burningSides = (Integer) blockState.getValue(BURNING_SIDES_COUNT);
+		boolean burning = (Boolean) blockState.getValue(BURNING);
 
-		if (burningSides == 0)
+		if (burning)
 		{
-			lightValue = 0;
+			lightValue = 15;
 		}
 		else
 		{
 			// linearly interpolate the light value depending on how many slots
 			// are burning
-			lightValue = ONE_SIDE_LIGHT_VALUE + (int) ((FOUR_SIDE_LIGHT_VALUE - ONE_SIDE_LIGHT_VALUE) / (4.0 - 1.0) * burningSides);
+			lightValue = 0;
 		}
-		lightValue = MathHelper.clamp_int(lightValue, 0, FOUR_SIDE_LIGHT_VALUE);
+		lightValue = MathHelper.clamp_int(lightValue, 0, 15);
 		return lightValue;
 	}
 

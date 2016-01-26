@@ -32,6 +32,7 @@ import com.arkcraft.module.core.common.entity.neutral.EntityBrontosaurus;
 import com.arkcraft.module.core.common.entity.passive.EntityDodo;
 import com.arkcraft.module.core.common.network.ARKMessagePipeline;
 import com.arkcraft.module.core.common.proxy.CommonProxy;
+import com.arkcraft.module.item.client.event.ItemsClientEventHandler;
 import com.arkcraft.module.item.client.event.KeyBindings;
 import com.arkcraft.module.item.client.event.Mod2ClientEventHandler;
 import com.arkcraft.module.item.client.gui.overlay.GuiOverlay;
@@ -67,6 +68,9 @@ public class ClientProxy extends CommonProxy
 	public void init()
 	{
 		if (initDone) { return; }
+		super.init();
+		
+		ItemsClientEventHandler.init();
 
 		MinecraftForge.EVENT_BUS.register(new GuiOverlay());
 		MinecraftForge.EVENT_BUS.register(new GuiOverlayReloading());

@@ -1,7 +1,7 @@
-package com.arkcraft.module.item.common.items;
+package com.arkcraft.module.item.common.items.itemblock;
 
 import com.arkcraft.module.item.common.blocks.ARKCraftBlocks;
-import com.arkcraft.module.item.common.blocks.BlockCompostBin;
+import com.arkcraft.module.item.common.blocks.BlockSmithy;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,9 +12,9 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public class ItemCompostBin extends Item
+public class ItemSmithy extends Item
 {
-    public ItemCompostBin()
+    public ItemSmithy()
     {
         super();
         this.setMaxStackSize(1);
@@ -57,13 +57,13 @@ public class ItemCompostBin extends Item
             {
                 if (flag2 && flag3 && World.doesBlockHaveSolidTopSurface(worldIn, pos.down()) && World.doesBlockHaveSolidTopSurface(worldIn, blockpos1.down()))
                 {
-                    IBlockState iblockstate1 = ARKCraftBlocks.compost_bin.getDefaultState()
-                            .withProperty(BlockCompostBin.FACING, enumfacing1)
-                            .withProperty(BlockCompostBin.PART, BlockCompostBin.EnumPartType.RIGHT);
+                    IBlockState iblockstate1 = ARKCraftBlocks.smithy.getDefaultState()
+                            .withProperty(BlockSmithy.FACING, enumfacing1)
+                            .withProperty(BlockSmithy.PART, BlockSmithy.EnumPartType.RIGHT);
                     if (worldIn.setBlockState(pos, iblockstate1, 3))
                     {
                         IBlockState iblockstate2 = iblockstate1
-                                .withProperty(BlockCompostBin.PART, BlockCompostBin.EnumPartType.LEFT);
+                                .withProperty(BlockSmithy.PART, BlockSmithy.EnumPartType.LEFT);
                         worldIn.setBlockState(blockpos1, iblockstate2, 3);
                     }
                     --stack.stackSize;

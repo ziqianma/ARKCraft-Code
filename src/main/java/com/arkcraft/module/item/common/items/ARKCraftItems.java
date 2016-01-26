@@ -16,6 +16,7 @@ import com.arkcraft.module.core.ARKCraft;
 import com.arkcraft.module.core.GlobalAdditions;
 import com.arkcraft.module.core.client.gui.book.Dossier;
 import com.arkcraft.module.core.common.handlers.EntityHandler;
+import com.arkcraft.module.item.common.blocks.ARKCraftBlocks;
 import com.arkcraft.module.item.common.config.ModuleItemBalance;
 import com.arkcraft.module.item.common.entity.item.projectiles.EntityAdvancedBullet;
 import com.arkcraft.module.item.common.entity.item.projectiles.EntityBallista;
@@ -35,6 +36,11 @@ import com.arkcraft.module.item.common.entity.item.projectiles.dispense.Dispense
 import com.arkcraft.module.item.common.entity.item.projectiles.dispense.DispenseSimpleRifleAmmo;
 import com.arkcraft.module.item.common.entity.item.projectiles.dispense.DispenseSimpleShotgunAmmo;
 import com.arkcraft.module.item.common.entity.item.projectiles.dispense.DispenseTranquilizer;
+import com.arkcraft.module.item.common.items.itemblock.ItemCompostBin;
+import com.arkcraft.module.item.common.items.itemblock.ItemCropPlot;
+import com.arkcraft.module.item.common.items.itemblock.ItemMortarAndPestle;
+import com.arkcraft.module.item.common.items.itemblock.ItemRefiningForge;
+import com.arkcraft.module.item.common.items.itemblock.ItemSmithy;
 import com.arkcraft.module.item.common.items.weapons.ItemARKBow;
 import com.arkcraft.module.item.common.items.weapons.ItemCompoundBow;
 import com.arkcraft.module.item.common.items.weapons.ItemSpear;
@@ -81,8 +87,8 @@ public class ARKCraftItems
 	public static ItemStoneHatchet stone_hatchet;
 	public static ItemMetalPick metal_pick;
 	public static ItemMetalHatchet metal_hatchet;
-	
-	//Attachments
+
+	// Attachments
 	public static ItemARKBase scope, flash_light;
 
 	// Weapons
@@ -187,17 +193,15 @@ public class ARKCraftItems
 		item_crop_plot = addCropPlot("item_crop_plot");
 		item_mortar_and_pestle = addMortarAndPestle("item_mortar_and_pestle");
 		item_crystal = addCrystalItem("item_crystal");
-		item_refining_forge = addRefiningForge("item_refining_forge");
+		// item_refining_forge = addRefiningForge("item_refining_forge");
 
 		// Bows
 		compound_bow = new ItemCompoundBow();
 		registerItem("compound_bow", compound_bow);
-		
+
 		bow = new ItemARKBow();
 		registerItem("bow", bow);
-	
 
-	         
 		// Bullets
 		// tranq_arrow = addItemProjectile("tranq_arrow");
 		// stone_arrow = addItemProjectile("stone_arrow");
@@ -515,7 +519,7 @@ public class ARKCraftItems
 
 	protected static ItemRefiningForge addRefiningForge(String name)
 	{
-		ItemRefiningForge i = new ItemRefiningForge();
+		ItemRefiningForge i = new ItemRefiningForge(ARKCraftBlocks.refining_forge);
 		registerItem(name, i);
 		return i;
 	}

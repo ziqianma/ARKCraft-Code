@@ -10,6 +10,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import org.lwjgl.opengl.GL11;
 
+import com.arkcraft.module.item.common.event.ItemsCommonEventHandler;
 import com.arkcraft.module.item.common.items.weapons.ranged.ItemRangedWeapon;
 
 public class GuiOverlayReloading extends Gui
@@ -48,8 +49,9 @@ public class GuiOverlayReloading extends Gui
 				}
 				else if (weapon.isReloading(stack))
 				{
-					f = Math.min((float) weapon.getReloadTicks(stack) / weapon.getReloadDuration(),
-							1F);
+					f = Math.min(
+							(float) ItemsCommonEventHandler.reloadTicks / weapon
+									.getReloadDuration(), 1F);
 					color = 0x60EAA800;
 				}
 				else
@@ -60,13 +62,21 @@ public class GuiOverlayReloading extends Gui
 				drawRect(x0, y0, x0 + 16, y0 - (int) (f * 16), color);
 			}
 		}
-		else if (e.type.equals(ElementType.FOOD))
+		else if (e.type.equals(ElementType.HELMET))
 		{
 			if (stack != null && stack.getItem() instanceof ItemRangedWeapon)
 			{
-				ItemRangedWeapon weapon = (ItemRangedWeapon) stack.getItem();
-				String text = weapon.getAmmoQuantity(stack) + "/" + weapon
-						.getAmmoQuantityInInventory(stack, p);
+				String text = "";
+				if (!p.capabilities.isCreativeMode)
+				{
+					ItemRangedWeapon weapon = (ItemRangedWeapon) stack.getItem();
+					text = weapon.getAmmoQuantity(stack) + "/" + weapon.getAmmoQuantityInInventory(
+							stack, p);
+				}
+				else
+				{
+					text = '\u221e' + "";
+				}
 				int x = e.resolution.getScaledWidth() - 4 - mc.fontRendererObj.getStringWidth(text);
 				int y = 20;
 				drawString(mc.fontRendererObj, text, x, y - 16, 0xFFFFFFFF);

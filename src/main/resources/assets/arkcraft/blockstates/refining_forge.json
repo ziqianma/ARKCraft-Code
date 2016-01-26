@@ -1,9 +1,12 @@
 {
     "variants": {
-        "facing=north": { "model": "arkcraft:refining_forge" },
-        "facing=south": { "model": "arkcraft:refining_forge", "y": 180 },
-        "facing=west":  { "model": "arkcraft:refining_forge", "y": 270 },
-        "facing=east":  { "model": "arkcraft:refining_forge", "y": 90 }
+        "burning=false,facing=north": { "model": "arkcraft:refining_forge" },
+        "burning=false,facing=south": { "model": "arkcraft:refining_forge", "y": 180 },
+        "burning=false,facing=west":  { "model": "arkcraft:refining_forge", "y": 270 },
+        "burning=false,facing=east":  { "model": "arkcraft:refining_forge", "y": 90 },
+        "burning=true,facing=north": { "model": "arkcraft:refining_forge_burning" },
+        "burning=true,facing=south": { "model": "arkcraft:refining_forge_burning", "y": 180 },
+        "burning=true,facing=west":  { "model": "arkcraft:refining_forge_burning", "y": 270 },
+        "burning=true,facing=east":  { "model": "arkcraft:refining_forge_burning", "y": 90 }
     }
 }
-
