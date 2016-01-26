@@ -53,27 +53,34 @@ public class ContainerInventoryForge extends Container
 		final int SLOT_X_SPACING = 18;
 		final int SLOT_Y_SPACING = 18;
 
+		final int PLAYER_INVENTORY_XPOS = 8;
+		final int PLAYER_INVENTORY_YPOS = 84;
+		final int HOTBAR_YPOS = PLAYER_INVENTORY_YPOS + 10 + 16 * 3;
 		final int FURNACE_SLOTS_XPOS = 53;
 		final int FURNACE_SLOTS_YPOS = 26;
 		// Add the tile fuel slots
 		for (int x = 0; x < FURNACE_SLOT_COUNT; x++)
 		{
-			for (int y = 0; y < 4; x++)
+			for (x = x; x < 4; x++)
 			{
 				addSlotToContainer(new Slot(tileInventoryFurnace, x,
 						FURNACE_SLOTS_XPOS + SLOT_X_SPACING * x, FURNACE_SLOTS_YPOS));
-				y = x;
 			}
-			for (int y = 4; y < FURNACE_SLOT_COUNT; x++)
+			for (x = x; x < FURNACE_SLOT_COUNT; x++)
 			{
 				addSlotToContainer(new Slot(tileInventoryFurnace, x,
 						FURNACE_SLOTS_XPOS + SLOT_X_SPACING * (x - 4), FURNACE_SLOTS_YPOS + 18));
-				y = x;
 			}
 		}
 
-		final int PLAYER_INVENTORY_XPOS = 8;
-		final int PLAYER_INVENTORY_YPOS = 84;
+		// Add the players hotbar to the gui - the [xpos, ypos] location of each
+		// item
+		for (int x = 0; x < HOTBAR_SLOT_COUNT; x++)
+		{
+			addSlotToContainer(new Slot(invPlayer, x, PLAYER_INVENTORY_XPOS + SLOT_X_SPACING * x,
+					HOTBAR_YPOS));
+		}
+
 		// Add the rest of the players inventory to the gui
 		for (int y = 0; y < PLAYER_INVENTORY_ROW_COUNT; y++)
 		{
@@ -84,16 +91,6 @@ public class ContainerInventoryForge extends Container
 				int ypos = PLAYER_INVENTORY_YPOS + y * SLOT_Y_SPACING;
 				addSlotToContainer(new Slot(invPlayer, slotNumber, xpos, ypos));
 			}
-		}
-
-		final int HOTBAR_YPOS = PLAYER_INVENTORY_YPOS + 10 + 16 * 3;
-		// Add the players hotbar to the gui - the [xpos, ypos] location of each
-		// item
-		for (int x = 0; x < HOTBAR_SLOT_COUNT; x++)
-		{
-			int slotNumber = x;
-			addSlotToContainer(new Slot(invPlayer, slotNumber,
-					PLAYER_INVENTORY_XPOS + SLOT_X_SPACING * x, HOTBAR_YPOS));
 		}
 	}
 

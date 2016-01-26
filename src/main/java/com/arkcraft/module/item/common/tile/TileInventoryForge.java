@@ -22,7 +22,6 @@ import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.world.EnumSkyBlock;
 
-import com.arkcraft.lib.LogHelper;
 import com.arkcraft.module.item.common.handlers.ForgeHandler;
 import com.arkcraft.module.item.common.handlers.ForgeRecipe;
 
@@ -32,25 +31,20 @@ public class TileInventoryForge extends TileEntity implements IForge
 
 	/** the currently active recipes */
 	private Map<ForgeRecipe, Integer> activeRecipes = new HashMap<ForgeRecipe, Integer>();
-	/** whether the furnace is activated */
-	private boolean burning;
 	/** the ticks burning left */
 	private int burningTicks;
 
 	public TileInventoryForge()
 	{
 		super();
-		this.burning = false;
 	}
 
 	/**
-	 * return the remaining burn time of the fuel in the given slot
+	 * return the remaining burn time of the fuel
 	 * 
-	 * @param fuelSlot
-	 *            the number of the fuel slot (0..3)
 	 * @return seconds remaining
 	 */
-	public double secondsOfFuelRemaining()
+	public int secondsOfFuelRemaining()
 	{
 		return burningTicks / 20; // 20 ticks per second
 	}
@@ -64,9 +58,8 @@ public class TileInventoryForge extends TileEntity implements IForge
 	public void update()
 	{
 		List<ForgeRecipe> possibleRecipes = ForgeHandler.findPossibleRecipes(this);
-		this.setBurning(possibleRecipes.size() > 0);
 		updateBurning();
-		if (this.isBurning())
+		if (this.isBurning() && possibleRecipes.size() > 0)
 		{
 			Iterator<Entry<ForgeRecipe, Integer>> it = activeRecipes.entrySet().iterator();
 			while (it.hasNext())
@@ -87,51 +80,37 @@ public class TileInventoryForge extends TileEntity implements IForge
 			updateInventory();
 
 			markDirty();
-
-			// when the number of burning slots changes, we need to force the
-			// block
-			// to re-render, otherwise the change in
-			// state will not be visible. Likewise, we need to force a lighting
-			// recalculation.
-			// The block update (for renderer) is only required on client side,
-			// but
-			// the lighting is required on both, since
-			// the client needs it for rendering and the server needs it for
-			// crop
-			// growth etc
-			if (worldObj.isRemote)
-			{
-				worldObj.markBlockForUpdate(pos);
-			}
-			worldObj.checkLightFor(EnumSkyBlock.BLOCK, pos);
 		}
+		else clearActiveRecipes();
+		if (worldObj.isRemote)
+		{
+			worldObj.markBlockForUpdate(pos);
+		}
+		worldObj.checkLightFor(EnumSkyBlock.BLOCK, pos);
 	}
 
 	private void updateBurning()
 	{
-		if (burningTicks <= 0)
+		if (burningTicks < 1)
 		{
-			if (this.isBurning())
+			for (int i = 0; i < itemStacks.length; i++)
 			{
-				if (!this.worldObj.isRemote)
+				ItemStack stack = itemStacks[i];
+				if (stack != null && ForgeHandler.isValidFuel(stack.getItem()) && this.activeRecipes
+						.size() > 0)
 				{
-					for (ItemStack i : itemStacks)
+					if (!worldObj.isRemote)
 					{
-						if (i != null && ForgeHandler.isValidFuel(i.getItem()))
-						{
-							i.stackSize--;
-							this.burningTicks += ForgeHandler.getBurnTime(i.getItem());
-							LogHelper.info("burned fuel");
-						}
+						stack.stackSize--;
+						if (stack.stackSize == 0) itemStacks[i] = null;
 					}
-				}
-				if (burningTicks <= 0)
-				{
-					this.setBurning(false);
+					this.burningTicks += ForgeHandler.getBurnTime(stack.getItem());
+					break;
 				}
 			}
 		}
-		else this.burningTicks--;
+		if (burningTicks > 0) this.burningTicks--;
+
 	}
 
 	private void updateInventory()
@@ -140,7 +119,7 @@ public class TileInventoryForge extends TileEntity implements IForge
 		while (it.hasNext())
 		{
 			Entry<ForgeRecipe, Integer> e = it.next();
-			if (e.getValue() >= e.getKey().getBurnTime() * this.getBurnFactor())
+			if (e.getValue() >= e.getKey().getBurnTime() * this.getBurnFactor() * 20)
 			{
 				it.remove();
 				ForgeRecipe r = e.getKey();
@@ -149,9 +128,11 @@ public class TileInventoryForge extends TileEntity implements IForge
 				int outputStack = -1;
 				for (int i = 0; i < itemStacks.length; i++)
 				{
-					if (itemStacks[i] != null && itemStacks[i].getItem().equals(output))
+					if (itemStacks[i] != null && itemStacks[i].getItem().equals(output) && itemStacks[i].stackSize < this
+							.getInventoryStackLimit())
 					{
 						outputStack = i;
+						break;
 					}
 				}
 				if (outputStack == -1)
@@ -161,6 +142,7 @@ public class TileInventoryForge extends TileEntity implements IForge
 						if (itemStacks[i] == null)
 						{
 							outputStack = i;
+							break;
 						}
 					}
 				}
@@ -174,8 +156,8 @@ public class TileInventoryForge extends TileEntity implements IForge
 							while (input.remove(stack.getItem()) && stack.stackSize > 0)
 							{
 								stack.stackSize--;
-								if (stack.stackSize == 0) itemStacks[i] = null;
 							}
+							if (stack.stackSize == 0) itemStacks[i] = null;
 						}
 					}
 					if (itemStacks[outputStack] == null)
@@ -326,7 +308,6 @@ public class TileInventoryForge extends TileEntity implements IForge
 
 		// Save everything else
 		parentNBT.setInteger("burnTime", this.burningTicks);
-		parentNBT.setBoolean("burning", this.burning);
 		NBTTagList nbtList = new NBTTagList();
 		for (Entry<ForgeRecipe, Integer> e : activeRecipes.entrySet())
 		{
@@ -361,7 +342,6 @@ public class TileInventoryForge extends TileEntity implements IForge
 
 		// Load everything else. Trim the arrays (or pad with 0) to make sure
 		// they have the correct number of elements
-		this.burning = nbt.getBoolean("burning");
 		this.burningTicks = nbt.getInteger("burnTime");
 		NBTTagList nbtList = nbt.getTagList("activeRecipes", NBT_TYPE_COMPOUND);
 		for (int i = 0; i < nbtList.tagCount(); i++)
@@ -534,21 +514,15 @@ public class TileInventoryForge extends TileEntity implements IForge
 	}
 
 	@Override
-	public void setBurning(boolean burning)
-	{
-		this.burning = burning;
-	}
-
-	@Override
 	public boolean isBurning()
 	{
-		return burning;
+		return this.burningTicks > 0;
 	}
 
 	@Override
-	public int getBurnFactor()
+	public double getBurnFactor()
 	{
-		return 20;
+		return 20d;
 	}
 
 }
