@@ -36,6 +36,11 @@ import com.arkcraft.module.item.common.entity.item.projectiles.dispense.Dispense
 import com.arkcraft.module.item.common.entity.item.projectiles.dispense.DispenseSimpleRifleAmmo;
 import com.arkcraft.module.item.common.entity.item.projectiles.dispense.DispenseSimpleShotgunAmmo;
 import com.arkcraft.module.item.common.entity.item.projectiles.dispense.DispenseTranquilizer;
+import com.arkcraft.module.item.common.items.itemblock.ItemCompostBin;
+import com.arkcraft.module.item.common.items.itemblock.ItemCropPlot;
+import com.arkcraft.module.item.common.items.itemblock.ItemMortarAndPestle;
+import com.arkcraft.module.item.common.items.itemblock.ItemRefiningForge;
+import com.arkcraft.module.item.common.items.itemblock.ItemSmithy;
 import com.arkcraft.module.item.common.items.weapons.ItemARKBow;
 import com.arkcraft.module.item.common.items.weapons.ItemCompoundBow;
 import com.arkcraft.module.item.common.items.weapons.ItemSpear;

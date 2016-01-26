@@ -227,12 +227,6 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 		{
 			if (isSelected)
 			{
-				if (isReloading(stack))
-				{
-					updateReload(stack, worldIn, (EntityPlayer) entityIn);
-					return;
-				}
-
 				TileInventoryAttachment inv = new TileInventoryAttachment(stack);
 
 				if (inv.isFlashPresent())
@@ -251,27 +245,6 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 	{
 		setReloading(stack, player, false);
 		setReloadTicks(stack, 0);
-	}
-
-	private void updateReload(ItemStack stack, World worldIn, EntityPlayer entityIn)
-	{
-		int reloadTicks = getReloadTicks(stack);
-		if (++reloadTicks <= getReloadDuration())
-		{
-			setReloadTicks(stack, reloadTicks);
-		}
-		else
-		{
-			setReloading(stack, entityIn, false);
-			setReloadTicks(stack, 0);
-			hasAmmoAndConsume(stack, entityIn);
-			if (!worldIn.isRemote)
-			{
-
-				// ARKCraft.modChannel.sendTo(new ReloadFinished(),
-				// (EntityPlayerMP) entityIn);
-			}
-		}
 	}
 
 	private void updateFlashlight(Entity entityIn)
@@ -344,13 +317,6 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 			// Start aiming weapon to fire
 			player.setItemInUse(stack, getMaxItemUseDuration(stack));
 		}
-		// Check can reload
-		// else if (hasAmmoInInventory(player))
-		// {
-		// // Begin reloading
-		// soundCharge(stack, world, player);
-		// player.setItemInUse(stack, getMaxItemUseDuration(stack));
-		// }
 		else
 		{
 			// Can't reload; no ammo
@@ -365,20 +331,7 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 		return EnumAction.NONE;
 	}
 
-	@Override
-	public void onUsingTick(ItemStack stack, EntityPlayer player, int count)
-	{
-		if (canReload(stack, player) && this.getMaxItemUseDuration(stack) - count >= getReloadDuration())
-		{
-			if (hasAmmoAndConsume(stack, player))
-			{
-				effectReloadDone(stack, player.worldObj, player);
-				player.clearItemInUse();
-			}
-		}
-	}
-
-	private boolean hasAmmoAndConsume(ItemStack stack, EntityPlayer player)
+	public void hasAmmoAndConsume(ItemStack stack, EntityPlayer player)
 	{
 		int ammoFinal = getAmmoQuantity(stack);
 		String type = "";
@@ -403,10 +356,7 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 		{
 			setAmmoType(stack, type);
 			setAmmoQuantity(stack, ammoFinal);
-			return true;
 		}
-
-		return false;
 	}
 
 	@Override
@@ -470,7 +420,7 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 		else return 0;
 	}
 
-	private void setAmmoQuantity(ItemStack stack, int ammo)
+	public void setAmmoQuantity(ItemStack stack, int ammo)
 	{
 		if (!stack.hasTagCompound()) stack.setTagCompound(new NBTTagCompound());
 		stack.getTagCompound().setInteger("ammo", ammo);
@@ -485,7 +435,7 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 		return type.toLowerCase();
 	}
 
-	private void setAmmoType(ItemStack stack, String type)
+	public void setAmmoType(ItemStack stack, String type)
 	{
 		if (!stack.hasTagCompound()) stack.setTagCompound(new NBTTagCompound());
 		stack.getTagCompound().setString("ammotype", type);

@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import com.arkcraft.module.core.GlobalAdditions;
 import com.arkcraft.module.core.common.handlers.GenerationHandler;
-import com.arkcraft.module.item.common.items.ItemRefiningForge;
+import com.arkcraft.module.item.common.items.itemblock.ItemRefiningForge;
 import com.arkcraft.module.item.common.tile.TileFlashlight;
 import com.arkcraft.module.item.common.tile.TileInventoryCompostBin;
 import com.arkcraft.module.item.common.tile.TileInventoryCropPlot;

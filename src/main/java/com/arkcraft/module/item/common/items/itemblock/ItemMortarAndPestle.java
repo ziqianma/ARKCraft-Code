@@ -1,4 +1,4 @@
-package com.arkcraft.module.item.common.items;
+package com.arkcraft.module.item.common.items.itemblock;
 
 import com.arkcraft.module.item.common.blocks.ARKCraftBlocks;
 import net.minecraft.block.Block;
