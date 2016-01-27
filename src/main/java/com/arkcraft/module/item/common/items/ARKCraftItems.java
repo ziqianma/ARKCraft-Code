@@ -35,16 +35,12 @@ import com.arkcraft.module.item.common.entity.item.projectiles.dispense.Dispense
 import com.arkcraft.module.item.common.entity.item.projectiles.dispense.DispenseSimpleRifleAmmo;
 import com.arkcraft.module.item.common.entity.item.projectiles.dispense.DispenseSimpleShotgunAmmo;
 import com.arkcraft.module.item.common.entity.item.projectiles.dispense.DispenseTranquilizer;
-import com.arkcraft.module.item.common.items.itemblock.ItemBerryBush;
-import com.arkcraft.module.item.common.items.itemblock.ItemCompostBin;
-import com.arkcraft.module.item.common.items.itemblock.ItemCropPlot;
-import com.arkcraft.module.item.common.items.itemblock.ItemMortarAndPestle;
-import com.arkcraft.module.item.common.items.itemblock.ItemRefiningForge;
-import com.arkcraft.module.item.common.items.itemblock.ItemSmithy;
 import com.arkcraft.module.item.common.items.weapons.ItemARKBow;
 import com.arkcraft.module.item.common.items.weapons.ItemCompoundBow;
 import com.arkcraft.module.item.common.items.weapons.ItemSpear;
 import com.arkcraft.module.item.common.items.weapons.ItemWoodenClub;
+import com.arkcraft.module.item.common.items.weapons.attachments.AttachmentType;
+import com.arkcraft.module.item.common.items.weapons.attachments.ItemAttachment;
 import com.arkcraft.module.item.common.items.weapons.bullets.ItemProjectile;
 import com.arkcraft.module.item.common.items.weapons.ranged.ItemCrossbow;
 import com.arkcraft.module.item.common.items.weapons.ranged.ItemFabricatedPistol;
@@ -74,13 +70,13 @@ public class ARKCraftItems
 	public static ItemARKArmor clothHelm, clothChest, clothLegs, clothBoots;
 	public static ItemARKArmor hideHelm, hideChest, hideLegs, hideBoots;
 	public static Dossier dino_book;
-	public static ItemBerryBush item_berry_bush;
-	public static ItemCompostBin item_compost_bin;
-	public static ItemSmithy item_smithy;
+	// public static ItemBerryBush item_berry_bush;
+	// public static ItemCompostBin item_compost_bin;
+	// public static ItemSmithy item_smithy;
 	public static ItemCrystal item_crystal;
-	public static ItemCropPlot item_crop_plot;
-	public static ItemRefiningForge item_refining_forge;
-	public static ItemMortarAndPestle item_mortar_and_pestle;
+	// public static ItemCropPlot item_crop_plot;
+	// public static ItemRefiningForge item_refining_forge;
+	// public static ItemMortarAndPestle item_mortar_and_pestle;
 	public static ItemSpyGlass spy_glass;
 	public static ItemGrenade grenade;
 	public static ItemStonePick stone_pick;
@@ -89,7 +85,7 @@ public class ARKCraftItems
 	public static ItemMetalHatchet metal_hatchet;
 
 	// Attachments
-	public static ItemARKBase scope, flash_light;
+	public static ItemAttachment scope, flash_light, silencer, laser, holo_scope;
 
 	// Weapons
 	public static ItemSlingshot slingshot;
@@ -154,10 +150,15 @@ public class ARKCraftItems
 
 		// world generated
 
+		// weapon attachments
+		scope = addItemAttachment("scope", AttachmentType.SCOPE);
+		flash_light = addItemAttachment("flash_light", AttachmentType.FLASH);
+		holo_scope = addItemAttachment("holo_scope", AttachmentType.HOLO_SCOPE);
+		laser = addItemAttachment("laser", AttachmentType.LASER);
+		silencer = addItemAttachment("silencer", AttachmentType.SILENCER);
+
 		// Weapons and tools
 		rock = addItem("rock");
-		scope = addItem("scope");
-		flash_light = addItem("flash_light");
 		cementing_pastes = addItem("cementing_paste");
 		slingshot = addSlingshot("slingshot");
 		grenade = addGrenade("grenade");
@@ -255,6 +256,13 @@ public class ARKCraftItems
 		registerDispenseBehavior();
 		registerWeaponEntities();
 		addGunPowderWeapons();
+	}
+
+	private static ItemAttachment addItemAttachment(String name, AttachmentType type)
+	{
+		ItemAttachment i = new ItemAttachment(name, type);
+		registerItem(name, i);
+		return i;
 	}
 
 	public static void registerWeaponEntities()
@@ -476,26 +484,26 @@ public class ARKCraftItems
 	// return i;
 	// }
 
-//	protected static ItemCompostBin addCompostBinItem(String name)
-//	{
-//		ItemCompostBin i = new ItemCompostBin();
-//		registerItem(name, i);
-//		return i;
-//	}
-//
-//	protected static ItemSmithy addSmithyItem(String name)
-//	{
-//		ItemSmithy i = new ItemSmithy();
-//		registerItem(name, i);
-//		return i;
-//	}
-//
-//	protected static ItemCropPlot addCropPlot(String name)
-//	{
-//		ItemCropPlot i = new ItemCropPlot();
-//		registerItem(name, i);
-//		return i;
-//	}
+	// protected static ItemCompostBin addCompostBinItem(String name)
+	// {
+	// ItemCompostBin i = new ItemCompostBin();
+	// registerItem(name, i);
+	// return i;
+	// }
+	//
+	// protected static ItemSmithy addSmithyItem(String name)
+	// {
+	// ItemSmithy i = new ItemSmithy();
+	// registerItem(name, i);
+	// return i;
+	// }
+	//
+	// protected static ItemCropPlot addCropPlot(String name)
+	// {
+	// ItemCropPlot i = new ItemCropPlot();
+	// registerItem(name, i);
+	// return i;
+	// }
 
 	protected static ItemCrystal addCrystalItem(String name)
 	{
@@ -511,19 +519,19 @@ public class ARKCraftItems
 		return i;
 	}
 
-//	protected static ItemMortarAndPestle addMortarAndPestle(String name)
-//	{
-//		ItemMortarAndPestle i = new ItemMortarAndPestle();
-//		registerItem(name, i);
-//		return i;
-//	}
-//
-//	protected static ItemRefiningForge addRefiningForge(String name)
-//	{
-//		ItemRefiningForge i = new ItemRefiningForge();
-//		registerItem(name, i);
-//		return i;
-//	}
+	// protected static ItemMortarAndPestle addMortarAndPestle(String name)
+	// {
+	// ItemMortarAndPestle i = new ItemMortarAndPestle();
+	// registerItem(name, i);
+	// return i;
+	// }
+	//
+	// protected static ItemRefiningForge addRefiningForge(String name)
+	// {
+	// ItemRefiningForge i = new ItemRefiningForge();
+	// registerItem(name, i);
+	// return i;
+	// }
 
 	protected static ItemSpyGlass addSpyGlass(String name)
 	{

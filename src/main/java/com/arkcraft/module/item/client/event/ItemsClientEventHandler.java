@@ -40,6 +40,7 @@ import com.arkcraft.module.item.common.entity.item.projectiles.EntityBallista;
 import com.arkcraft.module.item.common.entity.player.ARKPlayer;
 import com.arkcraft.module.item.common.items.ARKCraftItems;
 import com.arkcraft.module.item.common.items.weapons.ranged.ItemRangedWeapon;
+import com.arkcraft.module.item.common.items.weapons.ranged.supporting.NonSupporting;
 import com.arkcraft.module.item.common.tile.TileInventoryAttachment;
 
 @SideOnly(Side.CLIENT)
@@ -72,55 +73,15 @@ public class ItemsClientEventHandler
 
 		if (evt.button == 0)
 		{
-			if (evt.button == 0)
+			ItemStack stack = thePlayer.getCurrentEquippedItem();
+			TileInventoryAttachment att = TileInventoryAttachment.create(stack);
+			if (att != null)
 			{
-				ItemStack stack = thePlayer.getCurrentEquippedItem();
-				showScopeOverlap = stack != null && (new TileInventoryAttachment(stack)
-						.isScopePresent() || stack.getItem().equals(ARKCraftItems.spy_glass)) && evt.buttonstate;
+				showScopeOverlap = stack != null && (att.isScopePresent() || stack.getItem()
+						.equals(ARKCraftItems.spy_glass)) && evt.buttonstate;
 				selected = stack;
-				if (stack != null && new TileInventoryAttachment(stack).isScopePresent()) evt
-						.setCanceled(true);
+				if (stack != null && att.isScopePresent()) evt.setCanceled(true);
 			}
-
-			// ItemStack stack = thePlayer.getCurrentEquippedItem();
-			// if (stack != null)
-			// {
-			// IItemWeapon i_item_weapon;
-			// if (stack.getItem() instanceof IItemWeapon)
-			// {
-			// i_item_weapon = (IItemWeapon) stack.getItem();
-			// TileInventoryAttachment inv = new TileInventoryAttachment(stack);
-			// if (inv.isScopePresent())
-			// {
-			// if (evt.buttonstate)
-			// {
-			// showScopeOverlap = true;
-			// }
-			// else
-			// {
-			// showScopeOverlap = false;
-			// }
-			// evt.setCanceled(true);
-			// }
-			// }
-			// else
-			// {
-			// i_item_weapon = null;
-			// }
-			// Weapon with scope?
-			// if (i_item_weapon != null && i_item_weapon.ifCanScope())
-			// {
-			// if (evt.buttonstate)
-			// {
-			// ShowScopeOverlap = true;
-			// }
-			// else
-			// {
-			// ShowScopeOverlap = false;
-			// }
-			// evt.setCanceled(true);
-			// }
-			// }
 		}
 	}
 
@@ -302,7 +263,8 @@ public class ItemsClientEventHandler
 		if (KeyBindings.attachment.isPressed())
 		{
 			if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem()
-					.getItem() instanceof ItemRangedWeapon)
+					.getItem() instanceof ItemRangedWeapon && !(player.getCurrentEquippedItem()
+					.getItem() instanceof NonSupporting))
 			{
 				player.openGui(ARKCraft.instance, GlobalAdditions.GUI.ATTACHMENT_GUI.getID(),
 						player.worldObj, 0, 0, 0);

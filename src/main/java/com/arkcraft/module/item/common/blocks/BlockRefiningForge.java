@@ -24,7 +24,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.arkcraft.lib.LogHelper;
 import com.arkcraft.module.core.ARKCraft;
 import com.arkcraft.module.item.common.tile.TileInventoryForge;
 
@@ -80,7 +79,6 @@ public class BlockRefiningForge extends BlockContainer
 	@Override
 	public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
 	{
-		LogHelper.info("Facing: " + placer.getHorizontalFacing().getOpposite());
 		return this.getDefaultState().withProperty(FACING,
 				placer.getHorizontalFacing().getOpposite());
 	}
@@ -165,7 +163,6 @@ public class BlockRefiningForge extends BlockContainer
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
-		LogHelper.info("From meta " + meta);
 		EnumFacing enumfacing = EnumFacing.getHorizontal(meta);
 		int metaOld = meta;
 		EnumPart part = (metaOld & 8) > 0 ? EnumPart.TOP : EnumPart.BOTTOM;
@@ -178,7 +175,6 @@ public class BlockRefiningForge extends BlockContainer
 		byte b0 = 0;
 		int i = b0 | ((EnumFacing) state.getValue(FACING)).getHorizontalIndex();
 		if (state.getValue(PART).equals(EnumPart.TOP)) i |= 8;
-		LogHelper.info("From state " + i);
 		return i;
 	}
 

@@ -8,7 +8,6 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
-import com.arkcraft.module.core.GlobalAdditions;
 import com.arkcraft.module.item.common.blocks.ARKCraftBlocks;
 import com.arkcraft.module.item.common.blocks.BlockRefiningForge;
 
@@ -17,7 +16,6 @@ public class ItemRefiningForge extends ItemBlockARK
 	public ItemRefiningForge(Block block)
 	{
 		super(block);
-		setCreativeTab(GlobalAdditions.tabARK);
 		this.setMaxStackSize(1);
 	}
 

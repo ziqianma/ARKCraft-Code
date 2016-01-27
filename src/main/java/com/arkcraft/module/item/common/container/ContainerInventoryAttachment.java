@@ -3,6 +3,7 @@ package com.arkcraft.module.item.common.container;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
@@ -76,7 +77,7 @@ public class ContainerInventoryAttachment extends Container
 			if (index < ATTACHMENT_SLOT_COUNT)
 			{
 				// try to place in player inventory / action bar
-				if (!this.mergeItemStack(itemstack1, 0, ATTACHMENT_SLOT_COUNT, true)) { return null; }
+				if (!this.mergeItemStack(itemstack1, ATTACHMENT_SLOT_COUNT, 37, true)) { return null; }
 
 				slot.onSlotChange(itemstack1, itemstack);
 			}
@@ -216,5 +217,21 @@ public class ContainerInventoryAttachment extends Container
 		}
 
 		return flag1;
+	}
+
+	private class SlotAttachment extends Slot
+	{
+
+		public SlotAttachment(IInventory inventoryIn, int index, int xPosition, int yPosition)
+		{
+			super(inventoryIn, index, xPosition, yPosition);
+		}
+
+		@Override
+		public boolean isItemValid(ItemStack stack)
+		{
+			return tileInventoryAttachment.isItemValidForSlot(this.slotNumber, stack);
+		}
+
 	}
 }

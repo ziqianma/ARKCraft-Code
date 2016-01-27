@@ -20,6 +20,8 @@ import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
@@ -41,6 +43,10 @@ import com.arkcraft.module.item.common.tile.TileInventoryAttachment;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 
+/**
+ * @author Lewis_McReu
+ * @author BubbleTrouble
+ */
 public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 {
 	protected static final int MAX_DELAY = 72000;
@@ -104,10 +110,30 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 	@Override
 	public ModelResourceLocation getModel(ItemStack stack, EntityPlayer player, int useRemaining)
 	{
-		String jsonPath = ARKCraft.MODID + ":" + this.getUnlocalizedName();
-		if (canScope(stack))
+		String jsonPath = ARKCraft.MODID + ":weapons/" + this.getUnlocalizedName();
+		TileInventoryAttachment att = TileInventoryAttachment.create(stack);
+		if (att != null)
 		{
-			jsonPath = jsonPath + "_scoped";
+			if (att.isScopePresent())
+			{
+				jsonPath = jsonPath + "_scope";
+			}
+			else if (att.isFlashPresent())
+			{
+				jsonPath = jsonPath + "_flashlight";
+			}
+			else if (att.isLaserPresent())
+			{
+				jsonPath = jsonPath + "_laser";
+			}
+			else if (att.isSilencerPresent())
+			{
+				jsonPath = jsonPath + "_silencer";
+			}
+			else if (att.isHoloScopePresent())
+			{
+				jsonPath = jsonPath + "_holo_scope";
+			}
 		}
 		if (isReloading(stack))
 		{
@@ -126,12 +152,6 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 	public int getMaxItemUseDuration(ItemStack stack)
 	{
 		return MAX_DELAY;
-	}
-
-	@Override
-	public boolean canScope(ItemStack stack)
-	{
-		return new TileInventoryAttachment(stack).isScopePresent();
 	}
 
 	// @Override
@@ -227,9 +247,8 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 		{
 			if (isSelected)
 			{
-				TileInventoryAttachment inv = new TileInventoryAttachment(stack);
-
-				if (inv.isFlashPresent())
+				TileInventoryAttachment inv = TileInventoryAttachment.create(stack);
+				if (inv != null && inv.isFlashPresent())
 				{
 					updateFlashlight(entityIn);
 				}
@@ -320,7 +339,7 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 		else
 		{
 			// Can't reload; no ammo
-			if (!this.isReloading(stack)) 
+			if (!this.isReloading(stack))
 			{
 				soundEmpty(stack, world, player);
 			}
@@ -492,13 +511,34 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 	public final void postShootingEffects(ItemStack itemstack, EntityPlayer entityplayer, World world)
 	{
 		effectPlayer(itemstack, entityplayer, world);
-		effectShoot(world, entityplayer.posX, entityplayer.posY, entityplayer.posZ,
+		effectShoot(itemstack, world, entityplayer.posX, entityplayer.posY, entityplayer.posZ,
 				entityplayer.rotationYaw, entityplayer.rotationPitch);
 	}
 
 	public abstract void effectPlayer(ItemStack itemstack, EntityPlayer entityplayer, World world);
 
-	public abstract void effectShoot(World world, double x, double y, double z, float yaw, float pitch);
+	public void effectShoot(ItemStack stack, World world, double x, double y, double z, float yaw, float pitch)
+	{
+		String soundPath = ARKCraft.MODID + ":" + this.getUnlocalizedName() + "_shoot";
+		TileInventoryAttachment att = TileInventoryAttachment.create(stack);
+		if (att != null && att.isSilencerPresent()) soundPath = soundPath + "_silenced";
+		world.playSoundEffect(x, y, z, soundPath, 1.5F,
+				1F / (this.getItemRand().nextFloat() * 0.4F + 0.7F));
+
+		float particleX = -MathHelper.sin(((yaw + 23) / 180F) * 3.141593F) * MathHelper
+				.cos((pitch / 180F) * 3.141593F);
+		float particleY = -MathHelper.sin((pitch / 180F) * 3.141593F) - 0.1F;
+		float particleZ = MathHelper.cos(((yaw + 23) / 180F) * 3.141593F) * MathHelper
+				.cos((pitch / 180F) * 3.141593F);
+
+		for (int i = 0; i < 3; i++)
+		{
+			world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x + particleX, y + particleY,
+					z + particleZ, 0.0D, 0.0D, 0.0D);
+		}
+		world.spawnParticle(EnumParticleTypes.FLAME, x + particleX, y + particleY, z + particleZ,
+				0.0D, 0.0D, 0.0D);
+	}
 
 	public void fire(ItemStack stack, World world, EntityPlayer player, int timeLeft)
 	{

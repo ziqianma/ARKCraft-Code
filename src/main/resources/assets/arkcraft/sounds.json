@@ -161,6 +161,15 @@
             }
         ]
     },
+     "fabricated_pistol_shoot_silenced": {
+        "category": "neutral",
+        "sounds": [
+            {
+                "name": "fabricated_pistol_shoot_silenced",
+                "stream": false
+            }
+        ]
+    },
      "fabricated_pistol_reload": {
         "category": "neutral",
         "sounds": [
@@ -179,6 +188,15 @@
             }
         ]
     },
+     "simple_pistol_shoot_silenced": {
+        "category": "neutral",
+        "sounds": [
+            {
+                "name": "simple_pistol_shoot_silenced",
+                "stream": false
+            }
+        ]
+    },
      "simple_pistol_reload": {
         "category": "neutral",
         "sounds": [
@@ -188,7 +206,7 @@
             }
         ]
     },
-    "shotgun_shot": {
+    "shotgun_shoot": {
         "category": "neutral",
         "sounds": [
             {
@@ -220,6 +238,15 @@
         "sounds": [
             {
                 "name": "longneck_rifle_shoot",
+                "stream": false
+            }
+        ]
+    },
+     "longneck_rifle_shoot_silenced": {
+        "category": "neutral",
+        "sounds": [
+            {
+                "name": "longneck_rifle_shoot_silenced",
                 "stream": false
             }
         ]

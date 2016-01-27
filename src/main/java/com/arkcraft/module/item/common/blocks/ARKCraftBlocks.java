@@ -37,7 +37,7 @@ public class ARKCraftBlocks
 	public static BlockSmithy smithy;
 	public static BlockMortarAndPestle pestle;
 	public static BlockCropPlot crop_plot;
-	public static BlockRefiningForge refining_forge, refining_forge_burning;
+	public static BlockRefiningForge refining_forge;
 	public static BlockFlashlight block_flashlight;
 
 	// public static BlockImprovisedExplosiveDevice block_explosive_device;
@@ -96,9 +96,6 @@ public class ARKCraftBlocks
 				GlobalAdditions.GUI.COMPOST_BIN.getID(), false, false, 3);
 		refining_forge = registerRefiningForge("refining_forge", Material.rock, false,
 				GlobalAdditions.GUI.FORGE_GUI.getID(), false, false, 3);
-		// refining_forge_burning =
-		// registerRefiningForge("refining_forge_burning", Material.rock, true,
-		// GlobalAdditions.GUI.FORGE_GUI.getID(), false, false, 3);
 
 		// Tile Entities
 		GameRegistry.registerTileEntity(TileInventoryCropPlot.class, "TileInventoryCropPlot");
@@ -121,12 +118,12 @@ public class ARKCraftBlocks
 		GameRegistry.registerBlock(block, name);
 		block.setUnlocalizedName(name);
 		allBlocks.put(name, block);
-
 		return block;
 	}
 
 	private static Block registerBlockWithItemBlock(Block block, Class<? extends ItemBlock> itemBlock, String name)
 	{
+		block.setCreativeTab(GlobalAdditions.tabARK);
 		GameRegistry.registerBlock(block, itemBlock, name);
 		block.setUnlocalizedName(name);
 		allBlocks.put(name, block);
@@ -151,9 +148,6 @@ public class ARKCraftBlocks
 	protected static BlockSmithy registerSmithy(String name, Material mat, int ID, boolean renderAsNormalBlock, boolean isOpaque, int renderType)
 	{
 		BlockSmithy container = new BlockSmithy(mat, ID);
-		container.setRenderAsNormalBlock(renderAsNormalBlock);
-		container.setOpaque(isOpaque);
-		container.setRenderType(renderType);
 		registerBlockWithItemBlock(container, ItemSmithy.class, name);
 		return container;
 	}
@@ -161,9 +155,6 @@ public class ARKCraftBlocks
 	protected static BlockMortarAndPestle registerMortarAndPestle(String name, Material mat, int ID, boolean renderAsNormalBlock, boolean isOpaque, int renderType)
 	{
 		BlockMortarAndPestle container = new BlockMortarAndPestle(mat, ID);
-		container.setRenderAsNormalBlock(renderAsNormalBlock);
-		container.setOpaque(isOpaque);
-		container.setRenderType(renderType);
 		registerBlockWithItemBlock(container, ItemMortarAndPestle.class, name);
 		return container;
 	}
@@ -178,8 +169,6 @@ public class ARKCraftBlocks
 	protected static BlockCropPlot registerCropPlot(String name, Material mat, int ID, boolean isOpaque, int renderType)
 	{
 		BlockCropPlot container = new BlockCropPlot(mat, ID);
-		container.setOpaque(isOpaque);
-		container.setRenderType(renderType);
 		registerBlockWithItemBlock(container, ItemCropPlot.class, name);
 		return container;
 	}
@@ -187,9 +176,6 @@ public class ARKCraftBlocks
 	protected static BlockCompostBin registerCompostBin(String name, Material mat, int ID, boolean renderAsNormalBlock, boolean isOpaque, int renderType)
 	{
 		BlockCompostBin container = new BlockCompostBin(mat, ID);
-		container.setRenderAsNormalBlock(renderAsNormalBlock);
-		container.setOpaque(isOpaque);
-		container.setRenderType(renderType);
 		registerBlockWithItemBlock(container, ItemCompostBin.class, name);
 		return container;
 	}
