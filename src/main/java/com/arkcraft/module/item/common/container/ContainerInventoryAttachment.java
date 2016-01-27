@@ -13,7 +13,7 @@ public class ContainerInventoryAttachment extends Container
 {
 	/** The Item Inventory for this Container */
 	private final TileInventoryAttachment tileInventoryAttachment;
-	private final int ATTACHMENT_SLOT_COUNT = 4;
+	private final int ATTACHMENT_SLOT_COUNT = 1;
 	public static final int ATTACHMENT_SLOT_YPOS = 26;
 	public static final int ATTACHMENT_SLOT_XPOS = 53;
 
@@ -28,7 +28,7 @@ public class ContainerInventoryAttachment extends Container
 					.error("Mismatched slot count in container(" + ATTACHMENT_SLOT_COUNT + ") and CompostBinInventory (" + tileInventoryAttachment
 							.getSizeInventory() + ")");
 		}
-		for (int col = 0; col < 4; col++)
+		for (int col = 0; col < ATTACHMENT_SLOT_COUNT; col++)
 		{
 			int slotIndex = col;
 			addSlotToContainer(new SlotAttachment(tileInventoryAttachment, slotIndex,
