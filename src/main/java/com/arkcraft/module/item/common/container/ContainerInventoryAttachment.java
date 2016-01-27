@@ -14,8 +14,8 @@ public class ContainerInventoryAttachment extends Container
 	/** The Item Inventory for this Container */
 	private final TileInventoryAttachment tileInventoryAttachment;
 	private final int ATTACHMENT_SLOT_COUNT = 1;
-	public static final int ATTACHMENT_SLOT_YPOS = 26;
-	public static final int ATTACHMENT_SLOT_XPOS = 53;
+	public static final int ATTACHMENT_SLOT_YPOS = 30;
+	public static final int ATTACHMENT_SLOT_XPOS = 79;
 
 	public ContainerInventoryAttachment(EntityPlayer player, InventoryPlayer invPlayer, TileInventoryAttachment tileInventoryAttachment)
 	{
