@@ -1,12 +1,11 @@
 package com.arkcraft.module.item.common.blocks;
 
-import java.util.Arrays;
-
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyDirection;
+import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
@@ -18,12 +17,14 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumWorldBlockLayer;
+import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import com.arkcraft.lib.LogHelper;
 import com.arkcraft.module.core.ARKCraft;
 import com.arkcraft.module.item.common.tile.TileInventoryForge;
 
@@ -35,6 +36,8 @@ public class BlockRefiningForge extends BlockContainer
 	{
 		super(material);
 		this.setCreativeTab(CreativeTabs.tabBlock);
+		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH)
+				.withProperty(BURNING, false).withProperty(PART, EnumPart.BOTTOM));
 		this.ID = ID;
 	}
 
@@ -48,10 +51,38 @@ public class BlockRefiningForge extends BlockContainer
 	}
 
 	@Override
+	public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player)
+	{
+		if (player.capabilities.isCreativeMode && state.getValue(PART) == EnumPart.BOTTOM)
+		{
+			BlockPos blockpos1 = pos.up();
+			if (worldIn.getBlockState(blockpos1).getBlock() == this)
+			{
+				worldIn.setBlockToAir(blockpos1);
+			}
+		}
+		else if (player.capabilities.isCreativeMode && state.getValue(PART) == EnumPart.TOP)
+		{
+			BlockPos blockpos1 = pos.down();
+			if (worldIn.getBlockState(blockpos1).getBlock() == this)
+			{
+				worldIn.setBlockToAir(blockpos1);
+			}
+		}
+	}
+
+	@Override
+	public String getHarvestTool(IBlockState state)
+	{
+		return null;
+	}
+
+	@Override
 	public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
 	{
-		BlockUtils.getCardinalDirection(pos, placer);
-		return this.getDefaultState().withProperty(BURNING, false).withProperty(FACING, EnumFacing.EAST);
+		LogHelper.info("Facing: " + placer.getHorizontalFacing().getOpposite());
+		return this.getDefaultState().withProperty(FACING,
+				placer.getHorizontalFacing().getOpposite());
 	}
 
 	// Called when the block is right clicked
@@ -134,16 +165,21 @@ public class BlockRefiningForge extends BlockContainer
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
-		return this.getDefaultState();
-		// return this.getDefaultState().withProperty(BURNING_SIDES_COUNT,
-		// Integer.valueOf(meta));
+		LogHelper.info("From meta " + meta);
+		EnumFacing enumfacing = EnumFacing.getHorizontal(meta);
+		int metaOld = meta;
+		EnumPart part = (metaOld & 8) > 0 ? EnumPart.TOP : EnumPart.BOTTOM;
+		return this.getDefaultState().withProperty(FACING, enumfacing).withProperty(PART, part);
 	}
 
 	@Override
 	public int getMetaFromState(IBlockState state)
 	{
-		return 0;
-		// return ((Integer)state.getValue(BURNING_SIDES_COUNT)).intValue();
+		byte b0 = 0;
+		int i = b0 | ((EnumFacing) state.getValue(FACING)).getHorizontalIndex();
+		if (state.getValue(PART).equals(EnumPart.TOP)) i |= 8;
+		LogHelper.info("From state " + i);
+		return i;
 	}
 
 	// necessary to define which properties your blocks use
@@ -152,13 +188,35 @@ public class BlockRefiningForge extends BlockContainer
 	@Override
 	protected BlockState createBlockState()
 	{
-		return new BlockState(this, new IProperty[] { BURNING, FACING });
+		return new BlockState(this, new IProperty[] { BURNING, FACING, PART });
 	}
 
 	public static final PropertyBool BURNING = PropertyBool.create("burning");
-	public static final PropertyDirection FACING = PropertyDirection
-			.create("facing",
-					Arrays.asList(new EnumFacing[] { EnumFacing.EAST, EnumFacing.WEST, EnumFacing.NORTH, EnumFacing.SOUTH }));
+	public static final PropertyDirection FACING = PropertyDirection.create("facing",
+			EnumFacing.Plane.HORIZONTAL);
+	public static final PropertyEnum PART = PropertyEnum.create("part", EnumPart.class);
+
+	public static enum EnumPart implements IStringSerializable
+	{
+		TOP("top"), BOTTOM("bottom");
+
+		private final String name;
+
+		private EnumPart(String name)
+		{
+			this.name = name;
+		}
+
+		public String toString()
+		{
+			return this.name;
+		}
+
+		public String getName()
+		{
+			return this.name;
+		}
+	}
 
 	@Override
 	public int getLightValue(IBlockAccess world, BlockPos pos)

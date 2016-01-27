@@ -6,7 +6,7 @@
 	"scope": "arkcraft:items/attatchments/no_attatchment",
 	"silencer": "arkcraft:items/attatchments/no_attatchment",
 	"laser": "arkcraft:items/attatchments/no_attatchment",
-	"flashlight": "arkcraft:items/attatchments/no_attatchment"
+	"flashlight": "arkcraft:items/attatchments/flashlight"
 },
 "elements": [ 
 {

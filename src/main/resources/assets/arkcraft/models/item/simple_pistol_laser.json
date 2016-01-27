@@ -5,7 +5,7 @@
     "texture": "arkcraft:items/simple_pistol",
 	"scope": "arkcraft:items/attatchments/no_attatchment",
 	"silencer": "arkcraft:items/attatchments/no_attatchment",
-	"laser": "arkcraft:items/attatchments/no_attatchment",
+	"laser": "arkcraft:items/attatchments/laser",
 	"flashlight": "arkcraft:items/attatchments/no_attatchment"
 },
 "elements": [ 

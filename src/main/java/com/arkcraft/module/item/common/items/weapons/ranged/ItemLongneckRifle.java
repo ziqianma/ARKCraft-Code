@@ -8,8 +8,13 @@ import net.minecraft.world.World;
 
 import com.arkcraft.module.core.ARKCraft;
 import com.arkcraft.module.item.common.config.ModuleItemBalance;
+import com.arkcraft.module.item.common.items.weapons.ranged.supporting.Flashable;
+import com.arkcraft.module.item.common.items.weapons.ranged.supporting.Laserable;
+import com.arkcraft.module.item.common.items.weapons.ranged.supporting.Scopeable;
+import com.arkcraft.module.item.common.items.weapons.ranged.supporting.Silenceable;
 
-public class ItemLongneckRifle extends ItemRangedWeapon
+public class ItemLongneckRifle extends ItemRangedWeapon implements Scopeable, Silenceable,
+		Laserable, Flashable
 {
 	public ItemLongneckRifle()
 	{

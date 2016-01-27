@@ -78,7 +78,8 @@ public class ItemsClientEventHandler
 				showScopeOverlap = stack != null && (new TileInventoryAttachment(stack)
 						.isScopePresent() || stack.getItem().equals(ARKCraftItems.spy_glass)) && evt.buttonstate;
 				selected = stack;
-				if (new TileInventoryAttachment(stack).isScopePresent()) evt.setCanceled(true);
+				if (stack != null && new TileInventoryAttachment(stack).isScopePresent()) evt
+						.setCanceled(true);
 			}
 
 			// ItemStack stack = thePlayer.getCurrentEquippedItem();
@@ -300,7 +301,8 @@ public class ItemsClientEventHandler
 		EntityPlayerSP player = Minecraft.getMinecraft().thePlayer;
 		if (KeyBindings.attachment.isPressed())
 		{
-			if (player.inventory.getCurrentItem().getItem() instanceof ItemRangedWeapon)
+			if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem()
+					.getItem() instanceof ItemRangedWeapon)
 			{
 				player.openGui(ARKCraft.instance, GlobalAdditions.GUI.ATTACHMENT_GUI.getID(),
 						player.worldObj, 0, 0, 0);

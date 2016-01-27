@@ -1,12 +1,20 @@
 {
     "variants": {
-        "burning=false,facing=north": { "model": "arkcraft:refining_forge" },
-        "burning=false,facing=south": { "model": "arkcraft:refining_forge", "y": 180 },
-        "burning=false,facing=west":  { "model": "arkcraft:refining_forge", "y": 270 },
-        "burning=false,facing=east":  { "model": "arkcraft:refining_forge", "y": 90 },
-        "burning=true,facing=north": { "model": "arkcraft:refining_forge_burning" },
-        "burning=true,facing=south": { "model": "arkcraft:refining_forge_burning", "y": 180 },
-        "burning=true,facing=west":  { "model": "arkcraft:refining_forge_burning", "y": 270 },
-        "burning=true,facing=east":  { "model": "arkcraft:refining_forge_burning", "y": 90 }
+        "burning=false,facing=north,part=bottom": { "model": "arkcraft:forge_bottom" },
+        "burning=false,facing=south,part=bottom": { "model": "arkcraft:forge_bottom", "y": 180 },
+        "burning=false,facing=west,part=bottom":  { "model": "arkcraft:forge_bottom", "y": 270 },
+        "burning=false,facing=east,part=bottom":  { "model": "arkcraft:forge_bottom", "y": 90 },
+        "burning=true,facing=north,part=bottom": { "model": "arkcraft:forge_bottom" },
+        "burning=true,facing=south,part=bottom": { "model": "arkcraft:forge_bottom", "y": 180 },
+        "burning=true,facing=west,part=bottom":  { "model": "arkcraft:forge_bottom", "y": 270 },
+        "burning=true,facing=east,part=bottom":  { "model": "arkcraft:forge_bottom", "y": 90 },
+        "burning=false,facing=north,part=top": { "model": "arkcraft:forge_top_off" },
+        "burning=false,facing=south,part=top": { "model": "arkcraft:forge_top_off", "y": 180 },
+        "burning=false,facing=west,part=top":  { "model": "arkcraft:forge_top_off", "y": 270 },
+        "burning=false,facing=east,part=top":  { "model": "arkcraft:forge_top_off", "y": 90 },
+        "burning=true,facing=north,part=top": { "model": "arkcraft:forge_top_on" },
+        "burning=true,facing=south,part=top": { "model": "arkcraft:forge_top_on", "y": 180 },
+        "burning=true,facing=west,part=top":  { "model": "arkcraft:forge_top_on", "y": 270 },
+        "burning=true,facing=east,part=top":  { "model": "arkcraft:forge_top_on", "y": 90 }
     }
 }

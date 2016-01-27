@@ -10,12 +10,12 @@ import net.minecraft.world.World;
 
 import com.arkcraft.module.item.common.blocks.ARKCraftBlocks;
 
-public class ItemCropPlot extends ItemBlockARK
+public class ItemBerryBush extends ItemBlockARK
 {
-	public ItemCropPlot(Block block)
+	public ItemBerryBush(Block block)
 	{
 		super(block);
-		this.setMaxStackSize(16);
+		this.setMaxStackSize(1);
 	}
 
 	/**
@@ -39,10 +39,10 @@ public class ItemCropPlot extends ItemBlockARK
 			{
 				return false;
 			}
-			else if (ARKCraftBlocks.crop_plot.canPlaceBlockAt(worldIn, blockpos1))
+			else if (ARKCraftBlocks.berryBush.canPlaceBlockAt(worldIn, blockpos1))
 			{
 				--stack.stackSize;
-				worldIn.setBlockState(blockpos1, ARKCraftBlocks.crop_plot.getDefaultState());
+				worldIn.setBlockState(blockpos1, ARKCraftBlocks.berryBush.getDefaultState());
 				return true;
 			}
 			else

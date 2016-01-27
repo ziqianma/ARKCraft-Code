@@ -11,7 +11,12 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import com.arkcraft.module.core.GlobalAdditions;
 import com.arkcraft.module.core.common.handlers.GenerationHandler;
+import com.arkcraft.module.item.common.items.itemblock.ItemBerryBush;
+import com.arkcraft.module.item.common.items.itemblock.ItemCompostBin;
+import com.arkcraft.module.item.common.items.itemblock.ItemCropPlot;
+import com.arkcraft.module.item.common.items.itemblock.ItemMortarAndPestle;
 import com.arkcraft.module.item.common.items.itemblock.ItemRefiningForge;
+import com.arkcraft.module.item.common.items.itemblock.ItemSmithy;
 import com.arkcraft.module.item.common.tile.TileFlashlight;
 import com.arkcraft.module.item.common.tile.TileInventoryCompostBin;
 import com.arkcraft.module.item.common.tile.TileInventoryCropPlot;
@@ -26,7 +31,7 @@ public class ARKCraftBlocks
 {
 	public static BlockBerryBush berryBush;
 	public static BlockARKBase oreSurface;
-	public static Block blockNarcoBrerry;
+	public static Block blockNarcoBerry;
 	public static BlockSpikes wooden_spikes;
 	public static BlockCompostBin compost_bin;
 	public static BlockSmithy smithy;
@@ -53,7 +58,8 @@ public class ARKCraftBlocks
 	public static void init()
 	{
 		// world generated
-		berryBush = (BlockBerryBush) registerBlockNoTab(new BlockBerryBush(0.4F), "berryBush");
+		berryBush = (BlockBerryBush) registerBlockWithItemBlock(new BlockBerryBush(0.4F),
+				ItemBerryBush.class, "berryBush");
 		GenerationHandler.addOreToGen(oreSurface, 0); // Sets to the values in
 														// BALENCE.GEN.class
 
@@ -69,7 +75,7 @@ public class ARKCraftBlocks
 
 		// blockNarcoBrerry = addBlock(Material.ground, "narcoBerryBlock",
 		// 3.0F);
-		blockNarcoBrerry = getRegisteredBlock("blockNarcoBerry");
+		blockNarcoBerry = getRegisteredBlock("blockNarcoBerry");
 		block_flashlight = new BlockFlashlight();
 		GameRegistry.registerBlock(block_flashlight, "block_flashlight");
 
@@ -148,7 +154,7 @@ public class ARKCraftBlocks
 		container.setRenderAsNormalBlock(renderAsNormalBlock);
 		container.setOpaque(isOpaque);
 		container.setRenderType(renderType);
-		registerBlockNoTab(container, name);
+		registerBlockWithItemBlock(container, ItemSmithy.class, name);
 		return container;
 	}
 
@@ -158,7 +164,7 @@ public class ARKCraftBlocks
 		container.setRenderAsNormalBlock(renderAsNormalBlock);
 		container.setOpaque(isOpaque);
 		container.setRenderType(renderType);
-		registerBlockNoTab(container, name);
+		registerBlockWithItemBlock(container, ItemMortarAndPestle.class, name);
 		return container;
 	}
 
@@ -174,7 +180,7 @@ public class ARKCraftBlocks
 		BlockCropPlot container = new BlockCropPlot(mat, ID);
 		container.setOpaque(isOpaque);
 		container.setRenderType(renderType);
-		registerBlockNoTab(container, name);
+		registerBlockWithItemBlock(container, ItemCropPlot.class, name);
 		return container;
 	}
 
@@ -184,7 +190,7 @@ public class ARKCraftBlocks
 		container.setRenderAsNormalBlock(renderAsNormalBlock);
 		container.setOpaque(isOpaque);
 		container.setRenderType(renderType);
-		registerBlockNoTab(container, name);
+		registerBlockWithItemBlock(container, ItemCompostBin.class, name);
 		return container;
 	}
 }
