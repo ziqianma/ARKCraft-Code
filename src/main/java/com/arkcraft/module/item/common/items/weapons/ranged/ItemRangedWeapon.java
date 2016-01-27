@@ -320,7 +320,10 @@ public abstract class ItemRangedWeapon extends ItemBow implements IItemWeapon
 		else
 		{
 			// Can't reload; no ammo
-			soundEmpty(stack, world, player);
+			if (!this.isReloading(stack)) 
+			{
+				soundEmpty(stack, world, player);
+			}
 		}
 		return stack;
 	}

@@ -23,12 +23,13 @@ public class ItemShotgun extends ItemRangedWeapon
 		return (int) (ModuleItemBalance.WEAPONS.SHOTGUN_RELOAD * 20.0);
 	}
 
+	/*
 	@Override
 	public void effectReloadDone(ItemStack stack, World world, EntityPlayer player)
 	{
 		world.playSoundAtEntity(player, "random.door_close", 0.8F, 1.0F / (this.getItemRand()
 				.nextFloat() * 0.2F + 0.0F));
-	}
+	}	*/
 
 	@Override
 	public void effectPlayer(ItemStack itemstack, EntityPlayer entityplayer, World world)
@@ -66,13 +67,13 @@ public class ItemShotgun extends ItemRangedWeapon
 				0.0D, 0.0D, 0.0D);
 
 	}
-
+	/*
 	@Override
 	public void soundCharge(ItemStack stack, World world, EntityPlayer player)
 	{
 		world.playSoundAtEntity(player, ARKCraft.MODID + ":" + "shotgun_reload", 0.7F,
 				0.9F / (getItemRand().nextFloat() * 0.2F + 0.0F));
-	}
+	}	*/
 
 	@Override
 	public void fire(ItemStack stack, World world, EntityPlayer player, int timeLeft)
