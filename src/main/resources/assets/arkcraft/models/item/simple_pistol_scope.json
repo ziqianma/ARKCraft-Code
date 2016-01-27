@@ -3,7 +3,7 @@
 "textures": {
     "particle": "arkcraft:items/simple_pistol",
     "texture": "arkcraft:items/simple_pistol",
-	"scope": "arkcraft:items/attatchments/no_attatchment",
+	"scope": "arkcraft:items/attatchments/scope",
 	"silencer": "arkcraft:items/attatchments/no_attatchment",
 	"laser": "arkcraft:items/attatchments/no_attatchment",
 	"flashlight": "arkcraft:items/attatchments/no_attatchment"

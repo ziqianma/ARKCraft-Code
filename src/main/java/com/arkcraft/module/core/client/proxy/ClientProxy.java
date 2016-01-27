@@ -69,7 +69,7 @@ public class ClientProxy extends CommonProxy
 	{
 		if (initDone) { return; }
 		super.init();
-		
+
 		ItemsClientEventHandler.init();
 
 		MinecraftForge.EVENT_BUS.register(new GuiOverlay());
@@ -119,6 +119,12 @@ public class ClientProxy extends CommonProxy
 				"arkcraft:longneck_rifle_reload");
 		ModelBakery.addVariantName(ARKCraftItems.shotgun, "arkcraft:shotgun",
 				"arkcraft:shotgun_reload");
+		ModelBakery.addVariantName(ARKCraftItems.simple_pistol, "arkcraft:simple_pistol",
+				"arkcraft:simple_pistol_scoped", "arkcraft:simple_pistol_reload",
+				"arkcraft:simple_pistol_scoped_reload");
+		ModelBakery.addVariantName(ARKCraftItems.simple_pistol, "arkcraft:fabricated_pistol",
+				"arkcraft:fabricated_pistol_scoped", "arkcraft:fabricated_pistol_reload",
+				"arkcraft:fabricated_pistol_scoped_reload");
 
 		ModelBakery.addVariantName(ARKCraftItems.bow, "arkcraft:bow", "arkcraft:bow_pulling_0",
 				"arkcraft:bow_pulling_1", "arkcraft:bow_pulling_2");

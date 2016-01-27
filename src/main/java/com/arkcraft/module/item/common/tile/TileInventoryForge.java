@@ -58,7 +58,8 @@ public class TileInventoryForge extends TileEntity implements IForge
 	public void update()
 	{
 		List<ForgeRecipe> possibleRecipes = ForgeHandler.findPossibleRecipes(this);
-		updateBurning();
+		updateBurning(possibleRecipes);
+		//LogHelper.info(burningTicks);
 		if (this.isBurning() && possibleRecipes.size() > 0)
 		{
 			Iterator<Entry<ForgeRecipe, Integer>> it = activeRecipes.entrySet().iterator();
@@ -89,14 +90,14 @@ public class TileInventoryForge extends TileEntity implements IForge
 		worldObj.checkLightFor(EnumSkyBlock.BLOCK, pos);
 	}
 
-	private void updateBurning()
+	private void updateBurning(List<ForgeRecipe> possibleRecipes)
 	{
 		if (burningTicks < 1)
 		{
 			for (int i = 0; i < itemStacks.length; i++)
 			{
 				ItemStack stack = itemStacks[i];
-				if (stack != null && ForgeHandler.isValidFuel(stack.getItem()) && this.activeRecipes
+				if (stack != null && ForgeHandler.isValidFuel(stack.getItem()) && possibleRecipes
 						.size() > 0)
 				{
 					if (!worldObj.isRemote)
@@ -119,7 +120,7 @@ public class TileInventoryForge extends TileEntity implements IForge
 		while (it.hasNext())
 		{
 			Entry<ForgeRecipe, Integer> e = it.next();
-			if (e.getValue() >= e.getKey().getBurnTime() * this.getBurnFactor() * 20)
+			if (e.getValue() >= (e.getKey().getBurnTime() * this.getBurnFactor() * 20))
 			{
 				it.remove();
 				ForgeRecipe r = e.getKey();

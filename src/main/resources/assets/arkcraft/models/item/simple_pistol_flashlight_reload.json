@@ -6,7 +6,7 @@
 	"scope": "arkcraft:items/attatchments/no_attatchment",
 	"silencer": "arkcraft:items/attatchments/no_attatchment",
 	"laser": "arkcraft:items/attatchments/no_attatchment",
-	"flashlight": "arkcraft:items/attatchments/no_attatchment"
+	"flashlight": "arkcraft:items/attatchments/flashlight"
 },
 "elements": [ 
 {
@@ -22,8 +22,9 @@
     }
 },
 {
-    "from": [ 7, 7.75, 3 ],
-    "to": [ 9, 9.75, 5.5 ],
+    "from": [ 9.4375, 7.9375, 3 ],
+    "to": [ 11.4375, 9.9375, 5.5 ],
+    "rotation": { "origin": [ 9.4375, 9.9375, 3 ], "axis": "z", "angle": -45 },
     "faces": {
         "down":  { "uv": [ 0, 3.75, 2, 6.25 ], "texture": "#texture" },
         "up":    { "uv": [ 0, 3.75, 2, 6.25 ], "texture": "#texture" },
@@ -252,8 +253,8 @@
         "scale": [ 2, 2, 2 ]
     },
     "firstperson": {
-        "rotation": [ -4, 126, -1 ],
-        "translation": [ -3, 7.1, -2.8 ],
+        "rotation": [ -38, 140, -18 ],
+        "translation": [ -5.2, 11, -2.8 ],
         "scale": [ 1.8, 1.8, 1.8 ]
     },
     "gui": {

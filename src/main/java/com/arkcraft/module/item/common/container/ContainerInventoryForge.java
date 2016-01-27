@@ -9,6 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import com.arkcraft.lib.LogHelper;
 import com.arkcraft.module.item.common.tile.TileInventoryForge;
 
 public class ContainerInventoryForge extends Container
@@ -44,8 +45,8 @@ public class ContainerInventoryForge extends Container
 
 	// slot index is the unique index for all slots in this container i.e. 0 -
 	// 35 for invPlayer then 36 - 49 for tileInventoryFurnace
-	private final int VANILLA_FIRST_SLOT_INDEX = 0;
-	public final int FIRST_FURNACE_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
+	private final int FIRST_FURNACE_SLOT_INDEX = 0;
+	public final int VANILLA_FIRST_SLOT_INDEX = FIRST_FURNACE_SLOT_INDEX + FURNACE_SLOT_COUNT;
 
 	public ContainerInventoryForge(InventoryPlayer invPlayer, TileInventoryForge tileInventoryFurnace)
 	{
@@ -118,6 +119,7 @@ public class ContainerInventoryForge extends Container
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int sourceSlotIndex)
 	{
+		LogHelper.info(sourceSlotIndex);
 		Slot sourceSlot = (Slot) inventorySlots.get(sourceSlotIndex);
 		if (sourceSlot == null || !sourceSlot.getHasStack()) return null;
 		ItemStack sourceStack = sourceSlot.getStack();

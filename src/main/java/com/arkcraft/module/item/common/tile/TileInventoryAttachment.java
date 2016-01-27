@@ -1,12 +1,18 @@
 package com.arkcraft.module.item.common.tile;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
 import com.arkcraft.module.core.ARKCraft;
 import com.arkcraft.module.item.common.items.ARKCraftItems;
-import com.arkcraft.module.item.common.items.weapons.ranged.ItemRangedWeapon;
+import com.arkcraft.module.item.common.items.weapons.attachments.ItemAttachment;
+import com.arkcraft.module.item.common.items.weapons.ranged.supporting.Flashable;
+import com.arkcraft.module.item.common.items.weapons.ranged.supporting.HoloScopeable;
+import com.arkcraft.module.item.common.items.weapons.ranged.supporting.Laserable;
+import com.arkcraft.module.item.common.items.weapons.ranged.supporting.Scopeable;
+import com.arkcraft.module.item.common.items.weapons.ranged.supporting.Silenceable;
 
 public class TileInventoryAttachment extends AbstractInventory
 {
@@ -14,7 +20,7 @@ public class TileInventoryAttachment extends AbstractInventory
 
 	/** The key used to store and retrieve the inventory from NBT */
 	private static final String SAVE_KEY = "AttachmentInventory";
-	public static final int INV_SIZE = 10;// TODO
+	public static final int INV_SIZE = 4;// TODO
 
 	/** Provides NBT Tag Compound to reference */
 	private final ItemStack invStack;
@@ -113,7 +119,27 @@ public class TileInventoryAttachment extends AbstractInventory
 	@Override
 	public boolean isItemValidForSlot(int index, ItemStack stack)
 	{
-		return !(stack.getItem() instanceof ItemRangedWeapon);
+		if (stack != null && stack.getItem() instanceof ItemAttachment)
+		{
+			ItemAttachment item = (ItemAttachment) stack.getItem();
+			Item inv = invStack.getItem();
+			switch (item.getType())
+			{
+				case SCOPE:
+					return inv instanceof Scopeable;
+				case HOLO_SCOPE:
+					return inv instanceof HoloScopeable;
+				case FLASH:
+					return inv instanceof Flashable;
+				case LASER:
+					return inv instanceof Laserable;
+				case SILENCER:
+					return inv instanceof Silenceable;
+			}
+			return stack != null && stack.getItem() instanceof ItemAttachment && this.invStack
+					.getItem() != null;
+		}
+		return false;
 	}
 
 	@Override

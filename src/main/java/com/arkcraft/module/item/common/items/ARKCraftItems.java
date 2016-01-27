@@ -16,7 +16,6 @@ import com.arkcraft.module.core.ARKCraft;
 import com.arkcraft.module.core.GlobalAdditions;
 import com.arkcraft.module.core.client.gui.book.Dossier;
 import com.arkcraft.module.core.common.handlers.EntityHandler;
-import com.arkcraft.module.item.common.blocks.ARKCraftBlocks;
 import com.arkcraft.module.item.common.config.ModuleItemBalance;
 import com.arkcraft.module.item.common.entity.item.projectiles.EntityAdvancedBullet;
 import com.arkcraft.module.item.common.entity.item.projectiles.EntityBallista;
@@ -36,6 +35,7 @@ import com.arkcraft.module.item.common.entity.item.projectiles.dispense.Dispense
 import com.arkcraft.module.item.common.entity.item.projectiles.dispense.DispenseSimpleRifleAmmo;
 import com.arkcraft.module.item.common.entity.item.projectiles.dispense.DispenseSimpleShotgunAmmo;
 import com.arkcraft.module.item.common.entity.item.projectiles.dispense.DispenseTranquilizer;
+import com.arkcraft.module.item.common.items.itemblock.ItemBerryBush;
 import com.arkcraft.module.item.common.items.itemblock.ItemCompostBin;
 import com.arkcraft.module.item.common.items.itemblock.ItemCropPlot;
 import com.arkcraft.module.item.common.items.itemblock.ItemMortarAndPestle;
@@ -187,12 +187,13 @@ public class ARKCraftItems
 		spy_glass = addSpyGlass("spy_glass");
 
 		// Block Items
-		item_berry_bush = addBushItem("item_berry_bush");
-		item_compost_bin = addCompostBinItem("item_compost_bin");
-		item_smithy = addSmithyItem("item_smithy");
-		item_crop_plot = addCropPlot("item_crop_plot");
-		item_mortar_and_pestle = addMortarAndPestle("item_mortar_and_pestle");
-		item_crystal = addCrystalItem("item_crystal");
+		// item_berry_bush = addBushItem("item_berry_bush");
+		// item_compost_bin = addCompostBinItem("item_compost_bin");
+		// item_smithy = addSmithyItem("item_smithy");
+		// item_crop_plot = addCropPlot("item_crop_plot");
+		// item_mortar_and_pestle =
+		// addMortarAndPestle("item_mortar_and_pestle");
+		// item_crystal = addCrystalItem("item_crystal");
 		// item_refining_forge = addRefiningForge("item_refining_forge");
 
 		// Bows
@@ -468,33 +469,33 @@ public class ARKCraftItems
 		return i;
 	}
 
-	protected static ItemBerryBush addBushItem(String name)
-	{
-		ItemBerryBush i = new ItemBerryBush();
-		registerItem(name, i);
-		return i;
-	}
+	// protected static ItemBerryBush addBushItem(String name)
+	// {
+	// ItemBerryBush i = new ItemBerryBush();
+	// registerItem(name, i);
+	// return i;
+	// }
 
-	protected static ItemCompostBin addCompostBinItem(String name)
-	{
-		ItemCompostBin i = new ItemCompostBin();
-		registerItem(name, i);
-		return i;
-	}
-
-	protected static ItemSmithy addSmithyItem(String name)
-	{
-		ItemSmithy i = new ItemSmithy();
-		registerItem(name, i);
-		return i;
-	}
-
-	protected static ItemCropPlot addCropPlot(String name)
-	{
-		ItemCropPlot i = new ItemCropPlot();
-		registerItem(name, i);
-		return i;
-	}
+//	protected static ItemCompostBin addCompostBinItem(String name)
+//	{
+//		ItemCompostBin i = new ItemCompostBin();
+//		registerItem(name, i);
+//		return i;
+//	}
+//
+//	protected static ItemSmithy addSmithyItem(String name)
+//	{
+//		ItemSmithy i = new ItemSmithy();
+//		registerItem(name, i);
+//		return i;
+//	}
+//
+//	protected static ItemCropPlot addCropPlot(String name)
+//	{
+//		ItemCropPlot i = new ItemCropPlot();
+//		registerItem(name, i);
+//		return i;
+//	}
 
 	protected static ItemCrystal addCrystalItem(String name)
 	{
@@ -510,19 +511,19 @@ public class ARKCraftItems
 		return i;
 	}
 
-	protected static ItemMortarAndPestle addMortarAndPestle(String name)
-	{
-		ItemMortarAndPestle i = new ItemMortarAndPestle();
-		registerItem(name, i);
-		return i;
-	}
-
-	protected static ItemRefiningForge addRefiningForge(String name)
-	{
-		ItemRefiningForge i = new ItemRefiningForge(ARKCraftBlocks.refining_forge);
-		registerItem(name, i);
-		return i;
-	}
+//	protected static ItemMortarAndPestle addMortarAndPestle(String name)
+//	{
+//		ItemMortarAndPestle i = new ItemMortarAndPestle();
+//		registerItem(name, i);
+//		return i;
+//	}
+//
+//	protected static ItemRefiningForge addRefiningForge(String name)
+//	{
+//		ItemRefiningForge i = new ItemRefiningForge();
+//		registerItem(name, i);
+//		return i;
+//	}
 
 	protected static ItemSpyGlass addSpyGlass(String name)
 	{

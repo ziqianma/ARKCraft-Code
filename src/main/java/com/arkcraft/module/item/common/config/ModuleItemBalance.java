@@ -48,22 +48,22 @@ public final class ModuleItemBalance
 
 		@DefaultBoolean(value = true, name = "Include Simple Pistol", comment = "Include Simple Pistol")
 		public static boolean SIMPLE_PISTOL;
-		@DefaultDouble(value = 0.5, minValue = 0.2, maxValue = 2.0, name = "Time to reload pistol.", comment = "Seconds to reload")
+		@DefaultDouble(value = 2.5, minValue = 0.2, maxValue = 2.5, name = "Time to reload pistol.", comment = "Seconds to reload")
 		public static double SIMPLE_PISTOL_RELOAD;
 
 		@DefaultBoolean(value = true, name = "Include Longneck Rifle", comment = "Include  Longneck Rifle")
 		public static boolean LONGNECK_RIFLE;
-		@DefaultDouble(value = 3.0, minValue = 0.5, maxValue = 5.0, name = "Time to reload longneck rifle.", comment = "Seconds to reload")
+		@DefaultDouble(value = 4.0, minValue = 0.5, maxValue = 5.0, name = "Time to reload longneck rifle.", comment = "Seconds to reload")
 		public static double LONGNECK_RIFLE_RELOAD;
 
 		@DefaultBoolean(value = true, name = "Include Shotgun", comment = "Include Shotgun")
 		public static boolean SHOTGUN;
-		@DefaultDouble(value = 2.5, minValue = 0.2, maxValue = 5.0, name = "Time to reload shotgun.", comment = "Seconds to reload")
+		@DefaultDouble(value = 3, minValue = 0.2, maxValue = 5.0, name = "Time to reload shotgun.", comment = "Seconds to reload")
 		public static double SHOTGUN_RELOAD;
 
 		@DefaultBoolean(value = true, name = "Include Fabricated Pistol", comment = "Include Fabricated Pistol")
 		public static boolean FABRICATED_PISTOL;
-		@DefaultDouble(value = 1.0, minValue = 0.2, maxValue = 5.0, name = "Time to reload fabricated_pistol.", comment = "Seconds to reload")
+		@DefaultDouble(value = 3.0, minValue = 0.2, maxValue = 5.0, name = "Time to reload fabricated_pistol.", comment = "Seconds to reload")
 		public static double FABRICATED_PISTOL_RELOAD;
 
 		@DefaultBoolean(value = true, name = "Include Rocket Launcher", comment = "Include Rocket Launcher")
