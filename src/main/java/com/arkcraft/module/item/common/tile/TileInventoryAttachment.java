@@ -20,7 +20,7 @@ public class TileInventoryAttachment extends AbstractInventory
 
 	/** The key used to store and retrieve the inventory from NBT */
 	private static final String SAVE_KEY = "AttachmentInventory";
-	public static final int INV_SIZE = 4;// TODO
+	public static final int INV_SIZE = 1;// TODO
 
 	/** Provides NBT Tag Compound to reference */
 	private final ItemStack invStack;
