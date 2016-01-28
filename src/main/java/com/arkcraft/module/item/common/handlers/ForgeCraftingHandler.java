@@ -11,7 +11,7 @@ import net.minecraft.item.ItemStack;
 
 import com.arkcraft.module.item.common.items.ARKCraftItems;
 
-public class ForgeHandler
+public class ForgeCraftingHandler
 {
 	public static void registerForgeRecipes()
 	{

@@ -22,7 +22,7 @@ import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.world.EnumSkyBlock;
 
-import com.arkcraft.module.item.common.handlers.ForgeHandler;
+import com.arkcraft.module.item.common.handlers.ForgeCraftingHandler;
 import com.arkcraft.module.item.common.handlers.ForgeRecipe;
 
 public class TileInventoryForge extends TileEntity implements IForge
@@ -57,7 +57,7 @@ public class TileInventoryForge extends TileEntity implements IForge
 	@Override
 	public void update()
 	{
-		List<ForgeRecipe> possibleRecipes = ForgeHandler.findPossibleRecipes(this);
+		List<ForgeRecipe> possibleRecipes = ForgeCraftingHandler.findPossibleRecipes(this);
 		updateBurning(possibleRecipes);
 		//LogHelper.info(burningTicks);
 		if (this.isBurning() && possibleRecipes.size() > 0)
@@ -97,7 +97,7 @@ public class TileInventoryForge extends TileEntity implements IForge
 			for (int i = 0; i < itemStacks.length; i++)
 			{
 				ItemStack stack = itemStacks[i];
-				if (stack != null && ForgeHandler.isValidFuel(stack.getItem()) && possibleRecipes
+				if (stack != null && ForgeCraftingHandler.isValidFuel(stack.getItem()) && possibleRecipes
 						.size() > 0)
 				{
 					if (!worldObj.isRemote)
@@ -105,7 +105,7 @@ public class TileInventoryForge extends TileEntity implements IForge
 						stack.stackSize--;
 						if (stack.stackSize == 0) itemStacks[i] = null;
 					}
-					this.burningTicks += ForgeHandler.getBurnTime(stack.getItem());
+					this.burningTicks += ForgeCraftingHandler.getBurnTime(stack.getItem());
 					break;
 				}
 			}
@@ -349,7 +349,7 @@ public class TileInventoryForge extends TileEntity implements IForge
 		{
 			NBTTagCompound nbtR = nbtList.getCompoundTagAt(i);
 			int cookTime = nbtR.getInteger("cookTime");
-			ForgeRecipe r = ForgeHandler.getForgeRecipe(nbtR.getString("recipeKey"));
+			ForgeRecipe r = ForgeCraftingHandler.getForgeRecipe(nbtR.getString("recipeKey"));
 			this.activeRecipes.put(r, cookTime);
 		}
 	}
