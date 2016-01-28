@@ -67,6 +67,7 @@ item.tranq_gun.name=Tranquilizer Gun
 item.simple_pistol.name=Simple Pistol
 item.tranquilizer.name=Tranquilizer
 item.simple_bullet.name=Simple Bullet
+item.advanced_bullet.name=Advanced Bullet
 item.shotgun.name=Shotgun
 item.longneck_rifle.name=Longneck Rifle
 item.fabricated_pistol.name=Fabricated Pistol
