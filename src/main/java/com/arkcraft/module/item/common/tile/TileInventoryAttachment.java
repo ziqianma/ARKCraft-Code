@@ -5,29 +5,39 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
-import com.arkcraft.module.core.ARKCraft;
-import com.arkcraft.module.item.common.items.ARKCraftItems;
+import com.arkcraft.module.item.common.items.weapons.attachments.AttachmentType;
 import com.arkcraft.module.item.common.items.weapons.attachments.ItemAttachment;
+import com.arkcraft.module.item.common.items.weapons.ranged.ItemRangedWeapon;
 import com.arkcraft.module.item.common.items.weapons.ranged.supporting.Flashable;
 import com.arkcraft.module.item.common.items.weapons.ranged.supporting.HoloScopeable;
 import com.arkcraft.module.item.common.items.weapons.ranged.supporting.Laserable;
+import com.arkcraft.module.item.common.items.weapons.ranged.supporting.NonSupporting;
 import com.arkcraft.module.item.common.items.weapons.ranged.supporting.Scopeable;
 import com.arkcraft.module.item.common.items.weapons.ranged.supporting.Silenceable;
 
+/**
+ * @author BubbleTrouble
+ * @author Lewis_McReu
+ */
 public class TileInventoryAttachment extends AbstractInventory
 {
 	private String name = "Attachment Inventory";
 
 	/** The key used to store and retrieve the inventory from NBT */
 	private static final String SAVE_KEY = "AttachmentInventory";
-	public static final int INV_SIZE = 1;// TODO
+	public static final int INV_SIZE = 1;
 
 	/** Provides NBT Tag Compound to reference */
 	private final ItemStack invStack;
-	public boolean activate_scoping;
-	public boolean activate_flashlight;
 
-	public TileInventoryAttachment(ItemStack stack)
+	public static TileInventoryAttachment create(ItemStack stack)
+	{
+		if (stack != null && stack.getItem() instanceof ItemRangedWeapon && !(stack.getItem() instanceof NonSupporting)) return new TileInventoryAttachment(
+				stack);
+		return null;
+	}
+
+	private TileInventoryAttachment(ItemStack stack)
 	{
 		inventory = new ItemStack[INV_SIZE];
 		this.invStack = stack;
@@ -53,7 +63,7 @@ public class TileInventoryAttachment extends AbstractInventory
 	@Override
 	public int getInventoryStackLimit()
 	{
-		return 64;
+		return 1;
 	}
 
 	@Override
@@ -64,44 +74,38 @@ public class TileInventoryAttachment extends AbstractInventory
 		{
 			if (getStackInSlot(i) != null && getStackInSlot(i).stackSize == 0) inventory[i] = null;
 		}
-
-		if (isScopePresent())
-		{
-			activate_scoping = true;
-		}
-		else if (isFlashPresent())
-		{
-			activate_flashlight = true;
-		}
-
 		writeToNBT(invStack.getTagCompound());
+	}
+
+	private boolean isInvOfType(AttachmentType type)
+	{
+		return inventory[0] != null && ((ItemAttachment) inventory[0].getItem()).getType().equals(
+				type);
 	}
 
 	public boolean isScopePresent()
 	{
-		for (ItemStack stack : inventory)
-		{
-			if (stack != null && stack.getItem() == ARKCraftItems.scope) return true;
-		}
-
-		return false;
+		return isInvOfType(AttachmentType.SCOPE);
 	}
 
 	public boolean isFlashPresent()
 	{
-		for (ItemStack stack : inventory)
-		{
-			if (stack != null && stack.getItem() == ARKCraftItems.flash_light) return true;
-		}
-
-		return false;
+		return isInvOfType(AttachmentType.FLASH);
 	}
 
-	public String getModel()
+	public boolean isLaserPresent()
 	{
-		String jsonPath = ARKCraft.MODID + ":%s";
-		if (isScopePresent()) jsonPath = jsonPath + "_scoped";
-		return jsonPath;
+		return isInvOfType(AttachmentType.LASER);
+	}
+
+	public boolean isSilencerPresent()
+	{
+		return isInvOfType(AttachmentType.SILENCER);
+	}
+
+	public boolean isHoloScopePresent()
+	{
+		return isInvOfType(AttachmentType.HOLO_SCOPE);
 	}
 
 	@Override
@@ -136,8 +140,6 @@ public class TileInventoryAttachment extends AbstractInventory
 				case SILENCER:
 					return inv instanceof Silenceable;
 			}
-			return stack != null && stack.getItem() instanceof ItemAttachment && this.invStack
-					.getItem() != null;
 		}
 		return false;
 	}

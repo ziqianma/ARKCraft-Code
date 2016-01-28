@@ -2,6 +2,10 @@ package com.arkcraft.module.item.common.items.weapons.attachments;
 
 import com.arkcraft.module.item.common.items.ItemARKBase;
 
+/**
+ * @author Lewis_McReu
+ *
+ */
 public class ItemAttachment extends ItemARKBase
 {
 	private final AttachmentType type;

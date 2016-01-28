@@ -42,7 +42,7 @@ public class ItemRocketLauncher extends ItemRangedWeapon
 	}
 
 	@Override
-	public void effectShoot(World world, double x, double y, double z, float yaw, float pitch)
+	public void effectShoot(ItemStack stack, World world, double x, double y, double z, float yaw, float pitch)
 	{
 		world.playSoundEffect(x, y, z, "random.explode", 3F,
 				1F / (this.getItemRand().nextFloat() * 0.4F + 0.7F));

@@ -254,6 +254,7 @@ public class ModelSabertooth extends ModelBase
 				this.mainbody.offsetZ);
 		GlStateManager.translate(this.mainbody.rotationPointX * f5,
 				this.mainbody.rotationPointY * f5, this.mainbody.rotationPointZ * f5);
+		// TODO Scaling TEST
 		GlStateManager.scale(1.0D, 0.98D, 1.0D);
 		GlStateManager.translate(-this.mainbody.offsetX, -this.mainbody.offsetY,
 				-this.mainbody.offsetZ);

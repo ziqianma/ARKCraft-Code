@@ -1,8 +1,9 @@
 package com.arkcraft.module.core.common.entity;
 
-import com.arkcraft.module.core.common.container.inventory.InventorySaddle;
-import com.arkcraft.module.core.common.creature.Creature;
 import io.netty.buffer.ByteBuf;
+
+import java.util.UUID;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -15,7 +16,8 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 
-import java.util.UUID;
+import com.arkcraft.module.core.common.container.inventory.InventorySaddle;
+import com.arkcraft.module.core.common.creature.Creature;
 
 /**
  * @author gegy1000
