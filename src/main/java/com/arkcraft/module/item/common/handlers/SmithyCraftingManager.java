@@ -109,20 +109,6 @@ public class SmithyCraftingManager extends ARKCraftingManager
 				new ItemStack(ARKCraftItems.metal, 7), new ItemStack(ARKCraftItems.wood, 10),
 				new ItemStack(ARKCraftItems.fiber, 35));
 
-		// Simple Pistol with Scope
-		// getInstance().addShapelessRecipe(new
-		// ItemStack(ARKCraftItems.simple_pistol_scoped, 1),
-		// new ItemStack(ARKCraftItems.simple_pistol, 1),
-		// new ItemStack(ARKCraftItems.scope, 1)
-		// );
-		//
-		// //Scope with Longneck Rifle
-		// getInstance().addShapelessRecipe(new
-		// ItemStack(ARKCraftItems.longneck_rifle_scoped, 1),
-		// new ItemStack(ARKCraftItems.longneck_rifle, 1),
-		// new ItemStack(ARKCraftItems.scope, 1)
-		// );
-
 		// Bullets
 		// Simple Bullet
 		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.simple_bullet, 1),
