@@ -10,6 +10,7 @@ import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.entity.monster.EntityWitch;
 import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.item.Item;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
@@ -31,14 +32,24 @@ import com.arkcraft.module.item.common.handlers.PestleCraftingManager;
 import com.arkcraft.module.item.common.handlers.PlayerCraftingManager;
 import com.arkcraft.module.item.common.handlers.RecipeHandler;
 import com.arkcraft.module.item.common.handlers.SmithyCraftingManager;
+import com.arkcraft.module.item.common.items.ARKCraftItems;
 
 /**
  * @author Vastatio
  */
 public class GlobalAdditions
 {
-	public static CreativeTabs tabARK = new ARKTabs(CreativeTabs.getNextID(), "tabARKCraft");
-
+	public static CreativeTabs tabARKMisc = new ARKTabs(CreativeTabs.getNextID(), "tabARKCraftMisc");
+	
+	public static CreativeTabs tabARKWeapons = new ARKTabs(CreativeTabs.getNextID(), "tabARKCraftWeapons")
+	{
+		@Override
+	    public Item getTabIconItem()
+	    {
+	        return ARKCraftItems.shotgun;
+	    }
+	};
+	
 	public enum GUI
 	{
 		SMITHY(0),

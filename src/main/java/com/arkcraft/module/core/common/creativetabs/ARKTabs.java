@@ -15,7 +15,7 @@ public class ARKTabs extends CreativeTabs
     @Override
     public Item getTabIconItem()
     {
-        return ARKCraftItems.narcotics;
+        return ARKCraftItems.dino_book;
     }
 
 }
