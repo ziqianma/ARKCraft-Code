@@ -13,6 +13,23 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 
 import com.arkcraft.lib.LogHelper;
+import com.arkcraft.module.blocks.client.gui.GUICompostBin;
+import com.arkcraft.module.blocks.client.gui.GUICropPlot;
+import com.arkcraft.module.blocks.client.gui.GUIForge;
+import com.arkcraft.module.blocks.client.gui.GuiMP;
+import com.arkcraft.module.blocks.client.gui.GuiPlayerCrafting;
+import com.arkcraft.module.blocks.client.gui.GuiSmithy;
+import com.arkcraft.module.blocks.common.container.ContainerInventoryCompostBin;
+import com.arkcraft.module.blocks.common.container.ContainerInventoryCropPlot;
+import com.arkcraft.module.blocks.common.container.ContainerInventoryForge;
+import com.arkcraft.module.blocks.common.container.ContainerInventoryMP;
+import com.arkcraft.module.blocks.common.container.ContainerInventoryPlayerCrafting;
+import com.arkcraft.module.blocks.common.container.ContainerInventorySmithy;
+import com.arkcraft.module.blocks.common.tile.TileInventoryCompostBin;
+import com.arkcraft.module.blocks.common.tile.TileInventoryCropPlot;
+import com.arkcraft.module.blocks.common.tile.TileInventoryForge;
+import com.arkcraft.module.blocks.common.tile.TileInventoryMP;
+import com.arkcraft.module.blocks.common.tile.TileInventorySmithy;
 import com.arkcraft.module.core.GlobalAdditions;
 import com.arkcraft.module.core.client.gui.GUITaming;
 import com.arkcraft.module.core.client.gui.GuiInventoryDino;
@@ -23,28 +40,11 @@ import com.arkcraft.module.core.client.gui.book.GuiDossier;
 import com.arkcraft.module.core.common.container.ContainerInventoryDino;
 import com.arkcraft.module.core.common.container.ContainerInventoryDodo;
 import com.arkcraft.module.core.common.container.ContainerInventoryTaming;
-import com.arkcraft.module.core.common.entity.EntityTameableDinosaur;
 import com.arkcraft.module.core.common.entity.passive.EntityDodo;
-import com.arkcraft.module.item.client.gui.GUIAttachment;
-import com.arkcraft.module.item.client.gui.GUICompostBin;
-import com.arkcraft.module.item.client.gui.GUICropPlot;
-import com.arkcraft.module.item.client.gui.GUIForge;
-import com.arkcraft.module.item.client.gui.GuiMP;
-import com.arkcraft.module.item.client.gui.GuiPlayerCrafting;
-import com.arkcraft.module.item.client.gui.GuiSmithy;
-import com.arkcraft.module.item.common.container.ContainerInventoryAttachment;
-import com.arkcraft.module.item.common.container.ContainerInventoryCompostBin;
-import com.arkcraft.module.item.common.container.ContainerInventoryCropPlot;
-import com.arkcraft.module.item.common.container.ContainerInventoryForge;
-import com.arkcraft.module.item.common.container.ContainerInventoryMP;
-import com.arkcraft.module.item.common.container.ContainerInventoryPlayerCrafting;
-import com.arkcraft.module.item.common.container.ContainerInventorySmithy;
-import com.arkcraft.module.item.common.tile.TileInventoryAttachment;
-import com.arkcraft.module.item.common.tile.TileInventoryCompostBin;
-import com.arkcraft.module.item.common.tile.TileInventoryCropPlot;
-import com.arkcraft.module.item.common.tile.TileInventoryForge;
-import com.arkcraft.module.item.common.tile.TileInventoryMP;
-import com.arkcraft.module.item.common.tile.TileInventorySmithy;
+import com.arkcraft.module.creature.common.entity.EntityTameableDinosaur;
+import com.arkcraft.module.weapon.client.gui.GUIAttachment;
+import com.arkcraft.module.weapon.common.container.ContainerInventoryAttachment;
+import com.arkcraft.module.weapon.common.container.inventory.InventoryAttachment;
 
 public class GuiHandler implements IGuiHandler
 {
@@ -175,7 +175,7 @@ public class GuiHandler implements IGuiHandler
 		else if (ID == GlobalAdditions.GUI.ATTACHMENT_GUI.getID())
 		{
 			return new ContainerInventoryAttachment(player, player.inventory,
-					TileInventoryAttachment.create(player.getHeldItem()));
+					InventoryAttachment.create(player.getHeldItem()));
 		}
 		else if (ID == GlobalAdditions.GUI.TAMED_DINO.getID())
 		{
@@ -329,8 +329,8 @@ public class GuiHandler implements IGuiHandler
 		}
 		else if (ID == GlobalAdditions.GUI.ATTACHMENT_GUI.getID())
 		{
-			return new GUIAttachment(player, player.inventory,
-					TileInventoryAttachment.create(player.getHeldItem()));
+			return new GUIAttachment(player, player.inventory, InventoryAttachment.create(player
+					.getHeldItem()));
 		}
 		else if (ID == GlobalAdditions.GUI.TAMED_DINO.getID())
 		{

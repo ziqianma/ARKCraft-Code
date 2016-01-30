@@ -1,6 +1,7 @@
 package com.arkcraft.module.core.common.entity.ai;
 
-import com.arkcraft.module.core.common.entity.DinoTameableTest;
+import com.arkcraft.module.creature.common.entity.DinoTameableTest;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAITarget;
 

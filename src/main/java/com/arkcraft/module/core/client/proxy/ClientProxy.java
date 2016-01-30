@@ -16,55 +16,37 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import com.arkcraft.lib.LogHelper;
+import com.arkcraft.module.blocks.client.event.ItemsClientEventHandler;
+import com.arkcraft.module.blocks.client.event.KeyBindings;
+import com.arkcraft.module.blocks.client.event.Mod2ClientEventHandler;
+import com.arkcraft.module.blocks.common.blocks.ARKCraftBlocks;
+import com.arkcraft.module.blocks.common.entity.EntityDodoEgg;
+import com.arkcraft.module.blocks.common.handlers.PotionEffectHandler;
+import com.arkcraft.module.blocks.common.items.ARKCraftItems;
+import com.arkcraft.module.blocks.common.items.ItemARKFood;
 import com.arkcraft.module.core.ARKCraft;
 import com.arkcraft.module.core.client.event.CoreClientEventHandler;
-import com.arkcraft.module.core.client.model.ModelBrontosaurus;
-import com.arkcraft.module.core.client.model.ModelDodo;
-import com.arkcraft.module.core.client.model.ModelRaptorNew;
-import com.arkcraft.module.core.client.model.ModelSabertooth;
-import com.arkcraft.module.core.client.render.RenderBrontosaurus;
-import com.arkcraft.module.core.client.render.RenderDodo;
-import com.arkcraft.module.core.client.render.RenderRaptor;
-import com.arkcraft.module.core.client.render.RenderSabertooth;
+import com.arkcraft.module.core.client.gui.overlay.GuiOverlay;
 import com.arkcraft.module.core.common.entity.aggressive.EntityRaptor;
 import com.arkcraft.module.core.common.entity.aggressive.EntitySabertooth;
 import com.arkcraft.module.core.common.entity.neutral.EntityBrontosaurus;
 import com.arkcraft.module.core.common.entity.passive.EntityDodo;
 import com.arkcraft.module.core.common.network.ARKMessagePipeline;
 import com.arkcraft.module.core.common.proxy.CommonProxy;
-import com.arkcraft.module.item.client.event.ItemsClientEventHandler;
-import com.arkcraft.module.item.client.event.KeyBindings;
-import com.arkcraft.module.item.client.event.Mod2ClientEventHandler;
-import com.arkcraft.module.item.client.gui.overlay.GuiOverlay;
-import com.arkcraft.module.item.client.gui.overlay.GuiOverlayReloading;
-import com.arkcraft.module.item.client.render.RenderAdvancedBullet;
-import com.arkcraft.module.item.client.render.RenderSimpleBullet;
-import com.arkcraft.module.item.client.render.RenderSimpleRifleAmmo;
-import com.arkcraft.module.item.client.render.RenderSimpleShotgunAmmo;
-import com.arkcraft.module.item.client.render.RenderSpear;
-import com.arkcraft.module.item.client.render.RenderTranquilizer;
-import com.arkcraft.module.item.common.blocks.ARKCraftBlocks;
-import com.arkcraft.module.item.common.blocks.BlockFlashlight;
-import com.arkcraft.module.item.common.config.ModuleItemBalance;
-import com.arkcraft.module.item.common.entity.EntityCobble;
-import com.arkcraft.module.item.common.entity.EntityDodoEgg;
-import com.arkcraft.module.item.common.entity.item.projectiles.EntityAdvancedBullet;
-import com.arkcraft.module.item.common.entity.item.projectiles.EntityBase;
-import com.arkcraft.module.item.common.entity.item.projectiles.EntitySimpleBullet;
-import com.arkcraft.module.item.common.entity.item.projectiles.EntitySimpleRifleAmmo;
-import com.arkcraft.module.item.common.entity.item.projectiles.EntitySimpleShotgunAmmo;
-import com.arkcraft.module.item.common.entity.item.projectiles.EntitySpear;
-import com.arkcraft.module.item.common.entity.item.projectiles.EntityTranquilizer;
-import com.arkcraft.module.item.common.handlers.PotionEffectHandler;
-import com.arkcraft.module.item.common.items.ARKCraftItems;
-import com.arkcraft.module.item.common.items.ItemARKFood;
-import com.arkcraft.module.item.common.items.weapons.ItemARKBow;
-import com.arkcraft.module.item.common.items.weapons.ranged.ItemRangedWeapon;
+import com.arkcraft.module.creature.client.model.ModelBrontosaurus;
+import com.arkcraft.module.creature.client.model.ModelDodo;
+import com.arkcraft.module.creature.client.model.ModelRaptorNew;
+import com.arkcraft.module.creature.client.model.ModelSabertooth;
+import com.arkcraft.module.creature.client.render.RenderBrontosaurus;
+import com.arkcraft.module.creature.client.render.RenderDodo;
+import com.arkcraft.module.creature.client.render.RenderRaptor;
+import com.arkcraft.module.creature.client.render.RenderSabertooth;
+import com.arkcraft.module.weapon.client.gui.GuiOverlayReloading;
+import com.arkcraft.module.weapon.common.entity.EntityStone;
 
 public class ClientProxy extends CommonProxy
 {
 	boolean initDone = false;
-	public static ItemARKBow bow;
 
 	@Override
 	public void init()
@@ -77,7 +59,7 @@ public class ClientProxy extends CommonProxy
 		MinecraftForge.EVENT_BUS.register(new GuiOverlay());
 		MinecraftForge.EVENT_BUS.register(new GuiOverlayReloading());
 
-		RenderingRegistry.registerEntityRenderingHandler(EntityCobble.class, new RenderSnowball(
+		RenderingRegistry.registerEntityRenderingHandler(EntityStone.class, new RenderSnowball(
 				Minecraft.getMinecraft().getRenderManager(), ARKCraftItems.rock, Minecraft
 						.getMinecraft().getRenderItem()));
 		/*
@@ -91,9 +73,6 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntityDodoEgg.class, new RenderSnowball(
 				Minecraft.getMinecraft().getRenderManager(), ARKCraftItems.dodo_egg, Minecraft
 						.getMinecraft().getRenderItem()));
-		RenderingRegistry.registerEntityRenderingHandler(EntityBase.class, new RenderSnowball(
-				Minecraft.getMinecraft().getRenderManager(), ARKCraftItems.grenade, Minecraft
-						.getMinecraft().getRenderItem()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityRaptor.class, new RenderRaptor(
 				new ModelRaptorNew(), 0.5F));
 		RenderingRegistry.registerEntityRenderingHandler(EntitySabertooth.class,
@@ -102,10 +81,6 @@ public class ClientProxy extends CommonProxy
 				new ModelDodo(), 0.3F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityBrontosaurus.class,
 				new RenderBrontosaurus(new ModelBrontosaurus(), 0.5f));
-		// RenderingRegistry.registerEntityRenderingHandler(EntityTranqAmmo.class,
-		// new RenderTranqAmmo());
-		// RenderingRegistry.registerEntityRenderingHandler(EntitySimpleBullet.class,
-		// new RenderSimpleBullet());
 
 		GameRegistry.addSmelting(ARKCraftItems.meat_raw,
 				new ItemStack(ARKCraftItems.meat_cooked, 1),
@@ -113,45 +88,6 @@ public class ClientProxy extends CommonProxy
 		GameRegistry.addSmelting(ARKCraftItems.primemeat_raw, new ItemStack(
 				ARKCraftItems.primemeat_cooked, 1), (int) Math
 				.floor(ItemARKFood.globalHealAmount / 2));
-
-		ModelBakery.addVariantName(ARKCraftItems.slingshot, "arkcraft:slingshot",
-				"arkcraft:slingshot_pulled");
-		ModelBakery.addVariantName(ARKCraftItems.shotgun, "arkcraft:weapons/shotgun",
-				"arkcraft:weapons/shotgun_reload");
-		ModelBakery.addVariantName(ARKCraftItems.longneck_rifle, "arkcraft:weapons/longneck_rifle",
-				"arkcraft:weapons/longneck_rifle_scope",
-				"arkcraft:weapons/longneck_rifle_scope_reload",
-				"arkcraft:weapons/longneck_rifle_reload",
-				"arkcraft:weapons/longneck_rifle_flashlight",
-				"arkcraft:weapons/longneck_rifle_flashlight_reload",
-				"arkcraft:weapons/longneck_rifle_laser",
-				"arkcraft:weapons/longneck_rifle_laser_reload",
-				"arkcraft:weapons/longneck_rifle_silencer",
-				"arkcraft:weapons/longneck_rifle_silencer_reload");
-		ModelBakery.addVariantName(ARKCraftItems.simple_pistol, "arkcraft:weapons/simple_pistol",
-				"arkcraft:weapons/simple_pistol_scope", "arkcraft:weapons/simple_pistol_reload",
-				"arkcraft:weapons/simple_pistol_scope_reload",
-				"arkcraft:weapons/simple_pistol_flashlight",
-				"arkcraft:weapons/simple_pistol_flashlight_reload",
-				"arkcraft:weapons/simple_pistol_laser",
-				"arkcraft:weapons/simple_pistol_laser_reload",
-				"arkcraft:weapons/simple_pistol_silencer",
-				"arkcraft:weapons/simple_pistol_silencer_reload");
-		ModelBakery.addVariantName(ARKCraftItems.fabricated_pistol,
-				"arkcraft:weapons/fabricated_pistol", "arkcraft:weapons/fabricated_pistol_scope",
-				"arkcraft:weapons/fabricated_pistol_reload",
-				"arkcraft:weapons/fabricated_pistol_scope_reload",
-				"arkcraft:weapons/fabricated_pistol_flashlight",
-				"arkcraft:weapons/fabricated_pistol_flashlight_reload",
-				"arkcraft:weapons/fabricated_pistol_laser",
-				"arkcraft:weapons/fabricated_pistol_laser_reload",
-				"arkcraft:weapons/fabricated_pistol_silencer",
-				"arkcraft:weapons/fabricated_pistol_silencer_reload",
-				"arkcraft:weapons/fabricated_pistol_holo_scope",
-				"arkcraft:weapons/fabricated_pistol_holo_scope_reload");
-
-		ModelBakery.addVariantName(ARKCraftItems.bow, "arkcraft:bow", "arkcraft:bow_pulling_0",
-				"arkcraft:bow_pulling_1", "arkcraft:bow_pulling_2");
 
 		KeyBindings.preInit();
 		dossierProxy.init();
@@ -181,37 +117,6 @@ public class ClientProxy extends CommonProxy
 		MinecraftForge.EVENT_BUS.register(mod2Eventhandler);
 	}
 
-	@Override
-	public void registerWeapons()
-	{
-		if (ModuleItemBalance.WEAPONS.SIMPLE_PISTOL)
-		{
-			RenderingRegistry.registerEntityRenderingHandler(EntitySimpleBullet.class,
-					new RenderSimpleBullet());
-		}
-		if (ModuleItemBalance.WEAPONS.SHOTGUN)
-		{
-			RenderingRegistry.registerEntityRenderingHandler(EntitySimpleShotgunAmmo.class,
-					new RenderSimpleShotgunAmmo());
-		}
-		if (ModuleItemBalance.WEAPONS.LONGNECK_RIFLE)
-		{
-			RenderingRegistry.registerEntityRenderingHandler(EntitySimpleRifleAmmo.class,
-					new RenderSimpleRifleAmmo());
-			RenderingRegistry.registerEntityRenderingHandler(EntityTranquilizer.class,
-					new RenderTranquilizer());
-		}
-		if (ModuleItemBalance.WEAPONS.SPEAR)
-		{
-			RenderingRegistry.registerEntityRenderingHandler(EntitySpear.class, new RenderSpear());
-		}
-		if (ModuleItemBalance.WEAPONS.FABRICATED_PISTOL)
-		{
-			RenderingRegistry.registerEntityRenderingHandler(EntityAdvancedBullet.class,
-					new RenderAdvancedBullet());
-		}
-	}
-
 	/* We register the block/item textures and models here */
 	@Override
 	public void registerRenderers()
@@ -220,7 +125,6 @@ public class ClientProxy extends CommonProxy
 		{
 			String name = e.getKey();
 			Block b = e.getValue();
-			if (b instanceof BlockFlashlight) continue;
 			registerBlockTexture(b, name);
 		}
 
@@ -228,8 +132,7 @@ public class ClientProxy extends CommonProxy
 		{
 			String name = e.getKey();
 			Item item = e.getValue();
-			if (item instanceof ItemRangedWeapon) registerItemTexture(item, "weapons/" + name);
-			else registerItemTexture(item, name);
+			registerItemTexture(item, name);
 		}
 	}
 

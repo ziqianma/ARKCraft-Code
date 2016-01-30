@@ -15,6 +15,12 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 
+import com.arkcraft.module.blocks.common.entity.EntityDodoEgg;
+import com.arkcraft.module.blocks.common.handlers.ForgeCraftingHandler;
+import com.arkcraft.module.blocks.common.handlers.PestleCraftingManager;
+import com.arkcraft.module.blocks.common.handlers.PlayerCraftingManager;
+import com.arkcraft.module.blocks.common.handlers.RecipeHandler;
+import com.arkcraft.module.blocks.common.handlers.SmithyCraftingManager;
 import com.arkcraft.module.core.common.config.CoreBalance;
 import com.arkcraft.module.core.common.creativetabs.ARKTabs;
 import com.arkcraft.module.core.common.entity.aggressive.EntityRaptor;
@@ -23,16 +29,10 @@ import com.arkcraft.module.core.common.entity.neutral.EntityBrontosaurus;
 import com.arkcraft.module.core.common.entity.passive.EntityDodo;
 import com.arkcraft.module.core.common.handlers.EntityHandler;
 import com.arkcraft.module.core.common.handlers.GuiHandler;
-import com.arkcraft.module.item.common.entity.EntityCobble;
-import com.arkcraft.module.item.common.entity.EntityDodoEgg;
-import com.arkcraft.module.item.common.entity.item.projectiles.EntityGrenade;
-import com.arkcraft.module.item.common.entity.item.projectiles.EntitySpear;
-import com.arkcraft.module.item.common.handlers.ForgeCraftingHandler;
-import com.arkcraft.module.item.common.handlers.PestleCraftingManager;
-import com.arkcraft.module.item.common.handlers.PlayerCraftingManager;
-import com.arkcraft.module.item.common.handlers.RecipeHandler;
-import com.arkcraft.module.item.common.handlers.SmithyCraftingManager;
-import com.arkcraft.module.item.common.items.ARKCraftItems;
+import com.arkcraft.module.weapon.WeaponsModule;
+import com.arkcraft.module.weapon.common.entity.EntityGrenade;
+import com.arkcraft.module.weapon.common.entity.EntitySpear;
+import com.arkcraft.module.weapon.common.entity.EntityStone;
 
 /**
  * @author Vastatio
@@ -40,16 +40,17 @@ import com.arkcraft.module.item.common.items.ARKCraftItems;
 public class GlobalAdditions
 {
 	public static CreativeTabs tabARKMisc = new ARKTabs(CreativeTabs.getNextID(), "tabARKCraftMisc");
-	
-	public static CreativeTabs tabARKWeapons = new ARKTabs(CreativeTabs.getNextID(), "tabARKCraftWeapons")
+
+	public static CreativeTabs tabARKWeapons = new ARKTabs(CreativeTabs.getNextID(),
+			"tabARKCraftWeapons")
 	{
 		@Override
-	    public Item getTabIconItem()
-	    {
-	        return ARKCraftItems.shotgun;
-	    }
+		public Item getTabIconItem()
+		{
+			return WeaponsModule.items.shotgun;
+		}
 	};
-	
+
 	public enum GUI
 	{
 		SMITHY(0),
@@ -95,7 +96,7 @@ public class GlobalAdditions
 		// EntityHandler.registerModEntity(EntityMetalArrow.class,
 		// "Metal Arrow", ARKCraft.instance, 64, 10, true);
 
-		EntityHandler.registerModEntity(EntityCobble.class, "Cobblestone Ball", ARKCraft.instance,
+		EntityHandler.registerModEntity(EntityStone.class, "Cobblestone Ball", ARKCraft.instance,
 				64, 10, true);
 		EntityHandler.registerModEntity(EntityDodoEgg.class, "Dodo Egg", ARKCraft.instance, 64, 10,
 				true);

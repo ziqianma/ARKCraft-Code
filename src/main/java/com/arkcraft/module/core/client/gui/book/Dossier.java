@@ -1,31 +1,29 @@
 package com.arkcraft.module.core.client.gui.book;
 
-import com.arkcraft.module.core.GlobalAdditions;
-import com.arkcraft.module.core.client.gui.book.proxy.DClient;
-import com.arkcraft.module.core.ARKCraft;
+import java.util.List;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.client.FMLClientHandler;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.List;
+import com.arkcraft.module.core.ARKCraft;
+import com.arkcraft.module.core.GlobalAdditions;
+import com.arkcraft.module.core.client.gui.book.proxy.DClient;
 
 /**
  * @author Vastatio
  */
 public class Dossier extends Item
 {
-
     public Dossier(String name)
     {
         super();
         setUnlocalizedName(name);
         setCreativeTab(GlobalAdditions.tabARKMisc);
-        GameRegistry.registerItem(this, name);
     }
 
     @Override
