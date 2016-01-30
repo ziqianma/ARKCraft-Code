@@ -1,4 +1,4 @@
-package com.arkcraft.module.creature.common.entitynew.aggressive;
+package com.arkcraft.module.creature.common.entitytest;
 
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAILookIdle;

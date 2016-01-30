@@ -5,9 +5,9 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
 
+import com.arkcraft.lib.LogHelper;
 import com.arkcraft.module.blocks.common.config.ModuleItemBalance;
 import com.arkcraft.module.creature.common.entity.EntityARKCreature;
-import com.arkcraft.module.creature.common.entity.EntityTameableDinosaur;
 
 public class EntityTranquilizer extends EntityProjectile implements ITranquilizer
 {
@@ -61,10 +61,11 @@ public class EntityTranquilizer extends EntityProjectile implements ITranquilize
 	@Override
 	public void applyTorpor(Entity entityHit)
 	{
-		//TODO apply torpor to player
+		// TODO apply torpor to player
 		if (entityHit instanceof EntityARKCreature)
 		{
-			((EntityTameableDinosaur) entityHit)
+			LogHelper.info("Torpor applied: " + ModuleItemBalance.WEAPONS.TRANQ_AMMO_TORPOR_TIME);
+			((EntityARKCreature) entityHit)
 					.increaseTorpor(ModuleItemBalance.WEAPONS.TRANQ_AMMO_TORPOR_TIME);
 		}
 	}

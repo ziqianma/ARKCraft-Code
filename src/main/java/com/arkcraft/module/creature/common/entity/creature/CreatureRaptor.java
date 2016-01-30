@@ -2,7 +2,7 @@ package com.arkcraft.module.creature.common.entity.creature;
 
 import com.arkcraft.module.creature.common.entity.EntityARKCreature;
 import com.arkcraft.module.creature.common.entity.SaddleType;
-import com.arkcraft.module.creature.common.entitynew.aggressive.EntityRaptor;
+import com.arkcraft.module.creature.common.entitytest.EntityRaptor;
 
 public class CreatureRaptor extends Creature
 {
@@ -73,7 +73,7 @@ public class CreatureRaptor extends Creature
 	public int getTorporKnockout()
 	{
 		// TODO Auto-generated method stub
-		return 100;
+		return 10;
 	}
 
 	@Override

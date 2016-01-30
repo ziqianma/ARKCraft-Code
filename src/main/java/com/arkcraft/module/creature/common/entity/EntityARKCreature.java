@@ -16,6 +16,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 
+import com.arkcraft.lib.LogHelper;
 import com.arkcraft.module.creature.common.entity.creature.Creature;
 
 /**
@@ -80,10 +81,10 @@ public class EntityARKCreature extends EntityCreature implements IEntityAddition
 		this.dataWatcher.addObject(DATA_WATCHER_LEVEL, 0);
 		this.dataWatcher.addObject(DATA_WATCHER_UNCONSCIOUS, (byte) 0);
 		this.dataWatcher.addObject(DATA_WATCHER_TAME_TIME, 0);
-		this.dataWatcher.addObject(DATA_WATCHER_XP, 0.0F);
-		this.dataWatcher.addObject(DATA_WATCHER_SADDLED, (byte) 0);
+		// this.dataWatcher.addObject(DATA_WATCHER_XP, 0.0F);
+		// this.dataWatcher.addObject(DATA_WATCHER_SADDLED, (byte) 0);
 
-		levelManager.initDataWatcher();
+		// levelManager.initDataWatcher();
 	}
 
 	@Override
@@ -143,10 +144,17 @@ public class EntityARKCreature extends EntityCreature implements IEntityAddition
 	}
 
 	@Override
+	public void onUpdate()
+	{
+		if (!unconscious) super.onUpdate();
+		else LogHelper.info("Can't move, is unconscious!");
+	}
+
+	@Override
 	public void onLivingUpdate()
 	{
 		super.onLivingUpdate();
-
+		if (unconscious) LogHelper.info("Can't move, is unconscious!");
 		if (!worldObj.isRemote)
 		{
 			this.dataWatcher.updateObject(DATA_WATCHER_AGE, creatureAge);
@@ -156,8 +164,9 @@ public class EntityARKCreature extends EntityCreature implements IEntityAddition
 			this.dataWatcher.updateObject(DATA_WATCHER_LEVEL, level);
 			this.dataWatcher.updateObject(DATA_WATCHER_UNCONSCIOUS, (byte) (unconscious ? 1 : 0));
 			this.dataWatcher.updateObject(DATA_WATCHER_TAME_TIME, tameTime);
-			this.dataWatcher.updateObject(DATA_WATCHER_XP, xp);
-			this.dataWatcher.updateObject(DATA_WATCHER_SADDLED, (byte) (isSaddled() ? 1 : 0));
+			// this.dataWatcher.updateObject(DATA_WATCHER_XP, xp);
+			// this.dataWatcher.updateObject(DATA_WATCHER_SADDLED, (byte)
+			// (isSaddled() ? 1 : 0));
 
 			if (creatureAge < creature.getGrowthTime())
 			{
@@ -171,6 +180,7 @@ public class EntityARKCreature extends EntityCreature implements IEntityAddition
 			if (unconscious && torpor <= 0)
 			{
 				unconscious = false;
+				torpor = 0;
 				tameTime = 0;
 			}
 		}
@@ -183,8 +193,9 @@ public class EntityARKCreature extends EntityCreature implements IEntityAddition
 			level = dataWatcher.getWatchableObjectInt(DATA_WATCHER_LEVEL);
 			unconscious = dataWatcher.getWatchableObjectByte(DATA_WATCHER_UNCONSCIOUS) == 1;
 			tameTime = dataWatcher.getWatchableObjectInt(DATA_WATCHER_TAME_TIME);
-			xp = dataWatcher.getWatchableObjectFloat(DATA_WATCHER_XP);
-			isSaddled = dataWatcher.getWatchableObjectByte(DATA_WATCHER_SADDLED) == 1;
+			// xp = dataWatcher.getWatchableObjectFloat(DATA_WATCHER_XP);
+			// isSaddled =
+			// dataWatcher.getWatchableObjectByte(DATA_WATCHER_SADDLED) == 1;
 		}
 	}
 

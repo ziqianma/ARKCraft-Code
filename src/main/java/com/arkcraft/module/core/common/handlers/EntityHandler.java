@@ -16,7 +16,6 @@ import java.util.Random;
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class EntityHandler
 {
-
     static int entityID = 300;
 
     public EntityHandler() {}

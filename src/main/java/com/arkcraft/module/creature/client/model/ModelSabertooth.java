@@ -7,45 +7,45 @@ import net.minecraft.entity.Entity;
 
 public class ModelSabertooth extends ModelBase
 {
-	public ModelRenderer mainbody;
-	public ModelRenderer legbaseFR;
-	public ModelRenderer legbaseFL;
-	public ModelRenderer secondbody;
-	public ModelRenderer neck;
-	public ModelRenderer legFR;
-	public ModelRenderer footFR;
-	public ModelRenderer legFL;
-	public ModelRenderer footFL;
-	public ModelRenderer thirdbody;
-	public ModelRenderer secondbody2;
-	public ModelRenderer secondbodyunder;
-	public ModelRenderer tailbase;
-	public ModelRenderer legbaseBL;
-	public ModelRenderer legbaseBR;
-	public ModelRenderer thirdbody2;
-	public ModelRenderer tail;
-	public ModelRenderer tail2;
-	public ModelRenderer tail3;
-	public ModelRenderer tail4;
-	public ModelRenderer legBL;
-	public ModelRenderer leg2BL;
-	public ModelRenderer footBL;
-	public ModelRenderer legBR;
-	public ModelRenderer leg2BR;
-	public ModelRenderer footBR;
-	public ModelRenderer neck2;
-	public ModelRenderer underneck;
-	public ModelRenderer head;
-	public ModelRenderer upjaw;
-	public ModelRenderer bottomjaw;
-	public ModelRenderer earL;
-	public ModelRenderer earR;
-	public ModelRenderer nose;
-	public ModelRenderer toothbaseL;
-	public ModelRenderer toothbaseR;
-	public ModelRenderer nose2;
-	public ModelRenderer toothL;
-	public ModelRenderer toothR;
+	ModelRenderer mainbody;
+	ModelRenderer legbaseFR;
+	ModelRenderer legbaseFL;
+	ModelRenderer secondbody;
+	ModelRenderer neck;
+	ModelRenderer legFR;
+	ModelRenderer footFR;
+	ModelRenderer legFL;
+	ModelRenderer footFL;
+	ModelRenderer thirdbody;
+	ModelRenderer secondbody2;
+	ModelRenderer secondbodyunder;
+	ModelRenderer tailbase;
+	ModelRenderer legbaseBL;
+	ModelRenderer legbaseBR;
+	ModelRenderer thirdbody2;
+	ModelRenderer tail;
+	ModelRenderer tail2;
+	ModelRenderer tail3;
+	ModelRenderer tail4;
+	ModelRenderer legBL;
+	ModelRenderer leg2BL;
+	ModelRenderer footBL;
+	ModelRenderer legBR;
+	ModelRenderer leg2BR;
+	ModelRenderer footBR;
+	ModelRenderer neck2;
+	ModelRenderer underneck;
+	ModelRenderer head;
+	ModelRenderer upjaw;
+	ModelRenderer bottomjaw;
+	ModelRenderer earL;
+	ModelRenderer earR;
+	ModelRenderer nose;
+	ModelRenderer toothbaseL;
+	ModelRenderer toothbaseR;
+	ModelRenderer nose2;
+	ModelRenderer toothL;
+	ModelRenderer toothR;
 
 	public ModelSabertooth()
 	{
@@ -255,7 +255,7 @@ public class ModelSabertooth extends ModelBase
 		GlStateManager.translate(this.mainbody.rotationPointX * f5,
 				this.mainbody.rotationPointY * f5, this.mainbody.rotationPointZ * f5);
 		// TODO Scaling TEST
-		GlStateManager.scale(1.0D, 0.98D, 1.0D);
+		GlStateManager.scale(0.5D, 0.98D, 0.5D);
 		GlStateManager.translate(-this.mainbody.offsetX, -this.mainbody.offsetY,
 				-this.mainbody.offsetZ);
 		GlStateManager.translate(-this.mainbody.rotationPointX * f5,
