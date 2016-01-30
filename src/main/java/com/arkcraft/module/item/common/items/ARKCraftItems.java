@@ -199,10 +199,10 @@ public class ARKCraftItems
 
 		// Bows
 		compound_bow = new ItemCompoundBow();
-		registerItem("compound_bow", compound_bow);
+		registerItemWeapon("compound_bow", compound_bow);
 
 		bow = new ItemARKBow();
-		registerItem("bow", bow);
+		registerItemWeapon("bow", bow);
 
 		// Bullets
 		// tranq_arrow = addItemProjectile("tranq_arrow");
@@ -261,7 +261,7 @@ public class ARKCraftItems
 	private static ItemAttachment addItemAttachment(String name, AttachmentType type)
 	{
 		ItemAttachment i = new ItemAttachment(name, type);
-		registerItem(name, i);
+		registerItemWeapon(name, i);
 		return i;
 	}
 
@@ -397,27 +397,27 @@ public class ARKCraftItems
 	protected static ItemProjectile addItemProjectile(String name)
 	{
 		ItemProjectile i = new ItemProjectile();
-		registerItem(name, i);
+		registerItemWeapon(name, i);
 		return i;
 	}
 
 	protected static ItemRangedWeapon addShooter(ItemRangedWeapon weapon)
 	{
-		registerItem(weapon.getUnlocalizedName(), weapon);
+		registerItemWeapon(weapon.getUnlocalizedName(), weapon);
 		return weapon;
 	}
 
 	protected static ItemSlingshot addSlingshot(String name)
 	{
 		ItemSlingshot slingshot = new ItemSlingshot();
-		registerItem(name, slingshot);
+		registerItemWeapon(name, slingshot);
 		return slingshot;
 	}
 
 	protected static ItemGrenade addGrenade(String name)
 	{
 		ItemGrenade slingshot = new ItemGrenade();
-		registerItem(name, slingshot);
+		registerItemWeapon(name, slingshot);
 		return slingshot;
 	}
 
@@ -515,7 +515,7 @@ public class ARKCraftItems
 	protected static ItemBallista addBallista(String name)
 	{
 		ItemBallista i = new ItemBallista();
-		registerItem(name, i);
+		registerItemWeapon(name, i);
 		return i;
 	}
 
@@ -543,14 +543,14 @@ public class ARKCraftItems
 	public static ItemSpear addSpearItem(String name, ToolMaterial mat)
 	{
 		ItemSpear weapon = new ItemSpear(mat);
-		registerItem(name, weapon);
+		registerItemWeapon(name, weapon);
 		return weapon;
 	}
 
 	public static ItemWoodenClub addWoodenClub(String name, ToolMaterial mat)
 	{
 		ItemWoodenClub weapon = new ItemWoodenClub(mat);
-		registerItem(name, weapon);
+		registerItemWeapon(name, weapon);
 		return weapon;
 	}
 
@@ -604,18 +604,19 @@ public class ARKCraftItems
 		return weapon;
 	}
 
-	public static ItemARKThrowableWeaponBase addWeaponThrowable(String name, ToolMaterial mat)
-	{
-		ItemARKThrowableWeaponBase weapon = new ItemARKThrowableWeaponBase(mat);
-		registerItem(name, weapon);
-		return weapon;
-	}
-
 	public static void registerItem(String name, Item item)
 	{
 		allItems.put(name, item);
 		item.setUnlocalizedName(name);
-		item.setCreativeTab(GlobalAdditions.tabARK);
+		item.setCreativeTab(GlobalAdditions.tabARKMisc);
+		GameRegistry.registerItem(item, name);
+	}
+	
+	public static void registerItemWeapon(String name, Item item)
+	{
+		allItems.put(name, item);
+		item.setUnlocalizedName(name);
+		item.setCreativeTab(GlobalAdditions.tabARKWeapons);
 		GameRegistry.registerItem(item, name);
 	}
 }

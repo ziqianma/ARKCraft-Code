@@ -20,7 +20,7 @@ public class ContainerBlockBase extends Block
     {
         super(mat);
         this.guiID = guiID;
-        this.setCreativeTab(GlobalAdditions.tabARK);
+        this.setCreativeTab(GlobalAdditions.tabARKMisc);
         this.setHardness(hardness);
         this.setUnlocalizedName(name);
         GameRegistry.registerBlock(this, name);

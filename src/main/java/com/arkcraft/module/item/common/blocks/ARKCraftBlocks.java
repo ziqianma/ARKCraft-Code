@@ -109,7 +109,7 @@ public class ARKCraftBlocks
 
 	private static Block registerBlock(Block block, String name)
 	{
-		block.setCreativeTab(GlobalAdditions.tabARK);
+		block.setCreativeTab(GlobalAdditions.tabARKMisc);
 		return registerBlockNoTab(block, name);
 	}
 
@@ -123,7 +123,7 @@ public class ARKCraftBlocks
 
 	private static Block registerBlockWithItemBlock(Block block, Class<? extends ItemBlock> itemBlock, String name)
 	{
-		block.setCreativeTab(GlobalAdditions.tabARK);
+		block.setCreativeTab(GlobalAdditions.tabARKMisc);
 		GameRegistry.registerBlock(block, itemBlock, name);
 		block.setUnlocalizedName(name);
 		allBlocks.put(name, block);

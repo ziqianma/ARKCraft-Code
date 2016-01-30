@@ -24,7 +24,7 @@ public class Dossier extends Item
     {
         super();
         setUnlocalizedName(name);
-        setCreativeTab(GlobalAdditions.tabARK);
+        setCreativeTab(GlobalAdditions.tabARKMisc);
         GameRegistry.registerItem(this, name);
     }
 

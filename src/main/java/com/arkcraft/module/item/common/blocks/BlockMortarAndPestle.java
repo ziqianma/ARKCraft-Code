@@ -8,8 +8,10 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import com.arkcraft.module.core.ARKCraft;
@@ -24,17 +26,38 @@ public class BlockMortarAndPestle extends BlockContainer
 	private boolean isOpaque = false;
 	private int ID;
 	private boolean render = false;
-
+	
 	public BlockMortarAndPestle(Material mat, int ID)
 	{
 		super(mat);
 		this.setHardness(0.5F);
 		this.ID = ID;
+		float f = 0.25F;
+		float f1 = 0.25F; //Height
+	    this.setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, f1, 0.5F + f);
 	}
 
 	public TileEntity createNewTileEntity(World worldIn, int meta)
 	{
 		return new TileInventoryMP();
+	}
+	
+	@Override
+	public boolean isPassable(IBlockAccess worldIn, BlockPos pos)
+	{ 
+		return this.blockMaterial != Material.air;
+	}
+
+	@Override
+	public AxisAlignedBB getCollisionBoundingBox(World worldIn, BlockPos pos, IBlockState state) 
+	{ 
+		return null; 
+	}
+
+	@Override
+	public boolean isFullCube() 
+	{ 
+		return false; 
 	}
 
 	@Override
