@@ -2,7 +2,8 @@ package com.arkcraft.module.core.common.container;
 
 import com.arkcraft.lib.LogHelper;
 import com.arkcraft.module.core.common.container.inventory.InventoryDino;
-import com.arkcraft.module.core.common.entity.EntityTameableDinosaur;
+import com.arkcraft.module.creature.common.entity.EntityTameableDinosaur;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;

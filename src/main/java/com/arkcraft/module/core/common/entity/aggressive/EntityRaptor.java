@@ -29,12 +29,12 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
 import com.arkcraft.lib.LogHelper;
+import com.arkcraft.module.blocks.common.items.ARKCraftItems;
+import com.arkcraft.module.blocks.common.items.ItemARKFood;
 import com.arkcraft.module.core.ARKCraft;
 import com.arkcraft.module.core.common.config.CoreBalance;
-import com.arkcraft.module.core.common.entity.EntityTameableDinosaur;
-import com.arkcraft.module.core.common.entity.SaddleType;
-import com.arkcraft.module.item.common.items.ARKCraftItems;
-import com.arkcraft.module.item.common.items.ItemARKFood;
+import com.arkcraft.module.creature.common.entity.EntityTameableDinosaur;
+import com.arkcraft.module.creature.common.entity.SaddleType;
 import com.google.common.base.Predicate;
 
 /**

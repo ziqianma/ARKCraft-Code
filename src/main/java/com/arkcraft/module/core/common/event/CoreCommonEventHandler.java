@@ -8,8 +8,8 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import com.arkcraft.lib.LogHelper;
+import com.arkcraft.module.blocks.common.items.ARKCraftItems;
 import com.arkcraft.module.core.common.entity.aggressive.EntityRaptor;
-import com.arkcraft.module.item.common.items.ARKCraftItems;
 
 /**
  * @author wildbill22

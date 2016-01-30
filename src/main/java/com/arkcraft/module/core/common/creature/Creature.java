@@ -1,7 +1,7 @@
 package com.arkcraft.module.core.common.creature;
 
-import com.arkcraft.module.core.common.entity.EntityARKCreature;
-import com.arkcraft.module.core.common.entity.SaddleType;
+import com.arkcraft.module.creature.common.entity.EntityARKCreature;
+import com.arkcraft.module.creature.common.entity.SaddleType;
 
 /**
  * @author gegy1000

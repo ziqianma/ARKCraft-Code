@@ -5,7 +5,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 
 import com.arkcraft.module.core.client.gui.book.proxy.DCommon;
 import com.arkcraft.module.core.common.network.ARKMessagePipeline;
-import com.arkcraft.module.core.common.network.MsgBallistaShot;
+import com.arkcraft.module.weapon.common.network.MsgBallistaShot;
 
 public class CommonProxy
 {

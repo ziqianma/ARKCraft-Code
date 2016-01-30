@@ -24,25 +24,26 @@ import net.minecraftforge.fml.relauncher.Side;
 
 import org.apache.logging.log4j.Logger;
 
+import com.arkcraft.module.blocks.common.blocks.ARKCraftBlocks;
+import com.arkcraft.module.blocks.common.config.ModuleItemConfig;
+import com.arkcraft.module.blocks.common.event.ItemsCommonEventHandler;
+import com.arkcraft.module.blocks.common.items.ARKCraftItems;
+import com.arkcraft.module.blocks.common.items.potions.ARKCraftPotionEffects;
 import com.arkcraft.module.core.common.config.CoreConfig;
 import com.arkcraft.module.core.common.event.CoreCommonEventHandler;
 import com.arkcraft.module.core.common.gen.WorldGeneratorBushes;
 import com.arkcraft.module.core.common.gen.island.WorldTypeIsland;
 import com.arkcraft.module.core.common.network.ARKMessagePipeline;
-import com.arkcraft.module.core.common.network.OpenAttachmentInventory;
 import com.arkcraft.module.core.common.network.OpenPlayerCrafting;
 import com.arkcraft.module.core.common.network.PlayerPoop;
-import com.arkcraft.module.core.common.network.ReloadFinished;
-import com.arkcraft.module.core.common.network.ReloadStarted;
 import com.arkcraft.module.core.common.network.UpdateMPToCraftItem;
 import com.arkcraft.module.core.common.network.UpdatePlayerCrafting;
 import com.arkcraft.module.core.common.network.UpdateSmithyToCraftItem;
 import com.arkcraft.module.core.common.proxy.CommonProxy;
-import com.arkcraft.module.item.common.blocks.ARKCraftBlocks;
-import com.arkcraft.module.item.common.config.ModuleItemConfig;
-import com.arkcraft.module.item.common.event.ItemsCommonEventHandler;
-import com.arkcraft.module.item.common.items.ARKCraftItems;
-import com.arkcraft.module.item.common.items.potions.ARKCraftPotionEffects;
+import com.arkcraft.module.weapon.WeaponsModule;
+import com.arkcraft.module.weapon.common.network.OpenAttachmentInventory;
+import com.arkcraft.module.weapon.common.network.ReloadFinished;
+import com.arkcraft.module.weapon.common.network.ReloadStarted;
 
 @Mod(modid = ARKCraft.MODID, version = ARKCraft.VERSION, name = ARKCraft.MODID, guiFactory = "com.arkcraft.lib.ModGuiFactory", dependencies = "required-after:llibrary@[0.5.5]")
 public class ARKCraft
@@ -83,6 +84,10 @@ public class ARKCraft
 		ARKCraftBlocks.init();
 		ARKCraftItems.init();
 		ARKCraftPotionEffects.init();
+
+		// TODO finish modular system
+		WeaponsModule.preInit();
+
 		GlobalAdditions.init();
 
 		Potion[] potionTypes;
@@ -131,6 +136,7 @@ public class ARKCraft
 		proxy.init();
 		messagePipeline.initialize();
 		proxy.registerPackets(messagePipeline);
+		WeaponsModule.init();
 	}
 
 	@EventHandler
