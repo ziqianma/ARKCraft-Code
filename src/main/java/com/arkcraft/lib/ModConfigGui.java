@@ -19,7 +19,6 @@ import java.util.List;
  */
 public class ModConfigGui extends GuiConfig
 {
-
     // Creates the Mod1 Balance Screen (2nd Level)
     public static class Mod1BalanceEntry extends CategoryEntry
     {
