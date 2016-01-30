@@ -46,7 +46,9 @@ public class BlockRefiningForge extends BlockContainer
 	@Override
 	public TileEntity createNewTileEntity(World worldIn, int meta)
 	{
-		return new TileInventoryForge();
+		IBlockState state = getStateFromMeta(meta);
+		if (state.getValue(PART).equals(EnumPart.BOTTOM)) return new TileInventoryForge();
+		return null;
 	}
 
 	@Override
@@ -94,7 +96,7 @@ public class BlockRefiningForge extends BlockContainer
 		// open on the server side only (not sure why you shouldn't open client
 		// side too... vanilla doesn't, so we better not either)
 		if (worldIn.isRemote) return true;
-
+		if (state.getValue(PART).equals(EnumPart.TOP)) pos = pos.down();
 		playerIn.openGui(ARKCraft.instance(), ID, worldIn, pos.getX(), pos.getY(), pos.getZ());
 		return true;
 	}
@@ -104,6 +106,7 @@ public class BlockRefiningForge extends BlockContainer
 	@Override
 	public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
 	{
+		if (state.getValue(PART).equals(EnumPart.TOP)) pos = pos.down();
 		TileEntity tileEntity = worldIn.getTileEntity(pos);
 		if (tileEntity instanceof IInventory)
 		{
@@ -151,6 +154,7 @@ public class BlockRefiningForge extends BlockContainer
 	@Override
 	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
 	{
+		if (state.getValue(PART).equals(EnumPart.TOP)) pos = pos.down();
 		TileEntity tileEntity = worldIn.getTileEntity(pos);
 		if (tileEntity instanceof TileInventoryForge)
 		{
