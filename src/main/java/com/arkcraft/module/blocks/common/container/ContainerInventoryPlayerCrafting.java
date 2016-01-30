@@ -13,7 +13,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import com.arkcraft.lib.LogHelper;
 import com.arkcraft.module.blocks.common.container.inventory.InventoryBlueprints;
 import com.arkcraft.module.blocks.common.container.inventory.InventoryPlayerCrafting;
-import com.arkcraft.module.blocks.common.entity.player.ARKPlayer;
+import com.arkcraft.module.core.common.entity.data.ARKPlayer;
 
 public class ContainerInventoryPlayerCrafting extends Container
 {

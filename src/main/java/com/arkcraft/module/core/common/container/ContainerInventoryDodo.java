@@ -1,14 +1,15 @@
 package com.arkcraft.module.core.common.container;
 
-import com.arkcraft.lib.LogHelper;
-import com.arkcraft.module.core.common.container.inventory.InventoryDino;
-import com.arkcraft.module.core.common.entity.passive.EntityDodo;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+
+import com.arkcraft.lib.LogHelper;
+import com.arkcraft.module.core.common.container.inventory.InventoryDino;
+import com.arkcraft.module.creature.common.entity.passive.EntityDodo;
 
 /**
  * @author wildbill22

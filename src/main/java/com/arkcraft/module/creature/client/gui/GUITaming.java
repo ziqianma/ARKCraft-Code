@@ -1,4 +1,4 @@
-package com.arkcraft.module.core.client.gui;
+package com.arkcraft.module.creature.client.gui;
 
 import com.arkcraft.module.core.ARKCraft;
 import com.arkcraft.module.core.common.container.ContainerInventoryTaming;

@@ -12,10 +12,10 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.arkcraft.lib.LogHelper;
-import com.arkcraft.module.blocks.common.entity.player.ARKPlayer;
 import com.arkcraft.module.blocks.common.handlers.ARKCraftingManager;
 import com.arkcraft.module.blocks.common.handlers.IARKRecipe;
 import com.arkcraft.module.core.ARKCraft;
+import com.arkcraft.module.core.common.entity.data.ARKPlayer;
 import com.arkcraft.module.core.common.network.UpdatePlayerCrafting;
 
 /**

@@ -1,4 +1,4 @@
-package com.arkcraft.module.blocks.common.entity.player;
+package com.arkcraft.module.core.common.entity.data;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -166,7 +166,7 @@ public class ARKPlayer implements IExtendedEntityProperties
 		this.canPoop = canPoop;
 	}
 
-	public void Poop()
+	public void poop()
 	{
 		if (canPoop())
 		{

@@ -8,8 +8,8 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.ResourceLocation;
 
 import com.arkcraft.module.core.ARKCraft;
-import com.arkcraft.module.core.common.entity.aggressive.EntitySabertooth;
 import com.arkcraft.module.creature.client.model.ModelSabertooth;
+import com.arkcraft.module.creature.common.entity.aggressive.EntitySabertooth;
 
 /**
  * @author wildbill22

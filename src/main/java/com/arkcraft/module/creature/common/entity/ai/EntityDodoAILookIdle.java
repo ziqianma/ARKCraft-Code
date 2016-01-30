@@ -1,8 +1,9 @@
 package com.arkcraft.module.creature.common.entity.ai;
 
-import com.arkcraft.module.core.common.entity.passive.EntityDodo;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAIBase;
+
+import com.arkcraft.module.creature.common.entity.passive.EntityDodo;
 
 /**
  * @author wildbill22
