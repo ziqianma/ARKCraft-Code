@@ -13,9 +13,9 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.arkcraft.module.blocks.common.entity.player.ARKPlayer;
 import com.arkcraft.module.core.ARKCraft;
 import com.arkcraft.module.core.GlobalAdditions;
+import com.arkcraft.module.core.common.entity.data.ARKPlayer;
 import com.arkcraft.module.core.common.network.OpenPlayerCrafting;
 import com.arkcraft.module.weapon.common.entity.EntityBallista;
 
@@ -82,7 +82,7 @@ public class ItemsClientEventHandler
 		EntityPlayerSP player = Minecraft.getMinecraft().thePlayer;
 		if (KeyBindings.playerPooping.isPressed())
 		{
-			ARKPlayer.get(player).Poop();
+			ARKPlayer.get(player).poop();
 		}
 		else if (KeyBindings.playerCrafting.isPressed())
 		{

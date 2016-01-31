@@ -9,7 +9,7 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
 import com.arkcraft.module.blocks.common.items.ARKCraftItems;
-import com.arkcraft.module.core.common.entity.passive.EntityDodo;
+import com.arkcraft.module.creature.common.entity.passive.EntityDodo;
 
 public class EntityDodoEgg extends EntityThrowable
 {

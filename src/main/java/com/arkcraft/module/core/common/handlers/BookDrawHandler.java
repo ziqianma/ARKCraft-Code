@@ -1,9 +1,8 @@
 package com.arkcraft.module.core.common.handlers;
 
-import com.arkcraft.module.core.client.gui.GuiDossierScreen.CATEGORY;
-import com.arkcraft.module.core.ARKCraft;
-import com.arkcraft.module.core.common.entity.aggressive.EntityRaptor;
-import com.arkcraft.module.core.common.entity.passive.EntityDodo;
+import java.awt.Color;
+import java.util.Random;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiScreen;
@@ -11,10 +10,13 @@ import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
+
 import org.lwjgl.opengl.GL11;
 
-import java.awt.Color;
-import java.util.Random;
+import com.arkcraft.module.core.ARKCraft;
+import com.arkcraft.module.core.client.gui.GuiDossierScreen.CATEGORY;
+import com.arkcraft.module.creature.common.entity.aggressive.EntityRaptor;
+import com.arkcraft.module.creature.common.entity.passive.EntityDodo;
 
 public class BookDrawHandler
 {

@@ -1,13 +1,14 @@
 package com.arkcraft.module.creature.client.render;
 
-import com.arkcraft.module.core.ARKCraft;
-import com.arkcraft.module.core.common.entity.neutral.EntityBrontosaurus;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.ResourceLocation;
+
+import com.arkcraft.module.core.ARKCraft;
+import com.arkcraft.module.creature.common.entity.neutral.EntityBrontosaurus;
 
 public class RenderBrontosaurus extends RenderLiving
 {

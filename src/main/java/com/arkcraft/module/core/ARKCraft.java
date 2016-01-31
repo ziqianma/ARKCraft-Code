@@ -88,6 +88,7 @@ public class ARKCraft
 		// TODO finish modular system
 		WeaponsModule.preInit();
 
+		// ARKEntityRegistry.register();
 		GlobalAdditions.init();
 
 		Potion[] potionTypes;

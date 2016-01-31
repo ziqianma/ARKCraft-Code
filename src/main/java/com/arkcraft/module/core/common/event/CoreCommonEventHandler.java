@@ -9,7 +9,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import com.arkcraft.lib.LogHelper;
 import com.arkcraft.module.blocks.common.items.ARKCraftItems;
-import com.arkcraft.module.core.common.entity.aggressive.EntityRaptor;
+import com.arkcraft.module.creature.common.entity.aggressive.EntityRaptor;
 
 /**
  * @author wildbill22

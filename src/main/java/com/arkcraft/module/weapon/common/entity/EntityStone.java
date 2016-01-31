@@ -48,7 +48,7 @@ public class EntityStone extends EntityThrowable implements ITranquilizer
 
 	@Override
 	public void applyTorpor(Entity entityHit)
-	{
+	{ // TODO apply torpor to player
 		if (entityHit instanceof EntityTameableDinosaur)
 		{
 			((EntityTameableDinosaur) entityHit).increaseTorpor(10);

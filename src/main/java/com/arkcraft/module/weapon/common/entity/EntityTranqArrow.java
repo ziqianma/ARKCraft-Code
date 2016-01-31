@@ -97,9 +97,9 @@ public class EntityTranqArrow extends EntityArkArrow implements ITranquilizer
 	@Override
 	public void applyTorpor(Entity entityHit)
 	{
+		//TODO apply torpor to player
 		if (entityHit instanceof EntityTameableDinosaur)
 		{
-			LogHelper.info("Torpor applied: " + ModuleItemBalance.WEAPONS.TRANQ_ARROW_TORPOR_TIME);
 			((EntityTameableDinosaur) entityHit)
 					.increaseTorpor(ModuleItemBalance.WEAPONS.TRANQ_ARROW_TORPOR_TIME);
 		}

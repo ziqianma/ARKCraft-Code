@@ -10,8 +10,8 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 
-import com.arkcraft.module.blocks.common.entity.player.ARKPlayer;
 import com.arkcraft.module.core.ARKCraft;
+import com.arkcraft.module.core.common.entity.data.ARKPlayer;
 
 /**
  * @author gegy1000

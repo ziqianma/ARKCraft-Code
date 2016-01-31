@@ -8,9 +8,9 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.ResourceLocation;
 
 import com.arkcraft.module.core.ARKCraft;
-import com.arkcraft.module.core.common.entity.aggressive.EntityRaptor;
-import com.arkcraft.module.core.common.entity.aggressive.RaptorType;
 import com.arkcraft.module.creature.client.model.ModelRaptorNew;
+import com.arkcraft.module.creature.common.entity.aggressive.EntityRaptor;
+import com.arkcraft.module.creature.common.entity.aggressive.RaptorType;
 
 /**
  * @author Vastatio
@@ -19,7 +19,8 @@ public class RenderRaptor extends RenderLiving
 {
 	private static ResourceLocation[] texture;
 	protected ModelRaptorNew modelEntity;
-    private static final ResourceLocation raptorTexture = new ResourceLocation(ARKCraft.MODID + ":textures/model/raptor.png");
+	private static final ResourceLocation raptorTexture = new ResourceLocation(
+			ARKCraft.MODID + ":textures/model/raptor.png");
 
 	public RenderRaptor(ModelBase base, float par2)
 	{
@@ -57,12 +58,12 @@ public class RenderRaptor extends RenderLiving
 	@Override
 	protected ResourceLocation getEntityTexture(Entity e)
 	{
-        return raptorTexture;
-/*
-		EntityRaptor r = (EntityRaptor) e;
-		int type = r.getRaptorType();
-		// return new ResourceLocation(ARKCraft.MODID +
-		// ":textures/model/raptor.png"); //
-		return (texture[type]);// texture[((EntityRaptor)e).raptorType];	*/
+		return raptorTexture;
+		/*
+		 * EntityRaptor r = (EntityRaptor) e; int type = r.getRaptorType(); //
+		 * return new ResourceLocation(ARKCraft.MODID + //
+		 * ":textures/model/raptor.png"); // return (texture[type]);//
+		 * texture[((EntityRaptor)e).raptorType];
+		 */
 	}
 }

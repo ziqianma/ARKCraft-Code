@@ -1,17 +1,19 @@
-package com.arkcraft.module.core.client.gui;
+package com.arkcraft.module.creature.client.gui;
 
-import com.arkcraft.module.core.ARKCraft;
-import com.arkcraft.module.core.common.container.ContainerInventoryDodo;
-import com.arkcraft.module.core.common.container.inventory.InventoryDino;
-import com.arkcraft.module.core.common.entity.passive.EntityDodo;
+import java.awt.Color;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL11;
 
-import java.awt.Color;
+import com.arkcraft.module.core.ARKCraft;
+import com.arkcraft.module.core.common.container.ContainerInventoryDodo;
+import com.arkcraft.module.core.common.container.inventory.InventoryDino;
+import com.arkcraft.module.creature.common.entity.passive.EntityDodo;
 
 public class GuiInventoryDodo extends GuiContainer
 {

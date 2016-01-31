@@ -585,9 +585,8 @@ public abstract class ItemRangedWeapon extends ItemBow
 		{
 			String type = this.getAmmoType(stack);
 
-			Class<?> c = Class
-					.forName("com.arkcraft.module.item.common.entity.item.projectiles." + ProjectileType
-							.valueOf(type.toUpperCase()).getEntity());
+			Class<?> c = Class.forName("com.arkcraft.module.weapon.common.entity." + ProjectileType
+					.valueOf(type.toUpperCase()).getEntity());
 			Constructor<?> con = c.getConstructor(World.class, EntityLivingBase.class, float.class,
 					float.class);
 			return (EntityProjectile) con.newInstance(world, player, this.speed, this.inaccuracy);

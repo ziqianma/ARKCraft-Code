@@ -1,10 +1,7 @@
 package com.arkcraft.module.creature.common.entity;
 
-import com.arkcraft.lib.LogHelper;
-import com.arkcraft.module.core.ARKCraft;
-import com.arkcraft.module.core.common.entity.ai.EntityDinoAIOwnerHurtByTarget;
-import com.arkcraft.module.core.common.entity.ai.EntityDinoAIOwnerHurtTarget;
-import com.arkcraft.module.core.common.entity.ai.EntityDinoAITargetNonTamed;
+import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
@@ -23,7 +20,11 @@ import net.minecraft.pathfinding.PathNavigateGround;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
-import java.util.Random;
+import com.arkcraft.lib.LogHelper;
+import com.arkcraft.module.core.ARKCraft;
+import com.arkcraft.module.creature.common.entity.ai.EntityDinoAIOwnerHurtByTarget;
+import com.arkcraft.module.creature.common.entity.ai.EntityDinoAIOwnerHurtTarget;
+import com.arkcraft.module.creature.common.entity.ai.EntityDinoAITargetNonTamed;
 
 /**
  * @author Vastatio (color done by Bill)

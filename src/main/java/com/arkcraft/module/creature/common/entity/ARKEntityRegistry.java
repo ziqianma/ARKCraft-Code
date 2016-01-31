@@ -6,7 +6,8 @@ import java.util.Map;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 
 import com.arkcraft.module.core.ARKCraft;
-import com.arkcraft.module.core.common.creature.Creature;
+import com.arkcraft.module.creature.common.entity.creature.Creature;
+import com.arkcraft.module.creature.common.entity.creature.CreatureRaptor;
 
 /**
  * @author gegy1000
@@ -17,7 +18,7 @@ public class ARKEntityRegistry
 
 	public static void register()
 	{
-
+		registerCreature(new CreatureRaptor());
 	}
 
 	public static Creature getCreature(EntityARKCreature dino)

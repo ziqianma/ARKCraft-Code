@@ -6,12 +6,13 @@
 
 package com.arkcraft.module.creature.client.model;
 
-import com.arkcraft.module.core.common.entity.passive.EntityDodo;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
+
+import com.arkcraft.module.creature.common.entity.passive.EntityDodo;
 
 /**
  * @author wildbill22

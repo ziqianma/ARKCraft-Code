@@ -103,11 +103,11 @@ public class Items
 		spear = addSpearItem("spear", ToolMaterial.WOOD);
 		wooden_club = addWoodenClub("wooden_club", ToolMaterial.WOOD);
 
-		EntityHandler.registerModEntity(EntityBallista.class, ARKCraft.MODID + "ballista",
+		EntityHandler.registerModEntity(EntityBallista.class, ARKCraft.MODID + ".ballista",
 				ARKCraft.instance, 64, 128, false);
-		EntityHandler.registerModEntity(EntityBallistaBolt.class, ARKCraft.MODID + "ballistaBolt",
+		EntityHandler.registerModEntity(EntityBallistaBolt.class, ARKCraft.MODID + ".ballistaBolt",
 				ARKCraft.instance, 64, 20, true);
-		EntityHandler.registerModEntity(EntityGrenade.class, ARKCraft.MODID + "grenade",
+		EntityHandler.registerModEntity(EntityGrenade.class, ARKCraft.MODID + ".grenade",
 				ARKCraft.instance, 64, 10, true);
 
 		registerDispenseBehavior();

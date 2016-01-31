@@ -9,9 +9,9 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 
 import com.arkcraft.module.core.ARKCraft;
-import com.arkcraft.module.core.common.entity.passive.EntityDodo;
 import com.arkcraft.module.creature.client.model.ModelDodo;
 import com.arkcraft.module.creature.common.entity.DodoType;
+import com.arkcraft.module.creature.common.entity.passive.EntityDodo;
 
 /**
  * @author wildbill22
