@@ -249,13 +249,14 @@ public class ModelSabertooth extends ModelBase
 	@Override
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
 	{
+		double scale = 0.90d;
 		GlStateManager.pushMatrix();
 		GlStateManager.translate(this.mainbody.offsetX, this.mainbody.offsetY,
 				this.mainbody.offsetZ);
 		GlStateManager.translate(this.mainbody.rotationPointX * f5,
 				this.mainbody.rotationPointY * f5, this.mainbody.rotationPointZ * f5);
 		// TODO Scaling TEST
-		GlStateManager.scale(0.5D, 0.98D, 0.5D);
+		GlStateManager.scale(1D, 0.98D, 1D);
 		GlStateManager.translate(-this.mainbody.offsetX, -this.mainbody.offsetY,
 				-this.mainbody.offsetZ);
 		GlStateManager.translate(-this.mainbody.rotationPointX * f5,

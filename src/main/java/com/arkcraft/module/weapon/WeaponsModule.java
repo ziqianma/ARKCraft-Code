@@ -12,6 +12,7 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 
 import com.arkcraft.module.blocks.common.config.ModuleItemBalance;
 import com.arkcraft.module.core.ARKCraft;
+import com.arkcraft.module.core.common.handlers.EntityHandler;
 import com.arkcraft.module.weapon.client.event.ClientEventHandler;
 import com.arkcraft.module.weapon.client.render.RenderAdvancedBullet;
 import com.arkcraft.module.weapon.client.render.RenderSimpleBullet;
@@ -53,12 +54,11 @@ public class WeaponsModule
 
 	private static void clientPreInit()
 	{
-
+		ClientEventHandler.init();
 	}
 
 	private static void clientInit()
 	{
-		ClientEventHandler.init();
 		for (Entry<String, Item> i : items.allItems.entrySet())
 		{
 			registerItemTexture(i.getValue(), 0, i.getKey());
@@ -150,6 +150,9 @@ public class WeaponsModule
 			RenderingRegistry.registerEntityRenderingHandler(EntityAdvancedBullet.class,
 					new RenderAdvancedBullet());
 		}
+
+		EntityHandler.registerModEntity(EntitySpear.class, ARKCraft.MODID + ".spear",
+				ARKCraft.instance, 64, 10, true);
 	}
 
 	private static void serverPreInit()

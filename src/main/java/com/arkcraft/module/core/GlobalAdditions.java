@@ -26,6 +26,9 @@ import com.arkcraft.module.core.common.creativetabs.ARKTabs;
 import com.arkcraft.module.core.common.handlers.EntityHandler;
 import com.arkcraft.module.core.common.handlers.GuiHandler;
 import com.arkcraft.module.creature.common.entity.aggressive.EntityRaptor;
+import com.arkcraft.module.creature.common.entity.aggressive.EntitySabertooth;
+import com.arkcraft.module.creature.common.entity.neutral.EntityBrontosaurus;
+import com.arkcraft.module.creature.common.entity.passive.EntityDodo;
 import com.arkcraft.module.weapon.WeaponsModule;
 import com.arkcraft.module.weapon.common.entity.EntitySpear;
 import com.arkcraft.module.weapon.common.entity.EntityStone;
@@ -83,31 +86,19 @@ public class GlobalAdditions
 		PlayerCraftingManager.registerPlayerCraftingRecipes();
 		ForgeCraftingHandler.registerForgeRecipes();
 
-		EntityHandler.registerModEntity(EntitySpear.class, ARKCraft.MODID + ".spear",
-				ARKCraft.instance, 64, 10, true);
-		// EntityHandler.registerModEntity(EntityTranqArrow.class,
-		// "Tranq Arrow", ARKCraft.instance, 64, 10, true);
-		// EntityHandler.registerModEntity(EntityStoneArrow.class,
-		// "Stone Arrow", ARKCraft.instance, 64, 10, true);
-		// EntityHandler.registerModEntity(EntityMetalArrow.class,
-		// "Metal Arrow", ARKCraft.instance, 64, 10, true);
-
 		EntityHandler.registerModEntity(EntityStone.class, ARKCraft.MODID + ".stone",
 				ARKCraft.instance, 64, 10, true);
 		EntityHandler.registerModEntity(EntityDodoEgg.class, ARKCraft.MODID + ".dodo_egg",
 				ARKCraft.instance, 64, 10, true);
 
 		EntityHandler.registerEntityEgg(EntityRaptor.class, ARKCraft.MODID + ".raptor",
+				BiomeGenBase.icePlains, BiomeGenBase.plains);
+		EntityHandler.registerEntityEgg(EntitySabertooth.class, ARKCraft.MODID + ".saber",
 				BiomeGenBase.icePlains);
-		// EntityHandler.registerEntityEgg(EntitySabertooth.class,
-		// ARKCraft.MODID + ".saber",
-		// BiomeGenBase.icePlains);
-		// EntityHandler.registerEntityEgg(EntityDodo.class, ARKCraft.MODID +
-		// ".dodo",
-		// BiomeGenBase.beach, BiomeGenBase.desert, BiomeGenBase.forest,
-		// BiomeGenBase.birchForest, BiomeGenBase.extremeHills);
-		// EntityHandler.registerEntityEgg(EntityBrontosaurus.class,
-		// ARKCraft.MODID + ".brontosaurus");
+		EntityHandler.registerEntityEgg(EntityDodo.class, ARKCraft.MODID + ".dodo",
+				BiomeGenBase.beach, BiomeGenBase.desert, BiomeGenBase.forest,
+				BiomeGenBase.birchForest, BiomeGenBase.extremeHills);
+		EntityHandler.registerEntityEgg(EntityBrontosaurus.class, ARKCraft.MODID + ".brontosaurus");
 		// EntityHandler.registerMonster(EntityCoelacanth.class, "coelacanth",
 		// BiomeGenBase.deepOcean,
 		// BiomeGenBase.ocean, BiomeGenBase.river);
