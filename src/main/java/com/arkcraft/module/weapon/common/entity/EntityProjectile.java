@@ -393,6 +393,7 @@ public abstract class EntityProjectile extends Entity implements IProjectile
 	{
 		applyGroundHitEffects(movingobjectposition);
 		breakGlass(movingobjectposition);
+		setDead();
 	}
 
 	public void breakGlass(MovingObjectPosition movingobjectposition)
@@ -461,6 +462,7 @@ public abstract class EntityProjectile extends Entity implements IProjectile
 	{
 		applyEntityHitDamage(entityHit);
 		applyEntityHitEffects(entityHit);
+		setDead();
 	}
 
 	protected void applyEntityHitDamage(Entity entityHit)

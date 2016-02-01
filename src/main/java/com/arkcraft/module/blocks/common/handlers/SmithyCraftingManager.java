@@ -4,7 +4,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 import com.arkcraft.module.blocks.common.items.ARKCraftItems;
-import com.arkcraft.module.weapon.WeaponsModule;
+import com.arkcraft.module.weapon.WeaponModule;
 
 /**
  * @author wildbill22 Notes about adding recipes: 1) If a block has meta data:
@@ -71,12 +71,12 @@ public class SmithyCraftingManager extends ARKCraftingManager
 				new ItemStack(ARKCraftItems.item_crystal, 2));
 
 		// Scope
-		getInstance().addShapelessRecipe(new ItemStack(WeaponsModule.items.scope, 1),
+		getInstance().addShapelessRecipe(new ItemStack(WeaponModule.items.scope, 1),
 				new ItemStack(ARKCraftItems.rock, 5), new ItemStack(ARKCraftItems.metal, 40),
 				new ItemStack(ARKCraftItems.item_crystal, 20));
 
 		// Pike
-		getInstance().addShapelessRecipe(new ItemStack(WeaponsModule.items.ironPike, 1),
+		getInstance().addShapelessRecipe(new ItemStack(WeaponModule.items.ironPike, 1),
 				new ItemStack(ARKCraftItems.metal, 10), new ItemStack(ARKCraftItems.wood, 10),
 				new ItemStack(ARKCraftItems.hide, 20));
 
@@ -91,42 +91,42 @@ public class SmithyCraftingManager extends ARKCraftingManager
 
 		// Guns
 		// Simple Pistol
-		getInstance().addShapelessRecipe(new ItemStack(WeaponsModule.items.simple_pistol, 1),
+		getInstance().addShapelessRecipe(new ItemStack(WeaponModule.items.simple_pistol, 1),
 				new ItemStack(ARKCraftItems.metal, 60), new ItemStack(ARKCraftItems.wood, 5),
 				new ItemStack(ARKCraftItems.hide, 15));
 
 		// Longneck Rifle
-		getInstance().addShapelessRecipe(new ItemStack(WeaponsModule.items.longneck_rifle, 1),
+		getInstance().addShapelessRecipe(new ItemStack(WeaponModule.items.longneck_rifle, 1),
 				new ItemStack(ARKCraftItems.metal, 95), new ItemStack(ARKCraftItems.wood, 20),
 				new ItemStack(ARKCraftItems.hide, 25));
 
 		// Shotgun
-		getInstance().addShapelessRecipe(new ItemStack(WeaponsModule.items.shotgun, 1),
+		getInstance().addShapelessRecipe(new ItemStack(WeaponModule.items.shotgun, 1),
 				new ItemStack(ARKCraftItems.metal, 80), new ItemStack(ARKCraftItems.wood, 20),
 				new ItemStack(ARKCraftItems.hide, 25));
 
 		// Crossbow
-		getInstance().addShapelessRecipe(new ItemStack(WeaponsModule.items.crossbow, 1),
+		getInstance().addShapelessRecipe(new ItemStack(WeaponModule.items.crossbow, 1),
 				new ItemStack(ARKCraftItems.metal, 7), new ItemStack(ARKCraftItems.wood, 10),
 				new ItemStack(ARKCraftItems.fiber, 35));
 
 		// Bullets
 		// Simple Bullet
-		getInstance().addShapelessRecipe(new ItemStack(WeaponsModule.items.simple_bullet, 1),
+		getInstance().addShapelessRecipe(new ItemStack(WeaponModule.items.simple_bullet, 1),
 				new ItemStack(ARKCraftItems.gun_powder, 6), new ItemStack(ARKCraftItems.metal, 1));
 		// Simple Rifle Ammo
-		getInstance().addShapelessRecipe(new ItemStack(WeaponsModule.items.simple_rifle_ammo, 1),
+		getInstance().addShapelessRecipe(new ItemStack(WeaponModule.items.simple_rifle_ammo, 1),
 				new ItemStack(ARKCraftItems.gun_powder, 12), new ItemStack(ARKCraftItems.metal, 2));
 		// Simple Shotgun Ammo
-		getInstance().addShapelessRecipe(new ItemStack(WeaponsModule.items.simple_shotgun_ammo, 1),
+		getInstance().addShapelessRecipe(new ItemStack(WeaponModule.items.simple_shotgun_ammo, 1),
 				new ItemStack(ARKCraftItems.gun_powder, 3), new ItemStack(ARKCraftItems.metal, 1),
-				new ItemStack(WeaponsModule.items.simple_bullet, 3));
+				new ItemStack(WeaponModule.items.simple_bullet, 3));
 		// Tranquilizer
-		getInstance().addShapelessRecipe(new ItemStack(WeaponsModule.items.tranquilizer, 1),
+		getInstance().addShapelessRecipe(new ItemStack(WeaponModule.items.tranquilizer, 1),
 				new ItemStack(ARKCraftItems.narcotics, 3), new ItemStack(ARKCraftItems.metal, 2),
-				new ItemStack(WeaponsModule.items.simple_rifle_ammo, 1));
+				new ItemStack(WeaponModule.items.simple_rifle_ammo, 1));
 		// Grenade
-		getInstance().addShapelessRecipe(new ItemStack(WeaponsModule.items.grenade, 1),
+		getInstance().addShapelessRecipe(new ItemStack(WeaponModule.items.grenade, 1),
 				new ItemStack(ARKCraftItems.gun_powder, 30),
 				new ItemStack(ARKCraftItems.fiber, 15), new ItemStack(ARKCraftItems.rock, 20),
 				new ItemStack(ARKCraftItems.metal, 2), new ItemStack(ARKCraftItems.hide, 5)

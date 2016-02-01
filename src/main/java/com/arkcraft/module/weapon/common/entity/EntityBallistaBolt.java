@@ -7,7 +7,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
-import com.arkcraft.module.weapon.WeaponsModule;
+import com.arkcraft.module.weapon.WeaponModule;
 
 public class EntityBallistaBolt extends EntityProjectile
 {
@@ -107,6 +107,6 @@ public class EntityBallistaBolt extends EntityProjectile
 	@Override
 	public ItemStack getPickupItem()
 	{
-		return new ItemStack(WeaponsModule.items.ballista_bolt, 1);
+		return new ItemStack(WeaponModule.items.ballista_bolt, 1);
 	}
 }

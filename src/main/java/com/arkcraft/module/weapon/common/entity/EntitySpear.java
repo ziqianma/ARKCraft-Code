@@ -8,7 +8,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-import com.arkcraft.module.weapon.WeaponsModule;
+import com.arkcraft.module.weapon.WeaponModule;
 import com.arkcraft.module.weapon.common.data.WeaponDamageSource;
 
 public class EntitySpear extends EntityProjectile
@@ -99,6 +99,6 @@ public class EntitySpear extends EntityProjectile
 	@Override
 	public ItemStack getPickupItem()
 	{
-		return new ItemStack(WeaponsModule.items.spear, 1);
+		return new ItemStack(WeaponModule.items.spear, 1);
 	}
 }

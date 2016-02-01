@@ -6,8 +6,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-import com.arkcraft.lib.LogHelper;
 import com.arkcraft.module.blocks.common.config.ModuleItemBalance;
+import com.arkcraft.module.creature.common.entity.EntityARKCreature;
 import com.arkcraft.module.creature.common.entity.EntityTameableDinosaur;
 
 public class EntityTranqArrow extends EntityArkArrow implements ITranquilizer
@@ -97,8 +97,8 @@ public class EntityTranqArrow extends EntityArkArrow implements ITranquilizer
 	@Override
 	public void applyTorpor(Entity entityHit)
 	{
-		//TODO apply torpor to player
-		if (entityHit instanceof EntityTameableDinosaur)
+		// TODO apply torpor to player
+		if (entityHit instanceof EntityARKCreature)
 		{
 			((EntityTameableDinosaur) entityHit)
 					.increaseTorpor(ModuleItemBalance.WEAPONS.TRANQ_ARROW_TORPOR_TIME);

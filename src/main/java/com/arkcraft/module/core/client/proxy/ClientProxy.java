@@ -2,7 +2,6 @@ package com.arkcraft.module.core.client.proxy;
 
 import java.util.Map;
 
-
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderSnowball;
@@ -38,10 +37,10 @@ import com.arkcraft.module.creature.client.render.RenderBrontosaurus;
 import com.arkcraft.module.creature.client.render.RenderDodo;
 import com.arkcraft.module.creature.client.render.RenderRaptor;
 import com.arkcraft.module.creature.client.render.RenderSabertooth;
-import com.arkcraft.module.creature.common.entity.aggressive.EntityRaptor;
 import com.arkcraft.module.creature.common.entity.aggressive.EntitySabertooth;
 import com.arkcraft.module.creature.common.entity.neutral.EntityBrontosaurus;
 import com.arkcraft.module.creature.common.entity.passive.EntityDodo;
+import com.arkcraft.module.creature.common.entitytest.EntityRaptor;
 import com.arkcraft.module.weapon.client.gui.GuiOverlayReloading;
 import com.arkcraft.module.weapon.common.entity.EntityStone;
 

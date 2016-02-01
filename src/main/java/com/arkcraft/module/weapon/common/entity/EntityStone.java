@@ -8,6 +8,7 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
+import com.arkcraft.module.creature.common.entity.EntityARKCreature;
 import com.arkcraft.module.creature.common.entity.EntityTameableDinosaur;
 
 public class EntityStone extends EntityThrowable implements ITranquilizer
@@ -49,7 +50,7 @@ public class EntityStone extends EntityThrowable implements ITranquilizer
 	@Override
 	public void applyTorpor(Entity entityHit)
 	{ // TODO apply torpor to player
-		if (entityHit instanceof EntityTameableDinosaur)
+		if (entityHit instanceof EntityARKCreature)
 		{
 			((EntityTameableDinosaur) entityHit).increaseTorpor(10);
 		}

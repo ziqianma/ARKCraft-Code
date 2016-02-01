@@ -20,7 +20,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 import com.arkcraft.module.blocks.common.items.ARKCraftItems;
-import com.arkcraft.module.weapon.WeaponsModule;
+import com.arkcraft.module.weapon.WeaponModule;
 
 public class EntityBallista extends EntityBoat
 {
@@ -98,10 +98,10 @@ public class EntityBallista extends EntityBoat
 						.getEntity());
 				if (player.inventory.getCurrentItem() == null)
 				{
-					dropItem(WeaponsModule.items.ballista, 1);
+					dropItem(WeaponModule.items.ballista, 1);
 					if (isLoaded() || isLoading())
 					{
-						dropItem(WeaponsModule.items.ballista_bolt, 1);
+						dropItem(WeaponModule.items.ballista_bolt, 1);
 						dropItem(ARKCraftItems.gun_powder, 1);
 					}
 					setDead();
@@ -131,7 +131,7 @@ public class EntityBallista extends EntityBoat
 
 			if (isLoaded() || isLoading())
 			{
-				dropItem(WeaponsModule.items.ballista_bolt, 1);
+				dropItem(WeaponModule.items.ballista_bolt, 1);
 				dropItem(Items.gunpowder, 1);
 			}
 			setDead();
@@ -359,11 +359,11 @@ public class EntityBallista extends EntityBoat
 	{
 		ItemStack itemstack = entityplayer.getCurrentEquippedItem();
 		Item item = itemstack == null ? null : itemstack.getItem();
-		if (item == WeaponsModule.items.ballista_bolt && !isLoaded() && !isLoading())
+		if (item == WeaponModule.items.ballista_bolt && !isLoaded() && !isLoading())
 		{
 			if (entityplayer.inventory.consumeInventoryItem(Items.gunpowder))
 			{
-				if (entityplayer.inventory.consumeInventoryItem(WeaponsModule.items.ballista_bolt))
+				if (entityplayer.inventory.consumeInventoryItem(WeaponModule.items.ballista_bolt))
 				{
 					startLoadingCannon();
 					return false;

@@ -7,7 +7,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import com.arkcraft.module.blocks.common.blocks.ARKCraftBlocks;
 import com.arkcraft.module.blocks.common.items.ARKCraftItems;
-import com.arkcraft.module.weapon.WeaponsModule;
+import com.arkcraft.module.weapon.WeaponModule;
 
 public class RecipeHandler
 {
@@ -28,11 +28,11 @@ public class RecipeHandler
 		GameRegistry.addRecipe(new ItemStack(ARKCraftItems.chitinBoots), "   ", "A A", "A A", 'A',
 				ARKCraftItems.chitin);
 		// Iron Pike
-		GameRegistry.addRecipe(new ItemStack(WeaponsModule.items.ironPike), "  A", " B ", "B  ",
+		GameRegistry.addRecipe(new ItemStack(WeaponModule.items.ironPike), "  A", " B ", "B  ",
 				'A', Items.iron_ingot, 'B', Items.stick);
 
 		// Stone Spear
-		GameRegistry.addRecipe(new ItemStack(WeaponsModule.items.spear), "  A", " B ", "B  ", 'A',
+		GameRegistry.addRecipe(new ItemStack(WeaponModule.items.spear), "  A", " B ", "B  ", 'A',
 				Blocks.stone, 'B', Items.stick);
 
 		// Cobble Ball
@@ -40,7 +40,7 @@ public class RecipeHandler
 				Blocks.stone, 'A', Blocks.cobblestone);
 
 		// Slingshot
-		GameRegistry.addRecipe(new ItemStack(WeaponsModule.items.slingshot), "ACA", "B B", " B ",
+		GameRegistry.addRecipe(new ItemStack(WeaponModule.items.slingshot), "ACA", "B B", " B ",
 				'A', ARKCraftItems.fiber, 'B', Items.stick, 'C', Items.leather);
 
 		// Motar and Pestle
@@ -52,7 +52,7 @@ public class RecipeHandler
 				Blocks.iron_block, 'B', Blocks.planks);
 
 		// Tranc Arrow
-		GameRegistry.addShapelessRecipe(new ItemStack(WeaponsModule.items.tranq_arrow),
+		GameRegistry.addShapelessRecipe(new ItemStack(WeaponModule.items.tranq_arrow),
 				ARKCraftItems.narcotics, Items.arrow);
 
 		// Pistol
