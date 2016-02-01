@@ -5,7 +5,7 @@ import net.minecraft.item.ItemStack;
 
 import com.arkcraft.module.blocks.common.blocks.ARKCraftBlocks;
 import com.arkcraft.module.blocks.common.items.ARKCraftItems;
-import com.arkcraft.module.weapon.WeaponsModule;
+import com.arkcraft.module.weapon.WeaponModule;
 
 /**
  * @author wildbill22 Notes about adding recipes: 1) If a block has meta data:
@@ -69,26 +69,26 @@ public class PlayerCraftingManager extends ARKCraftingManager
 				new ItemStack(ARKCraftItems.fiber, 40));
 
 		// Slingshot
-		getInstance().addShapelessRecipe(new ItemStack(WeaponsModule.items.slingshot, 1),
+		getInstance().addShapelessRecipe(new ItemStack(WeaponModule.items.slingshot, 1),
 				new ItemStack(ARKCraftItems.hide, 1), new ItemStack(ARKCraftItems.wood, 5),
 				new ItemStack(ARKCraftItems.fiber, 20));
 
 		// Spear
-		getInstance().addShapelessRecipe(new ItemStack(WeaponsModule.items.spear, 1),
+		getInstance().addShapelessRecipe(new ItemStack(WeaponModule.items.spear, 1),
 				new ItemStack(ARKCraftItems.flint, 2), new ItemStack(ARKCraftItems.wood, 8),
 				new ItemStack(ARKCraftItems.fiber, 12));
 
 		// Wooden Club
-		getInstance().addShapelessRecipe(new ItemStack(WeaponsModule.items.wooden_club, 1),
+		getInstance().addShapelessRecipe(new ItemStack(WeaponModule.items.wooden_club, 1),
 				new ItemStack(ARKCraftItems.wood, 4), new ItemStack(ARKCraftItems.fiber, 15));
 
 		// Tranq Arrow
-		getInstance().addShapelessRecipe(new ItemStack(WeaponsModule.items.tranq_arrow, 1),
-				new ItemStack(WeaponsModule.items.stone_arrow, 1),
+		getInstance().addShapelessRecipe(new ItemStack(WeaponModule.items.tranq_arrow, 1),
+				new ItemStack(WeaponModule.items.stone_arrow, 1),
 				new ItemStack(ARKCraftItems.narcotics, 1));
 
 		// Stone Arrow
-		getInstance().addShapelessRecipe(new ItemStack(WeaponsModule.items.stone_arrow, 1),
+		getInstance().addShapelessRecipe(new ItemStack(WeaponModule.items.stone_arrow, 1),
 				new ItemStack(ARKCraftItems.fiber, 2), new ItemStack(ARKCraftItems.thatch, 2),
 				new ItemStack(ARKCraftItems.flint, 1));
 

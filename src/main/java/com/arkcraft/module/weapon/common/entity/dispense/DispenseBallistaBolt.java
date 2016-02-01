@@ -15,7 +15,7 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
 
-import com.arkcraft.module.weapon.WeaponsModule;
+import com.arkcraft.module.weapon.WeaponModule;
 import com.arkcraft.module.weapon.common.entity.EntityBallistaBolt;
 
 public class DispenseBallistaBolt extends BehaviorDefaultDispenseItem
@@ -49,9 +49,9 @@ public class DispenseBallistaBolt extends BehaviorDefaultDispenseItem
 			Item itemtocheck = null;
 			if (itemstack.getItem() == Items.gunpowder)
 			{
-				itemtocheck = WeaponsModule.items.ballista_bolt;
+				itemtocheck = WeaponModule.items.ballista_bolt;
 			}
-			else if (itemstack.getItem() == WeaponsModule.items.ballista_bolt)
+			else if (itemstack.getItem() == WeaponModule.items.ballista_bolt)
 			{
 				itemtocheck = Items.gunpowder;
 			}

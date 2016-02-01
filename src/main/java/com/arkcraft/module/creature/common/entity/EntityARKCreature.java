@@ -17,13 +17,16 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 
 import com.arkcraft.lib.LogHelper;
+import com.arkcraft.module.core.ARKCraft;
+import com.arkcraft.module.core.GlobalAdditions.GUI;
+import com.arkcraft.module.core.common.handlers.GuiHandler;
 import com.arkcraft.module.creature.common.entity.creature.Creature;
 
 /**
  * @author gegy1000
  */
-public class EntityARKCreature extends EntityCreature implements IEntityAdditionalSpawnData,
-		IInventory
+public class EntityARKCreature extends EntityCreature implements
+		IEntityAdditionalSpawnData, IInventory
 {
 	private int torpor;
 	private int stamina;
@@ -59,6 +62,7 @@ public class EntityARKCreature extends EntityCreature implements IEntityAddition
 	private LevelManager levelManager;
 
 	private UUID owner;
+	public EntityPlayer playerTaming;
 
 	public EntityARKCreature(World world)
 	{
@@ -106,6 +110,21 @@ public class EntityARKCreature extends EntityCreature implements IEntityAddition
 		}
 	}
 
+	@Override
+	protected boolean interact(EntityPlayer player)
+	{
+		if (unconscious && !this.worldObj.isRemote)
+		{
+			GuiHandler.rightClicked = this;
+			player.openGui(ARKCraft.instance, GUI.TAMING_GUI.getID(),
+					this.worldObj, (int) this.posX, (int) this.posY,
+					(int) this.posZ);
+			return true;
+		}
+
+		return false;
+	}
+
 	public void addXP(float xp)
 	{
 		this.xp += xp;
@@ -134,6 +153,7 @@ public class EntityARKCreature extends EntityCreature implements IEntityAddition
 	public void increaseTorpor(int amount)
 	{
 		torpor += amount;
+		LogHelper.info("Torpor: " + torpor);
 
 		if (torpor >= creature.getTorporKnockout()) // TODO higher level dinos
 													// take more to knock out?
@@ -147,14 +167,18 @@ public class EntityARKCreature extends EntityCreature implements IEntityAddition
 	public void onUpdate()
 	{
 		if (!unconscious) super.onUpdate();
-		else LogHelper.info("Can't move, is unconscious!");
+	}
+
+	@Override
+	public void onEntityUpdate()
+	{
+		if (!unconscious) super.onEntityUpdate();
 	}
 
 	@Override
 	public void onLivingUpdate()
 	{
-		super.onLivingUpdate();
-		if (unconscious) LogHelper.info("Can't move, is unconscious!");
+		if (!unconscious) super.onLivingUpdate();
 		if (!worldObj.isRemote)
 		{
 			this.dataWatcher.updateObject(DATA_WATCHER_AGE, creatureAge);
@@ -162,7 +186,8 @@ public class EntityARKCreature extends EntityCreature implements IEntityAddition
 			this.dataWatcher.updateObject(DATA_WATCHER_STAMINA, stamina);
 			this.dataWatcher.updateObject(DATA_WATCHER_HUNGER, hunger);
 			this.dataWatcher.updateObject(DATA_WATCHER_LEVEL, level);
-			this.dataWatcher.updateObject(DATA_WATCHER_UNCONSCIOUS, (byte) (unconscious ? 1 : 0));
+			this.dataWatcher.updateObject(DATA_WATCHER_UNCONSCIOUS,
+					(byte) (unconscious ? 1 : 0));
 			this.dataWatcher.updateObject(DATA_WATCHER_TAME_TIME, tameTime);
 			// this.dataWatcher.updateObject(DATA_WATCHER_XP, xp);
 			// this.dataWatcher.updateObject(DATA_WATCHER_SADDLED, (byte)
@@ -175,7 +200,7 @@ public class EntityARKCreature extends EntityCreature implements IEntityAddition
 				updateHitbox();
 			}
 
-			torpor -= creature.getTorporLossSpeed();
+			if (torpor > 0) torpor -= creature.getTorporLossSpeed();
 
 			if (unconscious && torpor <= 0)
 			{
@@ -191,8 +216,10 @@ public class EntityARKCreature extends EntityCreature implements IEntityAddition
 			stamina = dataWatcher.getWatchableObjectInt(DATA_WATCHER_STAMINA);
 			hunger = dataWatcher.getWatchableObjectInt(DATA_WATCHER_HUNGER);
 			level = dataWatcher.getWatchableObjectInt(DATA_WATCHER_LEVEL);
-			unconscious = dataWatcher.getWatchableObjectByte(DATA_WATCHER_UNCONSCIOUS) == 1;
-			tameTime = dataWatcher.getWatchableObjectInt(DATA_WATCHER_TAME_TIME);
+			unconscious = dataWatcher
+					.getWatchableObjectByte(DATA_WATCHER_UNCONSCIOUS) == 1;
+			tameTime = dataWatcher
+					.getWatchableObjectInt(DATA_WATCHER_TAME_TIME);
 			// xp = dataWatcher.getWatchableObjectFloat(DATA_WATCHER_XP);
 			// isSaddled =
 			// dataWatcher.getWatchableObjectByte(DATA_WATCHER_SADDLED) == 1;
@@ -206,7 +233,8 @@ public class EntityARKCreature extends EntityCreature implements IEntityAddition
 
 	public void updateHitbox()
 	{
-		this.setSize(scaleByAge(creature.getBabySizeXZ(), creature.getAdultSizeXZ()),
+		this.setSize(
+				scaleByAge(creature.getBabySizeXZ(), creature.getAdultSizeXZ()),
 				scaleByAge(creature.getBabySizeY(), creature.getAdultSizeY()));
 	}
 
@@ -233,7 +261,8 @@ public class EntityARKCreature extends EntityCreature implements IEntityAddition
 
 	public void updateEntityAttributes()
 	{
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(getCreatureAge());
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(
+				getCreatureAge());
 	}
 
 	public int getCreatureAge()
@@ -298,7 +327,8 @@ public class EntityARKCreature extends EntityCreature implements IEntityAddition
 
 			if (j >= 0 && j < inventory.length)
 			{
-				setInventorySlotContents(j, ItemStack.loadItemStackFromNBT(slotTag));
+				setInventorySlotContents(j,
+						ItemStack.loadItemStackFromNBT(slotTag));
 			}
 		}
 	}
@@ -341,7 +371,7 @@ public class EntityARKCreature extends EntityCreature implements IEntityAddition
 	@Override
 	public int getSizeInventory()
 	{
-		return inventory.length + 1;
+		return creature.getInventorySize();
 	}
 
 	@Override
@@ -450,7 +480,6 @@ public class EntityARKCreature extends EntityCreature implements IEntityAddition
 	@Override
 	public void setField(int id, int value)
 	{
-
 	}
 
 	@Override
@@ -471,5 +500,11 @@ public class EntityARKCreature extends EntityCreature implements IEntityAddition
 	public Creature getCreature()
 	{
 		return creature;
+	}
+
+	public void setSitting(boolean b)
+	{
+		// TODO Auto-generated method stub
+
 	}
 }

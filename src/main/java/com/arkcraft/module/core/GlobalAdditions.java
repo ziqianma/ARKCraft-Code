@@ -12,6 +12,7 @@ import net.minecraft.entity.monster.EntityWitch;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.item.Item;
 import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 
@@ -25,12 +26,10 @@ import com.arkcraft.module.core.common.config.CoreBalance;
 import com.arkcraft.module.core.common.creativetabs.ARKTabs;
 import com.arkcraft.module.core.common.handlers.EntityHandler;
 import com.arkcraft.module.core.common.handlers.GuiHandler;
-import com.arkcraft.module.creature.common.entity.aggressive.EntityRaptor;
 import com.arkcraft.module.creature.common.entity.aggressive.EntitySabertooth;
-import com.arkcraft.module.creature.common.entity.neutral.EntityBrontosaurus;
 import com.arkcraft.module.creature.common.entity.passive.EntityDodo;
-import com.arkcraft.module.weapon.WeaponsModule;
-import com.arkcraft.module.weapon.common.entity.EntitySpear;
+import com.arkcraft.module.creature.common.entitytest.EntityRaptor;
+import com.arkcraft.module.weapon.WeaponModule;
 import com.arkcraft.module.weapon.common.entity.EntityStone;
 
 /**
@@ -46,7 +45,7 @@ public class GlobalAdditions
 		@Override
 		public Item getTabIconItem()
 		{
-			return WeaponsModule.items.shotgun;
+			return WeaponModule.items.shotgun;
 		}
 	};
 
@@ -98,8 +97,10 @@ public class GlobalAdditions
 		EntityHandler.registerEntityEgg(EntityDodo.class, ARKCraft.MODID + ".dodo",
 				BiomeGenBase.beach, BiomeGenBase.desert, BiomeGenBase.forest,
 				BiomeGenBase.birchForest, BiomeGenBase.extremeHills);
-		EntityHandler.registerEntityEgg(EntityBrontosaurus.class, ARKCraft.MODID + ".brontosaurus");
-		// EntityHandler.registerMonster(EntityCoelacanth.class, "coelacanth",
+		// EntityHandler.registerEntityEgg(EntityBrontosaurus.class,
+		// ARKCraft.MODID + ".brontosaurus");
+		// EntityHandler.registerMonster(EntityCoelacanth.class, ARKCraft.MODID
+		// + ".coelacanth",
 		// BiomeGenBase.deepOcean,
 		// BiomeGenBase.ocean, BiomeGenBase.river);
 		removeTheseMCMobs();

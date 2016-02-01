@@ -1,4 +1,4 @@
-package com.arkcraft.module.creature.client.gui;
+package com.arkcraft.module.core.client.gui;
 
 import java.awt.Color;
 

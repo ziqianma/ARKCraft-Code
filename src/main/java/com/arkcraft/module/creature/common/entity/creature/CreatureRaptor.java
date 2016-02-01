@@ -45,35 +45,35 @@ public class CreatureRaptor extends Creature
 	public int getBabySizeXZ()
 	{
 		// TODO Auto-generated method stub
-		return 15;
+		return 1;
 	}
 
 	@Override
 	public int getBabySizeY()
 	{
 		// TODO Auto-generated method stub
-		return 15;
+		return 1;
 	}
 
 	@Override
 	public int getAdultSizeXZ()
 	{
 		// TODO Auto-generated method stub
-		return 50;
+		return 2;
 	}
 
 	@Override
 	public int getAdultSizeY()
 	{
 		// TODO Auto-generated method stub
-		return 50;
+		return 2;
 	}
 
 	@Override
 	public int getTorporKnockout()
 	{
 		// TODO Auto-generated method stub
-		return 10;
+		return 50;
 	}
 
 	@Override
@@ -87,7 +87,7 @@ public class CreatureRaptor extends Creature
 	public int getMeleeDamageBase()
 	{
 		// TODO Auto-generated method stub
-		return 0;
+		return 50;
 	}
 
 	@Override
@@ -129,6 +129,6 @@ public class CreatureRaptor extends Creature
 	public int getInventorySize()
 	{
 		// TODO Auto-generated method stub
-		return 27;
+		return 30;
 	}
 }

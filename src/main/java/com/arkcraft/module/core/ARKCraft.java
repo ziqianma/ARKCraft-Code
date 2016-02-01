@@ -36,11 +36,13 @@ import com.arkcraft.module.core.common.gen.island.WorldTypeIsland;
 import com.arkcraft.module.core.common.network.ARKMessagePipeline;
 import com.arkcraft.module.core.common.network.OpenPlayerCrafting;
 import com.arkcraft.module.core.common.network.PlayerPoop;
+import com.arkcraft.module.core.common.network.ScrollingMessage;
 import com.arkcraft.module.core.common.network.UpdateMPToCraftItem;
 import com.arkcraft.module.core.common.network.UpdatePlayerCrafting;
 import com.arkcraft.module.core.common.network.UpdateSmithyToCraftItem;
 import com.arkcraft.module.core.common.proxy.CommonProxy;
-import com.arkcraft.module.weapon.WeaponsModule;
+import com.arkcraft.module.creature.common.entity.ARKEntityRegistry;
+import com.arkcraft.module.weapon.WeaponModule;
 import com.arkcraft.module.weapon.common.network.OpenAttachmentInventory;
 import com.arkcraft.module.weapon.common.network.ReloadFinished;
 import com.arkcraft.module.weapon.common.network.ReloadStarted;
@@ -86,9 +88,9 @@ public class ARKCraft
 		ARKCraftPotionEffects.init();
 
 		// TODO finish modular system
-		WeaponsModule.preInit();
+		WeaponModule.preInit();
 
-		// ARKEntityRegistry.register();
+		ARKEntityRegistry.register();
 		GlobalAdditions.init();
 
 		Potion[] potionTypes;
@@ -137,7 +139,7 @@ public class ARKCraft
 		proxy.init();
 		messagePipeline.initialize();
 		proxy.registerPackets(messagePipeline);
-		WeaponsModule.init();
+		WeaponModule.init();
 	}
 
 	@EventHandler
@@ -173,6 +175,8 @@ public class ARKCraft
 				Side.SERVER);
 		modChannel.registerMessage(ReloadFinished.Handler.class, ReloadFinished.class, id++,
 				Side.CLIENT);
+		modChannel.registerMessage(ScrollingMessage.Handler.class, ScrollingMessage.class, id++,
+				Side.SERVER);
 	}
 
 	public boolean isDebugger()

@@ -9,8 +9,8 @@ import net.minecraft.util.ResourceLocation;
 
 import com.arkcraft.module.core.ARKCraft;
 import com.arkcraft.module.creature.client.model.ModelRaptorNew;
-import com.arkcraft.module.creature.common.entity.aggressive.EntityRaptor;
 import com.arkcraft.module.creature.common.entity.aggressive.RaptorType;
+import com.arkcraft.module.creature.common.entitytest.EntityRaptor;
 
 /**
  * @author Vastatio

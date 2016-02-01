@@ -5,8 +5,6 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 
-import com.arkcraft.lib.LogHelper;
-
 public class ModelSabertooth extends ModelBase
 {
 	ModelRenderer mainbody;
@@ -251,13 +249,9 @@ public class ModelSabertooth extends ModelBase
 	@Override
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
 	{
-		double scale = 0.70d;
-		double scale1 = 0.80d;
-		double scale2 = 0.90d;
+		// For scaling the model
+		double scale = 0.7;
 		double offset = 0.725;
-		double offset1 = 0.500;
-		double offset2 = 0.325;
-		LogHelper.info(offset);
 		GlStateManager.pushMatrix();
 		GlStateManager.translate(this.mainbody.offsetX, this.mainbody.offsetY + offset,
 				this.mainbody.offsetZ);
