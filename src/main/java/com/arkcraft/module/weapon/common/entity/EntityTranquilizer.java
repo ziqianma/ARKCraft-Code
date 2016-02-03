@@ -9,7 +9,8 @@ import com.arkcraft.lib.LogHelper;
 import com.arkcraft.module.blocks.common.config.ModuleItemBalance;
 import com.arkcraft.module.creature.common.entity.EntityARKCreature;
 
-public class EntityTranquilizer extends EntityProjectile implements ITranquilizer
+public class EntityTranquilizer extends EntityProjectile implements
+		ITranquilizer
 {
 	public EntityTranquilizer(World world)
 	{
@@ -47,8 +48,8 @@ public class EntityTranquilizer extends EntityProjectile implements ITranquilize
 	{
 		super.onUpdate();
 
-		worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, posX, posY, posZ, 0.0D, 0.0D,
-				0.0D);
+		worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, posX, posY,
+				posZ, 0.0D, 0.0D, 0.0D);
 	}
 
 	@Override
@@ -64,9 +65,11 @@ public class EntityTranquilizer extends EntityProjectile implements ITranquilize
 		// TODO apply torpor to player
 		if (entityHit instanceof EntityARKCreature)
 		{
-			LogHelper.info("Torpor applied: " + ModuleItemBalance.WEAPONS.TRANQ_AMMO_TORPOR_TIME);
-			((EntityARKCreature) entityHit)
-					.increaseTorpor(ModuleItemBalance.WEAPONS.TRANQ_AMMO_TORPOR_TIME);
+			LogHelper
+					.info("Torpor applied: " + ModuleItemBalance.WEAPONS.TRANQ_AMMO_TORPOR_TIME);
+			((EntityARKCreature) entityHit).increaseTorpor(
+					ModuleItemBalance.WEAPONS.TRANQ_AMMO_TORPOR_TIME,
+					this.shootingEntity);
 		}
 	}
 }

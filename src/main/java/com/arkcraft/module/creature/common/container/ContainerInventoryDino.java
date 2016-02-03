@@ -1,7 +1,7 @@
-package com.arkcraft.module.core.common.container;
+package com.arkcraft.module.creature.common.container;
 
 import com.arkcraft.lib.LogHelper;
-import com.arkcraft.module.core.common.container.inventory.InventoryDino;
+import com.arkcraft.module.creature.common.container.inventory.InventoryDino;
 import com.arkcraft.module.creature.common.entity.EntityTameableDinosaur;
 
 import net.minecraft.entity.player.EntityPlayer;

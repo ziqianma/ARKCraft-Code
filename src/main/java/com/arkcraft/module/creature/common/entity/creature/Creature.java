@@ -48,4 +48,36 @@ public abstract class Creature
 	}
 
 	public abstract int getInventorySize();
+
+	public abstract int getBaseHealth();
+
+	public abstract int getWildHealthIncrease();
+
+	public abstract int getBaseWeight();
+
+	public abstract int getWildWeightIncrease();
+
+	public abstract int getBaseOxygen();
+
+	public abstract int getWildOxygenIncrease();
+
+	public abstract int getBaseFood();
+
+	public abstract int getWildFoodIncrease();
+
+	public abstract int getBaseDamage();
+
+	public abstract int getWildDamageIncrease();
+
+	public abstract int getBaseSpeed();
+
+	public abstract int getWildSpeedIncrease();
+
+	public abstract int getBaseStamina();
+
+	public abstract int getWildStaminaIncrease();
+
+	public abstract int getBaseTorpor();
+
+	public abstract int getWildTorporIncrease();
 }

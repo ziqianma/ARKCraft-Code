@@ -1,4 +1,4 @@
-package com.arkcraft.module.core.common.container;
+package com.arkcraft.module.creature.common.container;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
@@ -8,7 +8,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
 import com.arkcraft.lib.LogHelper;
-import com.arkcraft.module.core.common.container.inventory.InventoryDino;
+import com.arkcraft.module.creature.common.container.inventory.InventoryDino;
 import com.arkcraft.module.creature.common.entity.passive.EntityDodo;
 
 /**
