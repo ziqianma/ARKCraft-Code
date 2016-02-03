@@ -41,6 +41,7 @@ import com.arkcraft.module.core.common.network.UpdateMPToCraftItem;
 import com.arkcraft.module.core.common.network.UpdatePlayerCrafting;
 import com.arkcraft.module.core.common.network.UpdateSmithyToCraftItem;
 import com.arkcraft.module.core.common.proxy.CommonProxy;
+import com.arkcraft.module.creature.CreatureModule;
 import com.arkcraft.module.creature.common.entity.ARKEntityRegistry;
 import com.arkcraft.module.weapon.WeaponModule;
 import com.arkcraft.module.weapon.common.network.OpenAttachmentInventory;
@@ -50,7 +51,8 @@ import com.arkcraft.module.weapon.common.network.ReloadStarted;
 @Mod(modid = ARKCraft.MODID, version = ARKCraft.VERSION, name = ARKCraft.MODID, guiFactory = "com.arkcraft.lib.ModGuiFactory", dependencies = "required-after:llibrary@[0.5.5]")
 public class ARKCraft
 {
-	public static final String MODID = "arkcraft", VERSION = "${version}", NAME = "ARKCraft";
+	public static final String MODID = "arkcraft", VERSION = "${version}",
+			NAME = "ARKCraft";
 
 	@SidedProxy(clientSide = "com.arkcraft.module.core.client.proxy.ClientProxy", serverSide = "com.arkcraft.module.core.server.proxy.ServerProxy")
 	public static CommonProxy proxy;
@@ -89,6 +91,7 @@ public class ARKCraft
 
 		// TODO finish modular system
 		WeaponModule.preInit();
+		CreatureModule.preInit();
 
 		ARKEntityRegistry.register();
 		GlobalAdditions.init();
@@ -101,14 +104,16 @@ public class ARKCraft
 
 			try
 			{
-				if (f.getName().equals("potionTypes") || f.getName().equals("field_76425_a"))
+				if (f.getName().equals("potionTypes") || f.getName().equals(
+						"field_76425_a"))
 				{
 					Field modfield = Field.class.getDeclaredField("modifiers");
 					modfield.setAccessible(true);
 					modfield.setInt(f, f.getModifiers() & ~Modifier.FINAL);
 					potionTypes = (Potion[]) f.get(null);
 					final Potion[] newPotionTypes = new Potion[256];
-					System.arraycopy(potionTypes, 0, newPotionTypes, 0, potionTypes.length);
+					System.arraycopy(potionTypes, 0, newPotionTypes, 0,
+							potionTypes.length);
 					f.set(null, newPotionTypes);
 				}
 			}
@@ -140,12 +145,15 @@ public class ARKCraft
 		messagePipeline.initialize();
 		proxy.registerPackets(messagePipeline);
 		WeaponModule.init();
+		CreatureModule.init();
 	}
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event)
 	{
 		messagePipeline.postInitialize();
+		WeaponModule.postInit();
+		CreatureModule.postInit();
 	}
 
 	public static ARKCraft instance()
@@ -160,23 +168,24 @@ public class ARKCraft
 		int id = 0;
 		// The handler (usually in the packet class), the packet class, unique
 		// id, side the packet is received on
-		modChannel.registerMessage(PlayerPoop.Handler.class, PlayerPoop.class, id++, Side.SERVER);
-		modChannel.registerMessage(UpdateMPToCraftItem.Handler.class, UpdateMPToCraftItem.class,
+		modChannel.registerMessage(PlayerPoop.Handler.class, PlayerPoop.class,
 				id++, Side.SERVER);
+		modChannel.registerMessage(UpdateMPToCraftItem.Handler.class,
+				UpdateMPToCraftItem.class, id++, Side.SERVER);
 		modChannel.registerMessage(UpdateSmithyToCraftItem.Handler.class,
 				UpdateSmithyToCraftItem.class, id++, Side.SERVER);
-		modChannel.registerMessage(OpenPlayerCrafting.Handler.class, OpenPlayerCrafting.class,
-				id++, Side.SERVER);
-		modChannel.registerMessage(UpdatePlayerCrafting.Handler.class, UpdatePlayerCrafting.class,
-				id++, Side.SERVER);
+		modChannel.registerMessage(OpenPlayerCrafting.Handler.class,
+				OpenPlayerCrafting.class, id++, Side.SERVER);
+		modChannel.registerMessage(UpdatePlayerCrafting.Handler.class,
+				UpdatePlayerCrafting.class, id++, Side.SERVER);
 		modChannel.registerMessage(OpenAttachmentInventory.Handler.class,
 				OpenAttachmentInventory.class, id++, Side.SERVER);
-		modChannel.registerMessage(ReloadStarted.Handler.class, ReloadStarted.class, id++,
-				Side.SERVER);
-		modChannel.registerMessage(ReloadFinished.Handler.class, ReloadFinished.class, id++,
-				Side.CLIENT);
-		modChannel.registerMessage(ScrollingMessage.Handler.class, ScrollingMessage.class, id++,
-				Side.SERVER);
+		modChannel.registerMessage(ReloadStarted.Handler.class,
+				ReloadStarted.class, id++, Side.SERVER);
+		modChannel.registerMessage(ReloadFinished.Handler.class,
+				ReloadFinished.class, id++, Side.CLIENT);
+		modChannel.registerMessage(ScrollingMessage.Handler.class,
+				ScrollingMessage.class, id++, Side.SERVER);
 	}
 
 	public boolean isDebugger()

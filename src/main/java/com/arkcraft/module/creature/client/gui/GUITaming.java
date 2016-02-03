@@ -1,4 +1,4 @@
-package com.arkcraft.module.core.client.gui;
+package com.arkcraft.module.creature.client.gui;
 
 import java.awt.Color;
 import java.util.ArrayList;
@@ -15,8 +15,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
 import com.arkcraft.module.core.ARKCraft;
-import com.arkcraft.module.core.common.container.ContainerInventoryTaming;
-import com.arkcraft.module.core.common.container.inventory.InventoryTaming;
+import com.arkcraft.module.creature.common.container.ContainerInventoryTaming;
+import com.arkcraft.module.creature.common.container.inventory.InventoryTaming;
 
 /**
  * @author wildbill22

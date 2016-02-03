@@ -11,58 +11,49 @@ import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import com.arkcraft.module.blocks.common.config.ModuleItemBalance;
-import com.arkcraft.module.core.ARKCraft;
 import com.arkcraft.module.core.GlobalAdditions;
 import com.arkcraft.module.core.client.gui.book.Dossier;
-import com.arkcraft.module.core.common.handlers.EntityHandler;
-import com.arkcraft.module.weapon.common.entity.EntityBallista;
-import com.arkcraft.module.weapon.common.entity.EntityBallistaBolt;
-import com.arkcraft.module.weapon.common.entity.EntityGrenade;
 
 /**
  * @author wildbill22
  */
 public class ARKCraftItems
 {
-	public static ItemARKFood tintoBerry, amarBerry, azulBerry, mejoBerry, narcoBerry, stimBerry,
-			meat_raw, meat_cooked, primemeat_raw, primemeat_cooked, spoiled_meat;
-	public static ItemARKSeed tintoBerrySeed, amarBerrySeed, azulBerrySeed, mejoBerrySeed,
-			narcoBerrySeed, stimBerrySeed;
-	public static ItemARKBase rock, cementing_pastes, fiber, chitin, narcotics, dodo_bag,
-			dodo_feather, gun_powder, spark_powder, hide;
+	public static ItemARKFood tintoBerry, amarBerry, azulBerry, mejoBerry,
+			narcoBerry, stimBerry, meat_raw, meat_cooked, primemeat_raw,
+			primemeat_cooked, spoiled_meat;
+	public static ItemARKSeed tintoBerrySeed, amarBerrySeed, azulBerrySeed,
+			mejoBerrySeed, narcoBerrySeed, stimBerrySeed;
+	public static ItemARKBase rock, cementing_pastes, fiber, chitin, narcotics,
+			dodo_bag, dodo_feather, gun_powder, spark_powder, hide;
 	public static ItemThatch thatch;
 	public static ItemARKBase wood, metal, metal_ingot, flint;
 	public static ItemFeces dodo_feces, player_feces, fertilizer;
 	public static ItemDinosaurEgg dodo_egg;
 	public static ItemDinosaurSaddle saddle_small, saddle_medium, saddle_large;
-	public static ItemARKArmor chitinHelm, chitinChest, chitinLegs, chitinBoots;
+	public static ItemARKArmor chitinHelm, chitinChest, chitinLegs,
+			chitinBoots;
 	public static ItemARKArmor clothHelm, clothChest, clothLegs, clothBoots;
 	public static ItemARKArmor hideHelm, hideChest, hideLegs, hideBoots;
 	public static Dossier dino_book;
-	// public static ItemBerryBush item_berry_bush;
-	// public static ItemCompostBin item_compost_bin;
-	// public static ItemSmithy item_smithy;
 	public static ItemCrystal item_crystal;
-	// public static ItemCropPlot item_crop_plot;
-	// public static ItemRefiningForge item_refining_forge;
-	// public static ItemMortarAndPestle item_mortar_and_pestle;
 	public static ItemSpyGlass spy_glass;
 	public static ItemStonePick stone_pick;
 	public static ItemStoneHatchet stone_hatchet;
 	public static ItemMetalPick metal_pick;
 	public static ItemMetalHatchet metal_hatchet;
 
-	public static ArmorMaterial CLOTH = EnumHelper.addArmorMaterial("CLOTH_MAT", "CLOTH_MAT", 4,
-			new int[] { 1, 2, 1, 1 }, 15);
-	public static ArmorMaterial CHITIN = EnumHelper.addArmorMaterial("CHITIN_MAT", "CHITIN_MAT",
-			16, new int[] { 3, 7, 6, 3 }, 10);
-	public static ArmorMaterial HIDE = EnumHelper.addArmorMaterial("HIDE_MAT", "HIDE_MAT", 40,
-			new int[] { 3, 8, 6, 3 }, 30);
+	public static ArmorMaterial CLOTH = EnumHelper.addArmorMaterial(
+			"CLOTH_MAT", "CLOTH_MAT", 4, new int[] { 1, 2, 1, 1 }, 15);
+	public static ArmorMaterial CHITIN = EnumHelper.addArmorMaterial(
+			"CHITIN_MAT", "CHITIN_MAT", 16, new int[] { 3, 7, 6, 3 }, 10);
+	public static ArmorMaterial HIDE = EnumHelper.addArmorMaterial("HIDE_MAT",
+			"HIDE_MAT", 40, new int[] { 3, 8, 6, 3 }, 30);
 
-	public static ToolMaterial METAL = EnumHelper.addToolMaterial("METAL_MAT", 3, 1500, 6.0F, 0.8F,
-			8);
-	public static ToolMaterial STONE = EnumHelper.addToolMaterial("STONE_MAT", 2, 500, 3.5F, 0.4F,
-			13);
+	public static ToolMaterial METAL = EnumHelper.addToolMaterial("METAL_MAT",
+			3, 1500, 6.0F, 0.8F, 8);
+	public static ToolMaterial STONE = EnumHelper.addToolMaterial("STONE_MAT",
+			2, 500, 3.5F, 0.4F, 13);
 
 	public static ARKCraftItems getInstance()
 	{
@@ -136,9 +127,11 @@ public class ARKCraftItems
 		// item_refining_forge = addRefiningForge("item_refining_forge");
 
 		// feces (2nd parameter is the seconds to decompose)
-		dodo_feces = addFecesItem("dodo_feces",
+		dodo_feces = addFecesItem(
+				"dodo_feces",
 				ModuleItemBalance.CROP_PLOT.SECONDS_FOR_SMALL_FECES_TO_DECOMPOSE);
-		player_feces = addFecesItem("player_feces",
+		player_feces = addFecesItem(
+				"player_feces",
 				ModuleItemBalance.CROP_PLOT.SECONDS_FOR_PLAYER_FECES_TO_DECOMPOSE);
 
 		// Technically not feces, but used in all situations the same
@@ -155,10 +148,14 @@ public class ARKCraftItems
 		saddle_large = addSaddle("saddle_large");
 
 		// Armor
-		chitinHelm = addArmorItem("chitin_helm", CHITIN, "chitinArmor", 0, false);
-		chitinChest = addArmorItem("chitin_chest", CHITIN, "chitinArmor", 1, false);
-		chitinLegs = addArmorItem("chitin_legs", CHITIN, "chitinArmor", 2, false);
-		chitinBoots = addArmorItem("chitin_boots", CHITIN, "chitinArmor", 3, false);
+		chitinHelm = addArmorItem("chitin_helm", CHITIN, "chitinArmor", 0,
+				false);
+		chitinChest = addArmorItem("chitin_chest", CHITIN, "chitinArmor", 1,
+				false);
+		chitinLegs = addArmorItem("chitin_legs", CHITIN, "chitinArmor", 2,
+				false);
+		chitinBoots = addArmorItem("chitin_boots", CHITIN, "chitinArmor", 3,
+				false);
 		clothHelm = addArmorItem("cloth_helm", CLOTH, "clothArmor", 0, false);
 		clothChest = addArmorItem("cloth_chest", CLOTH, "clothArmor", 1, false);
 		clothLegs = addArmorItem("cloth_legs", CLOTH, "clothArmor", 2, false);
@@ -167,14 +164,6 @@ public class ARKCraftItems
 		hideChest = addArmorItem("hide_chest", HIDE, "hideArmor", 1, true);
 		hideLegs = addArmorItem("hide_legs", HIDE, "hideArmor", 2, true);
 		hideBoots = addArmorItem("hide_boots", HIDE, "hideArmor", 3, true);
-
-		EntityHandler.registerModEntity(EntityBallista.class, "ballista", ARKCraft.instance, 64,
-				128, false);
-		EntityHandler.registerModEntity(EntityBallistaBolt.class, "ballistaBolt",
-				ARKCraft.instance, 64, 20, true);
-
-		EntityHandler.registerModEntity(EntityGrenade.class, "Entity Base", ARKCraft.instance, 64,
-				10, true);
 	}
 
 	protected static ItemARKBase addItem(String name)

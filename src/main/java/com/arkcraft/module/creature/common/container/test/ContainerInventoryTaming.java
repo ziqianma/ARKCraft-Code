@@ -8,12 +8,15 @@ import net.minecraft.item.ItemStack;
 import com.arkcraft.lib.LogHelper;
 import com.arkcraft.module.creature.common.entity.EntityARKCreature;
 
+/**
+ * @author Lewis_McReu
+ */
 public class ContainerInventoryTaming extends Container implements
 		IContainerScrollable
 {
 	public static final int SLOT_SPACING = 18;
-	public static final int SLOT_START_X = 36;
-	public static final int CREATURE_SLOT_START_Y = 50;
+	public static final int SLOT_START_X = 9;
+	public static final int CREATURE_SLOT_START_Y = 79;
 	public static final int PLAYER_SLOT_START_Y = 119;
 	public static final int PLAYER_SLOT_HOTBAR_START_Y = 195;
 
@@ -43,7 +46,6 @@ public class ContainerInventoryTaming extends Container implements
 
 	private void addCreatureSlots()
 	{
-		// TODO Auto-generated method stub
 		for (int i = 0; i < maxCreatureSlots; i++)
 		{
 			Slot slot = new SlotScrolling(
@@ -58,7 +60,6 @@ public class ContainerInventoryTaming extends Container implements
 
 	private void addPlayerSlots()
 	{
-		// TODO Auto-generated method stub
 		for (int i = 0; i < player.inventory.getSizeInventory() - 4; i++)
 		{
 			Slot slot;
@@ -81,7 +82,6 @@ public class ContainerInventoryTaming extends Container implements
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int index)
 	{
-		LogHelper.info("transfer");
 		ItemStack itemstack = null;
 		Slot slot = (Slot) this.inventorySlots.get(index);
 
@@ -120,9 +120,7 @@ public class ContainerInventoryTaming extends Container implements
 		int newScrollingOffset = scrollingOffset + offset;
 		if (isValidOffset(newScrollingOffset))
 		{
-			LogHelper.info("offset before: " + scrollingOffset);
 			scrollingOffset = newScrollingOffset;
-			LogHelper.info("offset after: " + scrollingOffset);
 			refreshLists();
 		}
 	}
@@ -142,9 +140,7 @@ public class ContainerInventoryTaming extends Container implements
 
 	private boolean isValidOffset(int offset)
 	{
-		LogHelper.info("required slots: " + requiredCreatureSlots);
-		int maxOffset = requiredCreatureSlots / getScrollableSlotsWidth() - getScrollableSlotsHeight() + 1;
-		LogHelper.info("max offset: " + maxOffset);
+		int maxOffset = getMaxOffset();
 		return canScroll() && offset >= 0 && offset <= maxOffset;
 	}
 
@@ -175,5 +171,17 @@ public class ContainerInventoryTaming extends Container implements
 	public int getRequiredSlotsCount()
 	{
 		return this.requiredCreatureSlots;
+	}
+
+	@Override
+	public int getMaxOffset()
+	{
+		return requiredCreatureSlots / getScrollableSlotsWidth() - getScrollableSlotsHeight() + 1;
+	}
+
+	@Override
+	public double getRelativeScrollingOffset()
+	{
+		return (double) this.scrollingOffset / (double) getMaxOffset();
 	}
 }

@@ -1,4 +1,4 @@
-package com.arkcraft.module.core.common.container.inventory;
+package com.arkcraft.module.creature.common.container.inventory;
 
 import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.item.ItemStack;

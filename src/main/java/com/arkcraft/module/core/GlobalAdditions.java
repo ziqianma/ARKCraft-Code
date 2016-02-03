@@ -28,7 +28,7 @@ import com.arkcraft.module.core.common.handlers.EntityHandler;
 import com.arkcraft.module.core.common.handlers.GuiHandler;
 import com.arkcraft.module.creature.common.entity.aggressive.EntitySabertooth;
 import com.arkcraft.module.creature.common.entity.passive.EntityDodo;
-import com.arkcraft.module.creature.common.entitytest.EntityRaptor;
+import com.arkcraft.module.creature.common.entity.test.EntityRaptor;
 import com.arkcraft.module.weapon.WeaponModule;
 import com.arkcraft.module.weapon.common.entity.EntityStone;
 

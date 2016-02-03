@@ -31,14 +31,14 @@ import com.arkcraft.module.blocks.common.tile.TileInventoryForge;
 import com.arkcraft.module.blocks.common.tile.TileInventoryMP;
 import com.arkcraft.module.blocks.common.tile.TileInventorySmithy;
 import com.arkcraft.module.core.GlobalAdditions;
-import com.arkcraft.module.core.client.gui.GuiInventoryDino;
-import com.arkcraft.module.core.client.gui.GuiInventoryDodo;
 import com.arkcraft.module.core.client.gui.book.BookData;
 import com.arkcraft.module.core.client.gui.book.BookDataStore;
 import com.arkcraft.module.core.client.gui.book.GuiDossier;
-import com.arkcraft.module.core.common.container.ContainerInventoryDino;
-import com.arkcraft.module.core.common.container.ContainerInventoryDodo;
+import com.arkcraft.module.creature.client.gui.GuiInventoryDino;
+import com.arkcraft.module.creature.client.gui.GuiInventoryDodo;
 import com.arkcraft.module.creature.client.gui.test.GuiInventoryTaming;
+import com.arkcraft.module.creature.common.container.ContainerInventoryDino;
+import com.arkcraft.module.creature.common.container.ContainerInventoryDodo;
 import com.arkcraft.module.creature.common.container.test.ContainerInventoryTaming;
 import com.arkcraft.module.creature.common.entity.EntityARKCreature;
 import com.arkcraft.module.creature.common.entity.EntityTameableDinosaur;
@@ -49,7 +49,7 @@ import com.arkcraft.module.weapon.common.container.inventory.InventoryAttachment
 
 public class GuiHandler implements IGuiHandler
 {
-	public static EntityARKCreature rightClicked;
+	public static EntityARKCreature rightClickedEntity;
 
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
@@ -163,10 +163,10 @@ public class GuiHandler implements IGuiHandler
 		else if (ID == GlobalAdditions.GUI.TAMING_GUI.getID())
 		{
 			// Entity entity = getEntityAt(player, x, y, z);
-			if (rightClicked != null)
+			if (rightClickedEntity != null)
 			{
-				EntityARKCreature creature = rightClicked;
-				rightClicked = null;
+				EntityARKCreature creature = rightClickedEntity;
+				rightClickedEntity = null;
 				// creature.setSitting(true);
 				// if (dino.invTaming.getTorporTime() == 0)
 				// {

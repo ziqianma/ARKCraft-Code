@@ -20,28 +20,13 @@ import com.arkcraft.module.blocks.client.event.ItemsClientEventHandler;
 import com.arkcraft.module.blocks.client.event.KeyBindings;
 import com.arkcraft.module.blocks.client.event.Mod2ClientEventHandler;
 import com.arkcraft.module.blocks.common.blocks.ARKCraftBlocks;
-import com.arkcraft.module.blocks.common.entity.EntityDodoEgg;
 import com.arkcraft.module.blocks.common.handlers.PotionEffectHandler;
 import com.arkcraft.module.blocks.common.items.ARKCraftItems;
 import com.arkcraft.module.blocks.common.items.ItemARKFood;
 import com.arkcraft.module.core.ARKCraft;
 import com.arkcraft.module.core.client.event.CoreClientEventHandler;
 import com.arkcraft.module.core.client.gui.overlay.GuiOverlay;
-import com.arkcraft.module.core.common.network.ARKMessagePipeline;
 import com.arkcraft.module.core.common.proxy.CommonProxy;
-import com.arkcraft.module.creature.client.model.ModelBrontosaurus;
-import com.arkcraft.module.creature.client.model.ModelDodo;
-import com.arkcraft.module.creature.client.model.ModelRaptorNew;
-import com.arkcraft.module.creature.client.model.ModelSabertooth;
-import com.arkcraft.module.creature.client.render.RenderBrontosaurus;
-import com.arkcraft.module.creature.client.render.RenderDodo;
-import com.arkcraft.module.creature.client.render.RenderRaptor;
-import com.arkcraft.module.creature.client.render.RenderSabertooth;
-import com.arkcraft.module.creature.common.entity.aggressive.EntitySabertooth;
-import com.arkcraft.module.creature.common.entity.neutral.EntityBrontosaurus;
-import com.arkcraft.module.creature.common.entity.passive.EntityDodo;
-import com.arkcraft.module.creature.common.entitytest.EntityRaptor;
-import com.arkcraft.module.weapon.client.gui.GuiOverlayReloading;
 import com.arkcraft.module.weapon.common.entity.EntityStone;
 
 public class ClientProxy extends CommonProxy
@@ -57,34 +42,10 @@ public class ClientProxy extends CommonProxy
 		ItemsClientEventHandler.init();
 
 		MinecraftForge.EVENT_BUS.register(new GuiOverlay());
-		MinecraftForge.EVENT_BUS.register(new GuiOverlayReloading());
 
-		RenderingRegistry.registerEntityRenderingHandler(EntityStone.class, new RenderSnowball(
-				Minecraft.getMinecraft().getRenderManager(), ARKCraftItems.rock, Minecraft
-						.getMinecraft().getRenderItem()));
-		/*
-		 * RenderingRegistry.registerEntityRenderingHandler(EntityTranqArrow.class
-		 * , new RenderTranqArrow());
-		 * RenderingRegistry.registerEntityRenderingHandler
-		 * (EntityStoneArrow.class, new RenderStoneArrow());
-		 * RenderingRegistry.registerEntityRenderingHandler
-		 * (EntityMetalArrow.class, new RenderMetalArrow());
-		 */
-		RenderingRegistry.registerEntityRenderingHandler(EntityDodoEgg.class, new RenderSnowball(
-				Minecraft.getMinecraft().getRenderManager(), ARKCraftItems.dodo_egg, Minecraft
-						.getMinecraft().getRenderItem()));
-		RenderingRegistry.registerEntityRenderingHandler(EntityRaptor.class, new RenderRaptor(
-				new ModelRaptorNew(), 0.5F));
-		RenderingRegistry.registerEntityRenderingHandler(EntitySabertooth.class,
-				new RenderSabertooth(new ModelSabertooth(), 0.5F));
-		RenderingRegistry.registerEntityRenderingHandler(EntityDodo.class, new RenderDodo(
-				new ModelDodo(), 0.3F));
-		RenderingRegistry.registerEntityRenderingHandler(EntityBrontosaurus.class,
-				new RenderBrontosaurus(new ModelBrontosaurus(), 0.5f));
-
-		GameRegistry.addSmelting(ARKCraftItems.meat_raw,
-				new ItemStack(ARKCraftItems.meat_cooked, 1),
-				(int) Math.floor(ItemARKFood.globalHealAmount / 2));
+		GameRegistry.addSmelting(ARKCraftItems.meat_raw, new ItemStack(
+				ARKCraftItems.meat_cooked, 1), (int) Math
+				.floor(ItemARKFood.globalHealAmount / 2));
 		GameRegistry.addSmelting(ARKCraftItems.primemeat_raw, new ItemStack(
 				ARKCraftItems.primemeat_cooked, 1), (int) Math
 				.floor(ItemARKFood.globalHealAmount / 2));
@@ -93,12 +54,6 @@ public class ClientProxy extends CommonProxy
 		dossierProxy.init();
 		LogHelper.info("CommonProxy: Init run finished.");
 		initDone = true;
-	}
-
-	@Override
-	public void registerPackets(ARKMessagePipeline pipeline)
-	{
-		super.registerPackets(pipeline);
 	}
 
 	@Override
@@ -157,8 +112,11 @@ public class ClientProxy extends CommonProxy
 				.getMinecraft()
 				.getRenderItem()
 				.getItemModelMesher()
-				.register(item, meta,
-						new ModelResourceLocation(ARKCraft.MODID + ":" + name, "inventory"));
+				.register(
+						item,
+						meta,
+						new ModelResourceLocation(ARKCraft.MODID + ":" + name,
+								"inventory"));
 		ModelBakery.addVariantName(item, ARKCraft.MODID + ":" + name);
 	}
 

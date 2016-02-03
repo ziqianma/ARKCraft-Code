@@ -22,9 +22,9 @@ import com.arkcraft.lib.LogHelper;
 import com.arkcraft.module.blocks.common.items.ARKCraftItems;
 import com.arkcraft.module.core.ARKCraft;
 import com.arkcraft.module.core.GlobalAdditions.GUI;
-import com.arkcraft.module.core.common.container.inventory.InventoryDino;
-import com.arkcraft.module.core.common.container.inventory.InventorySaddle;
-import com.arkcraft.module.core.common.container.inventory.InventoryTaming;
+import com.arkcraft.module.creature.common.container.inventory.InventoryDino;
+import com.arkcraft.module.creature.common.container.inventory.InventorySaddle;
+import com.arkcraft.module.creature.common.container.inventory.InventoryTaming;
 
 /**
  * @author wildbill22

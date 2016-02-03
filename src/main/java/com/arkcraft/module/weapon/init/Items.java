@@ -22,6 +22,7 @@ import com.arkcraft.module.weapon.common.entity.EntityRocketPropelledGrenade;
 import com.arkcraft.module.weapon.common.entity.EntitySimpleBullet;
 import com.arkcraft.module.weapon.common.entity.EntitySimpleRifleAmmo;
 import com.arkcraft.module.weapon.common.entity.EntitySimpleShotgunAmmo;
+import com.arkcraft.module.weapon.common.entity.EntitySpear;
 import com.arkcraft.module.weapon.common.entity.EntityStoneArrow;
 import com.arkcraft.module.weapon.common.entity.EntityTranqArrow;
 import com.arkcraft.module.weapon.common.entity.EntityTranquilizer;
@@ -60,11 +61,11 @@ public class Items
 	public ItemWoodenClub wooden_club;
 	public ItemARKBow bow;
 	public ItemCompoundBow compound_bow;
-	public ItemProjectile tranquilizer, stone_arrow, tranq_arrow, metal_arrow, ballista_bolt,
-			simple_bullet, simple_rifle_ammo, simple_shotgun_ammo, rocket_propelled_grenade,
-			advanced_bullet;
-	public ItemRangedWeapon rocket_launcher, tranq_gun, simple_pistol, fabricated_pistol,
-			longneck_rifle, shotgun, crossbow;
+	public ItemProjectile tranquilizer, stone_arrow, tranq_arrow, metal_arrow,
+			ballista_bolt, simple_bullet, simple_rifle_ammo,
+			simple_shotgun_ammo, rocket_propelled_grenade, advanced_bullet;
+	public ItemRangedWeapon rocket_launcher, tranq_gun, simple_pistol,
+			fabricated_pistol, longneck_rifle, shotgun, crossbow;
 	public ItemBallista ballista;
 
 	public Items()
@@ -103,11 +104,13 @@ public class Items
 		spear = addSpearItem("spear", ToolMaterial.WOOD);
 		wooden_club = addWoodenClub("wooden_club", ToolMaterial.WOOD);
 
-		EntityHandler.registerModEntity(EntityBallista.class, ARKCraft.MODID + ".ballista",
+		EntityHandler.registerModEntity(EntityBallista.class, "ballista",
 				ARKCraft.instance, 64, 128, false);
-		EntityHandler.registerModEntity(EntityBallistaBolt.class, ARKCraft.MODID + ".ballistaBolt",
-				ARKCraft.instance, 64, 20, true);
-		EntityHandler.registerModEntity(EntityGrenade.class, ARKCraft.MODID + ".grenade",
+		EntityHandler.registerModEntity(EntityBallistaBolt.class,
+				"ballistaBolt", ARKCraft.instance, 64, 20, true);
+		EntityHandler.registerModEntity(EntityGrenade.class, "grenade",
+				ARKCraft.instance, 64, 10, true);
+		EntityHandler.registerModEntity(EntitySpear.class, "spear",
 				ARKCraft.instance, 64, 10, true);
 
 		registerDispenseBehavior();
@@ -133,45 +136,44 @@ public class Items
 	{
 		if (ModuleItemBalance.WEAPONS.SIMPLE_PISTOL)
 		{
-			EntityHandler.registerModEntity(EntitySimpleBullet.class, "Simple Bullet",
-					ARKCraft.instance, 16, 20, true);
+			EntityHandler.registerModEntity(EntitySimpleBullet.class,
+					"simple_bullet", ARKCraft.instance, 16, 20, true);
 		}
 
 		if (ModuleItemBalance.WEAPONS.SHOTGUN)
 		{
-			EntityHandler.registerModEntity(EntitySimpleShotgunAmmo.class, "Simple Shotgun Ammo",
-					ARKCraft.instance, 64, 10, true);
+			EntityHandler.registerModEntity(EntitySimpleShotgunAmmo.class,
+					"simple_shotgun_ammo", ARKCraft.instance, 64, 10, true);
 		}
 
 		if (ModuleItemBalance.WEAPONS.LONGNECK_RIFLE)
 		{
-			EntityHandler.registerModEntity(EntitySimpleRifleAmmo.class, "Simple Rifle Ammo",
-					ARKCraft.instance, 64, 10, true);
-			EntityHandler.registerModEntity(EntityTranquilizer.class, "Tranquilizer",
-					ARKCraft.instance, 64, 10, true);
+			EntityHandler.registerModEntity(EntitySimpleRifleAmmo.class,
+					"simple_rifle_ammo", ARKCraft.instance, 64, 10, true);
+			EntityHandler.registerModEntity(EntityTranquilizer.class,
+					"tranquilizer_dart", ARKCraft.instance, 64, 10, true);
 		}
 
 		if (ModuleItemBalance.WEAPONS.FABRICATED_PISTOL)
 		{
-			EntityHandler.registerModEntity(EntityAdvancedBullet.class, "Advanced Bullet",
-					ARKCraft.instance, 64, 10, true);
+			EntityHandler.registerModEntity(EntityAdvancedBullet.class,
+					"advanced_bullet", ARKCraft.instance, 64, 10, true);
 		}
 
 		if (ModuleItemBalance.WEAPONS.ROCKET_LAUNCHER)
 		{
-			EntityHandler.registerModEntity(EntityRocketPropelledGrenade.class,
-					"Rocket Propelled Grenade", ARKCraft.instance, 64, 10, true);
+			EntityHandler
+					.registerModEntity(EntityRocketPropelledGrenade.class,
+							"rocket_propelled_grenade", ARKCraft.instance, 64,
+							10, true);
 		}
 
-		if (ModuleItemBalance.WEAPONS.CROSSBOW)
-		{
-			EntityHandler.registerModEntity(EntityTranqArrow.class, "Tranq Arrow",
-					ARKCraft.instance, 64, 10, true);
-			EntityHandler.registerModEntity(EntityStoneArrow.class, "Stone Arrow",
-					ARKCraft.instance, 64, 10, true);
-			EntityHandler.registerModEntity(EntityMetalArrow.class, "Metal Arrow",
-					ARKCraft.instance, 64, 10, true);
-		}
+		EntityHandler.registerModEntity(EntityTranqArrow.class, "tranq_arrow",
+				ARKCraft.instance, 64, 10, true);
+		EntityHandler.registerModEntity(EntityStoneArrow.class, "stone_arrow",
+				ARKCraft.instance, 64, 10, true);
+		EntityHandler.registerModEntity(EntityMetalArrow.class, "metal_arrow",
+				ARKCraft.instance, 64, 10, true);
 	}
 
 	public void addRangedWeapons()
@@ -226,13 +228,13 @@ public class Items
 		}
 		if (simple_shotgun_ammo != null)
 		{
-			BlockDispenser.dispenseBehaviorRegistry.putObject(simple_shotgun_ammo,
-					new DispenseSimpleShotgunAmmo());
+			BlockDispenser.dispenseBehaviorRegistry.putObject(
+					simple_shotgun_ammo, new DispenseSimpleShotgunAmmo());
 		}
 		if (simple_rifle_ammo != null)
 		{
-			BlockDispenser.dispenseBehaviorRegistry.putObject(simple_rifle_ammo,
-					new DispenseSimpleRifleAmmo());
+			BlockDispenser.dispenseBehaviorRegistry.putObject(
+					simple_rifle_ammo, new DispenseSimpleRifleAmmo());
 		}
 		if (tranquilizer != null)
 		{
@@ -241,14 +243,17 @@ public class Items
 		}
 		if (rocket_propelled_grenade != null)
 		{
-			BlockDispenser.dispenseBehaviorRegistry.putObject(rocket_propelled_grenade,
+			BlockDispenser.dispenseBehaviorRegistry.putObject(
+					rocket_propelled_grenade,
 					new DispenseRocketPropelledGrenade());
 		}
 		if (ballista != null)
 		{
 			DispenseBallistaBolt behavior = new DispenseBallistaBolt();
-			BlockDispenser.dispenseBehaviorRegistry.putObject(ballista_bolt, behavior);
-			BlockDispenser.dispenseBehaviorRegistry.putObject(ARKCraftItems.gun_powder, behavior);
+			BlockDispenser.dispenseBehaviorRegistry.putObject(ballista_bolt,
+					behavior);
+			BlockDispenser.dispenseBehaviorRegistry.putObject(
+					ARKCraftItems.gun_powder, behavior);
 		}
 	}
 
