@@ -5,7 +5,6 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-import com.arkcraft.lib.LogHelper;
 import com.arkcraft.module.creature.common.entity.EntityARKCreature;
 
 /**
@@ -36,8 +35,6 @@ public class ContainerInventoryTaming extends Container implements
 		maxCreatureSlots = creature.getSizeInventory() < getScrollableSlotsCount() ? creature
 				.getSizeInventory() : getScrollableSlotsCount();
 		requiredCreatureSlots = creature.getSizeInventory();
-		LogHelper.info(maxCreatureSlots);
-		LogHelper.info(requiredCreatureSlots);
 		this.player = player;
 		this.creature = creature;
 		addPlayerSlots();

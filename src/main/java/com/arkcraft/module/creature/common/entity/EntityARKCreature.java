@@ -7,6 +7,7 @@ import java.util.UUID;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
+import net.minecraft.entity.IProjectile;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -17,9 +18,10 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 
-import com.arkcraft.lib.LogHelper;
+import com.arkcraft.module.blocks.common.items.ItemDinosaurSaddle;
 import com.arkcraft.module.core.ARKCraft;
 import com.arkcraft.module.core.GlobalAdditions.GUI;
+import com.arkcraft.module.core.common.entity.data.ARKPlayer;
 import com.arkcraft.module.core.common.handlers.GuiHandler;
 import com.arkcraft.module.creature.common.entity.creature.Creature;
 
@@ -29,11 +31,18 @@ import com.arkcraft.module.creature.common.entity.creature.Creature;
 public class EntityARKCreature extends EntityCreature implements
 		IEntityAdditionalSpawnData, IInventory
 {
+	private static final int DATA_WATCHER_UNCONSCIOUS = 25,
+			DATA_WATCHER_LEVEL = 26, DATA_WATCHER_TAMING_PROGRESS = 27,
+			DATA_WATCHER_XP = 28;
+
+	public static final int HEALTH = 0, DAMAGE = 1, STAMINA = 2, WEIGHT = 3,
+			OXYGEN = 4, FOOD = 5, SPEED = 6;
+
 	private int health, weight, oxygen, food, damage, speed, stamina, torpor,
-			level, tamingProgress, xp;
+			level, tamingProgress, xp, points;
 
 	private int maxHealth, maxWeight, maxOxygen, maxFood, maxDamage, maxSpeed,
-			maxStamina, maxTorpor, maxLevel;
+			maxStamina, maxTorpor, baseLevel;
 
 	private boolean unconscious, grownUp;
 
@@ -57,50 +66,63 @@ public class EntityARKCreature extends EntityCreature implements
 	{
 		super.entityInit();
 
-		LogHelper.info("init");
-
 		creature = ARKEntityRegistry.getCreature(this);
+		if (!this.worldObj.isRemote)
+		{
+			points = 0;
+			// Determine and set stats
+			Random r = new Random();
+			baseLevel = r.nextInt(90) + 1;
+			level = baseLevel;
+			distributeWildPoints(baseLevel);
 
-		// Determine and set stats
+			// set actual stats
+			health = maxHealth;
+			weight = 0;
+			oxygen = maxOxygen;
+			food = maxFood;
+			damage = maxDamage;
+			speed = maxSpeed;
+			stamina = maxStamina;
+			torpor = 0;
+		}
+	}
+
+	private void distributeWildPoints(int points)
+	{
 		Random r = new Random();
-
-		maxLevel = r.nextInt(90) + 1;
-		int points = maxLevel;
-		int healthInc = r.nextInt(points);
+		int div = points / 3;
+		int maxIncrease = div;
+		int healthInc = r.nextInt(maxIncrease);
 		points -= healthInc;
-		int weightInc = r.nextInt(points);
+		maxIncrease = div < points ? div : points;
+		int weightInc = r.nextInt(maxIncrease);
 		points -= weightInc;
-		int oxygenInc = r.nextInt(points);
+		maxIncrease = div < points ? div : points;
+		int oxygenInc = r.nextInt(maxIncrease);
 		points -= oxygenInc;
-		int torporInc = r.nextInt(points);
+		maxIncrease = div < points ? div : points;
+		int torporInc = r.nextInt(maxIncrease);
 		points -= torporInc;
-		int damageInc = r.nextInt(points);
+		maxIncrease = div < points ? div : points;
+		int damageInc = r.nextInt(maxIncrease);
 		points -= damageInc;
-		int speedInc = r.nextInt(points);
-		points -= speedInc;
-		int staminaInc = r.nextInt(points);
+		maxIncrease = div < points ? div : points;
+		int staminaInc = r.nextInt(maxIncrease);
 		points -= staminaInc;
 		int foodInc = points;
 
+		
+		//TODO fix in comparison to ark
 		maxHealth = creature.getBaseHealth() + creature.getWildHealthIncrease() * healthInc;
 		maxWeight = creature.getBaseWeight() + creature.getWildWeightIncrease() * weightInc;
 		maxOxygen = creature.getBaseOxygen() + creature.getWildOxygenIncrease() * oxygenInc;
 		maxFood = creature.getBaseFood() + creature.getWildFoodIncrease() * foodInc;
 		maxDamage = creature.getBaseDamage() + creature.getWildDamageIncrease() * damageInc;
-		maxSpeed = creature.getBaseSpeed() + creature.getWildSpeedIncrease() * speedInc;
+		maxSpeed = creature.getBaseSpeed();
 		maxStamina = creature.getBaseStamina() + creature
 				.getWildStaminaIncrease() * staminaInc;
 		maxTorpor = creature.getBaseTorpor() + creature.getWildTorporIncrease() * torporInc;
-
-		// set actual stats
-		health = maxHealth;
-		weight = 0;
-		oxygen = maxOxygen;
-		food = maxFood;
-		damage = maxDamage;
-		speed = maxSpeed;
-		stamina = maxStamina;
-		torpor = 0;
 	}
 
 	@Override
@@ -114,6 +136,15 @@ public class EntityARKCreature extends EntityCreature implements
 		buffer.writeInt(maxSpeed);
 		buffer.writeInt(maxStamina);
 		buffer.writeInt(maxTorpor);
+		buffer.writeInt(baseLevel);
+		buffer.writeInt(health);
+		buffer.writeInt(weight);
+		buffer.writeInt(oxygen);
+		buffer.writeInt(food);
+		buffer.writeInt(damage);
+		buffer.writeInt(speed);
+		buffer.writeInt(stamina);
+		buffer.writeInt(torpor);
 	}
 
 	@Override
@@ -127,40 +158,17 @@ public class EntityARKCreature extends EntityCreature implements
 		maxSpeed = buffer.readInt();
 		maxStamina = buffer.readInt();
 		maxTorpor = buffer.readInt();
+		baseLevel = buffer.readInt();
+		level = baseLevel;
+		health = buffer.readInt();
+		weight = buffer.readInt();
+		oxygen = buffer.readInt();
+		food = buffer.readInt();
+		damage = buffer.readInt();
+		speed = buffer.readInt();
+		stamina = buffer.readInt();
+		torpor = buffer.readInt();
 	}
-
-	// private int torpor;
-	// private int stamina;
-	// private int hunger;
-	// private int creatureAge;
-	// private int tamingProgress;
-	//
-	// private int level;
-	// private int baseLevel;
-	//
-	// private boolean unconscious;
-	//
-	// private Creature creature;
-	//
-	// private float xp;
-	//
-	// private ItemStack[] inventory;
-	// private ItemStack saddle;
-	// private boolean isSaddled;
-
-	private static final float XP_PER_CREATURE_LEVEL = 10.0F;
-
-	private static final int DATA_WATCHER_AGE = 25;
-	private static final int DATA_WATCHER_TORPOR = 26;
-	private static final int DATA_WATCHER_STAMINA = 27;
-	private static final int DATA_WATCHER_HUNGER = 28;
-	private static final int DATA_WATCHER_LEVEL = 29;
-	private static final int DATA_WATCHER_UNCONSCIOUS = 30;
-	private static final int DATA_WATCHER_TAMING_PROGRESS = 31;
-	private static final int DATA_WATCHER_XP = 32;
-	private static final int DATA_WATCHER_SADDLED = 33;
-
-	private LevelManager levelManager;
 
 	// private UUID owner;
 	// public EntityPlayer playerTaming;
@@ -197,20 +205,41 @@ public class EntityARKCreature extends EntityCreature implements
 	{
 		super.onDeath(cause);
 
-		LogHelper.info("death");
-
 		Entity killedBy = cause.getSourceOfDamage();
+		Entity indirect = cause.getEntity();
 
-		// TODO projectiles and players
+		Entity actualKiller;
 
-		if (killedBy instanceof EntityARKCreature)
+		if (indirect != null && killedBy instanceof IProjectile)
 		{
-			((EntityARKCreature) killedBy).addXP(creature.getKillXP());
+			actualKiller = indirect;
 		}
-		else if (killedBy instanceof EntityPlayer)
+		else
 		{
-			// TODO ARKPlayer data update
+			actualKiller = killedBy;
 		}
+
+		if (actualKiller instanceof EntityARKCreature)
+		{
+			if (((EntityARKCreature) killedBy).isOwned()) ((EntityARKCreature) killedBy)
+					.addXP(creature.getKillXP());
+		}
+		else if (actualKiller instanceof EntityPlayer)
+		{
+			ARKPlayer data = ARKPlayer.get((EntityPlayer) actualKiller);
+			data.addXP(getKillXP());
+		}
+	}
+
+	private int getKillXP()
+	{
+		// TODO Auto-generated method stub
+		return creature.getKillXP() * level * level;
+	}
+
+	private boolean isOwned()
+	{
+		return this.owner != null;
 	}
 
 	@Override
@@ -231,20 +260,28 @@ public class EntityARKCreature extends EntityCreature implements
 	{
 		this.xp += xp;
 
-		int levels = (int) Math.floor(xp / XP_PER_CREATURE_LEVEL);
-		levelUp(levels);
+		while (checkLevel())
+		{
+		}
 	}
 
-	private void levelUp(int levels)
+	private boolean checkLevel()
 	{
-		level += levels;
-
-		level = Math.min(level, getMaxLevel());
+		int level = this.level + 1;
+		int xpNeeded = (int) (Math.log(level * level * level * level) * level * level);
+		if (xp > xpNeeded)
+		{
+			this.level++;
+			this.points++;
+			xp = xp - xpNeeded;
+			return true;
+		}
+		return false;
 	}
 
 	public int getMaxLevel()
 	{
-		return maxLevel + 54;
+		return baseLevel + 59;
 	}
 
 	private float getScaled(float value, float maxValue, float scale)
@@ -255,14 +292,15 @@ public class EntityARKCreature extends EntityCreature implements
 	public void increaseTorpor(int amount, Entity shootingEntity)
 	{
 		torpor += amount;
-		LogHelper.info("Torpor: " + torpor);
 
-		if (torpor >= creature.getTorporKnockout()) // TODO higher level dinos
-													// take more to knock out?
+		if (torpor >= maxTorpor) // DONE - all stats are randomly increased, so
+									// fair chance for high level creatures to
+									// have high torpor
 		{
 			if (shootingEntity instanceof EntityPlayer) this.tamer = shootingEntity
 					.getUniqueID();
 			this.unconscious = true;
+			this.torpor = maxTorpor;
 			this.tamingProgress = 0;
 		}
 	}
@@ -344,7 +382,6 @@ public class EntityARKCreature extends EntityCreature implements
 	public void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
-		LogHelper.info("attributes");
 		this.updateEntityAttributes();
 		this.updateHitbox();
 	}
@@ -389,7 +426,7 @@ public class EntityARKCreature extends EntityCreature implements
 		this.maxDamage = nbt.getInteger("maxDamage");
 		this.maxFood = nbt.getInteger("maxFood");
 		this.maxHealth = nbt.getInteger("maxHealth");
-		this.maxLevel = nbt.getInteger("maxLevel");
+		this.baseLevel = nbt.getInteger("baseLevel");
 		this.maxOxygen = nbt.getInteger("maxOxygen");
 		this.maxSpeed = nbt.getInteger("maxSpeed");
 		this.maxStamina = nbt.getInteger("maxStamina");
@@ -407,9 +444,15 @@ public class EntityARKCreature extends EntityCreature implements
 		this.weight = nbt.getInteger("weight");
 		this.xp = nbt.getInteger("xp");
 
-		this.tamingProgress = nbt.getInteger("tamingProgress");
-		this.unconscious = nbt.getBoolean("unconscious");
-		this.tamer = UUID.fromString(nbt.getString("tamer"));
+		if (nbt.hasKey("owner")) owner = UUID
+				.fromString(nbt.getString("owner"));
+
+		if (nbt.hasKey("tamer"))
+		{
+			this.tamingProgress = nbt.getInteger("tamingProgress");
+			this.unconscious = nbt.getBoolean("unconscious");
+			this.tamer = UUID.fromString(nbt.getString("tamer"));
+		}
 
 		this.grownUp = nbt.getBoolean("grownUp");
 
@@ -428,7 +471,6 @@ public class EntityARKCreature extends EntityCreature implements
 			}
 		}
 
-		owner = UUID.fromString(nbt.getString("owner"));
 	}
 
 	@Override
@@ -439,7 +481,7 @@ public class EntityARKCreature extends EntityCreature implements
 		nbt.setInteger("maxDamage", maxDamage);
 		nbt.setInteger("maxFood", maxFood);
 		nbt.setInteger("maxHealth", maxHealth);
-		nbt.setInteger("maxLevel", maxLevel);
+		nbt.setInteger("baseLevel", baseLevel);
 		nbt.setInteger("maxOxygen", maxOxygen);
 		nbt.setInteger("maxSpeed", maxSpeed);
 		nbt.setInteger("maxStamina", maxStamina);
@@ -500,8 +542,7 @@ public class EntityARKCreature extends EntityCreature implements
 	@Override
 	public ItemStack getStackInSlot(int index)
 	{
-		// TODO possibly return stack in saddle slot
-		return inventory[index];
+		return index < inventory.length ? inventory[index] : saddle;
 	}
 
 	@Override
@@ -591,7 +632,8 @@ public class EntityARKCreature extends EntityCreature implements
 	@Override
 	public boolean isItemValidForSlot(int index, ItemStack stack)
 	{
-		return true;
+		return index > inventory.length ? stack != null && stack.getItem() instanceof ItemDinosaurSaddle && ((ItemDinosaurSaddle) stack
+				.getItem()).getSaddleType().equals(creature.getSaddleType()) : true;
 	}
 
 	@Override
@@ -614,6 +656,7 @@ public class EntityARKCreature extends EntityCreature implements
 	@Override
 	public void clear()
 	{
+		saddle = null;
 		for (int i = 0; i < getSizeInventory(); i++)
 		{
 			setInventorySlotContents(i, null);
@@ -631,14 +674,25 @@ public class EntityARKCreature extends EntityCreature implements
 
 	}
 
-	public int getTorpor()
-	{
-		return torpor;
-	}
-
 	public int getTamingProgress()
 	{
 		return tamingProgress;
+	}
+
+	public int getTamingProgressRequired()
+	{
+		// TODO Auto-generated method stub
+		return (getBaseLevel() * 20);
+	}
+
+	public double getRelativeTamingProgress()
+	{
+		return (double) tamingProgress / (double) getTamingProgressRequired();
+	}
+
+	public int getTorpor()
+	{
+		return torpor;
 	}
 
 	public int getMaxTorpor()
@@ -646,8 +700,113 @@ public class EntityARKCreature extends EntityCreature implements
 		return maxTorpor;
 	}
 
-	public int getTamingProgressRequired()
+	public double getRelativeTorpor()
 	{
-		return (getMaxLevel() * 100) / getMaxLevel();
+		return (double) torpor / (double) maxTorpor;
+	}
+
+	public double getRelativeOxygen()
+	{
+		return (double) oxygen / (double) maxOxygen;
+	}
+
+	public double getRelativeHealth()
+	{
+		return (double) health / (double) maxHealth;
+	}
+
+	public double getRelativeFood()
+	{
+		return (double) food / (double) maxFood;
+	}
+
+	public double getRelativeStamina()
+	{
+		return (double) stamina / (double) maxStamina;
+	}
+
+	public double getRelativeWeight()
+	{
+		return (double) weight / (double) maxWeight;
+	}
+
+	public int getBaseLevel()
+	{
+		return baseLevel;
+	}
+
+	public int getMaxOxygen()
+	{
+		return maxOxygen;
+	}
+
+	public int getMaxDamage()
+	{
+		return maxDamage;
+	}
+
+	public int getMaxFood()
+	{
+		return maxFood;
+	}
+
+	public int getMaxSpeed()
+	{
+		return maxSpeed;
+	}
+
+	public int getMaxStamina()
+	{
+		return maxStamina;
+	}
+
+	public int getMaxWeight()
+	{
+		return maxWeight;
+	}
+
+	public int getOxygen()
+	{
+		return oxygen;
+	}
+
+	public int getFood()
+	{
+		return food;
+	}
+
+	public int getWeight()
+	{
+		return weight;
+	}
+
+	public int getStamina()
+	{
+		return stamina;
+	}
+
+	public int getSpeed()
+	{
+		return speed;
+	}
+
+	public int getLevel()
+	{
+		return level;
+	}
+
+	public int getDamage()
+	{
+		return damage;
+	}
+
+	public void increaseStat(int statIndex)
+	{
+		switch (statIndex)
+		{
+			case 0:
+				maxHealth += maxHealth;
+				break;
+		}
 	}
 }

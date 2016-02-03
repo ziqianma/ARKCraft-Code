@@ -13,6 +13,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import com.arkcraft.module.blocks.common.config.ModuleItemBalance;
 import com.arkcraft.module.core.GlobalAdditions;
 import com.arkcraft.module.core.client.gui.book.Dossier;
+import com.arkcraft.module.creature.common.entity.SaddleType;
 
 /**
  * @author wildbill22
@@ -144,8 +145,11 @@ public class ARKCraftItems
 		dino_book = addDossier("dossier");
 		narcotics = addItem("narcotics");
 		saddle_small = addSaddle("saddle_small");
+		saddle_small.setSaddleType(SaddleType.SMALL);
 		saddle_medium = addSaddle("saddle_medium");
+		saddle_medium.setSaddleType(SaddleType.MEDIUM);
 		saddle_large = addSaddle("saddle_large");
+		saddle_large.setSaddleType(SaddleType.LARGE);
 
 		// Armor
 		chitinHelm = addArmorItem("chitin_helm", CHITIN, "chitinArmor", 0,
