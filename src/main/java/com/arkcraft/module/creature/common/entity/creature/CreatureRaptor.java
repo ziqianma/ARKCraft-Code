@@ -6,6 +6,8 @@ import com.arkcraft.module.creature.common.entity.test.EntityRaptor;
 
 public class CreatureRaptor extends Creature
 {
+	//TODO all raptor stats taken from ARK - subject to change
+	
 	@Override
 	public String getName()
 	{
@@ -77,178 +79,170 @@ public class CreatureRaptor extends Creature
 	}
 
 	@Override
-	public int getKillXP()
+	public int getBaseKillXP()
 	{
 		// TODO Auto-generated method stub
 		return 50;
-	}
-
-	@Override
-	public int getInventorySize()
-	{
-		// TODO Auto-generated method stub
-		return 100;
 	}
 
 	@Override
 	public int getBaseHealth()
 	{
 		// TODO Auto-generated method stub
-		return 1;
-		// return 70;
-	}
-
-	@Override
-	public int getWildHealthIncrease()
-	{
-		// TODO Auto-generated method stub
-		return 1;
+		return 200;
 	}
 
 	@Override
 	public int getBaseWeight()
 	{
 		// TODO Auto-generated method stub
-		return 1;
-	}
-
-	@Override
-	public int getWildWeightIncrease()
-	{
-		// TODO Auto-generated method stub
-		return 1;
+		return 1400;
 	}
 
 	@Override
 	public int getBaseOxygen()
 	{
 		// TODO Auto-generated method stub
-		return 1;
-	}
-
-	@Override
-	public int getWildOxygenIncrease()
-	{
-		// TODO Auto-generated method stub
-		return 1;
+		return 150;
 	}
 
 	@Override
 	public int getBaseFood()
 	{
 		// TODO Auto-generated method stub
-		return 90;
-	}
-
-	@Override
-	public int getWildFoodIncrease()
-	{
-		// TODO Auto-generated method stub
-		return 1;
+		return 1200;
 	}
 
 	@Override
 	public int getBaseDamage()
 	{
 		// TODO Auto-generated method stub
-		return 50;
-	}
-
-	@Override
-	public int getWildDamageIncrease()
-	{
-		// TODO Auto-generated method stub
-		return 1;
+		return 15;
 	}
 
 	@Override
 	public int getBaseSpeed()
 	{
 		// TODO Auto-generated method stub
-		return 100;
+		return 480;
 	}
 
 	@Override
 	public int getBaseStamina()
 	{
 		// TODO Auto-generated method stub
-		return 50;
-	}
-
-	@Override
-	public int getWildStaminaIncrease()
-	{
-		// TODO Auto-generated method stub
-		return 1;
+		return 150;
 	}
 
 	@Override
 	public int getBaseTorpor()
 	{
 		// TODO Auto-generated method stub
-		return 50;
+		return 180;
 	}
 
 	@Override
-	public int getWildTorporIncrease()
+	public double getWildHealthIncrease()
 	{
 		// TODO Auto-generated method stub
-		return 1;
+		return 40;
 	}
 
 	@Override
-	public int getTamedHealthIncrease()
+	public double getWildWeightIncrease()
 	{
 		// TODO Auto-generated method stub
-		return 0;
+		return 2.8;
 	}
 
 	@Override
-	public int getTamedWeightIncrease()
+	public double getWildOxygenIncrease()
 	{
 		// TODO Auto-generated method stub
-		return 0;
+		return 15;
 	}
 
 	@Override
-	public int getTamedOxygenIncrease()
+	public double getWildFoodIncrease()
 	{
 		// TODO Auto-generated method stub
-		return 0;
+		return 120;
 	}
 
 	@Override
-	public int getTamedFoodIncrease()
+	public double getWildDamageIncrease()
 	{
 		// TODO Auto-generated method stub
-		return 0;
+		return 0.75;
 	}
 
 	@Override
-	public int getTamedDamageIncrease()
+	public double getWildStaminaIncrease()
 	{
 		// TODO Auto-generated method stub
-		return 0;
+		return 15;
 	}
 
 	@Override
-	public int getTamedSpeedIncrease()
+	public double getWildTorporIncrease()
 	{
 		// TODO Auto-generated method stub
-		return 0;
+		return 10.8;
 	}
 
 	@Override
-	public int getTamedStaminaIncrease()
+	public double getTamedHealthIncrease()
 	{
 		// TODO Auto-generated method stub
-		return 0;
+		return 0.0621;
 	}
 
 	@Override
-	public int getTamedTorporIncrease()
+	public double getTamedWeightIncrease()
 	{
 		// TODO Auto-generated method stub
-		return 0;
+		return 0.04;
+	}
+
+	@Override
+	public double getTamedOxygenIncrease()
+	{
+		// TODO Auto-generated method stub
+		return 0.1;
+	}
+
+	@Override
+	public double getTamedFoodIncrease()
+	{
+		// TODO Auto-generated method stub
+		return 0.1;
+	}
+
+	@Override
+	public double getTamedDamageIncrease()
+	{
+		// TODO Auto-generated method stub
+		return 0.02;
+	}
+
+	@Override
+	public double getTamedSpeedIncrease()
+	{
+		// TODO Auto-generated method stub
+		return 0.03;
+	}
+
+	@Override
+	public double getTamedStaminaIncrease()
+	{
+		// TODO Auto-generated method stub
+		return 0.1;
+	}
+
+	@Override
+	public double getTamedTorporIncrease()
+	{
+		// TODO Auto-generated method stub
+		return 0.05;
 	}
 }

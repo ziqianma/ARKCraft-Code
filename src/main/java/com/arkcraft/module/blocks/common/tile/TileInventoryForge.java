@@ -57,12 +57,14 @@ public class TileInventoryForge extends TileEntity implements IForge
 	@Override
 	public void update()
 	{
-		List<ForgeRecipe> possibleRecipes = ForgeCraftingHandler.findPossibleRecipes(this);
+		List<ForgeRecipe> possibleRecipes = ForgeCraftingHandler
+				.findPossibleRecipes(this);
 		updateBurning(possibleRecipes);
 		// LogHelper.info(burningTicks);
 		if (this.isBurning() && possibleRecipes.size() > 0)
 		{
-			Iterator<Entry<ForgeRecipe, Integer>> it = activeRecipes.entrySet().iterator();
+			Iterator<Entry<ForgeRecipe, Integer>> it = activeRecipes.entrySet()
+					.iterator();
 			while (it.hasNext())
 			{
 				Entry<ForgeRecipe, Integer> e = it.next();
@@ -73,7 +75,7 @@ public class TileInventoryForge extends TileEntity implements IForge
 			}
 			for (ForgeRecipe r : possibleRecipes)
 			{
-				activeRecipes.putIfAbsent(r, 0);
+				if (!activeRecipes.containsKey(r)) activeRecipes.put(r, 0);
 			}
 
 			updateCookTimes();
@@ -97,15 +99,16 @@ public class TileInventoryForge extends TileEntity implements IForge
 			for (int i = 0; i < itemStacks.length; i++)
 			{
 				ItemStack stack = itemStacks[i];
-				if (stack != null && ForgeCraftingHandler.isValidFuel(stack.getItem()) && possibleRecipes
-						.size() > 0)
+				if (stack != null && ForgeCraftingHandler.isValidFuel(stack
+						.getItem()) && possibleRecipes.size() > 0)
 				{
 					if (!worldObj.isRemote)
 					{
 						stack.stackSize--;
 						if (stack.stackSize == 0) itemStacks[i] = null;
 					}
-					this.burningTicks += ForgeCraftingHandler.getBurnTime(stack.getItem());
+					this.burningTicks += ForgeCraftingHandler.getBurnTime(stack
+							.getItem());
 					break;
 				}
 			}
@@ -116,11 +119,13 @@ public class TileInventoryForge extends TileEntity implements IForge
 
 	private void updateInventory()
 	{
-		Iterator<Entry<ForgeRecipe, Integer>> it = activeRecipes.entrySet().iterator();
+		Iterator<Entry<ForgeRecipe, Integer>> it = activeRecipes.entrySet()
+				.iterator();
 		while (it.hasNext())
 		{
 			Entry<ForgeRecipe, Integer> e = it.next();
-			if (e.getValue() >= (e.getKey().getBurnTime() * this.getBurnFactor() * 20))
+			if (e.getValue() >= (e.getKey().getBurnTime() * this
+					.getBurnFactor() * 20))
 			{
 				it.remove();
 				ForgeRecipe r = e.getKey();
@@ -129,7 +134,8 @@ public class TileInventoryForge extends TileEntity implements IForge
 				int outputStack = -1;
 				for (int i = 0; i < itemStacks.length; i++)
 				{
-					if (itemStacks[i] != null && itemStacks[i].getItem().equals(output) && itemStacks[i].stackSize < this
+					if (itemStacks[i] != null && itemStacks[i].getItem()
+							.equals(output) && itemStacks[i].stackSize < this
 							.getInventoryStackLimit())
 					{
 						outputStack = i;
@@ -177,7 +183,8 @@ public class TileInventoryForge extends TileEntity implements IForge
 
 	private void updateCookTimes()
 	{
-		Iterator<Entry<ForgeRecipe, Integer>> it = activeRecipes.entrySet().iterator();
+		Iterator<Entry<ForgeRecipe, Integer>> it = activeRecipes.entrySet()
+				.iterator();
 		while (it.hasNext())
 		{
 			Entry<ForgeRecipe, Integer> e = it.next();
@@ -267,8 +274,8 @@ public class TileInventoryForge extends TileEntity implements IForge
 		final double Y_CENTRE_OFFSET = 0.5;
 		final double Z_CENTRE_OFFSET = 0.5;
 		final double MAXIMUM_DISTANCE_SQ = 8.0 * 8.0;
-		return player.getDistanceSq(pos.getX() + X_CENTRE_OFFSET, pos.getY() + Y_CENTRE_OFFSET,
-				pos.getZ() + Z_CENTRE_OFFSET) < MAXIMUM_DISTANCE_SQ;
+		return player.getDistanceSq(pos.getX() + X_CENTRE_OFFSET,
+				pos.getY() + Y_CENTRE_OFFSET, pos.getZ() + Z_CENTRE_OFFSET) < MAXIMUM_DISTANCE_SQ;
 	}
 
 	// ------------------------------
@@ -337,7 +344,8 @@ public class TileInventoryForge extends TileEntity implements IForge
 			byte slotNumber = dataForOneSlot.getByte("Slot");
 			if (slotNumber >= 0 && slotNumber < this.itemStacks.length)
 			{
-				this.itemStacks[slotNumber] = ItemStack.loadItemStackFromNBT(dataForOneSlot);
+				this.itemStacks[slotNumber] = ItemStack
+						.loadItemStackFromNBT(dataForOneSlot);
 			}
 		}
 
@@ -349,7 +357,8 @@ public class TileInventoryForge extends TileEntity implements IForge
 		{
 			NBTTagCompound nbtR = nbtList.getCompoundTagAt(i);
 			int cookTime = nbtR.getInteger("cookTime");
-			ForgeRecipe r = ForgeCraftingHandler.getForgeRecipe(nbtR.getString("recipeKey"));
+			ForgeRecipe r = ForgeCraftingHandler.getForgeRecipe(nbtR
+					.getString("recipeKey"));
 			this.activeRecipes.put(r, cookTime);
 		}
 	}

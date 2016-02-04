@@ -4,11 +4,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.ResourceLocation;
 
 import com.arkcraft.module.core.ARKCraft;
-import com.arkcraft.module.creature.client.model.ModelRaptorNew;
+import com.arkcraft.module.creature.client.model.ModelRaptor;
 import com.arkcraft.module.creature.common.entity.aggressive.RaptorType;
 import com.arkcraft.module.creature.common.entity.test.EntityRaptor;
 
@@ -20,12 +19,12 @@ public class RenderRaptor extends RenderLiving
 	private static ResourceLocation[] texture;
 	private static final ResourceLocation raptorTexture = new ResourceLocation(
 			ARKCraft.MODID + ":textures/model/raptor.png");
-	protected ModelRaptorNew modelEntity;
+	protected ModelRaptor modelEntity;
 
 	public RenderRaptor(ModelBase base, float par2)
 	{
 		super(Minecraft.getMinecraft().getRenderManager(), base, par2);
-		modelEntity = ((ModelRaptorNew) mainModel);
+		modelEntity = ((ModelRaptor) mainModel);
 		texture = new ResourceLocation[RaptorType.numRaptors];
 		texture[0] = new ResourceLocation(
 				ARKCraft.MODID + ":textures/model/raptor_albino.png");
@@ -54,11 +53,6 @@ public class RenderRaptor extends RenderLiving
 	public void render(EntityRaptor entity, double x, double y, double z, float u, float v)
 	{
 		super.doRender(entity, x, y, z, u, v);
-	}
-
-	public void doRenderLiving(EntityLiving entity, double x, double y, double z, float u, float v)
-	{
-		render((EntityRaptor) entity, x, y, z, u, v);
 	}
 
 	public void doRender(Entity entity, double x, double y, double z, float u, float v)

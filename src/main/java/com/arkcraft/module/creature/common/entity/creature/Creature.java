@@ -28,14 +28,12 @@ public abstract class Creature
 
 	public abstract int getTorporLossSpeed();
 
-	public abstract int getKillXP();
+	public abstract int getBaseKillXP();
 
 	protected int fromDays(int days)
 	{
 		return days * 24000;
 	}
-
-	public abstract int getInventorySize();
 
 	public abstract int getBaseHealth();
 
@@ -45,41 +43,57 @@ public abstract class Creature
 
 	public abstract int getBaseFood();
 
+	/**
+	 * Returns the base damage of the creature, to be multiplied by their
+	 * upgraded stat (%)
+	 */
 	public abstract int getBaseDamage();
 
+	/**
+	 * Returns the base speed of the creature, to be multiplied by their
+	 * upgraded stat (%)
+	 */
 	public abstract int getBaseSpeed();
 
 	public abstract int getBaseStamina();
 
 	public abstract int getBaseTorpor();
 
-	public abstract int getTamedHealthIncrease();
+	public abstract double getTamedHealthIncrease();
 
-	public abstract int getTamedWeightIncrease();
+	public abstract double getTamedWeightIncrease();
 
-	public abstract int getTamedOxygenIncrease();
+	public abstract double getTamedOxygenIncrease();
 
-	public abstract int getTamedFoodIncrease();
+	public abstract double getTamedFoodIncrease();
 
-	public abstract int getTamedDamageIncrease();
+	public abstract double getTamedDamageIncrease();
 
-	public abstract int getTamedSpeedIncrease();
+	public abstract double getTamedSpeedIncrease();
 
-	public abstract int getTamedStaminaIncrease();
+	public abstract double getTamedStaminaIncrease();
 
-	public abstract int getTamedTorporIncrease();
+	public abstract double getTamedTorporIncrease();
 
-	public abstract int getWildHealthIncrease();
+	public abstract double getWildHealthIncrease();
 
-	public abstract int getWildWeightIncrease();
+	public abstract double getWildWeightIncrease();
 
-	public abstract int getWildOxygenIncrease();
+	public abstract double getWildOxygenIncrease();
 
-	public abstract int getWildFoodIncrease();
+	public abstract double getWildFoodIncrease();
 
-	public abstract int getWildDamageIncrease();
+	public abstract double getWildDamageIncrease();
 
-	public abstract int getWildStaminaIncrease();
+	public abstract double getWildStaminaIncrease();
 
-	public abstract int getWildTorporIncrease();
+	public abstract double getWildTorporIncrease();
+
+	/**
+	 * returns the multiplier for the xp needed to level up
+	 */
+	public double getLevelingMultiplier()
+	{
+		return 1;
+	}
 }

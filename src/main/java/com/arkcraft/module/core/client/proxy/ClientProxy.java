@@ -4,14 +4,12 @@ import java.util.Map;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.RenderSnowball;
 import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
@@ -27,7 +25,6 @@ import com.arkcraft.module.core.ARKCraft;
 import com.arkcraft.module.core.client.event.CoreClientEventHandler;
 import com.arkcraft.module.core.client.gui.overlay.GuiOverlay;
 import com.arkcraft.module.core.common.proxy.CommonProxy;
-import com.arkcraft.module.weapon.common.entity.EntityStone;
 
 public class ClientProxy extends CommonProxy
 {
