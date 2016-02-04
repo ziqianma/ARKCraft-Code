@@ -70,13 +70,6 @@ public class CreatureRaptor extends Creature
 	}
 
 	@Override
-	public int getTorporKnockout()
-	{
-		// TODO Auto-generated method stub
-		return 50;
-	}
-
-	@Override
 	public int getTorporLossSpeed()
 	{
 		// TODO Auto-generated method stub
@@ -84,42 +77,7 @@ public class CreatureRaptor extends Creature
 	}
 
 	@Override
-	public int getMeleeDamageBase()
-	{
-		// TODO Auto-generated method stub
-		return 50;
-	}
-
-	@Override
-	public int getHealthBase()
-	{
-		// TODO Auto-generated method stub
-		return 70;
-	}
-
-	@Override
-	public int getStaminaBase()
-	{
-		// TODO Auto-generated method stub
-		return 50;
-	}
-
-	@Override
-	public int getHungerBase()
-	{
-		// TODO Auto-generated method stub
-		return 90;
-	}
-
-	@Override
-	public int getSpeedBase()
-	{
-		// TODO Auto-generated method stub
-		return 100;
-	}
-
-	@Override
-	public float getKillXP()
+	public int getKillXP()
 	{
 		// TODO Auto-generated method stub
 		return 50;
@@ -136,7 +94,8 @@ public class CreatureRaptor extends Creature
 	public int getBaseHealth()
 	{
 		// TODO Auto-generated method stub
-		return 100;
+		return 1;
+		// return 70;
 	}
 
 	@Override
@@ -178,7 +137,7 @@ public class CreatureRaptor extends Creature
 	public int getBaseFood()
 	{
 		// TODO Auto-generated method stub
-		return 1;
+		return 90;
 	}
 
 	@Override
@@ -192,7 +151,7 @@ public class CreatureRaptor extends Creature
 	public int getBaseDamage()
 	{
 		// TODO Auto-generated method stub
-		return 1;
+		return 50;
 	}
 
 	@Override
@@ -206,21 +165,14 @@ public class CreatureRaptor extends Creature
 	public int getBaseSpeed()
 	{
 		// TODO Auto-generated method stub
-		return 1;
-	}
-
-	@Override
-	public int getWildSpeedIncrease()
-	{
-		// TODO Auto-generated method stub
-		return 1;
+		return 100;
 	}
 
 	@Override
 	public int getBaseStamina()
 	{
 		// TODO Auto-generated method stub
-		return 1;
+		return 50;
 	}
 
 	@Override
@@ -234,7 +186,7 @@ public class CreatureRaptor extends Creature
 	public int getBaseTorpor()
 	{
 		// TODO Auto-generated method stub
-		return 1;
+		return 50;
 	}
 
 	@Override
@@ -242,5 +194,61 @@ public class CreatureRaptor extends Creature
 	{
 		// TODO Auto-generated method stub
 		return 1;
+	}
+
+	@Override
+	public int getTamedHealthIncrease()
+	{
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getTamedWeightIncrease()
+	{
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getTamedOxygenIncrease()
+	{
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getTamedFoodIncrease()
+	{
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getTamedDamageIncrease()
+	{
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getTamedSpeedIncrease()
+	{
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getTamedStaminaIncrease()
+	{
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getTamedTorporIncrease()
+	{
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

@@ -26,21 +26,9 @@ public abstract class Creature
 
 	public abstract int getAdultSizeY();
 
-	public abstract int getTorporKnockout();
-
 	public abstract int getTorporLossSpeed();
 
-	public abstract int getMeleeDamageBase();
-
-	public abstract int getHealthBase();
-
-	public abstract int getStaminaBase();
-
-	public abstract int getHungerBase();
-
-	public abstract int getSpeedBase();
-
-	public abstract float getKillXP();
+	public abstract int getKillXP();
 
 	protected int fromDays(int days)
 	{
@@ -51,33 +39,47 @@ public abstract class Creature
 
 	public abstract int getBaseHealth();
 
-	public abstract int getWildHealthIncrease();
-
 	public abstract int getBaseWeight();
-
-	public abstract int getWildWeightIncrease();
 
 	public abstract int getBaseOxygen();
 
-	public abstract int getWildOxygenIncrease();
-
 	public abstract int getBaseFood();
-
-	public abstract int getWildFoodIncrease();
 
 	public abstract int getBaseDamage();
 
-	public abstract int getWildDamageIncrease();
-
 	public abstract int getBaseSpeed();
-
-	public abstract int getWildSpeedIncrease();
 
 	public abstract int getBaseStamina();
 
-	public abstract int getWildStaminaIncrease();
-
 	public abstract int getBaseTorpor();
+
+	public abstract int getTamedHealthIncrease();
+
+	public abstract int getTamedWeightIncrease();
+
+	public abstract int getTamedOxygenIncrease();
+
+	public abstract int getTamedFoodIncrease();
+
+	public abstract int getTamedDamageIncrease();
+
+	public abstract int getTamedSpeedIncrease();
+
+	public abstract int getTamedStaminaIncrease();
+
+	public abstract int getTamedTorporIncrease();
+
+	public abstract int getWildHealthIncrease();
+
+	public abstract int getWildWeightIncrease();
+
+	public abstract int getWildOxygenIncrease();
+
+	public abstract int getWildFoodIncrease();
+
+	public abstract int getWildDamageIncrease();
+
+	public abstract int getWildStaminaIncrease();
 
 	public abstract int getWildTorporIncrease();
 }
