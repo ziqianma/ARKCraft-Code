@@ -8,7 +8,7 @@ import com.arkcraft.module.blocks.common.entity.EntityDodoEgg;
 import com.arkcraft.module.blocks.common.items.ARKCraftItems;
 import com.arkcraft.module.creature.client.model.ModelBrontosaurus;
 import com.arkcraft.module.creature.client.model.ModelDodo;
-import com.arkcraft.module.creature.client.model.ModelRaptorNew;
+import com.arkcraft.module.creature.client.model.ModelRaptor;
 import com.arkcraft.module.creature.client.model.ModelSabertooth;
 import com.arkcraft.module.creature.client.render.RenderBrontosaurus;
 import com.arkcraft.module.creature.client.render.RenderDodo;
@@ -28,7 +28,7 @@ public class Models
 						ARKCraftItems.dodo_egg, Minecraft.getMinecraft()
 								.getRenderItem()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityRaptor.class,
-				new RenderRaptor(new ModelRaptorNew(), 0.5F));
+				new RenderRaptor(new ModelRaptor(), 0.5F));
 		RenderingRegistry.registerEntityRenderingHandler(
 				EntitySabertooth.class, new RenderSabertooth(
 						new ModelSabertooth(), 0.5F));

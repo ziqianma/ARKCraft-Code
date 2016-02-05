@@ -98,7 +98,8 @@ public class ModelSabertooth extends ModelBase
 		this.earR = new ModelRenderer(this, 47, 79);
 		this.earR.setRotationPoint(-9.1F, -0.4F, -6.09F);
 		this.earR.addBox(0.0F, 0.0F, 0.0F, 5, 4, 2, 0.0F);
-		this.setRotateAngle(earR, -0.5654866776461628F, 0.0F, -0.5454153912482279F);
+		this.setRotateAngle(earR, -0.5654866776461628F, 0.0F,
+				-0.5454153912482279F);
 		this.nose = new ModelRenderer(this, 49, 56);
 		this.nose.setRotationPoint(2.0F, -1.9F, -0.4F);
 		this.nose.addBox(0.0F, 0.0F, 0.0F, 6, 5, 11, 0.0F);
@@ -116,14 +117,16 @@ public class ModelSabertooth extends ModelBase
 		this.tail2.addBox(0.0F, 0.0F, 0.0F, 2, 2, 16, 0.0F);
 		this.setRotateAngle(tail2, -0.21362830044410594F, 0.0F, 0.0F);
 		this.upjaw = new ModelRenderer(this, 0, 55);
-		this.upjaw.setRotationPoint(-5.0F, 6.195234177486194F, -21.09181060122682F);
+		this.upjaw.setRotationPoint(-5.0F, 6.195234177486194F,
+				-21.09181060122682F);
 		this.upjaw.addBox(0.0F, 0.0F, 0.0F, 10, 5, 12, 0.0F);
 		this.legFR = new ModelRenderer(this, 470, 84);
 		this.legFR.setRotationPoint(1.0F, 13.45F, 2.13F);
 		this.legFR.addBox(0.0F, 0.0F, 0.0F, 6, 17, 8, 0.0F);
 		this.setRotateAngle(legFR, -0.4754276882432553F, 0.0F, 0.0F);
 		this.nose2 = new ModelRenderer(this, 51, 57);
-		this.nose2.setRotationPoint(1.0F, 0.39419750051090574F, 0.43140317924495264F);
+		this.nose2.setRotationPoint(1.0F, 0.39419750051090574F,
+				0.43140317924495264F);
 		this.nose2.addBox(0.0F, 0.0F, 0.0F, 4, 5, 10, 0.0F);
 		this.setRotateAngle(nose2, 0.36128315516282616F, 0.0F, 0.0F);
 		this.head = new ModelRenderer(this, 353, 2);
@@ -137,7 +140,8 @@ public class ModelSabertooth extends ModelBase
 		this.earL = new ModelRenderer(this, 29, 79);
 		this.earL.setRotationPoint(4.8F, -2.8F, -6.09F);
 		this.earL.addBox(0.0F, 0.0F, 0.0F, 5, 4, 2, 0.0F);
-		this.setRotateAngle(earL, -0.5654866776461628F, 0.0F, 0.5454153912482279F);
+		this.setRotateAngle(earL, -0.5654866776461628F, 0.0F,
+				0.5454153912482279F);
 		this.tail4 = new ModelRenderer(this, 250, 147);
 		this.tail4.setRotationPoint(0.0F, 0.09F, 11.05F);
 		this.tail4.addBox(0.0F, 0.0F, 0.0F, 2, 2, 12, 0.0F);
@@ -151,11 +155,13 @@ public class ModelSabertooth extends ModelBase
 		this.mainbody.addBox(1.5F, 0.0F, 0.0F, 19, 22, 22, 0.0F);
 		this.setRotateAngle(mainbody, 0.03490658503988659F, -0.0F, 0.0F);
 		this.secondbodyunder = new ModelRenderer(this, 116, 6);
-		this.secondbodyunder.setRotationPoint(1.5F, 11.996339847402526F, 8.828806842695242F);
+		this.secondbodyunder.setRotationPoint(1.5F, 11.996339847402526F,
+				8.828806842695242F);
 		this.secondbodyunder.addBox(0.0F, 0.0F, 0.0F, 15, 7, 8, 0.0F);
 		this.setRotateAngle(secondbodyunder, 0.16403100040700766F, 0.0F, 0.0F);
 		this.thirdbody = new ModelRenderer(this, 181, 0);
-		this.thirdbody.setRotationPoint(1.0F, 0.5226256258925552F, 8.045300644174858F);
+		this.thirdbody.setRotationPoint(1.0F, 0.5226256258925552F,
+				8.045300644174858F);
 		this.thirdbody.addBox(0.0F, 0.0F, 0.0F, 16, 16, 27, 0.0F);
 		this.setRotateAngle(thirdbody, -0.05948577821254731F, 0.0F, 0.0F);
 		this.tail = new ModelRenderer(this, 250, 79);
@@ -171,7 +177,8 @@ public class ModelSabertooth extends ModelBase
 		this.footBL.addBox(0.0F, 0.0F, 0.0F, 8, 4, 10, 0.0F);
 		this.setRotateAngle(footBL, 0.14870205226991687F, 0.0F, 0.0F);
 		this.bottomjaw = new ModelRenderer(this, 94, 56);
-		this.bottomjaw.setRotationPoint(0.0F, 10.695234177486201F, -11.691810601226814F);
+		this.bottomjaw.setRotationPoint(0.0F, 10.695234177486201F,
+				-11.691810601226814F);
 		this.bottomjaw.addBox(-3.0F, 0.04F, -8.12F, 6, 3, 8, 0.0F);
 		this.setRotateAngle(bottomjaw, -0.06359470714748088F, 0.0F, 0.0F);
 		this.neck2 = new ModelRenderer(this, 280, 4);
@@ -203,7 +210,8 @@ public class ModelSabertooth extends ModelBase
 		this.legbaseBR.addBox(0.0F, 0.0F, 0.0F, 8, 18, 12, 0.0F);
 		this.setRotateAngle(legbaseBR, -0.11903145498601327F, 0.0F, 0.0F);
 		this.underneck = new ModelRenderer(this, 284, 3);
-		this.underneck.setRotationPoint(1.0F, 15.335157874150148F, -5.433500986922754F);
+		this.underneck.setRotationPoint(1.0F, 15.335157874150148F,
+				-5.433500986922754F);
 		this.underneck.addBox(-7.0F, -0.18F, -12.07F, 12, 6, 12, 0.0F);
 		this.setRotateAngle(underneck, -0.6771877497737998F, 0.0F, 0.0F);
 		this.legFR.addChild(this.footFR);
@@ -251,18 +259,16 @@ public class ModelSabertooth extends ModelBase
 	{
 		// For scaling the model
 		double scale = 0.7;
-		double offset = 0.725;
 		GlStateManager.pushMatrix();
-		GlStateManager.translate(this.mainbody.offsetX, this.mainbody.offsetY + offset,
-				this.mainbody.offsetZ);
-		GlStateManager.translate(this.mainbody.rotationPointX * f5,
-				this.mainbody.rotationPointY * f5, this.mainbody.rotationPointZ * f5);
-		// TODO Scaling TEST
+		GlStateManager.translate(0, this.mainbody.rotationPointY * f5 * scale,
+				this.mainbody.rotationPointZ * f5 * scale);
+		GlStateManager.translate(this.mainbody.rotationPointX * f5 * scale,
+				this.mainbody.rotationPointY * f5 * scale,
+				this.mainbody.rotationPointZ * f5 * scale);
 		GlStateManager.scale(1D * scale, 0.98D * scale, 1D * scale);
-		GlStateManager.translate(-this.mainbody.offsetX, -this.mainbody.offsetY,
-				-this.mainbody.offsetZ);
-		GlStateManager.translate(-this.mainbody.rotationPointX * f5,
-				-this.mainbody.rotationPointY * f5, -this.mainbody.rotationPointZ * f5);
+		GlStateManager.translate(-this.mainbody.rotationPointX * f5 * scale,
+				-this.mainbody.rotationPointY * f5 * scale,
+				-this.mainbody.rotationPointZ * f5 * scale);
 		this.mainbody.render(f5);
 		GlStateManager.popMatrix();
 	}

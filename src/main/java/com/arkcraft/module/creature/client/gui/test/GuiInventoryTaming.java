@@ -115,25 +115,29 @@ public class GuiInventoryTaming extends GuiContainer
 		int stats_y = STATS_Y_START;
 
 		// health
-		drawTexturedModalRect(guiLeft + stats_x, guiTop + stats_y, stats_u,
+		drawTexturedModalRect(guiLeft + stats_x,
+				guiTop + stats_y + baseHeight - healthHeight, stats_u,
 				stats_v + baseHeight - healthHeight, baseHeight, healthHeight);
 		stats_x += 22;
 		stats_v += 18;
 
 		// weight
-		drawTexturedModalRect(guiLeft + stats_x, guiTop + stats_y, stats_u,
+		drawTexturedModalRect(guiLeft + stats_x,
+				guiTop + stats_y + baseHeight - weightHeight, stats_u,
 				stats_v + baseHeight - weightHeight, baseHeight, weightHeight);
 		stats_x += 22;
 		stats_v += 18;
 
 		// oxygen
-		drawTexturedModalRect(guiLeft + stats_x, guiTop + stats_y, stats_u,
+		drawTexturedModalRect(guiLeft + stats_x,
+				guiTop + stats_y + baseHeight - oxygenHeight, stats_u,
 				stats_v + baseHeight - oxygenHeight, baseHeight, oxygenHeight);
 		stats_x += 22;
 		stats_v += 18;
 
 		// food
-		drawTexturedModalRect(guiLeft + stats_x, guiTop + stats_y, stats_u,
+		drawTexturedModalRect(guiLeft + stats_x,
+				guiTop + stats_y + baseHeight - foodHeight, stats_u,
 				stats_v + baseHeight - foodHeight, baseHeight, foodHeight);
 		stats_x += 22;
 		stats_v += 18;
@@ -151,7 +155,8 @@ public class GuiInventoryTaming extends GuiContainer
 		stats_v += 18;
 
 		// stamina
-		drawTexturedModalRect(guiLeft + stats_x, guiTop + stats_y, stats_u,
+		drawTexturedModalRect(guiLeft + stats_x,
+				guiTop + stats_y + baseHeight - staminaHeight, stats_u,
 				stats_v + baseHeight - staminaHeight, baseHeight, staminaHeight);
 		stats_x += 22;
 		stats_v += 18;
@@ -179,7 +184,7 @@ public class GuiInventoryTaming extends GuiContainer
 		}
 		else if (mouseX >= STATS_X_START + 22 && mouseX <= STATS_X_START + 22 + 18 && mouseY >= STATS_Y_START && mouseY <= STATS_Y_START + 18)
 		{
-			tipList.add(creature.getWeight() + "/" + creature.getMaxWeight());
+			tipList.add(creature.countStacks() + "/" + creature.getMaxWeight());
 		}
 		else if (mouseX >= STATS_X_START + 22 * 2 && mouseX <= STATS_X_START + 22 * 2 + 18 && mouseY >= STATS_Y_START && mouseY <= STATS_Y_START + 18)
 		{
@@ -191,11 +196,11 @@ public class GuiInventoryTaming extends GuiContainer
 		}
 		else if (mouseX >= STATS_X_START + 22 * 4 && mouseX <= STATS_X_START + 22 * 4 + 18 && mouseY >= STATS_Y_START && mouseY <= STATS_Y_START + 18)
 		{
-			tipList.add(creature.getDamage() + "%");
+			tipList.add(creature.getMaxDamage() + "%");
 		}
 		else if (mouseX >= STATS_X_START + 22 * 5 && mouseX <= STATS_X_START + 22 * 5 + 18 && mouseY >= STATS_Y_START && mouseY <= STATS_Y_START + 18)
 		{
-			tipList.add(creature.getSpeed() + "%");
+			tipList.add(creature.getMaxSpeed() + "%");
 		}
 		else if (mouseX >= STATS_X_START + 22 * 6 && mouseX <= STATS_X_START + 22 * 6 + 18 && mouseY >= STATS_Y_START && mouseY <= STATS_Y_START + 18)
 		{
@@ -213,12 +218,12 @@ public class GuiInventoryTaming extends GuiContainer
 		{
 			if (scrollAmount > 0) scrollAmount = 1;
 			else if (scrollAmount < 0) scrollAmount = -1;
-			adjustScrollPosition(scrollAmount);
+			adjustScroll(scrollAmount);
 		}
 		else super.handleMouseInput();
 	}
 
-	private void adjustScrollPosition(int scrollAmount)
+	private void adjustScroll(int scrollAmount)
 	{
 		((ContainerInventoryTaming) this.inventorySlots).scroll(scrollAmount);
 		ARKCraft.modChannel.sendToServer(new ScrollingMessage(scrollAmount));
@@ -265,7 +270,7 @@ public class GuiInventoryTaming extends GuiContainer
 		}
 		int scrollDiv = SCROLL_BAR_HEIGHT / inv.getMaxOffset();
 		int adjustScroll = newScrollPos / scrollDiv - inv.getScrollingOffset();
-		adjustScrollPosition(adjustScroll);
+		adjustScroll(adjustScroll);
 	}
 
 	@Override

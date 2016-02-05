@@ -43,9 +43,9 @@ public class ForgeCraftingHandler
 		return fuels.put(i, new Integer(burnTime)) == null;
 	}
 
-	public static boolean registerRecipe(String id, ForgeRecipe recipe)
+	public static void registerRecipe(String id, ForgeRecipe recipe)
 	{
-		return recipes.putIfAbsent(id, recipe) != null;
+		recipes.put(id, recipe);
 	}
 
 	public static Map<String, ForgeRecipe> getRecipes()
