@@ -35,7 +35,7 @@ import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
  */
 public class EntityARKCreature extends EntityAnimal implements IEntityAdditionalSpawnData, IInventory
 {
-	private static final int DATA_WATCHER_UNCONSCIOUS = 25, DATA_WATCHER_LEVEL = 26, DATA_WATCHER_TAMING_PROGRESS = 27,
+	private static final int DATA_WATCHER_UNCONSCIOUS = 20, DATA_WATCHER_LEVEL = 21, DATA_WATCHER_TAMING_PROGRESS = 27,
 			DATA_WATCHER_XP = 28;
 
 	public static final int HEALTH = 0, DAMAGE = 1, STAMINA = 2, WEIGHT = 3, OXYGEN = 4, FOOD = 5, SPEED = 6;
@@ -83,7 +83,7 @@ public class EntityARKCreature extends EntityAnimal implements IEntityAdditional
 			food = maxFood;
 			stamina = maxStamina;
 			torpor = 0;
-			inventory = new ItemStack[maxWeight];
+			inventory = new ItemStack[maxWeight / WEIGHT_PER_STACK];
 		}
 
 		this.dataWatcher.addObject(DATA_WATCHER_UNCONSCIOUS, (byte) (unconscious ? 1 : 0));
@@ -165,7 +165,7 @@ public class EntityARKCreature extends EntityAnimal implements IEntityAdditional
 		food = buffer.readInt();
 		stamina = buffer.readInt();
 		torpor = buffer.readInt();
-		inventory = new ItemStack[maxWeight];
+		updateEntityAttributes();
 	}
 
 	// private UUID owner;
@@ -197,6 +197,35 @@ public class EntityARKCreature extends EntityAnimal implements IEntityAdditional
 	//
 	// // levelManager.initDataWatcher();
 	// }
+
+	@Override
+	public void applyEntityAttributes()
+	{
+		super.applyEntityAttributes();
+		if (!this.worldObj.isRemote)
+		{
+			this.updateEntityAttributes();
+		}
+		this.updateHitbox();
+	}
+
+	public void updateEntityAttributes()
+	{
+		this.getAttributeMap().registerAttribute(SharedMonsterAttributes.attackDamage);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(maxHealth);
+		// TODO change speed value -- way to high
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(1);
+		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(maxDamage);
+		if (inventory != null)
+		{
+			ItemStack[] inventoryOld = inventory;
+			inventory = new ItemStack[maxWeight / WEIGHT_PER_STACK];
+			for (int i = 0; i < inventoryOld.length; i++)
+			{
+				inventory[i] = inventoryOld[i];
+			}
+		}
+	}
 
 	@Override
 	public void onDeath(DamageSource cause)
@@ -383,27 +412,6 @@ public class EntityARKCreature extends EntityAnimal implements IEntityAdditional
 	{
 		int growthTime = ticksExisted > creature.getGrowthTime() ? creature.getGrowthTime() : ticksExisted;
 		return (adult - baby) / creature.getGrowthTime() * growthTime + baby;
-	}
-
-	@Override
-	public void applyEntityAttributes()
-	{
-		super.applyEntityAttributes();
-		this.updateEntityAttributes();
-		this.updateHitbox();
-	}
-
-	public void updateEntityAttributes()
-	{
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(maxHealth);
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(maxSpeed);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(maxDamage);
-		ItemStack[] inventoryOld = inventory;
-		inventory = new ItemStack[maxWeight / WEIGHT_PER_STACK];
-		for (int i = 0; i < inventoryOld.length; i++)
-		{
-			inventory[i] = inventoryOld[i];
-		}
 	}
 
 	// @Override
