@@ -6,6 +6,7 @@ import net.minecraft.item.ItemStack;
 import com.arkcraft.module.blocks.common.blocks.ARKCraftBlocks;
 import com.arkcraft.module.blocks.common.items.ARKCraftItems;
 import com.arkcraft.module.weapon.WeaponModule;
+import com.arkcraft.module.weapon.init.Items;
 
 /**
  * @author wildbill22 Notes about adding recipes: 1) If a block has meta data:
@@ -113,12 +114,12 @@ public class PlayerCraftingManager extends ARKCraftingManager
 				new ItemStack(ARKCraftItems.hide, 15), new ItemStack(ARKCraftItems.fiber, 6));
 
 		// Stone Pick
-		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.stone_pick, 1),
+		getInstance().addShapelessRecipe(new ItemStack(Items.stone_pick, 1),
 				new ItemStack(ARKCraftItems.rock, 1), new ItemStack(ARKCraftItems.wood, 1),
 				new ItemStack(ARKCraftItems.thatch, 10));
 
 		// Stone Hatchet
-		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.stone_hatchet, 1),
+		getInstance().addShapelessRecipe(new ItemStack(Items.stone_hatchet, 1),
 				new ItemStack(ARKCraftItems.thatch, 10), new ItemStack(ARKCraftItems.flint, 1),
 				new ItemStack(ARKCraftItems.wood, 1));
 	}

@@ -1,10 +1,10 @@
 package com.arkcraft.module.blocks.common.handlers;
 
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 import com.arkcraft.module.blocks.common.items.ARKCraftItems;
 import com.arkcraft.module.weapon.WeaponModule;
+import com.arkcraft.module.weapon.init.Items;
 
 /**
  * @author wildbill22 Notes about adding recipes: 1) If a block has meta data:
@@ -36,7 +36,7 @@ public class SmithyCraftingManager extends ARKCraftingManager
 
 	public static void registerSmithyCraftingRecipes()
 	{
-
+		//TODO
 		// Small Saddle
 		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.saddle_small, 1),
 				new ItemStack(ARKCraftItems.hide, 15), new ItemStack(ARKCraftItems.metal, 10),
@@ -44,11 +44,11 @@ public class SmithyCraftingManager extends ARKCraftingManager
 		// Medium Saddle
 		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.saddle_medium, 1),
 				new ItemStack(ARKCraftItems.hide, 48), new ItemStack(ARKCraftItems.metal, 32),
-				new ItemStack(ARKCraftItems.fiber, 32), new ItemStack(Items.diamond, 1));
+				new ItemStack(ARKCraftItems.fiber, 32), new ItemStack(ARKCraftItems.hide, 50));
 		// Large Saddle
 		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.saddle_large, 1),
 				new ItemStack(ARKCraftItems.chitin, 32), new ItemStack(ARKCraftItems.metal, 16),
-				new ItemStack(ARKCraftItems.fiber, 32), new ItemStack(Items.diamond, 4));
+				new ItemStack(ARKCraftItems.fiber, 32), new ItemStack(ARKCraftItems.hide, 40));
 
 		// Chitin Armor
 		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.chitinChest, 1),
@@ -81,11 +81,11 @@ public class SmithyCraftingManager extends ARKCraftingManager
 				new ItemStack(ARKCraftItems.hide, 20));
 
 		// Metal Pick
-		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.metal_pick, 1),
+		getInstance().addShapelessRecipe(new ItemStack(Items.metal_pick, 1),
 				new ItemStack(ARKCraftItems.metal, 1), new ItemStack(ARKCraftItems.wood, 1),
 				new ItemStack(ARKCraftItems.hide, 10));
 		// Metal Hatchet
-		getInstance().addShapelessRecipe(new ItemStack(ARKCraftItems.metal_hatchet, 1),
+		getInstance().addShapelessRecipe(new ItemStack(Items.metal_hatchet, 1),
 				new ItemStack(ARKCraftItems.metal, 8), new ItemStack(ARKCraftItems.wood, 1),
 				new ItemStack(ARKCraftItems.hide, 10));
 
