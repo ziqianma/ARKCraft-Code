@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.minecraft.item.Item;
-import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.common.util.EnumHelper;
@@ -23,38 +22,30 @@ public class ARKCraftItems
 	public static ItemARKFood tintoBerry, amarBerry, azulBerry, mejoBerry,
 			narcoBerry, stimBerry, meat_raw, meat_cooked, primemeat_raw,
 			primemeat_cooked, spoiled_meat;
-	public static ItemARKSeed tintoBerrySeed, amarBerrySeed, azulBerrySeed,
-			mejoBerrySeed, narcoBerrySeed, stimBerrySeed;
-	public static ItemARKBase rock, cementing_pastes, fiber, chitin, narcotics,
-			dodo_bag, dodo_feather, gun_powder, spark_powder, hide;
+	public static ItemARKSeed tintoBerrySeed, amarBerrySeed, azulBerrySeed, mejoBerrySeed, narcoBerrySeed, stimBerrySeed;
+	public static ItemARKBase rock, cementing_pastes, fiber, chitin, narcotics,dodo_bag, dodo_feather, gun_powder, spark_powder, hide;
 	public static ItemThatch thatch;
 	public static ItemARKBase wood, metal, metal_ingot, flint;
-	public static ItemFeces dodo_feces, player_feces, fertilizer;
+	public static ItemFeces small_feces, medium_feces, large_feces, fertilizer, player_feces;
 	public static ItemDinosaurEgg dodo_egg;
 	public static ItemDinosaurSaddle saddle_small, saddle_medium, saddle_large;
-	public static ItemARKArmor chitinHelm, chitinChest, chitinLegs,
-			chitinBoots;
+	public static ItemARKArmor chitinHelm, chitinChest, chitinLegs,chitinBoots;
 	public static ItemARKArmor clothHelm, clothChest, clothLegs, clothBoots;
 	public static ItemARKArmor hideHelm, hideChest, hideLegs, hideBoots;
+	public static ItemARKArmor furHelm, furChest, furLegs, furBoots;
 	public static Dossier dino_book;
 	public static ItemCrystal item_crystal;
 	public static ItemSpyGlass spy_glass;
-	public static ItemStonePick stone_pick;
-	public static ItemStoneHatchet stone_hatchet;
-	public static ItemMetalPick metal_pick;
-	public static ItemMetalHatchet metal_hatchet;
 
+	//Armor
 	public static ArmorMaterial CLOTH = EnumHelper.addArmorMaterial(
 			"CLOTH_MAT", "CLOTH_MAT", 4, new int[] { 1, 2, 1, 1 }, 15);
 	public static ArmorMaterial CHITIN = EnumHelper.addArmorMaterial(
 			"CHITIN_MAT", "CHITIN_MAT", 16, new int[] { 3, 7, 6, 3 }, 10);
-	public static ArmorMaterial HIDE = EnumHelper.addArmorMaterial("HIDE_MAT",
-			"HIDE_MAT", 40, new int[] { 3, 8, 6, 3 }, 30);
-
-	public static ToolMaterial METAL = EnumHelper.addToolMaterial("METAL_MAT",
-			3, 1500, 6.0F, 0.8F, 8);
-	public static ToolMaterial STONE = EnumHelper.addToolMaterial("STONE_MAT",
-			2, 500, 3.5F, 0.4F, 13);
+	public static ArmorMaterial HIDE = EnumHelper.addArmorMaterial
+			("HIDE_MAT", "HIDE_MAT", 40, new int[] { 3, 8, 6, 3 }, 30);
+	public static ArmorMaterial FUR = EnumHelper.addArmorMaterial(
+			"FUR_MAT", "HIDE_MAT", 40, new int[] { 3, 8, 6, 3 }, 30);
 
 	public static ARKCraftItems getInstance()
 	{
@@ -93,16 +84,10 @@ public class ARKCraftItems
 
 		// world generated
 
-		// Weapons and tools
+		
+		// Regular Items
 		rock = addItem("rock");
 		cementing_pastes = addItem("cementing_paste");
-
-		metal_pick = addMetalPick("metal_pick", METAL);
-		metal_hatchet = addMetalHatchet("metal_hatchet", METAL);
-		stone_hatchet = addStoneHatchet("stone_hatchet", STONE);
-		stone_pick = addStonePick("stone_pick", STONE);
-
-		// Regular Items
 		fiber = addItem("fiber");
 		thatch = addThatchItem("thatch");
 		wood = addItem("wood");
@@ -117,19 +102,16 @@ public class ARKCraftItems
 		hide = addItem("hide");
 		spy_glass = addSpyGlass("spy_glass");
 
-		// Block Items
-		// item_berry_bush = addBushItem("item_berry_bush");
-		// item_compost_bin = addCompostBinItem("item_compost_bin");
-		// item_smithy = addSmithyItem("item_smithy");
-		// item_crop_plot = addCropPlot("item_crop_plot");
-		// item_mortar_and_pestle =
-		// addMortarAndPestle("item_mortar_and_pestle");
-		// item_crystal = addCrystalItem("item_crystal");
-		// item_refining_forge = addRefiningForge("item_refining_forge");
-
 		// feces (2nd parameter is the seconds to decompose)
-		dodo_feces = addFecesItem(
-				"dodo_feces",
+		//TODO
+		small_feces = addFecesItem(
+				"small_feces",
+				ModuleItemBalance.CROP_PLOT.SECONDS_FOR_SMALL_FECES_TO_DECOMPOSE);
+		medium_feces = addFecesItem(
+				"medium_feces",
+				ModuleItemBalance.CROP_PLOT.SECONDS_FOR_SMALL_FECES_TO_DECOMPOSE);
+		large_feces = addFecesItem(
+				"large_feces",
 				ModuleItemBalance.CROP_PLOT.SECONDS_FOR_SMALL_FECES_TO_DECOMPOSE);
 		player_feces = addFecesItem(
 				"player_feces",
@@ -152,22 +134,25 @@ public class ARKCraftItems
 		saddle_large.setSaddleType(SaddleType.LARGE);
 
 		// Armor
-		chitinHelm = addArmorItem("chitin_helm", CHITIN, "chitinArmor", 0,
-				false);
-		chitinChest = addArmorItem("chitin_chest", CHITIN, "chitinArmor", 1,
-				false);
-		chitinLegs = addArmorItem("chitin_legs", CHITIN, "chitinArmor", 2,
-				false);
-		chitinBoots = addArmorItem("chitin_boots", CHITIN, "chitinArmor", 3,
-				false);
+		chitinHelm = addArmorItem("chitin_helm", CHITIN, "chitinArmor", 0,false);
+		chitinChest = addArmorItem("chitin_chest", CHITIN, "chitinArmor", 1,false);
+		chitinLegs = addArmorItem("chitin_legs", CHITIN, "chitinArmor", 2,false);
+		chitinBoots = addArmorItem("chitin_boots", CHITIN, "chitinArmor", 3,false);
+		
 		clothHelm = addArmorItem("cloth_helm", CLOTH, "clothArmor", 0, false);
 		clothChest = addArmorItem("cloth_chest", CLOTH, "clothArmor", 1, false);
 		clothLegs = addArmorItem("cloth_legs", CLOTH, "clothArmor", 2, false);
 		clothBoots = addArmorItem("cloth_boots", CLOTH, "clothArmor", 3, false);
-		hideHelm = addArmorItem("hide_helm", HIDE, "hideArmor", 0, true);
-		hideChest = addArmorItem("hide_chest", HIDE, "hideArmor", 1, true);
-		hideLegs = addArmorItem("hide_legs", HIDE, "hideArmor", 2, true);
-		hideBoots = addArmorItem("hide_boots", HIDE, "hideArmor", 3, true);
+		
+		hideHelm = addArmorItem("hide_helm", HIDE, "hideArmor", 0, false);
+		hideChest = addArmorItem("hide_chest", HIDE, "hideArmor", 1, false);
+		hideLegs = addArmorItem("hide_legs", HIDE, "hideArmor", 2, false);
+		hideBoots = addArmorItem("hide_boots", HIDE, "hideArmor", 3, false);
+		
+		furHelm = addArmorItem("fur_helm", FUR, "furArmor", 0, false);
+		furChest = addArmorItem("fur_chest", FUR, "furArmor", 1, false);
+		furLegs = addArmorItem("fur_legs", FUR, "furArmor", 2, false);
+		furBoots = addArmorItem("fur_boots", FUR, "furArmor", 3, false);
 	}
 
 	protected static ItemARKBase addItem(String name)
@@ -182,34 +167,6 @@ public class ARKCraftItems
 		ItemThatch t = new ItemThatch();
 		registerItem(name, t);
 		return t;
-	}
-
-	protected static ItemMetalPick addMetalPick(String name, ToolMaterial m)
-	{
-		ItemMetalPick i = new ItemMetalPick(m);
-		registerItem(name, i);
-		return i;
-	}
-
-	protected static ItemStonePick addStonePick(String name, ToolMaterial m)
-	{
-		ItemStonePick i = new ItemStonePick(m);
-		registerItem(name, i);
-		return i;
-	}
-
-	protected static ItemStoneHatchet addStoneHatchet(String name, ToolMaterial m)
-	{
-		ItemStoneHatchet i = new ItemStoneHatchet(m);
-		registerItem(name, i);
-		return i;
-	}
-
-	protected static ItemMetalHatchet addMetalHatchet(String name, ToolMaterial m)
-	{
-		ItemMetalHatchet i = new ItemMetalHatchet(m);
-		registerItem(name, i);
-		return i;
 	}
 
 	protected static ItemARKSeed addSeedItem(String name)

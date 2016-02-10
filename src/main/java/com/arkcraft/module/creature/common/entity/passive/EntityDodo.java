@@ -152,7 +152,7 @@ public class EntityDodo extends EntityTameable
 		{
 			this.playSound(ARKCraft.MODID + ":" + "dodo_defficating", 1.0F,
 					(this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
-			this.dropItem(ARKCraftItems.dodo_feces, 1);
+			this.dropItem(ARKCraftItems.small_feces, 1);
 			this.timeUntilNextEgg = this.rand.nextInt(3000) + 3000;
 		}
 	}

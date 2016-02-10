@@ -1,7 +1,7 @@
 {
     "parent":"builtin/generated",
     "textures": {
-        "layer0":"arkcraft:items/dodo_feces"
+        "layer0":"arkcraft:items/ballista_bolt"
     },
     "display": {
         "thirdperson": {

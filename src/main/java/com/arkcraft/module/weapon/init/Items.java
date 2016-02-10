@@ -6,6 +6,7 @@ import java.util.Map;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
+import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import com.arkcraft.module.blocks.common.config.ModuleItemBalance;
@@ -35,6 +36,10 @@ import com.arkcraft.module.weapon.common.entity.dispense.DispenseTranquilizer;
 import com.arkcraft.module.weapon.common.item.ItemARKWeaponBase;
 import com.arkcraft.module.weapon.common.item.ItemBallista;
 import com.arkcraft.module.weapon.common.item.ItemGrenade;
+import com.arkcraft.module.weapon.common.item.ItemMetalHatchet;
+import com.arkcraft.module.weapon.common.item.ItemMetalPick;
+import com.arkcraft.module.weapon.common.item.ItemStoneHatchet;
+import com.arkcraft.module.weapon.common.item.ItemStonePick;
 import com.arkcraft.module.weapon.common.item.ItemWoodenClub;
 import com.arkcraft.module.weapon.common.item.ammo.ItemProjectile;
 import com.arkcraft.module.weapon.common.item.attachment.AttachmentType;
@@ -67,6 +72,15 @@ public class Items
 	public ItemRangedWeapon rocket_launcher, tranq_gun, simple_pistol,
 			fabricated_pistol, longneck_rifle, shotgun, crossbow;
 	public ItemBallista ballista;
+	public static ItemStonePick stone_pick;
+	public static ItemStoneHatchet stone_hatchet;
+	public static ItemMetalPick metal_pick;
+	public static ItemMetalHatchet metal_hatchet;
+	
+	public static ToolMaterial METAL = EnumHelper.addToolMaterial("METAL_MAT",
+			3, 1500, 6.0F, 0.8F, 8);
+	public static ToolMaterial STONE = EnumHelper.addToolMaterial("STONE_MAT",
+			2, 500, 3.5F, 0.4F, 13);
 
 	public Items()
 	{
@@ -88,6 +102,12 @@ public class Items
 		ironPike = addWeapon("ironPike", ToolMaterial.IRON);
 		ballista = addBallista("ballista");
 		ballista_bolt = addItemProjectile("ballista_bolt");
+		
+		//Tools
+		metal_pick = addMetalPick("metal_pick", METAL);
+		metal_hatchet = addMetalHatchet("metal_hatchet", METAL);
+		stone_hatchet = addStoneHatchet("stone_hatchet", STONE);
+		stone_pick = addStonePick("stone_pick", STONE);
 
 		// Bows
 		compound_bow = new ItemCompoundBow();
@@ -310,6 +330,34 @@ public class Items
 		ItemARKWeaponBase weapon = new ItemARKWeaponBase(mat);
 		registerItem(name, weapon);
 		return weapon;
+	}
+	
+	public ItemMetalPick addMetalPick(String name, ToolMaterial m)
+	{
+		ItemMetalPick i = new ItemMetalPick(m);
+		registerItem(name, i);
+		return i;
+	}
+
+	public ItemStonePick addStonePick(String name, ToolMaterial m)
+	{
+		ItemStonePick i = new ItemStonePick(m);
+		registerItem(name, i);
+		return i;
+	}
+
+	public ItemStoneHatchet addStoneHatchet(String name, ToolMaterial m)
+	{
+		ItemStoneHatchet i = new ItemStoneHatchet(m);
+		registerItem(name, i);
+		return i;
+	}
+
+	public ItemMetalHatchet addMetalHatchet(String name, ToolMaterial m)
+	{
+		ItemMetalHatchet i = new ItemMetalHatchet(m);
+		registerItem(name, i);
+		return i;
 	}
 
 	public void registerItem(String name, Item item)

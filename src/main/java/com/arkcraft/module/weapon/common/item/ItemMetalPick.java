@@ -1,4 +1,4 @@
-package com.arkcraft.module.blocks.common.items;
+package com.arkcraft.module.weapon.common.item;
 
 import com.google.common.collect.ImmutableSet;
 import net.minecraft.block.Block;
@@ -11,7 +11,7 @@ import java.util.Set;
 public class ItemMetalPick extends ItemPickaxe
 {
 
-    protected ItemMetalPick(ToolMaterial material)
+	public ItemMetalPick(ToolMaterial material)
     {
 
         super(material);
