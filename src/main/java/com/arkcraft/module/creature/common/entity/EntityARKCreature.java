@@ -1,25 +1,11 @@
 package com.arkcraft.module.creature.common.entity;
 
-import io.netty.buffer.ByteBuf;
-
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Random;
 import java.util.UUID;
-
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityAgeable;
-import net.minecraft.entity.IProjectile;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.util.DamageSource;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 
 import com.arkcraft.module.blocks.common.items.ItemDinosaurSaddle;
 import com.arkcraft.module.core.ARKCraft;
@@ -28,26 +14,37 @@ import com.arkcraft.module.core.common.entity.data.ARKPlayer;
 import com.arkcraft.module.core.common.handlers.GuiHandler;
 import com.arkcraft.module.creature.common.entity.creature.Creature;
 
+import io.netty.buffer.ByteBuf;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.IProjectile;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.DamageSource;
+import net.minecraft.world.World;
+import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
+
 /**
  * @author gegy1000, Lewis_McReu
  */
-public class EntityARKCreature extends EntityAnimal implements
-		IEntityAdditionalSpawnData, IInventory
+public class EntityARKCreature extends EntityAnimal implements IEntityAdditionalSpawnData, IInventory
 {
-	private static final int DATA_WATCHER_UNCONSCIOUS = 25,
-			DATA_WATCHER_LEVEL = 26, DATA_WATCHER_TAMING_PROGRESS = 27,
+	private static final int DATA_WATCHER_UNCONSCIOUS = 25, DATA_WATCHER_LEVEL = 26, DATA_WATCHER_TAMING_PROGRESS = 27,
 			DATA_WATCHER_XP = 28;
 
-	public static final int HEALTH = 0, DAMAGE = 1, STAMINA = 2, WEIGHT = 3,
-			OXYGEN = 4, FOOD = 5, SPEED = 6;
+	public static final int HEALTH = 0, DAMAGE = 1, STAMINA = 2, WEIGHT = 3, OXYGEN = 4, FOOD = 5, SPEED = 6;
 
 	private static final int WEIGHT_PER_STACK = 10;
 
-	private int oxygen, food, stamina, torpor, level, tamingProgress, xp,
-			points = 0;
+	private int oxygen, food, stamina, torpor, level, tamingProgress, xp, points = 0;
 
-	private int maxHealth, maxWeight, maxOxygen, maxFood, maxDamage, maxSpeed,
-			maxStamina, maxTorpor, baseLevel;
+	private int maxHealth, maxWeight, maxOxygen, maxFood, maxDamage, maxSpeed, maxStamina, maxTorpor, baseLevel;
 
 	private boolean unconscious, grownUp;
 
@@ -88,6 +85,11 @@ public class EntityARKCreature extends EntityAnimal implements
 			torpor = 0;
 			inventory = new ItemStack[maxWeight];
 		}
+
+		this.dataWatcher.addObject(DATA_WATCHER_UNCONSCIOUS, (byte) (unconscious ? 1 : 0));
+		this.dataWatcher.addObject(DATA_WATCHER_LEVEL, level);
+		this.dataWatcher.addObject(DATA_WATCHER_TAMING_PROGRESS, tamingProgress);
+		this.dataWatcher.addObject(DATA_WATCHER_XP, xp);
 	}
 
 	private void distributeWildPoints(int points)
@@ -118,20 +120,14 @@ public class EntityARKCreature extends EntityAnimal implements
 		int foodInc = points;
 
 		// TODO fix in comparison to ark
-		maxHealth = (int) (creature.getBaseHealth() + creature
-				.getWildHealthIncrease() * healthInc);
-		maxWeight = (int) (creature.getBaseWeight() + creature
-				.getWildWeightIncrease() * weightInc) / WEIGHT_PER_STACK;
-		maxOxygen = (int) (creature.getBaseOxygen() + creature
-				.getWildOxygenIncrease() * oxygenInc);
-		maxFood = (int) (creature.getBaseFood() + creature
-				.getWildFoodIncrease() * foodInc);
+		maxHealth = (int) (creature.getBaseHealth() + creature.getWildHealthIncrease() * healthInc);
+		maxWeight = (int) (creature.getBaseWeight() + creature.getWildWeightIncrease() * weightInc) / WEIGHT_PER_STACK;
+		maxOxygen = (int) (creature.getBaseOxygen() + creature.getWildOxygenIncrease() * oxygenInc);
+		maxFood = (int) (creature.getBaseFood() + creature.getWildFoodIncrease() * foodInc);
 		maxDamage = (int) (100 + creature.getWildDamageIncrease() * damageInc);
 		maxSpeed = 100;
-		maxStamina = (int) (creature.getBaseStamina() + creature
-				.getWildStaminaIncrease() * staminaInc);
-		maxTorpor = (int) (creature.getBaseTorpor() + creature
-				.getWildTorporIncrease() * torporInc);
+		maxStamina = (int) (creature.getBaseStamina() + creature.getWildStaminaIncrease() * staminaInc);
+		maxTorpor = (int) (creature.getBaseTorpor() + creature.getWildTorporIncrease() * torporInc);
 	}
 
 	@Override
@@ -225,8 +221,8 @@ public class EntityARKCreature extends EntityAnimal implements
 		// TODO grant xp to owner nearby
 		if (actualKiller instanceof EntityARKCreature)
 		{
-			if (((EntityARKCreature) killedBy).isOwned()) ((EntityARKCreature) killedBy)
-					.addXP(creature.getBaseKillXP());
+			if (((EntityARKCreature) killedBy)
+					.isOwned()) ((EntityARKCreature) killedBy).addXP(creature.getBaseKillXP());
 		}
 		else if (actualKiller instanceof EntityPlayer)
 		{
@@ -252,8 +248,7 @@ public class EntityARKCreature extends EntityAnimal implements
 		GuiHandler.rightClickedEntity = this;
 		if (unconscious && !this.worldObj.isRemote && owner == null)
 		{
-			player.openGui(ARKCraft.instance, GUI.TAMING_GUI.getID(),
-					this.worldObj, (int) this.posX, (int) this.posY,
+			player.openGui(ARKCraft.instance, GUI.TAMING_GUI.getID(), this.worldObj, (int) this.posX, (int) this.posY,
 					(int) this.posZ);
 			return true;
 		}
@@ -302,8 +297,7 @@ public class EntityARKCreature extends EntityAnimal implements
 									// fair chance for high level creatures to
 									// have high torpor
 		{
-			if (shootingEntity instanceof EntityPlayer) this.tamer = shootingEntity
-					.getUniqueID();
+			if (shootingEntity instanceof EntityPlayer) this.tamer = shootingEntity.getUniqueID();
 			this.unconscious = true;
 			this.torpor = maxTorpor;
 			this.tamingProgress = 0;
@@ -314,8 +308,28 @@ public class EntityARKCreature extends EntityAnimal implements
 	public void onLivingUpdate()
 	{
 		super.onLivingUpdate();
-		// if (!worldObj.isRemote)
+
+		if (!grownUp)
 		{
+			updateHitbox();
+		}
+
+		if (torpor > 0) torpor -= creature.getTorporLossSpeed();
+
+		if (unconscious && torpor <= 0)
+		{
+			unconscious = false;
+			this.tamer = null;
+			torpor = 0;
+			tamingProgress = 0;
+		}
+
+		if (!worldObj.isRemote)
+		{
+			this.dataWatcher.updateObject(DATA_WATCHER_UNCONSCIOUS, (byte) (unconscious ? 1 : 0));
+			this.dataWatcher.updateObject(DATA_WATCHER_LEVEL, level);
+			this.dataWatcher.updateObject(DATA_WATCHER_TAMING_PROGRESS, tamingProgress);
+			this.dataWatcher.updateObject(DATA_WATCHER_XP, xp);
 			// this.dataWatcher.updateObject(DATA_WATCHER_AGE, creatureAge);
 			// this.dataWatcher.updateObject(DATA_WATCHER_TORPOR, torpor);
 			// this.dataWatcher.updateObject(DATA_WATCHER_STAMINA, stamina);
@@ -329,23 +343,13 @@ public class EntityARKCreature extends EntityAnimal implements
 			// this.dataWatcher.updateObject(DATA_WATCHER_SADDLED, (byte)
 			// (isSaddled() ? 1 : 0));
 
-			if (!grownUp)
-			{
-				updateHitbox();
-			}
-
-			if (torpor > 0) torpor -= creature.getTorporLossSpeed();
-
-			if (unconscious && torpor <= 0)
-			{
-				unconscious = false;
-				this.tamer = null;
-				torpor = 0;
-				tamingProgress = 0;
-			}
 		}
-		// else
+		else
 		{
+			level = dataWatcher.getWatchableObjectInt(DATA_WATCHER_LEVEL);
+			tamingProgress = dataWatcher.getWatchableObjectInt(DATA_WATCHER_TAMING_PROGRESS);
+			unconscious = dataWatcher.getWatchableObjectByte(DATA_WATCHER_UNCONSCIOUS) == 1 ? true : false;
+			xp = dataWatcher.getWatchableObjectInt(DATA_WATCHER_XP);
 			// creatureAge =
 			// dataWatcher.getWatchableObjectInt(DATA_WATCHER_AGE);
 			// torpor = dataWatcher.getWatchableObjectInt(DATA_WATCHER_TORPOR);
@@ -370,16 +374,14 @@ public class EntityARKCreature extends EntityAnimal implements
 
 	public void updateHitbox()
 	{
-		this.setSize(
-				scaleByAge(creature.getBabySizeXZ(), creature.getAdultSizeXZ()),
+		this.setSize(scaleByAge(creature.getBabySizeXZ(), creature.getAdultSizeXZ()),
 				scaleByAge(creature.getBabySizeY(), creature.getAdultSizeY()));
 		if (ticksExisted >= creature.getGrowthTime()) grownUp = true;
 	}
 
 	public float scaleByAge(float baby, float adult)
 	{
-		int growthTime = ticksExisted > creature.getGrowthTime() ? creature
-				.getGrowthTime() : ticksExisted;
+		int growthTime = ticksExisted > creature.getGrowthTime() ? creature.getGrowthTime() : ticksExisted;
 		return (adult - baby) / creature.getGrowthTime() * growthTime + baby;
 	}
 
@@ -393,12 +395,9 @@ public class EntityARKCreature extends EntityAnimal implements
 
 	public void updateEntityAttributes()
 	{
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(
-				maxHealth);
-		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(
-				maxSpeed);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(
-				maxDamage);
+		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(maxHealth);
+		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(maxSpeed);
+		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(maxDamage);
 		ItemStack[] inventoryOld = inventory;
 		inventory = new ItemStack[maxWeight / WEIGHT_PER_STACK];
 		for (int i = 0; i < inventoryOld.length; i++)
@@ -456,8 +455,7 @@ public class EntityARKCreature extends EntityAnimal implements
 		this.xp = nbt.getInteger("xp");
 		inventory = new ItemStack[maxWeight];
 
-		if (nbt.hasKey("owner")) owner = UUID
-				.fromString(nbt.getString("owner"));
+		if (nbt.hasKey("owner")) owner = UUID.fromString(nbt.getString("owner"));
 
 		if (nbt.hasKey("tamer"))
 		{
@@ -468,8 +466,7 @@ public class EntityARKCreature extends EntityAnimal implements
 
 		this.grownUp = nbt.getBoolean("grownUp");
 
-		this.saddle = ItemStack.loadItemStackFromNBT(nbt
-				.getCompoundTag("saddle"));
+		this.saddle = ItemStack.loadItemStackFromNBT(nbt.getCompoundTag("saddle"));
 		NBTTagList inv = nbt.getTagList("creatureInventory", 10);
 		for (int i = 0; i < inv.tagCount(); i++)
 		{
@@ -640,8 +637,9 @@ public class EntityARKCreature extends EntityAnimal implements
 	@Override
 	public boolean isItemValidForSlot(int index, ItemStack stack)
 	{
-		return index > inventory.length ? stack != null && stack.getItem() instanceof ItemDinosaurSaddle && ((ItemDinosaurSaddle) stack
-				.getItem()).getSaddleType().equals(creature.getSaddleType()) : true;
+		return index > inventory.length ? stack != null && stack
+				.getItem() instanceof ItemDinosaurSaddle && ((ItemDinosaurSaddle) stack.getItem()).getSaddleType()
+						.equals(creature.getSaddleType()) : true;
 	}
 
 	@Override
@@ -842,31 +840,24 @@ public class EntityARKCreature extends EntityAnimal implements
 		try
 		{
 			Class<? extends EntityARKCreature> cl = this.getClass();
-			Constructor<? extends EntityARKCreature> co = cl
-					.getConstructor(World.class);
+			Constructor<? extends EntityARKCreature> co = cl.getConstructor(World.class);
 			child = co.newInstance(this.worldObj);
 		}
-		catch (InvocationTargetException e)
+		catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e)
 		{
-			e.printStackTrace();
-		} catch (NoSuchMethodException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		child.grownUp = false;
 		child.updateHitbox();
 		return child;
+	}
+
+	public Collection<Item> getFoodOptions()
+	{
+		return Collections.emptySet();
+	}
+
+	public void addFoodOption(Item food)
+	{
 	}
 }
