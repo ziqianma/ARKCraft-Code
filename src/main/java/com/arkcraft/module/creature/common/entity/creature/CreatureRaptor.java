@@ -6,8 +6,8 @@ import com.arkcraft.module.creature.common.entity.test.EntityRaptor;
 
 public class CreatureRaptor extends Creature
 {
-	//TODO all raptor stats taken from ARK - subject to change
-	
+	// TODO all raptor stats taken from ARK - subject to change
+
 	@Override
 	public String getName()
 	{

@@ -1,12 +1,12 @@
 package com.arkcraft.module.blocks.common.handlers;
 
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-
 import com.arkcraft.module.blocks.common.blocks.ARKCraftBlocks;
 import com.arkcraft.module.blocks.common.items.ARKCraftItems;
 import com.arkcraft.module.weapon.WeaponModule;
 import com.arkcraft.module.weapon.init.Items;
+
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 /**
  * @author wildbill22 Notes about adding recipes: 1) If a block has meta data:
