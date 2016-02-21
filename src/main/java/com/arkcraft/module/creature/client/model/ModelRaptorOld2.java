@@ -1,12 +1,12 @@
 package com.arkcraft.module.creature.client.model;
 
+import com.arkcraft.lib.LogHelper;
+
 import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelBase;
 import net.ilexiconn.llibrary.client.model.modelbase.MowzieModelRenderer;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
-
-import com.arkcraft.lib.LogHelper;
 
 public class ModelRaptorOld2 extends MowzieModelBase
 {
@@ -86,46 +86,40 @@ public class ModelRaptorOld2 extends MowzieModelBase
 		textureHeight = 128;
 
 		this.Tail2 = new MowzieModelRenderer(this, 0, 106);
-		this.Tail2.setRotationPoint(0.0F, 0.23024359497401758F,
-				8.023024352625587F);
-		this.Tail2.addBox(-2.5F, -6.091729809042101E-5F, -0.0365100503297499F,
-				5, 4, 9, 0.0F);
+		this.Tail2.setRotationPoint(0.0F, 0.23024359497401758F, 8.023024352625587F);
+		this.Tail2.addBox(-2.5F, -6.091729809042101E-5F, -0.0365100503297499F, 5, 4, 9, 0.0F);
 		this.setRotateAngle(Tail2, 0.03490658503988659F, 0.0F, 0.0F);
 		this.HeadFeathers2 = new MowzieModelRenderer(this, 26, 41);
 		this.HeadFeathers2.setRotationPoint(0.0F, 0.0F, 0.0F);
 		this.HeadFeathers2.addBox(0.0F, -5.0F, -4.0F, 0, 6, 1, 0.0F);
 		this.setRotateAngle(HeadFeathers2, -1.1344640137963142F, 0.0F, 0.0F);
 		this.LeftArmFeathers4 = new MowzieModelRenderer(this, 24, 32);
-		this.LeftArmFeathers4.setRotationPoint(0.0F, 7.516910420957146E-4F,
-				0.003412681977403409F);
+		this.LeftArmFeathers4.setRotationPoint(0.0F, 7.516910420957146E-4F, 0.003412681977403409F);
 		this.LeftArmFeathers4.addBox(1.5F, 2.2F, 2.0F, 0, 1, 3, 0.0F);
 		this.setRotateAngle(LeftArmFeathers4, -0.3839770968142266F, 0.0F, 0.0F);
 		this.LeftLowerArm = new MowzieModelRenderer(this, 34, 23);
-		this.LeftLowerArm.setRotationPoint(0.7012158291296555F,
-				4.058946910821383F, 0.8504389079243522F);
+		this.LeftLowerArm.setRotationPoint(0.7012158291296555F, 4.058946910821383F,
+				0.8504389079243522F);
 		this.LeftLowerArm.addBox(-1.0F, 0.0F, -5.0F, 2, 2, 5, 0.0F);
 		this.LeftMiddleClaw = new MowzieModelRenderer(this, 62, 8);
 		this.LeftMiddleClaw.setRotationPoint(0.0F, 0.0F, 0.0F);
-		this.LeftMiddleClaw.addBox(-0.4000000059604645F, 7.0F, -5.0F, 1, 1, 1,
-				0.0F);
+		this.LeftMiddleClaw.addBox(-0.4000000059604645F, 7.0F, -5.0F, 1, 1, 1, 0.0F);
 		this.LeftInnerClaw2 = new MowzieModelRenderer(this, 62, 2);
 		this.LeftInnerClaw2.setRotationPoint(0.0F, 0.0F, 0.0F);
-		this.LeftInnerClaw2.addBox(-0.800000011920929F, 4.5F, -5.5F, 1, 1, 2,
-				0.0F);
+		this.LeftInnerClaw2.addBox(-0.800000011920929F, 4.5F, -5.5F, 1, 1, 2, 0.0F);
 		this.RightUpperArm = new MowzieModelRenderer(this, 24, 23);
-		this.RightUpperArm.setRotationPoint(-3.0F, 5.646995491906456F,
-				-3.1025095241554586F);
+		this.RightUpperArm.setRotationPoint(-3.0F, 5.646995491906456F, -3.1025095241554586F);
 		this.RightUpperArm.addBox(-2.0F, -1.5F, -1.5F, 2, 6, 3, 0.0F);
-		this.setRotateAngle(RightUpperArm, 0.27942721324429215F,
-				0.0024434609527920616F, 0.13962634015954636F);
+		this.setRotateAngle(RightUpperArm, 0.27942721324429215F, 0.0024434609527920616F,
+				0.13962634015954636F);
 		this.RghtArmFeathers1 = new MowzieModelRenderer(this, 24, 32);
 		this.RghtArmFeathers1.setRotationPoint(0.0F, 0.0F, 0.0F);
 		this.RghtArmFeathers1.addBox(-1.5F, -0.5F, 0.5F, 0, 1, 3, 0.0F);
 		this.RightOutterFoot = new MowzieModelRenderer(this, 56, 10);
 		this.RightOutterFoot.setRotationPoint(0.0F, 0.0F, 0.0F);
 		this.RightOutterFoot.addBox(-1.0F, 6.0F, -4.5F, 1, 2, 5, 0.0F);
-		this.setRotateAngle(RightOutterFoot, 0.08920936674176302F,
-				0.21167289761824615F, -0.01624963763548582F);
+		this.setRotateAngle(RightOutterFoot, 0.08920936674176302F, 0.21167289761824615F,
+				-0.01624963763548582F);
 		this.HeadFeathers5 = new MowzieModelRenderer(this, 26, 41);
 		this.HeadFeathers5.setRotationPoint(0.0F, 0.0F, 0.0F);
 		this.HeadFeathers5.addBox(0.0F, -5.0F, -1.0F, 0, 6, 1, 0.0F);
@@ -133,15 +127,13 @@ public class ModelRaptorOld2 extends MowzieModelBase
 		this.RightArmFeathers2 = new MowzieModelRenderer(this, 24, 32);
 		this.RightArmFeathers2.setRotationPoint(0.0F, 0.0F, 0.0F);
 		this.RightArmFeathers2.addBox(-1.5F, 0.5F, 1.5F, 0, 1, 3, 0.0F);
-		this.setRotateAngle(RightArmFeathers2, -0.08726646259971634F, 0.0F,
-				0.0F);
+		this.setRotateAngle(RightArmFeathers2, -0.08726646259971634F, 0.0F, 0.0F);
 		this.BackRightClaw = new MowzieModelRenderer(this, 62, 5);
 		this.BackRightClaw.setRotationPoint(0.0F, 0.0F, 0.0F);
 		this.BackRightClaw.addBox(-0.5F, 4.5F, -1.5F, 1, 2, 1, 0.0F);
 		this.setRotateAngle(BackRightClaw, 0.4363323003053663F, 0.0F, 0.0F);
 		this.Neck = new MowzieModelRenderer(this, 0, 32);
-		this.Neck.setRotationPoint(0.0F, 3.843558310510619F,
-				-3.267577009605857F);
+		this.Neck.setRotationPoint(0.0F, 3.843558310510619F, -3.267577009605857F);
 		this.Neck.addBox(-2.5F, -8.5F, -2.5F, 5, 9, 5, 0.0F);
 		this.setRotateAngle(Neck, 0.5061454830783555F, 0.0F, 0.0F);
 		this.Jaw = new MowzieModelRenderer(this, 24, 14);
@@ -156,77 +148,62 @@ public class ModelRaptorOld2 extends MowzieModelBase
 		this.LeftHand2.setRotationPoint(0.0F, 0.0F, 0.0F);
 		this.LeftHand2.addBox(-1.1F, 1.0F, -5.0F, 2, 3, 1, 0.0F);
 		this.RightArmFeathers4 = new MowzieModelRenderer(this, 24, 36);
-		this.RightArmFeathers4.setRotationPoint(0.0F, 7.516910420957146E-4F,
-				0.003412681977403409F);
+		this.RightArmFeathers4.setRotationPoint(0.0F, 7.516910420957146E-4F, 0.003412681977403409F);
 		this.RightArmFeathers4.addBox(-1.5F, 1.5F, 1.5F, 0, 1, 4, 0.0F);
-		this.setRotateAngle(RightArmFeathers4, -0.20944417161479364F, 0.0F,
-				0.0F);
+		this.setRotateAngle(RightArmFeathers4, -0.20944417161479364F, 0.0F, 0.0F);
 		this.LeftInnerFoot = new MowzieModelRenderer(this, 56, 17);
 		this.LeftInnerFoot.setRotationPoint(0.0F, 0.0F, 0.0F);
-		this.LeftInnerFoot.addBox(-0.699999988079071F, 6.0F, -3.5F, 1, 2, 4,
-				0.0F);
-		this.setRotateAngle(LeftInnerFoot, 0.08909425967226049F,
-				0.20559054771714225F, 0.05327424499186149F);
+		this.LeftInnerFoot.addBox(-0.699999988079071F, 6.0F, -3.5F, 1, 2, 4, 0.0F);
+		this.setRotateAngle(LeftInnerFoot, 0.08909425967226049F, 0.20559054771714225F,
+				0.05327424499186149F);
 		this.BackLeftClaw = new MowzieModelRenderer(this, 62, 5);
 		this.BackLeftClaw.setRotationPoint(0.0F, 0.0F, 0.0F);
 		this.BackLeftClaw.addBox(-0.5F, 4.5F, -1.5F, 1, 2, 1, 0.0F);
 		this.setRotateAngle(BackLeftClaw, 0.4363323003053663F, 0.0F, 0.0F);
 		this.LeftArmFeathers5 = new MowzieModelRenderer(this, 24, 32);
-		this.LeftArmFeathers5.setRotationPoint(0.0F, 7.516910420957146E-4F,
-				0.003412681977403409F);
+		this.LeftArmFeathers5.setRotationPoint(0.0F, 7.516910420957146E-4F, 0.003412681977403409F);
 		this.LeftArmFeathers5.addBox(1.5F, 3.2F, 2.0F, 0, 1, 3, 0.0F);
 		this.setRotateAngle(LeftArmFeathers5, -0.5061501444538296F, 0.0F, 0.0F);
 		this.Tail1 = new MowzieModelRenderer(this, 0, 92);
-		this.Tail1.setRotationPoint(0.0F, -5.667564050259824F,
-				3.610243526255875F);
-		this.Tail1.addBox(-3.0F, -0.0024359497401756913F, 0.20975647374412532F,
-				6, 6, 8, 0.0F);
+		this.Tail1.setRotationPoint(0.0F, -5.667564050259824F, 3.610243526255875F);
+		this.Tail1.addBox(-3.0F, -0.0024359497401756913F, 0.20975647374412532F, 6, 6, 8, 0.0F);
 		this.Tailfeathers4 = new MowzieModelRenderer(this, 30, 60);
 		this.Tailfeathers4.setRotationPoint(0.0F, 0.0F, 0.0F);
 		this.Tailfeathers4.addBox(0.0F, -1.0F, 1.7F, 0, 2, 1, 0.0F);
 		this.RightArmFeathers5 = new MowzieModelRenderer(this, 24, 32);
-		this.RightArmFeathers5.setRotationPoint(0.0F, 7.516910420957146E-4F,
-				0.003412681977403409F);
+		this.RightArmFeathers5.setRotationPoint(0.0F, 7.516910420957146E-4F, 0.003412681977403409F);
 		this.RightArmFeathers5.addBox(-1.5F, 2.2F, 2.0F, 0, 1, 3, 0.0F);
 		this.setRotateAngle(RightArmFeathers5, -0.3839770968142266F, 0.0F, 0.0F);
 		this.RightInnerClaw2 = new MowzieModelRenderer(this, 62, 2);
 		this.RightInnerClaw2.setRotationPoint(0.0F, 0.0F, 0.0F);
-		this.RightInnerClaw2.addBox(-0.4000000059604645F, 4.5F, -5.5F, 1, 1, 2,
-				0.0F);
+		this.RightInnerClaw2.addBox(-0.4000000059604645F, 4.5F, -5.5F, 1, 1, 2, 0.0F);
 		this.TailFeathers1 = new MowzieModelRenderer(this, 30, 71);
-		this.TailFeathers1.setRotationPoint(0.0F, -0.09902680687415888F,
-				0.013917310096005053F);
+		this.TailFeathers1.setRotationPoint(0.0F, -0.09902680687415888F, 0.013917310096005053F);
 		this.TailFeathers1.addBox(0.0F, -0.5F, 13.7F, 0, 1, 4, 0.0F);
 		this.Head = new MowzieModelRenderer(this, 0, 0);
-		this.Head.setRotationPoint(0.0F, -7.568395609140178F,
-				2.291154273188009F);
+		this.Head.setRotationPoint(0.0F, -7.568395609140178F, 2.291154273188009F);
 		this.Head.addBox(-3.0F, -3.0F, -8.0F, 6, 6, 8, 0.0F);
 		this.setRotateAngle(Head, -0.47123889803846897F, 0.0F, 0.0F);
 		this.Tail5 = new MowzieModelRenderer(this, 30, 84);
-		this.Tail5.setRotationPoint(0.0F, 0.6275640502598243F,
-				8.980243526255876F);
+		this.Tail5.setRotationPoint(0.0F, 0.6275640502598243F, 8.980243526255876F);
 		this.Tail5.addBox(-0.5F, -0.5F, -0.3F, 1, 1, 10, 0.0F);
 		this.setRotateAngle(Tail5, 0.06981317007977318F, 0.0F, 0.0F);
 		this.RightMiddleFoot = new MowzieModelRenderer(this, 56, 10);
 		this.RightMiddleFoot.setRotationPoint(0.0F, 0.0F, 0.0F);
 		this.RightMiddleFoot.addBox(-0.7F, 6.0F, -4.5F, 1, 2, 5, 0.0F);
-		this.setRotateAngle(RightMiddleFoot, 0.08726646259971647F,
-				0.0029670597283903604F, -0.03473205211468716F);
+		this.setRotateAngle(RightMiddleFoot, 0.08726646259971647F, 0.0029670597283903604F,
+				-0.03473205211468716F);
 		this.Waist = new MowzieModelRenderer(this, 0, 75);
 		this.Waist.setRotationPoint(0.0F, 9.07F, 7.99F);
-		this.Waist.addBox(-3.7F, -5.682435949740175F, -4.140243526255874F, 7,
-				9, 8, 0.0F);
+		this.Waist.addBox(-3.7F, -5.682435949740175F, -4.140243526255874F, 7, 9, 8, 0.0F);
 		this.setRotateAngle(Waist, -0.06981317007977318F, 0.0F, 0.0F);
 		this.LeftArmFeathers1 = new MowzieModelRenderer(this, 24, 32);
-		this.LeftArmFeathers1.setRotationPoint(0.0F, 7.516910420957146E-4F,
-				0.003412681977403409F);
+		this.LeftArmFeathers1.setRotationPoint(0.0F, 7.516910420957146E-4F, 0.003412681977403409F);
 		this.LeftArmFeathers1.addBox(1.5F, -0.5F, 0.5F, 0, 1, 3, 0.0F);
 		this.RightLegThigh = new MowzieModelRenderer(this, 28, 0);
-		this.RightLegThigh.setRotationPoint(-3.0F, 10.004457613554232F,
-				6.99625315625953F);
+		this.RightLegThigh.setRotationPoint(-3.0F, 10.004457613554232F, 6.99625315625953F);
 		this.RightLegThigh.addBox(-2.0F, -3.0F, -2.5F, 3, 9, 5, 0.0F);
-		this.setRotateAngle(RightLegThigh, -0.17453292012214658F, 0.0F,
-				0.1396263390779495F);
+		this.setRotateAngle(RightLegThigh, -0.17453292012214658F, 0.0F, 0.1396263390779495F);
 		this.TailFeathers2 = new MowzieModelRenderer(this, 30, 76);
 		this.TailFeathers2.setRotationPoint(0.0F, 0.0F, 0.0F);
 		this.TailFeathers2.addBox(0.0F, -1.0F, 7.7F, 0, 2, 6, 0.0F);
@@ -236,8 +213,7 @@ public class ModelRaptorOld2 extends MowzieModelBase
 		this.setRotateAngle(LeftPupill, 0.0F, 0.7853981633974483F, 0.0F);
 		this.RightInnerClaw1 = new MowzieModelRenderer(this, 62, 5);
 		this.RightInnerClaw1.setRotationPoint(0.0F, 0.0F, 0.0F);
-		this.RightInnerClaw1.addBox(-0.4000000059604645F, 5.0F, -4.5F, 1, 2, 1,
-				0.0F);
+		this.RightInnerClaw1.addBox(-0.4000000059604645F, 5.0F, -4.5F, 1, 2, 1, 0.0F);
 		this.setRotateAngle(RightInnerClaw1, 0.08726646006107329F, 0.0F, 0.0F);
 		this.RightHand1 = new MowzieModelRenderer(this, 34, 30);
 		this.RightHand1.setRotationPoint(0.0F, 0.0F, 0.0F);
@@ -246,24 +222,21 @@ public class ModelRaptorOld2 extends MowzieModelBase
 		this.LeftOutterFoot = new MowzieModelRenderer(this, 56, 10);
 		this.LeftOutterFoot.setRotationPoint(0.0F, 0.0F, 0.0F);
 		this.LeftOutterFoot.addBox(0.0F, 6.0F, -4.5F, 1, 2, 5, 0.0F);
-		this.setRotateAngle(LeftOutterFoot, 0.08920936674176302F,
-				-0.21167289761824615F, 0.01624963763548582F);
+		this.setRotateAngle(LeftOutterFoot, 0.08920936674176302F, -0.21167289761824615F,
+				0.01624963763548582F);
 		this.LeftOutterClaw = new MowzieModelRenderer(this, 62, 8);
 		this.LeftOutterClaw.setRotationPoint(0.0F, 0.0F, 0.0F);
-		this.LeftOutterClaw.addBox(-0.10000000149011612F, 7.0F, -5.0F, 1, 1, 1,
-				0.0F);
+		this.LeftOutterClaw.addBox(-0.10000000149011612F, 7.0F, -5.0F, 1, 1, 1, 0.0F);
 		this.LeftEyeball = new MowzieModelRenderer(this, 0, 0);
 		this.LeftEyeball.setRotationPoint(0.0F, 0.0F, 0.0F);
 		this.LeftEyeball.addBox(2.1F, -1.5F, -5.5F, 1, 2, 2, 0.0F);
 		this.RightLeg = new MowzieModelRenderer(this, 44, 0);
-		this.RightLeg.setRotationPoint(-0.4924559943469011F,
-				5.214237007402094F, -0.09601597006040485F);
+		this.RightLeg.setRotationPoint(-0.4924559943469011F, 5.214237007402094F,
+				-0.09601597006040485F);
 		this.RightLeg.addBox(-1.0F, -1.0F, -0.5F, 2, 3, 7, 0.0F);
 		this.Chest = new MowzieModelRenderer(this, 2, 61);
-		this.Chest.setRotationPoint(0.0F, -0.2491731009600654F,
-				-6.61026806874157F);
-		this.Chest.addBox(-3.0F, 0.01745240643728348F, -5.560152304843609F, 6,
-				7, 7, 0.0F);
+		this.Chest.setRotationPoint(0.0F, -0.2491731009600654F, -6.61026806874157F);
+		this.Chest.addBox(-3.0F, 0.01745240643728348F, -5.560152304843609F, 6, 7, 7, 0.0F);
 		this.setRotateAngle(Chest, -0.12217304763960307F, 0.0F, 0.0F);
 		this.HeadFeathers1 = new MowzieModelRenderer(this, 26, 41);
 		this.HeadFeathers1.setRotationPoint(0.0F, 0.0F, 0.0F);
@@ -275,19 +248,17 @@ public class ModelRaptorOld2 extends MowzieModelBase
 		this.setRotateAngle(HeadFeathers3, -1.3089969389957472F, 0.0F, 0.0F);
 		this.RightInnerFoot = new MowzieModelRenderer(this, 56, 17);
 		this.RightInnerFoot.setRotationPoint(0.0F, 0.0F, 0.0F);
-		this.RightInnerFoot.addBox(-0.30000001192092896F, 6.0F, -3.5F, 1, 2, 4,
-				0.0F);
-		this.setRotateAngle(RightInnerFoot, 0.08909425967226049F,
-				-0.20559054771714225F, -0.05327424499186149F);
+		this.RightInnerFoot.addBox(-0.30000001192092896F, 6.0F, -3.5F, 1, 2, 4, 0.0F);
+		this.setRotateAngle(RightInnerFoot, 0.08909425967226049F, -0.20559054771714225F,
+				-0.05327424499186149F);
 		this.LeftFoot = new MowzieModelRenderer(this, 46, 10);
-		this.LeftFoot.setRotationPoint(-0.13917309988899418F,
-				0.10698280934454907F, 5.095997010082719F);
+		this.LeftFoot.setRotationPoint(-0.13917309988899418F, 0.10698280934454907F,
+				5.095997010082719F);
 		this.LeftFoot.addBox(-1.0F, 0.0F, -1.5F, 2, 7, 3, 0.0F);
-		this.setRotateAngle(LeftFoot, 0.08632949453750462F,
-				-0.0181521733426594F, 0.10314017064577054F);
+		this.setRotateAngle(LeftFoot, 0.08632949453750462F, -0.0181521733426594F,
+				0.10314017064577054F);
 		this.LeftArmFeathers2 = new MowzieModelRenderer(this, 24, 32);
-		this.LeftArmFeathers2.setRotationPoint(0.0F, 7.516910420957146E-4F,
-				0.003412681977403409F);
+		this.LeftArmFeathers2.setRotationPoint(0.0F, 7.516910420957146E-4F, 0.003412681977403409F);
 		this.LeftArmFeathers2.addBox(1.5F, 0.5F, 1.5F, 0, 1, 3, 0.0F);
 		this.setRotateAngle(LeftArmFeathers2, -0.08727112397519053F, 0.0F, 0.0F);
 		this.RightHand2 = new MowzieModelRenderer(this, 34, 30);
@@ -298,8 +269,8 @@ public class ModelRaptorOld2 extends MowzieModelBase
 		this.HeadFeathers7.addBox(0.0F, -3.5F, 1.0F, 0, 6, 1, 0.0F);
 		this.setRotateAngle(HeadFeathers7, -2.007128639793479F, 0.0F, 0.0F);
 		this.RightLowerArm = new MowzieModelRenderer(this, 34, 23);
-		this.RightLowerArm.setRotationPoint(-0.7012158291296555F,
-				4.058946910821383F, 0.8504389079243522F);
+		this.RightLowerArm.setRotationPoint(-0.7012158291296555F, 4.058946910821383F,
+				0.8504389079243522F);
 		this.RightLowerArm.addBox(-1.0F, 0.0F, -5.0F, 2, 2, 5, 0.0F);
 		this.LeftInnerClaw1 = new MowzieModelRenderer(this, 62, 5);
 		this.LeftInnerClaw1.setRotationPoint(0.0F, 0.0F, 0.0F);
@@ -318,61 +289,51 @@ public class ModelRaptorOld2 extends MowzieModelBase
 		this.setRotateAngle(HeadFeathers4, -1.48352986419518F, 0.0F, 0.0F);
 		this.RightMiddleClaw = new MowzieModelRenderer(this, 62, 8);
 		this.RightMiddleClaw.setRotationPoint(0.0F, 0.0F, 0.0F);
-		this.RightMiddleClaw.addBox(-0.6000000238418579F, 7.0F, -5.0F, 1, 1, 1,
-				0.0F);
+		this.RightMiddleClaw.addBox(-0.6000000238418579F, 7.0F, -5.0F, 1, 1, 1, 0.0F);
 		this.UpperBoddy = new MowzieModelRenderer(this, 0, 75);
-		this.UpperBoddy.setRotationPoint(0.0F, -5.1863457317990225F,
-				-3.727333198787372F);
-		this.UpperBoddy.addBox(-3.5F, -0.41917310096006544F,
-				-7.470268068741571F, 7, 8, 8, 0.0F);
+		this.UpperBoddy.setRotationPoint(0.0F, -5.1863457317990225F, -3.727333198787372F);
+		this.UpperBoddy.addBox(-3.5F, -0.41917310096006544F, -7.470268068741571F, 7, 8, 8, 0.0F);
 		this.setRotateAngle(UpperBoddy, 0.20943951023931953F, 0.0F, 0.0F);
 		this.UpperSnout = new MowzieModelRenderer(this, 0, 24);
 		this.UpperSnout.setRotationPoint(0.0F, 0.0F, 0.0F);
 		this.UpperSnout.addBox(-2.5F, -3.7F, -6.6F, 5, 1, 7, 0.0F);
 		this.setRotateAngle(UpperSnout, 0.08726646259971642F, 0.0F, 0.0F);
 		this.LeftArmFeathers3 = new MowzieModelRenderer(this, 24, 36);
-		this.LeftArmFeathers3.setRotationPoint(0.0F, 7.516910420957146E-4F,
-				0.003412681977403409F);
+		this.LeftArmFeathers3.setRotationPoint(0.0F, 7.516910420957146E-4F, 0.003412681977403409F);
 		this.LeftArmFeathers3.addBox(1.5F, 1.5F, 1.5F, 0, 1, 4, 0.0F);
 		this.setRotateAngle(LeftArmFeathers3, -0.20944417161479364F, 0.0F, 0.0F);
 		this.LeftHand1 = new MowzieModelRenderer(this, 34, 30);
-		this.LeftHand1.setRotationPoint(0.0F, 7.669883586203241E-4F,
-				0.0033798929814690126F);
+		this.LeftHand1.setRotationPoint(0.0F, 7.669883586203241E-4F, 0.0033798929814690126F);
 		this.LeftHand1.addBox(-0.9F, 1.0F, -5.0F, 2, 3, 1, 0.0F);
 		this.setRotateAngle(LeftHand1, -0.20944417161479364F, 0.0F, 0.0F);
 		this.RightArmFeathers3 = new MowzieModelRenderer(this, 24, 32);
-		this.RightArmFeathers3.setRotationPoint(0.0F, 7.516910420957146E-4F,
-				0.003412681977403409F);
+		this.RightArmFeathers3.setRotationPoint(0.0F, 7.516910420957146E-4F, 0.003412681977403409F);
 		this.RightArmFeathers3.addBox(-1.5F, 3.2F, 2.0F, 0, 1, 3, 0.0F);
 		this.setRotateAngle(RightArmFeathers3, -0.5061501444538296F, 0.0F, 0.0F);
 		this.LeftMiddleFoot = new MowzieModelRenderer(this, 56, 10);
 		this.LeftMiddleFoot.setRotationPoint(0.0F, 0.0F, 0.0F);
-		this.LeftMiddleFoot.addBox(-0.30000001192092896F, 6.0F, -4.5F, 1, 2, 5,
-				0.0F);
-		this.setRotateAngle(LeftMiddleFoot, 0.08721356892970994F,
-				-0.003041696135063567F, 0.03477386194254569F);
+		this.LeftMiddleFoot.addBox(-0.30000001192092896F, 6.0F, -4.5F, 1, 2, 5, 0.0F);
+		this.setRotateAngle(LeftMiddleFoot, 0.08721356892970994F, -0.003041696135063567F,
+				0.03477386194254569F);
 		this.LeftUpperArm = new MowzieModelRenderer(this, 24, 23);
-		this.LeftUpperArm.setRotationPoint(3.0F, 5.646995491906456F,
-				-3.1025095241554586F);
+		this.LeftUpperArm.setRotationPoint(3.0F, 5.646995491906456F, -3.1025095241554586F);
 		this.LeftUpperArm.addBox(0.0F, -1.5F, -1.5F, 2, 6, 3, 0.0F);
-		this.setRotateAngle(LeftUpperArm, 0.27942721324429215F,
-				-0.0024434609527920616F, -0.13962634015954636F);
+		this.setRotateAngle(LeftUpperArm, 0.27942721324429215F, -0.0024434609527920616F,
+				-0.13962634015954636F);
 		this.LeftLegThigh = new MowzieModelRenderer(this, 28, 0);
-		this.LeftLegThigh.setRotationPoint(3.0F, 9.999989795198115F,
-				6.991900489845442F);
+		this.LeftLegThigh.setRotationPoint(3.0F, 9.999989795198115F, 6.991900489845442F);
 		this.LeftLegThigh.addBox(-1.0F, -3.0F, -2.5F, 3, 9, 5, 0.0F);
-		this.setRotateAngle(LeftLegThigh, -0.17455394296962073F, 0.0F,
-				-0.13961756447654425F);
+		this.setRotateAngle(LeftLegThigh, -0.17455394296962073F, 0.0F, -0.13961756447654425F);
 		this.LeftLeg = new MowzieModelRenderer(this, 44, 0);
 		this.LeftLeg.setRotationPoint(0.4924559943469011F, 5.214237007402094F,
 				-0.09601597006040485F);
 		this.LeftLeg.addBox(-1.0F, -1.0F, -0.5F, 2, 3, 7, 0.0F);
 		this.RightFoot = new MowzieModelRenderer(this, 46, 10);
-		this.RightFoot.setRotationPoint(0.13917309988899418F,
-				0.10698280934454907F, 5.095997010082719F);
+		this.RightFoot.setRotationPoint(0.13917309988899418F, 0.10698280934454907F,
+				5.095997010082719F);
 		this.RightFoot.addBox(-1.0F, 0.0F, -1.5F, 2, 7, 3, 0.0F);
-		this.setRotateAngle(RightFoot, 0.08632949453750462F,
-				0.0181521733426594F, -0.10314017064577054F);
+		this.setRotateAngle(RightFoot, 0.08632949453750462F, 0.0181521733426594F,
+				-0.10314017064577054F);
 		this.TailFeathers3 = new MowzieModelRenderer(this, 30, 63);
 		this.TailFeathers3.setRotationPoint(0.0F, 0.0F, 0.0F);
 		this.TailFeathers3.addBox(0.0F, -1.5F, 2.7F, 0, 3, 5, 0.0F);
@@ -380,19 +341,16 @@ public class ModelRaptorOld2 extends MowzieModelBase
 		this.LowerSnout1.setRotationPoint(0.0F, 1.5F, -8.0F);
 		this.LowerSnout1.addBox(-2.6F, -3.0F, -7.0F, 5, 3, 7, 0.0F);
 		this.Tail3 = new MowzieModelRenderer(this, 28, 106);
-		this.Tail3.setRotationPoint(0.0F, 0.18006091729809043F,
-				9.02651005032975F);
+		this.Tail3.setRotationPoint(0.0F, 0.18006091729809043F, 9.02651005032975F);
 		this.Tail3.addBox(-1.5F, 0.0F, -0.1F, 3, 3, 9, 0.0F);
 		this.setRotateAngle(Tail3, 0.03490658503988659F, 0.0F, 0.0F);
 		this.Tail4 = new MowzieModelRenderer(this, 28, 95);
 		this.Tail4.setRotationPoint(0.0F, 0.19999999999999996F, 9.0F);
-		this.Tail4.addBox(-1.0F, -0.0024359497401756913F, -0.2697564737441253F,
-				2, 2, 9, 0.0F);
+		this.Tail4.addBox(-1.0F, -0.0024359497401756913F, -0.2697564737441253F, 2, 2, 9, 0.0F);
 		this.setRotateAngle(Tail4, 0.06981317007977318F, 0.0F, 0.0F);
 		this.RightOutterClaw = new MowzieModelRenderer(this, 62, 8);
 		this.RightOutterClaw.setRotationPoint(0.0F, 0.0F, 0.0F);
-		this.RightOutterClaw.addBox(-0.8999999761581421F, 7.0F, -5.0F, 1, 1, 1,
-				0.0F);
+		this.RightOutterClaw.addBox(-0.8999999761581421F, 7.0F, -5.0F, 1, 1, 1, 0.0F);
 		this.LowerSnout2 = new MowzieModelRenderer(this, 4, 14);
 		this.LowerSnout2.setRotationPoint(0.0F, 0.0F, 0.0F);
 		this.LowerSnout2.addBox(1.6F, -3.0F, -7.0F, 1, 3, 7, 0.0F);
@@ -501,23 +459,16 @@ public class ModelRaptorOld2 extends MowzieModelBase
 		MowzieModelRenderer[] body = new MowzieModelRenderer[] { Head, Neck, UpperBoddy, Waist };
 
 		bob(Waist, globalSpeed * 1.0F, globalHeight * 1.0F, false, f, f1);
-		bob(RightLegThigh, globalSpeed * 1.0F, globalHeight * 1.0F, false, f,
-				f1);
+		bob(RightLegThigh, globalSpeed * 1.0F, globalHeight * 1.0F, false, f, f1);
 		bob(LeftLegThigh, globalSpeed * 1.0F, globalHeight * 1.0F, false, f, f1);
 
-		walk(LeftLegThigh, globalSpeed * 0.5F, globalDegree * 0.7F, false,
-				3.14F, 0.2F, f, f1);
-		walk(LeftLeg, globalSpeed * 0.5F, globalDegree * 0.6F, false, 1.5F,
-				0.3F, f, f1);
-		walk(LeftFoot, globalSpeed * 0.5F, globalDegree * .8F, false, -1F,
-				-0.1F, f, f1);
+		walk(LeftLegThigh, globalSpeed * 0.5F, globalDegree * 0.7F, false, 3.14F, 0.2F, f, f1);
+		walk(LeftLeg, globalSpeed * 0.5F, globalDegree * 0.6F, false, 1.5F, 0.3F, f, f1);
+		walk(LeftFoot, globalSpeed * 0.5F, globalDegree * .8F, false, -1F, -0.1F, f, f1);
 
-		walk(RightLegThigh, globalSpeed * 0.5F, globalDegree * 0.7F, true,
-				3.14F, 0.2F, f, f1);
-		walk(RightLeg, globalSpeed * 0.5F, globalDegree * 0.6F, true, 1.5F,
-				0.3F, f, f1);
-		walk(RightFoot, globalSpeed * 0.5F, globalDegree * 0.8F, true, -1F,
-				-0.1F, f, f1);
+		walk(RightLegThigh, globalSpeed * 0.5F, globalDegree * 0.7F, true, 3.14F, 0.2F, f, f1);
+		walk(RightLeg, globalSpeed * 0.5F, globalDegree * 0.6F, true, 1.5F, 0.3F, f, f1);
+		walk(RightFoot, globalSpeed * 0.5F, globalDegree * 0.8F, true, -1F, -0.1F, f, f1);
 
 		chainSwing(tail, globalSpeed * 0.5F, globalHeight * 0.1F, 2, f, f1);
 		chainWave(tail, globalSpeed * 1.0F, globalHeight * 0.1F, 2.5, f, f1);
@@ -525,9 +476,7 @@ public class ModelRaptorOld2 extends MowzieModelBase
 
 		int ticksExisted = e.ticksExisted;
 
-		chainWave(tail, globalSpeed * 0.15F, globalHeight * 0.1F, 2,
-				ticksExisted, 1.0F);
-		chainWave(body, globalSpeed * 0.15F, globalHeight * 0.1F, 5,
-				ticksExisted, 1.0F);
+		chainWave(tail, globalSpeed * 0.15F, globalHeight * 0.1F, 2, ticksExisted, 1.0F);
+		chainWave(body, globalSpeed * 0.15F, globalHeight * 0.1F, 5, ticksExisted, 1.0F);
 	}
 }
