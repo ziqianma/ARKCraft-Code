@@ -33,18 +33,21 @@ import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 /**
  * @author gegy1000, Lewis_McReu
  */
-public class EntityARKCreature extends EntityAnimal implements IEntityAdditionalSpawnData, IInventory
+public class EntityARKCreature extends EntityAnimal
+		implements IEntityAdditionalSpawnData, IInventory
 {
-	private static final int DATA_WATCHER_UNCONSCIOUS = 20, DATA_WATCHER_LEVEL = 21, DATA_WATCHER_TAMING_PROGRESS = 27,
-			DATA_WATCHER_XP = 28;
+	private static final int DATA_WATCHER_UNCONSCIOUS = 20, DATA_WATCHER_LEVEL = 21,
+			DATA_WATCHER_TAMING_PROGRESS = 27, DATA_WATCHER_XP = 28;
 
-	public static final int HEALTH = 0, DAMAGE = 1, STAMINA = 2, WEIGHT = 3, OXYGEN = 4, FOOD = 5, SPEED = 6;
+	public static final int HEALTH = 0, DAMAGE = 1, STAMINA = 2, WEIGHT = 3, OXYGEN = 4, FOOD = 5,
+			SPEED = 6;
 
 	private static final int WEIGHT_PER_STACK = 10;
 
 	private int oxygen, food, stamina, torpor, level, tamingProgress, xp, points = 0;
 
-	private int maxHealth, maxWeight, maxOxygen, maxFood, maxDamage, maxSpeed, maxStamina, maxTorpor, baseLevel;
+	private int maxHealth, maxWeight, maxOxygen, maxFood, maxDamage, maxSpeed, maxStamina,
+			maxTorpor, baseLevel;
 
 	private boolean unconscious, grownUp;
 
@@ -121,12 +124,14 @@ public class EntityARKCreature extends EntityAnimal implements IEntityAdditional
 
 		// TODO fix in comparison to ark
 		maxHealth = (int) (creature.getBaseHealth() + creature.getWildHealthIncrease() * healthInc);
-		maxWeight = (int) (creature.getBaseWeight() + creature.getWildWeightIncrease() * weightInc) / WEIGHT_PER_STACK;
+		maxWeight = (int) (creature
+				.getBaseWeight() + creature.getWildWeightIncrease() * weightInc) / WEIGHT_PER_STACK;
 		maxOxygen = (int) (creature.getBaseOxygen() + creature.getWildOxygenIncrease() * oxygenInc);
 		maxFood = (int) (creature.getBaseFood() + creature.getWildFoodIncrease() * foodInc);
 		maxDamage = (int) (100 + creature.getWildDamageIncrease() * damageInc);
 		maxSpeed = 100;
-		maxStamina = (int) (creature.getBaseStamina() + creature.getWildStaminaIncrease() * staminaInc);
+		maxStamina = (int) (creature
+				.getBaseStamina() + creature.getWildStaminaIncrease() * staminaInc);
 		maxTorpor = (int) (creature.getBaseTorpor() + creature.getWildTorporIncrease() * torporInc);
 	}
 
@@ -277,8 +282,8 @@ public class EntityARKCreature extends EntityAnimal implements IEntityAdditional
 		GuiHandler.rightClickedEntity = this;
 		if (unconscious && !this.worldObj.isRemote && owner == null)
 		{
-			player.openGui(ARKCraft.instance, GUI.TAMING_GUI.getID(), this.worldObj, (int) this.posX, (int) this.posY,
-					(int) this.posZ);
+			player.openGui(ARKCraft.instance, GUI.TAMING_GUI.getID(), this.worldObj,
+					(int) this.posX, (int) this.posY, (int) this.posZ);
 			return true;
 		}
 		return false;
@@ -377,7 +382,8 @@ public class EntityARKCreature extends EntityAnimal implements IEntityAdditional
 		{
 			level = dataWatcher.getWatchableObjectInt(DATA_WATCHER_LEVEL);
 			tamingProgress = dataWatcher.getWatchableObjectInt(DATA_WATCHER_TAMING_PROGRESS);
-			unconscious = dataWatcher.getWatchableObjectByte(DATA_WATCHER_UNCONSCIOUS) == 1 ? true : false;
+			unconscious = dataWatcher
+					.getWatchableObjectByte(DATA_WATCHER_UNCONSCIOUS) == 1 ? true : false;
 			xp = dataWatcher.getWatchableObjectInt(DATA_WATCHER_XP);
 			// creatureAge =
 			// dataWatcher.getWatchableObjectInt(DATA_WATCHER_AGE);
@@ -410,7 +416,8 @@ public class EntityARKCreature extends EntityAnimal implements IEntityAdditional
 
 	public float scaleByAge(float baby, float adult)
 	{
-		int growthTime = ticksExisted > creature.getGrowthTime() ? creature.getGrowthTime() : ticksExisted;
+		int growthTime = ticksExisted > creature.getGrowthTime() ? creature
+				.getGrowthTime() : ticksExisted;
 		return (adult - baby) / creature.getGrowthTime() * growthTime + baby;
 	}
 
@@ -646,8 +653,8 @@ public class EntityARKCreature extends EntityAnimal implements IEntityAdditional
 	public boolean isItemValidForSlot(int index, ItemStack stack)
 	{
 		return index > inventory.length ? stack != null && stack
-				.getItem() instanceof ItemDinosaurSaddle && ((ItemDinosaurSaddle) stack.getItem()).getSaddleType()
-						.equals(creature.getSaddleType()) : true;
+				.getItem() instanceof ItemDinosaurSaddle && ((ItemDinosaurSaddle) stack.getItem())
+						.getSaddleType().equals(creature.getSaddleType()) : true;
 	}
 
 	@Override

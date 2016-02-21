@@ -8,7 +8,6 @@ import com.arkcraft.module.core.client.gui.book.fonts.SmallFontRenderer;
  */
 public class Page implements IPage
 {
-
     public Page() {}
 
     @Override

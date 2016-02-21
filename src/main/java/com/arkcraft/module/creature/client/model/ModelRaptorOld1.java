@@ -435,8 +435,7 @@ public class ModelRaptorOld1 extends ModelBase
 		{
 			float scaling = 2.0F;
 			GlStateManager.pushMatrix();
-			GlStateManager
-					.scale(1.0F / scaling, 1.0F / scaling, 1.0F / scaling);
+			GlStateManager.scale(1.0F / scaling, 1.0F / scaling, 1.0F / scaling);
 			GlStateManager.translate(0.0F, 24.0F * f5, 0.0F);
 			Head.render(f5);
 			Body.render(f5);
@@ -472,8 +471,7 @@ public class ModelRaptorOld1 extends ModelBase
 		super.setRotationAngles(f, f1, f2, f3, f4, f5, e);
 
 		this.RightUpperLeg.rotateAngleX = MathHelper.cos(f * 0.6662F) * 0.9F * f1;
-		this.LeftUpperLeg.rotateAngleX = MathHelper
-				.cos(f * 0.6662F + (float) Math.PI) * 0.9F * f1;
+		this.LeftUpperLeg.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 0.9F * f1;
 	}
 
 	// Use this for parts that have a common rotation point, so they can be
