@@ -11,4 +11,10 @@ public abstract class ItemArkFood extends ItemFood implements DinoFood
 		super(amount, false);
 		this.type = type;
 	}
+
+	@Override
+	public CreatureFoodType getType()
+	{
+		return type;
+	}
 }

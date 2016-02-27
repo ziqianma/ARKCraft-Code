@@ -2,8 +2,6 @@ package com.arkcraft.module.creature.common.entity;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.Random;
 import java.util.UUID;
 
@@ -12,25 +10,26 @@ import com.arkcraft.module.core.GlobalAdditions.GUI;
 import com.arkcraft.module.core.common.entity.data.ARKPlayer;
 import com.arkcraft.module.core.common.handlers.GuiHandler;
 import com.arkcraft.module.creature.common.entity.creature.Creature;
-<<<<<<< HEAD
+import com.arkcraft.module.items.common.general.ItemDinosaurSaddle;
 import com.arkcraft.module.resource.common.item.food.CreatureFoodType;
 import com.arkcraft.module.resource.common.item.food.DinoFood;
-=======
-import com.arkcraft.module.items.common.general.ItemDinosaurSaddle;
->>>>>>> SolarCactus/master
+import com.arkcraft.module.resource.common.item.food.INarcotic;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.IProjectile;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.pathfinding.PathNavigateGround;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
@@ -72,6 +71,10 @@ public class EntityARKCreature extends EntityAnimal
 		this.type = type;
 		grownUp = true;
 		updateHitbox();
+		((PathNavigateGround) this.getNavigator()).func_179690_a(true);
+		this.tasks.addTask(0, new EntityAISwimming(this));
+		this.tasks.addTask(7, new EntityAIWander(this, 1.0D));
+		this.tasks.addTask(8, new EntityAILookIdle(this));
 	}
 
 	@Override
@@ -352,10 +355,32 @@ public class EntityARKCreature extends EntityAnimal
 	{
 		super.onLivingUpdate();
 
+		if (!worldObj.isRemote)
+		{
+			this.dataWatcher.updateObject(DATA_WATCHER_UNCONSCIOUS, (byte) (unconscious ? 1 : 0));
+			this.dataWatcher.updateObject(DATA_WATCHER_LEVEL, level);
+			this.dataWatcher.updateObject(DATA_WATCHER_TAMING_PROGRESS, tamingProgress);
+			this.dataWatcher.updateObject(DATA_WATCHER_XP, xp);
+		}
+		else
+		{
+			level = dataWatcher.getWatchableObjectInt(DATA_WATCHER_LEVEL);
+			tamingProgress = dataWatcher.getWatchableObjectInt(DATA_WATCHER_TAMING_PROGRESS);
+			unconscious = dataWatcher
+					.getWatchableObjectByte(DATA_WATCHER_UNCONSCIOUS) == 1 ? true : false;
+			xp = dataWatcher.getWatchableObjectInt(DATA_WATCHER_XP);
+		}
+
 		if (!grownUp)
 		{
 			updateHitbox();
 		}
+
+		if (this.food > 0)
+		{
+			this.food -= 1;
+		}
+		else this.food = 0;
 
 		if (torpor > 0)
 		{
@@ -364,10 +389,30 @@ public class EntityARKCreature extends EntityAnimal
 			{
 				for (ItemStack stack : inventory)
 				{
-					if (canEat() && isValidFood(stack))
+					if (stack != null)
 					{
-						stack.stackSize--;
-						tamingProgress += ((DinoFood) stack.getItem()).getTamingIncrease();
+						boolean consumed = false;
+						if (isValidFood(stack))
+						{
+							if (canEat(stack))
+							{
+								consumed = true;
+								stack.stackSize--;
+								DinoFood food = (DinoFood) stack.getItem();
+								this.food += food.getFoodValue();
+								tamingProgress += ((DinoFood) stack.getItem()).getTamingIncrease();
+							}
+						}
+						if (stack.getItem() instanceof INarcotic)
+						{
+							INarcotic narc = (INarcotic) stack.getItem();
+							if (this.maxTorpor >= this.torpor + narc.getTorporIncrease())
+							{
+								if (!consumed) stack.stackSize--;
+								this.torpor += narc.getTorporIncrease();
+							}
+						}
+						if (stack.stackSize == 0) stack = null;
 					}
 				}
 			}
@@ -381,54 +426,17 @@ public class EntityARKCreature extends EntityAnimal
 			tamingProgress = 0;
 		}
 
-		if (!worldObj.isRemote)
+		if (tamer != null && tamingProgress >= getTamingProgressRequired())
 		{
-			this.dataWatcher.updateObject(DATA_WATCHER_UNCONSCIOUS, (byte) (unconscious ? 1 : 0));
-			this.dataWatcher.updateObject(DATA_WATCHER_LEVEL, level);
-			this.dataWatcher.updateObject(DATA_WATCHER_TAMING_PROGRESS, tamingProgress);
-			this.dataWatcher.updateObject(DATA_WATCHER_XP, xp);
-			// this.dataWatcher.updateObject(DATA_WATCHER_AGE, creatureAge);
-			// this.dataWatcher.updateObject(DATA_WATCHER_TORPOR, torpor);
-			// this.dataWatcher.updateObject(DATA_WATCHER_STAMINA, stamina);
-			// this.dataWatcher.updateObject(DATA_WATCHER_HUNGER, hunger);
-			// this.dataWatcher.updateObject(DATA_WATCHER_LEVEL, level);
-			// this.dataWatcher.updateObject(DATA_WATCHER_UNCONSCIOUS,
-			// (byte) (unconscious ? 1 : 0));
-			// this.dataWatcher.updateObject(DATA_WATCHER_TAMING_PROGRESS,
-			// tamingProgress);
-			// this.dataWatcher.updateObject(DATA_WATCHER_XP, xp);
-			// this.dataWatcher.updateObject(DATA_WATCHER_SADDLED, (byte)
-			// (isSaddled() ? 1 : 0));
-
-		}
-		else
-		{
-			level = dataWatcher.getWatchableObjectInt(DATA_WATCHER_LEVEL);
-			tamingProgress = dataWatcher.getWatchableObjectInt(DATA_WATCHER_TAMING_PROGRESS);
-			unconscious = dataWatcher
-					.getWatchableObjectByte(DATA_WATCHER_UNCONSCIOUS) == 1 ? true : false;
-			xp = dataWatcher.getWatchableObjectInt(DATA_WATCHER_XP);
-			// creatureAge =
-			// dataWatcher.getWatchableObjectInt(DATA_WATCHER_AGE);
-			// torpor = dataWatcher.getWatchableObjectInt(DATA_WATCHER_TORPOR);
-			// stamina =
-			// dataWatcher.getWatchableObjectInt(DATA_WATCHER_STAMINA);
-			// hunger = dataWatcher.getWatchableObjectInt(DATA_WATCHER_HUNGER);
-			// level = dataWatcher.getWatchableObjectInt(DATA_WATCHER_LEVEL);
-			// unconscious = dataWatcher
-			// .getWatchableObjectByte(DATA_WATCHER_UNCONSCIOUS) == 1;
-			// tamingProgress = dataWatcher
-			// .getWatchableObjectInt(DATA_WATCHER_TAMING_PROGRESS);
-			// xp = dataWatcher.getWatchableObjectFloat(DATA_WATCHER_XP);
-			// isSaddled =
-			// dataWatcher.getWatchableObjectByte(DATA_WATCHER_SADDLED) == 1;
+			this.owner = tamer;
+			this.tamingProgress = 0;
 		}
 	}
 
-	private boolean canEat()
+	private boolean canEat(ItemStack stack)
 	{
-		// TODO Auto-generated method stub
-		return false;
+		return stack.getItem() instanceof DinoFood && ((DinoFood) stack.getItem())
+				.getFoodValue() + food <= maxFood;
 	}
 
 	private boolean isValidFood(ItemStack stack)
@@ -900,14 +908,5 @@ public class EntityARKCreature extends EntityAnimal
 		child.grownUp = false;
 		child.updateHitbox();
 		return child;
-	}
-
-	public Collection<Item> getFoodOptions()
-	{
-		return Collections.emptySet();
-	}
-
-	public void addFoodOption(Item food)
-	{
 	}
 }
