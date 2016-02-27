@@ -13,6 +13,8 @@ import com.arkcraft.module.core.GlobalAdditions.GUI;
 import com.arkcraft.module.core.common.entity.data.ARKPlayer;
 import com.arkcraft.module.core.common.handlers.GuiHandler;
 import com.arkcraft.module.creature.common.entity.creature.Creature;
+import com.arkcraft.module.resource.common.item.food.CreatureFoodType;
+import com.arkcraft.module.resource.common.item.food.DinoFood;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
@@ -51,6 +53,8 @@ public class EntityARKCreature extends EntityAnimal
 
 	private boolean unconscious, grownUp;
 
+	protected CreatureFoodType type;
+
 	private ItemStack[] inventory;
 	private ItemStack saddle;
 
@@ -59,9 +63,10 @@ public class EntityARKCreature extends EntityAnimal
 	private UUID owner;
 	private UUID tamer;
 
-	public EntityARKCreature(World world)
+	public EntityARKCreature(World world, CreatureFoodType type)
 	{
 		super(world);
+		this.type = type;
 		grownUp = true;
 		updateHitbox();
 	}
@@ -218,7 +223,7 @@ public class EntityARKCreature extends EntityAnimal
 	{
 		this.getAttributeMap().registerAttribute(SharedMonsterAttributes.attackDamage);
 		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(maxHealth);
-		// TODO change speed value -- way to high
+		// TODO change speed value
 		getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(1);
 		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(maxDamage);
 		if (inventory != null)
@@ -230,6 +235,7 @@ public class EntityARKCreature extends EntityAnimal
 				inventory[i] = inventoryOld[i];
 			}
 		}
+		else inventory = new ItemStack[maxWeight / WEIGHT_PER_STACK];
 	}
 
 	@Override
@@ -348,7 +354,21 @@ public class EntityARKCreature extends EntityAnimal
 			updateHitbox();
 		}
 
-		if (torpor > 0) torpor -= creature.getTorporLossSpeed();
+		if (torpor > 0)
+		{
+			torpor -= creature.getTorporLossSpeed();
+			if (tamer != null)
+			{
+				for (ItemStack stack : inventory)
+				{
+					if (canEat() && isValidFood(stack))
+					{
+						stack.stackSize--;
+						tamingProgress += ((DinoFood) stack.getItem()).getTamingIncrease();
+					}
+				}
+			}
+		}
 
 		if (unconscious && torpor <= 0)
 		{
@@ -400,6 +420,18 @@ public class EntityARKCreature extends EntityAnimal
 			// isSaddled =
 			// dataWatcher.getWatchableObjectByte(DATA_WATCHER_SADDLED) == 1;
 		}
+	}
+
+	private boolean canEat()
+	{
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	private boolean isValidFood(ItemStack stack)
+	{
+		return stack != null && stack.getItem() instanceof DinoFood && ((DinoFood) stack.getItem())
+				.getType().equals(this.type);
 	}
 
 	public boolean isSaddled()
