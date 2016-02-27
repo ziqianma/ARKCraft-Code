@@ -1,5 +1,13 @@
 package com.arkcraft.module.creature.common.entity.passive;
 
+import com.arkcraft.lib.LogHelper;
+import com.arkcraft.module.core.ARKCraft;
+import com.arkcraft.module.core.GlobalAdditions.GUI;
+import com.arkcraft.module.creature.common.container.inventory.InventoryDino;
+import com.arkcraft.module.creature.common.entity.ai.EntityDodoAILookIdle;
+import com.arkcraft.module.items.ARKCraftItems;
+import com.arkcraft.module.items.common.general.ItemARKFood;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
@@ -22,14 +30,6 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-
-import com.arkcraft.lib.LogHelper;
-import com.arkcraft.module.core.ARKCraft;
-import com.arkcraft.module.core.GlobalAdditions.GUI;
-import com.arkcraft.module.creature.common.container.inventory.InventoryDino;
-import com.arkcraft.module.creature.common.entity.ai.EntityDodoAILookIdle;
-import com.arkcraft.module.items.ARKCraftItems;
-import com.arkcraft.module.items.common.general.ItemARKFood;
 
 /**
  * @author wildbill22

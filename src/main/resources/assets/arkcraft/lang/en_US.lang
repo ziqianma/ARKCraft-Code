@@ -119,9 +119,9 @@ category.arkcraft.mod2_balance=Item, Block, and Player Balance Settings
 category.arkcraft.balance.tooltip=Balance settings
 
 # Entities
-entity.raptor.name=Raptor
-entity.dodo.name=Dodo
-entity.brontosaurus.name=Brontosaurus
+entity.arkcraft.raptor.name=Raptor
+entity.arkcraft.dodo.name=Dodo
+entity.arkcraft.brontosaurus.name=Brontosaurus
 
 # Key Bindings
 key.playerPoop=Player Pooping Function
