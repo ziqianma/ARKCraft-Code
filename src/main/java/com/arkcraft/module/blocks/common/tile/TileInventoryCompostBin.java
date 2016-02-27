@@ -22,9 +22,9 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 import com.arkcraft.lib.LogHelper;
-import com.arkcraft.module.blocks.common.config.ModuleItemBalance;
-import com.arkcraft.module.blocks.common.items.ARKCraftItems;
-import com.arkcraft.module.blocks.common.items.ItemFeces;
+import com.arkcraft.module.crafting.common.config.ModuleItemBalance;
+import com.arkcraft.module.items.ARKCraftItems;
+import com.arkcraft.module.items.common.general.ItemFeces;
 
 /**
  * @author wildbill22

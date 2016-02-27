@@ -24,11 +24,7 @@ import net.minecraftforge.fml.relauncher.Side;
 
 import org.apache.logging.log4j.Logger;
 
-import com.arkcraft.module.blocks.common.blocks.ARKCraftBlocks;
-import com.arkcraft.module.blocks.common.config.ModuleItemConfig;
-import com.arkcraft.module.blocks.common.event.ItemsCommonEventHandler;
-import com.arkcraft.module.blocks.common.items.ARKCraftItems;
-import com.arkcraft.module.blocks.common.items.potions.ARKCraftPotionEffects;
+import com.arkcraft.module.blocks.ARKCraftBlocks;
 import com.arkcraft.module.core.common.config.CoreConfig;
 import com.arkcraft.module.core.common.event.CoreCommonEventHandler;
 import com.arkcraft.module.core.common.gen.WorldGeneratorBushes;
@@ -41,8 +37,12 @@ import com.arkcraft.module.core.common.network.UpdateMPToCraftItem;
 import com.arkcraft.module.core.common.network.UpdatePlayerCrafting;
 import com.arkcraft.module.core.common.network.UpdateSmithyToCraftItem;
 import com.arkcraft.module.core.common.proxy.CommonProxy;
+import com.arkcraft.module.crafting.common.config.ModuleItemConfig;
 import com.arkcraft.module.creature.CreatureModule;
 import com.arkcraft.module.creature.common.entity.ARKEntityRegistry;
+import com.arkcraft.module.items.ARKCraftItems;
+import com.arkcraft.module.items.common.event.ItemsCommonEventHandler;
+import com.arkcraft.module.items.common.general.potions.ARKCraftPotionEffects;
 import com.arkcraft.module.weapon.WeaponModule;
 import com.arkcraft.module.weapon.common.network.OpenAttachmentInventory;
 import com.arkcraft.module.weapon.common.network.ReloadFinished;

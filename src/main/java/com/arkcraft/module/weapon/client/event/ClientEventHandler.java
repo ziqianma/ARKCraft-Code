@@ -29,9 +29,9 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
-import com.arkcraft.module.blocks.common.items.ARKCraftItems;
 import com.arkcraft.module.core.ARKCraft;
 import com.arkcraft.module.core.GlobalAdditions;
+import com.arkcraft.module.items.ARKCraftItems;
 import com.arkcraft.module.weapon.common.container.inventory.InventoryAttachment;
 import com.arkcraft.module.weapon.common.item.attachment.supporting.NonSupporting;
 import com.arkcraft.module.weapon.common.item.ranged.ItemRangedWeapon;

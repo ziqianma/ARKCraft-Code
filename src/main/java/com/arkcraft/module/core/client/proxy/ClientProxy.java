@@ -14,17 +14,17 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import com.arkcraft.lib.LogHelper;
-import com.arkcraft.module.blocks.client.event.ItemsClientEventHandler;
-import com.arkcraft.module.blocks.client.event.KeyBindings;
-import com.arkcraft.module.blocks.client.event.Mod2ClientEventHandler;
-import com.arkcraft.module.blocks.common.blocks.ARKCraftBlocks;
-import com.arkcraft.module.blocks.common.handlers.PotionEffectHandler;
-import com.arkcraft.module.blocks.common.items.ARKCraftItems;
-import com.arkcraft.module.blocks.common.items.ItemARKFood;
+import com.arkcraft.module.blocks.ARKCraftBlocks;
 import com.arkcraft.module.core.ARKCraft;
 import com.arkcraft.module.core.client.event.CoreClientEventHandler;
 import com.arkcraft.module.core.client.gui.overlay.GuiOverlay;
 import com.arkcraft.module.core.common.proxy.CommonProxy;
+import com.arkcraft.module.crafting.client.KeyBindings;
+import com.arkcraft.module.items.ARKCraftItems;
+import com.arkcraft.module.items.client.event.ItemsClientEventHandler;
+import com.arkcraft.module.items.client.event.Mod2ClientEventHandler;
+import com.arkcraft.module.items.common.general.ItemARKFood;
+import com.arkcraft.module.items.common.handlers.PotionEffectHandler;
 
 public class ClientProxy extends CommonProxy
 {

@@ -22,8 +22,8 @@ import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.world.EnumSkyBlock;
 
-import com.arkcraft.module.blocks.common.handlers.ForgeCraftingHandler;
-import com.arkcraft.module.blocks.common.handlers.ForgeRecipe;
+import com.arkcraft.module.crafting.common.handlers.ForgeCraftingHandler;
+import com.arkcraft.module.crafting.common.handlers.ForgeRecipe;
 
 public class TileInventoryForge extends TileEntity implements IForge
 {

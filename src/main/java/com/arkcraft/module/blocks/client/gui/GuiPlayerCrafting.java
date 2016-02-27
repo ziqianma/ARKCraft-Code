@@ -17,9 +17,9 @@ import org.lwjgl.opengl.GL11;
 
 import com.arkcraft.lib.LogHelper;
 import com.arkcraft.module.blocks.common.container.ContainerInventoryPlayerCrafting;
-import com.arkcraft.module.blocks.common.container.inventory.InventoryBlueprints;
 import com.arkcraft.module.core.ARKCraft;
 import com.arkcraft.module.core.common.entity.data.ARKPlayer;
+import com.arkcraft.module.crafting.common.inventory.InventoryBlueprints;
 
 /* Player Crafting */
 

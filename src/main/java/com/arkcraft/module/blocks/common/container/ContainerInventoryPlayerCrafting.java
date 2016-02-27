@@ -11,9 +11,9 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.arkcraft.lib.LogHelper;
-import com.arkcraft.module.blocks.common.container.inventory.InventoryBlueprints;
-import com.arkcraft.module.blocks.common.container.inventory.InventoryPlayerCrafting;
 import com.arkcraft.module.core.common.entity.data.ARKPlayer;
+import com.arkcraft.module.crafting.common.inventory.InventoryBlueprints;
+import com.arkcraft.module.crafting.common.inventory.InventoryPlayerCrafting;
 
 public class ContainerInventoryPlayerCrafting extends Container
 {

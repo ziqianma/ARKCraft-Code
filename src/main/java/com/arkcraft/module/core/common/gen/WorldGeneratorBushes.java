@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
-import com.arkcraft.module.blocks.common.blocks.ARKCraftBlocks;
+import com.arkcraft.module.blocks.ARKCraftBlocks;
 
 /**
  * @author gegy1000

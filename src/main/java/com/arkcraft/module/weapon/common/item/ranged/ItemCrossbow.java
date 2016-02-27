@@ -4,7 +4,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import com.arkcraft.module.blocks.common.config.ModuleItemBalance;
+import com.arkcraft.module.crafting.common.config.ModuleItemBalance;
 
 public class ItemCrossbow extends ItemRangedWeapon
 {

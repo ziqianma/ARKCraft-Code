@@ -9,13 +9,13 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
 
 import com.arkcraft.lib.LogHelper;
-import com.arkcraft.module.blocks.common.config.ModuleItemBalance;
-import com.arkcraft.module.blocks.common.container.inventory.InventoryBlueprints;
-import com.arkcraft.module.blocks.common.container.inventory.InventoryPlayerCrafting;
-import com.arkcraft.module.blocks.common.handlers.PlayerCraftingManager;
 import com.arkcraft.module.core.ARKCraft;
 import com.arkcraft.module.core.common.network.PlayerPoop;
 import com.arkcraft.module.core.common.network.SyncPlayerData;
+import com.arkcraft.module.crafting.common.config.ModuleItemBalance;
+import com.arkcraft.module.crafting.common.handlers.PlayerCraftingManager;
+import com.arkcraft.module.crafting.common.inventory.InventoryBlueprints;
+import com.arkcraft.module.crafting.common.inventory.InventoryPlayerCrafting;
 
 /**
  * @author wildbill22, Lewis_McReu

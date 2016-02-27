@@ -7,12 +7,12 @@ import java.util.Collections;
 import java.util.Random;
 import java.util.UUID;
 
-import com.arkcraft.module.blocks.common.items.ItemDinosaurSaddle;
 import com.arkcraft.module.core.ARKCraft;
 import com.arkcraft.module.core.GlobalAdditions.GUI;
 import com.arkcraft.module.core.common.entity.data.ARKPlayer;
 import com.arkcraft.module.core.common.handlers.GuiHandler;
 import com.arkcraft.module.creature.common.entity.creature.Creature;
+import com.arkcraft.module.items.common.general.ItemDinosaurSaddle;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;

@@ -15,19 +15,19 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 
-import com.arkcraft.module.blocks.common.entity.EntityDodoEgg;
-import com.arkcraft.module.blocks.common.handlers.ForgeCraftingHandler;
-import com.arkcraft.module.blocks.common.handlers.PestleCraftingManager;
-import com.arkcraft.module.blocks.common.handlers.PlayerCraftingManager;
-import com.arkcraft.module.blocks.common.handlers.RecipeHandler;
-import com.arkcraft.module.blocks.common.handlers.SmithyCraftingManager;
 import com.arkcraft.module.core.common.config.CoreBalance;
 import com.arkcraft.module.core.common.creativetabs.ARKTabs;
 import com.arkcraft.module.core.common.handlers.EntityHandler;
 import com.arkcraft.module.core.common.handlers.GuiHandler;
+import com.arkcraft.module.crafting.common.handlers.ForgeCraftingHandler;
+import com.arkcraft.module.crafting.common.handlers.PestleCraftingManager;
+import com.arkcraft.module.crafting.common.handlers.PlayerCraftingManager;
+import com.arkcraft.module.crafting.common.handlers.RecipeHandler;
+import com.arkcraft.module.crafting.common.handlers.SmithyCraftingManager;
 import com.arkcraft.module.creature.common.entity.aggressive.EntitySabertooth;
 import com.arkcraft.module.creature.common.entity.passive.EntityDodo;
 import com.arkcraft.module.creature.common.entity.test.EntityRaptor;
+import com.arkcraft.module.items.common.entity.EntityDodoEgg;
 import com.arkcraft.module.weapon.WeaponModule;
 import com.arkcraft.module.weapon.common.entity.EntityStone;
 

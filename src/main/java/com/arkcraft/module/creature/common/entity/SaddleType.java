@@ -2,7 +2,7 @@ package com.arkcraft.module.creature.common.entity;
 
 import net.minecraft.item.Item;
 
-import com.arkcraft.module.blocks.common.items.ARKCraftItems;
+import com.arkcraft.module.items.ARKCraftItems;
 
 public enum SaddleType
 {

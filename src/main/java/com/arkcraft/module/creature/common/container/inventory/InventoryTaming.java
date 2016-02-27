@@ -15,10 +15,10 @@ import net.minecraft.util.IChatComponent;
 import net.minecraft.util.MathHelper;
 
 import com.arkcraft.lib.LogHelper;
-import com.arkcraft.module.blocks.common.items.ARKCraftItems;
-import com.arkcraft.module.blocks.common.items.ItemARKBase;
-import com.arkcraft.module.blocks.common.items.ItemARKFood;
 import com.arkcraft.module.creature.common.entity.EntityTameableDinosaur;
+import com.arkcraft.module.items.ARKCraftItems;
+import com.arkcraft.module.items.common.general.ItemARKBase;
+import com.arkcraft.module.items.common.general.ItemARKFood;
 
 /**
  * @author wildbill22

@@ -6,9 +6,9 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 
 import com.arkcraft.lib.LogHelper;
-import com.arkcraft.module.blocks.common.items.ARKCraftItems;
 import com.arkcraft.module.core.ARKCraft;
 import com.arkcraft.module.core.client.gui.book.proxy.DClient;
+import com.arkcraft.module.items.ARKCraftItems;
 
 /**
  * @author Vastatio

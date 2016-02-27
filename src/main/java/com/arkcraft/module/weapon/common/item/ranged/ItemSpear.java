@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.world.World;
 
-import com.arkcraft.module.blocks.common.config.ModuleItemBalance;
+import com.arkcraft.module.crafting.common.config.ModuleItemBalance;
 import com.arkcraft.module.weapon.common.entity.EntitySpear;
 
 public class ItemSpear extends ItemSword
