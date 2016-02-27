@@ -6,7 +6,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-import com.arkcraft.module.blocks.common.config.ModuleItemBalance;
+import com.arkcraft.module.crafting.common.config.ModuleItemBalance;
 import com.arkcraft.module.creature.common.entity.EntityARKCreature;
 import com.arkcraft.module.creature.common.entity.EntityTameableDinosaur;
 

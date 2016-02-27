@@ -1,6 +1,6 @@
 package com.arkcraft.module.weapon.common.item.attachment;
 
-import com.arkcraft.module.blocks.common.items.ItemARKBase;
+import com.arkcraft.module.items.common.general.ItemARKBase;
 
 /**
  * @author Lewis_McReu

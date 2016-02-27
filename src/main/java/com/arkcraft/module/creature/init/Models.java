@@ -4,8 +4,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderSnowball;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 
-import com.arkcraft.module.blocks.common.entity.EntityDodoEgg;
-import com.arkcraft.module.blocks.common.items.ARKCraftItems;
 import com.arkcraft.module.creature.client.model.ModelBrontosaurus;
 import com.arkcraft.module.creature.client.model.ModelDodo;
 import com.arkcraft.module.creature.client.model.ModelRaptor;
@@ -18,6 +16,8 @@ import com.arkcraft.module.creature.common.entity.aggressive.EntitySabertooth;
 import com.arkcraft.module.creature.common.entity.neutral.EntityBrontosaurus;
 import com.arkcraft.module.creature.common.entity.passive.EntityDodo;
 import com.arkcraft.module.creature.common.entity.test.EntityRaptor;
+import com.arkcraft.module.items.ARKCraftItems;
+import com.arkcraft.module.items.common.entity.EntityDodoEgg;
 
 public class Models
 {

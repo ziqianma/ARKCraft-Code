@@ -11,8 +11,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.arkcraft.lib.LogHelper;
-import com.arkcraft.module.blocks.common.container.inventory.InventoryBlueprints;
 import com.arkcraft.module.blocks.common.tile.TileInventorySmithy;
+import com.arkcraft.module.crafting.common.inventory.InventoryBlueprints;
 
 public class ContainerInventorySmithy extends Container
 {

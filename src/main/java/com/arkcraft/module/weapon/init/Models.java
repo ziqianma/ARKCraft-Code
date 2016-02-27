@@ -9,9 +9,9 @@ import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 
-import com.arkcraft.module.blocks.common.config.ModuleItemBalance;
-import com.arkcraft.module.blocks.common.items.ARKCraftItems;
 import com.arkcraft.module.core.ARKCraft;
+import com.arkcraft.module.crafting.common.config.ModuleItemBalance;
+import com.arkcraft.module.items.ARKCraftItems;
 import com.arkcraft.module.weapon.WeaponModule;
 import com.arkcraft.module.weapon.client.render.RenderAdvancedBullet;
 import com.arkcraft.module.weapon.client.render.RenderMetalArrow;

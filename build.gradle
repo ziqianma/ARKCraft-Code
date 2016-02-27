@@ -12,6 +12,8 @@ buildscript {
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
 
+sourceCompatibility=1.7
+
 version = "0.1-ALPHA"
 group= "com.arkcraft.mod" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "ARKCraft"

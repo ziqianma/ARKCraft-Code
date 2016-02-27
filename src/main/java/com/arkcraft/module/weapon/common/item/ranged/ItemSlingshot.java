@@ -7,8 +7,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagLong;
 import net.minecraft.world.World;
 
-import com.arkcraft.module.blocks.common.items.ARKCraftItems;
 import com.arkcraft.module.core.ARKCraft;
+import com.arkcraft.module.items.ARKCraftItems;
 import com.arkcraft.module.weapon.common.entity.EntityStone;
 
 public class ItemSlingshot extends Item

@@ -3,7 +3,7 @@ package com.arkcraft.module.core.common.creativetabs;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
-import com.arkcraft.module.blocks.common.items.ARKCraftItems;
+import com.arkcraft.module.items.ARKCraftItems;
 
 public class ARKTabs extends CreativeTabs
 {

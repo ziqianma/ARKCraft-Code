@@ -19,7 +19,7 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-import com.arkcraft.module.blocks.common.items.ARKCraftItems;
+import com.arkcraft.module.items.ARKCraftItems;
 import com.arkcraft.module.weapon.WeaponModule;
 
 public class EntityBallista extends EntityBoat

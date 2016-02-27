@@ -3,7 +3,7 @@ package com.arkcraft.module.creature.common.container.inventory;
 import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.item.ItemStack;
 
-import com.arkcraft.module.blocks.common.items.ItemDinosaurSaddle;
+import com.arkcraft.module.items.common.general.ItemDinosaurSaddle;
 
 /**
  * @author wildbill22

@@ -9,11 +9,11 @@ import net.minecraft.item.Item.ToolMaterial;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-import com.arkcraft.module.blocks.common.config.ModuleItemBalance;
-import com.arkcraft.module.blocks.common.items.ARKCraftItems;
 import com.arkcraft.module.core.ARKCraft;
 import com.arkcraft.module.core.GlobalAdditions;
 import com.arkcraft.module.core.common.handlers.EntityHandler;
+import com.arkcraft.module.crafting.common.config.ModuleItemBalance;
+import com.arkcraft.module.items.ARKCraftItems;
 import com.arkcraft.module.weapon.common.entity.EntityAdvancedBullet;
 import com.arkcraft.module.weapon.common.entity.EntityBallista;
 import com.arkcraft.module.weapon.common.entity.EntityBallistaBolt;

@@ -15,7 +15,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.pathfinding.PathNavigateGround;
 import net.minecraft.world.World;
 
-import com.arkcraft.module.blocks.common.items.ARKCraftItems;
+import com.arkcraft.module.items.ARKCraftItems;
 
 /**
  * @author Vastatio

@@ -23,10 +23,10 @@ import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 
 import com.arkcraft.lib.LogHelper;
-import com.arkcraft.module.blocks.common.blocks.BlockCropPlot;
-import com.arkcraft.module.blocks.common.config.ModuleItemBalance;
-import com.arkcraft.module.blocks.common.items.ItemARKSeed;
-import com.arkcraft.module.blocks.common.items.ItemFeces;
+import com.arkcraft.module.blocks.common.general.BlockCropPlot;
+import com.arkcraft.module.crafting.common.config.ModuleItemBalance;
+import com.arkcraft.module.items.common.general.ItemARKSeed;
+import com.arkcraft.module.items.common.general.ItemFeces;
 
 /**
  * @author wildbill22

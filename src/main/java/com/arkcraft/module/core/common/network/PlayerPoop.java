@@ -7,7 +7,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 
-import com.arkcraft.module.blocks.common.items.ARKCraftItems;
+import com.arkcraft.module.items.ARKCraftItems;
 
 /**
  * Used so the player can poop

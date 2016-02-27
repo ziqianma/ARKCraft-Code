@@ -5,7 +5,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-import com.arkcraft.module.blocks.common.config.ModuleItemBalance;
+import com.arkcraft.module.crafting.common.config.ModuleItemBalance;
 import com.arkcraft.module.weapon.common.item.attachment.supporting.Flashable;
 import com.arkcraft.module.weapon.common.item.attachment.supporting.Laserable;
 import com.arkcraft.module.weapon.common.item.attachment.supporting.Scopeable;

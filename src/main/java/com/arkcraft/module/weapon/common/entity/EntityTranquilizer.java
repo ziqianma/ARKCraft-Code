@@ -6,7 +6,7 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
 
 import com.arkcraft.lib.LogHelper;
-import com.arkcraft.module.blocks.common.config.ModuleItemBalance;
+import com.arkcraft.module.crafting.common.config.ModuleItemBalance;
 import com.arkcraft.module.creature.common.entity.EntityARKCreature;
 
 public class EntityTranquilizer extends EntityProjectile implements

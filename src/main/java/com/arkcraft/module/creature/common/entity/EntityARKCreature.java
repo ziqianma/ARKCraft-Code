@@ -7,14 +7,17 @@ import java.util.Collections;
 import java.util.Random;
 import java.util.UUID;
 
-import com.arkcraft.module.blocks.common.items.ItemDinosaurSaddle;
 import com.arkcraft.module.core.ARKCraft;
 import com.arkcraft.module.core.GlobalAdditions.GUI;
 import com.arkcraft.module.core.common.entity.data.ARKPlayer;
 import com.arkcraft.module.core.common.handlers.GuiHandler;
 import com.arkcraft.module.creature.common.entity.creature.Creature;
+<<<<<<< HEAD
 import com.arkcraft.module.resource.common.item.food.CreatureFoodType;
 import com.arkcraft.module.resource.common.item.food.DinoFood;
+=======
+import com.arkcraft.module.items.common.general.ItemDinosaurSaddle;
+>>>>>>> SolarCactus/master
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;

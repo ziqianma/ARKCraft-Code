@@ -26,12 +26,12 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.arkcraft.lib.LogHelper;
-import com.arkcraft.module.blocks.common.config.ModuleItemBalance;
-import com.arkcraft.module.blocks.common.container.inventory.InventoryBlueprints;
-import com.arkcraft.module.blocks.common.handlers.IARKRecipe;
-import com.arkcraft.module.blocks.common.handlers.SmithyCraftingManager;
 import com.arkcraft.module.core.ARKCraft;
 import com.arkcraft.module.core.common.network.UpdateSmithyToCraftItem;
+import com.arkcraft.module.crafting.common.config.ModuleItemBalance;
+import com.arkcraft.module.crafting.common.handlers.IARKRecipe;
+import com.arkcraft.module.crafting.common.handlers.SmithyCraftingManager;
+import com.arkcraft.module.crafting.common.inventory.InventoryBlueprints;
 
 /**
  * @author wildbill22
