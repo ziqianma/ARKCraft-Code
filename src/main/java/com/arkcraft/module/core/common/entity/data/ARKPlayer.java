@@ -1,13 +1,5 @@
 package com.arkcraft.module.core.common.entity.data;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ChatComponentTranslation;
-import net.minecraft.world.World;
-import net.minecraftforge.common.IExtendedEntityProperties;
-
 import com.arkcraft.lib.LogHelper;
 import com.arkcraft.module.core.ARKCraft;
 import com.arkcraft.module.core.common.network.PlayerPoop;
@@ -17,16 +9,23 @@ import com.arkcraft.module.crafting.common.handlers.PlayerCraftingManager;
 import com.arkcraft.module.crafting.common.inventory.InventoryBlueprints;
 import com.arkcraft.module.crafting.common.inventory.InventoryPlayerCrafting;
 
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ChatComponentTranslation;
+import net.minecraft.world.World;
+import net.minecraftforge.common.IExtendedEntityProperties;
+
 /**
  * @author wildbill22, Lewis_McReu
  */
 public class ARKPlayer implements IExtendedEntityProperties
 {
 	// TODO
-	private static final int healthIncrease = 10, staminaIncrease = 10,
-			oxygenIncrease = 20, foodIncrease = 10, waterIncrease = 10,
-			damageIncrease = 5, speedIncrease = 2, maxTorpor = 200,
-			maxLevel = 94;
+	private static final int healthIncrease = 10, staminaIncrease = 10, oxygenIncrease = 20,
+			foodIncrease = 10, waterIncrease = 10, damageIncrease = 5, speedIncrease = 2,
+			maxTorpor = 200, maxLevel = 94;
 
 	public static final String EXT_PROP_NAME = "ARKPlayer";
 	private final EntityPlayer player;
@@ -35,11 +34,9 @@ public class ARKPlayer implements IExtendedEntityProperties
 	// constructor and in NBT):
 	private boolean canPoop; // True if player can poop (timer sets this)
 	// actual stats
-	private int health, oxygen, food, water, damage, speed, stamina, torpor,
-			xp, level;
+	private int health, oxygen, food, water, damage, speed, stamina, torpor, xp, level;
 	// max stats
-	private int maxHealth, maxOxygen, maxFood, maxWater, maxDamage, maxSpeed,
-			maxStamina;
+	private int maxHealth, maxOxygen, maxFood, maxWater, maxDamage, maxSpeed, maxStamina;
 
 	public ARKPlayer(EntityPlayer player, World world)
 	{
@@ -58,8 +55,7 @@ public class ARKPlayer implements IExtendedEntityProperties
 	 */
 	public static final void register(EntityPlayer player, World world)
 	{
-		player.registerExtendedProperties(ARKPlayer.EXT_PROP_NAME,
-				new ARKPlayer(player, world));
+		player.registerExtendedProperties(ARKPlayer.EXT_PROP_NAME, new ARKPlayer(player, world));
 	}
 
 	/**
@@ -107,9 +103,25 @@ public class ARKPlayer implements IExtendedEntityProperties
 		if (properties == null) { return; }
 		// ARK player properties
 		canPoop = properties.getBoolean("canPoop");
-		water = properties.getInteger("water");
-		torpor = properties.getInteger("torpor");
-		stamina = properties.getInteger("stamina");
+		health = properties.getInteger("health");
+		oxygen = properties.getInteger("oxygen");
+
+		properties.setInteger("food", food);
+		properties.setInteger("water", water);
+		properties.setInteger("damage", damage);
+		properties.setInteger("speed", speed);
+		properties.setInteger("stamina", stamina);
+		properties.setInteger("torpor", torpor);
+		properties.setInteger("xp", xp);
+		properties.setInteger("level", level);
+
+		properties.setInteger("maxHealth", maxHealth);
+		properties.setInteger("maxOxygen", maxOxygen);
+		properties.setInteger("maxFood", maxFood);
+		properties.setInteger("maxWater", maxWater);
+		properties.setInteger("maxDamage", maxDamage);
+		properties.setInteger("maxSpeed", maxSpeed);
+		properties.setInteger("maxStamina", maxStamina);
 
 		inventoryPlayerCrafting.loadInventoryFromNBT(compound);
 	}
@@ -168,8 +180,7 @@ public class ARKPlayer implements IExtendedEntityProperties
 	{
 		if (player instanceof EntityPlayerMP)
 		{
-			ARKCraft.modChannel.sendTo(new SyncPlayerData(all, this),
-					(EntityPlayerMP) player);
+			ARKCraft.modChannel.sendTo(new SyncPlayerData(all, this), (EntityPlayerMP) player);
 		}
 	}
 
@@ -196,9 +207,7 @@ public class ARKPlayer implements IExtendedEntityProperties
 		{
 			if (player.worldObj.isRemote)
 			{
-				player.playSound(
-						ARKCraft.MODID + ":" + "dodo_defficating",
-						1.0F,
+				player.playSound(ARKCraft.MODID + ":" + "dodo_defficating", 1.0F,
 						(player.worldObj.rand.nextFloat() - player.worldObj.rand
 								.nextFloat()) * 0.2F + 1.0F);
 				ARKCraft.modChannel.sendToServer(new PlayerPoop(true));
@@ -208,8 +217,7 @@ public class ARKPlayer implements IExtendedEntityProperties
 		}
 		else
 		{
-			player.addChatMessage(new ChatComponentTranslation(
-					"chat.canNotPoop"));
+			player.addChatMessage(new ChatComponentTranslation("chat.canNotPoop"));
 		}
 	}
 
@@ -219,9 +227,8 @@ public class ARKPlayer implements IExtendedEntityProperties
 	// Inventory for Crafting
 	private InventoryPlayerCrafting inventoryPlayerCrafting = new InventoryPlayerCrafting(
 			"Crafting", false, INVENTORY_SLOTS_COUNT);
-	private InventoryBlueprints inventoryBlueprints = new InventoryBlueprints(
-			"Blueprints", false, BLUEPRINT_SLOTS_COUNT,
-			PlayerCraftingManager.getInstance(), inventoryPlayerCrafting,
+	private InventoryBlueprints inventoryBlueprints = new InventoryBlueprints("Blueprints", false,
+			BLUEPRINT_SLOTS_COUNT, PlayerCraftingManager.getInstance(), inventoryPlayerCrafting,
 			(short) ModuleItemBalance.PLAYER_CRAFTING.CRAFT_TIME_FOR_ITEM);
 
 	// Constants for the inventory
