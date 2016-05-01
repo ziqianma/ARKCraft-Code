@@ -21,7 +21,7 @@ public class EntityRaptor extends EntityARKCreature
 	public EntityRaptor(World worldIn)
 	{
 		super(worldIn, CreatureFoodType.CARNIVORE);
-		this.type = RaptorType.values()[RaptorType.getRandomRaptorType()];
+		this.type = RaptorType.getRandomRaptorType();
 
 		this.tasks.addTask(2, new EntityAIAttackOnCollide(this, 1.0D, false));
 		this.tasks.addTask(5, new EntityAIMoveTowardsRestriction(this, 1.0D)); // For

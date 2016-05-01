@@ -10,8 +10,7 @@ import com.arkcraft.module.creature.common.entity.EntityARKCreature;
 /**
  * @author Lewis_McReu
  */
-public class ContainerInventoryTaming extends Container implements
-		IContainerScrollable
+public class ContainerInventoryTaming extends Container implements IContainerScrollable
 {
 	public static final int SLOT_SPACING = 18;
 	public static final int SLOT_START_X = 9;
@@ -45,12 +44,9 @@ public class ContainerInventoryTaming extends Container implements
 	{
 		for (int i = 0; i < maxCreatureSlots; i++)
 		{
-			Slot slot = new SlotScrolling(
-					creature,
-					i,
+			Slot slot = new SlotScrolling(creature, i,
 					SLOT_START_X + i % getScrollableSlotsWidth() * SLOT_SPACING,
-					CREATURE_SLOT_START_Y + i / getScrollableSlotsWidth() * SLOT_SPACING,
-					this);
+					CREATURE_SLOT_START_Y + i / getScrollableSlotsWidth() * SLOT_SPACING, this);
 			this.addSlotToContainer(slot);
 		}
 	}
@@ -60,11 +56,9 @@ public class ContainerInventoryTaming extends Container implements
 		for (int i = 0; i < player.inventory.getSizeInventory() - 4; i++)
 		{
 			Slot slot;
-			if (i < 9) slot = new Slot(player.inventory, i,
-					SLOT_START_X + i % 9 * SLOT_SPACING,
+			if (i < 9) slot = new Slot(player.inventory, i, SLOT_START_X + i % 9 * SLOT_SPACING,
 					PLAYER_SLOT_HOTBAR_START_Y + i / 9 * SLOT_SPACING);
-			else slot = new Slot(player.inventory, i,
-					SLOT_START_X + i % 9 * SLOT_SPACING,
+			else slot = new Slot(player.inventory, i, SLOT_START_X + i % 9 * SLOT_SPACING,
 					PLAYER_SLOT_START_Y + i / 9 * SLOT_SPACING);
 			this.addSlotToContainer(slot);
 		}
@@ -90,8 +84,7 @@ public class ContainerInventoryTaming extends Container implements
 				itemstack = stack.copy();
 				if (index < 36)
 				{
-					if (!this.mergeItemStack(stack, 36, 36 + maxCreatureSlots,
-							false)) return null;
+					if (!this.mergeItemStack(stack, 36, 36 + maxCreatureSlots, false)) return null;
 					// else this.player.inventory.setInventorySlotContents(
 					// slot.getSlotIndex(), null);
 				}
@@ -99,7 +92,7 @@ public class ContainerInventoryTaming extends Container implements
 				{
 					if (!this.mergeItemStack(stack, 0, 36, false)) return null;
 				}
-				this.putStackInSlot(slot.slotNumber, null);
+				this.putStackInSlot(slot.getSlotIndex(), null);
 			}
 		}
 		return itemstack;

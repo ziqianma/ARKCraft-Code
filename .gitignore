@@ -7,3 +7,4 @@
 !*.md
 *.db
 *.DS_Store
+/gradle/*

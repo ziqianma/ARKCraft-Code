@@ -19,7 +19,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
  */
 public class ContainerInventoryTaming extends Container
 {
-
     private InventoryTaming invTaming;
     public InventoryCrafting inputSlots;
     private final int TAMING_SLOT_COUNT = 2;

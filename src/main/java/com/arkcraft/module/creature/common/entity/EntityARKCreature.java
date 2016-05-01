@@ -657,11 +657,15 @@ public class EntityARKCreature extends EntityAnimal
 	@Override
 	public void setInventorySlotContents(int index, ItemStack stack)
 	{
-		inventory[index] = stack;
-
-		if (stack != null && stack.stackSize > getInventoryStackLimit())
+		//TODO ArrayIndexOutOfBoundsException occurring here -- figure it out
+		if (index > 0 && index < inventory.length)
 		{
-			stack.stackSize = getInventoryStackLimit();
+			inventory[index] = stack;
+
+			if (stack != null && stack.stackSize > getInventoryStackLimit())
+			{
+				stack.stackSize = getInventoryStackLimit();
+			}
 		}
 	}
 
