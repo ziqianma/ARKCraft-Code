@@ -1,15 +1,17 @@
 package com.arkcraft.module.creature.client.render;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.util.ResourceLocation;
-
 import com.arkcraft.module.core.ARKCraft;
 import com.arkcraft.module.creature.client.model.ModelSabertooth;
 import com.arkcraft.module.creature.common.entity.aggressive.EntitySabertooth;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.util.ResourceLocation;
 
 /**
  * @author wildbill22
@@ -24,6 +26,14 @@ public class RenderSabertooth extends RenderLiving
 	{
 		super(Minecraft.getMinecraft().getRenderManager(), base, par2);
 		modelEntity = ((ModelSabertooth) mainModel);
+	}
+
+	@Override
+	protected void preRenderCallback(EntityLivingBase p_77041_1_, float p_77041_2_)
+	{
+		double scale = 0.7;
+		GlStateManager.scale(scale, scale, scale);
+		super.preRenderCallback(p_77041_1_, p_77041_2_);
 	}
 
 	// Stuff to make the Dodo rotate when floating?

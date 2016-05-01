@@ -4,27 +4,27 @@ import java.util.Random;
 
 /**
  * @author wildbill22
+ * @author Lewis_McReu
  */
 public enum RaptorType
 {
 	ALBINO(0),
-	BREEN_WHITE(1),
-	CYAN_LGREEN(2),
-	RAINBOW(3),
-	GREEN_GREY(4),
-	GREEN_TAN(5),
-	GREEN_WHITE(6),
-	GREY_GREY(7),
-	LBROWN_TAN(8),
-	RED_TAN(9),
-	TAN_WHITE(10);
+	BLACK_GREY(1),
+	BLACK_WHITE(2),
+	BROWN_WHITE(3),
+	GREEN_ORANGE(4),
+	GREEN_RED_WHITE(5),
+	GREEN_RED(6),
+	GREY_BLUE(7),
+	GREY_YELLOW(8),
+	ORANGE(9),
+	STRIPED(10);
 
 	private int type;
-	public static final int numRaptors = 11;
 
 	RaptorType(int id)
 	{
-		this.type = id;
+		type = id;
 	}
 
 	public int getRaptorTypeInt()
@@ -32,43 +32,24 @@ public enum RaptorType
 		return type;
 	}
 
-	public static int getRandomRaptorType()
+	public static RaptorType getRandomRaptorType()
 	{
-		return new Random().nextInt(RaptorType.numRaptors);
+		return RaptorType.values()[new Random().nextInt(RaptorType.values().length)];
 	}
 
 	public String getReadableName()
 	{
-		switch (type)
-		{
-			case 1:
-				return "Breen White";
-			case 2:
-				return "Cyan Light Green";
-			case 3:
-				return "Rainbow";
-			case 4:
-				return "Green Grey";
-			case 5:
-				return "Green Tan";
-			case 6:
-				return "Green White";
-			case 7:
-				return "Grey Grey";
-			case 8:
-				return "Light Brown Tan";
-			case 9:
-				return "Red Tan";
-			case 10:
-				return "Tan White";
-			case 0:
-			default:
-				return "Albino";
-		}
+		// TODO switch case or some string fiddling
+		return toString();
+	}
+
+	public String getResourceName()
+	{
+		return "raptor_" + toString() + ".png";
 	}
 
 	public String toString()
 	{
-		return super.toString().toLowerCase();
+		return this.name().toLowerCase();
 	}
 }

@@ -35,7 +35,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 
 /**
- * @author gegy1000, Lewis_McReu
+ * @author gegy1000
+ * @author Lewis_McReu
  */
 public class EntityARKCreature extends EntityAnimal
 		implements IEntityAdditionalSpawnData, IInventory
@@ -657,11 +658,15 @@ public class EntityARKCreature extends EntityAnimal
 	@Override
 	public void setInventorySlotContents(int index, ItemStack stack)
 	{
-		inventory[index] = stack;
-
-		if (stack != null && stack.stackSize > getInventoryStackLimit())
+		//TODO ArrayIndexOutOfBoundsException occurring here -- figure it out
+		if (index > 0 && index < inventory.length)
 		{
-			stack.stackSize = getInventoryStackLimit();
+			inventory[index] = stack;
+
+			if (stack != null && stack.stackSize > getInventoryStackLimit())
+			{
+				stack.stackSize = getInventoryStackLimit();
+			}
 		}
 	}
 
