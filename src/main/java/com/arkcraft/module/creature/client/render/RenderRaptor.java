@@ -13,7 +13,7 @@ import net.minecraft.util.ResourceLocation;
 
 /**
  * @author Vastatio
- * @author Lewis McReu
+ * @author Lewis_McReu
  */
 public class RenderRaptor extends RenderLiving
 {

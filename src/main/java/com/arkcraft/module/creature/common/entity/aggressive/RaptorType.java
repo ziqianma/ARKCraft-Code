@@ -4,7 +4,7 @@ import java.util.Random;
 
 /**
  * @author wildbill22
- * @author Lewis McReu
+ * @author Lewis_McReu
  */
 public enum RaptorType
 {

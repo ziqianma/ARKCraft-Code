@@ -35,7 +35,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 
 /**
- * @author gegy1000, Lewis_McReu
+ * @author gegy1000
+ * @author Lewis_McReu
  */
 public class EntityARKCreature extends EntityAnimal
 		implements IEntityAdditionalSpawnData, IInventory
